@@ -13,4 +13,5 @@ enum Strings {
     static let hair = "Волосы"
     static let nail = "Ногти"
     static let spa = "SPA"
+    static let face_care = "Уход"
 }

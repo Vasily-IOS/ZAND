@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042CC1D691F0A02C53C10F1A /* Pods_ZAND_ZANDUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */; };
+		6BB5B17526532B28DF315ED0 /* Pods_ZANDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */; };
+		B17EB085DEE9BA19C8577769 /* Pods_ZAND.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
 		FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13729E7EC1300587DAF /* LaunchScreen.storyboard */; };
@@ -65,11 +68,14 @@
 
 /* Begin PBXFileReference section */
 		09181F2A3035598E7B9479D5 /* Pods-ZANDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZANDTests.debug.xcconfig"; path = "Target Support Files/Pods-ZANDTests/Pods-ZANDTests.debug.xcconfig"; sourceTree = "<group>"; };
+		65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZANDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C8CC9559D9785FD856A1B9F /* Pods-ZAND-ZANDUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND-ZANDUITests.release.xcconfig"; path = "Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests.release.xcconfig"; sourceTree = "<group>"; };
 		713BE12830D2FF40112E8E72 /* Pods-ZAND.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.release.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.release.xcconfig"; sourceTree = "<group>"; };
 		949B316C67496D26CF0C8038 /* Pods-ZAND-ZANDUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND-ZANDUITests.debug.xcconfig"; path = "Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C1DF0BB965CF63B55C57860E /* Pods-ZAND.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.debug.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.debug.xcconfig"; sourceTree = "<group>"; };
 		D51E2AC66A5767F8E7463DE8 /* Pods-ZANDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZANDTests.release.xcconfig"; path = "Target Support Files/Pods-ZANDTests/Pods-ZANDTests.release.xcconfig"; sourceTree = "<group>"; };
+		F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND_ZANDUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF45A13529E7EC1300587DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B17EB085DEE9BA19C8577769 /* Pods_ZAND.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BB5B17526532B28DF315ED0 /* Pods_ZANDTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,12 +140,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042CC1D691F0A02C53C10F1A /* Pods_ZAND_ZANDUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6BEA2F84F56137094AB6306 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */,
+				F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */,
+				65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E494D5953749331F30E11D91 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +178,7 @@
 				FF45A14C29E7EC1300587DAF /* ZANDUITests */,
 				FF45A12A29E7EC1200587DAF /* Products */,
 				E494D5953749331F30E11D91 /* Pods */,
+				A6BEA2F84F56137094AB6306 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
