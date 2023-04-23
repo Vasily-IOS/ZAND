@@ -11,11 +11,7 @@ final class TabBarController: UITabBarController {
     
     // MARK: - Properties
     
-    override var selectedIndex: Int {
-        didSet {
-            print(selectedIndex)
-        }
-    }
+    private let vcFactory: DefaultVCFactory = VCFactory()
     
     // MARK: - Initializers
     
@@ -28,6 +24,12 @@ final class TabBarController: UITabBarController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
+    }
 }
 
 extension TabBarController {
@@ -35,7 +37,8 @@ extension TabBarController {
     // MARK: - Instance methods
     
     private func setViews() {
-        let mainView = MainView()
+        let layoutBuilder: LayoutBuilderProtocol = LayoutBuilder()
+        let mainView = MainView(layoutBuilder: layoutBuilder)
         let mainVC = MainViewController(contentView: mainView)
         mainVC.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(named: "main_icon"), selectedImage: nil)
 
@@ -43,17 +46,17 @@ extension TabBarController {
         let mapVC = MapViewController(contentView: mapView)
         mapVC.tabBarItem = UITabBarItem(title: "Карта", image: UIImage(named: "map_icon"), selectedImage: nil)
         
-        let profileView = ProfileView()
-        let profileVC = ProfileViewController(contentView: profileView)
-        profileVC.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(named: "profile_icon"), selectedImage: nil)
+        let signInView = SignInView()
+        let signInVc = SignInViewController(contentView: signInView)
+        signInVc.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(named: "profile_icon"), selectedImage: nil)
         
-        [mainVC, mapVC, profileVC].forEach {
+        [mainVC, mapVC, signInVc].forEach {
             $0.navigationController?.isNavigationBarHidden = true
         }
     
         UITabBar.appearance().tintColor = .mainGreen
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().itemPositioning = .centered
-        viewControllers = [mainVC, mapVC, profileVC]
+        viewControllers = [mainVC, mapVC, signInVc]
     }
 }
