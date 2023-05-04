@@ -7,10 +7,8 @@
 
 import Foundation
 
-
 // MARK: - Properties
 
 // MARK: - Initializers
 
 // MARK: - Instance methods
-

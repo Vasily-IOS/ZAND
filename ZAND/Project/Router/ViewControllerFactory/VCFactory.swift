@@ -30,6 +30,26 @@ final class VCFactory: DefaultVCFactory {
             let view = RegisterView()
             let vc = RegisterViewController(contentView: view)
             return vc
+        case .filter:
+            let layoutBuilder: DefaultLayoutBuilder = FilterLayoutBuilder()
+            let view = FilterView(layout: layoutBuilder)
+            let vc = FilterViewController(contentView: view)
+            return vc
+        case .profile:
+            let layout: DefaultProfileLayoutProtocol = ProfileLayoutBuilder()
+            let view = ProfileView(layout: layout)
+            let vc = ProfileViewController(contentView: view)
+            return vc
+        case .appointments:
+//            let layout =
+            let view = AppointemtsView()
+            let vc = AppointmentsViewController(contentView: view)
+            return vc
+        case .settings:
+//            let layout =
+            let view = SettingsView()
+            let vc = SettingsViewController(contentView: view)
+            return vc
         }
     }
 }

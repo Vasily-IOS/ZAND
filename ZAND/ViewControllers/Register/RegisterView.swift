@@ -97,6 +97,7 @@ final class RegisterView: BaseUIView {
         } else if registerState == .two {
             registerState = .three
             bottomButton.stateText = .register /// костыль, убрать под MVVM!!!
+            registerLabel.text = Strings.confirmEmail
         }
     }
     

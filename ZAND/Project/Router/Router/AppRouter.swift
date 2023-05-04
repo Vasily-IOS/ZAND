@@ -34,7 +34,6 @@ extension AppRouter {
     
     private func setup() {
         Thread.sleep(forTimeInterval: 1.0)
-        
         let vc = vcFactory.getViewController(for: .tabBar)
         tabBarController = vc as? UITabBarController
         navigationController = UINavigationController(rootViewController: vc)

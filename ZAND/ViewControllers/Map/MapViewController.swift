@@ -13,4 +13,8 @@ final class MapViewController: BaseViewController<UIView> {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
+    
+    deinit {
+        print("MapViewController died")
+    }
 }

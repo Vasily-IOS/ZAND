@@ -77,6 +77,8 @@ final class SaloonPhotoCollection: BaseUIView {
         subscribeDelegate()
         setBackgroundColor()
         setViews()
+        
+        bottomButton.addTarget(self, action: #selector(bookAction), for: .touchUpInside)
     }
     
     private func setInfo(from model: SaloonMockModel) {
@@ -86,6 +88,11 @@ final class SaloonPhotoCollection: BaseUIView {
         self.categoryLabel.text = model.category.name
         self.ratingLabel.text = "\(model.rating)"
         self.gradeCountLabel.text = "\(model.scores)"
+    }
+    
+    @objc
+    private func bookAction() {
+       print(1)
     }
 }
 

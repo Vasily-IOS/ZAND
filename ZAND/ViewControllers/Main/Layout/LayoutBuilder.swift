@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum MainSection: Int, CaseIterable {
+    case option
+    case beautySaloon
+}
+
 protocol LayoutBuilderProtocol: AnyObject {
     func createSection(type: MainSection) -> NSCollectionLayoutSection
 }
@@ -22,7 +27,7 @@ final class LayoutBuilder: LayoutBuilderProtocol {
             item.contentInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 10)
             
             let groupSize = NSCollectionLayoutSize(
-                widthDimension: .absolute(90),
+                widthDimension: .absolute(85),
                 heightDimension: .absolute(110))
             
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])

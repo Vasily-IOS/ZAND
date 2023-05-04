@@ -27,6 +27,12 @@ enum Strings {
     static let forgotPassword = "Забыли пароль?"
     static let registation = "Регистрация"
     static let accountExist = "Уже есть аккаунт?"
+    static let confirmEmail = "Подтвердите Email"
+    static let showFirst = "Показать сначала"
+    static let services = "Услуги"
+    static let cancel = "Сбросить"
+    static let userName = "#username"
+    static let favourites = "Избранное"
     
     // MARK: - Bottom button values
     static let apply = "Применить"
@@ -42,7 +48,18 @@ enum Strings {
     static let name = "Имя"
     static let surname = "Фамилия"
     static let age = "Возраст"
-    static let userName = "@username"
+    static let user_name = "@username"
     static let confirmPassword = "Подтвердите пароль"
     static let confirmationCode = "Код подтверждения"
+    
+    // MARK: - Filter options
+    static let byDefault = "По умолчанию"
+    static let highGrade = "Высокий рейтинг"
+    static let chip = "Недорогие"
+    static let expensive = "Дорогие"
+    
+    // MARK: - ProfileMenu
+    static let books = "Записи"
+    static let settings = "Настройки"
+    static let logOut = "Выйти"
 }

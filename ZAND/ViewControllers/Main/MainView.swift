@@ -8,11 +8,6 @@
 import UIKit
 import SnapKit
 
-enum MainSection: Int, CaseIterable {
-    case option
-    case beautySaloon
-}
-
 final class MainView: BaseUIView {
     
     // MARK: - Closures
@@ -122,13 +117,13 @@ extension MainView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       let optionCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: OptionCell.self), for: indexPath) as! OptionCell
+        let optionCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: OptionCell.self), for: indexPath) as! OptionCell
         let saloonCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SaloonCell.self), for: indexPath)
         as! SaloonCell
         
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
-            optionCell.configure(model: optionsModel[indexPath.item])
+            optionCell.configure(model: optionsModel[indexPath.item], state: .onMain)
             return optionCell
         case .beautySaloon:
             saloonCell.configure(model: saloonMockModel[indexPath.item])
@@ -142,6 +137,9 @@ extension MainView: UICollectionViewDataSource {
 extension MainView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.item == 0 {
+            AppRouter.shared.present(type: .filter)
+        }
         if indexPath.section == 1 {
             let model = saloonMockModel[indexPath.item]
             AppRouter.shared.push(.saloonDetail(model))

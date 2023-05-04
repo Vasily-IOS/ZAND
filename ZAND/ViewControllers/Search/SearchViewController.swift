@@ -14,4 +14,8 @@ final class SearchViewController: BaseViewController<UIView> {
         navigationController?.isNavigationBarHidden = true
     }
     
+    deinit {
+        print("SearchViewController died")
+    }
+    
 }

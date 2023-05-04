@@ -7,4 +7,9 @@
 
 import UIKit
 
-final class RegisterViewController: BaseViewController<UIView> {}
+final class RegisterViewController: BaseViewController<UIView> {
+    
+    deinit {
+        print("RegisterViewController died")
+    }
+}

@@ -13,6 +13,10 @@ final class SaloonDetailViewController: BaseViewController<UIView> {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
     }
+    
+    deinit {
+        print("SaloonDetailViewController died")
+    }
         
     private func setupNavigationbar() {
         let appearance = UINavigationBarAppearance()

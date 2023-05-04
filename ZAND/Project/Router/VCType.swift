@@ -13,4 +13,8 @@ enum VCType {
     case main
     case saloonDetail(SaloonMockModel)
     case register
+    case filter
+    case profile
+    case appointments
+    case settings
 }

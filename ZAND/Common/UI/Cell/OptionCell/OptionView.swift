@@ -13,7 +13,7 @@ final class OptionView: BaseUIView {
     var isSelected: Bool = false {
         didSet {
             if isSelected {
-                layer.borderColor = UIColor.mainGreen.cgColor
+                layer.borderColor = UIColor.superLightGreen.cgColor
             }
         }
     }
@@ -56,5 +56,6 @@ extension OptionView {
         layer.cornerRadius = 15
         layer.borderWidth = 2
         layer.borderColor = UIColor.clear.cgColor
+        layer.backgroundColor = UIColor.white.cgColor
     }
 }

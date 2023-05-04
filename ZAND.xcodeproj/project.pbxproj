@@ -10,6 +10,8 @@
 		042CC1D691F0A02C53C10F1A /* Pods_ZAND_ZANDUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */; };
 		6BB5B17526532B28DF315ED0 /* Pods_ZANDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */; };
 		B17EB085DEE9BA19C8577769 /* Pods_ZAND.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */; };
+		FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E3382A02C3C4006476F0 /* ProfileCell.swift */; };
+		FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */; };
 		FF25632829F561FD00091374 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25632729F561FD00091374 /* AddressView.swift */; };
 		FF25632A29F5675900091374 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25632929F5675900091374 /* TransparentButton.swift */; };
 		FF25632D29F5718C00091374 /* DescriptionShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25632C29F5718C00091374 /* DescriptionShowcaseView.swift */; };
@@ -20,6 +22,14 @@
 		FF25633A29F591F600091374 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25633929F591F600091374 /* PaddingTextField.swift */; };
 		FF25633D29F5A16A00091374 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25633C29F5A16A00091374 /* RegisterViewController.swift */; };
 		FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25633E29F5A8C900091374 /* RegisterView.swift */; };
+		FF25634329F682C800091374 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634229F682C800091374 /* FilterViewController.swift */; };
+		FF25634529F682CF00091374 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634429F682CF00091374 /* FilterView.swift */; };
+		FF25634829F687A900091374 /* DefaultLayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634729F687A900091374 /* DefaultLayoutBuilder.swift */; };
+		FF25634A29F687B900091374 /* FilterLayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634929F687B900091374 /* FilterLayoutBuilder.swift */; };
+		FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634C29F68CE800091374 /* FilterOptionCell.swift */; };
+		FF25634F29F68D3900091374 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634E29F68D3900091374 /* FilterModel.swift */; };
+		FF25635229F69BE100091374 /* OptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635129F69BE100091374 /* OptionModel.swift */; };
+		FF25635429F6B46800091374 /* ReuseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeader.swift */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
 		FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13729E7EC1300587DAF /* LaunchScreen.storyboard */; };
@@ -62,6 +72,14 @@
 		FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45329F2CC320067CC6F /* BottomButton.swift */; };
 		FFA3D45629F2D0780067CC6F /* SalonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45529F2D0780067CC6F /* SalonDetailViewController.swift */; };
 		FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45729F2D0A60067CC6F /* SaloonDetailView.swift */; };
+		FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */; };
+		FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B482A03C80A005CE41B /* AppointmentsView.swift */; };
+		FFC01B4C2A03CA78005CE41B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */; };
+		FFC01B4E2A03CA83005CE41B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B4D2A03CA83005CE41B /* SettingsView.swift */; };
+		FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49329FACE9700FDB519 /* UserNameView.swift */; };
+		FFE6F49729FAD45700FDB519 /* ProfileMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */; };
+		FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */; };
+		FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */; };
 		FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */; };
 		FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */; };
 /* End PBXBuildFile section */
@@ -93,6 +111,8 @@
 		D51E2AC66A5767F8E7463DE8 /* Pods-ZANDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZANDTests.release.xcconfig"; path = "Target Support Files/Pods-ZANDTests/Pods-ZANDTests.release.xcconfig"; sourceTree = "<group>"; };
 		F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND_ZANDUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF01E3382A02C3C4006476F0 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCell.swift; sourceTree = "<group>"; };
 		FF25632729F561FD00091374 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		FF25632929F5675900091374 /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
 		FF25632C29F5718C00091374 /* DescriptionShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionShowcaseView.swift; sourceTree = "<group>"; };
@@ -103,6 +123,14 @@
 		FF25633929F591F600091374 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		FF25633C29F5A16A00091374 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		FF25633E29F5A8C900091374 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		FF25634229F682C800091374 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		FF25634429F682CF00091374 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		FF25634729F687A900091374 /* DefaultLayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLayoutBuilder.swift; sourceTree = "<group>"; };
+		FF25634929F687B900091374 /* FilterLayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLayoutBuilder.swift; sourceTree = "<group>"; };
+		FF25634C29F68CE800091374 /* FilterOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionCell.swift; sourceTree = "<group>"; };
+		FF25634E29F68D3900091374 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
+		FF25635129F69BE100091374 /* OptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionModel.swift; sourceTree = "<group>"; };
+		FF25635329F6B46800091374 /* ReuseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeader.swift; sourceTree = "<group>"; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF45A13529E7EC1300587DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -149,6 +177,14 @@
 		FFA3D45329F2CC320067CC6F /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		FFA3D45529F2D0780067CC6F /* SalonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonDetailViewController.swift; sourceTree = "<group>"; };
 		FFA3D45729F2D0A60067CC6F /* SaloonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonDetailView.swift; sourceTree = "<group>"; };
+		FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsViewController.swift; sourceTree = "<group>"; };
+		FFC01B482A03C80A005CE41B /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
+		FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FFC01B4D2A03CA83005CE41B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
+		FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuModel.swift; sourceTree = "<group>"; };
+		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
+		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
 		FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCollection.swift; sourceTree = "<group>"; };
 		FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,6 +240,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		FF01E3372A02C3B1006476F0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FF01E3382A02C3C4006476F0 /* ProfileCell.swift */,
+				FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		FF25632529F5619A00091374 /* AddressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +292,59 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		FF25634029F682A600091374 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FF8E7BE629EF293600644208 /* OptionCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		FF25634129F682B500091374 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				FF25634229F682C800091374 /* FilterViewController.swift */,
+				FF25634429F682CF00091374 /* FilterView.swift */,
+				FF25634E29F68D3900091374 /* FilterModel.swift */,
+				FF25635529F6C09100091374 /* Components */,
+				FF25634629F6879000091374 /* Layout */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		FF25634629F6879000091374 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				FF25634729F687A900091374 /* DefaultLayoutBuilder.swift */,
+				FF25634929F687B900091374 /* FilterLayoutBuilder.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		FF25634B29F68C9500091374 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FF25634C29F68CE800091374 /* FilterOptionCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		FF25635029F69BD100091374 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FF25635129F69BE100091374 /* OptionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FF25635529F6C09100091374 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FF25634B29F68C9500091374 /* Cell */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		FF45A12029E7EC1200587DAF = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5F29EEA176007D6A60 /* Project */,
+				FF25635029F69BD100091374 /* Model */,
 				FF99B8F129EEAB0500F4E4C3 /* Enum */,
 				FF45A15E29E7EF3A00587DAF /* Common */,
 				FF45A15D29E7EF3200587DAF /* Extensions */,
@@ -303,6 +402,9 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FFC01B4A2A03CA65005CE41B /* SettingsViewController */,
+				FFC01B452A03C7D8005CE41B /* Appointments */,
+				FF25634129F682B500091374 /* Filter */,
 				FF25633B29F5A15100091374 /* Register */,
 				FF25633429F5884000091374 /* SignIn */,
 				FFA3D45229F2CABE0067CC6F /* SaloonDetail */,
@@ -361,8 +463,8 @@
 		FF8AAF5A29EE96E9007D6A60 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */,
-				FF8AAF6B29EEA392007D6A60 /* ProfileView.swift */,
+				FFE6F49829FAD6FB00FDB519 /* View */,
+				FFE6F49529FAD44300FDB519 /* Model */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -382,6 +484,7 @@
 		FF8AAF6029EEA202007D6A60 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				FF25634029F682A600091374 /* Cell */,
 				FF99B8EE29EEA9F300F4E4C3 /* View */,
 				FF99B8ED29EEA9EA00F4E4C3 /* Base */,
 			);
@@ -392,7 +495,6 @@
 			isa = PBXGroup;
 			children = (
 				FFA3D44F29F2A64F0067CC6F /* SaloonCell */,
-				FF8E7BE629EF293600644208 /* OptionCell */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -424,6 +526,7 @@
 				FFA3D45329F2CC320067CC6F /* BottomButton.swift */,
 				FF25632929F5675900091374 /* TransparentButton.swift */,
 				FF25633929F591F600091374 /* PaddingTextField.swift */,
+				FF25635329F6B46800091374 /* ReuseHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -497,6 +600,61 @@
 				FFF5574329F2FA7A00758A31 /* Components */,
 			);
 			path = SaloonDetail;
+			sourceTree = "<group>";
+		};
+		FFC01B452A03C7D8005CE41B /* Appointments */ = {
+			isa = PBXGroup;
+			children = (
+				FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */,
+				FFC01B482A03C80A005CE41B /* AppointmentsView.swift */,
+			);
+			path = Appointments;
+			sourceTree = "<group>";
+		};
+		FFC01B4A2A03CA65005CE41B /* SettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */,
+				FFC01B4D2A03CA83005CE41B /* SettingsView.swift */,
+			);
+			path = SettingsViewController;
+			sourceTree = "<group>";
+		};
+		FFE6F49229FACE7400FDB519 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FFE6F49329FACE9700FDB519 /* UserNameView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FFE6F49529FAD44300FDB519 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FFE6F49829FAD6FB00FDB519 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */,
+				FF8AAF6B29EEA392007D6A60 /* ProfileView.swift */,
+				FF01E3372A02C3B1006476F0 /* Cell */,
+				FFE6F49929FAD72900FDB519 /* Layout */,
+				FFE6F49229FACE7400FDB519 /* Components */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FFE6F49929FAD72900FDB519 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */,
+				FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 		FFF5574329F2FA7A00758A31 /* Components */ = {
@@ -762,31 +920,44 @@
 				FF45A16A29E7F67600587DAF /* UIView.swift in Sources */,
 				FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */,
 				FF25633329F57A3000091374 /* ShowCaseItemCell.swift in Sources */,
+				FF25635229F69BE100091374 /* OptionModel.swift in Sources */,
+				FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */,
 				FF45A16429E7F5C100587DAF /* UILabel.swift in Sources */,
 				FF99B8F729EEB1A100F4E4C3 /* ExtensionUIColor.swift in Sources */,
 				FF45A16829E7F5FC00587DAF /* UITableViewHeaderFooterView.swift in Sources */,
 				FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */,
+				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* UITableView.swift in Sources */,
+				FF25635429F6B46800091374 /* ReuseHeader.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* Strings.swift in Sources */,
+				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
+				FFC01B4E2A03CA83005CE41B /* SettingsView.swift in Sources */,
 				FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */,
+				FF25634829F687A900091374 /* DefaultLayoutBuilder.swift in Sources */,
 				FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */,
+				FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */,
 				FF45A16C29E7F70D00587DAF /* UserDefaults.swift in Sources */,
+				FFE6F49729FAD45700FDB519 /* ProfileMenuModel.swift in Sources */,
 				FF8AAF6829EEA37F007D6A60 /* MapView.swift in Sources */,
 				FF45A16629E7F5ED00587DAF /* UITableViewCell.swift in Sources */,
 				FF8AAF6C29EEA392007D6A60 /* ProfileView.swift in Sources */,
 				FF8AAF6A29EEA389007D6A60 /* MainView.swift in Sources */,
+				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
 				FF45A16029E7F4BC00587DAF /* UIStackView.swift in Sources */,
 				FF8AAF6629EEA256007D6A60 /* BaseUIView.swift in Sources */,
 				FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */,
 				FF25633629F5886700091374 /* SignInViewController.swift in Sources */,
 				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
+				FFC01B4C2A03CA78005CE41B /* SettingsViewController.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
+				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
 				FF25632D29F5718C00091374 /* DescriptionShowcaseView.swift in Sources */,
 				FF25633D29F5A16A00091374 /* RegisterViewController.swift in Sources */,
 				FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */,
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
+				FF25634A29F687B900091374 /* FilterLayoutBuilder.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
 				FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */,
 				FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */,
@@ -797,9 +968,14 @@
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,
 				FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */,
 				FF25633829F5888800091374 /* SignInView.swift in Sources */,
+				FF25634F29F68D3900091374 /* FilterModel.swift in Sources */,
 				FFA3D45629F2D0780067CC6F /* SalonDetailViewController.swift in Sources */,
 				FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */,
 				FF99B90829EEBA7F00F4E4C3 /* SearchView.swift in Sources */,
+				FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */,
+				FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */,
+				FF25634329F682C800091374 /* FilterViewController.swift in Sources */,
+				FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */,
 				FF99B90B29EECA3500F4E4C3 /* DafaultSearchView.swift in Sources */,
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,
 				FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */,

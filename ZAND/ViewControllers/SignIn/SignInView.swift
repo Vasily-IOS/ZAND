@@ -57,6 +57,11 @@ final class SignInView: BaseUIView {
     private func registerAction() {
         AppRouter.shared.push(.register)
     }
+    
+    @objc
+    private func signInAction() {
+        AppRouter.shared.push(.profile)
+    }
 }
 
 extension SignInView {
@@ -105,6 +110,7 @@ extension SignInView {
     }
     
     private func addTargets() {
+        signInButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
     }
 }
