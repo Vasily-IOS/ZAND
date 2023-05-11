@@ -33,6 +33,11 @@ enum Strings {
     static let cancel = "Сбросить"
     static let userName = "#username"
     static let favourites = "Избранное"
+    static let phoneNumber = "Номер телефона"
+    static let pushesAboutOrder = "Пуши о заказе"
+    static let writeAboutBook = "Напишем, когда подтвердим запись"
+    static let feature = "Предстоящие"
+    static let was = "Прошедшие"
     
     // MARK: - Bottom button values
     static let apply = "Применить"
@@ -41,6 +46,8 @@ enum Strings {
     static let book = "Записаться"
     static let contin = "Далее"
     static let callUs = "Свяжитесь с нами"
+    static let myData = "Мои данные"
+    static let pushSms = "Уведомления и смс"
     
     // MARK: - Padding textfield
     static let email = "Email"

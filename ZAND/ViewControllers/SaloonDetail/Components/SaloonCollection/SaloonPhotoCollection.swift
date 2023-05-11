@@ -92,7 +92,7 @@ final class SaloonPhotoCollection: BaseUIView {
     
     @objc
     private func bookAction() {
-       print(1)
+        AppRouter.shared.present(type: .booking)
     }
 }
 

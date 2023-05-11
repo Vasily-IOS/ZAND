@@ -43,6 +43,7 @@
 		FF45A16829E7F5FC00587DAF /* UITableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16729E7F5FC00587DAF /* UITableViewHeaderFooterView.swift */; };
 		FF45A16A29E7F67600587DAF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16929E7F67600587DAF /* UIView.swift */; };
 		FF45A16C29E7F70D00587DAF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16B29E7F70D00587DAF /* UserDefaults.swift */; };
+		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
 		FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5529EE967D007D6A60 /* MainViewController.swift */; };
 		FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */; };
 		FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */; };
@@ -76,6 +77,14 @@
 		FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B482A03C80A005CE41B /* AppointmentsView.swift */; };
 		FFC01B4C2A03CA78005CE41B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */; };
 		FFC01B4E2A03CA83005CE41B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B4D2A03CA83005CE41B /* SettingsView.swift */; };
+		FFC01B512A03D661005CE41B /* DataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B502A03D661005CE41B /* DataCell.swift */; };
+		FFC01B532A03D673005CE41B /* PushCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B522A03D673005CE41B /* PushCell.swift */; };
+		FFC01B562A03D764005CE41B /* SettingsMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B552A03D764005CE41B /* SettingsMenuModel.swift */; };
+		FFC01B592A03DCA5005CE41B /* DefaultSettingsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B582A03DCA5005CE41B /* DefaultSettingsLayout.swift */; };
+		FFC01B5B2A03DD37005CE41B /* SettingsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5A2A03DD37005CE41B /* SettingsLayout.swift */; };
+		FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */; };
+		FFC01B602A03F147005CE41B /* BaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */; };
+		FFD3E1D72A054E7C00680ED5 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */; };
 		FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49329FACE9700FDB519 /* UserNameView.swift */; };
 		FFE6F49729FAD45700FDB519 /* ProfileMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */; };
 		FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */; };
@@ -148,6 +157,7 @@
 		FF45A16729E7F5FC00587DAF /* UITableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		FF45A16929E7F67600587DAF /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FF45A16B29E7F70D00587DAF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
 		FF8AAF5529EE967D007D6A60 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +191,14 @@
 		FFC01B482A03C80A005CE41B /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FFC01B4D2A03CA83005CE41B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		FFC01B502A03D661005CE41B /* DataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCell.swift; sourceTree = "<group>"; };
+		FFC01B522A03D673005CE41B /* PushCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushCell.swift; sourceTree = "<group>"; };
+		FFC01B552A03D764005CE41B /* SettingsMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuModel.swift; sourceTree = "<group>"; };
+		FFC01B582A03DCA5005CE41B /* DefaultSettingsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSettingsLayout.swift; sourceTree = "<group>"; };
+		FFC01B5A2A03DD37005CE41B /* SettingsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLayout.swift; sourceTree = "<group>"; };
+		FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsCell.swift; sourceTree = "<group>"; };
+		FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCell.swift; sourceTree = "<group>"; };
+		FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuModel.swift; sourceTree = "<group>"; };
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
@@ -402,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FFD3E1D52A054E6400680ED5 /* BookingViewController */,
 				FFC01B4A2A03CA65005CE41B /* SettingsViewController */,
 				FFC01B452A03C7D8005CE41B /* Appointments */,
 				FF25634129F682B500091374 /* Filter */,
@@ -514,6 +533,7 @@
 				FF8AAF6129EEA222007D6A60 /* BaseViewController.swift */,
 				FF8AAF6529EEA256007D6A60 /* BaseUIView.swift */,
 				FF8E7BE229EF260500644208 /* BaseCollectionCell.swift */,
+				FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -607,6 +627,8 @@
 			children = (
 				FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */,
 				FFC01B482A03C80A005CE41B /* AppointmentsView.swift */,
+				FF5FB4962A04153500A06981 /* AppointmentsModel.swift */,
+				FFC01B5C2A03F0E6005CE41B /* Cell */,
 			);
 			path = Appointments;
 			sourceTree = "<group>";
@@ -616,8 +638,53 @@
 			children = (
 				FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */,
 				FFC01B4D2A03CA83005CE41B /* SettingsView.swift */,
+				FFC01B572A03DC91005CE41B /* Layout */,
+				FFC01B542A03D756005CE41B /* Model */,
+				FFC01B4F2A03D651005CE41B /* Cell */,
 			);
 			path = SettingsViewController;
+			sourceTree = "<group>";
+		};
+		FFC01B4F2A03D651005CE41B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FFC01B502A03D661005CE41B /* DataCell.swift */,
+				FFC01B522A03D673005CE41B /* PushCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		FFC01B542A03D756005CE41B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FFC01B552A03D764005CE41B /* SettingsMenuModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FFC01B572A03DC91005CE41B /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				FFC01B582A03DCA5005CE41B /* DefaultSettingsLayout.swift */,
+				FFC01B5A2A03DD37005CE41B /* SettingsLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		FFC01B5C2A03F0E6005CE41B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		FFD3E1D52A054E6400680ED5 /* BookingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */,
+			);
+			path = BookingViewController;
 			sourceTree = "<group>";
 		};
 		FFE6F49229FACE7400FDB519 /* Components */ = {
@@ -921,11 +988,14 @@
 				FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */,
 				FF25633329F57A3000091374 /* ShowCaseItemCell.swift in Sources */,
 				FF25635229F69BE100091374 /* OptionModel.swift in Sources */,
+				FFC01B602A03F147005CE41B /* BaseTableCell.swift in Sources */,
 				FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */,
 				FF45A16429E7F5C100587DAF /* UILabel.swift in Sources */,
 				FF99B8F729EEB1A100F4E4C3 /* ExtensionUIColor.swift in Sources */,
 				FF45A16829E7F5FC00587DAF /* UITableViewHeaderFooterView.swift in Sources */,
+				FFC01B562A03D764005CE41B /* SettingsMenuModel.swift in Sources */,
 				FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */,
+				FFD3E1D72A054E7C00680ED5 /* BookingViewController.swift in Sources */,
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* UITableView.swift in Sources */,
@@ -935,6 +1005,7 @@
 				FFC01B4E2A03CA83005CE41B /* SettingsView.swift in Sources */,
 				FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */,
 				FF25634829F687A900091374 /* DefaultLayoutBuilder.swift in Sources */,
+				FFC01B5B2A03DD37005CE41B /* SettingsLayout.swift in Sources */,
 				FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */,
 				FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */,
 				FF45A16C29E7F70D00587DAF /* UserDefaults.swift in Sources */,
@@ -945,6 +1016,7 @@
 				FF8AAF6A29EEA389007D6A60 /* MainView.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
+				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,
 				FF45A16029E7F4BC00587DAF /* UIStackView.swift in Sources */,
 				FF8AAF6629EEA256007D6A60 /* BaseUIView.swift in Sources */,
 				FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */,
@@ -955,12 +1027,14 @@
 				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
 				FF25632D29F5718C00091374 /* DescriptionShowcaseView.swift in Sources */,
 				FF25633D29F5A16A00091374 /* RegisterViewController.swift in Sources */,
+				FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */,
 				FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */,
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
 				FF25634A29F687B900091374 /* FilterLayoutBuilder.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
 				FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */,
 				FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */,
+				FFC01B532A03D673005CE41B /* PushCell.swift in Sources */,
 				FF25632829F561FD00091374 /* AddressView.swift in Sources */,
 				FFA3D44E29F2A21D0067CC6F /* LayoutBuilder.swift in Sources */,
 				FF25632F29F571D200091374 /* MARKS.swift in Sources */,
@@ -971,12 +1045,14 @@
 				FF25634F29F68D3900091374 /* FilterModel.swift in Sources */,
 				FFA3D45629F2D0780067CC6F /* SalonDetailViewController.swift in Sources */,
 				FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */,
+				FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */,
 				FF99B90829EEBA7F00F4E4C3 /* SearchView.swift in Sources */,
 				FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */,
 				FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */,
 				FF25634329F682C800091374 /* FilterViewController.swift in Sources */,
 				FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */,
 				FF99B90B29EECA3500F4E4C3 /* DafaultSearchView.swift in Sources */,
+				FFC01B592A03DCA5005CE41B /* DefaultSettingsLayout.swift in Sources */,
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,
 				FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */,
 				FF99B90329EEB95400F4E4C3 /* VCFactory.swift in Sources */,
@@ -1157,7 +1233,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1165,9 +1241,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = m.ZAND;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1179,14 +1258,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7P89GZBVJ2;
+				DEVELOPMENT_TEAM = 2A23R4N5M7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1194,9 +1273,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = m.ZAND;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

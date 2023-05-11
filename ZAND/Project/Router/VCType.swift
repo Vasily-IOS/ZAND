@@ -17,4 +17,5 @@ enum VCType {
     case profile
     case appointments
     case settings
+    case booking
 }

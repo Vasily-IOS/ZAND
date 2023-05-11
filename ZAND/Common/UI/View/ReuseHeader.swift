@@ -13,6 +13,8 @@ class ReuseHeader: UICollectionReusableView {
     enum HeaderText {
         case services
         case favourites
+        case data
+        case pushes
         
         var description: String {
             switch self {
@@ -20,6 +22,10 @@ class ReuseHeader: UICollectionReusableView {
                 return Strings.services
             case .favourites:
                 return Strings.favourites
+            case .data:
+                return Strings.myData
+            case .pushes:
+                return Strings.pushSms
             }
         }
     }

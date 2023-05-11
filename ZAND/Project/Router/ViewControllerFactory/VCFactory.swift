@@ -41,15 +41,17 @@ final class VCFactory: DefaultVCFactory {
             let vc = ProfileViewController(contentView: view)
             return vc
         case .appointments:
-//            let layout =
-            let view = AppointemtsView()
+            let model = AppointmentsModel.model
+            let view = AppointemtsView(model: model)
             let vc = AppointmentsViewController(contentView: view)
             return vc
         case .settings:
-//            let layout =
-            let view = SettingsView()
+            let layout: DefaultSettingsLayout = SettingsLayout()
+            let view = SettingsView(layout: layout)
             let vc = SettingsViewController(contentView: view)
             return vc
+        case .booking:
+            return BookingViewController()
         }
     }
 }
