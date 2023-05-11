@@ -10,4 +10,12 @@ import Foundation
 enum VCType {
     case tabBar
     case search
+    case main
+    case saloonDetail(SaloonMockModel)
+    case register
+    case filter
+    case profile
+    case appointments
+    case settings
+    case booking
 }

@@ -36,7 +36,7 @@ extension UIStackView {
         }
     }
     
-    convenience init(alignment: UIStackView.Alignment = .fill,
+    public convenience init(alignment: UIStackView.Alignment = .fill,
                      arrangedSubviews: [UIView] = [],
                      axis: NSLayoutConstraint.Axis,
                      distribution: UIStackView.Distribution = .fill,
