@@ -106,7 +106,7 @@ extension SaloonPhotoCollection {
         
         collectionView.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
-            make.height.equalTo(225)
+            make.height.equalTo(255)
         }
         
         pageControl.snp.makeConstraints { make in

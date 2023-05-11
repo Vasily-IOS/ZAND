@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class SaloonDetailView: BaseUIView {
     
@@ -18,17 +19,13 @@ final class SaloonDetailView: BaseUIView {
     private lazy var saloonPhotoCollection = SaloonPhotoCollection(model: salonMockModel)
     private lazy var addressView = AddressView(model: salonMockModel)
     private lazy var descriptionShowcaseView = DescriptionShowcaseView(model: salonMockModel)
+    private lazy var circleBackButton = CircleBackButton()
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.contentInsetAdjustmentBehavior = .never
         return scrollView
-    }()
-    
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        return stackView
     }()
     
     // MARK: - Initializers
@@ -44,6 +41,14 @@ final class SaloonDetailView: BaseUIView {
         super.setup()
         setViews()
         setBackgroundColor()
+        addTargets()
+    }
+    
+    // MARK: - Action
+    
+    @objc
+    private func dismissAction() {
+        AppRouter.shared.popViewController()
     }
 }
 
@@ -53,28 +58,42 @@ extension SaloonDetailView {
     
     private func setViews() {
         addSubview(scrollView)
-        scrollView.addSubview(stackView)
+        scrollView.addSubviews([saloonPhotoCollection, circleBackButton,
+                                addressView, descriptionShowcaseView])
         
-        disableAutoresizeFramesFor([scrollView, stackView, addressView])
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(self)
+        }
         
-        stackView.addArrangedSubview(saloonPhotoCollection)
-        stackView.addArrangedSubview(addressView)
-        stackView.addArrangedSubview(descriptionShowcaseView)
+        saloonPhotoCollection.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.top)
+            make.left.right.equalTo(self)
+        }
         
-        NSLayoutConstraint.activate([
-            scrollView.leftAnchor.constraint(equalTo: self.leftAnchor),
-            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
-            scrollView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
-        ])
+        circleBackButton.snp.makeConstraints { make in
+            make.left.equalTo(20)
+            make.top.equalTo(self).offset(50)
+        }
+        
+        addressView.snp.makeConstraints { make in
+            make.top.equalTo(saloonPhotoCollection.snp.bottom).offset(0)
+            make.left.equalTo(self).offset(16)
+            make.right.equalTo(self).inset(16)
+        }
+        
+        descriptionShowcaseView.snp.makeConstraints { make in
+            make.top.equalTo(addressView.snp.bottom)
+            make.left.equalTo(self)
+            make.right.equalTo(self)
+            make.bottom.equalTo(scrollView.snp.bottom)
+        }
     }
     
     private func setBackgroundColor() {
         scrollView.backgroundColor = .mainGray
+    }
+    
+    private func addTargets() {
+        circleBackButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
     }
 }

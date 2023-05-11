@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import SnapKit
 
 final class SaloonDetailViewController: BaseViewController<UIView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = false
+        navigationController?.isNavigationBarHidden = true
     }
     
     deinit {
