@@ -30,6 +30,8 @@
 		FF25634F29F68D3900091374 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634E29F68D3900091374 /* FilterModel.swift */; };
 		FF25635229F69BE100091374 /* OptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635129F69BE100091374 /* OptionModel.swift */; };
 		FF25635429F6B46800091374 /* ReuseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeader.swift */; };
+		FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */; };
+		FF427DE12A12AA88007DF80A /* splash_video_long.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FF427DE02A12AA67007DF80A /* splash_video_long.mp4 */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
 		FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13729E7EC1300587DAF /* LaunchScreen.storyboard */; };
@@ -44,6 +46,10 @@
 		FF45A16A29E7F67600587DAF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16929E7F67600587DAF /* UIView.swift */; };
 		FF45A16C29E7F70D00587DAF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16B29E7F70D00587DAF /* UserDefaults.swift */; };
 		FF5DFDB12A0CFE4100495E63 /* CircleBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackButton.swift */; };
+		FF5DFDB42A0D2A2700495E63 /* MapBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB32A0D2A2700495E63 /* MapBaseModel.swift */; };
+		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
+		FF5DFDB92A0D583E00495E63 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB82A0D583E00495E63 /* LocationManager.swift */; };
+		FF5DFDBB2A0D589D00495E63 /* DefaultLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDBA2A0D589D00495E63 /* DefaultLocationManager.swift */; };
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
 		FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5529EE967D007D6A60 /* MainViewController.swift */; };
 		FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */; };
@@ -141,6 +147,8 @@
 		FF25634E29F68D3900091374 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		FF25635129F69BE100091374 /* OptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionModel.swift; sourceTree = "<group>"; };
 		FF25635329F6B46800091374 /* ReuseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeader.swift; sourceTree = "<group>"; };
+		FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVideoScreenViewController.swift; sourceTree = "<group>"; };
+		FF427DE02A12AA67007DF80A /* splash_video_long.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = splash_video_long.mp4; path = ../../../../splash_video_long.mp4; sourceTree = "<group>"; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF45A13529E7EC1300587DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -159,6 +167,10 @@
 		FF45A16929E7F67600587DAF /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FF45A16B29E7F70D00587DAF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FF5DFDB02A0CFE4100495E63 /* CircleBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackButton.swift; sourceTree = "<group>"; };
+		FF5DFDB32A0D2A2700495E63 /* MapBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBaseModel.swift; sourceTree = "<group>"; };
+		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
+		FF5DFDB82A0D583E00495E63 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		FF5DFDBA2A0D589D00495E63 /* DefaultLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationManager.swift; sourceTree = "<group>"; };
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
 		FF8AAF5529EE967D007D6A60 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -365,6 +377,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		FF427DD82A128622007DF80A /* LaunchVideoScreen */ = {
+			isa = PBXGroup;
+			children = (
+				FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */,
+				FF427DE02A12AA67007DF80A /* splash_video_long.mp4 */,
+			);
+			path = LaunchVideoScreen;
+			sourceTree = "<group>";
+		};
 		FF45A12029E7EC1200587DAF = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +492,15 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
+		FF5DFDB72A0D582C00495E63 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				FF5DFDBA2A0D589D00495E63 /* DefaultLocationManager.swift */,
+				FF5DFDB82A0D583E00495E63 /* LocationManager.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		FF8AAF5429EE9645007D6A60 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,6 +518,8 @@
 			children = (
 				FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */,
 				FF8AAF6729EEA37F007D6A60 /* MapView.swift */,
+				FF5DFDB32A0D2A2700495E63 /* MapBaseModel.swift */,
+				FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -504,7 +536,9 @@
 		FF8AAF5F29EEA176007D6A60 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				FF427DD82A128622007DF80A /* LaunchVideoScreen */,
 				FF99B8F829EEB4D600F4E4C3 /* Router */,
+				FF5DFDB72A0D582C00495E63 /* Location */,
 				FF45A13A29E7EC1300587DAF /* Info.plist */,
 				FF45A13529E7EC1300587DAF /* Assets.xcassets */,
 				FF45A13729E7EC1300587DAF /* LaunchScreen.storyboard */,
@@ -863,6 +897,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF427DE12A12AA88007DF80A /* splash_video_long.mp4 in Resources */,
 				FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */,
 				FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */,
 			);
@@ -1014,6 +1049,7 @@
 				FF25635429F6B46800091374 /* ReuseHeader.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* Strings.swift in Sources */,
 				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
+				FF5DFDBB2A0D589D00495E63 /* DefaultLocationManager.swift in Sources */,
 				FFC01B4E2A03CA83005CE41B /* SettingsView.swift in Sources */,
 				FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */,
 				FF25634829F687A900091374 /* DefaultLayoutBuilder.swift in Sources */,
@@ -1044,7 +1080,10 @@
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
 				FF25634A29F687B900091374 /* FilterLayoutBuilder.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
+				FF5DFDB92A0D583E00495E63 /* LocationManager.swift in Sources */,
+				FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */,
 				FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */,
+				FF5DFDB42A0D2A2700495E63 /* MapBaseModel.swift in Sources */,
 				FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */,
 				FFC01B532A03D673005CE41B /* PushCell.swift in Sources */,
 				FF25632829F561FD00091374 /* AddressView.swift in Sources */,
@@ -1053,6 +1092,7 @@
 				FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */,
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,
 				FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */,
+				FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */,
 				FF25633829F5888800091374 /* SignInView.swift in Sources */,
 				FF25634F29F68D3900091374 /* FilterModel.swift in Sources */,
 				FFA3D45629F2D0780067CC6F /* SalonDetailViewController.swift in Sources */,
@@ -1166,7 +1206,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1220,7 +1260,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1245,7 +1285,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1277,7 +1317,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

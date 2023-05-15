@@ -38,6 +38,7 @@ enum Strings {
     static let writeAboutBook = "Напишем, когда подтвердим запись"
     static let feature = "Предстоящие"
     static let was = "Прошедшие"
+    static let mens = "Мужчинам"
     
     // MARK: - Bottom button values
     static let apply = "Применить"
