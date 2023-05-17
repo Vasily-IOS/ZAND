@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		042CC1D691F0A02C53C10F1A /* Pods_ZAND_ZANDUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */; };
-		6BB5B17526532B28DF315ED0 /* Pods_ZANDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */; };
-		B17EB085DEE9BA19C8577769 /* Pods_ZAND.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */; };
 		FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E3382A02C3C4006476F0 /* ProfileCell.swift */; };
 		FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */; };
 		FF25632829F561FD00091374 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25632729F561FD00091374 /* AddressView.swift */; };
@@ -31,7 +28,6 @@
 		FF25635229F69BE100091374 /* OptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635129F69BE100091374 /* OptionModel.swift */; };
 		FF25635429F6B46800091374 /* ReuseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeader.swift */; };
 		FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */; };
-		FF427DE12A12AA88007DF80A /* splash_video_long.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FF427DE02A12AA67007DF80A /* splash_video_long.mp4 */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
 		FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13729E7EC1300587DAF /* LaunchScreen.storyboard */; };
@@ -98,6 +94,8 @@
 		FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */; };
 		FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */; };
 		FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */; };
+		FFFC47802A14DA5B000085E7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FFFC477F2A14DA5B000085E7 /* SnapKit */; };
+		FFFC47842A14DB0D000085E7 /* splash_video_long.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFFC47832A14DB06000085E7 /* splash_video_long.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,15 +116,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		09181F2A3035598E7B9479D5 /* Pods-ZANDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZANDTests.debug.xcconfig"; path = "Target Support Files/Pods-ZANDTests/Pods-ZANDTests.debug.xcconfig"; sourceTree = "<group>"; };
-		65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZANDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C8CC9559D9785FD856A1B9F /* Pods-ZAND-ZANDUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND-ZANDUITests.release.xcconfig"; path = "Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests.release.xcconfig"; sourceTree = "<group>"; };
-		713BE12830D2FF40112E8E72 /* Pods-ZAND.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.release.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.release.xcconfig"; sourceTree = "<group>"; };
-		949B316C67496D26CF0C8038 /* Pods-ZAND-ZANDUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND-ZANDUITests.debug.xcconfig"; path = "Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		C1DF0BB965CF63B55C57860E /* Pods-ZAND.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.debug.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.debug.xcconfig"; sourceTree = "<group>"; };
-		D51E2AC66A5767F8E7463DE8 /* Pods-ZANDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZANDTests.release.xcconfig"; path = "Target Support Files/Pods-ZANDTests/Pods-ZANDTests.release.xcconfig"; sourceTree = "<group>"; };
-		F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND_ZANDUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF01E3382A02C3C4006476F0 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCell.swift; sourceTree = "<group>"; };
 		FF25632729F561FD00091374 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
@@ -148,7 +137,6 @@
 		FF25635129F69BE100091374 /* OptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionModel.swift; sourceTree = "<group>"; };
 		FF25635329F6B46800091374 /* ReuseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeader.swift; sourceTree = "<group>"; };
 		FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVideoScreenViewController.swift; sourceTree = "<group>"; };
-		FF427DE02A12AA67007DF80A /* splash_video_long.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = splash_video_long.mp4; path = ../../../../splash_video_long.mp4; sourceTree = "<group>"; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF45A13529E7EC1300587DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -219,6 +207,7 @@
 		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
 		FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCollection.swift; sourceTree = "<group>"; };
 		FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCell.swift; sourceTree = "<group>"; };
+		FFFC47832A14DB06000085E7 /* splash_video_long.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = splash_video_long.mp4; path = ../../../../splash_video_long.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,7 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B17EB085DEE9BA19C8577769 /* Pods_ZAND.framework in Frameworks */,
+				FFFC47802A14DA5B000085E7 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +223,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BB5B17526532B28DF315ED0 /* Pods_ZANDTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,36 +230,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				042CC1D691F0A02C53C10F1A /* Pods_ZAND_ZANDUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A6BEA2F84F56137094AB6306 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */,
-				F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */,
-				65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E494D5953749331F30E11D91 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C1DF0BB965CF63B55C57860E /* Pods-ZAND.debug.xcconfig */,
-				713BE12830D2FF40112E8E72 /* Pods-ZAND.release.xcconfig */,
-				949B316C67496D26CF0C8038 /* Pods-ZAND-ZANDUITests.debug.xcconfig */,
-				6C8CC9559D9785FD856A1B9F /* Pods-ZAND-ZANDUITests.release.xcconfig */,
-				09181F2A3035598E7B9479D5 /* Pods-ZANDTests.debug.xcconfig */,
-				D51E2AC66A5767F8E7463DE8 /* Pods-ZANDTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		FF01E3372A02C3B1006476F0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,7 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */,
-				FF427DE02A12AA67007DF80A /* splash_video_long.mp4 */,
+				FFFC47832A14DB06000085E7 /* splash_video_long.mp4 */,
 			);
 			path = LaunchVideoScreen;
 			sourceTree = "<group>";
@@ -394,8 +358,6 @@
 				FF45A14229E7EC1300587DAF /* ZANDTests */,
 				FF45A14C29E7EC1300587DAF /* ZANDUITests */,
 				FF45A12A29E7EC1200587DAF /* Products */,
-				E494D5953749331F30E11D91 /* Pods */,
-				A6BEA2F84F56137094AB6306 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -795,17 +757,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF45A15329E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZAND" */;
 			buildPhases = (
-				AF483506CF3CD28C0D60C0E9 /* [CP] Check Pods Manifest.lock */,
 				FF45A12529E7EC1200587DAF /* Sources */,
 				FF45A12629E7EC1200587DAF /* Frameworks */,
 				FF45A12729E7EC1200587DAF /* Resources */,
-				C554C387E605C0003772E397 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ZAND;
+			packageProductDependencies = (
+				FFFC477F2A14DA5B000085E7 /* SnapKit */,
+			);
 			productName = ZAND;
 			productReference = FF45A12929E7EC1200587DAF /* ZAND.app */;
 			productType = "com.apple.product-type.application";
@@ -814,7 +777,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF45A15629E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZANDTests" */;
 			buildPhases = (
-				272CFB965C27E7DF4460AAA1 /* [CP] Check Pods Manifest.lock */,
 				FF45A13B29E7EC1300587DAF /* Sources */,
 				FF45A13C29E7EC1300587DAF /* Frameworks */,
 				FF45A13D29E7EC1300587DAF /* Resources */,
@@ -833,11 +795,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF45A15929E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZANDUITests" */;
 			buildPhases = (
-				33239D4BA2DC9CBD14942290 /* [CP] Check Pods Manifest.lock */,
 				FF45A14529E7EC1300587DAF /* Sources */,
 				FF45A14629E7EC1300587DAF /* Frameworks */,
 				FF45A14729E7EC1300587DAF /* Resources */,
-				0FA6EDE0F33560A7DCDA3A17 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -881,6 +841,9 @@
 				Base,
 			);
 			mainGroup = FF45A12029E7EC1200587DAF;
+			packageReferences = (
+				FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = FF45A12A29E7EC1200587DAF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -897,7 +860,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF427DE12A12AA88007DF80A /* splash_video_long.mp4 in Resources */,
+				FFFC47842A14DB0D000085E7 /* splash_video_long.mp4 in Resources */,
 				FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */,
 				FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */,
 			);
@@ -918,109 +881,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0FA6EDE0F33560A7DCDA3A17 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		272CFB965C27E7DF4460AAA1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ZANDTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		33239D4BA2DC9CBD14942290 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ZAND-ZANDUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF483506CF3CD28C0D60C0E9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ZAND-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C554C387E605C0003772E397 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF45A12529E7EC1200587DAF /* Sources */ = {
@@ -1272,7 +1132,6 @@
 		};
 		FF45A15429E7EC1300587DAF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1DF0BB965CF63B55C57860E /* Pods-ZAND.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1304,7 +1163,6 @@
 		};
 		FF45A15529E7EC1300587DAF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 713BE12830D2FF40112E8E72 /* Pods-ZAND.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1336,7 +1194,6 @@
 		};
 		FF45A15729E7EC1300587DAF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09181F2A3035598E7B9479D5 /* Pods-ZANDTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1356,7 +1213,6 @@
 		};
 		FF45A15829E7EC1300587DAF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D51E2AC66A5767F8E7463DE8 /* Pods-ZANDTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1376,7 +1232,6 @@
 		};
 		FF45A15A29E7EC1300587DAF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 949B316C67496D26CF0C8038 /* Pods-ZAND-ZANDUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1394,7 +1249,6 @@
 		};
 		FF45A15B29E7EC1300587DAF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C8CC9559D9785FD856A1B9F /* Pods-ZAND-ZANDUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1450,6 +1304,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FFFC477F2A14DA5B000085E7 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF45A12129E7EC1200587DAF /* Project object */;
 }
