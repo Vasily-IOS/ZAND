@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		042CC1D691F0A02C53C10F1A /* Pods_ZAND_ZANDUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */; };
-		6BB5B17526532B28DF315ED0 /* Pods_ZANDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */; };
-		B17EB085DEE9BA19C8577769 /* Pods_ZAND.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */; };
 		FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E3382A02C3C4006476F0 /* ProfileCell.swift */; };
 		FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */; };
 		FF25632829F561FD00091374 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25632729F561FD00091374 /* AddressView.swift */; };
@@ -30,6 +27,7 @@
 		FF25634F29F68D3900091374 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634E29F68D3900091374 /* FilterModel.swift */; };
 		FF25635229F69BE100091374 /* OptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635129F69BE100091374 /* OptionModel.swift */; };
 		FF25635429F6B46800091374 /* ReuseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeader.swift */; };
+		FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
 		FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13729E7EC1300587DAF /* LaunchScreen.storyboard */; };
@@ -44,6 +42,8 @@
 		FF45A16A29E7F67600587DAF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16929E7F67600587DAF /* UIView.swift */; };
 		FF45A16C29E7F70D00587DAF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16B29E7F70D00587DAF /* UserDefaults.swift */; };
 		FF5DFDB12A0CFE4100495E63 /* CircleBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackButton.swift */; };
+		FF5DFDB42A0D2A2700495E63 /* MapBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB32A0D2A2700495E63 /* MapBaseModel.swift */; };
+		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
 		FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5529EE967D007D6A60 /* MainViewController.swift */; };
 		FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */; };
@@ -86,12 +86,18 @@
 		FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */; };
 		FFC01B602A03F147005CE41B /* BaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */; };
 		FFD3E1D72A054E7C00680ED5 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */; };
+		FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */; };
+		FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B42A1B8E9000CEA0E1 /* SelectableMapViewController.swift */; };
+		FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B62A1B8E9900CEA0E1 /* SelectableMapView.swift */; };
+		FFDCE4B92A1B8EA500CEA0E1 /* SelectableMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */; };
 		FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49329FACE9700FDB519 /* UserNameView.swift */; };
 		FFE6F49729FAD45700FDB519 /* ProfileMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */; };
 		FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */; };
 		FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */; };
 		FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */; };
 		FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */; };
+		FFFC47802A14DA5B000085E7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FFFC477F2A14DA5B000085E7 /* SnapKit */; };
+		FFFC47862A14DCE6000085E7 /* splash_video_long.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFFC47852A14DCE1000085E7 /* splash_video_long.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,15 +118,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		09181F2A3035598E7B9479D5 /* Pods-ZANDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZANDTests.debug.xcconfig"; path = "Target Support Files/Pods-ZANDTests/Pods-ZANDTests.debug.xcconfig"; sourceTree = "<group>"; };
-		65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZANDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C8CC9559D9785FD856A1B9F /* Pods-ZAND-ZANDUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND-ZANDUITests.release.xcconfig"; path = "Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests.release.xcconfig"; sourceTree = "<group>"; };
-		713BE12830D2FF40112E8E72 /* Pods-ZAND.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.release.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.release.xcconfig"; sourceTree = "<group>"; };
-		949B316C67496D26CF0C8038 /* Pods-ZAND-ZANDUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND-ZANDUITests.debug.xcconfig"; path = "Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		C1DF0BB965CF63B55C57860E /* Pods-ZAND.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.debug.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.debug.xcconfig"; sourceTree = "<group>"; };
-		D51E2AC66A5767F8E7463DE8 /* Pods-ZANDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZANDTests.release.xcconfig"; path = "Target Support Files/Pods-ZANDTests/Pods-ZANDTests.release.xcconfig"; sourceTree = "<group>"; };
-		F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND_ZANDUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF01E3382A02C3C4006476F0 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCell.swift; sourceTree = "<group>"; };
 		FF25632729F561FD00091374 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
@@ -141,6 +138,7 @@
 		FF25634E29F68D3900091374 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		FF25635129F69BE100091374 /* OptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionModel.swift; sourceTree = "<group>"; };
 		FF25635329F6B46800091374 /* ReuseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeader.swift; sourceTree = "<group>"; };
+		FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVideoScreenViewController.swift; sourceTree = "<group>"; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF45A13529E7EC1300587DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -159,6 +157,8 @@
 		FF45A16929E7F67600587DAF /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FF45A16B29E7F70D00587DAF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FF5DFDB02A0CFE4100495E63 /* CircleBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackButton.swift; sourceTree = "<group>"; };
+		FF5DFDB32A0D2A2700495E63 /* MapBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBaseModel.swift; sourceTree = "<group>"; };
+		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
 		FF8AAF5529EE967D007D6A60 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -201,12 +201,17 @@
 		FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsCell.swift; sourceTree = "<group>"; };
 		FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCell.swift; sourceTree = "<group>"; };
 		FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
+		FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkView.swift; sourceTree = "<group>"; };
+		FFDCE4B42A1B8E9000CEA0E1 /* SelectableMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapViewController.swift; sourceTree = "<group>"; };
+		FFDCE4B62A1B8E9900CEA0E1 /* SelectableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapView.swift; sourceTree = "<group>"; };
+		FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapPresenter.swift; sourceTree = "<group>"; };
 		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuModel.swift; sourceTree = "<group>"; };
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
 		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
 		FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCollection.swift; sourceTree = "<group>"; };
 		FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCell.swift; sourceTree = "<group>"; };
+		FFFC47852A14DCE1000085E7 /* splash_video_long.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = splash_video_long.mp4; path = "../../../../ZAND files/splash_video_long.mp4"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,7 +219,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B17EB085DEE9BA19C8577769 /* Pods_ZAND.framework in Frameworks */,
+				FFFC47802A14DA5B000085E7 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +227,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BB5B17526532B28DF315ED0 /* Pods_ZANDTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,36 +234,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				042CC1D691F0A02C53C10F1A /* Pods_ZAND_ZANDUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A6BEA2F84F56137094AB6306 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F83BFABBDA9C1688AE307A35 /* Pods_ZAND.framework */,
-				F5605C73EB0B476F0D95DB80 /* Pods_ZAND_ZANDUITests.framework */,
-				65FE9ADA7D635440C5AB7AE4 /* Pods_ZANDTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E494D5953749331F30E11D91 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C1DF0BB965CF63B55C57860E /* Pods-ZAND.debug.xcconfig */,
-				713BE12830D2FF40112E8E72 /* Pods-ZAND.release.xcconfig */,
-				949B316C67496D26CF0C8038 /* Pods-ZAND-ZANDUITests.debug.xcconfig */,
-				6C8CC9559D9785FD856A1B9F /* Pods-ZAND-ZANDUITests.release.xcconfig */,
-				09181F2A3035598E7B9479D5 /* Pods-ZANDTests.debug.xcconfig */,
-				D51E2AC66A5767F8E7463DE8 /* Pods-ZANDTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		FF01E3372A02C3B1006476F0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +345,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		FF427DD82A128622007DF80A /* LaunchVideoScreen */ = {
+			isa = PBXGroup;
+			children = (
+				FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */,
+				FFFC47852A14DCE1000085E7 /* splash_video_long.mp4 */,
+			);
+			path = LaunchVideoScreen;
+			sourceTree = "<group>";
+		};
 		FF45A12029E7EC1200587DAF = {
 			isa = PBXGroup;
 			children = (
@@ -373,8 +362,6 @@
 				FF45A14229E7EC1300587DAF /* ZANDTests */,
 				FF45A14C29E7EC1300587DAF /* ZANDUITests */,
 				FF45A12A29E7EC1200587DAF /* Products */,
-				E494D5953749331F30E11D91 /* Pods */,
-				A6BEA2F84F56137094AB6306 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -393,7 +380,7 @@
 			children = (
 				FF8AAF5F29EEA176007D6A60 /* Project */,
 				FF25635029F69BD100091374 /* Model */,
-				FF99B8F129EEAB0500F4E4C3 /* Enum */,
+				FF99B8F129EEAB0500F4E4C3 /* Constants */,
 				FF45A15E29E7EF3A00587DAF /* Common */,
 				FF45A15D29E7EF3200587DAF /* Extensions */,
 				FF45A15C29E7EF2600587DAF /* ViewControllers */,
@@ -422,6 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FFDCE4B32A1B8E6F00CEA0E1 /* SelectableMap */,
 				FFD3E1D52A054E6400680ED5 /* BookingViewController */,
 				FFC01B4A2A03CA65005CE41B /* SettingsViewController */,
 				FFC01B452A03C7D8005CE41B /* Appointments */,
@@ -488,6 +476,8 @@
 			children = (
 				FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */,
 				FF8AAF6729EEA37F007D6A60 /* MapView.swift */,
+				FF5DFDB32A0D2A2700495E63 /* MapBaseModel.swift */,
+				FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -504,6 +494,7 @@
 		FF8AAF5F29EEA176007D6A60 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				FF427DD82A128622007DF80A /* LaunchVideoScreen */,
 				FF99B8F829EEB4D600F4E4C3 /* Router */,
 				FF45A13A29E7EC1300587DAF /* Info.plist */,
 				FF45A13529E7EC1300587DAF /* Assets.xcassets */,
@@ -527,7 +518,7 @@
 		FF8E7BDF29EF25D500644208 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				FFA3D44F29F2A64F0067CC6F /* SaloonCell */,
+				FFA3D45029F2A6800067CC6F /* SaloonCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -558,16 +549,17 @@
 				FF99B90A29EECA3500F4E4C3 /* DafaultSearchView.swift */,
 				FF25633929F591F600091374 /* PaddingTextField.swift */,
 				FF25635329F6B46800091374 /* ReuseHeader.swift */,
+				FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		FF99B8F129EEAB0500F4E4C3 /* Enum */ = {
+		FF99B8F129EEAB0500F4E4C3 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
 				FF99B8F229EEAB1500F4E4C3 /* Strings.swift */,
 			);
-			path = Enum;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		FF99B8F829EEB4D600F4E4C3 /* Router */ = {
@@ -613,14 +605,6 @@
 				FFA3D44D29F2A21D0067CC6F /* LayoutBuilder.swift */,
 			);
 			path = Layout;
-			sourceTree = "<group>";
-		};
-		FFA3D44F29F2A64F0067CC6F /* SaloonCell */ = {
-			isa = PBXGroup;
-			children = (
-				FFA3D45029F2A6800067CC6F /* SaloonCell.swift */,
-			);
-			path = SaloonCell;
 			sourceTree = "<group>";
 		};
 		FFA3D45229F2CABE0067CC6F /* SaloonDetail */ = {
@@ -698,6 +682,16 @@
 			path = BookingViewController;
 			sourceTree = "<group>";
 		};
+		FFDCE4B32A1B8E6F00CEA0E1 /* SelectableMap */ = {
+			isa = PBXGroup;
+			children = (
+				FFDCE4B42A1B8E9000CEA0E1 /* SelectableMapViewController.swift */,
+				FFDCE4B62A1B8E9900CEA0E1 /* SelectableMapView.swift */,
+				FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */,
+			);
+			path = SelectableMap;
+			sourceTree = "<group>";
+		};
 		FFE6F49229FACE7400FDB519 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -761,17 +755,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF45A15329E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZAND" */;
 			buildPhases = (
-				AF483506CF3CD28C0D60C0E9 /* [CP] Check Pods Manifest.lock */,
 				FF45A12529E7EC1200587DAF /* Sources */,
 				FF45A12629E7EC1200587DAF /* Frameworks */,
 				FF45A12729E7EC1200587DAF /* Resources */,
-				C554C387E605C0003772E397 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ZAND;
+			packageProductDependencies = (
+				FFFC477F2A14DA5B000085E7 /* SnapKit */,
+			);
 			productName = ZAND;
 			productReference = FF45A12929E7EC1200587DAF /* ZAND.app */;
 			productType = "com.apple.product-type.application";
@@ -780,7 +775,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF45A15629E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZANDTests" */;
 			buildPhases = (
-				272CFB965C27E7DF4460AAA1 /* [CP] Check Pods Manifest.lock */,
 				FF45A13B29E7EC1300587DAF /* Sources */,
 				FF45A13C29E7EC1300587DAF /* Frameworks */,
 				FF45A13D29E7EC1300587DAF /* Resources */,
@@ -799,11 +793,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF45A15929E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZANDUITests" */;
 			buildPhases = (
-				33239D4BA2DC9CBD14942290 /* [CP] Check Pods Manifest.lock */,
 				FF45A14529E7EC1300587DAF /* Sources */,
 				FF45A14629E7EC1300587DAF /* Frameworks */,
 				FF45A14729E7EC1300587DAF /* Resources */,
-				0FA6EDE0F33560A7DCDA3A17 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -847,6 +839,9 @@
 				Base,
 			);
 			mainGroup = FF45A12029E7EC1200587DAF;
+			packageReferences = (
+				FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = FF45A12A29E7EC1200587DAF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -863,6 +858,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFFC47862A14DCE6000085E7 /* splash_video_long.mp4 in Resources */,
 				FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */,
 				FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */,
 			);
@@ -883,109 +879,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0FA6EDE0F33560A7DCDA3A17 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZAND-ZANDUITests/Pods-ZAND-ZANDUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		272CFB965C27E7DF4460AAA1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ZANDTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		33239D4BA2DC9CBD14942290 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ZAND-ZANDUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF483506CF3CD28C0D60C0E9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ZAND-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C554C387E605C0003772E397 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF45A12529E7EC1200587DAF /* Sources */ = {
@@ -1011,6 +904,7 @@
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* UITableView.swift in Sources */,
+				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
 				FF25635429F6B46800091374 /* ReuseHeader.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* Strings.swift in Sources */,
 				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
@@ -1036,6 +930,7 @@
 				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
 				FFC01B4C2A03CA78005CE41B /* SettingsViewController.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
+				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
 				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
 				FF25632D29F5718C00091374 /* DescriptionShowcaseView.swift in Sources */,
 				FF25633D29F5A16A00091374 /* RegisterViewController.swift in Sources */,
@@ -1044,20 +939,25 @@
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
 				FF25634A29F687B900091374 /* FilterLayoutBuilder.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
+				FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */,
 				FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */,
+				FF5DFDB42A0D2A2700495E63 /* MapBaseModel.swift in Sources */,
 				FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */,
 				FFC01B532A03D673005CE41B /* PushCell.swift in Sources */,
 				FF25632829F561FD00091374 /* AddressView.swift in Sources */,
 				FFA3D44E29F2A21D0067CC6F /* LayoutBuilder.swift in Sources */,
 				FF25632F29F571D200091374 /* MARKS.swift in Sources */,
+				FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */,
 				FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */,
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,
 				FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */,
+				FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */,
 				FF25633829F5888800091374 /* SignInView.swift in Sources */,
 				FF25634F29F68D3900091374 /* FilterModel.swift in Sources */,
 				FFA3D45629F2D0780067CC6F /* SalonDetailViewController.swift in Sources */,
 				FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */,
 				FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */,
+				FFDCE4B92A1B8EA500CEA0E1 /* SelectableMapPresenter.swift in Sources */,
 				FF99B90829EEBA7F00F4E4C3 /* SearchView.swift in Sources */,
 				FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */,
 				FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */,
@@ -1166,7 +1066,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1220,7 +1120,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1232,7 +1132,6 @@
 		};
 		FF45A15429E7EC1300587DAF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1DF0BB965CF63B55C57860E /* Pods-ZAND.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1245,7 +1144,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1264,7 +1163,6 @@
 		};
 		FF45A15529E7EC1300587DAF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 713BE12830D2FF40112E8E72 /* Pods-ZAND.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1277,7 +1175,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1296,7 +1194,6 @@
 		};
 		FF45A15729E7EC1300587DAF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09181F2A3035598E7B9479D5 /* Pods-ZANDTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1316,7 +1213,6 @@
 		};
 		FF45A15829E7EC1300587DAF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D51E2AC66A5767F8E7463DE8 /* Pods-ZANDTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1336,7 +1232,6 @@
 		};
 		FF45A15A29E7EC1300587DAF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 949B316C67496D26CF0C8038 /* Pods-ZAND-ZANDUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1354,7 +1249,6 @@
 		};
 		FF45A15B29E7EC1300587DAF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C8CC9559D9785FD856A1B9F /* Pods-ZAND-ZANDUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1410,6 +1304,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FFFC477F2A14DA5B000085E7 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF45A12129E7EC1200587DAF /* Project object */;
 }

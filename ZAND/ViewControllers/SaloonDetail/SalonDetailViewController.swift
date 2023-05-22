@@ -8,36 +8,27 @@
 import UIKit
 import SnapKit
 
-final class SaloonDetailViewController: BaseViewController<UIView> {
+final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
+    
+    // MARK: - Lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        setupNavigationbar()
     }
     
     deinit {
         print("SaloonDetailViewController died")
     }
-        
-    private func setupNavigationbar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white
-        ]
-        
-        if #available(iOS 15, *) {
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .white
-            appearance.shadowColor = .clear
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = appearance
-            navigationController?.navigationBar.tintColor = .white
-        } else {
-            navigationController?.navigationBar.shadowImage = UIImage()
-        }
-        
-        navigationController?.navigationBar.tintColor = UIColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    }
 }
 
+extension SaloonDetailViewController {
+    
+    // MARK: - Instance methods
+    
+    private func setupNavigationbar() {
+        navigationController?.isNavigationBarHidden = true
+        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
+    }
+}

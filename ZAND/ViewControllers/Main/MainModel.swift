@@ -20,6 +20,7 @@ struct SaloonMockModel {
     let min_price: Int
     let description: String
     let showcase: [Item]
+    let coordinates: String
     
     static let saloons: [Self] = [
         .init(category: Category(id: 0, name: "спа-салон"),
@@ -41,7 +42,8 @@ struct SaloonMockModel {
               showcase: [
                 Item(image: nil,
                      description: nil,
-                     price_from: nil)]),
+                     price_from: nil)],
+              coordinates: "55.933301,37.514214"),
         
         .init(category: Category(id: 0, name: "спа-салон"),
               name: "Good smiles",
@@ -61,7 +63,8 @@ struct SaloonMockModel {
               showcase: [
                 Item(image: nil,
                      description: nil,
-                     price_from: nil)]),
+                     price_from: nil)],
+              coordinates: "55.763908,37.60646"),
         .init(category: Category(id: 1, name: "салон красоты"),
               name: "Wella krasavella",
               adress: "ул. Союзная, д. 6, стр. 3",
@@ -80,7 +83,8 @@ struct SaloonMockModel {
               showcase: [
                 Item(image: nil,
                      description: nil,
-                     price_from: nil)]),
+                     price_from: nil)],
+              coordinates: "55.583205,37.59674"),
         .init(category: Category(id: 1, name: "салон красоты"),
               name: "Приукрасим так приукрасим",
               adress: "Переулок Твардовского, д. 4",
@@ -99,7 +103,8 @@ struct SaloonMockModel {
               showcase: [
                 Item(image: nil,
                      description: nil,
-                     price_from: nil)]),
+                     price_from: nil)],
+              coordinates: "55.751665,37.817169"),
         .init(category: Category(id: 2, name: "массажный салон"),
               name: "Good Relaх",
               adress: "1-ая Тверская-Ямская, д. 1, стр. 7",
@@ -118,7 +123,8 @@ struct SaloonMockModel {
               showcase: [
                 Item(image: nil,
                      description: nil,
-                     price_from: nil)]),
+                     price_from: nil)],
+              coordinates: "55.756842,37.408139"),
     ]
 }
 

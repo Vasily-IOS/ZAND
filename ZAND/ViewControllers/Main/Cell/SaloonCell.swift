@@ -10,7 +10,15 @@ import SnapKit
 
 final class SaloonCell: BaseCollectionCell {
     
+    // MARK:  - Closures
+    
+    var viewOnMapHandler: ((String) -> ())?
+    
     // MARK: - Properties
+    
+    var coordinates: String?
+    
+    // MARK: - UI
     
     private let saloonImage: UIImageView = {
         let saloonImage = UIImageView()
@@ -47,16 +55,27 @@ final class SaloonCell: BaseCollectionCell {
         super.setup()
         setSelf()
         setViews()
+        setTarget()
     }
     
     // MARK: - Configuration
     
     func configure(model: SaloonMockModel) {
-        saloonImage.image = model.image
-        saloonDescriptionLabel.text = model.name
-        categoryLabel.text = model.category.name
-        adressLabel.text = model.adress
-        ratingLabel.text = "\(model.rating)"
+        self.saloonImage.image = model.image
+        self.saloonDescriptionLabel.text = model.name
+        self.categoryLabel.text = model.category.name
+        self.adressLabel.text = model.adress
+        self.ratingLabel.text = "\(model.rating)"
+        self.coordinates = model.coordinates
+    }
+    
+    // MARK: - Action
+    
+    @objc
+    private func viewOnMapAction() {
+        if let coordinates = coordinates {
+            viewOnMapHandler?(coordinates)
+        }
     }
 }
 
@@ -114,5 +133,9 @@ extension SaloonCell {
     private func setSelf() {
         layer.cornerRadius = 15
         clipsToBounds = true
+    }
+    
+    private func setTarget() {
+        viewOnMapButton.addTarget(self, action: #selector(viewOnMapAction), for: .touchUpInside)
     }
 }

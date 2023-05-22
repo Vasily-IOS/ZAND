@@ -10,11 +10,15 @@ import WebKit
 
 final class BookingViewController: UIViewController {
 
+    // MARK: - Properties
+    
     private lazy var webView: WKWebView = {
         let configurator = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: configurator)
         return webView
     }()
+    
+    // MARK: - Lifecycle
     
     override func loadView() {
         super.loadView()
@@ -26,9 +30,10 @@ final class BookingViewController: UIViewController {
         request()
     }
     
+    // MARK: - Instance method
+    
     private func request() {
-        let urlString = "https://www.youtube.com/watch?v=eGdAipbnoys&list=RDEMYXFd1WjBMZdHHvPdHyaEiw&index=3"
-        guard let url = URL(string: urlString) else { return }
+        guard let url = URL(string: "https://n134214.yclients.com") else { return }
         let request = URLRequest(url: url)
         DispatchQueue.main.async { [weak self] in
             self?.webView.load(request)

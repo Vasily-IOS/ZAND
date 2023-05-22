@@ -62,6 +62,7 @@ final class AddressView: BaseUIView {
         super.setup()
         setSelf()
         setViews()
+        addTarget()
     }
     
     private func configure(model: SaloonMockModel) {
@@ -69,6 +70,13 @@ final class AddressView: BaseUIView {
         weekDaysDescriptionLabel.text = model.weekdays
         weekendDaysDescriptionLabel.text = model.weekend
         minPriceLabel.text = "от \(model.min_price) руб."
+    }
+    
+    // MARK: - Action
+    
+    @objc
+    private func viewOnMapAction() {
+        AppRouter.shared.push(.selectableMap(model.coordinates))
     }
 }
 
@@ -115,5 +123,9 @@ extension AddressView {
             make.centerY.equalTo(viewOnMapButton)
             make.right.equalTo(self).inset(25)
         }
+    }
+    
+    private func addTarget() {
+        viewOnMapButton.addTarget(self, action: #selector(viewOnMapAction), for: .touchUpInside)
     }
 }

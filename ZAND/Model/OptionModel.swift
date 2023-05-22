@@ -18,7 +18,8 @@ struct OptionsModel {
         .init(name: Strings.spa, image: UIImage(named: "spa_icon")!),
         .init(name: Strings.makeUp, image: UIImage(named: "makeup_icon")!),
         .init(name: Strings.face_care, image: UIImage(named: "faceCare_icon")!),
-        .init(name: Strings.brows, image: UIImage(named: "brows_icon")!)
+        .init(name: Strings.brows, image: UIImage(named: "brows_icon")!),
+        .init(name: Strings.mens, image: UIImage(named: "mens_icon")!)
     ]
     
     static let optionWithoutFilterModel: [Self] = [
@@ -27,6 +28,7 @@ struct OptionsModel {
         .init(name: Strings.spa, image: UIImage(named: "spa_icon")!),
         .init(name: Strings.makeUp, image: UIImage(named: "makeup_icon")!),
         .init(name: Strings.face_care, image: UIImage(named: "faceCare_icon")!),
-        .init(name: Strings.brows, image: UIImage(named: "brows_icon")!)
+        .init(name: Strings.brows, image: UIImage(named: "brows_icon")!),
+        .init(name: Strings.mens, image: UIImage(named: "mens_icon")!)
     ]
 }

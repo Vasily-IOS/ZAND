@@ -8,7 +8,7 @@
 import UIKit
 
 class BaseTableCell: UITableViewCell {
-    
+
     // MARK: - Initializers
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

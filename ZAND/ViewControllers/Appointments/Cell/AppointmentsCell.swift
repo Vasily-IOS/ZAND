@@ -10,6 +10,14 @@ import SnapKit
 
 final class AppoitmentsCell: BaseTableCell {
     
+    // MARK:  - Closures
+    
+    var viewOnMapHandler: ((String) -> ())?
+    
+    // MARK: - Properties
+    
+    var coordinates: String?
+    
     // MARK: - Properties
     
     private let saloonNameLabel = UILabel(.systemFont(ofSize: 20, weight: .bold))
@@ -45,6 +53,7 @@ final class AppoitmentsCell: BaseTableCell {
         super.setup()
         setViews()
         setSelf()
+        setTarget()
     }
     
     func configure(model: AppointmentsModel) {
@@ -54,6 +63,16 @@ final class AppoitmentsCell: BaseTableCell {
         priceLabel.text = "от \(model.servicePrice) руб."
         timeLabel.text = model.bookingTime
         serviceTypeLabel.text = model.serviceName
+        coordinates = model.coordinates
+    }
+    
+    // MARK: - Action
+    
+    @objc
+    private func viewOnMapAction() {
+        if let coordinates = coordinates {
+            viewOnMapHandler?(coordinates)
+        }
     }
 }
 
@@ -96,5 +115,9 @@ extension AppoitmentsCell {
     private func setSelf() {
         layer.cornerRadius = 15
         clipsToBounds = true
+    }
+    
+    private func setTarget() {
+        viewOnMapButton.addTarget(self, action: #selector(viewOnMapAction), for: .touchUpInside)
     }
 }

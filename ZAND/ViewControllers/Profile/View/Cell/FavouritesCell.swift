@@ -10,7 +10,15 @@ import SnapKit
 
 final class FavouritesCell: BaseCollectionCell {
     
+    // MARK: - Closures
+    
+    var viewOnMapHandler: ((String) -> ())?
+    
     // MARK: - Properties
+    
+    var coordinates: String?
+    
+    // MARK: - UI
     
     private let saloonImage: UIImageView = {
         let saloonImage = UIImageView()
@@ -31,8 +39,6 @@ final class FavouritesCell: BaseCollectionCell {
         ratingLabel.font = .systemFont(ofSize: 12)
         return ratingLabel
     }()
-    
-    // MARK: - Initializers
 
     // MARK: - Instance methods
     
@@ -40,12 +46,23 @@ final class FavouritesCell: BaseCollectionCell {
         super.setup()
         setSelf()
         setViews()
+        addTarget()
     }
     
     func configure(model: SaloonMockModel) {
-        saloonImage.image = model.image
-        saloonName.text = model.name
-        ratingLabel.text = "\(model.rating)"
+        self.saloonImage.image = model.image
+        self.saloonName.text = model.name
+        self.ratingLabel.text = "\(model.rating)"
+        self.coordinates = model.coordinates
+    }
+    
+    // MARK: - Action
+    
+    @objc
+    private func viewOnMapAction() {
+        if let coordinates = coordinates {
+            viewOnMapHandler?(coordinates)
+        }
     }
 }
 
@@ -88,5 +105,9 @@ extension FavouritesCell {
     private func setSelf() {
         layer.cornerRadius = 16
         clipsToBounds = true
+    }
+    
+    private func addTarget() {
+        viewOnMapButton.addTarget(self, action: #selector(viewOnMapAction), for: .touchUpInside)
     }
 }

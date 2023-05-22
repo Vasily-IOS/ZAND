@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,15 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var navigationController: UINavigationController?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = .white
+        window?.backgroundColor = .black
         setupRouter()
         return true
     }
 }
 
 extension AppDelegate {
+    
     func setupRouter() {
         AppRouter.shared.appDelegate = self
     }

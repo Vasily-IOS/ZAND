@@ -10,7 +10,11 @@ import SnapKit
 
 final class AppointemtsView: BaseUIView {
     
-    // MARK: - Properties
+    // MARK: - Closure
+    
+    private let viewOnMapClosure = { (coordinates: String) in
+        AppRouter.shared.push(.selectableMap(coordinates))
+    }
     
     // MARK: - Models
     
@@ -127,6 +131,8 @@ extension AppointemtsView {
 
 extension AppointemtsView: UITableViewDataSource {
     
+    // MARK: - UITableViewDataSource methods
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return rootModel.count
     }
@@ -138,11 +144,14 @@ extension AppointemtsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(withType: AppoitmentsCell.self, for: indexPath) as! AppoitmentsCell
         cell.configure(model: rootModel[indexPath.section])
+        cell.viewOnMapHandler = viewOnMapClosure
         return cell
     }
 }
 
 extension AppointemtsView: UITableViewDelegate {
+    
+    // MARK: - UITableViewDelegate methods
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 20

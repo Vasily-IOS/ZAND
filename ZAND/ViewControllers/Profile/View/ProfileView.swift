@@ -11,9 +11,18 @@ import SnapKit
 enum ProfileSelect: Int {
     case appointments
     case settings
+    case logOut
 }
 
 final class ProfileView: BaseUIView {
+    
+    // MARK: - Closures
+    
+    var alertHandler: (() -> ())?
+    
+    private let viewOnMapClosure = { (coordinates: String) in
+        AppRouter.shared.push(.selectableMap(coordinates))
+    }
     
     // MARK: - Properties
     
@@ -55,6 +64,14 @@ final class ProfileView: BaseUIView {
         setViews()
         setBackgroundColor()
         subscribeDelegates()
+        addTargets()
+    }
+    
+    // MARK: - Action
+    
+    @objc
+    private func callUsAction() {
+        print("Свяжитесь с нами")
     }
 }
 
@@ -107,6 +124,10 @@ extension ProfileView {
         }
         return layout
     }
+    
+    private func addTargets() {
+        callUsButton.addTarget(self, action: #selector(callUsAction), for: .touchUpInside)
+    }
 }
 
 extension ProfileView: UICollectionViewDataSource {
@@ -139,6 +160,7 @@ extension ProfileView: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: FavouritesCell.self),
                                                           for: indexPath) as! FavouritesCell
             cell.configure(model: saloonMockModel[indexPath.row])
+            cell.viewOnMapHandler = viewOnMapClosure
             return cell
         default:
             return UICollectionViewCell()
@@ -158,6 +180,8 @@ extension ProfileView: UICollectionViewDelegate {
                 AppRouter.shared.push(.appointments)
             case .settings:
                 AppRouter.shared.push(.settings)
+            case .logOut:
+                alertHandler?()
             default:
                 break
             }

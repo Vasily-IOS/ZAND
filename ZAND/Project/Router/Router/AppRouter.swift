@@ -33,13 +33,24 @@ extension AppRouter {
     // MARK: - Instance methods
     
     private func setup() {
-        Thread.sleep(forTimeInterval: 1.0)
-        let vc = vcFactory.getViewController(for: .tabBar)
-        tabBarController = vc as? UITabBarController
-        navigationController = UINavigationController(rootViewController: vc)
-        navigationController.isNavigationBarHidden = false
-        navigationController.navigationBar.tintColor = .white
-        appDelegate?.window?.rootViewController = navigationController
+        let videoVC = LaunchVideoScreenViewController()
+        let tabBar = vcFactory.getViewController(for: .tabBar)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+            UIView.animate(withDuration: 0.2) {
+                self.tabBarController = tabBar as? UITabBarController
+                self.navigationController = UINavigationController(rootViewController: tabBar)
+                self.navigationController.isNavigationBarHidden = false
+                self.navigationController.navigationBar.tintColor = .white
+                
+                self.appDelegate?.window?.rootViewController = self.navigationController
+                self.setupNavigationbar()
+                self.appDelegate?.window?.makeKeyAndVisible()
+            }
+        }
+ 
+        appDelegate?.window?.backgroundColor = .black
+        appDelegate?.window?.rootViewController = videoVC
         setupNavigationbar()
         appDelegate?.window?.makeKeyAndVisible()
     }

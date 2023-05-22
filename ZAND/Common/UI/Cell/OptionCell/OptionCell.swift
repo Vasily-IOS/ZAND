@@ -24,15 +24,6 @@ final class OptionCell: BaseCollectionCell {
                 return .white
             }
         }
-        
-        var borderColor: CGColor {
-            switch self {
-            case .onMain:
-                return UIColor.clear.cgColor
-            case .onFilter:
-                return UIColor.lightGreen.cgColor
-            }
-        }
     }
     
     override var isSelected: Bool {
@@ -58,9 +49,7 @@ final class OptionCell: BaseCollectionCell {
     func configure(model: OptionsModel, state: State) {
         descriptionLabel.text = model.name
         optionView.configure(image: model.image)
-        
         setBackgroundColor(color: state.backgroundColor)
-        optionView.layer.borderColor = state.borderColor
     }
 }
 
