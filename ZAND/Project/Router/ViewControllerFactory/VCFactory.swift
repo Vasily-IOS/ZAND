@@ -52,6 +52,12 @@ final class VCFactory: DefaultVCFactory {
             return vc
         case .booking:
             return BookingViewController()
+        case .selectableMap(let coordinates):
+            let view = SelectableMapView(coordinates: coordinates)
+            let vc = SelectableViewController(contentView: view)
+            let presenter = SelectableMapPresenter(view: view)
+            view.presenter = presenter
+            return vc
         }
     }
 }

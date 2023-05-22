@@ -13,5 +13,5 @@ enum ProfileSection: Int, CaseIterable {
 }
 
 protocol DefaultProfileLayoutProtocol {
-    func createSection(type: ProfileSection) -> NSCollectionLayoutSection
+    func createSection(type: ProfileSection) -> NSCollectionLayoutSection?
 }

@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileLayoutBuilder: DefaultProfileLayoutProtocol {
     
-    func createSection(type: ProfileSection) -> NSCollectionLayoutSection {
+    func createSection(type: ProfileSection) -> NSCollectionLayoutSection? {
         switch type {
         case .profileFields:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -47,6 +47,8 @@ final class ProfileLayoutBuilder: DefaultProfileLayoutProtocol {
             section.boundarySupplementaryItems = [header]
             section.orthogonalScrollingBehavior = .continuous
             return section
+        default:
+            return nil
         }
     }
 }

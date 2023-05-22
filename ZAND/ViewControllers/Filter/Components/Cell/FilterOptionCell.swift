@@ -11,23 +11,26 @@ import SnapKit
 final class FilterOptionCell: BaseCollectionCell {
     
     // MARK: - Properties
-    
-    /// костыль, потом убрать
-    var indexPath: IndexPath? {
+
+    override var isSelected: Bool {
         didSet {
-            if indexPath?.row == 0 {
-                circleImage.image = UIImage(named: "fillCircle_icon")
-                backgroundColor = .superLightGreen
-            }
+            fillCircleImage.isHidden = !isSelected
+            backgroundColor = isSelected ? .superLightGreen : .white
         }
     }
+    
+    var indexPath: IndexPath?
     
     // MARK: - UI
     
     private let filterDescription = UILabel(.systemFont(ofSize: 16))
     private let circleImage = UIImageView(image: UIImage(named: "emptyCircle_icon"))
-
-    // MARK: - Initializers
+    
+    private let fillCircleImage: CheckMarkImageView = {
+        let fillCircleImage = CheckMarkImageView(frame: .zero)
+        fillCircleImage.isHidden = true
+        return fillCircleImage
+    }()
 
     // MARK: - Instance methods
     
@@ -49,6 +52,7 @@ extension FilterOptionCell {
     
     private func setViews() {
         addSubviews([circleImage, filterDescription])
+        circleImage.addSubview(fillCircleImage)
         
         circleImage.snp.makeConstraints { make in
             make.centerY.equalTo(self)
@@ -58,6 +62,10 @@ extension FilterOptionCell {
         filterDescription.snp.makeConstraints { make in
             make.centerY.equalTo(self)
             make.left.equalTo(self).offset(72)
+        }
+        
+        fillCircleImage.snp.makeConstraints { make in
+            make.edges.equalTo(circleImage)
         }
     }
     

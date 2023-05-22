@@ -13,7 +13,7 @@ final class FilterView: BaseUIView {
     // MARK: - Properties
     
     var layoutBulder: DefaultLayoutBuilder?
-    
+   
     // MARK: - Model
     
     private let filterModel = FilterModel.filterModel
@@ -60,6 +60,7 @@ final class FilterView: BaseUIView {
         collectionView.isScrollEnabled = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .white
+        collectionView.allowsMultipleSelection = true
         return collectionView
     }()
 
@@ -101,6 +102,16 @@ final class FilterView: BaseUIView {
     @objc
     private func clearFiltersAction() {
         buttonStackView.subviews[0].isHidden = true
+        deselectAllRows()
+    }
+    
+    // MARK: -
+    
+    private func deselectAllRows() {
+        let selectedItems = collectionView.indexPathsForSelectedItems ?? []
+        for indexPath in selectedItems {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
     }
 }
 
@@ -193,7 +204,14 @@ extension FilterView: UICollectionViewDelegate {
     // MARK: - UICollectionViewDelegate methods
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        buttonStackView.subviews[0].isHidden = false
+        switch FilterSection.init(rawValue: indexPath.section) {
+        case .filterOption:
+            print(1)
+        case .services:
+            buttonStackView.subviews[0].isHidden = false
+        default:
+            break
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

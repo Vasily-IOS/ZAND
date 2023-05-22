@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-class SaloonAnnotation: NSObject, MKAnnotation {
+final class SaloonAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
 //    var pointModel: PointsModel?
     

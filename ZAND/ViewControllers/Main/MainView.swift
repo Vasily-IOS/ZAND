@@ -16,6 +16,10 @@ final class MainView: BaseUIView {
         AppRouter.shared.present(type: .search)
     }
     
+    private let viewOnMapClosure = { (coordinates: String) in
+        AppRouter.shared.push(.selectableMap(coordinates))
+    }
+    
     // MARK: -
     
     var layoutBuilder: LayoutBuilderProtocol?
@@ -57,6 +61,8 @@ final class MainView: BaseUIView {
 }
 
 extension MainView {
+    
+    // MARK: - Instance methods
     
     private func setViews() {
         addSubviews([searchButton, collectionView])
@@ -101,6 +107,8 @@ extension MainView {
 
 extension MainView: UICollectionViewDataSource {
     
+    // MARK: - UICollectionViewDataSource methods
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return MainSection.allCases.count
     }
@@ -117,8 +125,10 @@ extension MainView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let optionCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: OptionCell.self), for: indexPath) as! OptionCell
-        let saloonCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SaloonCell.self), for: indexPath)
+        let optionCell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                                                                String(describing: OptionCell.self), for: indexPath) as! OptionCell
+        let saloonCell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                                                                String(describing: SaloonCell.self), for: indexPath)
         as! SaloonCell
         
         switch MainSection.init(rawValue: indexPath.section) {
@@ -127,6 +137,7 @@ extension MainView: UICollectionViewDataSource {
             return optionCell
         case .beautySaloon:
             saloonCell.configure(model: saloonMockModel[indexPath.item])
+            saloonCell.viewOnMapHandler = viewOnMapClosure
             return saloonCell
         default:
             return UICollectionViewCell()
@@ -136,13 +147,19 @@ extension MainView: UICollectionViewDataSource {
 
 extension MainView: UICollectionViewDelegate {
     
+    // MARK: - UICollectionViewDelegate methods
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 && indexPath.item == 0 {
-            AppRouter.shared.present(type: .filter)
-        }
-        if indexPath.section == 1 {
+        switch MainSection.init(rawValue: indexPath.section) {
+        case .option:
+            if indexPath.section == 0 && indexPath.item == 0 {
+                AppRouter.shared.present(type: .filter)
+            }
+        case .beautySaloon:
             let model = saloonMockModel[indexPath.item]
             AppRouter.shared.push(.saloonDetail(model))
+        default:
+            break
         }
     }
 }

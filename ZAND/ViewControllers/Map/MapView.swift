@@ -51,14 +51,14 @@ final class MapView: BaseUIView {
         setBaseOverlay()
         addPinsOnMap(model: model)
         subscribeDelegate()
-        isLocationIsEnabled()
+//        isLocationIsEnabled()
     }
     
     // MARK: - Map
 
     private func setupLocationManager() {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.delegate = self
+//        locationManager.delegate = self
     }
     
     private func setBaseOverlay() {
@@ -116,41 +116,43 @@ extension MapView {
         backgroundColor = .mainGray
     }
     
-    private func checkAuthorization() {
-        switch CLLocationManager.authorizationStatus() {
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            break
-        case .denied:
-            showAlertLocation(title: "LocalizebleValues.denied_location.localized",
-                              message: "LocalizebleValues.wanna_unlock_location.localized",
-                              url: URL(string: UIApplication.openSettingsURLString))
-            break
-        case .authorizedAlways:
-            break
-        case .authorizedWhenInUse:
-            mapView.showsUserLocation = true
-            locationManager.startUpdatingLocation()
-            break
-        @unknown default:
-            break
-        }
-    }
+//    private func checkAuthorization() {
+//        switch CLLocationManager.authorizationStatus() {
+//        case .notDetermined:
+//            locationManager.requestWhenInUseAuthorization()
+//        case .restricted:
+//            break
+//        case .denied:
+//            showAlertLocation(title: "LocalizebleValues.denied_location.localized",
+//                              message: "LocalizebleValues.wanna_unlock_location.localized",
+//                              url: URL(string: UIApplication.openSettingsURLString))
+//            break
+//        case .authorizedAlways:
+//            break
+//        case .authorizedWhenInUse:
+//            mapView.showsUserLocation = true
+//            locationManager.startUpdatingLocation()
+//            break
+//        @unknown default:
+//            break
+//        }
+//    }
 
-    private func isLocationIsEnabled() {
-        if CLLocationManager.locationServicesEnabled() {
-            setupLocationManager()
-            checkAuthorization()
-        } else {
-            showAlertLocation(title: "LocalizebleValues.geoLoc_lock.localized",
-                              message: "LocalizebleValues.wanna_unlock_geo.localized",
-                              url: URL(string: UIApplication.openSettingsURLString))
-        }
-    }
+//    private func isLocationIsEnabled() {
+//        if CLLocationManager.locationServicesEnabled() {
+//            setupLocationManager()
+//            checkAuthorization()
+//        } else {
+//            showAlertLocation(title: "LocalizebleValues.geoLoc_lock.localized",
+//                              message: "LocalizebleValues.wanna_unlock_geo.localized",
+//                              url: URL(string: UIApplication.openSettingsURLString))
+//        }
+//    }
 }
 
 extension MapView: MKMapViewDelegate {
+    
+    // MARK: - MKMapViewDelegate methods
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
@@ -186,11 +188,11 @@ extension MapView: MKMapViewDelegate {
     }
 }
 
-extension MapView: CLLocationManagerDelegate {
-    
-    // MARK: - CLLocationManagerDelegate methods
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkAuthorization()
-    }
-}
+//extension MapView: CLLocationManagerDelegate {
+//
+//    // MARK: - CLLocationManagerDelegate methods
+//
+//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+//        checkAuthorization()
+//    }
+//}

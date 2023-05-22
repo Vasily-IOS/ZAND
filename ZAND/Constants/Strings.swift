@@ -39,6 +39,9 @@ enum Strings {
     static let feature = "Предстоящие"
     static let was = "Прошедшие"
     static let mens = "Мужчинам"
+    static let exitMessage = "Вы точнно хотите выйти?"
+    static let no = "Нет"
+    static let yes = "Да"
     
     // MARK: - Bottom button values
     static let apply = "Применить"
