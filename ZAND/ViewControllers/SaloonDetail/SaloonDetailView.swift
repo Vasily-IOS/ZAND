@@ -19,7 +19,6 @@ final class SaloonDetailView: BaseUIView {
     private lazy var saloonPhotoCollection = SaloonPhotoCollection(model: salonMockModel)
     private lazy var addressView = AddressView(model: salonMockModel)
     private lazy var descriptionShowcaseView = DescriptionShowcaseView(model: salonMockModel)
-    private lazy var circleBackButton = CircleBackButton()
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -41,7 +40,6 @@ final class SaloonDetailView: BaseUIView {
         super.setup()
         setViews()
         setBackgroundColor()
-        addTargets()
     }
     
     // MARK: - Action
@@ -58,7 +56,7 @@ extension SaloonDetailView {
     
     private func setViews() {
         addSubview(scrollView)
-        scrollView.addSubviews([saloonPhotoCollection, circleBackButton,
+        scrollView.addSubviews([saloonPhotoCollection,
                                 addressView, descriptionShowcaseView])
         
         scrollView.snp.makeConstraints { make in
@@ -68,11 +66,6 @@ extension SaloonDetailView {
         saloonPhotoCollection.snp.makeConstraints { make in
             make.top.equalTo(scrollView.snp.top)
             make.left.right.equalTo(self)
-        }
-        
-        circleBackButton.snp.makeConstraints { make in
-            make.left.equalTo(20)
-            make.top.equalTo(self).offset(50)
         }
         
         addressView.snp.makeConstraints { make in
@@ -91,9 +84,5 @@ extension SaloonDetailView {
     
     private func setBackgroundColor() {
         scrollView.backgroundColor = .mainGray
-    }
-    
-    private func addTargets() {
-        circleBackButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
     }
 }

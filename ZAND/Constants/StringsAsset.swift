@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Strings {
+enum StringsAsset {
     static let where_wanna_go = "Куда хотите пойти?"
     static let filter = "Фильтры"
     static let hair = "Волосы"
@@ -42,6 +42,8 @@ enum Strings {
     static let exitMessage = "Вы точнно хотите выйти?"
     static let no = "Нет"
     static let yes = "Да"
+    static let from = "от"
+    static let rub = "руб."
     
     // MARK: - Bottom button values
     static let apply = "Применить"
@@ -73,4 +75,9 @@ enum Strings {
     static let books = "Записи"
     static let settings = "Настройки"
     static let logOut = "Выйти"
+    
+    // MARK: - Tabbar
+    static let main = "Главная"
+    static let map = "Карта"
+    static let profile = "Профиль"
 }

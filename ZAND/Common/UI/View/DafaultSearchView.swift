@@ -15,7 +15,7 @@ final class DefaultSearchView: BaseUIView {
     private let searchIcon = UIImageView(image: UIImage(named: "search_icon"))
     private let searchTextField: UITextField = {
         let searchTextField = UITextField()
-        searchTextField.placeholder = Strings.where_wanna_go
+        searchTextField.placeholder = StringsAsset.where_wanna_go
         return searchTextField
     }()
     

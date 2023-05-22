@@ -31,7 +31,7 @@ final class SaloonCell: BaseCollectionCell {
     
     private let favouritesButton: UIButton = {
         let favouritesButton = UIButton()
-        favouritesButton.setImage(UIImage(named: "fav_icon"), for: .normal)
+        favouritesButton.setImage(ImageAsset.fav_icon, for: .normal)
         return favouritesButton
     }()
     
@@ -39,7 +39,7 @@ final class SaloonCell: BaseCollectionCell {
     
     private let starImage: UIImageView = {
         let starImage = UIImageView()
-        starImage.image = UIImage(named: "star_icon")
+        starImage.image = ImageAsset.star_icon
         return starImage
     }()
     

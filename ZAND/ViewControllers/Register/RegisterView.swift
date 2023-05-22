@@ -27,7 +27,7 @@ final class RegisterView: BaseUIView {
     
     // MARK: - UI
     
-    private let registerLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, Strings.registation)
+    private let registerLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, StringsAsset.registation)
     
     private let nameTextField = PaddingTextField(state: .name)
     private let surnameTextField = PaddingTextField(state: .surname)
@@ -46,12 +46,10 @@ final class RegisterView: BaseUIView {
                                                         nameTextField,
                                                         surnameTextField,
                                                         ageTextField,
-                                                        
                                                         userNameTextField,
                                                         emailTextField,
                                                         passwordTextField,
                                                         confirmPasswordTextField,
-                                                        
                                                         confirmationCodeTextField
                                                      ],
                                                      axis: .vertical,
@@ -97,7 +95,7 @@ final class RegisterView: BaseUIView {
         } else if registerState == .two {
             registerState = .three
             bottomButton.stateText = .register /// костыль, убрать под MVVM!!!
-            registerLabel.text = Strings.confirmEmail
+            registerLabel.text = StringsAsset.confirmEmail
         }
     }
     

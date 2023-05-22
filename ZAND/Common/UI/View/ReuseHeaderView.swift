@@ -8,8 +8,9 @@
 import UIKit
 import SnapKit
 
-class ReuseHeader: UICollectionReusableView {
+final class ReuseHeaderView: UICollectionReusableView {
     
+    // MARK: - Nested types
     enum HeaderText {
         case services
         case favourites
@@ -19,13 +20,13 @@ class ReuseHeader: UICollectionReusableView {
         var description: String {
             switch self {
             case .services:
-                return Strings.services
+                return StringsAsset.services
             case .favourites:
-                return Strings.favourites
+                return StringsAsset.favourites
             case .data:
-                return Strings.myData
+                return StringsAsset.myData
             case .pushes:
-                return Strings.pushSms
+                return StringsAsset.pushSms
             }
         }
     }
@@ -37,6 +38,8 @@ class ReuseHeader: UICollectionReusableView {
             titleLabel.text = state.description
         }
     }
+    
+    // MARK: - UI
 
     private let titleLabel = UILabel(.systemFont(ofSize: 20, weight: .bold))
     
@@ -53,7 +56,7 @@ class ReuseHeader: UICollectionReusableView {
     }
 }
 
-extension ReuseHeader {
+extension ReuseHeaderView {
     
     // MARK: - Instance method
     

@@ -32,9 +32,6 @@ final class ShowCaseItemCell: BaseCollectionCell {
                                              distribution: .equalSpacing,
                                              spacing: 10)
 
-    // MARK: - Initializers
-    
-
     // MARK: - Instance methods
     
     override func setup() {
@@ -45,6 +42,8 @@ final class ShowCaseItemCell: BaseCollectionCell {
 }
 
 extension ShowCaseItemCell {
+    
+    // MARK: - Instance methods
     
     private func setViews() {
         addSubview(stackView)

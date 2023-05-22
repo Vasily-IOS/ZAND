@@ -9,6 +9,8 @@ import UIKit
 
 final class RegisterViewController: BaseViewController<UIView> {
     
+    // MARK: - Lifecycle
+    
     deinit {
         print("RegisterViewController died")
     }

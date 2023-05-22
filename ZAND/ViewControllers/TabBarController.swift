@@ -40,21 +40,21 @@ extension TabBarController {
         let layoutBuilder: LayoutBuilderProtocol = LayoutBuilder()
         let mainView = MainView(layoutBuilder: layoutBuilder)
         let mainVC = MainViewController(contentView: mainView)
-        mainVC.tabBarItem = UITabBarItem(title: "Главная",
-                                         image: UIImage(named: "main_icon"),
+        mainVC.tabBarItem = UITabBarItem(title: StringsAsset.main,
+                                         image: ImageAsset.main_icon,
                                          selectedImage: nil)
 
         let model = SaloonMockModel.saloons
         let mapView = MapView(model: model)
         let mapVC = MapViewController(contentView: mapView)
-        mapVC.tabBarItem = UITabBarItem(title: "Карта",
-                                        image: UIImage(named: "map_icon"),
+        mapVC.tabBarItem = UITabBarItem(title: StringsAsset.map,
+                                        image:  ImageAsset.main_icon,
                                         selectedImage: nil)
         
         let signInView = SignInView()
         let signInVc = SignInViewController(contentView: signInView)
-        signInVc.tabBarItem = UITabBarItem(title: "Профиль",
-                                           image: UIImage(named: "profile_icon"),
+        signInVc.tabBarItem = UITabBarItem(title: StringsAsset.profile,
+                                           image: ImageAsset.profile_icon,
                                            selectedImage: nil)
         
         [mainVC, mapVC, signInVc].forEach {
@@ -64,8 +64,7 @@ extension TabBarController {
         UITabBar.appearance().tintColor = .mainGreen
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().itemPositioning = .automatic
-        let tabBarAppearance = UITabBar.appearance()
-
+    
         tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
         tabBar.layer.shadowRadius = 2.5
         tabBar.layer.shadowColor = UIColor.black.cgColor

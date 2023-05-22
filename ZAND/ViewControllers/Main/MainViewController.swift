@@ -9,9 +9,11 @@ import UIKit
 
 final class MainViewController: BaseViewController<UIView> {
     
+    // MARK: - Lifecycle
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = false
     }
     
     deinit {

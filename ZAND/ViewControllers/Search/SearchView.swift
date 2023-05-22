@@ -25,6 +25,8 @@ final class SearchView: BaseUIView {
 
 extension SearchView {
     
+    // MARK: - Instance methods
+    
     private func setViews() {
         addSubviews([defaultSearchView])
         

@@ -20,6 +20,6 @@ extension SettingsViewController {
     // MARK: - SettingsViewController
     
     private func setNavBar() {
-        title = Strings.settings
+        title = StringsAsset.settings
     }
 }

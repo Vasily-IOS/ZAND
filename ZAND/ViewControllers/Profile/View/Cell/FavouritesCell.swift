@@ -10,14 +10,6 @@ import SnapKit
 
 final class FavouritesCell: BaseCollectionCell {
     
-    // MARK: - Closures
-    
-    var viewOnMapHandler: ((String) -> ())?
-    
-    // MARK: - Properties
-    
-    var coordinates: String?
-    
     // MARK: - UI
     
     private let saloonImage: UIImageView = {
@@ -31,8 +23,7 @@ final class FavouritesCell: BaseCollectionCell {
         return saloonName
     }()
     
-    private let viewOnMapButton = TransparentButton(state: .viewOnMap)
-    private let favouritesStarImage = UIImageView(image: UIImage(named: "star_icon"))
+    private let favouritesStarImage = UIImageView(image: ImageAsset.star_icon)
     
     private let ratingLabel: UILabel = {
         let ratingLabel = UILabel()
@@ -46,23 +37,12 @@ final class FavouritesCell: BaseCollectionCell {
         super.setup()
         setSelf()
         setViews()
-        addTarget()
     }
     
     func configure(model: SaloonMockModel) {
         self.saloonImage.image = model.image
         self.saloonName.text = model.name
         self.ratingLabel.text = "\(model.rating)"
-        self.coordinates = model.coordinates
-    }
-    
-    // MARK: - Action
-    
-    @objc
-    private func viewOnMapAction() {
-        if let coordinates = coordinates {
-            viewOnMapHandler?(coordinates)
-        }
     }
 }
 
@@ -71,7 +51,7 @@ extension FavouritesCell {
     // MARK: - Instance methods
     
     private func setViews() {
-        addSubviews([saloonImage, saloonName, viewOnMapButton,
+        addSubviews([saloonImage, saloonName,
                      favouritesStarImage, ratingLabel])
         
         saloonImage.snp.makeConstraints { make in
@@ -83,21 +63,16 @@ extension FavouritesCell {
             make.top.equalTo(saloonImage.snp.bottom).offset(3)
             make.left.equalTo(self).offset(10)
             make.width.equalTo(110)
-        }
-        
-        viewOnMapButton.snp.makeConstraints { make in
-            make.top.equalTo(saloonName.snp.bottom).offset(4)
-            make.left.equalTo(saloonName)
-            make.bottom.equalTo(self).inset(2)
+            make.bottom.equalTo(self).inset(10)
         }
         
         favouritesStarImage.snp.makeConstraints { make in
-            make.top.equalTo(saloonImage.snp.bottom).offset(8)
+            make.centerY.equalTo(saloonName.snp.centerY)
             make.right.equalTo(self).inset(10)
         }
-        
+
         ratingLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(favouritesStarImage)
+            make.centerY.equalTo(saloonName)
             make.right.equalTo(self).inset(20)
         }
     }
@@ -105,9 +80,5 @@ extension FavouritesCell {
     private func setSelf() {
         layer.cornerRadius = 16
         clipsToBounds = true
-    }
-    
-    private func addTarget() {
-        viewOnMapButton.addTarget(self, action: #selector(viewOnMapAction), for: .touchUpInside)
     }
 }

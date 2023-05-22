@@ -27,8 +27,6 @@ extension SaloonDetailViewController {
     // MARK: - Instance methods
     
     private func setupNavigationbar() {
-        navigationController?.isNavigationBarHidden = true
-        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backBarButtonItem
+        navigationController?.isNavigationBarHidden = false
     }
 }

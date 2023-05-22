@@ -9,6 +9,8 @@ import UIKit
 
 final class SignInViewController: BaseViewController<UIView> {
     
+    // MARK: - Lifecycle
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false

@@ -16,8 +16,8 @@ final class DescriptionShowcaseView: BaseUIView {
     
     // MARK: - UI
     
-    private let topDescriptionLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, Strings.description)
-    private let showCaseLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, Strings.showCase)
+    private let topDescriptionLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, StringsAsset.description)
+    private let showCaseLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, StringsAsset.showCase)
     
     private let descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
@@ -124,7 +124,9 @@ extension DescriptionShowcaseView: UICollectionViewDelegateFlowLayout {
     
     // MARK: - UICollectionViewDelegateFlowLayout methods
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 184, height: collectionView.frame.size.height)
     }
 }

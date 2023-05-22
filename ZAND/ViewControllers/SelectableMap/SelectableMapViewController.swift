@@ -30,5 +30,4 @@ extension SelectableViewController {
     private func setNavBar() {
         navigationController?.isNavigationBarHidden = false
     }
-    
 }

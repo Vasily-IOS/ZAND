@@ -9,6 +9,8 @@ import UIKit
 
 final class FilterViewController: BaseViewController<UIView> {
     
+    // MARK: - Lifecycle
+    
     deinit {
         print("FilterViewController died")
     }

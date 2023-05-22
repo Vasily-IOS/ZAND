@@ -12,8 +12,8 @@ struct ProfileMenuModel {
     let description: String
     
     static let model: [Self] = [
-        .init(image: UIImage(named: "books_icon")!, description: Strings.books),
-        .init(image: UIImage(named: "settings_icon")!, description: Strings.settings),
-        .init(image: UIImage(named: "logout_icon")!, description: Strings.logOut)
+        .init(image: ImageAsset.books_icon!, description: StringsAsset.books),
+        .init(image: ImageAsset.settings_icon!, description: StringsAsset.settings),
+        .init(image: ImageAsset.logout_icon!, description: StringsAsset.logOut)
     ]
 }

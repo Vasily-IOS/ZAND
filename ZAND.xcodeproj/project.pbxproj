@@ -26,7 +26,7 @@
 		FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634C29F68CE800091374 /* FilterOptionCell.swift */; };
 		FF25634F29F68D3900091374 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634E29F68D3900091374 /* FilterModel.swift */; };
 		FF25635229F69BE100091374 /* OptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635129F69BE100091374 /* OptionModel.swift */; };
-		FF25635429F6B46800091374 /* ReuseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeader.swift */; };
+		FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeaderView.swift */; };
 		FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
@@ -41,7 +41,7 @@
 		FF45A16829E7F5FC00587DAF /* UITableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16729E7F5FC00587DAF /* UITableViewHeaderFooterView.swift */; };
 		FF45A16A29E7F67600587DAF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16929E7F67600587DAF /* UIView.swift */; };
 		FF45A16C29E7F70D00587DAF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16B29E7F70D00587DAF /* UserDefaults.swift */; };
-		FF5DFDB12A0CFE4100495E63 /* CircleBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackButton.swift */; };
+		FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */; };
 		FF5DFDB42A0D2A2700495E63 /* MapBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB32A0D2A2700495E63 /* MapBaseModel.swift */; };
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
@@ -58,7 +58,7 @@
 		FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE229EF260500644208 /* BaseCollectionCell.swift */; };
 		FF8E7BE529EF293100644208 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE429EF293100644208 /* OptionView.swift */; };
 		FF8E7BE829EF2BD200644208 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE729EF2BD200644208 /* MainModel.swift */; };
-		FF99B8F329EEAB1500F4E4C3 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F229EEAB1500F4E4C3 /* Strings.swift */; };
+		FF99B8F329EEAB1500F4E4C3 /* StringsAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F229EEAB1500F4E4C3 /* StringsAsset.swift */; };
 		FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */; };
 		FF99B8F729EEB1A100F4E4C3 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F629EEB1A100F4E4C3 /* ExtensionUIColor.swift */; };
 		FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F929EEB4F000F4E4C3 /* DefaulRouter.swift */; };
@@ -90,6 +90,8 @@
 		FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B42A1B8E9000CEA0E1 /* SelectableMapViewController.swift */; };
 		FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B62A1B8E9900CEA0E1 /* SelectableMapView.swift */; };
 		FFDCE4B92A1B8EA500CEA0E1 /* SelectableMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */; };
+		FFDCE4BB2A1BB47000CEA0E1 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4BA2A1BB47000CEA0E1 /* ImageAsset.swift */; };
+		FFDCE4BD2A1BB7E300CEA0E1 /* YClientsMockURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4BC2A1BB7E300CEA0E1 /* YClientsMockURL.swift */; };
 		FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49329FACE9700FDB519 /* UserNameView.swift */; };
 		FFE6F49729FAD45700FDB519 /* ProfileMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */; };
 		FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */; };
@@ -137,7 +139,7 @@
 		FF25634C29F68CE800091374 /* FilterOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionCell.swift; sourceTree = "<group>"; };
 		FF25634E29F68D3900091374 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		FF25635129F69BE100091374 /* OptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionModel.swift; sourceTree = "<group>"; };
-		FF25635329F6B46800091374 /* ReuseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeader.swift; sourceTree = "<group>"; };
+		FF25635329F6B46800091374 /* ReuseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeaderView.swift; sourceTree = "<group>"; };
 		FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVideoScreenViewController.swift; sourceTree = "<group>"; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -156,7 +158,7 @@
 		FF45A16729E7F5FC00587DAF /* UITableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		FF45A16929E7F67600587DAF /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FF45A16B29E7F70D00587DAF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
-		FF5DFDB02A0CFE4100495E63 /* CircleBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackButton.swift; sourceTree = "<group>"; };
+		FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackView.swift; sourceTree = "<group>"; };
 		FF5DFDB32A0D2A2700495E63 /* MapBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBaseModel.swift; sourceTree = "<group>"; };
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
@@ -173,7 +175,7 @@
 		FF8E7BE229EF260500644208 /* BaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
 		FF8E7BE429EF293100644208 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		FF8E7BE729EF2BD200644208 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
-		FF99B8F229EEAB1500F4E4C3 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		FF99B8F229EEAB1500F4E4C3 /* StringsAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsAsset.swift; sourceTree = "<group>"; };
 		FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		FF99B8F629EEB1A100F4E4C3 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		FF99B8F929EEB4F000F4E4C3 /* DefaulRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaulRouter.swift; sourceTree = "<group>"; };
@@ -205,6 +207,8 @@
 		FFDCE4B42A1B8E9000CEA0E1 /* SelectableMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapViewController.swift; sourceTree = "<group>"; };
 		FFDCE4B62A1B8E9900CEA0E1 /* SelectableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapView.swift; sourceTree = "<group>"; };
 		FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapPresenter.swift; sourceTree = "<group>"; };
+		FFDCE4BA2A1BB47000CEA0E1 /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
+		FFDCE4BC2A1BB7E300CEA0E1 /* YClientsMockURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YClientsMockURL.swift; sourceTree = "<group>"; };
 		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuModel.swift; sourceTree = "<group>"; };
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
@@ -321,14 +325,6 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
-		FF25634B29F68C9500091374 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				FF25634C29F68CE800091374 /* FilterOptionCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		FF25635029F69BD100091374 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,7 +336,7 @@
 		FF25635529F6C09100091374 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				FF25634B29F68C9500091374 /* Cell */,
+				FF25634C29F68CE800091374 /* FilterOptionCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -452,7 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */,
-				FF5DFDB02A0CFE4100495E63 /* CircleBackButton.swift */,
+				FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */,
 				FF25632929F5675900091374 /* TransparentButton.swift */,
 				FFA3D45329F2CC320067CC6F /* BottomButton.swift */,
 			);
@@ -507,6 +503,7 @@
 		FF8AAF6029EEA202007D6A60 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				FFDCE4BE2A1BD6BF00CEA0E1 /* TextField */,
 				FF5DFDB22A0D092200495E63 /* Button */,
 				FF25634029F682A600091374 /* Cell */,
 				FF99B8EE29EEA9F300F4E4C3 /* View */,
@@ -547,8 +544,7 @@
 			isa = PBXGroup;
 			children = (
 				FF99B90A29EECA3500F4E4C3 /* DafaultSearchView.swift */,
-				FF25633929F591F600091374 /* PaddingTextField.swift */,
-				FF25635329F6B46800091374 /* ReuseHeader.swift */,
+				FF25635329F6B46800091374 /* ReuseHeaderView.swift */,
 				FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */,
 			);
 			path = View;
@@ -557,7 +553,9 @@
 		FF99B8F129EEAB0500F4E4C3 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				FF99B8F229EEAB1500F4E4C3 /* Strings.swift */,
+				FF99B8F229EEAB1500F4E4C3 /* StringsAsset.swift */,
+				FFDCE4BA2A1BB47000CEA0E1 /* ImageAsset.swift */,
+				FFDCE4BC2A1BB7E300CEA0E1 /* YClientsMockURL.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -690,6 +688,14 @@
 				FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */,
 			);
 			path = SelectableMap;
+			sourceTree = "<group>";
+		};
+		FFDCE4BE2A1BD6BF00CEA0E1 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				FF25633929F591F600091374 /* PaddingTextField.swift */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 		FFE6F49229FACE7400FDB519 /* Components */ = {
@@ -898,17 +904,18 @@
 				FF99B8F729EEB1A100F4E4C3 /* ExtensionUIColor.swift in Sources */,
 				FF45A16829E7F5FC00587DAF /* UITableViewHeaderFooterView.swift in Sources */,
 				FFC01B562A03D764005CE41B /* SettingsMenuModel.swift in Sources */,
-				FF5DFDB12A0CFE4100495E63 /* CircleBackButton.swift in Sources */,
+				FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */,
 				FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */,
 				FFD3E1D72A054E7C00680ED5 /* BookingViewController.swift in Sources */,
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* UITableView.swift in Sources */,
 				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
-				FF25635429F6B46800091374 /* ReuseHeader.swift in Sources */,
-				FF99B8F329EEAB1500F4E4C3 /* Strings.swift in Sources */,
+				FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */,
+				FF99B8F329EEAB1500F4E4C3 /* StringsAsset.swift in Sources */,
 				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
 				FFC01B4E2A03CA83005CE41B /* SettingsView.swift in Sources */,
+				FFDCE4BD2A1BB7E300CEA0E1 /* YClientsMockURL.swift in Sources */,
 				FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */,
 				FF25634829F687A900091374 /* DefaultLayoutBuilder.swift in Sources */,
 				FFC01B5B2A03DD37005CE41B /* SettingsLayout.swift in Sources */,
@@ -920,6 +927,7 @@
 				FF45A16629E7F5ED00587DAF /* UITableViewCell.swift in Sources */,
 				FF8AAF6C29EEA392007D6A60 /* ProfileView.swift in Sources */,
 				FF8AAF6A29EEA389007D6A60 /* MainView.swift in Sources */,
+				FFDCE4BB2A1BB47000CEA0E1 /* ImageAsset.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
 				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,

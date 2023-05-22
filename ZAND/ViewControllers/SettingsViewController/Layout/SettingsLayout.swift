@@ -8,7 +8,6 @@
 import UIKit
 
 final class SettingsLayout: DefaultSettingsLayout {
-    
     func createSection(type: SettingsState) -> NSCollectionLayoutSection {
         switch type {
         case .data:

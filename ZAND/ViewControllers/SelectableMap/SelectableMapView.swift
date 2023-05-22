@@ -72,7 +72,7 @@ extension SelectableMapView: MKMapViewDelegate {
             } else {
                 annotationView?.annotation = annotation
             }
-            annotationView?.image = UIImage(named: "pin_icon")
+            annotationView?.image = ImageAsset.pin_icon
             return annotationView
         }
         return nil
