@@ -97,7 +97,7 @@
 		FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */; };
 		FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */; };
 		FFFC47802A14DA5B000085E7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FFFC477F2A14DA5B000085E7 /* SnapKit */; };
-		FFFC47862A14DCE6000085E7 /* splash_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFFC47852A14DCE1000085E7 /* splash_video.mp4 */; };
+		FFFC47862A14DCE6000085E7 /* splash_video_long.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFFC47852A14DCE1000085E7 /* splash_video_long.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,7 +211,7 @@
 		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
 		FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCollection.swift; sourceTree = "<group>"; };
 		FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCell.swift; sourceTree = "<group>"; };
-		FFFC47852A14DCE1000085E7 /* splash_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = splash_video.mp4; path = "../../../../ZAND files/splash_video.mp4"; sourceTree = "<group>"; };
+		FFFC47852A14DCE1000085E7 /* splash_video_long.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = splash_video_long.mp4; path = "../../../../ZAND files/splash_video_long.mp4"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,7 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */,
-				FFFC47852A14DCE1000085E7 /* splash_video.mp4 */,
+				FFFC47852A14DCE1000085E7 /* splash_video_long.mp4 */,
 			);
 			path = LaunchVideoScreen;
 			sourceTree = "<group>";
@@ -858,7 +858,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFFC47862A14DCE6000085E7 /* splash_video.mp4 in Resources */,
+				FFFC47862A14DCE6000085E7 /* splash_video_long.mp4 in Resources */,
 				FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */,
 				FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */,
 			);

@@ -10,10 +10,10 @@ import MapKit
 
 final class SaloonAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
-//    var pointModel: PointsModel?
+    var saloonMockModel: SaloonMockModel?=nil
     
-    init(coordinate: CLLocationCoordinate2D) {
+    init(coordinate: CLLocationCoordinate2D, saloonMockModel: SaloonMockModel? = nil) {
         self.coordinate = coordinate
-//        self.pointModel =  pointModel
+        self.saloonMockModel = saloonMockModel
     }
 }

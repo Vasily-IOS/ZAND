@@ -19,6 +19,7 @@ final class MapView: BaseUIView {
     // MARK: - Model
     
     var model: [SaloonMockModel]
+    var currentModel: SaloonMockModel?
     
     // MARK: - Map
     
@@ -51,14 +52,12 @@ final class MapView: BaseUIView {
         setBaseOverlay()
         addPinsOnMap(model: model)
         subscribeDelegate()
-//        isLocationIsEnabled()
     }
     
     // MARK: - Map
 
     private func setupLocationManager() {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.delegate = self
     }
     
     private func setBaseOverlay() {
@@ -71,7 +70,8 @@ final class MapView: BaseUIView {
             let bothCoordinates = $0.coordinates.components(separatedBy: ",")
             let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
                                                   longitude: Double(bothCoordinates[1] ) ?? 0)
-            mapView.addAnnotation(SaloonAnnotation(coordinate: coordinates))
+            mapView.addAnnotation(SaloonAnnotation(coordinate: coordinates,
+                                                   saloonMockModel: $0))
         }
     }
     
@@ -79,17 +79,13 @@ final class MapView: BaseUIView {
         mapView.delegate = self
     }
     
-    func showAlertLocation(title: String, message: String?, url: URL?) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Title.settings.localized", style: .default) { alert in
-            if let url = url {
-                UIApplication.shared.open(url)
-            }
+    // MARK: - Action
+    
+    @objc
+    private func navigateToSaloonDetail() {
+        if let currentModel = currentModel {
+            AppRouter.shared.push(.saloonDetail(currentModel))
         }
-        let cancelAction = UIAlertAction(title: "LocalizebleValues.cancel_sh.localized", style: .cancel)
-        alertController.addAction(settingsAction)
-        alertController.addAction(cancelAction)
-//        present(alertController, animated: true)
     }
 }
 
@@ -115,39 +111,6 @@ extension MapView {
     private func setBackgroundColor() {
         backgroundColor = .mainGray
     }
-    
-//    private func checkAuthorization() {
-//        switch CLLocationManager.authorizationStatus() {
-//        case .notDetermined:
-//            locationManager.requestWhenInUseAuthorization()
-//        case .restricted:
-//            break
-//        case .denied:
-//            showAlertLocation(title: "LocalizebleValues.denied_location.localized",
-//                              message: "LocalizebleValues.wanna_unlock_location.localized",
-//                              url: URL(string: UIApplication.openSettingsURLString))
-//            break
-//        case .authorizedAlways:
-//            break
-//        case .authorizedWhenInUse:
-//            mapView.showsUserLocation = true
-//            locationManager.startUpdatingLocation()
-//            break
-//        @unknown default:
-//            break
-//        }
-//    }
-
-//    private func isLocationIsEnabled() {
-//        if CLLocationManager.locationServicesEnabled() {
-//            setupLocationManager()
-//            checkAuthorization()
-//        } else {
-//            showAlertLocation(title: "LocalizebleValues.geoLoc_lock.localized",
-//                              message: "LocalizebleValues.wanna_unlock_geo.localized",
-//                              url: URL(string: UIApplication.openSettingsURLString))
-//        }
-//    }
 }
 
 extension MapView: MKMapViewDelegate {
@@ -161,7 +124,7 @@ extension MapView: MKMapViewDelegate {
             userAnnotation?.image = UIImage(named: "fillCircle_icon")
             return userAnnotation
         } else {
-            if annotation is SaloonAnnotation {
+            if let annotation = annotation as? SaloonAnnotation {
                 var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
                 if annotationView == nil {
                     annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
@@ -171,9 +134,9 @@ extension MapView: MKMapViewDelegate {
                 }
                 annotationView?.image = UIImage(named: "pin_icon")
                 let button = UIButton(type: .custom)
-                button.setTitle("Еуые", for: .normal)
+                button.setTitle(annotation.saloonMockModel?.name, for: .normal)
                 button.setTitleColor(.black, for: .normal)
-//                button. (self, action: #selector(setTarget), for: .touchUpInside)
+                button.addTarget(self, action: #selector(navigateToSaloonDetail), for: .touchUpInside)
                 annotationView?.detailCalloutAccessoryView = button
                 return annotationView
             }
@@ -182,17 +145,8 @@ extension MapView: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        if let customAnnotation = view.annotation as? CityAnnotation {
-//            self.pointModel = customAnnotation.pointModel
-//        }
+        if let customAnnotation = view.annotation as? SaloonAnnotation {
+            self.currentModel = customAnnotation.saloonMockModel
+        }
     }
 }
-
-//extension MapView: CLLocationManagerDelegate {
-//
-//    // MARK: - CLLocationManagerDelegate methods
-//
-//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//        checkAuthorization()
-//    }
-//}
