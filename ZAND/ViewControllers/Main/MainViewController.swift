@@ -15,7 +15,7 @@ final class MainViewController: BaseViewController<UIView> {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
     }
-    
+
     deinit {
         print("MainViewController died")
     }

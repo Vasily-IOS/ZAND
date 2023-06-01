@@ -12,8 +12,8 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
     
     // MARK: - Lifecycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupNavigationbar()
     }
     
@@ -28,5 +28,7 @@ extension SaloonDetailViewController {
     
     private func setupNavigationbar() {
         navigationController?.isNavigationBarHidden = false
+        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
     }
 }

@@ -78,8 +78,7 @@ final class SaloonPhotoCollection: BaseUIView {
         subscribeDelegate()
         setBackgroundColor()
         setViews()
-        
-        bottomButton.addTarget(self, action: #selector(bookAction), for: .touchUpInside)
+        addTarget()
     }
     
     private func setInfo(from model: SaloonMockModel) {
@@ -95,7 +94,7 @@ final class SaloonPhotoCollection: BaseUIView {
     
     @objc
     private func bookAction() {
-        AppRouter.shared.present(type: .booking)
+        AppRouter.shared.presentWithNav(type: .booking)
     }
 }
 
@@ -175,6 +174,10 @@ extension SaloonPhotoCollection {
     
     private func setBackgroundColor() {
         backgroundColor = .mainGray
+    }
+    
+    private func addTarget() {
+        bottomButton.addTarget(self, action: #selector(bookAction), for: .touchUpInside)
     }
 }
 

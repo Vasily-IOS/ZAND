@@ -27,8 +27,7 @@ final class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backBarButtonItem
+        setBackButton()
     }
 }
 
@@ -48,7 +47,7 @@ extension TabBarController {
         let mapView = MapView(model: model)
         let mapVC = MapViewController(contentView: mapView)
         mapVC.tabBarItem = UITabBarItem(title: StringsAsset.map,
-                                        image:  ImageAsset.main_icon,
+                                        image:  ImageAsset.map_icon,
                                         selectedImage: nil)
         
         let signInView = SignInView()
@@ -70,5 +69,11 @@ extension TabBarController {
         tabBar.layer.shadowColor = UIColor.black.cgColor
         tabBar.layer.shadowOpacity = 0.3
         viewControllers = [mainVC, mapVC, signInVc]
+    }
+    
+    private func setBackButton() {
+        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "fillCircle_icon")
     }
 }

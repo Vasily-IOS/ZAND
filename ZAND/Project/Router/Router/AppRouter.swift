@@ -48,7 +48,7 @@ extension AppRouter {
                 self.appDelegate?.window?.makeKeyAndVisible()
             }
         }
- 
+
         appDelegate?.window?.backgroundColor = .black
         appDelegate?.window?.rootViewController = videoVC
         setupNavigationbar()
@@ -72,9 +72,7 @@ extension AppRouter {
                     
         navigationController.navigationBar.standardAppearance = navBarAppearance
         navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
-        
         navigationController.navigationBar.tintColor = UIColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        navigationController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 }
 
@@ -98,5 +96,11 @@ extension AppRouter: DefaultRouter {
     
     func popViewController() {
         navigationController.popViewController(animated: true)
+    }
+    
+    func presentWithNav(type: VCType) {
+        let viewController = vcFactory.getViewController(for: type)
+        let myNavigationController = UINavigationController(rootViewController: viewController)
+        navigationController.present(myNavigationController, animated: true)
     }
 }

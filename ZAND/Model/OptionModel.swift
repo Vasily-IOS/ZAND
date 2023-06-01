@@ -15,7 +15,7 @@ struct OptionsModel {
         .init(name: StringsAsset.filter, image: UIImage(named: "filter_icon")!),
         .init(name: StringsAsset.hair, image: UIImage(named: "scissors_icon")!),
         .init(name: StringsAsset.nail, image: UIImage(named: "nails_icon")!),
-        .init(name: StringsAsset.spa, image: UIImage(named: "spa_icon")!),
+        .init(name: StringsAsset.spa, image: UIImage(named: "massage_icon")!),
         .init(name: StringsAsset.makeUp, image: UIImage(named: "makeup_icon")!),
         .init(name: StringsAsset.face_care, image: UIImage(named: "faceCare_icon")!),
         .init(name: StringsAsset.brows, image: UIImage(named: "brows_icon")!),
@@ -25,7 +25,7 @@ struct OptionsModel {
     static let optionWithoutFilterModel: [Self] = [
         .init(name: StringsAsset.hair, image: UIImage(named: "scissors_icon")!),
         .init(name: StringsAsset.nail, image: UIImage(named: "nails_icon")!),
-        .init(name: StringsAsset.spa, image: UIImage(named: "spa_icon")!),
+        .init(name: StringsAsset.spa, image: UIImage(named: "massage_icon")!),
         .init(name: StringsAsset.makeUp, image: UIImage(named: "makeup_icon")!),
         .init(name: StringsAsset.face_care, image: UIImage(named: "faceCare_icon")!),
         .init(name: StringsAsset.brows, image: UIImage(named: "brows_icon")!),
