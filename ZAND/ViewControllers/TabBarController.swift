@@ -74,6 +74,5 @@ extension TabBarController {
     private func setBackButton() {
         let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarButtonItem
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "fillCircle_icon")
     }
 }

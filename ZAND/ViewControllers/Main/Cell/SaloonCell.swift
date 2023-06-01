@@ -31,7 +31,8 @@ final class SaloonCell: BaseCollectionCell {
     
     private let favouritesButton: UIButton = {
         let favouritesButton = UIButton()
-        favouritesButton.setImage(ImageAsset.fav_icon, for: .normal)
+        favouritesButton.setImage(ImageAsset.heart, for: .normal)
+        
         return favouritesButton
     }()
     

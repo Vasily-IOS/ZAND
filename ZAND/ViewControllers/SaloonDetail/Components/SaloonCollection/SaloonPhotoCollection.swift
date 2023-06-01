@@ -50,18 +50,12 @@ final class SaloonPhotoCollection: BaseUIView {
         return nameLabel
     }()
     
-    private let likeButton: UIButton = {
-        let likeButton = UIButton()
-        likeButton.setImage(ImageAsset.like_icon, for: .normal)
-        return likeButton
-    }()
-    
     private let categoryLabel = UILabel(.systemFont(ofSize: 12), .textGray)
     private let ratingLabel = UILabel(.systemFont(ofSize: 12))
     private let starImage = UIImageView(image: ImageAsset.star_icon)
     private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, StringsAsset.grades)
     private let gradeCountLabel = UILabel(.systemFont(ofSize: 12))
-    private let heartImage = UIImageView(image: ImageAsset.fav_icon)
+    private let heartImage = UIImageView(image: ImageAsset.heart)
     private let bottomButton = BottomButton(buttonText: .book)
     
     // MARK: - Initializers
@@ -104,7 +98,7 @@ extension SaloonPhotoCollection {
     
     private func setViews() {
         addSubviews([collectionView, pageControl, nameLabel, categoryLabel, ratingLabel,
-                     starImage, gradeLabel, gradeCountLabel, likeButton, heartImage, bottomButton])
+                     starImage, gradeLabel, gradeCountLabel, heartImage, bottomButton])
         
         collectionView.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
@@ -148,14 +142,9 @@ extension SaloonPhotoCollection {
             make.centerY.equalTo(starImage)
         }
         
-        likeButton.snp.makeConstraints { make in
-            make.top.equalTo(collectionView.snp.bottom).offset(29)
-            make.right.equalTo(self).inset(16)
-        }
-        
         heartImage.snp.makeConstraints { make in
-            make.centerY.equalTo(likeButton)
-            make.right.equalTo(likeButton.snp.right).offset(-110)
+            make.top.equalTo(collectionView.snp.bottom).offset(16)
+            make.right.equalTo(self).inset(16)
         }
         
         bottomButton.snp.makeConstraints { make in
