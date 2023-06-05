@@ -13,20 +13,11 @@ final class TabBarController: UITabBarController {
     
     private let vcFactory: DefaultVCFactory = VCFactory()
     
-    // MARK: - Initializers
+    // MARK: - Lifecycle
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    override func loadView() {
+        super.loadView()
         setViews()
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         setBackButton()
     }
 }
@@ -72,7 +63,7 @@ extension TabBarController {
     }
     
     private func setBackButton() {
-        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backBarButtonItem
+////        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+////        navigationItem.backBarButtonItem = backBarButtonItem
     }
 }

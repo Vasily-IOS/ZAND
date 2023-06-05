@@ -20,6 +20,10 @@ final class MainView: BaseUIView {
         AppRouter.shared.push(.selectableMap(coordinates))
     }
     
+    private lazy var favouritesHandler = { [weak self] (indexPath: IndexPath) -> () in
+        self?.changeHeartAppearence(by: indexPath)
+    }
+    
     // MARK: -
     
     var layoutBuilder: LayoutBuilderProtocol?
@@ -103,6 +107,11 @@ extension MainView {
     private func setBackgroundColor() {
         backgroundColor = .mainGray
     }
+    
+    private func changeHeartAppearence(by indexPath: IndexPath) {
+        let cell = self.collectionView.cellForItem(at: indexPath) as! SaloonCell
+        cell.isInFavourite = !cell.isInFavourite
+    }
 }
 
 extension MainView: UICollectionViewDataSource {
@@ -136,8 +145,9 @@ extension MainView: UICollectionViewDataSource {
             optionCell.configure(model: optionsModel[indexPath.item], state: .onMain)
             return optionCell
         case .beautySaloon:
-            saloonCell.configure(model: saloonMockModel[indexPath.item])
+            saloonCell.configure(model: saloonMockModel[indexPath.item], indexPath: indexPath)
             saloonCell.viewOnMapHandler = viewOnMapClosure
+            saloonCell.favouritesHandler = favouritesHandler
             return saloonCell
         default:
             return UICollectionViewCell()

@@ -8,7 +8,6 @@
 import UIKit
 
 protocol DefaultRouter: AnyObject {
-    
     var appDelegate: AppDelegate? { get set}
     
     func push(_ type: VCType)

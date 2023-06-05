@@ -41,13 +41,6 @@ final class SaloonDetailView: BaseUIView {
         setViews()
         setBackgroundColor()
     }
-    
-    // MARK: - Action
-    
-    @objc
-    private func dismissAction() {
-        AppRouter.shared.popViewController()
-    }
 }
 
 extension SaloonDetailView {

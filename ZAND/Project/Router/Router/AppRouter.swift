@@ -34,8 +34,7 @@ extension AppRouter {
     
     private func setup() {
         let videoVC = LaunchVideoScreenViewController()
-        let tabBar = vcFactory.getViewController(for: .tabBar)
-        
+        let tabBar = self.vcFactory.getViewController(for: .tabBar)
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             UIView.animate(withDuration: 0.2) {
                 self.tabBarController = tabBar as? UITabBarController
@@ -63,15 +62,9 @@ extension AppRouter {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white
         appearance.shadowColor = .clear
+        appearance.configureWithTransparentBackground()
         navigationController.navigationBar.standardAppearance = appearance
         navigationController.navigationBar.scrollEdgeAppearance = appearance
-        navigationController.navigationBar.tintColor = .white
-        
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithTransparentBackground()
-                    
-        navigationController.navigationBar.standardAppearance = navBarAppearance
-        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
         navigationController.navigationBar.tintColor = UIColor(red: 0, green: 0, blue: 0.2, alpha: 1)
     }
 }

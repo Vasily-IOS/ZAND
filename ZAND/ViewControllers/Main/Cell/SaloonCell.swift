@@ -13,10 +13,19 @@ final class SaloonCell: BaseCollectionCell {
     // MARK:  - Closures
     
     var viewOnMapHandler: ((String) -> ())?
+    var favouritesHandler: ((IndexPath) -> ())?
     
     // MARK: - Properties
     
     var coordinates: String?
+    var indexPath: IndexPath?
+    
+    var isInFavourite: Bool = false {
+        didSet {
+            let image = isInFavourite ? ImageAsset.fillHeart_icon : ImageAsset.heart
+            favouritesButton.setImage(image, for: .normal)
+        }
+    }
     
     // MARK: - UI
     
@@ -32,7 +41,6 @@ final class SaloonCell: BaseCollectionCell {
     private let favouritesButton: UIButton = {
         let favouritesButton = UIButton()
         favouritesButton.setImage(ImageAsset.heart, for: .normal)
-        
         return favouritesButton
     }()
     
@@ -61,13 +69,14 @@ final class SaloonCell: BaseCollectionCell {
     
     // MARK: - Configuration
     
-    func configure(model: SaloonMockModel) {
+    func configure(model: SaloonMockModel, indexPath: IndexPath) {
         self.saloonImage.image = model.image
         self.saloonDescriptionLabel.text = model.name
         self.categoryLabel.text = model.category.name
         self.adressLabel.text = model.adress
         self.ratingLabel.text = "\(model.rating)"
         self.coordinates = model.coordinates
+        self.indexPath = indexPath
     }
     
     // MARK: - Action
@@ -76,6 +85,13 @@ final class SaloonCell: BaseCollectionCell {
     private func viewOnMapAction() {
         if let coordinates = coordinates {
             viewOnMapHandler?(coordinates)
+        }
+    }
+    
+    @objc
+    private func favouritesAction() {
+        if let indexPath = indexPath {
+            favouritesHandler?(indexPath)
         }
     }
 }
@@ -138,5 +154,6 @@ extension SaloonCell {
     
     private func setTarget() {
         viewOnMapButton.addTarget(self, action: #selector(viewOnMapAction), for: .touchUpInside)
+        favouritesButton.addTarget(self, action: #selector(favouritesAction), for: .touchUpInside)
     }
 }

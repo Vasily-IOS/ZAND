@@ -11,12 +11,21 @@ final class MainViewController: BaseViewController<UIView> {
     
     // MARK: - Lifecycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+    override func loadView() {
+        super.loadView()
+        setupNavigationBar()
     }
 
     deinit {
         print("MainViewController died")
+    }
+}
+
+extension MainViewController {
+    
+    // MARK: - Instance methods
+    
+    private func setupNavigationBar() {
+        navigationController?.isNavigationBarHidden = true
     }
 }

@@ -27,6 +27,7 @@
 		FF25634F29F68D3900091374 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634E29F68D3900091374 /* FilterModel.swift */; };
 		FF25635229F69BE100091374 /* OptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635129F69BE100091374 /* OptionModel.swift */; };
 		FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeaderView.swift */; };
+		FF27FC212A2DE4C3006DE1B9 /* BackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27FC202A2DE4C3006DE1B9 /* BackView.swift */; };
 		FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
@@ -140,6 +141,7 @@
 		FF25634E29F68D3900091374 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		FF25635129F69BE100091374 /* OptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionModel.swift; sourceTree = "<group>"; };
 		FF25635329F6B46800091374 /* ReuseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeaderView.swift; sourceTree = "<group>"; };
+		FF27FC202A2DE4C3006DE1B9 /* BackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
 		FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVideoScreenViewController.swift; sourceTree = "<group>"; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 				FF99B90A29EECA3500F4E4C3 /* DafaultSearchView.swift */,
 				FF25635329F6B46800091374 /* ReuseHeaderView.swift */,
 				FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */,
+				FF27FC202A2DE4C3006DE1B9 /* BackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -936,6 +939,7 @@
 				FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */,
 				FF25633629F5886700091374 /* SignInViewController.swift in Sources */,
 				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
+				FF27FC212A2DE4C3006DE1B9 /* BackView.swift in Sources */,
 				FFC01B4C2A03CA78005CE41B /* SettingsViewController.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
 				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
