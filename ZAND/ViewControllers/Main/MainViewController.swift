@@ -9,23 +9,27 @@ import UIKit
 
 final class MainViewController: BaseViewController<UIView> {
     
+    // MARK: - Properties
+    
+    var navController: UINavigationController? {
+        return self.navigationController ?? UINavigationController()
+    }
+    
     // MARK: - Lifecycle
     
     override func loadView() {
         super.loadView()
-        setupNavigationBar()
+        hideNavigationBar()
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        hideNavigationBar()
+//    }
 
     deinit {
         print("MainViewController died")
     }
 }
 
-extension MainViewController {
-    
-    // MARK: - Instance methods
-    
-    private func setupNavigationBar() {
-        navigationController?.isNavigationBarHidden = true
-    }
-}
+extension MainViewController: HideNavigationBar {}

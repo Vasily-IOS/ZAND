@@ -57,7 +57,7 @@ extension AppRouter {
     private func setupNavigationbar() {
         let appearance = UINavigationBarAppearance()
         appearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white
+            .foregroundColor: UIColor.black
         ]
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white

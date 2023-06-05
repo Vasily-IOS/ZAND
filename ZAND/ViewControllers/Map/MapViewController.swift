@@ -8,15 +8,23 @@
 import UIKit
 
 final class MapViewController: BaseViewController<UIView> {
+    
+    // MARK: - Properties
+    
+    var navController: UINavigationController? {
+        return self.navigationController ?? UINavigationController()
+    }
 
     // MARK: - Lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        hideNavigationBar()
     }
     
     deinit {
         print("MapViewController died")
     }
 }
+
+extension MapViewController: HideNavigationBar {}

@@ -9,11 +9,24 @@ import UIKit
 
 final class ProfileViewController: BaseViewController<ProfileView> {
     
+    // MARK: - Properties
+    
+    var navController: UINavigationController? {
+        return self.navigationController ?? UINavigationController()
+    }
+    
     // MARK: - Lifecycle
     
-    override func loadView() {
-        super.loadView()
-        setNavBar()
+//    override func loadView() {
+//        super.loadView()
+//        showNavigationBar()
+//        hideBackButtonTitle()
+//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showNavigationBar()
+        hideBackButtonTitle()
     }
     
     override func viewDidLoad() {
@@ -26,15 +39,17 @@ final class ProfileViewController: BaseViewController<ProfileView> {
     }
 }
 
+extension ProfileViewController: HideBackButtonTitle, ShowNavigationBar {}
+
 extension ProfileViewController {
     
-    // MARK: - Instance methods
-    
-    private func setNavBar() {
-        navigationController?.isNavigationBarHidden = false
-        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backBarButtonItem
-    }
+//    // MARK: - Instance methods
+//
+//    private func setNavBar() {
+//        navigationController?.isNavigationBarHidden = false
+//        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+//        navigationItem.backBarButtonItem = backBarButtonItem
+//    }
     
     private func setTargets() {
         contentView.alertHandler = { [weak self] in

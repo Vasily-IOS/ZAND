@@ -13,18 +13,19 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
     // MARK: - Properties
     
     private lazy var backView = BackView()
-    
+ 
     // MARK: - Lifecycle
     
-    override func loadView() {
-        super.loadView()
-        setupNavigationBar()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupBackButtonItem()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         backViewAction()
         subscribeDelegate()
+        hideBackButtonTitle()
     }
 
     deinit {
@@ -44,7 +45,7 @@ extension SaloonDetailViewController {
     
     // MARK: - Instance methods
     
-    private func setupNavigationBar() {
+    private func setupBackButtonItem() {
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backView)
     }
@@ -65,3 +66,5 @@ extension SaloonDetailViewController: UIGestureRecognizerDelegate {
         return false
     }
 }
+
+extension SaloonDetailViewController: HideBackButtonTitle {}

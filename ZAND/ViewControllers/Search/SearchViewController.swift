@@ -9,15 +9,22 @@ import UIKit
 
 final class SearchViewController: BaseViewController<UIView> {
     
+    // MARK: - Properties
+    
+    var navController: UINavigationController? {
+        return self.navigationController ?? UINavigationController()
+    }
+    
     // MARK: - Lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        hideNavigationBar()
     }
     
     deinit {
         print("SearchViewController died")
     }
-    
 }
+
+extension SearchViewController: HideNavigationBar {}

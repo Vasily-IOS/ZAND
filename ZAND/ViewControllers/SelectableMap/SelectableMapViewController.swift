@@ -8,26 +8,23 @@
 import UIKit
 
 final class SelectableViewController: BaseViewController<SelectableMapView> {
+    
+    // MARK: - Properties
+    
+    var navController: UINavigationController? {
+        return self.navigationController ?? UINavigationController()
+    }
 
     // MARK: - Lifecycle
     
     override func loadView() {
         super.loadView()
-        setNavBar()
+        showNavigationBar()
     }
     
     deinit {
         print("MapVC died")
     }
-
-    // MARK: - Instance methods
 }
 
-extension SelectableViewController {
-    
-    // MARK: - Instance methods
-    
-    private func setNavBar() {
-        navigationController?.isNavigationBarHidden = false
-    }
-}
+extension SelectableViewController: ShowNavigationBar {}

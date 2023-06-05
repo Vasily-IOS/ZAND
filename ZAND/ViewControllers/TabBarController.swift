@@ -8,11 +8,7 @@
 import UIKit
 
 final class TabBarController: UITabBarController {
-    
-    // MARK: - Properties
-    
-    private let vcFactory: DefaultVCFactory = VCFactory()
-    
+
     // MARK: - Lifecycle
     
     override func loadView() {
@@ -46,11 +42,7 @@ extension TabBarController {
         signInVc.tabBarItem = UITabBarItem(title: StringsAsset.profile,
                                            image: ImageAsset.profile_icon,
                                            selectedImage: nil)
-        
-        [mainVC, mapVC, signInVc].forEach {
-            $0.navigationController?.isNavigationBarHidden = true
-        }
-    
+
         UITabBar.appearance().tintColor = .mainGreen
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().itemPositioning = .automatic
@@ -63,7 +55,7 @@ extension TabBarController {
     }
     
     private func setBackButton() {
-////        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-////        navigationItem.backBarButtonItem = backBarButtonItem
+        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
     }
 }
