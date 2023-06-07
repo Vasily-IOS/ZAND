@@ -17,12 +17,15 @@ final class VCFactory: DefaultVCFactory {
             let view = SearchView()
             let vc = SearchViewController(contentView: view)
             let presenter = SearchPresenter(view: vc, model: model)
+//            let presenter = SearchPresenter(view: vc)
             vc.presenter = presenter
             return vc
         case .main:
             let layotBuilder: LayoutBuilderProtocol = LayoutBuilder()
             let view = MainView(layoutBuilder: layotBuilder)
             let vc = MainViewController(contentView: view)
+            let presenter = MainPresenter(view: vc)
+            vc.presenter = presenter
             return vc
         case .saloonDetail(let model):
             let view = SaloonDetailView(model: model)

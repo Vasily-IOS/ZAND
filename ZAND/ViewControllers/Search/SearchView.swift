@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol SearchViewDelegate: AnyObject {
-    func dismiss(value: String)
+    func dismiss(value: SaloonMockModel)
 }
 
 final class SearchView: BaseUIView {
@@ -111,7 +111,7 @@ extension SearchView {
     }
     
     private func setGestureRecognizer() {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(searchingIsOverAction))
+//        let recognizer = UITapGestureRecognizer(target: self, action: #selector(searchingIsOverAction))
 //        view.addGestureRecognizer(recognizer)
     }
     
@@ -143,7 +143,7 @@ extension SearchView: UITableViewDelegate {
         let text = filteredModel[indexPath.row].name
         searchBar.text = text
         changeSearchTextColor()
-        delegate?.dismiss(value: filteredModel[indexPath.row].coordinates)
+        delegate?.dismiss(value: filteredModel[indexPath.row])
     }
 }
 

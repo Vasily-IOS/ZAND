@@ -104,7 +104,7 @@ extension AppRouter: DefaultRouter {
         navigationController.present(myNavigationController, animated: true)
     }
     
-    func presentSearch(type: VCType, completion: ((String) -> ())?) {
+    func presentSearch(type: VCType, completion: ((SaloonMockModel) -> ())?) {
         let vc = vcFactory.getViewController(for: type) as! SearchViewController
         vc.completionHandler = completion
         navigationController.present(vc, animated: true)

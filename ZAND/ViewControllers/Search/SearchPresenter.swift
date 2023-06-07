@@ -21,6 +21,10 @@ final class SearchPresenter: SearchPresenterProtocol {
     
     weak var view: SearchViewProtocol?
     
+//    init(view: SearchViewProtocol) {
+//        self.view = view
+//    }
+    
     init(view: SearchViewProtocol, model: [SaloonMockModel]) {
         self.view = view
         self.model = model

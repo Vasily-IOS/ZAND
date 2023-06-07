@@ -8,6 +8,10 @@
 import UIKit
 
 final class TabBarController: UITabBarController {
+    
+    // MARK: - Properties
+    
+    private let vcFactory: DefaultVCFactory = VCFactory()
 
     // MARK: - Lifecycle
     
@@ -23,14 +27,15 @@ extension TabBarController {
     // MARK: - Instance methods
     
     private func setViews() {
-        let layoutBuilder: LayoutBuilderProtocol = LayoutBuilder()
-        let mainView = MainView(layoutBuilder: layoutBuilder)
-        let mainVC = MainViewController(contentView: mainView)
+        let mainVC = vcFactory.getViewController(for: .main)
+//        let layoutBuilder: LayoutBuilderProtocol = LayoutBuilder()
+//        let mainView = MainView(layoutBuilder: layoutBuilder)
+//        let mainVC = MainViewController(contentView: mainView)
         mainVC.tabBarItem = UITabBarItem(title: StringsAsset.main,
                                          image: ImageAsset.main_icon,
                                          selectedImage: nil)
 
-        let model = SaloonMockModel.saloons
+        let model = SaloonMockModel.saloons // !
         let mapView = MapView(model: model)
         let mapVC = MapViewController(contentView: mapView)
         mapVC.tabBarItem = UITabBarItem(title: StringsAsset.map,

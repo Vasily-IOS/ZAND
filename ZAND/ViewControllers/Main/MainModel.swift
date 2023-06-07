@@ -8,6 +8,7 @@
 import UIKit
 
 struct SaloonMockModel {
+    let id: Int
     let category: Category
     let name: String
     let adress: String
@@ -23,7 +24,7 @@ struct SaloonMockModel {
     let coordinates: String
     
     static let saloons: [Self] = [
-        .init(category: Category(id: 0, name: "спа-салон"),
+        .init(id: 0, category: Category(id: 0, name: "спа-салон"),
               name: "Beautiful eyes",
               adress: "Колпачный переулок, д. 6, стр. 4",
               rating: 5.0,
@@ -45,7 +46,7 @@ struct SaloonMockModel {
                      price_from: nil)],
               coordinates: "55.933301,37.514214"),
         
-        .init(category: Category(id: 0, name: "спа-салон"),
+            .init(id: 1, category: Category(id: 0, name: "спа-салон"),
               name: "Good smiles",
               adress: "Юбилейный проспект, д. 7",
               rating: 4.6,
@@ -65,7 +66,7 @@ struct SaloonMockModel {
                      description: nil,
                      price_from: nil)],
               coordinates: "55.763908,37.60646"),
-        .init(category: Category(id: 1, name: "салон красоты"),
+        .init(id: 2, category: Category(id: 1, name: "салон красоты"),
               name: "Wella krasavella",
               adress: "ул. Союзная, д. 6, стр. 3",
               rating: 3.0,
@@ -85,7 +86,7 @@ struct SaloonMockModel {
                      description: nil,
                      price_from: nil)],
               coordinates: "55.583205,37.59674"),
-        .init(category: Category(id: 1, name: "салон красоты"),
+        .init(id: 3, category: Category(id: 1, name: "салон красоты"),
               name: "Приукрасим так приукрасим",
               adress: "Переулок Твардовского, д. 4",
               rating: 4.1,
@@ -105,7 +106,7 @@ struct SaloonMockModel {
                      description: nil,
                      price_from: nil)],
               coordinates: "55.751665,37.817169"),
-        .init(category: Category(id: 2, name: "массажный салон"),
+        .init(id: 4, category: Category(id: 2, name: "массажный салон"),
               name: "Good Relaх",
               adress: "1-ая Тверская-Ямская, д. 1, стр. 7",
               rating: 4.2,

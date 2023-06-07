@@ -13,8 +13,8 @@ final class MapView: BaseUIView {
     // MARK: - Closures
     
     private lazy var searchClosure = { [weak self] in
-        AppRouter.shared.presentSearch(type: .search(self?.model ?? []), completion: { coordinates in
-            self?.showSinglePin(model: coordinates)
+        AppRouter.shared.presentSearch(type: .search(self?.model ?? []), completion: { model in
+            self?.showSinglePin(model: model.coordinates)
         })
     }
     

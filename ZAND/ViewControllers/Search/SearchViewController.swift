@@ -11,7 +11,7 @@ final class SearchViewController: BaseViewController<SearchView> {
     
     // MARK: - Closures
     
-    var completionHandler: ((String) -> ())?
+    var completionHandler: ((SaloonMockModel) -> ())?
     
     // MARK: - Properties
     
@@ -60,7 +60,7 @@ extension SearchViewController: SearchViewDelegate {
     
     // MARK: - SearchViewDelegate methods
     
-    func dismiss(value: String) {
+    func dismiss(value: SaloonMockModel) {
         completionHandler?(value)
         AppRouter.shared.dismiss()
     }

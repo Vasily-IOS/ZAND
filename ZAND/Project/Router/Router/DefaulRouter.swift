@@ -17,6 +17,6 @@ protocol DefaultRouter: AnyObject {
     func dismiss()
     
     func presentWithNav(type: VCType)
-    func presentSearch(type: VCType, completion: ((String) -> ())?)
+    func presentSearch(type: VCType, completion: ((SaloonMockModel) -> ())?)
     
 }
