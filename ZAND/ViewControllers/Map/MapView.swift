@@ -12,8 +12,10 @@ final class MapView: BaseUIView {
     
     // MARK: - Closures
     
-    private let searchClosure = {
-        AppRouter.shared.present(type: .search)
+    private lazy var searchClosure = { [weak self] in
+        AppRouter.shared.presentSearch(type: .search(self?.model ?? []), completion: { model in
+            self?.showSinglePin(model: model.coordinates)
+        })
     }
     
     // MARK: - Model
@@ -75,6 +77,16 @@ final class MapView: BaseUIView {
         }
     }
     
+    private func showSinglePin(model: String) {
+        let bothCoordinates = model.components(separatedBy: ",")
+        let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
+                                                 longitude: Double(bothCoordinates[1] ) ?? 0)
+        let region = MKCoordinateRegion(center: coordinates,
+                                        span: MKCoordinateSpan(latitudeDelta: 0.01,
+                                                               longitudeDelta: 0.01))
+        mapView.setRegion(region, animated: true)
+    }
+    
     private func subscribeDelegate() {
         mapView.delegate = self
     }
@@ -121,7 +133,7 @@ extension MapView: MKMapViewDelegate {
         if annotation is MKUserLocation {
             var userAnnotation = mapView.dequeueReusableAnnotationView(withIdentifier: "user")
             userAnnotation = MKAnnotationView(annotation: annotation, reuseIdentifier: "user")
-            userAnnotation?.image = UIImage(named: "fillCircle_icon")
+            userAnnotation?.image = ImageAsset.fillCircle_icon
             return userAnnotation
         } else {
             if let annotation = annotation as? SaloonAnnotation {
@@ -132,7 +144,7 @@ extension MapView: MKMapViewDelegate {
                 } else {
                     annotationView?.annotation = annotation
                 }
-                annotationView?.image = UIImage(named: "pin_icon")
+                annotationView?.image = ImageAsset.pin_icon
                 let button = UIButton(type: .custom)
                 button.setTitle(annotation.saloonMockModel?.name, for: .normal)
                 button.setTitleColor(.black, for: .normal)

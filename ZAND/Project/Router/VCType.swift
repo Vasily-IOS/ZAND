@@ -9,8 +9,9 @@ import Foundation
 
 enum VCType {
     case tabBar
-    case search
+    case search([SaloonMockModel])
     case main
+    case map
     case saloonDetail(SaloonMockModel)
     case register
     case filter

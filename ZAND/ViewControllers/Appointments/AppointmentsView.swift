@@ -32,7 +32,7 @@ final class AppointemtsView: BaseUIView {
     // MARK: - UI
     
     private lazy var segmentControl: UISegmentedControl = {
-        let items = [Strings.feature, Strings.was]
+        let items = [StringsAsset.feature, StringsAsset.was]
         let segmentControl = UISegmentedControl(items: items)
         segmentControl.selectedSegmentIndex = 0
         segmentControl.selectedSegmentTintColor = .mainGreen

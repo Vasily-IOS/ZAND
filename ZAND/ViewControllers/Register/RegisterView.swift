@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol RegisterViewDelegate: AnyObject {
+    func skip()
+}
+
 final class RegisterView: BaseUIView {
     
     // MARK: - Nested types
@@ -19,6 +23,8 @@ final class RegisterView: BaseUIView {
     
     // MARK: -
     
+    weak var delegate: RegisterViewDelegate?
+    
     var registerState: RegistrationSteps = .one {
         didSet {
             updateUI(by: registerState)
@@ -27,8 +33,7 @@ final class RegisterView: BaseUIView {
     
     // MARK: - UI
     
-    private let registerLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, Strings.registation)
-    
+    private let registerLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, StringsAsset.registation)
     private let nameTextField = PaddingTextField(state: .name)
     private let surnameTextField = PaddingTextField(state: .surname)
     private let ageTextField = PaddingTextField(state: .age)
@@ -46,22 +51,32 @@ final class RegisterView: BaseUIView {
                                                         nameTextField,
                                                         surnameTextField,
                                                         ageTextField,
-                                                        
                                                         userNameTextField,
                                                         emailTextField,
                                                         passwordTextField,
                                                         confirmPasswordTextField,
-                                                        
                                                         confirmationCodeTextField
                                                      ],
                                                      axis: .vertical,
                                                      distribution: .fill,
                                                      spacing: 10)
     private let bottomButton = BottomButton(buttonText: .contin)
+    private let skipButton: UIButton = {
+        let skipButton = UIButton()
+        skipButton.layer.borderColor = UIColor.lightGreen.cgColor
+        skipButton.layer.borderWidth = 1
+        skipButton.backgroundColor = .mainGray
+        skipButton.setTitle(StringsAsset.skip, for: .normal)
+        skipButton.setTitleColor(.mainGreen, for: .normal)
+        skipButton.layer.cornerRadius = 15
+        skipButton.isHidden = !OnboardManager.shared.isUserFirstLaunch()
+        return skipButton
+    }()
     private lazy var bottomButtonsStackView = UIStackView(alignment: .center,
                                                       arrangedSubviews: [
                                                         transparentButton,
-                                                        bottomButton
+                                                        bottomButton,
+                                                        skipButton
                                                       ],
                                                       axis: .vertical,
                                                       distribution: .fill,
@@ -96,9 +111,14 @@ final class RegisterView: BaseUIView {
             registerState = .two
         } else if registerState == .two {
             registerState = .three
-            bottomButton.stateText = .register /// костыль, убрать под MVVM!!!
-            registerLabel.text = Strings.confirmEmail
+            bottomButton.stateText = .register
+            registerLabel.text = StringsAsset.confirmEmail
         }
+    }
+    
+    @objc
+    private func skipAction() {
+        delegate?.skip()
     }
     
     // MARK: - Registration steps
@@ -157,6 +177,10 @@ extension RegisterView {
             make.width.equalTo(280)
             make.height.equalTo(44)
         }
+        
+        skipButton.snp.makeConstraints { make in
+            make.width.height.equalTo(bottomButton)
+        }
     }
     
     private func setBackgroundColor() {
@@ -171,6 +195,7 @@ extension RegisterView {
     private func addTargets() {
         transparentButton.addTarget(self, action: #selector(backToSignInAction), for: .touchUpInside)
         bottomButton.addTarget(self, action: #selector(bottomButtonAction), for: .touchUpInside)
+        skipButton.addTarget(self, action: #selector(skipAction), for: .touchUpInside)
     }
     
     private func setInitialRegistrationStep() {

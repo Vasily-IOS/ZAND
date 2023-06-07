@@ -12,7 +12,7 @@ final class SignInView: BaseUIView {
     
     // MARK: - Properties
     
-    private let signInLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, Strings.entrance)
+    private let signInLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, StringsAsset.entrance)
     private let emailTextField = PaddingTextField(state: .email)
     private let passTextField = PaddingTextField(state: .password)
     private let transparentButton = TransparentButton(state: .forgotPassword)

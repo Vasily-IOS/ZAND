@@ -17,7 +17,6 @@ protocol LayoutBuilderProtocol: AnyObject {
 }
 
 final class LayoutBuilder: LayoutBuilderProtocol {
-    
     func createSection(type: MainSection) -> NSCollectionLayoutSection {
         switch type {
         case .option:

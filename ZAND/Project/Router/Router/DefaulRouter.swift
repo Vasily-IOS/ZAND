@@ -8,11 +8,14 @@
 import UIKit
 
 protocol DefaultRouter: AnyObject {
-    
     var appDelegate: AppDelegate? { get set}
     
     func push(_ type: VCType)
     func present(type: VCType)
     func changeTabBarVC(to index: Int)
     func popViewController()
+    func dismiss()
+    
+    func presentWithNav(type: VCType)
+    func presentSearch(type: VCType, completion: ((SaloonMockModel) -> ())?)
 }

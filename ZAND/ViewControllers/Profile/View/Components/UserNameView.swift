@@ -12,7 +12,7 @@ final class UserNameView: BaseUIView {
     
     // MARK: - Properties
     
-    private let userAccountLabel = UILabel(.systemFont(ofSize: 14), .black, Strings.user_name)
+    private let userAccountLabel = UILabel(.systemFont(ofSize: 14), .black, StringsAsset.user_name)
     private let nameLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, "Петрова Анфиса")
     private let emailLabel = UILabel(.systemFont(ofSize: 12), .textGray, "test@gmail.com")
     

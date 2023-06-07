@@ -13,14 +13,23 @@ final class VCFactory: DefaultVCFactory {
         case .tabBar:
             let vc = TabBarController()
             return vc
-        case .search:
+        case .search(let model):
             let view = SearchView()
             let vc = SearchViewController(contentView: view)
+            let presenter = SearchPresenter(view: vc, model: model)
+            vc.presenter = presenter
             return vc
         case .main:
             let layotBuilder: LayoutBuilderProtocol = LayoutBuilder()
             let view = MainView(layoutBuilder: layotBuilder)
             let vc = MainViewController(contentView: view)
+            let presenter = MainPresenter(view: vc)
+            vc.presenter = presenter
+            return vc
+        case .map:
+            let model = SaloonMockModel.saloons // !
+            let view = MapView(model: model)
+            let vc = MapViewController(contentView: view)
             return vc
         case .saloonDetail(let model):
             let view = SaloonDetailView(model: model)

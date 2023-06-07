@@ -27,7 +27,8 @@ final class SaloonPhotoCollection: BaseUIView {
         flowLayout.scrollDirection = .horizontal
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(SaloonPhotoCell.self, forCellWithReuseIdentifier: "test")
+        collectionView.register(SaloonPhotoCell.self,
+                                forCellWithReuseIdentifier: String(describing: SaloonPhotoCell.self))
         collectionView.isPagingEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .mainGray
@@ -49,18 +50,12 @@ final class SaloonPhotoCollection: BaseUIView {
         return nameLabel
     }()
     
-    private let likeButton: UIButton = {
-        let likeButton = UIButton()
-        likeButton.setImage(UIImage(named: "like_icon"), for: .normal)
-        return likeButton
-    }()
-    
     private let categoryLabel = UILabel(.systemFont(ofSize: 12), .textGray)
     private let ratingLabel = UILabel(.systemFont(ofSize: 12))
-    private let starImage = UIImageView(image: UIImage(named: "star_icon"))
-    private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, Strings.grades)
+    private let starImage = UIImageView(image: ImageAsset.star_icon)
+    private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, StringsAsset.grades)
     private let gradeCountLabel = UILabel(.systemFont(ofSize: 12))
-    private let heartImage = UIImageView(image: UIImage(named: "fav_icon"))
+    private let heartImage = UIImageView(image: ImageAsset.heart)
     private let bottomButton = BottomButton(buttonText: .book)
     
     // MARK: - Initializers
@@ -77,8 +72,7 @@ final class SaloonPhotoCollection: BaseUIView {
         subscribeDelegate()
         setBackgroundColor()
         setViews()
-        
-        bottomButton.addTarget(self, action: #selector(bookAction), for: .touchUpInside)
+        addTarget()
     }
     
     private func setInfo(from model: SaloonMockModel) {
@@ -90,9 +84,11 @@ final class SaloonPhotoCollection: BaseUIView {
         self.gradeCountLabel.text = "\(model.scores)"
     }
     
+    // MARK: - Action
+    
     @objc
     private func bookAction() {
-        AppRouter.shared.present(type: .booking)
+        AppRouter.shared.presentWithNav(type: .booking)
     }
 }
 
@@ -102,7 +98,7 @@ extension SaloonPhotoCollection {
     
     private func setViews() {
         addSubviews([collectionView, pageControl, nameLabel, categoryLabel, ratingLabel,
-                     starImage, gradeLabel, gradeCountLabel, likeButton, heartImage, bottomButton])
+                     starImage, gradeLabel, gradeCountLabel, heartImage, bottomButton])
         
         collectionView.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
@@ -146,14 +142,9 @@ extension SaloonPhotoCollection {
             make.centerY.equalTo(starImage)
         }
         
-        likeButton.snp.makeConstraints { make in
-            make.top.equalTo(collectionView.snp.bottom).offset(29)
-            make.right.equalTo(self).inset(16)
-        }
-        
         heartImage.snp.makeConstraints { make in
-            make.centerY.equalTo(likeButton)
-            make.right.equalTo(likeButton.snp.right).offset(-110)
+            make.top.equalTo(collectionView.snp.bottom).offset(16)
+            make.right.equalTo(self).inset(16)
         }
         
         bottomButton.snp.makeConstraints { make in
@@ -173,6 +164,10 @@ extension SaloonPhotoCollection {
     private func setBackgroundColor() {
         backgroundColor = .mainGray
     }
+    
+    private func addTarget() {
+        bottomButton.addTarget(self, action: #selector(bookAction), for: .touchUpInside)
+    }
 }
 
 extension SaloonPhotoCollection: UICollectionViewDataSource {
@@ -184,7 +179,8 @@ extension SaloonPhotoCollection: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "test", for: indexPath) as! SaloonPhotoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SaloonPhotoCell.self),
+                                                      for: indexPath) as! SaloonPhotoCell
         cell.configure(image: model?.photos[indexPath.item] ?? UIImage())
         return cell
     }
@@ -194,12 +190,15 @@ extension SaloonPhotoCollection: UICollectionViewDelegateFlowLayout {
     
     // MARK: - UICollectionViewDelegateFlowLayout methods
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
     }
 }
 
 extension SaloonPhotoCollection: UICollectionViewDelegate {
+    
+    // MARK: - UICollectionViewDelegate methods
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)

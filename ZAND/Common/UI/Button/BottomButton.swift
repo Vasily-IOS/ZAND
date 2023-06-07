@@ -18,17 +18,17 @@ enum ButtonText {
     var text: String {
         switch self {
         case .apply:
-            return Strings.apply
+            return StringsAsset.apply
         case .enter:
-            return Strings.enter
+            return StringsAsset.enter
         case .register:
-            return Strings.register
+            return StringsAsset.register
         case .book:
-            return Strings.book
+            return StringsAsset.book
         case .contin:
-            return Strings.contin
+            return StringsAsset.contin
         case .callUs:
-            return Strings.callUs
+            return StringsAsset.callUs
         }
     }
 }

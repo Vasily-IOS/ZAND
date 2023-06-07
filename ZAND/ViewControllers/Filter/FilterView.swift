@@ -21,8 +21,8 @@ final class FilterView: BaseUIView {
     
     // MARK: - UI
     
-    private let lineImage = UIImageView(image: UIImage(named: "line_icon"))
-    private let viewFirstLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, Strings.showFirst)
+    private let lineImage = UIImageView(image: ImageAsset.line_icon)
+    private let viewFirstLabel = UILabel(.systemFont(ofSize: 20, weight: .bold), .black, StringsAsset.showFirst)
     
     private let applyButton = BottomButton(buttonText: .apply)
     
@@ -31,7 +31,7 @@ final class FilterView: BaseUIView {
         cancelButton.layer.borderColor = UIColor.lightGreen.cgColor
         cancelButton.layer.borderWidth = 1
         cancelButton.backgroundColor = .mainGray
-        cancelButton.setTitle(Strings.cancel, for: .normal)
+        cancelButton.setTitle(StringsAsset.cancel, for: .normal)
         cancelButton.setTitleColor(.mainGreen, for: .normal)
         cancelButton.layer.cornerRadius = 15
         cancelButton.isHidden = true
@@ -55,8 +55,8 @@ final class FilterView: BaseUIView {
                                 forCellWithReuseIdentifier: String(describing: FilterOptionCell.self))
         collectionView.register(OptionCell.self,
                                 forCellWithReuseIdentifier: String(describing: OptionCell.self))
-        collectionView.register(ReuseHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: String(describing: ReuseHeader.self))
+        collectionView.register(ReuseHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: String(describing: ReuseHeaderView.self))
         collectionView.isScrollEnabled = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .white
@@ -216,8 +216,8 @@ extension FilterView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                         withReuseIdentifier: String(describing: ReuseHeader.self),
-                                                                         for: indexPath) as! ReuseHeader
+                                                                         withReuseIdentifier: String(describing: ReuseHeaderView.self),
+                                                                         for: indexPath) as! ReuseHeaderView
         headerView.state = .services
         return headerView
     }

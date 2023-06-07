@@ -16,11 +16,11 @@ final class AddressView: BaseUIView {
     
     // MARK: - UI
     
-    private let addressLabel = UILabel(.systemFont(ofSize: 16), .black, Strings.address)
+    private let addressLabel = UILabel(.systemFont(ofSize: 16), .black, StringsAsset.address)
     private let viewOnMapButton = TransparentButton(state: .viewOnMap)
-    private let weedDaysLabel = UILabel(.systemFont(ofSize: 12), .black, Strings.weekDays)
+    private let weedDaysLabel = UILabel(.systemFont(ofSize: 12), .black, StringsAsset.weekDays)
     private let weekDaysDescriptionLabel = UILabel(.systemFont(ofSize: 12))
-    private let weekendDaysLabel = UILabel(.systemFont(ofSize: 12), .black, Strings.weekendDays)
+    private let weekendDaysLabel = UILabel(.systemFont(ofSize: 12), .black, StringsAsset.weekendDays)
     private let weekendDaysDescriptionLabel = UILabel(.systemFont(ofSize: 12))
     private let minPriceLabel = UILabel(.systemFont(ofSize: 12))
     
@@ -69,7 +69,7 @@ final class AddressView: BaseUIView {
         addressDescriptionLabel.text = model.adress
         weekDaysDescriptionLabel.text = model.weekdays
         weekendDaysDescriptionLabel.text = model.weekend
-        minPriceLabel.text = "от \(model.min_price) руб."
+        minPriceLabel.text = "\(StringsAsset.from) \(model.min_price) \(StringsAsset.rub)"
     }
     
     // MARK: - Action

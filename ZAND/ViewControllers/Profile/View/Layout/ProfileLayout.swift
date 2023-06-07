@@ -8,7 +8,6 @@
 import UIKit
 
 final class ProfileLayoutBuilder: DefaultProfileLayoutProtocol {
-    
     func createSection(type: ProfileSection) -> NSCollectionLayoutSection? {
         switch type {
         case .profileFields:

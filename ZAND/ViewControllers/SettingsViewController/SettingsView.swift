@@ -26,8 +26,8 @@ final class SettingsView: BaseUIView {
         collectionView.isScrollEnabled = false
         collectionView.register(DataCell.self, forCellWithReuseIdentifier: String(describing: DataCell.self))
         collectionView.register(PushCell.self, forCellWithReuseIdentifier: String(describing: PushCell.self))
-        collectionView.register(ReuseHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: String(describing: ReuseHeader.self))
+        collectionView.register(ReuseHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: String(describing: ReuseHeaderView.self))
         return collectionView
     }()
 
@@ -129,8 +129,8 @@ extension SettingsView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                         withReuseIdentifier: String(describing: ReuseHeader.self),
-                                                                         for: indexPath) as! ReuseHeader
+                                                                         withReuseIdentifier: String(describing: ReuseHeaderView.self),
+                                                                         for: indexPath) as! ReuseHeaderView
         switch SettingsState.init(rawValue: indexPath.section) {
         case .data:
             headerView.state = .data

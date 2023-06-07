@@ -20,6 +20,6 @@ extension AppointmentsViewController {
     // MARK: - Instance methods
     
     private func setNavBar() {
-        title = Strings.books
+        title = StringsAsset.books
     }
 }

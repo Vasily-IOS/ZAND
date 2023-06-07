@@ -20,10 +20,6 @@ final class ProfileView: BaseUIView {
     
     var alertHandler: (() -> ())?
     
-    private let viewOnMapClosure = { (coordinates: String) in
-        AppRouter.shared.push(.selectableMap(coordinates))
-    }
-    
     // MARK: - Properties
     
     var layout: DefaultProfileLayoutProtocol?
@@ -42,8 +38,8 @@ final class ProfileView: BaseUIView {
                                 forCellWithReuseIdentifier: String(describing: ProfileCell.self))
         collectionView.register(FavouritesCell.self,
                                 forCellWithReuseIdentifier: String(describing: FavouritesCell.self))
-        collectionView.register(ReuseHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: String(describing: ReuseHeader.self))
+        collectionView.register(ReuseHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: String(describing: ReuseHeaderView.self))
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .mainGray
         collectionView.isScrollEnabled = false
@@ -160,7 +156,6 @@ extension ProfileView: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: FavouritesCell.self),
                                                           for: indexPath) as! FavouritesCell
             cell.configure(model: saloonMockModel[indexPath.row])
-            cell.viewOnMapHandler = viewOnMapClosure
             return cell
         default:
             return UICollectionViewCell()
@@ -194,8 +189,8 @@ extension ProfileView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                         withReuseIdentifier: String(describing: ReuseHeader.self),
-                                                                         for: indexPath) as! ReuseHeader
+                                                                         withReuseIdentifier: String(describing: ReuseHeaderView.self),
+                                                                         for: indexPath) as! ReuseHeaderView
         headerView.state = .favourites
         return headerView
     }

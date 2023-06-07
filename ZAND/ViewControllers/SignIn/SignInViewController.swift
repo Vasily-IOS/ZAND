@@ -9,12 +9,22 @@ import UIKit
 
 final class SignInViewController: BaseViewController<UIView> {
     
+    // MARK: - Properties
+    
+    var navController: UINavigationController? {
+        return self.navigationController ?? UINavigationController()
+    }
+    
+    // MARK: - Lifecycle
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = false
+        hideNavigationBar()
     }
     
     deinit {
         print("SignInViewController died")
     }
 }
+
+extension SignInViewController: HideNavigationBar {}

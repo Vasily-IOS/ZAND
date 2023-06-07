@@ -64,6 +64,8 @@ extension SelectableMapView {
 
 extension SelectableMapView: MKMapViewDelegate {
     
+    // MARK: - MKMapViewDelegate methods
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is SaloonAnnotation {
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
@@ -72,7 +74,7 @@ extension SelectableMapView: MKMapViewDelegate {
             } else {
                 annotationView?.annotation = annotation
             }
-            annotationView?.image = UIImage(named: "pin_icon")
+            annotationView?.image = ImageAsset.pin_icon
             return annotationView
         }
         return nil

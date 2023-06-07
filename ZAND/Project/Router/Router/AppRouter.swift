@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class AppRouter {
     
@@ -48,7 +49,7 @@ extension AppRouter {
                 self.appDelegate?.window?.makeKeyAndVisible()
             }
         }
- 
+
         appDelegate?.window?.backgroundColor = .black
         appDelegate?.window?.rootViewController = videoVC
         setupNavigationbar()
@@ -58,27 +59,21 @@ extension AppRouter {
     private func setupNavigationbar() {
         let appearance = UINavigationBarAppearance()
         appearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white
+            .foregroundColor: UIColor.black
         ]
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white
         appearance.shadowColor = .clear
+        appearance.configureWithTransparentBackground()
         navigationController.navigationBar.standardAppearance = appearance
         navigationController.navigationBar.scrollEdgeAppearance = appearance
-        navigationController.navigationBar.tintColor = .white
-        
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithTransparentBackground()
-                    
-        navigationController.navigationBar.standardAppearance = navBarAppearance
-        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
-        
         navigationController.navigationBar.tintColor = UIColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        navigationController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 }
 
 extension AppRouter: DefaultRouter {
+    
+    // MARK: - DefaultRouter methods
     
     func push(_ type: VCType) {
         let viewController = vcFactory.getViewController(for: type)
@@ -95,8 +90,24 @@ extension AppRouter: DefaultRouter {
         let viewController = vcFactory.getViewController(for: type)
         navigationController.present(viewController, animated: true)
     }
-    
+
     func popViewController() {
         navigationController.popViewController(animated: true)
+    }
+    
+    func dismiss() {
+        navigationController.dismiss(animated: true)
+    }
+    
+    func presentWithNav(type: VCType) {
+        let viewController = vcFactory.getViewController(for: type)
+        let myNavigationController = UINavigationController(rootViewController: viewController)
+        navigationController.present(myNavigationController, animated: true)
+    }
+    
+    func presentSearch(type: VCType, completion: ((SaloonMockModel) -> ())?) {
+        let vc = vcFactory.getViewController(for: type) as! SearchViewController
+        vc.completionHandler = completion
+        navigationController.present(vc, animated: true)
     }
 }

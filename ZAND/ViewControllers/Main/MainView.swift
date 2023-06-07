@@ -8,26 +8,42 @@
 import UIKit
 import SnapKit
 
+protocol MainViewDelegate: AnyObject {
+    func showFilter()
+    func showSaloonDetail(saloon: SaloonMockModel)
+    func showSelectableMap(coordinates: String)
+    func showSearch(model: [SaloonMockModel])
+}
+
 final class MainView: BaseUIView {
     
     // MARK: - Closures
     
-    private let searchClosure = {
-        AppRouter.shared.present(type: .search)
+    private lazy var searchClosure = { [weak self] in
+        guard let self = self else { return }
+        self.showSearch()
     }
     
-    private let viewOnMapClosure = { (coordinates: String) in
-        AppRouter.shared.push(.selectableMap(coordinates))
+    private lazy var viewOnMapClosure = { [weak self] (coordinates: String) -> () in
+        guard let self = self else { return }
+        self.showSelectableMap(coordinates: coordinates)
+    }
+    
+    private lazy var favouritesHandler = { [weak self] (indexPath: IndexPath) -> () in
+        guard let self = self else { return }
+        self.changeHeartAppearence(by: indexPath)
+        VibrationManager.shared.vibrate(for: .success)
     }
     
     // MARK: -
     
+    weak var delegate: MainViewDelegate?
     var layoutBuilder: LayoutBuilderProtocol?
     
     // MARK: - Test Model
     
-    private let optionsModel = OptionsModel.options
-    private let saloonMockModel = SaloonMockModel.saloons
+    var optionsModel: [OptionsModel] = []
+    var saloonMockModel: [SaloonMockModel] = []
     
     // MARK: - UI
     
@@ -64,6 +80,12 @@ extension MainView {
     
     // MARK: - Instance methods
     
+    func scrollToItem(at indexPath: IndexPath) {
+        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+    }
+    
+    // MARK: - Private
+    
     private func setViews() {
         addSubviews([searchButton, collectionView])
         
@@ -82,7 +104,8 @@ extension MainView {
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout
+        { (section, environment) -> NSCollectionLayoutSection? in
             switch MainSection.init(rawValue: section) {
             case .option:
                 return self.layoutBuilder?.createSection(type: .option)
@@ -102,6 +125,19 @@ extension MainView {
     
     private func setBackgroundColor() {
         backgroundColor = .mainGray
+    }
+    
+    private func changeHeartAppearence(by indexPath: IndexPath) {
+        let cell = self.collectionView.cellForItem(at: indexPath) as! SaloonCell
+        cell.isInFavourite = !cell.isInFavourite
+    }
+    
+    private func showSelectableMap(coordinates: String) {
+        delegate?.showSelectableMap(coordinates: coordinates)
+    }
+    
+    private func showSearch() {
+        self.delegate?.showSearch(model: self.saloonMockModel)
     }
 }
 
@@ -136,8 +172,9 @@ extension MainView: UICollectionViewDataSource {
             optionCell.configure(model: optionsModel[indexPath.item], state: .onMain)
             return optionCell
         case .beautySaloon:
-            saloonCell.configure(model: saloonMockModel[indexPath.item])
+            saloonCell.configure(model: saloonMockModel[indexPath.item], indexPath: indexPath)
             saloonCell.viewOnMapHandler = viewOnMapClosure
+            saloonCell.favouritesHandler = favouritesHandler
             return saloonCell
         default:
             return UICollectionViewCell()
@@ -153,11 +190,11 @@ extension MainView: UICollectionViewDelegate {
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
             if indexPath.section == 0 && indexPath.item == 0 {
-                AppRouter.shared.present(type: .filter)
+                delegate?.showFilter()
             }
         case .beautySaloon:
             let model = saloonMockModel[indexPath.item]
-            AppRouter.shared.push(.saloonDetail(model))
+            delegate?.showSaloonDetail(saloon: model)
         default:
             break
         }

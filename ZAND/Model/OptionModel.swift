@@ -12,23 +12,23 @@ struct OptionsModel {
     let image: UIImage
     
     static let options: [Self] = [
-        .init(name: Strings.filter, image: UIImage(named: "filter_icon")!),
-        .init(name: Strings.hair, image: UIImage(named: "scissors_icon")!),
-        .init(name: Strings.nail, image: UIImage(named: "nails_icon")!),
-        .init(name: Strings.spa, image: UIImage(named: "spa_icon")!),
-        .init(name: Strings.makeUp, image: UIImage(named: "makeup_icon")!),
-        .init(name: Strings.face_care, image: UIImage(named: "faceCare_icon")!),
-        .init(name: Strings.brows, image: UIImage(named: "brows_icon")!),
-        .init(name: Strings.mens, image: UIImage(named: "mens_icon")!)
+        .init(name: StringsAsset.filter, image: UIImage(named: "filter_icon")!),
+        .init(name: StringsAsset.hair, image: UIImage(named: "scissors_icon")!),
+        .init(name: StringsAsset.nail, image: UIImage(named: "nails_icon")!),
+        .init(name: StringsAsset.spa, image: UIImage(named: "massage_icon")!),
+        .init(name: StringsAsset.makeUp, image: UIImage(named: "makeup_icon")!),
+        .init(name: StringsAsset.face_care, image: UIImage(named: "faceCare_icon")!),
+        .init(name: StringsAsset.brows, image: UIImage(named: "brows_icon")!),
+        .init(name: StringsAsset.mens, image: UIImage(named: "mens_icon")!)
     ]
     
     static let optionWithoutFilterModel: [Self] = [
-        .init(name: Strings.hair, image: UIImage(named: "scissors_icon")!),
-        .init(name: Strings.nail, image: UIImage(named: "nails_icon")!),
-        .init(name: Strings.spa, image: UIImage(named: "spa_icon")!),
-        .init(name: Strings.makeUp, image: UIImage(named: "makeup_icon")!),
-        .init(name: Strings.face_care, image: UIImage(named: "faceCare_icon")!),
-        .init(name: Strings.brows, image: UIImage(named: "brows_icon")!),
-        .init(name: Strings.mens, image: UIImage(named: "mens_icon")!)
+        .init(name: StringsAsset.hair, image: UIImage(named: "scissors_icon")!),
+        .init(name: StringsAsset.nail, image: UIImage(named: "nails_icon")!),
+        .init(name: StringsAsset.spa, image: UIImage(named: "massage_icon")!),
+        .init(name: StringsAsset.makeUp, image: UIImage(named: "makeup_icon")!),
+        .init(name: StringsAsset.face_care, image: UIImage(named: "faceCare_icon")!),
+        .init(name: StringsAsset.brows, image: UIImage(named: "brows_icon")!),
+        .init(name: StringsAsset.mens, image: UIImage(named: "mens_icon")!)
     ]
 }

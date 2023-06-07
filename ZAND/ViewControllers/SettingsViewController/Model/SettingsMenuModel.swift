@@ -11,10 +11,10 @@ struct SettingsMenuModel {
     let description: String
     
     static let model: [Self] = [
-        .init(description: Strings.name),
-        .init(description: Strings.surname),
-        .init(description: Strings.age),
-        .init(description: Strings.email),
-        .init(description: Strings.phoneNumber)
+        .init(description: StringsAsset.name),
+        .init(description: StringsAsset.surname),
+        .init(description: StringsAsset.age),
+        .init(description: StringsAsset.email),
+        .init(description: StringsAsset.phoneNumber)
     ]
 }
