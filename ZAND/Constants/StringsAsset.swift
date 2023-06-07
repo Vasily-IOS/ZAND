@@ -44,6 +44,8 @@ enum StringsAsset {
     static let yes = "Да"
     static let from = "от"
     static let rub = "руб."
+    static let skip = "Пропустить"
+    static let notifyTabBar = "notifyTabBar"
     
     // MARK: - Bottom button values
     static let apply = "Применить"
@@ -80,4 +82,7 @@ enum StringsAsset {
     static let main = "Главная"
     static let map = "Карта"
     static let profile = "Профиль"
+    
+    // MARK: - UserFirstLaunch
+    static let firstLaunch = "firstLaunch"
 }

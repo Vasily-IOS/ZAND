@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class MainViewController: BaseViewController<MainView> {
     
@@ -24,6 +25,7 @@ final class MainViewController: BaseViewController<MainView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         subscribeDelegate()
+        subscribeNotify()
         presenter?.getOptionsModel()
         presenter?.getSaloonMockModel()
     }
@@ -31,6 +33,7 @@ final class MainViewController: BaseViewController<MainView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar()
+        checkIsUserLaunched()
     }
 
     deinit {
@@ -41,6 +44,39 @@ final class MainViewController: BaseViewController<MainView> {
     
     private func subscribeDelegate() {
         contentView.delegate = self
+    }
+    
+    private func checkIsUserLaunched() {
+        if OnboardManager.shared.isUserFirstLaunch() {
+            isFirstUserLaunch()
+        }
+    }
+    
+    private func isFirstUserLaunch() {
+        let factory: DefaultVCFactory = VCFactory()
+        let vc = factory.getViewController(for: .register)
+        addChild(vc)
+        vc.didMove(toParent: self)
+        view.addSubview(vc.view)
+        vc.view.snp.makeConstraints { make in
+            make.edges.equalTo(contentView)
+        }
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    private func subscribeNotify() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(getNotifyAction(_:)),
+                                               name: .showTabBar,
+                                               object: nil)
+    }
+    
+    // MARK: - Action
+    
+    @objc
+    private func getNotifyAction(_ notification: Notification) {
+        tabBarController?.tabBar.isHidden = false
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -85,7 +121,6 @@ extension MainViewController: MainViewProtocol {
     func updateWithFilter(model: [SaloonMockModel]) {
         contentView.saloonMockModel = model
     }
-    
 }
 
 extension MainViewController: HideNavigationBar {}

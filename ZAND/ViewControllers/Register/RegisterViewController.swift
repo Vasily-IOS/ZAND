@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RegisterViewController: BaseViewController<UIView> {
+final class RegisterViewController: BaseViewController<RegisterView> {
     
     // MARK: - Properties
     
@@ -17,18 +17,41 @@ final class RegisterViewController: BaseViewController<UIView> {
     
     // MARK: - Lifecycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        subscribeDelegate()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showNavigationBar()
     }
-    
-//    override func loadView() {
-//        super.loadView()
-//        showNavigationBar()
-//    }
-    
+ 
     deinit {
         print("RegisterViewController died")
+    }
+    
+    // MARK: - Instance methods
+    
+    private func subscribeDelegate() {
+        contentView.delegate = self
+    }
+    
+    private func sendNotify() {
+        NotificationCenter.default.post(name: .showTabBar, object: nil)
+    }
+}
+
+extension RegisterViewController: RegisterViewDelegate {
+    
+    // MARK: - Instance methods
+    
+    func skip() {
+        removeFromParent()
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        sendNotify()
+        OnboardManager.shared.setIsNotNewUser()
     }
 }
 

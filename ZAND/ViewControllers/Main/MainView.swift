@@ -32,6 +32,7 @@ final class MainView: BaseUIView {
     private lazy var favouritesHandler = { [weak self] (indexPath: IndexPath) -> () in
         guard let self = self else { return }
         self.changeHeartAppearence(by: indexPath)
+        VibrationManager.shared.vibrate(for: .success)
     }
     
     // MARK: -
@@ -42,13 +43,7 @@ final class MainView: BaseUIView {
     // MARK: - Test Model
     
     var optionsModel: [OptionsModel] = []
-    var saloonMockModel: [SaloonMockModel] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-    }
+    var saloonMockModel: [SaloonMockModel] = []
     
     // MARK: - UI
     

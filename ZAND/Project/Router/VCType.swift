@@ -11,6 +11,7 @@ enum VCType {
     case tabBar
     case search([SaloonMockModel])
     case main
+    case map
     case saloonDetail(SaloonMockModel)
     case register
     case filter

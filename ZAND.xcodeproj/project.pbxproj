@@ -38,13 +38,13 @@
 		FF45A14429E7EC1300587DAF /* ZANDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A14329E7EC1300587DAF /* ZANDTests.swift */; };
 		FF45A14E29E7EC1300587DAF /* ZANDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A14D29E7EC1300587DAF /* ZANDUITests.swift */; };
 		FF45A15029E7EC1300587DAF /* ZANDUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A14F29E7EC1300587DAF /* ZANDUITestsLaunchTests.swift */; };
-		FF45A16029E7F4BC00587DAF /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A15F29E7F4BC00587DAF /* UIStackView.swift */; };
-		FF45A16229E7F52900587DAF /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16129E7F52900587DAF /* UITableView.swift */; };
-		FF45A16429E7F5C100587DAF /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16329E7F5C100587DAF /* UILabel.swift */; };
-		FF45A16629E7F5ED00587DAF /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16529E7F5ED00587DAF /* UITableViewCell.swift */; };
-		FF45A16829E7F5FC00587DAF /* UITableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16729E7F5FC00587DAF /* UITableViewHeaderFooterView.swift */; };
-		FF45A16A29E7F67600587DAF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16929E7F67600587DAF /* UIView.swift */; };
-		FF45A16C29E7F70D00587DAF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16B29E7F70D00587DAF /* UserDefaults.swift */; };
+		FF45A16029E7F4BC00587DAF /* Extension + UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A15F29E7F4BC00587DAF /* Extension + UIStackView.swift */; };
+		FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16129E7F52900587DAF /* Extension + UITableView.swift */; };
+		FF45A16429E7F5C100587DAF /* Extension + UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16329E7F5C100587DAF /* Extension + UILabel.swift */; };
+		FF45A16629E7F5ED00587DAF /* Extension + UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16529E7F5ED00587DAF /* Extension + UITableViewCell.swift */; };
+		FF45A16829E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16729E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift */; };
+		FF45A16A29E7F67600587DAF /* Extension + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16929E7F67600587DAF /* Extension + UIView.swift */; };
+		FF45A16C29E7F70D00587DAF /* Extension + UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16B29E7F70D00587DAF /* Extension + UserDefaults.swift */; };
 		FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */; };
 		FF5DFDB42A0D2A2700495E63 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB32A0D2A2700495E63 /* MapModel.swift */; };
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
@@ -64,7 +64,7 @@
 		FF8E7BE829EF2BD200644208 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE729EF2BD200644208 /* MainModel.swift */; };
 		FF99B8F329EEAB1500F4E4C3 /* StringsAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F229EEAB1500F4E4C3 /* StringsAsset.swift */; };
 		FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */; };
-		FF99B8F729EEB1A100F4E4C3 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F629EEB1A100F4E4C3 /* ExtensionUIColor.swift */; };
+		FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */; };
 		FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F929EEB4F000F4E4C3 /* DefaulRouter.swift */; };
 		FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8FB29EEB58500F4E4C3 /* VCType.swift */; };
 		FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8FD29EEB6AD00F4E4C3 /* AppRouter.swift */; };
@@ -80,6 +80,14 @@
 		FFB9855F2A2F52CC00ABEFBB /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB9855E2A2F52CC00ABEFBB /* SearchCell.swift */; };
 		FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985602A2F551600ABEFBB /* SearchPresenter.swift */; };
 		FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985642A308E1F00ABEFBB /* MainPresenter.swift */; };
+		FFB985682A30AFD100ABEFBB /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985672A30AFD100ABEFBB /* VibrationManager.swift */; };
+		FFB9856A2A30B5D500ABEFBB /* OnboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985692A30B5D500ABEFBB /* OnboardManager.swift */; };
+		FFB9856E2A30D40400ABEFBB /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB9856D2A30D40400ABEFBB /* RegisterPresenter.swift */; };
+		FFB985702A30E1C000ABEFBB /* Extension + NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB9856F2A30E1C000ABEFBB /* Extension + NotificationName.swift */; };
+		FFB985722A30E6E700ABEFBB /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985712A30E6E700ABEFBB /* RealmManager.swift */; };
+		FFB985752A30E84600ABEFBB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FFB985742A30E84600ABEFBB /* Realm */; };
+		FFB985772A30E84600ABEFBB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FFB985762A30E84600ABEFBB /* RealmSwift */; };
+		FFB9857A2A30E87B00ABEFBB /* DefaultRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985792A30E87B00ABEFBB /* DefaultRealmManager.swift */; };
 		FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */; };
 		FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B482A03C80A005CE41B /* AppointmentsView.swift */; };
 		FFC01B4C2A03CA78005CE41B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */; };
@@ -161,13 +169,13 @@
 		FF45A14929E7EC1300587DAF /* ZANDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZANDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A14D29E7EC1300587DAF /* ZANDUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZANDUITests.swift; sourceTree = "<group>"; };
 		FF45A14F29E7EC1300587DAF /* ZANDUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZANDUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		FF45A15F29E7F4BC00587DAF /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
-		FF45A16129E7F52900587DAF /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
-		FF45A16329E7F5C100587DAF /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
-		FF45A16529E7F5ED00587DAF /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
-		FF45A16729E7F5FC00587DAF /* UITableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewHeaderFooterView.swift; sourceTree = "<group>"; };
-		FF45A16929E7F67600587DAF /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		FF45A16B29E7F70D00587DAF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		FF45A15F29E7F4BC00587DAF /* Extension + UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIStackView.swift"; sourceTree = "<group>"; };
+		FF45A16129E7F52900587DAF /* Extension + UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITableView.swift"; sourceTree = "<group>"; };
+		FF45A16329E7F5C100587DAF /* Extension + UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UILabel.swift"; sourceTree = "<group>"; };
+		FF45A16529E7F5ED00587DAF /* Extension + UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITableViewCell.swift"; sourceTree = "<group>"; };
+		FF45A16729E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITableViewHeaderFooterView.swift"; sourceTree = "<group>"; };
+		FF45A16929E7F67600587DAF /* Extension + UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIView.swift"; sourceTree = "<group>"; };
+		FF45A16B29E7F70D00587DAF /* Extension + UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UserDefaults.swift"; sourceTree = "<group>"; };
 		FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackView.swift; sourceTree = "<group>"; };
 		FF5DFDB32A0D2A2700495E63 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
@@ -187,7 +195,7 @@
 		FF8E7BE729EF2BD200644208 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		FF99B8F229EEAB1500F4E4C3 /* StringsAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsAsset.swift; sourceTree = "<group>"; };
 		FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
-		FF99B8F629EEB1A100F4E4C3 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
+		FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIColor.swift"; sourceTree = "<group>"; };
 		FF99B8F929EEB4F000F4E4C3 /* DefaulRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaulRouter.swift; sourceTree = "<group>"; };
 		FF99B8FB29EEB58500F4E4C3 /* VCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCType.swift; sourceTree = "<group>"; };
 		FF99B8FD29EEB6AD00F4E4C3 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
@@ -203,6 +211,12 @@
 		FFB9855E2A2F52CC00ABEFBB /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		FFB985602A2F551600ABEFBB /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		FFB985642A308E1F00ABEFBB /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		FFB985672A30AFD100ABEFBB /* VibrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
+		FFB985692A30B5D500ABEFBB /* OnboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardManager.swift; sourceTree = "<group>"; };
+		FFB9856D2A30D40400ABEFBB /* RegisterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
+		FFB9856F2A30E1C000ABEFBB /* Extension + NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + NotificationName.swift"; sourceTree = "<group>"; };
+		FFB985712A30E6E700ABEFBB /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		FFB985792A30E87B00ABEFBB /* DefaultRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRealmManager.swift; sourceTree = "<group>"; };
 		FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsViewController.swift; sourceTree = "<group>"; };
 		FFC01B482A03C80A005CE41B /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +249,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFB985772A30E84600ABEFBB /* RealmSwift in Frameworks */,
+				FFB985752A30E84600ABEFBB /* Realm in Frameworks */,
 				FFFC47802A14DA5B000085E7 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +320,7 @@
 			children = (
 				FF25633C29F5A16A00091374 /* RegisterViewController.swift */,
 				FF25633E29F5A8C900091374 /* RegisterView.swift */,
+				FFB9856D2A30D40400ABEFBB /* RegisterPresenter.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -397,10 +414,11 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5F29EEA176007D6A60 /* Project */,
-				FF25635029F69BD100091374 /* Model */,
 				FF99B8F129EEAB0500F4E4C3 /* Constants */,
 				FF45A15E29E7EF3A00587DAF /* Common */,
 				FF45A15D29E7EF3200587DAF /* Extensions */,
+				FF25635029F69BD100091374 /* Model */,
+				FFB985662A30AF7A00ABEFBB /* Managers */,
 				FF45A15C29E7EF2600587DAF /* ViewControllers */,
 			);
 			path = ZAND;
@@ -446,14 +464,15 @@
 		FF45A15D29E7EF3200587DAF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FF45A15F29E7F4BC00587DAF /* UIStackView.swift */,
-				FF45A16129E7F52900587DAF /* UITableView.swift */,
-				FF45A16329E7F5C100587DAF /* UILabel.swift */,
-				FF45A16529E7F5ED00587DAF /* UITableViewCell.swift */,
-				FF45A16729E7F5FC00587DAF /* UITableViewHeaderFooterView.swift */,
-				FF45A16929E7F67600587DAF /* UIView.swift */,
-				FF45A16B29E7F70D00587DAF /* UserDefaults.swift */,
-				FF99B8F629EEB1A100F4E4C3 /* ExtensionUIColor.swift */,
+				FF45A15F29E7F4BC00587DAF /* Extension + UIStackView.swift */,
+				FF45A16129E7F52900587DAF /* Extension + UITableView.swift */,
+				FF45A16329E7F5C100587DAF /* Extension + UILabel.swift */,
+				FF45A16529E7F5ED00587DAF /* Extension + UITableViewCell.swift */,
+				FF45A16729E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift */,
+				FF45A16929E7F67600587DAF /* Extension + UIView.swift */,
+				FF45A16B29E7F70D00587DAF /* Extension + UserDefaults.swift */,
+				FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */,
+				FFB9856F2A30E1C000ABEFBB /* Extension + NotificationName.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -657,6 +676,41 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		FFB985662A30AF7A00ABEFBB /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FFB9857C2A30E96100ABEFBB /* OnboardManager */,
+				FFB9857B2A30E95300ABEFBB /* VibrationManager */,
+				FFB985782A30E86700ABEFBB /* RealmManager */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		FFB985782A30E86700ABEFBB /* RealmManager */ = {
+			isa = PBXGroup;
+			children = (
+				FFB985712A30E6E700ABEFBB /* RealmManager.swift */,
+				FFB985792A30E87B00ABEFBB /* DefaultRealmManager.swift */,
+			);
+			path = RealmManager;
+			sourceTree = "<group>";
+		};
+		FFB9857B2A30E95300ABEFBB /* VibrationManager */ = {
+			isa = PBXGroup;
+			children = (
+				FFB985672A30AFD100ABEFBB /* VibrationManager.swift */,
+			);
+			path = VibrationManager;
+			sourceTree = "<group>";
+		};
+		FFB9857C2A30E96100ABEFBB /* OnboardManager */ = {
+			isa = PBXGroup;
+			children = (
+				FFB985692A30B5D500ABEFBB /* OnboardManager.swift */,
+			);
+			path = OnboardManager;
+			sourceTree = "<group>";
+		};
 		FFC01B452A03C7D8005CE41B /* Appointments */ = {
 			isa = PBXGroup;
 			children = (
@@ -814,6 +868,8 @@
 			name = ZAND;
 			packageProductDependencies = (
 				FFFC477F2A14DA5B000085E7 /* SnapKit */,
+				FFB985742A30E84600ABEFBB /* Realm */,
+				FFB985762A30E84600ABEFBB /* RealmSwift */,
 			);
 			productName = ZAND;
 			productReference = FF45A12929E7EC1200587DAF /* ZAND.app */;
@@ -889,6 +945,7 @@
 			mainGroup = FF45A12029E7EC1200587DAF;
 			packageReferences = (
 				FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				FFB985732A30E84600ABEFBB /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = FF45A12A29E7EC1200587DAF /* Products */;
 			projectDirPath = "";
@@ -937,22 +994,23 @@
 				FF99B90129EEB90100F4E4C3 /* DefaultVCFactory.swift in Sources */,
 				FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */,
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,
-				FF45A16A29E7F67600587DAF /* UIView.swift in Sources */,
+				FF45A16A29E7F67600587DAF /* Extension + UIView.swift in Sources */,
 				FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */,
 				FF25633329F57A3000091374 /* ShowCaseItemCell.swift in Sources */,
 				FF25635229F69BE100091374 /* OptionModel.swift in Sources */,
 				FFC01B602A03F147005CE41B /* BaseTableCell.swift in Sources */,
 				FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */,
-				FF45A16429E7F5C100587DAF /* UILabel.swift in Sources */,
-				FF99B8F729EEB1A100F4E4C3 /* ExtensionUIColor.swift in Sources */,
-				FF45A16829E7F5FC00587DAF /* UITableViewHeaderFooterView.swift in Sources */,
+				FF45A16429E7F5C100587DAF /* Extension + UILabel.swift in Sources */,
+				FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */,
+				FF45A16829E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift in Sources */,
 				FFC01B562A03D764005CE41B /* SettingsMenuModel.swift in Sources */,
 				FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */,
 				FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */,
+				FFB985722A30E6E700ABEFBB /* RealmManager.swift in Sources */,
 				FFD3E1D72A054E7C00680ED5 /* BookingViewController.swift in Sources */,
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */,
-				FF45A16229E7F52900587DAF /* UITableView.swift in Sources */,
+				FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */,
 				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
 				FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* StringsAsset.swift in Sources */,
@@ -963,11 +1021,13 @@
 				FF25634829F687A900091374 /* DefaultLayoutBuilder.swift in Sources */,
 				FFC01B5B2A03DD37005CE41B /* SettingsLayout.swift in Sources */,
 				FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */,
+				FFB9856E2A30D40400ABEFBB /* RegisterPresenter.swift in Sources */,
 				FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */,
-				FF45A16C29E7F70D00587DAF /* UserDefaults.swift in Sources */,
+				FF45A16C29E7F70D00587DAF /* Extension + UserDefaults.swift in Sources */,
+				FFB985702A30E1C000ABEFBB /* Extension + NotificationName.swift in Sources */,
 				FFE6F49729FAD45700FDB519 /* ProfileMenuModel.swift in Sources */,
 				FF8AAF6829EEA37F007D6A60 /* MapView.swift in Sources */,
-				FF45A16629E7F5ED00587DAF /* UITableViewCell.swift in Sources */,
+				FF45A16629E7F5ED00587DAF /* Extension + UITableViewCell.swift in Sources */,
 				FF8AAF6C29EEA392007D6A60 /* ProfileView.swift in Sources */,
 				FF8AAF6A29EEA389007D6A60 /* MainView.swift in Sources */,
 				FF27FC262A2E079F006DE1B9 /* HideNavigationBar.swift in Sources */,
@@ -975,7 +1035,7 @@
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
 				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,
-				FF45A16029E7F4BC00587DAF /* UIStackView.swift in Sources */,
+				FF45A16029E7F4BC00587DAF /* Extension + UIStackView.swift in Sources */,
 				FF8AAF6629EEA256007D6A60 /* BaseUIView.swift in Sources */,
 				FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */,
 				FF25633629F5886700091374 /* SignInViewController.swift in Sources */,
@@ -983,6 +1043,7 @@
 				FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */,
 				FF27FC212A2DE4C3006DE1B9 /* BackView.swift in Sources */,
 				FFC01B4C2A03CA78005CE41B /* SettingsViewController.swift in Sources */,
+				FFB9856A2A30B5D500ABEFBB /* OnboardManager.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
 				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
 				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
@@ -1005,6 +1066,7 @@
 				FF25632F29F571D200091374 /* MARKS.swift in Sources */,
 				FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */,
 				FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */,
+				FFB985682A30AFD100ABEFBB /* VibrationManager.swift in Sources */,
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,
 				FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */,
 				FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */,
@@ -1019,6 +1081,7 @@
 				FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */,
 				FF25634329F682C800091374 /* FilterViewController.swift in Sources */,
 				FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */,
+				FFB9857A2A30E87B00ABEFBB /* DefaultRealmManager.swift in Sources */,
 				FFC01B592A03DCA5005CE41B /* DefaultSettingsLayout.swift in Sources */,
 				FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */,
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,
@@ -1362,6 +1425,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FFB985732A30E84600ABEFBB /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1373,6 +1444,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FFB985742A30E84600ABEFBB /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFB985732A30E84600ABEFBB /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		FFB985762A30E84600ABEFBB /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFB985732A30E84600ABEFBB /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		FFFC477F2A14DA5B000085E7 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */;
