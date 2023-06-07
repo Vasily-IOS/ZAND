@@ -12,8 +12,8 @@ final class MainView: BaseUIView {
     
     // MARK: - Closures
     
-    private let searchClosure = {
-        AppRouter.shared.present(type: .search)
+    private lazy var searchClosure = { [weak self] in
+        AppRouter.shared.present(type: .search(self?.saloonMockModel ?? []))
     }
     
     private let viewOnMapClosure = { (coordinates: String) in

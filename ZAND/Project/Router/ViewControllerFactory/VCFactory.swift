@@ -13,9 +13,11 @@ final class VCFactory: DefaultVCFactory {
         case .tabBar:
             let vc = TabBarController()
             return vc
-        case .search:
+        case .search(let model):
             let view = SearchView()
             let vc = SearchViewController(contentView: view)
+            let presenter = SearchPresenter(view: vc, model: model)
+            vc.presenter = presenter
             return vc
         case .main:
             let layotBuilder: LayoutBuilderProtocol = LayoutBuilder()

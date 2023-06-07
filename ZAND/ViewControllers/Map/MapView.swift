@@ -12,8 +12,10 @@ final class MapView: BaseUIView {
     
     // MARK: - Closures
     
-    private let searchClosure = {
-        AppRouter.shared.present(type: .search)
+    private lazy var searchClosure = { [weak self] in
+        AppRouter.shared.presentSearch(type: .search(self?.model ?? []), completion: { coordinates in
+            self?.showSinglePin(model: coordinates)
+        })
     }
     
     // MARK: - Model
@@ -73,6 +75,16 @@ final class MapView: BaseUIView {
             mapView.addAnnotation(SaloonAnnotation(coordinate: coordinates,
                                                    saloonMockModel: $0))
         }
+    }
+    
+    private func showSinglePin(model: String) {
+        let bothCoordinates = model.components(separatedBy: ",")
+        let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
+                                                 longitude: Double(bothCoordinates[1] ) ?? 0)
+        let region = MKCoordinateRegion(center: coordinates,
+                                        span: MKCoordinateSpan(latitudeDelta: 0.01,
+                                                               longitudeDelta: 0.01))
+        mapView.setRegion(region, animated: true)
     }
     
     private func subscribeDelegate() {

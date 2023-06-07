@@ -16,7 +16,7 @@ class SearchButton: UIButton {
     
     // MARK: - Properties
     
-    private let searchIcon = UIImageView(image: UIImage(named: "search_icon"))
+    private let searchIcon = UIImageView(image: ImageAsset.search_icon)
     private let searchLabel = UILabel(nil, .lightGray, StringsAsset.where_wanna_go)
     
     // MARK: - Initializers

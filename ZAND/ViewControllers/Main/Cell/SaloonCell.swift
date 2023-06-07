@@ -38,6 +38,16 @@ final class SaloonCell: BaseCollectionCell {
     private let categoryLabel = UILabel(.systemFont(ofSize: 12), .textGray)
     private let adressLabel = UILabel(.systemFont(ofSize: 12))
     
+    private lazy var leftStackView = UIStackView(alignment: .top,
+                                                 arrangedSubviews: [
+                                                    saloonDescriptionLabel,
+                                                    categoryLabel,
+                                                    adressLabel
+                                                 ],
+                                                 axis: .vertical,
+                                                 distribution: .equalSpacing,
+                                                 spacing: 4)
+    
     private let favouritesButton: UIButton = {
         let favouritesButton = UIButton()
         favouritesButton.setImage(ImageAsset.heart, for: .normal)
@@ -101,30 +111,19 @@ extension SaloonCell {
     // MARK: - Instance methods
     
     private func setViews() {
-        addSubviews([saloonImage, saloonDescriptionLabel, categoryLabel, adressLabel,
-                     favouritesButton, viewOnMapButton, starImage, ratingLabel])
+        addSubviews([saloonImage, leftStackView, favouritesButton,
+                     viewOnMapButton, starImage, ratingLabel])
         
         saloonImage.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
             make.height.equalTo(214)
         }
         
-        saloonDescriptionLabel.snp.makeConstraints { make in
+        leftStackView.snp.makeConstraints { make in
             make.top.equalTo(saloonImage.snp.bottom).offset(12)
             make.left.equalTo(self).offset(10)
         }
-        
-        categoryLabel.snp.makeConstraints { make in
-            make.left.equalTo(self).offset(10)
-            make.top.equalTo(saloonDescriptionLabel.snp.bottom).offset(1)
-        }
-        
-        adressLabel.snp.makeConstraints { make in
-            make.left.equalTo(self).offset(10)
-            make.top.equalTo(categoryLabel.snp.bottom).offset(6)
-            make.bottom.equalTo(self).inset(12)
-        }
-        
+
         favouritesButton.snp.makeConstraints { make in
             make.top.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
@@ -132,8 +131,8 @@ extension SaloonCell {
         
         viewOnMapButton.snp.makeConstraints { make in
             make.right.equalTo(self).inset(16)
-            make.bottom.equalTo(self).inset(10)
             make.height.equalTo(15)
+            make.centerY.equalTo(leftStackView.subviews[2])
         }
         
         starImage.snp.makeConstraints { make in

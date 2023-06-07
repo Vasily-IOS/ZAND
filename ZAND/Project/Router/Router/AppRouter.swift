@@ -34,7 +34,8 @@ extension AppRouter {
     
     private func setup() {
         let videoVC = LaunchVideoScreenViewController()
-        let tabBar = self.vcFactory.getViewController(for: .tabBar)
+        let tabBar = vcFactory.getViewController(for: .tabBar)
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             UIView.animate(withDuration: 0.2) {
                 self.tabBarController = tabBar as? UITabBarController
@@ -71,6 +72,8 @@ extension AppRouter {
 
 extension AppRouter: DefaultRouter {
     
+    // MARK: - DefaultRouter methods
+    
     func push(_ type: VCType) {
         let viewController = vcFactory.getViewController(for: type)
         navigationController.pushViewController(viewController, animated: true)
@@ -86,14 +89,24 @@ extension AppRouter: DefaultRouter {
         let viewController = vcFactory.getViewController(for: type)
         navigationController.present(viewController, animated: true)
     }
-    
+
     func popViewController() {
         navigationController.popViewController(animated: true)
+    }
+    
+    func dismiss() {
+        navigationController.dismiss(animated: true)
     }
     
     func presentWithNav(type: VCType) {
         let viewController = vcFactory.getViewController(for: type)
         let myNavigationController = UINavigationController(rootViewController: viewController)
         navigationController.present(myNavigationController, animated: true)
+    }
+    
+    func presentSearch(type: VCType, completion: ((String) -> ())?) {
+        let vc = vcFactory.getViewController(for: type) as! SearchViewController
+        vc.completionHandler = completion
+        navigationController.present(vc, animated: true)
     }
 }

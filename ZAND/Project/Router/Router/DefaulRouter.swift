@@ -14,5 +14,9 @@ protocol DefaultRouter: AnyObject {
     func present(type: VCType)
     func changeTabBarVC(to index: Int)
     func popViewController()
+    func dismiss()
+    
     func presentWithNav(type: VCType)
+    func presentSearch(type: VCType, completion: ((String) -> ())?)
+    
 }

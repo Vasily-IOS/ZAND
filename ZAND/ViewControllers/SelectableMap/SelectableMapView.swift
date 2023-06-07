@@ -64,6 +64,8 @@ extension SelectableMapView {
 
 extension SelectableMapView: MKMapViewDelegate {
     
+    // MARK: - MKMapViewDelegate methods
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is SaloonAnnotation {
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")

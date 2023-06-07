@@ -17,15 +17,10 @@ final class MainViewController: BaseViewController<UIView> {
     
     // MARK: - Lifecycle
     
-    override func loadView() {
-        super.loadView()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         hideNavigationBar()
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        hideNavigationBar()
-//    }
 
     deinit {
         print("MainViewController died")
