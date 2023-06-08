@@ -21,10 +21,6 @@ final class SearchPresenter: SearchPresenterProtocol {
     
     weak var view: SearchViewProtocol?
     
-//    init(view: SearchViewProtocol) {
-//        self.view = view
-//    }
-    
     init(view: SearchViewProtocol, model: [SaloonMockModel]) {
         self.view = view
         self.model = model
@@ -32,6 +28,8 @@ final class SearchPresenter: SearchPresenterProtocol {
 }
 
 extension SearchPresenter {
+    
+    // MARK: - SearchPresenter methods
     
     func getData() {
         if let model = model {

@@ -130,7 +130,7 @@ extension SearchView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(withType: SearchCell.self, for: indexPath) as! SearchCell
-        cell.textLabel?.text = filteredModel[indexPath.row].name
+        cell.configure(model: filteredModel[indexPath.row])
         return cell
     }
 }
@@ -166,6 +166,9 @@ extension SearchView: UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if searchBar.text == StringsAsset.where_wanna_go {
+            searchBar.text = nil
+        }
         changeSearchTextColor()
     }
 }
