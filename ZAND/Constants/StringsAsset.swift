@@ -68,7 +68,6 @@ enum StringsAsset {
     static let confirmationCode = "Код подтверждения"
     
     // MARK: - Filter options
-    static let byDefault = "По умолчанию"
     static let highGrade = "Высокий рейтинг"
     static let chip = "Недорогие"
     static let expensive = "Дорогие"
@@ -82,7 +81,4 @@ enum StringsAsset {
     static let main = "Главная"
     static let map = "Карта"
     static let profile = "Профиль"
-    
-    // MARK: - UserFirstLaunch
-    static let firstLaunch = "firstLaunch"
 }

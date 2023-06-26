@@ -33,7 +33,7 @@ final class BookingViewController: UIViewController {
     // MARK: - Instance method
     
     private func request() {
-        guard let url = URL(string: YClientsMockURL.url) else { return }
+        guard let url = URL(string: URLS.yClientsBase) else { return }
         let request = URLRequest(url: url)
         DispatchQueue.main.async { [weak self] in
             self?.webView.load(request)
