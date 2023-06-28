@@ -53,6 +53,9 @@
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
 		FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76E8D52A32244200DCF779 /* RatingView.swift */; };
+		FF7FA3A62A4B53F10075AAA7 /* GestureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */; };
+		FF7FA3A82A4B54290075AAA7 /* GesturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */; };
+		FF7FA3AA2A4B547A0075AAA7 /* GestureSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A92A4B547A0075AAA7 /* GestureSubscription.swift */; };
 		FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5529EE967D007D6A60 /* MainViewController.swift */; };
 		FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */; };
 		FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */; };
@@ -189,6 +192,9 @@
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
 		FF76E8D52A32244200DCF779 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureType.swift; sourceTree = "<group>"; };
+		FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturePublisher.swift; sourceTree = "<group>"; };
+		FF7FA3A92A4B547A0075AAA7 /* GestureSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureSubscription.swift; sourceTree = "<group>"; };
 		FF8AAF5529EE967D007D6A60 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -423,6 +429,7 @@
 		FF45A12B29E7EC1200587DAF /* ZAND */ = {
 			isa = PBXGroup;
 			children = (
+				FF7FA3A32A4B53CA0075AAA7 /* Library */,
 				FF8AAF5F29EEA176007D6A60 /* Project */,
 				FF99B8F129EEAB0500F4E4C3 /* Constants */,
 				FF45A15E29E7EF3A00587DAF /* Common */,
@@ -507,6 +514,24 @@
 				FFA3D45329F2CC320067CC6F /* BottomButton.swift */,
 			);
 			path = Button;
+			sourceTree = "<group>";
+		};
+		FF7FA3A32A4B53CA0075AAA7 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				FF7FA3A42A4B53D50075AAA7 /* Combine */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		FF7FA3A42A4B53D50075AAA7 /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */,
+				FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */,
+				FF7FA3A92A4B547A0075AAA7 /* GestureSubscription.swift */,
+			);
+			path = Combine;
 			sourceTree = "<group>";
 		};
 		FF8AAF5429EE9645007D6A60 /* Main */ = {
@@ -1012,6 +1037,7 @@
 				FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */,
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,
 				FF45A16A29E7F67600587DAF /* Extension + UIView.swift in Sources */,
+				FF7FA3A82A4B54290075AAA7 /* GesturePublisher.swift in Sources */,
 				FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */,
 				FF25633329F57A3000091374 /* ShowCaseItemCell.swift in Sources */,
 				FF25635229F69BE100091374 /* OptionModel.swift in Sources */,
@@ -1029,6 +1055,7 @@
 				FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */,
 				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
+				FF7FA3AA2A4B547A0075AAA7 /* GestureSubscription.swift in Sources */,
 				FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* StringsAsset.swift in Sources */,
 				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
@@ -1049,6 +1076,7 @@
 				FF8AAF6C29EEA392007D6A60 /* ProfileView.swift in Sources */,
 				FF8AAF6A29EEA389007D6A60 /* MainView.swift in Sources */,
 				FF27FC262A2E079F006DE1B9 /* HideNavigationBar.swift in Sources */,
+				FF7FA3A62A4B53F10075AAA7 /* GestureType.swift in Sources */,
 				FFDCE4BB2A1BB47000CEA0E1 /* ImageAsset.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,

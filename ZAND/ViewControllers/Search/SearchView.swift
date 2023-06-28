@@ -7,9 +7,11 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 protocol SearchViewDelegate: AnyObject {
     func dismiss(value: SaloonMockModel)
+    func dismiss()
 }
 
 final class SearchView: BaseUIView {
@@ -18,11 +20,9 @@ final class SearchView: BaseUIView {
     
     weak var delegate: SearchViewDelegate?
     
-    var model: [SaloonMockModel]? {
+    var model: [SaloonMockModel] = [] {
         didSet {
-            if let model = model {
-                filteredModel = model
-            }
+            filteredModel = model
         }
     }
     
@@ -33,8 +33,25 @@ final class SearchView: BaseUIView {
             }
         }
     }
+
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - UI
+
+    private let searchLabel: UILabel = {
+        let searchLabel = UILabel()
+        searchLabel.text = StringsAsset.search
+        searchLabel.font = .systemFont(ofSize: 22, weight: .regular)
+        return searchLabel
+    }()
+
+    private let cancelButton: UIButton = {
+        let cancelButton = UIButton()
+        cancelButton.setTitle(StringsAsset.cancel, for: .normal)
+        cancelButton.setTitleColor(.textGray, for: .normal)
+        cancelButton.titleLabel?.font = .systemFont(ofSize: 22)
+        return cancelButton
+    }()
     
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -63,18 +80,16 @@ final class SearchView: BaseUIView {
     
     override func setup() {
         super.setup()
-        setBackgroundColor()
         setViews()
         subscribeDelegates()
-        setGestureRecognizer()
+        setTargets()
     }
     
     // MARK: - Action
-    
+
     @objc
-    private func searchingIsOverAction() {
-        searchBar.text = StringsAsset.where_wanna_go
-        searchBar.resignFirstResponder()
+    private func cancelTapAction() {
+        delegate?.dismiss()
     }
 }
 
@@ -83,10 +98,22 @@ extension SearchView {
     // MARK: - Instance methods
     
     private func setViews() {
-        addSubviews([searchBar, tableView])
+        backgroundColor = .mainGray
+
+        addSubviews([searchLabel, cancelButton, searchBar, tableView])
+
+        searchLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.centerX.equalToSuperview()
+        }
+
+        cancelButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.centerY.equalTo(searchLabel)
+        }
         
         searchBar.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(20)
+            make.top.equalTo(searchLabel.snp.bottom).offset(20)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
             make.height.equalTo(48)
@@ -100,23 +127,25 @@ extension SearchView {
         }
     }
     
-    private func setBackgroundColor() {
-        backgroundColor = .mainGray
-    }
-    
     private func subscribeDelegates() {
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
     }
-    
-    private func setGestureRecognizer() {
-//        let recognizer = UITapGestureRecognizer(target: self, action: #selector(searchingIsOverAction))
-//        view.addGestureRecognizer(recognizer)
+
+    private func setSearchPlaceholderText() {
+        searchBar.text = StringsAsset.where_wanna_go
+        searchBar.searchTextField.textColor = .lightGray
     }
-    
-    private func changeSearchTextColor() {
-        searchBar.searchTextField.textColor = .black
+
+    private func setTargets() {
+        gesture(.tap())
+            .sink { [weak self] _ in
+                self?.endEditing(true)
+                self?.setSearchPlaceholderText()
+            }.store(in: &cancellables)
+
+        cancelButton.addTarget(self, action: #selector(cancelTapAction), for: .touchUpInside)
     }
 }
 
@@ -142,7 +171,7 @@ extension SearchView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let text = filteredModel[indexPath.row].name
         searchBar.text = text
-        changeSearchTextColor()
+        endEditing(true)
         delegate?.dismiss(value: filteredModel[indexPath.row])
     }
 }
@@ -154,11 +183,9 @@ extension SearchView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredModel = []
         if searchText.isEmpty {
-            if let model = model {
-                filteredModel = model
-            }
+            filteredModel = model
         }
-        model?.forEach {
+        model.forEach {
             if $0.name.uppercased().contains(searchText.uppercased()) {
                 filteredModel.append($0)
             }
@@ -169,6 +196,6 @@ extension SearchView: UISearchBarDelegate {
         if searchBar.text == StringsAsset.where_wanna_go {
             searchBar.text = nil
         }
-        changeSearchTextColor()
+        searchBar.searchTextField.textColor = .black
     }
 }

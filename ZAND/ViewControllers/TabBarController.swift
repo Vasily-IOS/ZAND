@@ -29,7 +29,6 @@ extension TabBarController {
                                          image: ImageAsset.main_icon,
                                          selectedImage: nil)
 
-        
         let mapVC = vcFactory.getViewController(for: .map)
         mapVC.tabBarItem = UITabBarItem(title: StringsAsset.map,
                                         image:  ImageAsset.map_icon,

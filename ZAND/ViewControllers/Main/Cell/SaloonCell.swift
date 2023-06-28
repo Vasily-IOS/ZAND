@@ -106,7 +106,6 @@ final class SaloonCell: BaseCollectionCell {
         if let indexPath = indexPath {
             favouritesHandler?(indexPath)
         }
-        runAnimation()
     }
 }
 
@@ -158,15 +157,5 @@ extension SaloonCell {
     private func setTarget() {
         viewOnMapButton.addTarget(self, action: #selector(viewOnMapAction), for: .touchUpInside)
         favouritesButton.addTarget(self, action: #selector(favouritesAction), for: .touchUpInside)
-    }
-    
-    private func runAnimation() {
-        addSubview(favouriteAnimation)
-        
-//        favouriteAnimation.snp.makeConstraints { make in
-//            make.edges.equalTo(favouritesButton)
-//        }
-        
-//        favouriteAnimation.play()
     }
 }
