@@ -9,4 +9,6 @@ import Foundation
 
 enum Config {
     static let firstLaunch = "firstLaunch"
+    static let header = "UICollectionElementKindSectionHeader"
+    static let footer = "UICollectionElementKindSectionFooter"
 }

@@ -90,5 +90,4 @@ final class RealmManager: DefaultRealmManager {
             return defaultRealm.object(ofType: type, forPrimaryKey: key)
             
         }
-    
 }

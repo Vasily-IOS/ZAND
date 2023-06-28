@@ -47,5 +47,4 @@ extension UIView {
     func gesture(_ type: GestureType) -> GesturePublisher {
         GesturePublisher(view: self, gestureType: type)
     }
-    
 }

@@ -19,5 +19,5 @@ enum VCType {
     case appointments
     case settings
     case booking
-    case selectableMap(String)
+    case selectableMap(CommonModel)
 }
