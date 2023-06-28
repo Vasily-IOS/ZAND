@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AppointmentsModel: CommonModel {
+struct AppointmentsModel: CommonModel, Hashable {
     let saloon_name: String
     let saloon_address: String
     let bookingDate: String

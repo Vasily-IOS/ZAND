@@ -12,13 +12,11 @@ final class SettingsView: BaseUIView {
     
     // MARK: - Properties
     
-    var layout: DefaultSettingsLayout
-    
-    private let model = SettingsMenuModel.model
-    
+    private let layout: DefaultSettingsLayout
+
     // MARK: - UI
     
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = createLayout()
         var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
@@ -34,6 +32,7 @@ final class SettingsView: BaseUIView {
     
     init(layout: DefaultSettingsLayout) {
         self.layout = layout
+
         super.init(frame: .zero)
     }
 
@@ -41,8 +40,8 @@ final class SettingsView: BaseUIView {
     
     override func setup() {
         super.setup()
+
         setViews()
-        subscribeDelegate()
     }
 }
 
@@ -54,7 +53,6 @@ extension SettingsView {
         backgroundColor = .mainGray
 
         addSubview(collectionView)
-        
         collectionView.snp.makeConstraints { make in
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
@@ -63,14 +61,9 @@ extension SettingsView {
         }
     }
     
-    private func subscribeDelegate() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-    }
-    
     private func createLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { section, _ -> NSCollectionLayoutSection? in
-            switch SettingsState.init(rawValue: section) {
+        let layout = UICollectionViewCompositionalLayout { section, _ in
+            switch SettingsSection.init(rawValue: section) {
             case .data:
                 return self.layout.createSection(type: .data)
             case .pushes:
@@ -80,64 +73,5 @@ extension SettingsView {
             }
         }
         return layout
-    }
-}
-
-extension SettingsView: UICollectionViewDataSource {
-    
-    // MARK: - UICollectionViewDataSource methods
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return SettingsState.allCases.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
-        switch SettingsState.init(rawValue: section) {
-        case .data:
-            return model.count
-        case .pushes:
-            return 1
-        default:
-            return 0
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch SettingsState.init(rawValue: indexPath.section) {
-        case .data:
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: DataCell.self)
-            cell.configure(model: model[indexPath.row])
-            return cell
-        case .pushes:
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: PushCell.self)
-            return cell
-        default:
-            return UICollectionViewCell()
-        }
-    }
-}
-
-extension SettingsView: UICollectionViewDelegate {
-    
-    // MARK: - UICollectionViewDelegate methods
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableView(for: indexPath,
-                                                            viewType: ReuseHeaderView.self,
-                                                            kind: .header)
-        switch SettingsState.init(rawValue: indexPath.section) {
-        case .data:
-            headerView.state = .data
-            return headerView
-        case .pushes:
-            headerView.state = .pushes
-            return headerView
-        default:
-            return UICollectionReusableView()
-        }
     }
 }

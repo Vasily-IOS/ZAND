@@ -25,6 +25,15 @@ final class SaloonCell: BaseCollectionCell {
         didSet {
             let image = isInFavourite ? ImageAsset.fillHeart_icon : ImageAsset.heart
             favouritesButton.setImage(image, for: .normal)
+
+            if isInFavourite {
+                animationView.isHidden = false
+                animationView.play()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.animationView.isHidden = true
+                }
+            }
         }
     }
     
@@ -67,6 +76,12 @@ final class SaloonCell: BaseCollectionCell {
         let ratingLabel = UILabel()
         ratingLabel.font = .systemFont(ofSize: 12)
         return ratingLabel
+    }()
+
+    private lazy var animationView: LottieAnimationView = {
+        var animationView = LottieAnimationView(name: "animation_fav")
+        animationView.isHidden = true
+        return animationView
     }()
 
     // MARK: - Instance methods
@@ -113,7 +128,7 @@ extension SaloonCell {
     
     private func setViews() {
         addSubviews([saloonImage, leftStackView, favouritesButton,
-                     viewOnMapButton, starImage, ratingLabel])
+                     viewOnMapButton, starImage, ratingLabel, animationView])
         
         saloonImage.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
@@ -126,7 +141,7 @@ extension SaloonCell {
         }
 
         favouritesButton.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(16)
+            make.top.equalTo(self).offset(24)
             make.right.equalTo(self).inset(16)
         }
         
@@ -144,6 +159,11 @@ extension SaloonCell {
         ratingLabel.snp.makeConstraints { make in
             make.right.equalTo(starImage.snp.right).inset(10)
             make.centerY.equalTo(starImage)
+        }
+
+        animationView.snp.makeConstraints { make in
+            make.bottom.equalTo(favouritesButton)
+            make.centerX.equalTo(favouritesButton)
         }
     }
     

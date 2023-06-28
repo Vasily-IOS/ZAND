@@ -31,8 +31,8 @@
 		FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25633E29F5A8C900091374 /* RegisterView.swift */; };
 		FF25634329F682C800091374 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634229F682C800091374 /* FilterViewController.swift */; };
 		FF25634529F682CF00091374 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634429F682CF00091374 /* FilterView.swift */; };
-		FF25634829F687A900091374 /* DefaultLayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634729F687A900091374 /* DefaultLayoutBuilder.swift */; };
-		FF25634A29F687B900091374 /* FilterLayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634929F687B900091374 /* FilterLayoutBuilder.swift */; };
+		FF25634829F687A900091374 /* DefaultFilterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634729F687A900091374 /* DefaultFilterLayout.swift */; };
+		FF25634A29F687B900091374 /* FilterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634929F687B900091374 /* FilterLayout.swift */; };
 		FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634C29F68CE800091374 /* FilterOptionCell.swift */; };
 		FF25635229F69BE100091374 /* OptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635129F69BE100091374 /* OptionModel.swift */; };
 		FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeaderView.swift */; };
@@ -87,7 +87,7 @@
 		FF99B90329EEB95400F4E4C3 /* VCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90229EEB95400F4E4C3 /* VCFactory.swift */; };
 		FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90529EEBA7800F4E4C3 /* SearchViewController.swift */; };
 		FF99B90829EEBA7F00F4E4C3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90729EEBA7F00F4E4C3 /* SearchView.swift */; };
-		FFA3D44E29F2A21D0067CC6F /* LayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D44D29F2A21D0067CC6F /* LayoutBuilder.swift */; };
+		FFA3D44E29F2A21D0067CC6F /* MainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D44D29F2A21D0067CC6F /* MainLayout.swift */; };
 		FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45029F2A6800067CC6F /* SaloonCell.swift */; };
 		FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45329F2CC320067CC6F /* BottomButton.swift */; };
 		FFA3D45629F2D0780067CC6F /* SalonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45529F2D0780067CC6F /* SalonDetailViewController.swift */; };
@@ -114,6 +114,9 @@
 		FFC01B5B2A03DD37005CE41B /* SettingsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5A2A03DD37005CE41B /* SettingsLayout.swift */; };
 		FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */; };
 		FFC01B602A03F147005CE41B /* BaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */; };
+		FFD0DA082A4C907D006752B7 /* DefautMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */; };
+		FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */; };
+		FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */; };
 		FFD3E1D72A054E7C00680ED5 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */; };
 		FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */; };
 		FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B42A1B8E9000CEA0E1 /* SelectableMapViewController.swift */; };
@@ -172,8 +175,8 @@
 		FF25633E29F5A8C900091374 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		FF25634229F682C800091374 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FF25634429F682CF00091374 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
-		FF25634729F687A900091374 /* DefaultLayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLayoutBuilder.swift; sourceTree = "<group>"; };
-		FF25634929F687B900091374 /* FilterLayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLayoutBuilder.swift; sourceTree = "<group>"; };
+		FF25634729F687A900091374 /* DefaultFilterLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFilterLayout.swift; sourceTree = "<group>"; };
+		FF25634929F687B900091374 /* FilterLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLayout.swift; sourceTree = "<group>"; };
 		FF25634C29F68CE800091374 /* FilterOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionCell.swift; sourceTree = "<group>"; };
 		FF25635129F69BE100091374 /* OptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionModel.swift; sourceTree = "<group>"; };
 		FF25635329F6B46800091374 /* ReuseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeaderView.swift; sourceTree = "<group>"; };
@@ -232,7 +235,7 @@
 		FF99B90229EEB95400F4E4C3 /* VCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCFactory.swift; sourceTree = "<group>"; };
 		FF99B90529EEBA7800F4E4C3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FF99B90729EEBA7F00F4E4C3 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		FFA3D44D29F2A21D0067CC6F /* LayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutBuilder.swift; sourceTree = "<group>"; };
+		FFA3D44D29F2A21D0067CC6F /* MainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLayout.swift; sourceTree = "<group>"; };
 		FFA3D45029F2A6800067CC6F /* SaloonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonCell.swift; sourceTree = "<group>"; };
 		FFA3D45329F2CC320067CC6F /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		FFA3D45529F2D0780067CC6F /* SalonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonDetailViewController.swift; sourceTree = "<group>"; };
@@ -256,6 +259,9 @@
 		FFC01B5A2A03DD37005CE41B /* SettingsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLayout.swift; sourceTree = "<group>"; };
 		FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsCell.swift; sourceTree = "<group>"; };
 		FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCell.swift; sourceTree = "<group>"; };
+		FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefautMainLayout.swift; sourceTree = "<group>"; };
+		FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
+		FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkView.swift; sourceTree = "<group>"; };
 		FFDCE4B42A1B8E9000CEA0E1 /* SelectableMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +392,7 @@
 			children = (
 				FF25634229F682C800091374 /* FilterViewController.swift */,
 				FF25634429F682CF00091374 /* FilterView.swift */,
+				FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */,
 				FF25635529F6C09100091374 /* Cell */,
 			);
 			path = Filter;
@@ -394,8 +401,8 @@
 		FF25634629F6879000091374 /* Layout + Filter */ = {
 			isa = PBXGroup;
 			children = (
-				FF25634729F687A900091374 /* DefaultLayoutBuilder.swift */,
-				FF25634929F687B900091374 /* FilterLayoutBuilder.swift */,
+				FF25634729F687A900091374 /* DefaultFilterLayout.swift */,
+				FF25634929F687B900091374 /* FilterLayout.swift */,
 			);
 			path = "Layout + Filter";
 			sourceTree = "<group>";
@@ -598,6 +605,7 @@
 			children = (
 				FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */,
 				FF8AAF6B29EEA392007D6A60 /* ProfileView.swift */,
+				FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */,
 				FFE6F49229FACE7400FDB519 /* Components */,
 			);
 			path = Profile;
@@ -720,7 +728,8 @@
 		FFA3D44C29F2A2020067CC6F /* Layout + Main */ = {
 			isa = PBXGroup;
 			children = (
-				FFA3D44D29F2A21D0067CC6F /* LayoutBuilder.swift */,
+				FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */,
+				FFA3D44D29F2A21D0067CC6F /* MainLayout.swift */,
 			);
 			path = "Layout + Main";
 			sourceTree = "<group>";
@@ -792,8 +801,8 @@
 			children = (
 				FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */,
 				FFC01B482A03C80A005CE41B /* AppointmentsView.swift */,
-				FF5FB4962A04153500A06981 /* AppointmentsModel.swift */,
 				FF1961AF2A4C51BC00434AC7 /* AppointmentsPresenter.swift */,
+				FF5FB4962A04153500A06981 /* AppointmentsModel.swift */,
 				FFC01B5C2A03F0E6005CE41B /* Cell */,
 			);
 			path = Appointments;
@@ -1076,7 +1085,7 @@
 				FFC01B4E2A03CA83005CE41B /* SettingsView.swift in Sources */,
 				FFDCE4BD2A1BB7E300CEA0E1 /* URL.swift in Sources */,
 				FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */,
-				FF25634829F687A900091374 /* DefaultLayoutBuilder.swift in Sources */,
+				FF25634829F687A900091374 /* DefaultFilterLayout.swift in Sources */,
 				FFC01B5B2A03DD37005CE41B /* SettingsLayout.swift in Sources */,
 				FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */,
 				FFB9856E2A30D40400ABEFBB /* RegisterPresenter.swift in Sources */,
@@ -1094,6 +1103,7 @@
 				FFDCE4BB2A1BB47000CEA0E1 /* ImageAsset.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
+				FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */,
 				FF1961BA2A4C78E700434AC7 /* SettingsPresenter.swift in Sources */,
 				FF1961B82A4C78B900434AC7 /* SettingsMenuModel.swift in Sources */,
 				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,
@@ -1108,6 +1118,7 @@
 				FFC01B4C2A03CA78005CE41B /* SettingsViewController.swift in Sources */,
 				FFB9856A2A30B5D500ABEFBB /* OnboardManager.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
+				FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */,
 				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
 				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
 				FFB9855F2A2F52CC00ABEFBB /* SearchCell.swift in Sources */,
@@ -1117,7 +1128,7 @@
 				FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */,
 				FF27FC282A2E07A9006DE1B9 /* ShowNavigationBar.swift in Sources */,
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
-				FF25634A29F687B900091374 /* FilterLayoutBuilder.swift in Sources */,
+				FF25634A29F687B900091374 /* FilterLayout.swift in Sources */,
 				FF1961BC2A4C79B000434AC7 /* FilterModel.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
 				FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */,
@@ -1126,7 +1137,7 @@
 				FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */,
 				FFC01B532A03D673005CE41B /* PushCell.swift in Sources */,
 				FF25632829F561FD00091374 /* AddressView.swift in Sources */,
-				FFA3D44E29F2A21D0067CC6F /* LayoutBuilder.swift in Sources */,
+				FFA3D44E29F2A21D0067CC6F /* MainLayout.swift in Sources */,
 				FF25632F29F571D200091374 /* MARKS.swift in Sources */,
 				FF1961BE2A4C7A2B00434AC7 /* MapModel.swift in Sources */,
 				FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */,
@@ -1134,6 +1145,7 @@
 				FFB985682A30AFD100ABEFBB /* VibrationManager.swift in Sources */,
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,
 				FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */,
+				FFD0DA082A4C907D006752B7 /* DefautMainLayout.swift in Sources */,
 				FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */,
 				FF25633829F5888800091374 /* SignInView.swift in Sources */,
 				FFA3D45629F2D0780067CC6F /* SalonDetailViewController.swift in Sources */,

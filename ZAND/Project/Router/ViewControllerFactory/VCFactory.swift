@@ -20,7 +20,7 @@ final class VCFactory: DefaultVCFactory {
             vc.presenter = presenter
             return vc
         case .main:
-            let layotBuilder: LayoutBuilderProtocol = LayoutBuilder()
+            let layotBuilder: DefaultMainLayout = MainLayout()
             let view = MainView(layoutBuilder: layotBuilder)
             let vc = MainViewController(contentView: view)
             let presenter = MainPresenter(view: vc)
@@ -40,32 +40,36 @@ final class VCFactory: DefaultVCFactory {
             let vc = RegisterViewController(contentView: view)
             return vc
         case .filter:
-            let layoutBuilder: DefaultLayoutBuilder = FilterLayoutBuilder()
+            let layoutBuilder: DefaultFilterLayout = FilterLayout()
             let view = FilterView(layout: layoutBuilder)
             let vc = FilterViewController(contentView: view)
             return vc
         case .profile:
-            let layout: DefaultProfileLayoutProtocol = ProfileLayoutBuilder()
+            let layout: DefaultProfileLayout = ProfileLayoutBuilder()
             let view = ProfileView(layout: layout)
             let vc = ProfileViewController(contentView: view)
             return vc
         case .appointments:
-            let model = AppointmentsModel.model
-            let view = AppointemtsView(model: model)
+            let view = AppointemtsView()
             let vc = AppointmentsViewController(contentView: view)
+            let presenter = AppointmentsPresenterImpl(view: vc)
+            vc.presenter = presenter
             return vc
+
         case .settings:
             let layout: DefaultSettingsLayout = SettingsLayout()
             let view = SettingsView(layout: layout)
             let vc = SettingsViewController(contentView: view)
+            let presenter = SettingsPresenterImpl(view: vc)
+            vc.presenter = presenter
             return vc
         case .booking:
             return BookingViewController()
         case .selectableMap(let model):
-            let view = SelectableMapView(model: model)
+            let view = SelectableMapView()
             let vc = SelectableViewController(contentView: view)
-            let presenter = SelectableMapPresenter(view: view)
-            view.presenter = presenter
+            let presenter = SelectableMapPresenter(view: vc, model: model)
+            vc.presenter = presenter
             return vc
         }
     }

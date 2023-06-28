@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum ProfileSection: Int, CaseIterable {
-    case profileFields
-    case favourites
-}
-
-protocol DefaultProfileLayoutProtocol {
+protocol DefaultProfileLayout {
     func createSection(type: ProfileSection) -> NSCollectionLayoutSection?
 }

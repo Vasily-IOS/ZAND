@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol DefaultLayoutBuilder: AnyObject {
+protocol DefaultFilterLayout: AnyObject {
     func createSection(type: FilterSection) -> NSCollectionLayoutSection
 }

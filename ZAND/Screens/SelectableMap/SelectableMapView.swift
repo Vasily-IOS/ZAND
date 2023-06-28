@@ -12,19 +12,8 @@ import SnapKit
 final class SelectableMapView: BaseUIView {
     
     // MARK: - Properties
-    
-    var presenter: SelectablePresenterProtocol?
-    
-    // MARK: - Map
-    
+
     private let mapView = MKMapView()
-    
-    // MARK: - Initializers
-    
-    init(model: CommonModel) {
-        super.init(frame: .zero)
-        addPinsOnMap(model: model)
-    }
 
     // MARK: - Instance methods
 
@@ -36,8 +25,8 @@ final class SelectableMapView: BaseUIView {
     
     // MARK: - Map
     
-    private func addPinsOnMap(model: CommonModel) {
-        let bothCoordinates = model.coordinates.components(separatedBy: ",")
+    func addPinsOnMap(model: CommonModel) {
+        let bothCoordinates = model.coordinates.components(separatedBy: Config.separatedBy)
         let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
                                                  longitude: Double(bothCoordinates[1] ) ?? 0)
         let annotation = SaloonAnnotation(coordinate: coordinates, model: model)
@@ -71,9 +60,9 @@ extension SelectableMapView: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is SaloonAnnotation {
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: Config.customAnnotation)
             if annotationView == nil {
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Config.customAnnotation)
             } else {
                 annotationView?.annotation = annotation
             }
@@ -84,5 +73,3 @@ extension SelectableMapView: MKMapViewDelegate {
         return nil
     }
 }
-
-extension SelectableMapView: SelectableViewProtocol {}

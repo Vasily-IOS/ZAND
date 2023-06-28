@@ -7,15 +7,34 @@
 
 import Foundation
 
-protocol SelectableViewProtocol: AnyObject {}
+// input - делает что-то с UI
+protocol SelectablePresenter: AnyObject {
+    func updateUI(model: CommonModel)
+}
 
-protocol SelectablePresenterProtocol: AnyObject {}
+// output - presenter сделай что-то
+protocol SelectablePresenterImpl: AnyObject {
+    func getModel()
+}
 
-final class SelectableMapPresenter: SelectablePresenterProtocol {
-    
-    weak var view: SelectableViewProtocol?
-    
-    init(view: SelectableViewProtocol) {
+final class SelectableMapPresenter: SelectablePresenterImpl {
+
+    // MARK: - Properties
+
+    weak var view: SelectablePresenter?
+
+    var model: CommonModel
+
+    // MARK: - Initializers
+
+    init(view: SelectablePresenter, model: CommonModel) {
         self.view = view
+        self.model = model
+    }
+
+    // MARK: - Instance methods
+
+    func getModel() {
+        view?.updateUI(model: model)
     }
 }

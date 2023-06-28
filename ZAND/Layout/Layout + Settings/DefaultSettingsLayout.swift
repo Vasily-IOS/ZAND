@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum SettingsState: Int, CaseIterable {
-    case data
-    case pushes
-}
-
 protocol DefaultSettingsLayout {
-    func createSection(type: SettingsState) -> NSCollectionLayoutSection
+    func createSection(type: SettingsSection) -> NSCollectionLayoutSection
 }

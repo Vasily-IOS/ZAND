@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SettingsMenuModel {
+struct SettingsMenuModel: Hashable {
     let description: String
 
     static let model: [Self] = [

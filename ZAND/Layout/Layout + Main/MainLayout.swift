@@ -12,11 +12,7 @@ enum MainSection: Int, CaseIterable {
     case beautySaloon
 }
 
-protocol LayoutBuilderProtocol: AnyObject {
-    func createSection(type: MainSection) -> NSCollectionLayoutSection
-}
-
-final class LayoutBuilder: LayoutBuilderProtocol {
+final class MainLayout: DefaultMainLayout {
     func createSection(type: MainSection) -> NSCollectionLayoutSection {
         switch type {
         case .option:

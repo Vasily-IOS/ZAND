@@ -12,7 +12,7 @@ final class FilterView: BaseUIView {
     
     // MARK: - Properties
     
-    private let layoutBulder: DefaultLayoutBuilder
+    private let layoutBulder: DefaultFilterLayout
    
     // MARK: - Model
     
@@ -66,7 +66,7 @@ final class FilterView: BaseUIView {
 
     // MARK: - Initializers
     
-    init(layout: DefaultLayoutBuilder) {
+    init(layout: DefaultFilterLayout) {
         self.layoutBulder = layout
         super.init(frame: .zero)
     }

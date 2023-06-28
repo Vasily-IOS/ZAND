@@ -12,7 +12,7 @@ enum FilterSection: Int, CaseIterable {
     case services
 }
 
-final class FilterLayoutBuilder: DefaultLayoutBuilder {
+final class FilterLayout: DefaultFilterLayout {
     
     func createSection(type: FilterSection) -> NSCollectionLayoutSection {
         switch type {

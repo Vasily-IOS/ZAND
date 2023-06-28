@@ -22,7 +22,7 @@ final class ProfileView: BaseUIView {
     
     // MARK: - Properties
     
-    private let layout: DefaultProfileLayoutProtocol
+    private let layout: DefaultProfileLayout
 
 
     private let profileMenuModel = ProfileMenuModel.model
@@ -48,7 +48,7 @@ final class ProfileView: BaseUIView {
     
     // MARK: - Initializers
     
-    init(layout: DefaultProfileLayoutProtocol) {
+    init(layout: DefaultProfileLayout) {
         self.layout = layout
         super.init(frame: .zero)
     }

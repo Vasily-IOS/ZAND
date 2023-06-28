@@ -8,45 +8,19 @@
 import UIKit
 import SnapKit
 
-final class AppointemtsView: BaseUIView {
-    
-    // MARK: - Closure
-    
-    private let viewOnMapClosure = { model in
-        AppRouter.shared.push(.selectableMap(model))
-    }
-    
-    // MARK: - Models
-    
-    private var serviceDeliveredModel: [AppointmentsModel] = []
-    private var serviceIsNotDeliveredModel: [AppointmentsModel] = []
+protocol AppointmentsDelegate: AnyObject {
+    func changeModel(by type: AppointmentType)
+}
 
-    private var rootModel: [AppointmentsModel] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+final class AppointemtsView: BaseUIView {
+
+    // MARK: - Properties
+
+    weak var delegate: AppointmentsDelegate?
     
     // MARK: - UI
     
-    private lazy var segmentControl: UISegmentedControl = {
-        let items = [StringsAsset.feature, StringsAsset.was]
-        let segmentControl = UISegmentedControl(items: items)
-        segmentControl.selectedSegmentIndex = 0
-        segmentControl.selectedSegmentTintColor = .mainGreen
-        segmentControl.layer.borderWidth = 2
-        segmentControl.layer.borderColor = UIColor.mainGreen.cgColor
-        segmentControl.backgroundColor = .mainGray
-        
-        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        segmentControl.setTitleTextAttributes(titleTextAttributes, for: .selected)
-        
-        return segmentControl
-    }()
-    
-    private lazy var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.registerCell(type: AppoitmentsCell.self)
         tableView.showsVerticalScrollIndicator = false
@@ -55,38 +29,39 @@ final class AppointemtsView: BaseUIView {
         return tableView
     }()
 
-    // MARK: - Initializers
-    
-     init(model: [AppointmentsModel]) {
-        super.init(frame: .zero)
-        sortModels(baseModel: model)
-    }
+    private lazy var segmentControl: UISegmentedControl = {
+        let items = [StringsAsset.feature, StringsAsset.was]
+        let segmentControl = UISegmentedControl(items: items)
+        segmentControl.selectedSegmentIndex = 0
+        segmentControl.selectedSegmentTintColor = .mainGreen
+        segmentControl.layer.borderWidth = 2
+        segmentControl.layer.borderColor = UIColor.mainGreen.cgColor
+        segmentControl.tintColor = .mainGray
+
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let unSelected = [NSAttributedString.Key.foregroundColor: UIColor.mainGreen]
+        segmentControl.setTitleTextAttributes(titleTextAttributes, for: .selected)
+        segmentControl.setTitleTextAttributes(unSelected, for: .normal)
+        return segmentControl
+    }()
 
     // MARK: - Instance methods
     
     override func setup() {
         super.setup()
         setViews()
-        setBackgroundColor()
-        subscribeDelegate()
         addTarget()
     }
-    
-    private func sortModels(baseModel: [AppointmentsModel]) {
-        serviceIsNotDeliveredModel = baseModel.filter({ $0.isServiceIsDelivered == false })
-        serviceDeliveredModel = baseModel.filter({ $0.isServiceIsDelivered == true })
-        rootModel = serviceIsNotDeliveredModel
-    }
-    
+
     // MARK: - Action
     
     @objc
     private func changeModel(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            rootModel = serviceIsNotDeliveredModel
+            delegate?.changeModel(by: .upcoming)
         case 1:
-            rootModel = serviceDeliveredModel
+            delegate?.changeModel(by: .past)
         default:
             break
         }
@@ -98,8 +73,10 @@ extension AppointemtsView {
     // MARK: - Instance methods
     
     private func setViews() {
+        backgroundColor = .mainGray
+
         addSubviews([segmentControl, tableView])
-        
+
         segmentControl.snp.makeConstraints { make in
             make.top.equalTo(self).offset(130)
             make.left.equalTo(self).offset(16)
@@ -114,50 +91,10 @@ extension AppointemtsView {
             make.bottom.equalTo(self)
         }
     }
-    
-    private func setBackgroundColor() {
-        backgroundColor = .mainGray
-    }
-    
-    private func subscribeDelegate() {
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
+
     private func addTarget() {
-        segmentControl.addTarget(self, action: #selector(changeModel(_:)), for: .valueChanged)
-    }
-}
-
-extension AppointemtsView: UITableViewDataSource {
-    
-    // MARK: - UITableViewDataSource methods
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return rootModel.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueCell(withType: AppoitmentsCell.self, for: indexPath) as! AppoitmentsCell
-        cell.configure(model: rootModel[indexPath.section])
-        cell.viewOnMapHandler = viewOnMapClosure
-        return cell
-    }
-}
-
-extension AppointemtsView: UITableViewDelegate {
-    
-    // MARK: - UITableViewDelegate methods
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 20
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView.init(frame: .zero)
+        segmentControl.addTarget(self,
+                                 action: #selector(changeModel(_:)),
+                                 for: .valueChanged)
     }
 }

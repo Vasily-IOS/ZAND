@@ -7,8 +7,13 @@
 
 import UIKit
 
+enum SettingsSection: Int, CaseIterable {
+    case data
+    case pushes
+}
+
 final class SettingsLayout: DefaultSettingsLayout {
-    func createSection(type: SettingsState) -> NSCollectionLayoutSection {
+    func createSection(type: SettingsSection) -> NSCollectionLayoutSection {
         switch type {
         case .data:
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))

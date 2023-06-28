@@ -40,7 +40,7 @@ final class MainView: BaseUIView {
     
     weak var delegate: MainViewDelegate?
 
-    private let layoutBuilder: LayoutBuilderProtocol
+    private let layoutBuilder: DefaultMainLayout
     
     // MARK: - Test Model
     
@@ -63,7 +63,7 @@ final class MainView: BaseUIView {
     
     // MARK: - Initializers
     
-    init(layoutBuilder: LayoutBuilderProtocol) {
+    init(layoutBuilder: DefaultMainLayout) {
         self.layoutBuilder = layoutBuilder
         super.init(frame: .zero)
     }
