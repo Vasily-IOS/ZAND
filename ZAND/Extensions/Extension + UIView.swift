@@ -43,4 +43,9 @@ extension UIView {
         let value: Double = isRotate ? Double.pi * -0.999 : 0
         self.transform = CGAffineTransform(rotationAngle: CGFloat(value))
     }
+    
+    func gesture(_ type: GestureType) -> GesturePublisher {
+        GesturePublisher(view: self, gestureType: type)
+    }
+    
 }

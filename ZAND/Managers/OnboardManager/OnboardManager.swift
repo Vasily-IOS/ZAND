@@ -14,11 +14,11 @@ final class OnboardManager {
     private init() {}
     
     func isUserFirstLaunch() -> Bool {
-        let isFirst = UserDefaults.standard.bool(forKey: StringsAsset.firstLaunch)
+        let isFirst = UserDefaults.standard.bool(forKey: Config.firstLaunch)
         return !isFirst
     }
     
     func setIsNotNewUser() {
-        UserDefaults.standard.set(true, forKey: StringsAsset.firstLaunch)
+        UserDefaults.standard.set(true, forKey: Config.firstLaunch)
     }
 }

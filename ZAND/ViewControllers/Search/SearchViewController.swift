@@ -64,6 +64,10 @@ extension SearchViewController: SearchViewDelegate {
         completionHandler?(value)
         AppRouter.shared.dismiss()
     }
+
+    func dismiss() {
+        AppRouter.shared.dismiss()
+    }
 }
 
 extension SearchViewController: HideNavigationBar {}

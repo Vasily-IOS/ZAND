@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Lottie
 
 final class SaloonCell: BaseCollectionCell {
     
@@ -67,6 +68,8 @@ final class SaloonCell: BaseCollectionCell {
         ratingLabel.font = .systemFont(ofSize: 12)
         return ratingLabel
     }()
+    
+    private let favouriteAnimation = LottieAnimationView(name: "fav_animation")
     
     // MARK: - Instance methods
     

@@ -30,7 +30,7 @@ enum StringsAsset {
     static let confirmEmail = "Подтвердите Email"
     static let showFirst = "Показать сначала"
     static let services = "Услуги"
-    static let cancel = "Сбросить"
+    static let reset = "Сбросить"
     static let userName = "#username"
     static let favourites = "Избранное"
     static let phoneNumber = "Номер телефона"
@@ -46,6 +46,8 @@ enum StringsAsset {
     static let rub = "руб."
     static let skip = "Пропустить"
     static let notifyTabBar = "notifyTabBar"
+    static let search = "Поиск"
+    static let cancel = "Отмена"
     
     // MARK: - Bottom button values
     static let apply = "Применить"
@@ -68,7 +70,6 @@ enum StringsAsset {
     static let confirmationCode = "Код подтверждения"
     
     // MARK: - Filter options
-    static let byDefault = "По умолчанию"
     static let highGrade = "Высокий рейтинг"
     static let chip = "Недорогие"
     static let expensive = "Дорогие"
@@ -82,7 +83,4 @@ enum StringsAsset {
     static let main = "Главная"
     static let map = "Карта"
     static let profile = "Профиль"
-    
-    // MARK: - UserFirstLaunch
-    static let firstLaunch = "firstLaunch"
 }

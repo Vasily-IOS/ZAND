@@ -31,7 +31,7 @@ final class FilterView: BaseUIView {
         cancelButton.layer.borderColor = UIColor.lightGreen.cgColor
         cancelButton.layer.borderWidth = 1
         cancelButton.backgroundColor = .mainGray
-        cancelButton.setTitle(StringsAsset.cancel, for: .normal)
+        cancelButton.setTitle(StringsAsset.reset, for: .normal)
         cancelButton.setTitleColor(.mainGreen, for: .normal)
         cancelButton.layer.cornerRadius = 15
         cancelButton.isHidden = true

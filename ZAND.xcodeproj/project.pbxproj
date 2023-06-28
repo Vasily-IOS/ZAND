@@ -31,6 +31,9 @@
 		FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27FC232A2E0494006DE1B9 /* HideBackButtonTitle.swift */; };
 		FF27FC262A2E079F006DE1B9 /* HideNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27FC252A2E079F006DE1B9 /* HideNavigationBar.swift */; };
 		FF27FC282A2E07A9006DE1B9 /* ShowNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27FC272A2E07A9006DE1B9 /* ShowNavigationBar.swift */; };
+		FF30A1BD2A4A138800DD6E29 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BC2A4A138800DD6E29 /* Config.swift */; };
+		FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */; };
+		FF30A1C12A4A156D00DD6E29 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1C02A4A156D00DD6E29 /* Reusable.swift */; };
 		FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
@@ -49,6 +52,10 @@
 		FF5DFDB42A0D2A2700495E63 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB32A0D2A2700495E63 /* MapModel.swift */; };
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
+		FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76E8D52A32244200DCF779 /* RatingView.swift */; };
+		FF7FA3A62A4B53F10075AAA7 /* GestureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */; };
+		FF7FA3A82A4B54290075AAA7 /* GesturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */; };
+		FF7FA3AA2A4B547A0075AAA7 /* GestureSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A92A4B547A0075AAA7 /* GestureSubscription.swift */; };
 		FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5529EE967D007D6A60 /* MainViewController.swift */; };
 		FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */; };
 		FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */; };
@@ -77,6 +84,7 @@
 		FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45329F2CC320067CC6F /* BottomButton.swift */; };
 		FFA3D45629F2D0780067CC6F /* SalonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45529F2D0780067CC6F /* SalonDetailViewController.swift */; };
 		FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45729F2D0A60067CC6F /* SaloonDetailView.swift */; };
+		FFB4A3082A3C61B60085727D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FFB4A3072A3C61B60085727D /* Lottie */; };
 		FFB9855F2A2F52CC00ABEFBB /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB9855E2A2F52CC00ABEFBB /* SearchCell.swift */; };
 		FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985602A2F551600ABEFBB /* SearchPresenter.swift */; };
 		FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985642A308E1F00ABEFBB /* MainPresenter.swift */; };
@@ -105,7 +113,7 @@
 		FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B62A1B8E9900CEA0E1 /* SelectableMapView.swift */; };
 		FFDCE4B92A1B8EA500CEA0E1 /* SelectableMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */; };
 		FFDCE4BB2A1BB47000CEA0E1 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4BA2A1BB47000CEA0E1 /* ImageAsset.swift */; };
-		FFDCE4BD2A1BB7E300CEA0E1 /* YClientsMockURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4BC2A1BB7E300CEA0E1 /* YClientsMockURL.swift */; };
+		FFDCE4BD2A1BB7E300CEA0E1 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4BC2A1BB7E300CEA0E1 /* URL.swift */; };
 		FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49329FACE9700FDB519 /* UserNameView.swift */; };
 		FFE6F49729FAD45700FDB519 /* ProfileMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */; };
 		FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */; };
@@ -158,6 +166,9 @@
 		FF27FC232A2E0494006DE1B9 /* HideBackButtonTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideBackButtonTitle.swift; sourceTree = "<group>"; };
 		FF27FC252A2E079F006DE1B9 /* HideNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideNavigationBar.swift; sourceTree = "<group>"; };
 		FF27FC272A2E07A9006DE1B9 /* ShowNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNavigationBar.swift; sourceTree = "<group>"; };
+		FF30A1BC2A4A138800DD6E29 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UICollectionView.swift"; sourceTree = "<group>"; };
+		FF30A1C02A4A156D00DD6E29 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVideoScreenViewController.swift; sourceTree = "<group>"; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +191,10 @@
 		FF5DFDB32A0D2A2700495E63 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
+		FF76E8D52A32244200DCF779 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureType.swift; sourceTree = "<group>"; };
+		FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturePublisher.swift; sourceTree = "<group>"; };
+		FF7FA3A92A4B547A0075AAA7 /* GestureSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureSubscription.swift; sourceTree = "<group>"; };
 		FF8AAF5529EE967D007D6A60 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -234,7 +249,7 @@
 		FFDCE4B62A1B8E9900CEA0E1 /* SelectableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapView.swift; sourceTree = "<group>"; };
 		FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapPresenter.swift; sourceTree = "<group>"; };
 		FFDCE4BA2A1BB47000CEA0E1 /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
-		FFDCE4BC2A1BB7E300CEA0E1 /* YClientsMockURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YClientsMockURL.swift; sourceTree = "<group>"; };
+		FFDCE4BC2A1BB7E300CEA0E1 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		FFE6F49629FAD45700FDB519 /* ProfileMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuModel.swift; sourceTree = "<group>"; };
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
@@ -252,6 +267,7 @@
 				FFB985772A30E84600ABEFBB /* RealmSwift in Frameworks */,
 				FFB985752A30E84600ABEFBB /* Realm in Frameworks */,
 				FFFC47802A14DA5B000085E7 /* SnapKit in Frameworks */,
+				FFB4A3082A3C61B60085727D /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +429,7 @@
 		FF45A12B29E7EC1200587DAF /* ZAND */ = {
 			isa = PBXGroup;
 			children = (
+				FF7FA3A32A4B53CA0075AAA7 /* Library */,
 				FF8AAF5F29EEA176007D6A60 /* Project */,
 				FF99B8F129EEAB0500F4E4C3 /* Constants */,
 				FF45A15E29E7EF3A00587DAF /* Common */,
@@ -473,6 +490,8 @@
 				FF45A16B29E7F70D00587DAF /* Extension + UserDefaults.swift */,
 				FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */,
 				FFB9856F2A30E1C000ABEFBB /* Extension + NotificationName.swift */,
+				FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */,
+				FF30A1C02A4A156D00DD6E29 /* Reusable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -495,6 +514,24 @@
 				FFA3D45329F2CC320067CC6F /* BottomButton.swift */,
 			);
 			path = Button;
+			sourceTree = "<group>";
+		};
+		FF7FA3A32A4B53CA0075AAA7 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				FF7FA3A42A4B53D50075AAA7 /* Combine */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		FF7FA3A42A4B53D50075AAA7 /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */,
+				FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */,
+				FF7FA3A92A4B547A0075AAA7 /* GestureSubscription.swift */,
+			);
+			path = Combine;
 			sourceTree = "<group>";
 		};
 		FF8AAF5429EE9645007D6A60 /* Main */ = {
@@ -589,6 +626,7 @@
 				FF25635329F6B46800091374 /* ReuseHeaderView.swift */,
 				FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */,
 				FF27FC202A2DE4C3006DE1B9 /* BackView.swift */,
+				FF76E8D52A32244200DCF779 /* RatingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -598,7 +636,8 @@
 			children = (
 				FF99B8F229EEAB1500F4E4C3 /* StringsAsset.swift */,
 				FFDCE4BA2A1BB47000CEA0E1 /* ImageAsset.swift */,
-				FFDCE4BC2A1BB7E300CEA0E1 /* YClientsMockURL.swift */,
+				FFDCE4BC2A1BB7E300CEA0E1 /* URL.swift */,
+				FF30A1BC2A4A138800DD6E29 /* Config.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -870,6 +909,7 @@
 				FFFC477F2A14DA5B000085E7 /* SnapKit */,
 				FFB985742A30E84600ABEFBB /* Realm */,
 				FFB985762A30E84600ABEFBB /* RealmSwift */,
+				FFB4A3072A3C61B60085727D /* Lottie */,
 			);
 			productName = ZAND;
 			productReference = FF45A12929E7EC1200587DAF /* ZAND.app */;
@@ -946,6 +986,7 @@
 			packageReferences = (
 				FFFC477E2A14DA5B000085E7 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				FFB985732A30E84600ABEFBB /* XCRemoteSwiftPackageReference "realm-swift" */,
+				FFB4A3062A3C61B60085727D /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = FF45A12A29E7EC1200587DAF /* Products */;
 			projectDirPath = "";
@@ -990,11 +1031,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF30A1C12A4A156D00DD6E29 /* Reusable.swift in Sources */,
 				FF8E7BE829EF2BD200644208 /* MainModel.swift in Sources */,
 				FF99B90129EEB90100F4E4C3 /* DefaultVCFactory.swift in Sources */,
 				FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */,
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,
 				FF45A16A29E7F67600587DAF /* Extension + UIView.swift in Sources */,
+				FF7FA3A82A4B54290075AAA7 /* GesturePublisher.swift in Sources */,
 				FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */,
 				FF25633329F57A3000091374 /* ShowCaseItemCell.swift in Sources */,
 				FF25635229F69BE100091374 /* OptionModel.swift in Sources */,
@@ -1012,11 +1055,12 @@
 				FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */,
 				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
+				FF7FA3AA2A4B547A0075AAA7 /* GestureSubscription.swift in Sources */,
 				FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* StringsAsset.swift in Sources */,
 				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
 				FFC01B4E2A03CA83005CE41B /* SettingsView.swift in Sources */,
-				FFDCE4BD2A1BB7E300CEA0E1 /* YClientsMockURL.swift in Sources */,
+				FFDCE4BD2A1BB7E300CEA0E1 /* URL.swift in Sources */,
 				FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */,
 				FF25634829F687A900091374 /* DefaultLayoutBuilder.swift in Sources */,
 				FFC01B5B2A03DD37005CE41B /* SettingsLayout.swift in Sources */,
@@ -1027,10 +1071,12 @@
 				FFB985702A30E1C000ABEFBB /* Extension + NotificationName.swift in Sources */,
 				FFE6F49729FAD45700FDB519 /* ProfileMenuModel.swift in Sources */,
 				FF8AAF6829EEA37F007D6A60 /* MapView.swift in Sources */,
+				FF30A1BD2A4A138800DD6E29 /* Config.swift in Sources */,
 				FF45A16629E7F5ED00587DAF /* Extension + UITableViewCell.swift in Sources */,
 				FF8AAF6C29EEA392007D6A60 /* ProfileView.swift in Sources */,
 				FF8AAF6A29EEA389007D6A60 /* MainView.swift in Sources */,
 				FF27FC262A2E079F006DE1B9 /* HideNavigationBar.swift in Sources */,
+				FF7FA3A62A4B53F10075AAA7 /* GestureType.swift in Sources */,
 				FFDCE4BB2A1BB47000CEA0E1 /* ImageAsset.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
@@ -1038,6 +1084,7 @@
 				FF45A16029E7F4BC00587DAF /* Extension + UIStackView.swift in Sources */,
 				FF8AAF6629EEA256007D6A60 /* BaseUIView.swift in Sources */,
 				FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */,
+				FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */,
 				FF25633629F5886700091374 /* SignInViewController.swift in Sources */,
 				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
 				FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */,
@@ -1056,6 +1103,7 @@
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
 				FF25634A29F687B900091374 /* FilterLayoutBuilder.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
+				FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */,
 				FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */,
 				FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */,
 				FF5DFDB42A0D2A2700495E63 /* MapModel.swift in Sources */,
@@ -1287,7 +1335,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2A23R4N5M7;
+				DEVELOPMENT_TEAM = UK58QJPNA5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1425,6 +1473,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FFB4A3062A3C61B60085727D /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		FFB985732A30E84600ABEFBB /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -1444,6 +1500,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FFB4A3072A3C61B60085727D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFB4A3062A3C61B60085727D /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		FFB985742A30E84600ABEFBB /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FFB985732A30E84600ABEFBB /* XCRemoteSwiftPackageReference "realm-swift" */;

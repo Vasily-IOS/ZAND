@@ -11,7 +11,6 @@ struct FilterModel {
     let filterDescription: String
     
     static let filterModel: [Self] = [
-        .init(filterDescription: StringsAsset.byDefault),
         .init(filterDescription: StringsAsset.highGrade),
         .init(filterDescription: StringsAsset.chip),
         .init(filterDescription: StringsAsset.expensive),

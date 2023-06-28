@@ -34,10 +34,8 @@ final class ProfileView: BaseUIView {
     private lazy var collectionView: UICollectionView = {
         var layout = createLayout()
         var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(ProfileCell.self,
-                                forCellWithReuseIdentifier: String(describing: ProfileCell.self))
-        collectionView.register(FavouritesCell.self,
-                                forCellWithReuseIdentifier: String(describing: FavouritesCell.self))
+        collectionView.register(cellType: ProfileCell.self)
+        collectionView.register(cellType: FavouritesCell.self)
         collectionView.register(ReuseHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: String(describing: ReuseHeaderView.self))
         collectionView.showsVerticalScrollIndicator = false
@@ -67,7 +65,12 @@ final class ProfileView: BaseUIView {
     
     @objc
     private func callUsAction() {
-        print("Свяжитесь с нами")
+        guard let botURL = URL.init(string: URLS.telegram_bot) else {
+            return
+        }
+        if UIApplication.shared.canOpenURL(botURL) {
+            UIApplication.shared.open(botURL)
+        }
     }
 }
 
@@ -148,13 +151,11 @@ extension ProfileView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch ProfileSection.init(rawValue: indexPath.section) {
         case .profileFields:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProfileCell.self),
-                                                          for: indexPath) as! ProfileCell
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: ProfileCell.self)
             cell.configure(model: profileMenuModel[indexPath.row])
             return cell
         case .favourites:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: FavouritesCell.self),
-                                                          for: indexPath) as! FavouritesCell
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: FavouritesCell.self)
             cell.configure(model: saloonMockModel[indexPath.row])
             return cell
         default:
@@ -187,10 +188,14 @@ extension ProfileView: UICollectionViewDelegate {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                         withReuseIdentifier: String(describing: ReuseHeaderView.self),
-                                                                         for: indexPath) as! ReuseHeaderView
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: String(describing: ReuseHeaderView.self),
+            for: indexPath) as! ReuseHeaderView
+
         headerView.state = .favourites
         return headerView
     }
