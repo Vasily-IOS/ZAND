@@ -9,12 +9,8 @@ import UIKit
 import SnapKit
 
 final class DescriptionShowcaseView: BaseUIView {
-    
-    // MARK: - Model
-    
-    private let model: SaloonMockModel
-    
-    // MARK: - UI
+
+    // MARK: - Properties
     
     private let topDescriptionLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                               .black,
@@ -43,23 +39,16 @@ final class DescriptionShowcaseView: BaseUIView {
         return collectionView
     }()
     
-    // MARK: - Initializers
-    
-    init(model: SaloonMockModel) {
-        self.model = model
-        super.init(frame: .zero)
-        configure(model: model)
-    }
-    
     // MARK: - Instance methods
     
     override func setup() {
         super.setup()
+
         setViews()
         subscribeDelegate()
     }
     
-    private func configure(model: SaloonMockModel) {
+    func configure(model: SaloonMockModel) {
         descriptionLabel.text = model.description
     }
 }
@@ -71,7 +60,8 @@ extension DescriptionShowcaseView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([topDescriptionLabel, descriptionLabel, showCaseLabel, collectionView])
+        addSubviews([topDescriptionLabel, descriptionLabel,
+                     showCaseLabel, collectionView])
         
         topDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(self).offset(22)
@@ -108,12 +98,15 @@ extension DescriptionShowcaseView: UICollectionViewDataSource {
     
     // MARK: - UICollectionViewDataSource methods
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return 3
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: ShowCaseItemCell.self)
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(for: indexPath,
+                                                      cellType: ShowCaseItemCell.self)
         return cell
     }
 }

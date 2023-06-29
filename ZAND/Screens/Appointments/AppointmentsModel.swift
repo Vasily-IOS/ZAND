@@ -8,6 +8,7 @@
 import Foundation
 
 struct AppointmentsModel: CommonModel, Hashable {
+    let id: Int = 0
     let saloon_name: String
     let saloon_address: String
     let bookingDate: String

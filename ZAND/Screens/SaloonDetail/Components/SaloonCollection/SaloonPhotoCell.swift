@@ -12,12 +12,17 @@ final class SaloonPhotoCell: BaseCollectionCell {
     
     // MARK: - Properties
     
-    private let saloonImage = UIImageView()
+    private let saloonImage: UIImageView = {
+        let saloonImage = UIImageView()
+        saloonImage.contentMode = .scaleToFill
+        return saloonImage
+    }()
     
     // MARK: - Instance methods
     
     override func setup() {
         super.setup()
+
         setViews()
     }
     
@@ -34,9 +39,7 @@ extension SaloonPhotoCell {
     
     private func setViews() {
         addSubview(saloonImage)
-        
-        saloonImage.contentMode = .scaleToFill
-        
+
         saloonImage.snp.makeConstraints { make in
             make.left.top.right.bottom.equalTo(self)
         }

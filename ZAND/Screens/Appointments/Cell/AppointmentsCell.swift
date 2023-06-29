@@ -80,6 +80,7 @@ final class AppoitmentsCell: BaseTableCell {
     
     override func setup() {
         super.setup()
+
         setViews()
         setSelf()
         setTarget()

@@ -24,6 +24,7 @@ final class MainViewController: BaseViewController<MainView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         subscribeDelegate()
         subscribeNotify()
         presenter?.getOptionsModel()
@@ -32,6 +33,7 @@ final class MainViewController: BaseViewController<MainView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         hideNavigationBar()
         checkIsUserLaunched()
     }

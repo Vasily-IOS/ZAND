@@ -36,15 +36,18 @@ final class FilterOptionCell: BaseCollectionCell {
     
     override func setup() {
         super.setup()
+
         setViews()
         setSelf()
     }
     
     // MARK: - Configure
     
-    func configure(model: FilterModel, indexPath: IndexPath) {
-        self.filterDescription.text = model.filterDescription
-        self.indexPath = indexPath
+    func configure(model: CommonFilterProtocol, indexPath: IndexPath) {
+        if let model = model as? FilterModel {
+            self.filterDescription.text = model.filterDescription
+            self.indexPath = indexPath
+        }
     }
 }
 

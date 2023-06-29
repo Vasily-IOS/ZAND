@@ -8,67 +8,43 @@
 import UIKit
 import MapKit
 
+protocol MapDelegate: AnyObject {
+    func showSearch()
+    func showDetail(by id: Int)
+}
+
 final class MapView: BaseUIView {
-    
-    // MARK: - Closures
-    
-    private lazy var searchClosure = { [weak self] in
-        AppRouter.shared.presentSearch(type: .search(self?.model ?? []), completion: { model in
-            self?.showSinglePin(model: model.coordinates)
-        })
-    }
-    
-    // MARK: - Model
-    
-    var model: [SaloonMockModel]
-    var currentModel: SaloonMockModel?
-    
-    // MARK: - Map
-    
-    private let mapView = MKMapView()
-    private let locationManager = CLLocationManager()
-    
+
+    // MARK: - Properties
+
+    weak var delegate: MapDelegate?
+
+    var currentId: Int?
+
     var rectangleOverlay: MKPolygon {
         return MKPolygon(coordinates: BaseMapRectModel.coordinates,
                          count: BaseMapRectModel.coordinates.count)
     }
-    
-    // MARK: - UI
-    
-    private lazy var searchButton = SearchButton(handler: searchClosure)
-    
-    // MARK: - Initializers
-    
-    init(model: [SaloonMockModel]) {
-        self.model = model
-        super.init(frame: .zero)
-    }
-    
+
+    private let searchButton = SearchButton()
+    private let mapView = MKMapView()
+    private let locationManager = CLLocationManager()
+
     // MARK: - Instance methods
     
     override func setup() {
         super.setup()
-        setBackgroundColor()
+
         setViews()
-        
         setupLocationManager()
         setBaseOverlay()
-        addPinsOnMap(model: model)
         subscribeDelegate()
+        searchAction()
     }
     
-    // MARK: - Map
+    // MARK: - 
 
-    private func setupLocationManager() {
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
-    private func setBaseOverlay() {
-        let region = MKCoordinateRegion(rectangleOverlay.boundingMapRect)
-        mapView.setRegion(region, animated: true)
-    }
-    
-    private func addPinsOnMap(model: [SaloonMockModel]) {
+    func addPinsOnMap(model: [SaloonMockModel]) {
         model.forEach {
             let bothCoordinates = $0.coordinates.components(separatedBy: ",")
             let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
@@ -77,8 +53,8 @@ final class MapView: BaseUIView {
                                                    model: $0))
         }
     }
-    
-    private func showSinglePin(model: String) {
+
+    func showSinglePin(model: String) {
         let bothCoordinates = model.components(separatedBy: ",")
         let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
                                                  longitude: Double(bothCoordinates[1] ) ?? 0)
@@ -90,18 +66,35 @@ final class MapView: BaseUIView {
         }
         mapView.setRegion(region, animated: true)
     }
+
+    // MARK: -
+
+    private func setupLocationManager() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
     
     private func subscribeDelegate() {
         mapView.delegate = self
     }
+
+    private func setBaseOverlay() {
+        let region = MKCoordinateRegion(rectangleOverlay.boundingMapRect)
+        mapView.setRegion(region, animated: true)
+    }
     
     // MARK: - Action
+
+    private func searchAction() {
+        searchButton.tapHandler = { [weak self] in
+            self?.delegate?.showSearch()
+        }
+    }
     
     @objc
     private func navigateToSaloonDetail() {
-        if let currentModel = currentModel {
-            AppRouter.shared.push(.saloonDetail(currentModel))
-        }
+        guard let id = currentId  else { return }
+
+        delegate?.showDetail(by: id)
     }
 }
 
@@ -110,8 +103,9 @@ extension MapView {
     // MARK: - Instance methods
     
     private func setViews() {
+        backgroundColor = .mainGray
+
         addSubviews([searchButton, mapView])
-        
         searchButton.snp.makeConstraints { make in
             make.top.equalTo(self).offset(50)
             make.left.equalTo(self).offset(16)
@@ -122,10 +116,6 @@ extension MapView {
             make.top.equalTo(searchButton.snp.bottom).offset(10)
             make.left.bottom.right.equalTo(self)
         }
-    }
-    
-    private func setBackgroundColor() {
-        backgroundColor = .mainGray
     }
 }
 
@@ -162,7 +152,7 @@ extension MapView: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let customAnnotation = view.annotation as? SaloonAnnotation {
-            self.currentModel = customAnnotation.model as? SaloonMockModel
+            self.currentId = customAnnotation.model.id
         }
     }
 }

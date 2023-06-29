@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SignInViewController: BaseViewController<UIView> {
+final class SignInViewController: BaseViewController<SignInView> {
     
     // MARK: - Properties
     
@@ -19,11 +19,41 @@ final class SignInViewController: BaseViewController<UIView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         hideNavigationBar()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        subscribeDelegate()
     }
     
     deinit {
         print("SignInViewController died")
+    }
+
+    // MARK: - Instance methods
+
+    private func subscribeDelegate() {
+        contentView.delegate = self
+    }
+}
+
+extension SignInViewController: SignInDelegate {
+
+    // MARK: - SignInDelegate methods
+
+    func stopEditing() {
+        contentView.endEditing(true)
+    }
+
+    func navigateToRegister() {
+        AppRouter.shared.push(.register)
+    }
+
+    func navigatetoProfile() {
+        AppRouter.shared.push(.profile)
     }
 }
 

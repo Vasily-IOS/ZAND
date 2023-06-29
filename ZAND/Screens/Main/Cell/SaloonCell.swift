@@ -79,7 +79,7 @@ final class SaloonCell: BaseCollectionCell {
     }()
 
     private lazy var animationView: LottieAnimationView = {
-        var animationView = LottieAnimationView(name: "animation_fav")
+        var animationView = LottieAnimationView(name: Config.animation_fav)
         animationView.isHidden = true
         return animationView
     }()
@@ -173,7 +173,11 @@ extension SaloonCell {
     }
     
     private func setTarget() {
-        viewOnMapButton.addTarget(self, action: #selector(viewOnMapAction), for: .touchUpInside)
-        favouritesButton.addTarget(self, action: #selector(favouritesAction), for: .touchUpInside)
+        viewOnMapButton.addTarget(self,
+                                  action: #selector(viewOnMapAction),
+                                  for: .touchUpInside)
+        favouritesButton.addTarget(self,
+                                   action: #selector(favouritesAction),
+                                   for: .touchUpInside)
     }
 }

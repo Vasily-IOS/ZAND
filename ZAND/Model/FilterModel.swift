@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FilterModel {
+struct FilterModel: CommonFilterProtocol {
     let filterDescription: String
 
     static let filterModel: [Self] = [

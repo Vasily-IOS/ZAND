@@ -15,11 +15,13 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
         case appointments
     }
 
-    // MARK: - Properties
+    // MARK: - Closures
 
     private let mapHandler = { model in
         AppRouter.shared.push(.selectableMap(model))
     }
+
+    // MARK: - Properties
 
     typealias DataSource = UITableViewDiffableDataSource<Section, AppointmentsModel>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AppointmentsModel>
@@ -29,11 +31,6 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
     var presenter: AppointmentsPresenterOutput?
 
     // MARK: - Lifecycle
-
-    override func loadView() {
-        super.loadView()
-        setNavBar()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,17 +56,13 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
         var snapShot = Snapshot()
         snapShot.appendSections([.appointments])
         snapShot.appendItems(model)
-        dataSource?.apply(snapShot, animatingDifferences: false)
+        dataSource?.apply(snapShot, animatingDifferences: true)
     }
 }
 
 extension AppointmentsViewController {
     
     // MARK: - Instance methods
-    
-    private func setNavBar() {
-        title = StringsAsset.books
-    }
 
     private func subscribeDelegate() {
         contentView.delegate = self

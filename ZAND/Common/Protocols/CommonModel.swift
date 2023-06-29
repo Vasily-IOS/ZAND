@@ -9,6 +9,7 @@ import Foundation
 import MapKit
 
 protocol CommonModel {
+    var id: Int { get }
     var coordinates: String { get }
     var saloon_name: String { get }
 }

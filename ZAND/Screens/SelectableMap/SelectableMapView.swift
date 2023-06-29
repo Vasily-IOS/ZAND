@@ -60,9 +60,11 @@ extension SelectableMapView: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is SaloonAnnotation {
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: Config.customAnnotation)
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier:
+                                                                        Config.customAnnotation)
             if annotationView == nil {
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Config.customAnnotation)
+                annotationView = MKAnnotationView(annotation: annotation,
+                                                  reuseIdentifier: Config.customAnnotation)
             } else {
                 annotationView?.annotation = annotation
             }

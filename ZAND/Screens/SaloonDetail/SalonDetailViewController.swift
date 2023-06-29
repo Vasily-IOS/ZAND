@@ -11,6 +11,8 @@ import SnapKit
 final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
     
     // MARK: - Properties
+
+    var presenter: SaloonPresenterOutput?
     
     private lazy var backView = BackView()
  
@@ -18,14 +20,18 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         setupBackButtonItem()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         backViewAction()
         subscribeDelegate()
         hideBackButtonTitle()
+
+        presenter?.updateUI()
     }
 
     deinit {
@@ -52,6 +58,7 @@ extension SaloonDetailViewController {
     
     private func subscribeDelegate() {
         navigationController?.interactivePopGestureRecognizer?.delegate = self
+        contentView.delegate = self
     }
 }
 
@@ -65,6 +72,30 @@ extension SaloonDetailViewController: UIGestureRecognizerDelegate {
             return true
         }
         return false
+    }
+}
+
+extension SaloonDetailViewController: SaloonViewInput {
+
+    // MARK: - SaloonViewInput methods
+
+    func updateUI(model: SaloonMockModel) {
+        contentView.configure(model: model)
+    }
+}
+
+extension SaloonDetailViewController: SaloonDetailDelegate {
+
+    // MARK: - SaloonDetailDelegate methods
+
+    func openMap() {
+        guard let model = presenter?.getModel() else { return }
+
+        AppRouter.shared.push(.selectableMap(model))
+    }
+
+    func openBooking() {
+        AppRouter.shared.presentWithNav(type: .booking)
     }
 }
 

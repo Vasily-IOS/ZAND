@@ -46,10 +46,12 @@ final class OptionCell: BaseCollectionCell {
     
     // MARK: - Configure
     
-    func configure(model: OptionsModel, state: State) {
-        descriptionLabel.text = model.name
-        optionView.configure(image: model.image)
-        setBackgroundColor(color: state.backgroundColor)
+    func configure(model: CommonFilterProtocol, state: State) {
+        if let model = model as? OptionsModel {
+            descriptionLabel.text = model.name
+            optionView.configure(image: model.image)
+            setBackgroundColor(color: state.backgroundColor)
+        }
     }
 }
 

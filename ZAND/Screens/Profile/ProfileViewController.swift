@@ -19,18 +19,14 @@ final class ProfileViewController: BaseViewController<ProfileView> {
     
     override func loadView() {
         super.loadView()
+
         showNavigationBar()
         hideBackButtonTitle()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        showNavigationBar()
-//        hideBackButtonTitle()
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setTargets()
     }
  
@@ -38,8 +34,6 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         print("ProfileViewController died")
     }
 }
-
-extension ProfileViewController: HideBackButtonTitle, ShowNavigationBar {}
 
 extension ProfileViewController {
     
@@ -62,3 +56,5 @@ extension ProfileViewController {
         present(alertController, animated: true)
     }
 }
+
+extension ProfileViewController: HideBackButtonTitle, ShowNavigationBar {}

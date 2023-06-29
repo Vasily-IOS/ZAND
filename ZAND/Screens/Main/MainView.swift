@@ -18,12 +18,7 @@ protocol MainViewDelegate: AnyObject {
 final class MainView: BaseUIView {
     
     // MARK: - Closures
-    
-    private lazy var searchClosure = { [weak self] in
-        guard let self = self else { return }
-        self.showSearch()
-    }
-    
+
     private lazy var viewOnMapClosure = { [weak self] (model: CommonModel) -> () in
         guard let self else { return }
 
@@ -31,7 +26,8 @@ final class MainView: BaseUIView {
     }
     
     private lazy var favouritesHandler = { [weak self] (indexPath: IndexPath) -> () in
-        guard let self = self else { return }
+        guard let self else { return }
+
         self.changeHeartAppearence(by: indexPath)
         VibrationManager.shared.vibrate(for: .success)
     }
@@ -49,7 +45,7 @@ final class MainView: BaseUIView {
     
     // MARK: - UI
     
-    private lazy var searchButton = SearchButton(handler: searchClosure)
+    private lazy var searchButton = SearchButton()
     
     private lazy var collectionView: UICollectionView = {
         let layout = createLayout()
@@ -66,6 +62,10 @@ final class MainView: BaseUIView {
     init(layoutBuilder: DefaultMainLayout) {
         self.layoutBuilder = layoutBuilder
         super.init(frame: .zero)
+
+        searchButton.tapHandler = {
+            self.showSearch()
+        }
     }
     
     // MARK: - Instance methods

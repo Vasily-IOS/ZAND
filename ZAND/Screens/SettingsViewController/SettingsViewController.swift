@@ -13,24 +13,12 @@ final class SettingsViewController: BaseViewController<SettingsView> {
 
     var presenter: SettingsPresenterOutput?
 
-    var model: [SettingsMenuModel] = [] {
-        didSet {
-            self.presenter?.reloadData()
-        }
-    }
-
     // MARK: - Lifecycle
-
-    override func loadView() {
-        super.loadView()
-        setNavBar()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         subscribeDelegate()
-        presenter?.getData()
     }
 
     // MARK: - Instance methods
@@ -38,23 +26,6 @@ final class SettingsViewController: BaseViewController<SettingsView> {
     private func subscribeDelegate() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
-    }
-
-    private func setNavBar() {
-        title = StringsAsset.settings
-    }
-}
-
-extension SettingsViewController: SettingsInput {
-
-    // MARK: - SettingsInput methods
-
-    func updateUI(model: [SettingsMenuModel]) {
-        self.model = model
-    }
-
-    func reloadData() {
-        contentView.collectionView.reloadData()
     }
 }
 
@@ -70,7 +41,7 @@ extension SettingsViewController: UICollectionViewDataSource {
                         numberOfItemsInSection section: Int) -> Int {
         switch SettingsSection.init(rawValue: section) {
         case .data:
-            return model.count
+            return presenter?.getModel().count ?? 0
         case .pushes:
             return 1
         default:
@@ -84,7 +55,10 @@ extension SettingsViewController: UICollectionViewDataSource {
         case .data:
             let cell = collectionView.dequeueReusableCell(for: indexPath,
                                                           cellType: DataCell.self)
-            cell.configure(model: model[indexPath.row])
+            if let singleModel = presenter?.getModel() {
+                cell.configure(model: singleModel[indexPath.row])
+            }
+
             return cell
         case .pushes:
             let cell = collectionView.dequeueReusableCell(for: indexPath,
@@ -118,3 +92,5 @@ extension SettingsViewController: UICollectionViewDelegate {
         }
     }
 }
+
+extension SettingsViewController: SettingsInput {}

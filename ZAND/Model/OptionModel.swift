@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct OptionsModel {
+struct OptionsModel: CommonFilterProtocol {
     let name: String
     let image: UIImage
     

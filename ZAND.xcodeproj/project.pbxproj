@@ -60,6 +60,7 @@
 		FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */; };
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
+		FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */; };
 		FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76E8D52A32244200DCF779 /* RatingView.swift */; };
 		FF7FA3A62A4B53F10075AAA7 /* GestureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */; };
 		FF7FA3A82A4B54290075AAA7 /* GesturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */; };
@@ -208,6 +209,7 @@
 		FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackView.swift; sourceTree = "<group>"; };
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
+		FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterProtocol.swift; sourceTree = "<group>"; };
 		FF76E8D52A32244200DCF779 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureType.swift; sourceTree = "<group>"; };
 		FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturePublisher.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				FF27FC252A2E079F006DE1B9 /* HideNavigationBar.swift */,
 				FF27FC272A2E07A9006DE1B9 /* ShowNavigationBar.swift */,
 				FF1961AD2A4C4F0A00434AC7 /* CommonModel.swift */,
+				FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FF8AAF5729EE96BA007D6A60 /* Map */,
 				FFDCE4B32A1B8E6F00CEA0E1 /* SelectableMap */,
 				FFD3E1D52A054E6400680ED5 /* BookingViewController */,
 				FFC01B4A2A03CA65005CE41B /* SettingsViewController */,
@@ -515,7 +519,6 @@
 				FFA3D45229F2CABE0067CC6F /* SaloonDetail */,
 				FF8AAF5429EE9645007D6A60 /* Main */,
 				FF99B90429EEBA5A00F4E4C3 /* Search */,
-				FF8AAF5729EE96BA007D6A60 /* Map */,
 				FF8AAF5A29EE96E9007D6A60 /* Profile */,
 			);
 			path = Screens;
@@ -1078,6 +1081,7 @@
 				FF25633F29F5A8C900091374 /* RegisterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */,
 				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
+				FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */,
 				FF7FA3AA2A4B547A0075AAA7 /* GestureSubscription.swift in Sources */,
 				FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* StringsAsset.swift in Sources */,

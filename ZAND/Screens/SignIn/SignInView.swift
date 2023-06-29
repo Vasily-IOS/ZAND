@@ -8,9 +8,17 @@
 import UIKit
 import SnapKit
 
+protocol SignInDelegate: AnyObject {
+    func stopEditing()
+    func navigateToRegister()
+    func navigatetoProfile()
+}
+
 final class SignInView: BaseUIView {
     
     // MARK: - Properties
+
+    weak var delegate: SignInDelegate?
     
     private let signInLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                       .black,
@@ -48,6 +56,7 @@ final class SignInView: BaseUIView {
     
     override func setup() {
         super.setup()
+
         setViews()
         setRecognizer()
         addTargets()
@@ -57,17 +66,17 @@ final class SignInView: BaseUIView {
     
     @objc
     private func dismissKeyboard() {
-        endEditing(true)
+        delegate?.stopEditing()
     }
     
     @objc
-    private func registerAction() {
-        AppRouter.shared.push(.register)
+    private func navigateToRegisterAction() {
+        delegate?.navigateToRegister()
     }
     
     @objc
-    private func signInAction() {
-        AppRouter.shared.push(.profile)
+    private func navigateToProfileAction() {
+        delegate?.navigatetoProfile()
     }
 }
 
@@ -110,12 +119,11 @@ extension SignInView {
     }
     
     private func setRecognizer() {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        addGestureRecognizer(recognizer)
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
     private func addTargets() {
-        signInButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
-        registerButton.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
+        signInButton.addTarget(self, action: #selector(navigateToProfileAction), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(navigateToRegisterAction), for: .touchUpInside)
     }
 }

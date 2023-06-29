@@ -8,18 +8,43 @@
 import UIKit
 import SnapKit
 
+protocol FilerViewDelegate: AnyObject {
+    func clearFilterActions()
+}
+
 final class FilterView: BaseUIView {
     
     // MARK: - Properties
+
+    weak var delegate: FilerViewDelegate?
     
     private let layoutBulder: DefaultFilterLayout
-   
-    // MARK: - Model
-    
-    private let filterModel = FilterModel.filterModel
-    private let optionModel = OptionsModel.optionWithoutFilterModel
-    
+
     // MARK: - UI
+
+    lazy var collectionView: UICollectionView = {
+        let layout = createLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(cellType: FilterOptionCell.self)
+        collectionView.register(cellType: OptionCell.self)
+        collectionView.register(view: ReuseHeaderView.self)
+
+        collectionView.isScrollEnabled = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .white
+        collectionView.allowsMultipleSelection = true
+        return collectionView
+    }()
+
+    lazy var buttonStackView = UIStackView(alignment: .fill,
+                                                    arrangedSubviews: [
+                                                        cancelButton,
+                                                        applyButton
+                                                    ],
+                                                    axis: .horizontal,
+                                                    distribution: .fillEqually,
+                                                    spacing: 16)
+
     
     private let lineImage = UIImageView(image: ImageAsset.line_icon)
 
@@ -40,29 +65,6 @@ final class FilterView: BaseUIView {
         cancelButton.isHidden = true
         return cancelButton
     }()
-    
-    private lazy var buttonStackView = UIStackView(alignment: .fill,
-                                                    arrangedSubviews: [
-                                                        cancelButton,
-                                                        applyButton
-                                                    ],
-                                                    axis: .horizontal,
-                                                    distribution: .fillEqually,
-                                                    spacing: 16)
-    
-    private lazy var collectionView: UICollectionView = {
-        let layout = createLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(cellType: FilterOptionCell.self)
-        collectionView.register(cellType: OptionCell.self)
-        collectionView.register(view: ReuseHeaderView.self)
-
-        collectionView.isScrollEnabled = false
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = .white
-        collectionView.allowsMultipleSelection = true
-        return collectionView
-    }()
 
     // MARK: - Initializers
     
@@ -75,9 +77,9 @@ final class FilterView: BaseUIView {
     
     override func setup() {
         super.setup()
+
         setViews()
-        subscribeDelegate()
-        addTargets()
+        addTarget()
     }
     
     // MARK: - Layout
@@ -100,13 +102,12 @@ final class FilterView: BaseUIView {
     
     @objc
     private func clearFiltersAction() {
-        buttonStackView.subviews[0].isHidden = true
-        deselectAllRows()
+        delegate?.clearFilterActions()
     }
     
-    // MARK: -
+    // MARK: - Instance methods
     
-    private func deselectAllRows() {
+    func deselectAllRows() {
         let selectedItems = collectionView.indexPathsForSelectedItems ?? []
         for indexPath in selectedItems {
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -120,7 +121,7 @@ extension FilterView {
     
     private func setViews() {
         backgroundColor = .white
-
+        
         addSubviews([lineImage, viewFirstLabel, collectionView,
                      buttonStackView])
         
@@ -148,82 +149,10 @@ extension FilterView {
             make.bottom.equalTo(self.snp.bottom).inset(40)
         }
     }
-    
-    private func subscribeDelegate() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-    }
-    
-    private func addTargets() {
+
+    private func addTarget() {
         cancelButton.addTarget(self,
                                action: #selector(clearFiltersAction),
                                for: .touchUpInside)
-    }
-}
-
-extension FilterView: UICollectionViewDataSource {
-    
-    // MARK: - UICollectionViewDataSource methods
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return FilterSection.allCases.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
-        switch FilterSection.init(rawValue: section) {
-        case .filterOption:
-            return filterModel.count
-        case .services:
-            return optionModel.count
-        default:
-            return 0
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let filterOptionCell = collectionView.dequeueReusableCell(for: indexPath,
-                                                                  cellType: FilterOptionCell.self)
-        let optionCell = collectionView.dequeueReusableCell(for: indexPath,
-                                                            cellType: OptionCell.self)
-
-        switch FilterSection.init(rawValue: indexPath.section) {
-        case .filterOption:
-            filterOptionCell.configure(model: filterModel[indexPath.item], indexPath: indexPath)
-            return filterOptionCell
-        case .services:
-            optionCell.configure(model: optionModel[indexPath.item], state: .onFilter)
-            return optionCell
-        default:
-            return UICollectionViewCell()
-        }
-    }
-}
-
-extension FilterView: UICollectionViewDelegate {
-    
-    // MARK: - UICollectionViewDelegate methods
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
-        switch FilterSection.init(rawValue: indexPath.section) {
-        case .filterOption:
-            print(1)
-        case .services:
-            buttonStackView.subviews[0].isHidden = false
-        default:
-            break
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableView(for: indexPath,
-                                                            viewType: ReuseHeaderView.self,
-                                                            kind: .header)
-        headerView.state = .services
-        return headerView
     }
 }

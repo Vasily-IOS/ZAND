@@ -8,27 +8,28 @@
 import UIKit
 
 final class SaloonPhotoCollection: BaseUIView {
+
+    // MARK: - Closure
+
+    var openBookingHandler: (() -> Void)?
     
-    // MARK: - Model
+    // MARK: - Properties
     
-    var model: SaloonMockModel? = nil {
+    var model: SaloonMockModel? {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
-    
-    // MARK: - UI
-    
+
     private (set) lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 0
         flowLayout.scrollDirection = .horizontal
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(SaloonPhotoCell.self,
-                                forCellWithReuseIdentifier: String(describing: SaloonPhotoCell.self))
+        collectionView.register(cellType: SaloonPhotoCell.self)
         collectionView.isPagingEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .mainGray
@@ -51,31 +52,30 @@ final class SaloonPhotoCollection: BaseUIView {
     }()
     
     private let categoryLabel = UILabel(.systemFont(ofSize: 12), .textGray)
+
     private let ratingLabel = UILabel(.systemFont(ofSize: 12))
+
     private let starImage = UIImageView(image: ImageAsset.star_icon)
+
     private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, StringsAsset.grades)
+
     private let gradeCountLabel = UILabel(.systemFont(ofSize: 12))
+
     private let heartImage = UIImageView(image: ImageAsset.heart)
+
     private let bottomButton = BottomButton(buttonText: .book)
-    
-    // MARK: - Initializers
-    
-    init(model: SaloonMockModel) {
-        super.init(frame: .zero)
-        setInfo(from: model)
-    }
-    
+
     // MARK: - Instance methods
     
     override func setup() {
         super.setup()
+
         subscribeDelegate()
-        setBackgroundColor()
         setViews()
         addTarget()
     }
     
-    private func setInfo(from model: SaloonMockModel) {
+    func configure(model: SaloonMockModel) {
         self.model = model
         self.pageControl.numberOfPages = model.photos.count
         self.nameLabel.text = model.saloon_name
@@ -88,7 +88,7 @@ final class SaloonPhotoCollection: BaseUIView {
     
     @objc
     private func bookAction() {
-        AppRouter.shared.presentWithNav(type: .booking)
+        openBookingHandler?()
     }
 }
 
@@ -97,6 +97,8 @@ extension SaloonPhotoCollection {
     // MARK: - Instance methods
     
     private func setViews() {
+        backgroundColor = .mainGray
+
         addSubviews([collectionView, pageControl, nameLabel, categoryLabel, ratingLabel,
                      starImage, gradeLabel, gradeCountLabel, heartImage, bottomButton])
         
@@ -161,10 +163,6 @@ extension SaloonPhotoCollection {
         collectionView.delegate = self
     }
     
-    private func setBackgroundColor() {
-        backgroundColor = .mainGray
-    }
-    
     private func addTarget() {
         bottomButton.addTarget(self, action: #selector(bookAction), for: .touchUpInside)
     }
@@ -174,13 +172,14 @@ extension SaloonPhotoCollection: UICollectionViewDataSource {
     
     // MARK: - UICollectionViewDataSource methods
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return model?.photos.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SaloonPhotoCell.self),
-                                                      for: indexPath) as! SaloonPhotoCell
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonPhotoCell.self)
         cell.configure(image: model?.photos[indexPath.item] ?? UIImage())
         return cell
     }
@@ -190,9 +189,11 @@ extension SaloonPhotoCollection: UICollectionViewDelegateFlowLayout {
     
     // MARK: - UICollectionViewDelegateFlowLayout methods
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
+        return CGSize(width: collectionView.frame.size.width,
+                      height: collectionView.frame.size.height)
     }
 }
 
@@ -201,7 +202,8 @@ extension SaloonPhotoCollection: UICollectionViewDelegate {
     // MARK: - UICollectionViewDelegate methods
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)
+        let visibleRect = CGRect(origin: self.collectionView.contentOffset,
+                                 size: self.collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = self.collectionView.indexPathForItem(at: visiblePoint) {
             self.pageControl.currentPage = visibleIndexPath.row

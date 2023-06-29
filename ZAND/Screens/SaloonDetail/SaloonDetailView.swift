@@ -8,38 +8,55 @@
 import UIKit
 import SnapKit
 
+protocol SaloonDetailDelegate: AnyObject {
+    func openMap()
+    func openBooking()
+}
+
 final class SaloonDetailView: BaseUIView {
+
+    // MARK: - Properties
+
+    weak var delegate: SaloonDetailDelegate?
     
-    // MARK: - Model
-    
-    private let salonMockModel: SaloonMockModel
-    
-    // MARK: - UI
-    
-    private lazy var saloonPhotoCollection = SaloonPhotoCollection(model: salonMockModel)
-    private lazy var addressView = AddressView(model: salonMockModel)
-    private lazy var descriptionShowcaseView = DescriptionShowcaseView(model: salonMockModel)
+    private lazy var saloonPhotoCollection = SaloonPhotoCollection()
+    private lazy var addressView = AddressView()
+    private lazy var descriptionShowcaseView = DescriptionShowcaseView()
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.backgroundColor = .mainGray
         return scrollView
     }()
-    
-    // MARK: - Initializers
-    
-    init(model: SaloonMockModel) {
-        self.salonMockModel = model
-        super.init(frame: .zero)
-    }
     
     // MARK: - Instance methods
     
     override func setup() {
         super.setup()
+
         setViews()
-        setBackgroundColor()
+        viewAction()
+    }
+
+    func configure(model: SaloonMockModel) {
+        saloonPhotoCollection.configure(model: model)
+        addressView.configure(model: model)
+        descriptionShowcaseView.configure(model: model)
+    }
+
+    // MARK: - Action
+
+    private func viewAction() {
+
+        saloonPhotoCollection.openBookingHandler = { [weak self] in
+            self?.delegate?.openBooking()
+        }
+        
+        addressView.mapHandler = { [weak self] in
+            self?.delegate?.openMap()
+        }
     }
 }
 
@@ -49,6 +66,7 @@ extension SaloonDetailView {
     
     private func setViews() {
         addSubview(scrollView)
+
         scrollView.addSubviews([saloonPhotoCollection,
                                 addressView, descriptionShowcaseView])
         
@@ -73,9 +91,5 @@ extension SaloonDetailView {
             make.right.equalTo(self)
             make.bottom.equalTo(scrollView.snp.bottom)
         }
-    }
-    
-    private func setBackgroundColor() {
-        scrollView.backgroundColor = .mainGray
     }
 }

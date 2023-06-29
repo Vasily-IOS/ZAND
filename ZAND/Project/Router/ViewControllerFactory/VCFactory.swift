@@ -27,22 +27,29 @@ final class VCFactory: DefaultVCFactory {
             vc.presenter = presenter
             return vc
         case .map:
-            let model = SaloonMockModel.saloons // !
-            let view = MapView(model: model)
+            let view = MapView()
             let vc = MapViewController(contentView: view)
+            let presenter = MapPresenter(view: vc)
+            vc.presenter = presenter
             return vc
         case .saloonDetail(let model):
-            let view = SaloonDetailView(model: model)
+            let view = SaloonDetailView()
             let vc = SaloonDetailViewController(contentView: view)
+            let presenter = SaloonDetailPresenter(view: vc, model: model)
+            vc.presenter = presenter
             return vc
         case .register:
             let view = RegisterView()
             let vc = RegisterViewController(contentView: view)
+            let presenter = RegisterPresenter(view: vc)
+            vc.presenter = presenter
             return vc
         case .filter:
             let layoutBuilder: DefaultFilterLayout = FilterLayout()
             let view = FilterView(layout: layoutBuilder)
             let vc = FilterViewController(contentView: view)
+            let presenter = FilterPresenter(view: vc)
+            vc.presenter = presenter
             return vc
         case .profile:
             let layout: DefaultProfileLayout = ProfileLayoutBuilder()
@@ -54,14 +61,15 @@ final class VCFactory: DefaultVCFactory {
             let vc = AppointmentsViewController(contentView: view)
             let presenter = AppointmentsPresenterImpl(view: vc)
             vc.presenter = presenter
+            vc.title = StringsAsset.books
             return vc
-
         case .settings:
             let layout: DefaultSettingsLayout = SettingsLayout()
             let view = SettingsView(layout: layout)
             let vc = SettingsViewController(contentView: view)
             let presenter = SettingsPresenterImpl(view: vc)
             vc.presenter = presenter
+            vc.title = StringsAsset.settings
             return vc
         case .booking:
             return BookingViewController()

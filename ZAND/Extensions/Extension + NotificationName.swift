@@ -8,5 +8,5 @@
 import Foundation
 
 extension Notification.Name {
-    static let showTabBar = Notification.Name(StringsAsset.notifyTabBar)
+    static let showTabBar = Notification.Name(Config.notifyTabBar)
 }

@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 final class AddressView: BaseUIView {
-    
-    // MARK: - Model
-    
-    private let model: SaloonMockModel
-    
-    // MARK: - UI
-    
+
+    // MARK: - Closures
+
+    var mapHandler: (() -> Void)?
+
+    // MARK: - Properties
+
     private let addressLabel = UILabel(.systemFont(ofSize: 16), .black, StringsAsset.address)
 
     private let viewOnMapButton = TransparentButton(state: .viewOnMap)
@@ -54,14 +54,6 @@ final class AddressView: BaseUIView {
         addressDescriptionLabel.numberOfLines = 0
         return addressDescriptionLabel
     }()
-    
-    // MARK: - Initializers
-    
-    init(model: SaloonMockModel) {
-        self.model = model
-        super.init(frame: .zero)
-        configure(model: model)
-    }
         
     // MARK: - Instance methods
     
@@ -71,7 +63,7 @@ final class AddressView: BaseUIView {
         addTarget()
     }
     
-    private func configure(model: SaloonMockModel) {
+    func configure(model: SaloonMockModel) {
         addressDescriptionLabel.text = model.adress
         weekDaysDescriptionLabel.text = model.weekdays
         weekendDaysDescriptionLabel.text = model.weekend
@@ -82,7 +74,7 @@ final class AddressView: BaseUIView {
     
     @objc
     private func viewOnMapAction() {
-        AppRouter.shared.push(.selectableMap(model))
+        mapHandler?()
     }
 }
 
