@@ -49,6 +49,7 @@ final class AppointemtsView: BaseUIView {
     
     override func setup() {
         super.setup()
+
         setViews()
         addTarget()
     }
@@ -76,7 +77,6 @@ extension AppointemtsView {
         backgroundColor = .mainGray
 
         addSubviews([segmentControl, tableView])
-
         segmentControl.snp.makeConstraints { make in
             make.top.equalTo(self).offset(130)
             make.left.equalTo(self).offset(16)

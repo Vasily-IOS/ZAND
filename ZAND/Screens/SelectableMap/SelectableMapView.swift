@@ -22,9 +22,7 @@ final class SelectableMapView: BaseUIView {
         setViews()
         subscribeDelegate()
     }
-    
-    // MARK: - Map
-    
+
     func addPinsOnMap(model: CommonModel) {
         let bothCoordinates = model.coordinates.components(separatedBy: Config.separatedBy)
         let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,

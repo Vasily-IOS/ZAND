@@ -36,6 +36,8 @@ final class FilterViewController: BaseViewController<FilterView> {
 
 extension FilterViewController: UICollectionViewDataSource {
 
+    // MARK: - UICollectionViewDataSource mwthods
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return FilterSection.allCases.count
     }

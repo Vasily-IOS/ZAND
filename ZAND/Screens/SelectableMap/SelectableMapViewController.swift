@@ -21,11 +21,13 @@ final class SelectableViewController: BaseViewController<SelectableMapView> {
     
     override func loadView() {
         super.loadView()
+
         showNavigationBar()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         presenter?.getModel()
     }
     

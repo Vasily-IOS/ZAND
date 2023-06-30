@@ -55,6 +55,8 @@ final class VCFactory: DefaultVCFactory {
             let layout: DefaultProfileLayout = ProfileLayoutBuilder()
             let view = ProfileView(layout: layout)
             let vc = ProfileViewController(contentView: view)
+            let presenter = ProfilePresenter(view: vc)
+            vc.presenter = presenter
             return vc
         case .appointments:
             let view = AppointemtsView()

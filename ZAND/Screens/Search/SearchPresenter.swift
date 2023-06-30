@@ -7,21 +7,29 @@
 
 import Foundation
 
-protocol SearchViewProtocol: AnyObject {
+protocol SearchViewInput: AnyObject {
     func updateUI(with model: [SaloonMockModel])
 }
 
-protocol SearchPresenterProtocol: AnyObject {
-    func getData()
+protocol SearchPresenterOutput: AnyObject {
+    func updateUI()
+    func getModel() -> [SaloonMockModel]
+    func search(text: String)
 }
 
-final class SearchPresenter: SearchPresenterProtocol {
+final class SearchPresenter: SearchPresenterOutput {
+
+    // MARK: - Properties
     
-    var model: [SaloonMockModel]?
+    weak var view: SearchViewInput?
+
+    var currentModel: [SaloonMockModel] = []
+
+    private let model: [SaloonMockModel]
+
+    // MARK: - Initializers
     
-    weak var view: SearchViewProtocol?
-    
-    init(view: SearchViewProtocol, model: [SaloonMockModel]) {
+    init(view: SearchViewInput, model: [SaloonMockModel]) {
         self.view = view
         self.model = model
     }
@@ -31,9 +39,25 @@ extension SearchPresenter {
     
     // MARK: - SearchPresenter methods
     
-    func getData() {
-        if let model = model {
+    func updateUI() {
+        view?.updateUI(with: model)
+        currentModel = model
+    }
+
+    func search(text: String) {
+        if text.isEmpty {
             view?.updateUI(with: model)
+            currentModel = model
+        } else {
+            let filtedModel = model.filter({ model in
+                model.saloon_name.uppercased().contains(text.uppercased())})
+
+            view?.updateUI(with: filtedModel)
+            currentModel = filtedModel
         }
+    }
+
+    func getModel() -> [SaloonMockModel] {
+        return model
     }
 }

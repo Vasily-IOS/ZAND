@@ -14,7 +14,7 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
 
     var presenter: SaloonPresenterOutput?
     
-    private lazy var backView = BackView()
+    private let backView = BackView()
  
     // MARK: - Lifecycle
     

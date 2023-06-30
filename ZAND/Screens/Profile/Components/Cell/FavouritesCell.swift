@@ -10,13 +10,10 @@ import SnapKit
 
 final class FavouritesCell: BaseCollectionCell {
     
-    // MARK: - UI
+    // MARK: - Properties
     
-    private let saloonImage: UIImageView = {
-        let saloonImage = UIImageView()
-        return saloonImage
-    }()
-    
+    private let saloonImage = UIImageView()
+
     private let saloonName: UILabel = {
         let saloonName = UILabel()
         saloonName.font = .systemFont(ofSize: 12, weight: .bold)
@@ -35,6 +32,7 @@ final class FavouritesCell: BaseCollectionCell {
     
     override func setup() {
         super.setup()
+
         setSelf()
         setViews()
     }

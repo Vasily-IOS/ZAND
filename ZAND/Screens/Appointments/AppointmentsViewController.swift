@@ -24,7 +24,6 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
     // MARK: - Properties
 
     typealias DataSource = UITableViewDiffableDataSource<Section, AppointmentsModel>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AppointmentsModel>
 
     var dataSource: DataSource?
 
@@ -44,8 +43,7 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
     private func setupDataSource(model: [AppointmentsModel]) {
         dataSource = DataSource(tableView: contentView.tableView) {
             [weak self] tableView, indexPath, item  in
-            let cell = tableView.dequeueCell(withType: AppoitmentsCell.self,
-                                             for: indexPath) as! AppoitmentsCell
+            let cell = tableView.dequeueCell(withType: AppoitmentsCell.self, for: indexPath)
             cell.configure(model: item)
             cell.mapHandler = self?.mapHandler
             return cell
@@ -53,10 +51,10 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
     }
 
     private func applySnapshot(model: [AppointmentsModel]) {
-        var snapShot = Snapshot()
+        var snapShot = NSDiffableDataSourceSnapshot<Section, AppointmentsModel>()
         snapShot.appendSections([.appointments])
         snapShot.appendItems(model)
-        dataSource?.apply(snapShot, animatingDifferences: true)
+        dataSource?.apply(snapShot, animatingDifferences: false)
     }
 }
 

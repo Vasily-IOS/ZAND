@@ -8,42 +8,36 @@
 import UIKit
 import SnapKit
 
-enum ProfileSelect: Int {
-    case appointments
-    case settings
-    case logOut
+protocol ProfileViewDelegate: AnyObject {
+    func showTelegramBot()
 }
 
 final class ProfileView: BaseUIView {
-    
-    // MARK: - Closures
-    
-    var alertHandler: (() -> ())?
-    
+
     // MARK: - Properties
-    
-    private let layout: DefaultProfileLayout
 
+    weak var delegate: ProfileViewDelegate?
 
-    private let profileMenuModel = ProfileMenuModel.model
-    private let saloonMockModel = SaloonMockModel.saloons
-    
-    // MARK: - UI
-    
-    private let userNameView = UserNameView()
-    private let callUsButton = BottomButton(buttonText: .callUs)
-    
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         var layout = createLayout()
         var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(cellType: ProfileCell.self)
         collectionView.register(cellType: FavouritesCell.self)
-        collectionView.register(ReuseHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: String(describing: ReuseHeaderView.self))
+        collectionView.register(view: ReuseHeaderView.self)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .mainGray
         collectionView.isScrollEnabled = false
         return collectionView
+    }()
+    
+    private let layout: DefaultProfileLayout
+
+    private let userNameView = UserNameView()
+
+    private lazy var callUsButton: BottomButton = {
+        let callUsButton = BottomButton(buttonText: .callUs)
+        callUsButton.addTarget(self, action: #selector(callUsAction), for: .touchUpInside)
+        return callUsButton
     }()
     
     // MARK: - Initializers
@@ -57,22 +51,15 @@ final class ProfileView: BaseUIView {
     
     override func setup() {
         super.setup()
+
         setViews()
-        setBackgroundColor()
-        subscribeDelegates()
-        addTargets()
     }
     
     // MARK: - Action
     
     @objc
     private func callUsAction() {
-        guard let botURL = URL.init(string: URLS.telegram_bot) else {
-            return
-        }
-        if UIApplication.shared.canOpenURL(botURL) {
-            UIApplication.shared.open(botURL)
-        }
+        delegate?.showTelegramBot()
     }
 }
 
@@ -81,8 +68,9 @@ extension ProfileView {
     // MARK: - Instance methods
     
     private func setViews() {
+        backgroundColor = .mainGray
+
         addSubviews([userNameView, collectionView, callUsButton])
-        
         userNameView.snp.makeConstraints { make in
             make.left.equalTo(self).offset(16)
             make.top.equalTo(self).offset(109)
@@ -103,15 +91,6 @@ extension ProfileView {
         }
     }
     
-    private func setBackgroundColor() {
-        backgroundColor = .mainGray
-    }
-    
-    private func subscribeDelegates() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-    }
-    
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { section, _  in
             switch ProfileSection.init(rawValue: section) {
@@ -124,79 +103,5 @@ extension ProfileView {
             }
         }
         return layout
-    }
-    
-    private func addTargets() {
-        callUsButton.addTarget(self, action: #selector(callUsAction), for: .touchUpInside)
-    }
-}
-
-extension ProfileView: UICollectionViewDataSource {
-    
-    // MARK: - UICollectionViewDataSource methods
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return ProfileSection.allCases.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch ProfileSection.init(rawValue: section) {
-        case .profileFields:
-            return profileMenuModel.count
-        case .favourites:
-            return saloonMockModel.count
-        default:
-            return 0
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch ProfileSection.init(rawValue: indexPath.section) {
-        case .profileFields:
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: ProfileCell.self)
-            cell.configure(model: profileMenuModel[indexPath.row])
-            return cell
-        case .favourites:
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: FavouritesCell.self)
-            cell.configure(model: saloonMockModel[indexPath.row])
-            return cell
-        default:
-            return UICollectionViewCell()
-        }
-    }
-}
-
-extension ProfileView: UICollectionViewDelegate {
-    
-    // MARK: - UICollectionViewDelegate methods
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch ProfileSection.init(rawValue: indexPath.section) {
-        case .profileFields:
-            switch ProfileSelect.init(rawValue: indexPath.row) {
-            case .appointments:
-                AppRouter.shared.push(.appointments)
-            case .settings:
-                AppRouter.shared.push(.settings)
-            case .logOut:
-                alertHandler?()
-            default:
-                break
-            }
-        case .favourites:
-            AppRouter.shared.push(.saloonDetail(saloonMockModel[indexPath.row]))
-        default:
-            break
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableView(for: indexPath,
-                                                            viewType: ReuseHeaderView.self,
-                                                            kind: .header)
-        headerView.state = .favourites
-        return headerView
     }
 }

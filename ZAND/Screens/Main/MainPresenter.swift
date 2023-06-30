@@ -7,31 +7,36 @@
 
 import Foundation
 
-protocol MainPresenterProtocol: AnyObject {
-    func getOptionsModel()
-    func getSaloonMockModel()
+enum MainType {
+    case options
+    case saloons
+}
+
+protocol MainPresenterOutput: AnyObject {
+//    func updateUI(by types: [MainType])
+    func getModel(by type: MainType) -> [CommonFilterProtocol]
     func getSearchIndex(id: Int) -> IndexPath?
+    func getModel(by id: Int) -> SaloonMockModel?
 }
 
-protocol MainViewProtocol: AnyObject {
-    func updateWithOptions(model: [OptionsModel])
-    func updateWithSaloonMock(model: [SaloonMockModel])
+protocol MainViewInput: AnyObject {
+//    func updateUI(with model: [CommonFilterProtocol])
 }
 
-final class MainPresenter: MainPresenterProtocol {
+final class MainPresenter: MainPresenterOutput {
     
     // MARK: - Properties
     
     private let optionsModel = OptionsModel.options
-    private var saloonMockModel = SaloonMockModel.saloons
+    private var saloonsModel = SaloonMockModel.saloons
     
     // MARK: - UI
     
-    weak var view: MainViewProtocol?
+    weak var view: MainViewInput?
     
     // MARK: - Initializer
     
-    init(view: MainViewProtocol) {
+    init(view: MainViewInput) {
         self.view = view
     }
 }
@@ -39,19 +44,30 @@ final class MainPresenter: MainPresenterProtocol {
 extension MainPresenter {
     
     // MARK: - Instance methods
-    
-    func getOptionsModel() {
-        self.view?.updateWithOptions(model: optionsModel)
-    }
-    
-    func getSaloonMockModel() {
-        self.view?.updateWithSaloonMock(model: saloonMockModel)
-    }
-    
+
+//    func updateUI(by types: [MainType]) {
+//        for type in types {
+//            view?.updateUI(with: getModel(by: type))
+//        }
+//    }
+
     func getSearchIndex(id: Int) -> IndexPath? {
-        if let index = saloonMockModel.firstIndex(where: { $0.id == id }) {
+        if let index = saloonsModel.firstIndex(where: { $0.id == id }) {
             return [1, index]
         }
         return nil
+    }
+
+    func getModel(by type: MainType) -> [CommonFilterProtocol] {
+        switch type {
+        case .options:
+            return optionsModel
+        case .saloons:
+            return saloonsModel
+        }
+    }
+
+    func getModel(by id: Int) -> SaloonMockModel? {
+        return saloonsModel.first(where: { $0.id == id })
     }
 }

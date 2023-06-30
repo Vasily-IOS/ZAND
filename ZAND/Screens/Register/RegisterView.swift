@@ -140,9 +140,7 @@ extension RegisterView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([registerLabel, entranceStackView,
-                     bottomButtonsStackView])
-        
+        addSubviews([registerLabel, entranceStackView, bottomButtonsStackView])
         registerLabel.snp.makeConstraints { make in
             make.top.equalTo(self).offset(200)
             make.centerX.equalTo(self)
@@ -170,7 +168,8 @@ extension RegisterView {
     }
     
     private func setRecognizer() {
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                    action: #selector(dismissKeyboard)))
     }
     
     private func addTargets() {

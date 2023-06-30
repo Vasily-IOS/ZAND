@@ -49,7 +49,6 @@ final class SaloonDetailView: BaseUIView {
     // MARK: - Action
 
     private func viewAction() {
-
         saloonPhotoCollection.openBookingHandler = { [weak self] in
             self?.delegate?.openBooking()
         }

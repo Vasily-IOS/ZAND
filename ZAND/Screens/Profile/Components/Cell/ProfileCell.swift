@@ -12,11 +12,8 @@ final class ProfileCell: BaseCollectionCell {
     
     // MARK: - Properties
     
-    private let profileOptionImage: UIImageView = {
-        let profileOptionImage = UIImageView()
-        return profileOptionImage
-    }()
-    
+    private let profileOptionImage = UIImageView()
+
     private let profileOptionLabel: UILabel = {
         let profileOptionLabel = UILabel()
         profileOptionLabel.font = .systemFont(ofSize: 16)
@@ -27,6 +24,7 @@ final class ProfileCell: BaseCollectionCell {
     
     override func setup() {
         super.setup()
+
         setViews()
     }
     
@@ -44,7 +42,6 @@ extension ProfileCell {
         layer.cornerRadius = 15
 
         addSubviews([profileOptionImage, profileOptionLabel])
-        
         snp.makeConstraints { make in
             make.height.equalTo(48)
         }

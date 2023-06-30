@@ -13,12 +13,14 @@ final class SaloonCell: BaseCollectionCell {
     
     // MARK:  - Closures
     
-    var viewOnMapHandler: ((CommonModel) -> ())?
+    var mapHandler: ((Int) -> ())?
+
     var favouritesHandler: ((IndexPath) -> ())?
     
     // MARK: - Properties
-    
-    var model: SaloonMockModel?
+
+    var id: Int?
+
     var indexPath: IndexPath?
     
     var isInFavourite: Bool = false {
@@ -88,6 +90,7 @@ final class SaloonCell: BaseCollectionCell {
     
     override func setup() {
         super.setup()
+
         setSelf()
         setViews()
         setTarget()
@@ -102,15 +105,15 @@ final class SaloonCell: BaseCollectionCell {
         self.adressLabel.text = model.adress
         self.ratingLabel.text = "\(model.rating)"
         self.indexPath = indexPath
-        self.model = model
+        self.id = model.id
     }
     
     // MARK: - Action
     
     @objc
     private func viewOnMapAction() {
-        if let model = model {
-            viewOnMapHandler?(model)
+        if let id = id {
+            mapHandler?(id)
         }
     }
     

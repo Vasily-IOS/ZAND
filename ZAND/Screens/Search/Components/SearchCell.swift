@@ -29,9 +29,9 @@ final class SearchCell: BaseTableCell {
     
     override func setup() {
         super.setup()
+
         setViews()
         setSelf()
-        addLine()
     }
 
     // MARK: - Configure
@@ -66,5 +66,6 @@ extension SearchCell {
         contentView.backgroundColor = .mainGray
         selectionStyle = .none
         contentView.layer.cornerRadius = 0
+        addLine()
     }
 }

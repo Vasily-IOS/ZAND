@@ -29,8 +29,6 @@ final class UserNameView: BaseUIView {
                                                      axis: .vertical,
                                                      spacing: 10)
 
-    // MARK: - Initializers ??
-
     // MARK: - Instance methods
     
     override func setup() {
@@ -47,7 +45,6 @@ extension UserNameView {
         backgroundColor = .mainGray
 
         addSubview(userNameStackView)
-        
         userNameStackView.snp.makeConstraints { make in
             make.edges.equalTo(self)
         }

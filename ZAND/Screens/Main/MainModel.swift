@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct SaloonMockModel: CommonModel {
+struct SaloonMockModel: CommonModel, CommonFilterProtocol, Hashable {
     let id: Int
     let category: Category
     let saloon_name: String
@@ -129,12 +129,12 @@ struct SaloonMockModel: CommonModel {
     ]
 }
 
-struct Category {
+struct Category: Hashable {
     let id: Int
     let name: String
 }
 
-struct Item {
+struct Item: Hashable {
     let image: UIImage?
     let description: String?
     let price_from: Int?
