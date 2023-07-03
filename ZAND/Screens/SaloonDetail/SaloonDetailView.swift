@@ -11,11 +11,18 @@ import SnapKit
 protocol SaloonDetailDelegate: AnyObject {
     func openMap()
     func openBooking()
+    func applyDB()
 }
 
 final class SaloonDetailView: BaseUIView {
 
     // MARK: - Properties
+
+    var inFavourite = false {
+        didSet {
+            saloonPhotoCollection.inFavourite = inFavourite
+        }
+    }
 
     weak var delegate: SaloonDetailDelegate?
     
@@ -52,7 +59,11 @@ final class SaloonDetailView: BaseUIView {
         saloonPhotoCollection.openBookingHandler = { [weak self] in
             self?.delegate?.openBooking()
         }
-        
+
+        saloonPhotoCollection.favouriteHandler = { [weak self] id in
+            self?.delegate?.applyDB()
+        }
+
         addressView.mapHandler = { [weak self] in
             self?.delegate?.openMap()
         }

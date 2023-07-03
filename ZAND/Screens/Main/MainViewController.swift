@@ -19,11 +19,12 @@ final class MainViewController: BaseViewController<MainView> {
         AppRouter.shared.push(.selectableMap(model))
     }
 
-    private lazy var favouritesHandler = { [weak self] (indexPath: IndexPath) -> () in
+    private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
         guard let self else { return }
 
-        self.contentView.changeHeartAppearence(by: indexPath)
-        VibrationManager.shared.vibrate(for: .success)
+        self.presenter?.applyDB(by: id) { [weak self] in
+            self?.contentView.changeHeartAppearence(by: indexPath)
+        }
     }
     
     // MARK: - Properties
@@ -84,10 +85,12 @@ final class MainViewController: BaseViewController<MainView> {
     }
     
     private func subscribeNotify() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(getNotifyAction(_:)),
-                                               name: .showTabBar,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getNotifyAction(_:)),
+            name: .showTabBar,
+            object: nil
+        )
     }
     
     // MARK: - Action
@@ -132,6 +135,11 @@ extension MainViewController: UICollectionViewDataSource {
             saloonCell.configure(model: saloons[indexPath.item], indexPath: indexPath)
             saloonCell.mapHandler = mapHandler
             saloonCell.favouritesHandler = favouritesHandler
+
+            if let isInFavourite = presenter?.contains(by: saloons[indexPath.item].id) {
+                saloonCell.isInFavourite = !isInFavourite
+            }
+
             return saloonCell
         default:
             return UICollectionViewCell()
@@ -185,9 +193,6 @@ extension MainViewController: MainViewInput {
 
     // MARK: - MainViewProtocol methods
 
-    func updateUI(with model: [CommonFilterProtocol]) {
-        // ???
-    }
 }
 
 extension MainViewController: HideNavigationBar {}

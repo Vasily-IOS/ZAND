@@ -21,9 +21,10 @@ final class VCFactory: DefaultVCFactory {
             return vc
         case .main:
             let layotBuilder: DefaultMainLayout = MainLayout()
+            let realmManager: RealmManager = RealmManagerImpl()
             let view = MainView(layoutBuilder: layotBuilder)
             let vc = MainViewController(contentView: view)
-            let presenter = MainPresenter(view: vc)
+            let presenter = MainPresenter(view: vc, realmManager: realmManager)
             vc.presenter = presenter
             return vc
         case .map:
@@ -33,9 +34,12 @@ final class VCFactory: DefaultVCFactory {
             vc.presenter = presenter
             return vc
         case .saloonDetail(let model):
+            let realmManager: RealmManager = RealmManagerImpl()
             let view = SaloonDetailView()
             let vc = SaloonDetailViewController(contentView: view)
-            let presenter = SaloonDetailPresenter(view: vc, model: model)
+            let presenter = SaloonDetailPresenter(view: vc,
+                                                  model: model,
+                                                  realmManager: realmManager)
             vc.presenter = presenter
             return vc
         case .register:
@@ -53,9 +57,10 @@ final class VCFactory: DefaultVCFactory {
             return vc
         case .profile:
             let layout: DefaultProfileLayout = ProfileLayoutBuilder()
+            let realmManager: RealmManager = RealmManagerImpl()
             let view = ProfileView(layout: layout)
             let vc = ProfileViewController(contentView: view)
-            let presenter = ProfilePresenter(view: vc)
+            let presenter = ProfilePresenter(view: vc, realmManager: realmManager)
             vc.presenter = presenter
             return vc
         case .appointments:

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 enum ProfileType {
     case profileFields
@@ -14,7 +15,7 @@ enum ProfileType {
 
 protocol ProfilePresenterOutput: AnyObject {
     func getMenuModel() -> [ProfileMenuModel]
-    func getDBmodel() -> [SaloonMockModel]
+    func getDBmodel() -> [DetailModelDB]
 }
 
 protocol ProfileViewInput: AnyObject {
@@ -29,20 +30,20 @@ final class ProfilePresenter: ProfilePresenterOutput {
 
     private let profileMenuModel = ProfileMenuModel.model
 
-    // should be data base model!
-    private let saloonMockModel = SaloonMockModel.saloons
+    private let realmManager: RealmManager
 
     // MARK: - Initializers
 
-    init(view: ProfileViewInput) {
+    init(view: ProfileViewInput, realmManager: RealmManager) {
         self.view = view
+        self.realmManager = realmManager
     }
 
     func getMenuModel() -> [ProfileMenuModel] {
         return profileMenuModel
     }
 
-    func getDBmodel() -> [SaloonMockModel] {
-        return saloonMockModel
+    func getDBmodel() -> [DetailModelDB] {
+        return Array(realmManager.get(DetailModelDB.self))
     }
 }

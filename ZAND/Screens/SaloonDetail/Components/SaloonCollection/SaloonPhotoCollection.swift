@@ -12,8 +12,15 @@ final class SaloonPhotoCollection: BaseUIView {
     // MARK: - Closure
 
     var openBookingHandler: (() -> Void)?
+    var favouriteHandler:((Int) -> Void)?
     
     // MARK: - Properties
+
+    var inFavourite: Bool = false {
+        didSet {
+            heartButton.setImage(inFavourite ? ImageAsset.fillHeart_icon : ImageAsset.heart, for: .normal)
+        }
+    }
     
     var model: SaloonMockModel? {
         didSet {
@@ -61,7 +68,7 @@ final class SaloonPhotoCollection: BaseUIView {
 
     private let gradeCountLabel = UILabel(.systemFont(ofSize: 12))
 
-    private let heartImage = UIImageView(image: ImageAsset.heart)
+    private let heartButton = UIButton()
 
     private let bottomButton = BottomButton(buttonText: .book)
 
@@ -85,6 +92,13 @@ final class SaloonPhotoCollection: BaseUIView {
     }
     
     // MARK: - Action
+
+    @objc
+    private func favouriteAction() {
+        if let id = model?.id {
+            favouriteHandler?(id)
+        }
+    }
     
     @objc
     private func bookAction() {
@@ -100,7 +114,7 @@ extension SaloonPhotoCollection {
         backgroundColor = .mainGray
 
         addSubviews([collectionView, pageControl, nameLabel, categoryLabel, ratingLabel,
-                     starImage, gradeLabel, gradeCountLabel, heartImage, bottomButton])
+                     starImage, gradeLabel, gradeCountLabel, heartButton, bottomButton])
         
         collectionView.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
@@ -144,8 +158,8 @@ extension SaloonPhotoCollection {
             make.centerY.equalTo(starImage)
         }
         
-        heartImage.snp.makeConstraints { make in
-            make.top.equalTo(collectionView.snp.bottom).offset(16)
+        heartButton.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom).offset(25)
             make.right.equalTo(self).inset(16)
         }
         
@@ -164,6 +178,7 @@ extension SaloonPhotoCollection {
     }
     
     private func addTarget() {
+        heartButton.addTarget(self, action: #selector(favouriteAction), for: .touchUpInside)
         bottomButton.addTarget(self, action: #selector(bookAction), for: .touchUpInside)
     }
 }

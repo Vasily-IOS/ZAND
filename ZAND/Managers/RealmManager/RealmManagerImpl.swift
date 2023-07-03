@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-final class RealmManager: DefaultRealmManager {
+final class RealmManagerImpl: RealmManager {
     
     private let defaultRealm: Realm
     
@@ -63,7 +63,7 @@ final class RealmManager: DefaultRealmManager {
         let existingObject = defaultRealm.objects(Element.self).filter(predicate).first
         return existingObject == nil
     }
-    
+
     func removeAll() {
         do {
             try defaultRealm.write({
@@ -88,6 +88,5 @@ final class RealmManager: DefaultRealmManager {
         _ type: Element.Type,
         key: Any) -> Element? {
             return defaultRealm.object(ofType: type, forPrimaryKey: key)
-            
         }
 }

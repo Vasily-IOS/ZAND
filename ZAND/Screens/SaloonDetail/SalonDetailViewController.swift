@@ -18,12 +18,6 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
  
     // MARK: - Lifecycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        setupBackButtonItem()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +26,14 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
         hideBackButtonTitle()
 
         presenter?.updateUI()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        setupBackButtonItem()
+
+        presenter?.isInFavourite()
     }
 
     deinit {
@@ -82,6 +84,10 @@ extension SaloonDetailViewController: SaloonViewInput {
     func updateUI(model: SaloonMockModel) {
         contentView.configure(model: model)
     }
+
+    func isInFavourite(result: Bool) {
+        contentView.inFavourite = !result
+    }
 }
 
 extension SaloonDetailViewController: SaloonDetailDelegate {
@@ -96,6 +102,12 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
 
     func openBooking() {
         AppRouter.shared.presentWithNav(type: .booking)
+    }
+
+    func applyDB() {
+        presenter?.applyDB {
+            contentView.inFavourite = !contentView.inFavourite
+        }
     }
 }
 

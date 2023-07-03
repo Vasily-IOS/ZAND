@@ -13,22 +13,26 @@ enum MainType {
 }
 
 protocol MainPresenterOutput: AnyObject {
-//    func updateUI(by types: [MainType])
     func getModel(by type: MainType) -> [CommonFilterProtocol]
     func getSearchIndex(id: Int) -> IndexPath?
     func getModel(by id: Int) -> SaloonMockModel?
+    func applyDB(by id: Int, completion: () -> ())
+    func contains(by id: Int) -> Bool
 }
 
 protocol MainViewInput: AnyObject {
-//    func updateUI(with model: [CommonFilterProtocol])
+
 }
 
 final class MainPresenter: MainPresenterOutput {
-    
+   
     // MARK: - Properties
     
     private let optionsModel = OptionsModel.options
+
     private var saloonsModel = SaloonMockModel.saloons
+
+    private let realmManager: RealmManager
     
     // MARK: - UI
     
@@ -36,20 +40,15 @@ final class MainPresenter: MainPresenterOutput {
     
     // MARK: - Initializer
     
-    init(view: MainViewInput) {
+    init(view: MainViewInput, realmManager: RealmManager) {
         self.view = view
+        self.realmManager = realmManager
     }
 }
 
 extension MainPresenter {
     
     // MARK: - Instance methods
-
-//    func updateUI(by types: [MainType]) {
-//        for type in types {
-//            view?.updateUI(with: getModel(by: type))
-//        }
-//    }
 
     func getSearchIndex(id: Int) -> IndexPath? {
         if let index = saloonsModel.firstIndex(where: { $0.id == id }) {
@@ -69,5 +68,32 @@ extension MainPresenter {
 
     func getModel(by id: Int) -> SaloonMockModel? {
         return saloonsModel.first(where: { $0.id == id })
+    }
+
+    func applyDB(by id: Int, completion: () -> ()) {
+        if contains(by: id) {
+            let modelForSave = getModel(by: id)
+
+            let modelDB = DetailModelDB()
+            modelDB.id = modelForSave?.id ?? 0
+            modelDB.saloon_name = modelForSave?.saloon_name ?? ""
+            realmManager.save(object: modelDB)
+
+            VibrationManager.shared.vibrate(for: .success)
+            completion()
+        } else {
+            remove(by: id)
+            completion()
+        }
+    }
+
+    func remove(by id: Int) {
+        let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
+        realmManager.removeObjectByID(object: DetailModelDB.self, predicate: predicate)
+    }
+
+    func contains(by id: Int) -> Bool {
+        let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
+        return realmManager.contains(predicate: predicate, DetailModelDB.self)
     }
 }

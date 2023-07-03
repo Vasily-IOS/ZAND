@@ -22,7 +22,7 @@ struct SaloonMockModel: CommonModel, CommonFilterProtocol, Hashable {
     let description: String
     let showcase: [Item]
     let coordinates: String
-    
+
     static let saloons: [Self] = [
         .init(id: 0, category: Category(id: 0, name: "спа-салон"),
               saloon_name: "Beautiful eyes",

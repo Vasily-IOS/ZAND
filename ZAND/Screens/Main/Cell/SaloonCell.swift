@@ -15,7 +15,7 @@ final class SaloonCell: BaseCollectionCell {
     
     var mapHandler: ((Int) -> ())?
 
-    var favouritesHandler: ((IndexPath) -> ())?
+    var favouritesHandler: ((Int, IndexPath) -> ())?
     
     // MARK: - Properties
 
@@ -119,8 +119,8 @@ final class SaloonCell: BaseCollectionCell {
     
     @objc
     private func favouritesAction() {
-        if let indexPath = indexPath {
-            favouritesHandler?(indexPath)
+        if let id = id, let indexPath = indexPath {
+            favouritesHandler?(id, indexPath)
         }
     }
 }

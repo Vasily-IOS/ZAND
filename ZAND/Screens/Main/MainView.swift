@@ -85,7 +85,7 @@ extension MainView {
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout
-        { (section, _) in
+        { section, _ in
             switch MainSection.init(rawValue: section) {
             case .option:
                 return self.layoutBuilder.createSection(type: .option)

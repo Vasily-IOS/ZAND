@@ -36,11 +36,11 @@ final class FavouritesCell: BaseCollectionCell {
         setSelf()
         setViews()
     }
-    
-    func configure(model: SaloonMockModel) {
-        self.saloonImage.image = model.image
+
+    func configure(model: DetailModelDB) {
+//        self.saloonImage.image = model.image
         self.saloonName.text = model.saloon_name
-        self.ratingLabel.text = "\(model.rating)"
+//        self.ratingLabel.text = "\(model.rating)"
     }
 }
 

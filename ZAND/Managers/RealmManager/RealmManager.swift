@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-protocol DefaultRealmManager {
+protocol RealmManager {
     func save<Element: Object>(object: Element)
     func get<Element>(_ type: Element.Type) -> Results<Element> where Element: RealmFetchable
     func removeObject<Element: Object>(object: Element)

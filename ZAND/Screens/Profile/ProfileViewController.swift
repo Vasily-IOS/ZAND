@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class ProfileViewController: BaseViewController<ProfileView> {
     
@@ -21,7 +22,7 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         return presenter?.getMenuModel() ?? []
     }
 
-    var saloonDBmodel: [SaloonMockModel] {
+    var saloonDBmodel: [DetailModelDB] {
         return presenter?.getDBmodel() ?? []
     }
     
@@ -38,6 +39,12 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         super.viewDidLoad()
 
         subscribeDelegate()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        contentView.emptyLabel.isHidden = !saloonDBmodel.isEmpty
     }
  
     deinit {
@@ -77,6 +84,7 @@ extension ProfileViewController: ProfileViewDelegate {
         guard let botURL = URL.init(string: URLS.telegram_bot) else {
             return
         }
+
         if UIApplication.shared.canOpenURL(botURL) {
             UIApplication.shared.open(botURL)
         }
@@ -141,7 +149,8 @@ extension ProfileViewController: UICollectionViewDelegate {
                 break
             }
         case .favourites:
-            AppRouter.shared.push(.saloonDetail(saloonDBmodel[indexPath.row]))
+            print(1)
+//            AppRouter.shared.push(.saloonDetail(saloonDBmodel[indexPath.row]))
         default:
             break
         }

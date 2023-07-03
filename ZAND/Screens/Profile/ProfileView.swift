@@ -29,6 +29,14 @@ final class ProfileView: BaseUIView {
         collectionView.isScrollEnabled = false
         return collectionView
     }()
+
+    lazy var emptyLabel: UILabel = {
+        var emptyLabel = UILabel()
+        emptyLabel.font = .systemFont(ofSize: 20, weight: .regular)
+        emptyLabel.textColor = .textGray
+        emptyLabel.text = StringsAsset.empty
+        return emptyLabel
+    }()
     
     private let layout: DefaultProfileLayout
 
@@ -70,7 +78,7 @@ extension ProfileView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([userNameView, collectionView, callUsButton])
+        addSubviews([userNameView, collectionView, callUsButton, emptyLabel])
         userNameView.snp.makeConstraints { make in
             make.left.equalTo(self).offset(16)
             make.top.equalTo(self).offset(109)
@@ -88,6 +96,11 @@ extension ProfileView {
             make.height.equalTo(44)
             make.centerX.equalTo(self)
             make.bottom.equalTo(self).inset(120)
+        }
+
+        emptyLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(callUsButton).inset(150)
         }
     }
     

@@ -62,6 +62,7 @@
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
 		FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */; };
+		FF69DADB2A53089200481CF1 /* DetailModelDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DADA2A53089200481CF1 /* DetailModelDB.swift */; };
 		FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76E8D52A32244200DCF779 /* RatingView.swift */; };
 		FF7FA3A62A4B53F10075AAA7 /* GestureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */; };
 		FF7FA3A82A4B54290075AAA7 /* GesturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */; };
@@ -105,7 +106,7 @@
 		FFB985722A30E6E700ABEFBB /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985712A30E6E700ABEFBB /* RealmManager.swift */; };
 		FFB985752A30E84600ABEFBB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FFB985742A30E84600ABEFBB /* Realm */; };
 		FFB985772A30E84600ABEFBB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FFB985762A30E84600ABEFBB /* RealmSwift */; };
-		FFB9857A2A30E87B00ABEFBB /* DefaultRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985792A30E87B00ABEFBB /* DefaultRealmManager.swift */; };
+		FFB9857A2A30E87B00ABEFBB /* RealmManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985792A30E87B00ABEFBB /* RealmManagerImpl.swift */; };
 		FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */; };
 		FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B482A03C80A005CE41B /* AppointmentsView.swift */; };
 		FFC01B4C2A03CA78005CE41B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */; };
@@ -212,6 +213,7 @@
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
 		FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterProtocol.swift; sourceTree = "<group>"; };
+		FF69DADA2A53089200481CF1 /* DetailModelDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModelDB.swift; sourceTree = "<group>"; };
 		FF76E8D52A32244200DCF779 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureType.swift; sourceTree = "<group>"; };
 		FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturePublisher.swift; sourceTree = "<group>"; };
@@ -252,7 +254,7 @@
 		FFB9856D2A30D40400ABEFBB /* RegisterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
 		FFB9856F2A30E1C000ABEFBB /* Extension + NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + NotificationName.swift"; sourceTree = "<group>"; };
 		FFB985712A30E6E700ABEFBB /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		FFB985792A30E87B00ABEFBB /* DefaultRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRealmManager.swift; sourceTree = "<group>"; };
+		FFB985792A30E87B00ABEFBB /* RealmManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManagerImpl.swift; sourceTree = "<group>"; };
 		FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsViewController.swift; sourceTree = "<group>"; };
 		FFC01B482A03C80A005CE41B /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		FFC01B4B2A03CA78005CE41B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				FF1961BB2A4C79B000434AC7 /* FilterModel.swift */,
 				FF1961BD2A4C7A2B00434AC7 /* MapModel.swift */,
 				FF1961BF2A4C7A7800434AC7 /* ProfileMenuModel.swift */,
+				FF69DADA2A53089200481CF1 /* DetailModelDB.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -781,7 +784,7 @@
 			isa = PBXGroup;
 			children = (
 				FFB985712A30E6E700ABEFBB /* RealmManager.swift */,
-				FFB985792A30E87B00ABEFBB /* DefaultRealmManager.swift */,
+				FFB985792A30E87B00ABEFBB /* RealmManagerImpl.swift */,
 			);
 			path = RealmManager;
 			sourceTree = "<group>";
@@ -898,9 +901,9 @@
 		FFF5574329F2FA7A00758A31 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				FFF5574629F2FB8600758A31 /* SaloonCollection */,
 				FF25632B29F5716B00091374 /* DescriptionShowcaseView */,
 				FF25632529F5619A00091374 /* AddressView */,
-				FFF5574629F2FB8600758A31 /* SaloonCollection */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1136,6 +1139,7 @@
 				FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */,
 				FF27FC282A2E07A9006DE1B9 /* ShowNavigationBar.swift in Sources */,
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
+				FF69DADB2A53089200481CF1 /* DetailModelDB.swift in Sources */,
 				FF25634A29F687B900091374 /* FilterLayout.swift in Sources */,
 				FF1961BC2A4C79B000434AC7 /* FilterModel.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
@@ -1165,7 +1169,7 @@
 				FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */,
 				FF25634329F682C800091374 /* FilterViewController.swift in Sources */,
 				FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */,
-				FFB9857A2A30E87B00ABEFBB /* DefaultRealmManager.swift in Sources */,
+				FFB9857A2A30E87B00ABEFBB /* RealmManagerImpl.swift in Sources */,
 				FFC01B592A03DCA5005CE41B /* DefaultSettingsLayout.swift in Sources */,
 				FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */,
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,
