@@ -18,14 +18,17 @@ protocol MainPresenterOutput: AnyObject {
     func getModel(by id: Int) -> SaloonMockModel?
     func applyDB(by id: Int, completion: () -> ())
     func contains(by id: Int) -> Bool
+    func checkIsUserLaunched()
 }
 
 protocol MainViewInput: AnyObject {
-
+    func hideTabBar()
+    func checkIsUserLaunched(result: Bool)
+    func changeFavouritesAppearence(indexPath: IndexPath)
 }
 
 final class MainPresenter: MainPresenterOutput {
-   
+
     // MARK: - Properties
     
     private let optionsModel = OptionsModel.options
@@ -43,6 +46,24 @@ final class MainPresenter: MainPresenterOutput {
     init(view: MainViewInput, realmManager: RealmManager) {
         self.view = view
         self.realmManager = realmManager
+
+        subscribeTabBarNotification()
+        subcribeFavouritesNotification()
+    }
+
+    // MARK: - Action
+
+    @objc
+    private func hideTabBarNotificationAction(_ notification: Notification) {
+        view?.hideTabBar()
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc
+    private func isInFavouriteNotificationAction(_ notification: Notification) {
+        guard let userId = notification.userInfo?["userId"] as? Int else { return }
+
+        view?.changeFavouritesAppearence(indexPath: (getSearchIndex(id: userId) ?? [0, 0]))
     }
 }
 
@@ -89,15 +110,13 @@ extension MainPresenter {
             modelDB.scores = modelForSave?.scores ?? 0
             modelDB.min_price = modelForSave?.min_price ?? 0
 
-            var photosDB = modelDB.photos
             for photo in (modelForSave?.photos ?? []) {
                 photo.toData { resultData in
-                    photosDB.append(resultData)
+                    modelDB.photos.append(resultData)
                 }
             }
 
             realmManager.save(object: modelDB)
-
             VibrationManager.shared.vibrate(for: .success)
             completion()
         } else {
@@ -115,5 +134,26 @@ extension MainPresenter {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
         return realmManager.contains(predicate: predicate, DetailModelDB.self)
     }
-}
 
+    func checkIsUserLaunched() {
+        view?.checkIsUserLaunched(result: OnboardManager.shared.isUserFirstLaunch())
+    }
+
+    // MARK: - Private
+
+    private func subcribeFavouritesNotification() {
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(isInFavouriteNotificationAction(_ :)),
+            name: .isInFavourite,
+            object: nil)
+    }
+
+    private func subscribeTabBarNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(hideTabBarNotificationAction(_:)),
+            name: .showTabBar,
+            object: nil
+        )
+    }
+}

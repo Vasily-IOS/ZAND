@@ -43,6 +43,7 @@
 		FF30A1BD2A4A138800DD6E29 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BC2A4A138800DD6E29 /* Config.swift */; };
 		FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */; };
 		FF30A1C12A4A156D00DD6E29 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1C02A4A156D00DD6E29 /* Reusable.swift */; };
+		FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */; };
 		FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
@@ -193,6 +194,7 @@
 		FF30A1BC2A4A138800DD6E29 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UICollectionView.swift"; sourceTree = "<group>"; };
 		FF30A1C02A4A156D00DD6E29 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Notification.Name.swift"; sourceTree = "<group>"; };
 		FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVideoScreenViewController.swift; sourceTree = "<group>"; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 				FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */,
 				FF69DADE2A5465BF00481CF1 /* Extension + CGFloat.swift */,
 				FF69DAE02A5467FB00481CF1 /* Extension + UIImage.swift */,
+				FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */,
 				FF30A1C02A4A156D00DD6E29 /* Reusable.swift */,
 			);
 			path = Extensions;
@@ -1121,6 +1124,7 @@
 				FF7FA3A62A4B53F10075AAA7 /* GestureType.swift in Sources */,
 				FFDCE4BB2A1BB47000CEA0E1 /* ImageAsset.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
+				FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
 				FF69DADF2A5465BF00481CF1 /* Extension + CGFloat.swift in Sources */,
 				FF50CF972A4EFD9E00AACC5B /* Extension + UIViewController.swift in Sources */,

@@ -30,7 +30,6 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
         super.viewWillAppear(animated)
 
         setupBackButtonItem()
-
         presenter?.isInFavourite()
     }
 

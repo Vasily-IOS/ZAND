@@ -1,5 +1,5 @@
 //
-//  MainModel.swift
+//  SaloonMockModel.swift
 //  ZAND
 //
 //  Created by Василий on 18.04.2023.

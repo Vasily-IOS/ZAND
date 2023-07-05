@@ -12,6 +12,7 @@ protocol SaloonPresenterOutput: AnyObject {
     func getDBModel() -> DetailModelDB?
     func isInFavourite()
     func applyDB(completion: () -> ())
+
 }
 
 protocol SaloonViewInput: AnyObject {
@@ -77,14 +78,15 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
             modelDB.saloon_name = apiModel.saloon_name
             realmManager.save(object: modelDB)
 
+            sendNotification(userId: apiModel.id, isInFavourite: true)
             VibrationManager.shared.vibrate(for: .success)
+
             completion()
-
-            print("Save")
         } else {
-            print("Remove")
-
             remove(by: apiModel.id)
+
+            sendNotification(userId: apiModel.id, isInFavourite: false)
+
             completion()
         }
     }
@@ -97,5 +99,15 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
     func contains(by id: Int) -> Bool {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
         return realmManager.contains(predicate: predicate, DetailModelDB.self)
+    }
+
+    // MARK: - Private
+
+    private func sendNotification(userId: Int, isInFavourite: Bool) {
+        NotificationCenter.default.post(
+            name: .isInFavourite,
+            object: nil,
+            userInfo: ["userId": userId, "isInFavourite": isInFavourite]
+        )
     }
 }

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MainViewController.swift
 //  ZAND
 //
 //  Created by Василий on 18.04.2023.
@@ -21,6 +21,8 @@ final class MainViewController: BaseViewController<MainView> {
 
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
         guard let self else { return }
+
+        self.indexPath = indexPath
 
         self.presenter?.applyDB(by: id) { [weak self] in
             self?.contentView.changeHeartAppearence(by: indexPath)
@@ -49,14 +51,13 @@ final class MainViewController: BaseViewController<MainView> {
         super.viewDidLoad()
 
         subscribeDelegate()
-        subscribeNotify()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         hideNavigationBar()
-        checkIsUserLaunched()
+        presenter?.checkIsUserLaunched()
     }
 
     deinit {
@@ -82,23 +83,6 @@ final class MainViewController: BaseViewController<MainView> {
         let viewController = factory.getViewController(for: .register)
         addChildren(viewController: viewController)
         tabBarController?.tabBar.isHidden = true
-    }
-    
-    private func subscribeNotify() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(getNotifyAction(_:)),
-            name: .showTabBar,
-            object: nil
-        )
-    }
-    
-    // MARK: - Action
-    
-    @objc
-    private func getNotifyAction(_ notification: Notification) {
-        tabBarController?.tabBar.isHidden = false
-        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -158,6 +142,7 @@ extension MainViewController: UICollectionViewDelegate {
             if indexPath.section == 0 && indexPath.item == 0 {
                 AppRouter.shared.present(type: .filter)
             }
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         case .beautySaloon:
             AppRouter.shared.push(.saloonDetail(.apiModel(saloons[indexPath.item])))
         default:
@@ -191,8 +176,21 @@ extension MainViewController: MainViewDelegate {
 
 extension MainViewController: MainViewInput {
 
-    // MARK: - MainViewProtocol methods
+    // MARK: - MainViewInput methods
 
+    func hideTabBar() {
+        tabBarController?.tabBar.isHidden = false
+    }
+
+    func checkIsUserLaunched(result: Bool) {
+        if result == true {
+            addChild()
+        }
+    }
+
+    func changeFavouritesAppearence(indexPath: IndexPath) {
+        contentView.collectionView.reloadItems(at: [indexPath])
+    }
 }
 
 extension MainViewController: HideNavigationBar {}
