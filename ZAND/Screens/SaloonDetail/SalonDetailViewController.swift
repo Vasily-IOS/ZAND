@@ -24,8 +24,6 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
         backViewAction()
         subscribeDelegate()
         hideBackButtonTitle()
-
-        presenter?.updateUI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -81,8 +79,8 @@ extension SaloonDetailViewController: SaloonViewInput {
 
     // MARK: - SaloonViewInput methods
 
-    func updateUI(model: SaloonMockModel) {
-        contentView.configure(model: model)
+    func updateUI(type: SaloonDetailType) {
+        contentView.configure(type: type)
     }
 
     func isInFavourite(result: Bool) {
@@ -95,9 +93,11 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
     // MARK: - SaloonDetailDelegate methods
 
     func openMap() {
-        guard let model = presenter?.getModel() else { return }
-
-        AppRouter.shared.push(.selectableMap(model))
+        if let model = presenter?.getModel() {
+            AppRouter.shared.push(.selectableMap(model))
+        } else if let dbModel = presenter?.getDBModel() {
+            AppRouter.shared.push(.selectableMap(dbModel))
+        }
     }
 
     func openBooking() {

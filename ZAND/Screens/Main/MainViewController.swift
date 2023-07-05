@@ -159,7 +159,7 @@ extension MainViewController: UICollectionViewDelegate {
                 AppRouter.shared.present(type: .filter)
             }
         case .beautySaloon:
-            AppRouter.shared.push(.saloonDetail(saloons[indexPath.item]))
+            AppRouter.shared.push(.saloonDetail(.apiModel(saloons[indexPath.item])))
         default:
             break
         }

@@ -5,7 +5,7 @@
 //  Created by Василий on 07.06.2023.
 //
 
-import Foundation
+import UIKit
 
 enum MainType {
     case options
@@ -30,7 +30,7 @@ final class MainPresenter: MainPresenterOutput {
     
     private let optionsModel = OptionsModel.options
 
-    private var saloonsModel = SaloonMockModel.saloons
+    private let saloonsModel = SaloonMockModel.saloons
 
     private let realmManager: RealmManager
     
@@ -77,6 +77,25 @@ extension MainPresenter {
             let modelDB = DetailModelDB()
             modelDB.id = modelForSave?.id ?? 0
             modelDB.saloon_name = modelForSave?.saloon_name ?? ""
+            modelDB.rating = (modelForSave?.rating)?.toData() ?? Data()
+            modelDB.image = (modelForSave?.image ?? UIImage()).toData() ?? Data()
+            modelDB.category?.id = modelForSave?.category.id ?? 0
+            modelDB.category?.name = modelForSave?.category.name ?? ""
+            modelDB.adress = modelForSave?.adress ?? ""
+            modelDB.coordinates = modelForSave?.coordinates ?? ""
+            modelDB.descriptions = modelForSave?.description ?? ""
+            modelDB.weekend = modelForSave?.weekend ?? ""
+            modelDB.weekdays = modelForSave?.weekdays ?? ""
+            modelDB.scores = modelForSave?.scores ?? 0
+            modelDB.min_price = modelForSave?.min_price ?? 0
+
+            var photosDB = modelDB.photos
+            for photo in (modelForSave?.photos ?? []) {
+                photo.toData { resultData in
+                    photosDB.append(resultData)
+                }
+            }
+
             realmManager.save(object: modelDB)
 
             VibrationManager.shared.vibrate(for: .success)
@@ -97,3 +116,4 @@ extension MainPresenter {
         return realmManager.contains(predicate: predicate, DetailModelDB.self)
     }
 }
+

@@ -18,17 +18,17 @@ final class SaloonPhotoCollection: BaseUIView {
 
     var inFavourite: Bool = false {
         didSet {
-            heartButton.setImage(inFavourite ? ImageAsset.fillHeart_icon : ImageAsset.heart, for: .normal)
+            heartButton.setImage(
+                inFavourite ? ImageAsset.fillHeart_icon : ImageAsset.heart, for: .normal
+            )
         }
     }
-    
-    var model: SaloonMockModel? {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-    }
+
+    var id: Int = 0
+
+    var mockPhotos: [UIImage] = []
+
+    var dbPhotos: [Data] = []
 
     private (set) lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -81,23 +81,33 @@ final class SaloonPhotoCollection: BaseUIView {
         setViews()
         addTarget()
     }
-    
-    func configure(model: SaloonMockModel) {
-        self.model = model
-        self.pageControl.numberOfPages = model.photos.count
-        self.nameLabel.text = model.saloon_name
-        self.categoryLabel.text = model.category.name
-        self.ratingLabel.text = "\(model.rating)"
-        self.gradeCountLabel.text = "\(model.scores)"
+
+    func configure(type: SaloonDetailType) {
+        switch type {
+        case .apiModel(let model):
+            pageControl.numberOfPages = model.photos.count
+            nameLabel.text = model.saloon_name
+            categoryLabel.text = model.category.name
+            ratingLabel.text = "\(model.rating)"
+            gradeCountLabel.text = "\(model.scores)"
+            id = model.id
+            mockPhotos = model.photos
+        case .dbModel(let model):
+            pageControl.numberOfPages = model.photos.count
+            nameLabel.text = model.saloon_name
+            categoryLabel.text = model.category?.name
+            ratingLabel.text = "\(CGFloat(data: model.rating))"
+            gradeCountLabel.text = "\(model.scores)"
+            id = model.id
+            dbPhotos = Array(model.getPhotos())
+        }
     }
     
     // MARK: - Action
 
     @objc
     private func favouriteAction() {
-        if let id = model?.id {
-            favouriteHandler?(id)
-        }
+        favouriteHandler?(id)
     }
     
     @objc
@@ -189,13 +199,16 @@ extension SaloonPhotoCollection: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return model?.photos.count ?? 0
+        return mockPhotos.isEmpty ? dbPhotos.count : mockPhotos.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonPhotoCell.self)
-        cell.configure(image: model?.photos[indexPath.item] ?? UIImage())
+
+        mockPhotos.isEmpty ? cell.configure(image: dbPhotos[indexPath.item]) :
+        cell.configure(image: mockPhotos[indexPath.item])
+
         return cell
     }
 }

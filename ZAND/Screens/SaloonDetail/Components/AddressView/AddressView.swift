@@ -62,12 +62,20 @@ final class AddressView: BaseUIView {
         setViews()
         addTarget()
     }
-    
-    func configure(model: SaloonMockModel) {
-        addressDescriptionLabel.text = model.adress
-        weekDaysDescriptionLabel.text = model.weekdays
-        weekendDaysDescriptionLabel.text = model.weekend
-        minPriceLabel.text = "\(StringsAsset.from) \(model.min_price) \(StringsAsset.rub)"
+
+    func configure(type: SaloonDetailType) {
+        switch type {
+        case .apiModel(let model):
+            addressDescriptionLabel.text = model.adress
+            weekDaysDescriptionLabel.text = model.weekdays
+            weekendDaysDescriptionLabel.text = model.weekend
+            minPriceLabel.text = "\(StringsAsset.from) \(model.min_price) \(StringsAsset.rub)"
+        case .dbModel(let model):
+            addressDescriptionLabel.text = model.adress
+            weekDaysDescriptionLabel.text = model.weekdays
+            weekendDaysDescriptionLabel.text = model.weekend
+            minPriceLabel.text = "\(StringsAsset.from) \(model.min_price) \(StringsAsset.rub)"
+        }
     }
     
     // MARK: - Action

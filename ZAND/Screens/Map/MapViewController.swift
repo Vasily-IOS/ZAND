@@ -66,7 +66,7 @@ extension MapViewController: MapDelegate {
 
     func showDetail(by id: Int) {
         if let model = presenter?.getModel(by: id) {
-            AppRouter.shared.push(.saloonDetail(model))
+            AppRouter.shared.push(.saloonDetail(.apiModel(model)))
         }
     }
 }

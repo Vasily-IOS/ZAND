@@ -47,9 +47,14 @@ final class DescriptionShowcaseView: BaseUIView {
         setViews()
         subscribeDelegate()
     }
-    
-    func configure(model: SaloonMockModel) {
-        descriptionLabel.text = model.description
+
+    func configure(type: SaloonDetailType) {
+        switch type {
+        case .apiModel(let model):
+            descriptionLabel.text = model.description
+        case .dbModel(let model):
+            descriptionLabel.text = model.descriptions
+        }
     }
 }
 

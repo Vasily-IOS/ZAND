@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum SaloonDetailType {
+    case apiModel(SaloonMockModel)
+    case dbModel(DetailModelDB)
+}
+
 final class VCFactory: DefaultVCFactory {
     func getViewController(for type: VCType) -> UIViewController {
         switch type {
@@ -33,12 +38,12 @@ final class VCFactory: DefaultVCFactory {
             let presenter = MapPresenter(view: vc)
             vc.presenter = presenter
             return vc
-        case .saloonDetail(let model):
+        case .saloonDetail(let type):
             let realmManager: RealmManager = RealmManagerImpl()
             let view = SaloonDetailView()
             let vc = SaloonDetailViewController(contentView: view)
             let presenter = SaloonDetailPresenter(view: vc,
-                                                  model: model,
+                                                  type: type,
                                                   realmManager: realmManager)
             vc.presenter = presenter
             return vc

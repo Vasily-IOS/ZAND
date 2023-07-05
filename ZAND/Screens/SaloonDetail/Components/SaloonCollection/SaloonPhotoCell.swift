@@ -31,6 +31,10 @@ final class SaloonPhotoCell: BaseCollectionCell {
     func configure(image: UIImage) {
         saloonImage.image = image
     }
+
+    func configure(image: Data) {
+        saloonImage.image = UIImage(data: image)
+    }
 }
 
 extension SaloonPhotoCell {

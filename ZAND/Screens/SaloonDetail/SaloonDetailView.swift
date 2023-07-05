@@ -47,10 +47,10 @@ final class SaloonDetailView: BaseUIView {
         viewAction()
     }
 
-    func configure(model: SaloonMockModel) {
-        saloonPhotoCollection.configure(model: model)
-        addressView.configure(model: model)
-        descriptionShowcaseView.configure(model: model)
+    func configure(type: SaloonDetailType) {
+        saloonPhotoCollection.configure(type: type)
+        addressView.configure(type: type)
+        descriptionShowcaseView.configure(type: type)
     }
 
     // MARK: - Action

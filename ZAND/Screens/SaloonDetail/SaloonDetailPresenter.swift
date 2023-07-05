@@ -8,14 +8,14 @@
 import Foundation
 
 protocol SaloonPresenterOutput: AnyObject {
-    func updateUI()
-    func getModel() -> SaloonMockModel
+    func getModel() -> SaloonMockModel?
+    func getDBModel() -> DetailModelDB?
     func isInFavourite()
     func applyDB(completion: () -> ())
 }
 
 protocol SaloonViewInput: AnyObject {
-    func updateUI(model: SaloonMockModel)
+    func updateUI(type: SaloonDetailType)
     func isInFavourite(result: Bool)
 }
 
@@ -25,38 +25,56 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
 
     weak var view: SaloonViewInput?
 
-    private let model: SaloonMockModel
+    private var apiModel: SaloonMockModel?
+
+    private var modelDB: DetailModelDB?
 
     private let realmManager: RealmManager
 
     // MARK: - Initializers
 
-    init(view: SaloonViewInput, model: SaloonMockModel, realmManager: RealmManager) {
+    init(view: SaloonViewInput, type: SaloonDetailType, realmManager: RealmManager) {
         self.view = view
-        self.model = model
         self.realmManager = realmManager
+
+        switch type {
+        case .apiModel(let apiModel):
+            self.apiModel = apiModel
+        case .dbModel(let modelDB):
+            self.modelDB = modelDB
+        }
+
+        view.updateUI(type: type)
     }
 
     // MARK: - Instance methods
 
-    func updateUI() {
-        view?.updateUI(model: model)
+    func getModel() -> SaloonMockModel? {
+        guard let apiModel else { return nil }
+
+        return apiModel
     }
 
-    func getModel() -> SaloonMockModel {
-        return model
+    func getDBModel() -> DetailModelDB? {
+        guard let modelDB else { return nil }
+
+        return modelDB
     }
 
     func isInFavourite() {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: model.id))
+        guard let apiModel else { return }
+
+        let predicate = NSPredicate(format: "id == %@", NSNumber(value: apiModel.id))
         view?.isInFavourite(result: realmManager.contains(predicate: predicate, DetailModelDB.self))
     }
 
     func applyDB(completion: () -> ()) {
-        if contains(by: model.id) {
+        guard let apiModel else { return }
+
+        if contains(by: apiModel.id) {
             let modelDB = DetailModelDB()
-            modelDB.id = model.id
-            modelDB.saloon_name = model.saloon_name
+            modelDB.id = apiModel.id
+            modelDB.saloon_name = apiModel.saloon_name
             realmManager.save(object: modelDB)
 
             VibrationManager.shared.vibrate(for: .success)
@@ -65,7 +83,8 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
             print("Save")
         } else {
             print("Remove")
-            remove(by: model.id)
+
+            remove(by: apiModel.id)
             completion()
         }
     }

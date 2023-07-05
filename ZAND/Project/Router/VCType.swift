@@ -12,7 +12,7 @@ enum VCType {
     case search([SaloonMockModel])
     case main
     case map
-    case saloonDetail(SaloonMockModel)
+    case saloonDetail(SaloonDetailType)
     case register
     case filter
     case profile

@@ -63,6 +63,9 @@
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
 		FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */; };
 		FF69DADB2A53089200481CF1 /* DetailModelDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DADA2A53089200481CF1 /* DetailModelDB.swift */; };
+		FF69DADD2A545F5700481CF1 /* Extension + StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */; };
+		FF69DADF2A5465BF00481CF1 /* Extension + CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DADE2A5465BF00481CF1 /* Extension + CGFloat.swift */; };
+		FF69DAE12A5467FB00481CF1 /* Extension + UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DAE02A5467FB00481CF1 /* Extension + UIImage.swift */; };
 		FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76E8D52A32244200DCF779 /* RatingView.swift */; };
 		FF7FA3A62A4B53F10075AAA7 /* GestureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */; };
 		FF7FA3A82A4B54290075AAA7 /* GesturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */; };
@@ -214,6 +217,9 @@
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
 		FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterProtocol.swift; sourceTree = "<group>"; };
 		FF69DADA2A53089200481CF1 /* DetailModelDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModelDB.swift; sourceTree = "<group>"; };
+		FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + StringProtocol.swift"; sourceTree = "<group>"; };
+		FF69DADE2A5465BF00481CF1 /* Extension + CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + CGFloat.swift"; sourceTree = "<group>"; };
+		FF69DAE02A5467FB00481CF1 /* Extension + UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImage.swift"; sourceTree = "<group>"; };
 		FF76E8D52A32244200DCF779 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		FF7FA3A52A4B53F10075AAA7 /* GestureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureType.swift; sourceTree = "<group>"; };
 		FF7FA3A72A4B54290075AAA7 /* GesturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturePublisher.swift; sourceTree = "<group>"; };
@@ -543,6 +549,9 @@
 				FFB9856F2A30E1C000ABEFBB /* Extension + NotificationName.swift */,
 				FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */,
 				FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */,
+				FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */,
+				FF69DADE2A5465BF00481CF1 /* Extension + CGFloat.swift */,
+				FF69DAE02A5467FB00481CF1 /* Extension + UIImage.swift */,
 				FF30A1C02A4A156D00DD6E29 /* Reusable.swift */,
 			);
 			path = Extensions;
@@ -1113,6 +1122,7 @@
 				FFDCE4BB2A1BB47000CEA0E1 /* ImageAsset.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
+				FF69DADF2A5465BF00481CF1 /* Extension + CGFloat.swift in Sources */,
 				FF50CF972A4EFD9E00AACC5B /* Extension + UIViewController.swift in Sources */,
 				FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */,
 				FF1961BA2A4C78E700434AC7 /* SettingsPresenter.swift in Sources */,
@@ -1123,6 +1133,7 @@
 				FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */,
 				FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */,
 				FF25633629F5886700091374 /* SignInViewController.swift in Sources */,
+				FF69DAE12A5467FB00481CF1 /* Extension + UIImage.swift in Sources */,
 				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
 				FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */,
 				FF27FC212A2DE4C3006DE1B9 /* BackView.swift in Sources */,
@@ -1141,6 +1152,7 @@
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
 				FF69DADB2A53089200481CF1 /* DetailModelDB.swift in Sources */,
 				FF25634A29F687B900091374 /* FilterLayout.swift in Sources */,
+				FF69DADD2A545F5700481CF1 /* Extension + StringProtocol.swift in Sources */,
 				FF1961BC2A4C79B000434AC7 /* FilterModel.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
 				FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */,

@@ -38,9 +38,9 @@ final class FavouritesCell: BaseCollectionCell {
     }
 
     func configure(model: DetailModelDB) {
-//        self.saloonImage.image = model.image
-        self.saloonName.text = model.saloon_name
-//        self.ratingLabel.text = "\(model.rating)"
+        saloonImage.image = UIImage(data: model.image)
+        saloonName.text = model.saloon_name
+        ratingLabel.text = "\(CGFloat(data: model.rating))"
     }
 }
 

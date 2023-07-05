@@ -8,48 +8,27 @@
 import Foundation
 import RealmSwift
 
-final class DetailModelDB: Object {
+class DetailModelDB: Object, CommonModel {
     @Persisted var id = 0
-//    @Persisted var category: Category
+    @Persisted var category: CategoryDB? = CategoryDB()
     @Persisted var saloon_name = ""
+    @Persisted var adress = ""
+    @Persisted var rating = Data()
+    @Persisted var image = Data()
+    @Persisted var photos = List<Data>()
+    @Persisted var scores = 0
+    @Persisted var weekdays = ""
+    @Persisted var weekend = ""
+    @Persisted var min_price = 0
+    @Persisted var descriptions = ""
+    @Persisted var coordinates = ""
 
-//    @Persisted var adress = ""
-//    @Persisted var rating = 0
-//    @Persisted var image: UIImage = UIImage()
-//    @Persisted var photos: [UIImage] = []
-//    @Persisted var scores = 0
-//    @Persisted var weekdays = ""
-//    @Persisted var weekend = ""
-//    @Persisted var min_price = 0
-//    @Persisted var descriptions = ""
-//    @Persisted var showcase: [Item]
-//    @Persisted var coordinates = ""
+    func getPhotos() -> List<Data> {
+        return photos
+    }
 }
 
-
-//let id: Int
-//let category: Category
-//let saloon_name: String
-//let adress: String
-//let rating: CGFloat
-//let image: UIImage
-//let photos: [UIImage]
-//let scores: Int
-//let weekdays: String
-//let weekend: String
-//let min_price: Int
-//let description: String
-//let showcase: [Item]
-//let coordinates: String
-
-
-//struct Category: Hashable {
-//    let id: Int
-//    let name: String
-//}
-//
-//struct Item: Hashable {
-//    let image: UIImage?
-//    let description: String?
-//    let price_from: Int?
-//}
+class CategoryDB: Object {
+    @Persisted var id = 0
+    @Persisted var name = ""
+}

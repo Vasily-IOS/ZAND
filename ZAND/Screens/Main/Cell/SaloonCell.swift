@@ -27,12 +27,18 @@ final class SaloonCell: BaseCollectionCell {
         didSet {
             let image = isInFavourite ? ImageAsset.fillHeart_icon : ImageAsset.heart
             favouritesButton.setImage(image, for: .normal)
+        }
+    }
 
-            if isInFavourite {
+    var shouldPlayAnimation: Bool = false {
+        didSet {
+            if shouldPlayAnimation {
                 animationView.isHidden = false
+                favouritesButton.isUserInteractionEnabled = false
                 animationView.play()
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { 
+                    self.favouritesButton.isUserInteractionEnabled = true
                     self.animationView.isHidden = true
                 }
             }
