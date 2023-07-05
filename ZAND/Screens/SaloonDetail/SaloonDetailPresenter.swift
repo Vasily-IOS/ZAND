@@ -70,23 +70,15 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
     }
 
     func applyDB(completion: () -> ()) {
-        guard let apiModel else { return }
+        guard let modelForSave = apiModel else { return }
 
-        if contains(by: apiModel.id) {
-            let modelDB = DetailModelDB()
-            modelDB.id = apiModel.id
-            modelDB.saloon_name = apiModel.saloon_name
-            realmManager.save(object: modelDB)
-
-            sendNotification(userId: apiModel.id, isInFavourite: true)
-            VibrationManager.shared.vibrate(for: .success)
-
+        if contains(by: modelForSave.id) {
+            SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
+            sendNotification(userId: modelForSave.id, isInFavourite: true)
             completion()
         } else {
-            remove(by: apiModel.id)
-
-            sendNotification(userId: apiModel.id, isInFavourite: false)
-
+            remove(by: modelForSave.id)
+            sendNotification(userId: modelForSave.id, isInFavourite: false)
             completion()
         }
     }
