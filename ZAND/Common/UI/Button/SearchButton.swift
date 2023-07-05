@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class SearchButton: UIButton {
+final class SearchButton: UIButton {
     
     // MARK: - Closure
     
-    var tapHandler: (() -> Void)
+    var tapHandler: (() -> Void)?
     
     // MARK: - Properties
     
@@ -21,11 +21,11 @@ class SearchButton: UIButton {
     
     // MARK: - Initializers
     
-    init(handler: @escaping () -> Void) {
-        self.tapHandler = handler
+    override init(frame: CGRect) {
         super.init(frame: .zero)
-        setSelf()
+
         setViews()
+        setSelf()
     }
     
     @available(*, unavailable)
@@ -37,11 +37,13 @@ class SearchButton: UIButton {
     
     @objc
     private func tapAction() {
-        tapHandler()
+        tapHandler?()
     }
 }
 
 extension SearchButton {
+
+    // MARK: - Instance methods
     
     private func setViews() {
         addSubviews([searchIcon, searchLabel])

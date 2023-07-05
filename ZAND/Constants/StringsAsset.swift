@@ -45,9 +45,9 @@ enum StringsAsset {
     static let from = "от"
     static let rub = "руб."
     static let skip = "Пропустить"
-    static let notifyTabBar = "notifyTabBar"
     static let search = "Поиск"
     static let cancel = "Отмена"
+    static let empty = "Пока что пусто"
     
     // MARK: - Bottom button values
     static let apply = "Применить"
