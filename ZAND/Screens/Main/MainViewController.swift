@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Moya
 
 final class MainViewController: BaseViewController<MainView> {
 
@@ -42,7 +43,7 @@ final class MainViewController: BaseViewController<MainView> {
     var saloons: [SaloonMockModel] {
         presenter?.getModel(by: .saloons) as! [SaloonMockModel]
     }
-    
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
