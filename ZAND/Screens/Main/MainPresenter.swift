@@ -93,32 +93,10 @@ extension MainPresenter {
 
     func applyDB(by id: Int, completion: () -> ()) {
         if contains(by: id) {
-            let modelForSave = getModel(by: id)
-
-            let modelDB = DetailModelDB()
-            modelDB.id = modelForSave?.id ?? 0
-            modelDB.saloon_name = modelForSave?.saloon_name ?? ""
-            modelDB.rating = (modelForSave?.rating)?.toData() ?? Data()
-            modelDB.image = (modelForSave?.image ?? UIImage()).toData() ?? Data()
-            modelDB.category?.id = modelForSave?.category.id ?? 0
-            modelDB.category?.name = modelForSave?.category.name ?? ""
-            modelDB.adress = modelForSave?.adress ?? ""
-            modelDB.coordinates = modelForSave?.coordinates ?? ""
-            modelDB.descriptions = modelForSave?.description ?? ""
-            modelDB.weekend = modelForSave?.weekend ?? ""
-            modelDB.weekdays = modelForSave?.weekdays ?? ""
-            modelDB.scores = modelForSave?.scores ?? 0
-            modelDB.min_price = modelForSave?.min_price ?? 0
-
-            for photo in (modelForSave?.photos ?? []) {
-                photo.toData { resultData in
-                    modelDB.photos.append(resultData)
-                }
+            if let modelForSave = getModel(by: id) {
+                SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
+                completion()
             }
-
-            realmManager.save(object: modelDB)
-            VibrationManager.shared.vibrate(for: .success)
-            completion()
         } else {
             remove(by: id)
             completion()

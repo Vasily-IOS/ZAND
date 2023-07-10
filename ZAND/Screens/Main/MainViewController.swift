@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Moya
 
 final class MainViewController: BaseViewController<MainView> {
 
@@ -21,8 +22,6 @@ final class MainViewController: BaseViewController<MainView> {
 
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
         guard let self else { return }
-
-        self.indexPath = indexPath
 
         self.presenter?.applyDB(by: id) { [weak self] in
             self?.contentView.changeHeartAppearence(by: indexPath)
@@ -44,7 +43,7 @@ final class MainViewController: BaseViewController<MainView> {
     var saloons: [SaloonMockModel] {
         presenter?.getModel(by: .saloons) as! [SaloonMockModel]
     }
-    
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
