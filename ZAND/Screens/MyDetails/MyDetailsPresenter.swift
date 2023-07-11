@@ -7,21 +7,21 @@
 
 import Foundation
 
-protocol SettingsPresenterOutput: AnyObject {
+protocol MyDetailsPresenterOutput: AnyObject {
     func getModel() -> [SettingsMenuModel]
 }
 
-protocol SettingsInput: AnyObject {}
+protocol MyDetailsInput: AnyObject {}
 
-final class SettingsPresenterImpl: SettingsPresenterOutput {
+final class MyDetailsPresenterImpl: MyDetailsPresenterOutput {
 
     // MARK: - Properties
 
-    weak var view: SettingsInput?
+    weak var view: MyDetailsInput?
 
     // MARK: - Initializers
 
-    init(view: SettingsInput) {
+    init(view: MyDetailsInput) {
         self.view = view
     }
 

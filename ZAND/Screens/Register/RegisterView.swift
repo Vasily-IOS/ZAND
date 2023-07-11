@@ -11,23 +11,12 @@ protocol RegisterViewDelegate: AnyObject {
     func skip()
     func popViewController()
     func stopEditing()
-    func updateTo(state: RegistrationState)
+    func register()
 }
 
 final class RegisterView: BaseUIView {
     
     // MARK: - Properties
-
-    var state: RegistrationState? {
-        didSet {
-            guard let state else { return }
-
-            if state == .thirdStep {
-                bottomButton.stateText = .register
-                registerLabel.text = StringsAsset.confirmEmail
-            }
-        }
-    }
     
     weak var delegate: RegisterViewDelegate?
 
@@ -36,51 +25,42 @@ final class RegisterView: BaseUIView {
     lazy var entranceStackView = UIStackView(alignment: .fill,
                                                      arrangedSubviews: [
                                                         nameTextField,
-                                                        surnameTextField,
-                                                        ageTextField,
-                                                        userNameTextField,
                                                         emailTextField,
+                                                        phoneTextField,
                                                         passwordTextField,
-                                                        confirmPasswordTextField,
-                                                        confirmationCodeTextField
+                                                        confirmPasswordTextField
                                                      ],
                                                      axis: .vertical,
                                                      distribution: .fill,
-                                                     spacing: 10)
+                                                     spacing: 20)
 
     lazy var bottomButtonsStackView = UIStackView(alignment: .center,
                                                       arrangedSubviews: [
                                                         transparentButton,
-                                                        bottomButton,
+                                                        registerButton,
                                                         skipButton
                                                       ],
                                                       axis: .vertical,
                                                       distribution: .fill,
                                                       spacing: 10)
+
+    let nameTextField = PaddingTextField(state: .name)
+
+    let emailTextField = PaddingTextField(state: .email)
+
+    let phoneTextField = PaddingTextField(state: .phone)
+
+    let passwordTextField = PaddingTextField(state: .password)
+
+    let confirmPasswordTextField = PaddingTextField(state: .confirmPassword)
     
     private let registerLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                         .black,
                                         StringsAsset.registation)
 
-    private let nameTextField = PaddingTextField(state: .name)
-
-    private let surnameTextField = PaddingTextField(state: .surname)
-
-    private let ageTextField = PaddingTextField(state: .age)
-    
-    private let userNameTextField = PaddingTextField(state: .usename)
-
-    private let emailTextField = PaddingTextField(state: .email)
-
-    private let passwordTextField = PaddingTextField(state: .password)
-
-    private let confirmPasswordTextField = PaddingTextField(state: .confirmPassword)
-    
-    private let confirmationCodeTextField = PaddingTextField(state: .confirmation_code)
-    
     private let transparentButton = TransparentButton(state: .accountExist)
 
-    private let bottomButton = BottomButton(buttonText: .contin)
+    private let registerButton = BottomButton(buttonText: .register)
 
     private let skipButton: UIButton = {
         let skipButton = UIButton()
@@ -118,13 +98,7 @@ final class RegisterView: BaseUIView {
     
     @objc
     private func registerButtonAction() {
-        guard let state else { return }
-
-        if state == .firstStep {
-            delegate?.updateTo(state: .secondStep)
-        } else if state == .secondStep {
-            delegate?.updateTo(state: .thirdStep)
-        }
+        delegate?.register()
     }
     
     @objc
@@ -157,13 +131,13 @@ extension RegisterView {
             make.centerX.equalTo(self)
         }
         
-        bottomButton.snp.makeConstraints { make in
+        registerButton.snp.makeConstraints { make in
             make.width.equalTo(280)
             make.height.equalTo(44)
         }
         
         skipButton.snp.makeConstraints { make in
-            make.width.height.equalTo(bottomButton)
+            make.width.height.equalTo(registerButton)
         }
     }
     
@@ -177,7 +151,7 @@ extension RegisterView {
                                     action: #selector(backToSignInAction),
                                     for: .touchUpInside)
 
-        bottomButton.addTarget(self,
+        registerButton.addTarget(self,
                                action: #selector(registerButtonAction),
                                for: .touchUpInside)
 

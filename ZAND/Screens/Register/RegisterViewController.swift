@@ -23,7 +23,6 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         super.viewDidLoad()
 
         subscribeDelegate()
-        presenter?.setInitialState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +39,13 @@ final class RegisterViewController: BaseViewController<RegisterView> {
     
     private func subscribeDelegate() {
         contentView.delegate = self
+        [contentView.nameTextField,
+         contentView.emailTextField,
+         contentView.phoneTextField,
+         contentView.passwordTextField,
+         contentView.confirmPasswordTextField].forEach {
+            $0.delegate = self
+        }
     }
     
     private func sendNotify() {
@@ -67,8 +73,49 @@ extension RegisterViewController: RegisterViewDelegate {
         contentView.endEditing(true)
     }
 
-    func updateTo(state: RegistrationState) {
-        presenter?.performUpdateUI(to: state)
+    func register() {
+        presenter?.register()
+    }
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+
+    // MARK: - UITextFieldDelegate methods
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if textField == contentView.phoneTextField {
+            let fullNumber = (textField.text ?? "") + string
+            textField.text = presenter?.numberCorrector(phoneNumber: fullNumber,
+                                                        shouldRemoveLastDigit: range.length == 1)
+            return false
+        }
+        return true
+    }
+
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let text = textField.text ?? ""
+
+        switch textField {
+        case contentView.nameTextField:
+            presenter?.registerModel.name = text
+        case contentView.emailTextField:
+            presenter?.registerModel.email = text
+        case contentView.phoneTextField:
+            presenter?.registerModel.phone = text
+        case contentView.passwordTextField:
+            presenter?.registerModel.password = text
+        case contentView.confirmPasswordTextField:
+            presenter?.registerModel.confirmPassword = text
+        default:
+            break
+        }
+
+        presenter?.filledFields = [
+            contentView.nameTextField, contentView.emailTextField, contentView.phoneTextField,
+            contentView.passwordTextField, contentView.confirmPasswordTextField
+        ].filter({ !($0.text ?? "").isEmpty}).count
     }
 }
 
@@ -76,34 +123,12 @@ extension RegisterViewController: RegisterViewInput {
 
     // MARK: - RegisterViewInput methods
 
-    func setInitialState(state: RegistrationState) {
-        updateUI(by: state)
+    func showAlert(type: AlertType) {
+        AppRouter.shared.showAlert(type: type)
     }
 
-    func updateUI(by state: RegistrationState) {
-        contentView.state = state
-        switch state {
-        case .firstStep:
-            contentView.entranceStackView.subviews.suffix(5).forEach {
-                $0.isHidden = true
-            }
-        case .secondStep:
-            let range = 3..<7
-            for i in 0..<contentView.entranceStackView.subviews.count {
-                if range.contains(i) {
-                    contentView.entranceStackView.subviews[i].isHidden = false
-                } else {
-                    contentView.entranceStackView.subviews[i].isHidden = true
-                }
-            }
-        case .thirdStep:
-            contentView.entranceStackView.subviews.prefix(8).forEach {
-                $0.isHidden = true
-            }
-            contentView.entranceStackView.subviews.suffix(1).forEach {
-                $0.isHidden = false
-            }
-        }
+    func dismiss() {
+        AppRouter.shared.popViewController()
     }
 }
 

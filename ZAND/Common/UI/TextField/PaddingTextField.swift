@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class PaddingTextField: UITextField {
+final class PaddingTextField: UITextField {
     
     // MARK: - Nested types
     
@@ -21,6 +21,7 @@ class PaddingTextField: UITextField {
         case usename
         case confirmPassword
         case confirmation_code
+        case phone
         
         var placeholder_text: String {
             switch self {
@@ -40,6 +41,8 @@ class PaddingTextField: UITextField {
                 return StringsAsset.confirmPassword
             case .confirmation_code:
                 return StringsAsset.confirmationCode
+            case .phone:
+                return StringsAsset.phoneNumber
             }
         }
     }
@@ -70,6 +73,10 @@ class PaddingTextField: UITextField {
     
     private func setup(with state: State) {
         placeholder = state.placeholder_text
+
+        if state == .phone {
+            keyboardType = .numberPad
+        }
     }
     
     private func setSelf() {

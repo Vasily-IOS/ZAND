@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class AppRouter {
+final class AppRouter {
     
     static let shared: DefaultRouter = AppRouter()
     
@@ -50,6 +50,7 @@ extension AppRouter {
             }
         }
 
+        appDelegate?.window = UIWindow(frame: UIScreen.main.bounds)
         appDelegate?.window?.backgroundColor = .black
         appDelegate?.window?.rootViewController = videoVC
         setupNavigationbar()
@@ -109,5 +110,12 @@ extension AppRouter: DefaultRouter {
         let vc = vcFactory.getViewController(for: type) as! SearchViewController
         vc.completionHandler = completion
         navigationController.present(vc, animated: true)
+    }
+
+    func showAlert(type: AlertType) {
+        let alertController = UIAlertController(title: type.textValue, message: nil, preferredStyle: .alert)
+        let understandAction = UIAlertAction(title: "Понятно", style: .cancel)
+        alertController.addAction(understandAction)
+        navigationController.present(alertController, animated: true)
     }
 }

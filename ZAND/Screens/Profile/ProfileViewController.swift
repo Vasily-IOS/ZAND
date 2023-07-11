@@ -142,7 +142,7 @@ extension ProfileViewController: UICollectionViewDelegate {
             case 0:
                 AppRouter.shared.push(.appointments)
             case 1:
-                AppRouter.shared.push(.settings)
+                AppRouter.shared.push(.myDetails)
             case 2:
                 makeAlertController()
             default:

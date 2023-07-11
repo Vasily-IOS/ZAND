@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SettingsView: BaseUIView {
+final class MyDetailsView: BaseUIView {
     
     // MARK: - Properties
     
@@ -45,7 +45,7 @@ final class SettingsView: BaseUIView {
     }
 }
 
-extension SettingsView {
+extension MyDetailsView {
     
     // MARK: - Instance methods
 
@@ -63,11 +63,9 @@ extension SettingsView {
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { section, _ in
-            switch SettingsSection.init(rawValue: section) {
+            switch MyDetailsSection.init(rawValue: section) {
             case .data:
                 return self.layout.createSection(type: .data)
-            case .pushes:
-                return self.layout.createSection(type: .pushes)
             default:
                 return nil
             }

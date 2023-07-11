@@ -11,7 +11,7 @@ import SnapKit
 protocol SignInDelegate: AnyObject {
     func stopEditing()
     func navigateToRegister()
-    func navigatetoProfile()
+    func signIn()
 }
 
 final class SignInView: BaseUIView {
@@ -19,25 +19,25 @@ final class SignInView: BaseUIView {
     // MARK: - Properties
 
     weak var delegate: SignInDelegate?
-    
+
+    let emailTextField = PaddingTextField(state: .email)
+
+    let passwordTextField = PaddingTextField(state: .password)
+
     private let signInLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                       .black,
                                       StringsAsset.entrance)
-
-    private let emailTextField = PaddingTextField(state: .email)
-
-    private let passTextField = PaddingTextField(state: .password)
 
     private let transparentButton = TransparentButton(state: .forgotPassword)
     
     private lazy var entranceStackView = UIStackView(alignment: .fill,
                                                      arrangedSubviews: [
                                                         emailTextField,
-                                                        passTextField
+                                                        passwordTextField
                                                      ],
                                                      axis: .vertical,
                                                      distribution: .fill,
-                                                     spacing: 10)
+                                                     spacing: 20)
 
     private let registerButton = TransparentButton(state: .register)
 
@@ -75,8 +75,8 @@ final class SignInView: BaseUIView {
     }
     
     @objc
-    private func navigateToProfileAction() {
-        delegate?.navigatetoProfile()
+    private func signInAction() {
+        delegate?.signIn()
     }
 }
 
@@ -123,7 +123,7 @@ extension SignInView {
     }
     
     private func addTargets() {
-        signInButton.addTarget(self, action: #selector(navigateToProfileAction), for: .touchUpInside)
+        signInButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(navigateToRegisterAction), for: .touchUpInside)
     }
 }

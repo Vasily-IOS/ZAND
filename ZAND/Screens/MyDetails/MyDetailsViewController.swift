@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class SettingsViewController: BaseViewController<SettingsView> {
+final class MyDetailsViewController: BaseViewController<MyDetailsView> {
 
     // MARK: - Properties
 
-    var presenter: SettingsPresenterOutput?
+    var presenter: MyDetailsPresenterOutput?
 
     // MARK: - Lifecycle
 
@@ -29,21 +29,19 @@ final class SettingsViewController: BaseViewController<SettingsView> {
     }
 }
 
-extension SettingsViewController: UICollectionViewDataSource {
+extension MyDetailsViewController: UICollectionViewDataSource {
 
     // MARK: - UICollectionViewDataSource methods
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return SettingsSection.allCases.count
+        return MyDetailsSection.allCases.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        switch SettingsSection.init(rawValue: section) {
+        switch MyDetailsSection.init(rawValue: section) {
         case .data:
             return presenter?.getModel().count ?? 0
-        case .pushes:
-            return 1
         default:
             return 0
         }
@@ -51,7 +49,7 @@ extension SettingsViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch SettingsSection.init(rawValue: indexPath.section) {
+        switch MyDetailsSection.init(rawValue: indexPath.section) {
         case .data:
             let cell = collectionView.dequeueReusableCell(for: indexPath,
                                                           cellType: DataCell.self)
@@ -60,17 +58,13 @@ extension SettingsViewController: UICollectionViewDataSource {
             }
 
             return cell
-        case .pushes:
-            let cell = collectionView.dequeueReusableCell(for: indexPath,
-                                                          cellType: PushCell.self)
-            return cell
         default:
             return UICollectionViewCell()
         }
     }
 }
 
-extension SettingsViewController: UICollectionViewDelegate {
+extension MyDetailsViewController: UICollectionViewDelegate {
 
     // MARK: - UICollectionViewDelegate methods
 
@@ -80,12 +74,9 @@ extension SettingsViewController: UICollectionViewDelegate {
         let headerView = contentView.collectionView.dequeueReusableView(for: indexPath,
                                                             viewType: ReuseHeaderView.self,
                                                             kind: .header)
-        switch SettingsSection.init(rawValue: indexPath.section) {
+        switch MyDetailsSection.init(rawValue: indexPath.section) {
         case .data:
             headerView.state = .data
-            return headerView
-        case .pushes:
-            headerView.state = .pushes
             return headerView
         default:
             return UICollectionReusableView()
@@ -93,4 +84,4 @@ extension SettingsViewController: UICollectionViewDelegate {
     }
 }
 
-extension SettingsViewController: SettingsInput {}
+extension MyDetailsViewController: MyDetailsInput {}

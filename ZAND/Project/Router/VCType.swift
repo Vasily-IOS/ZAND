@@ -17,7 +17,8 @@ enum VCType {
     case filter
     case profile
     case appointments
-    case settings
+    case myDetails
     case booking
     case selectableMap(CommonModel)
+    case signIn
 }

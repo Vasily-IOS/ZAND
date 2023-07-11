@@ -6,18 +6,25 @@
 //
 
 import UIKit
-import MapKit
+import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var navigationController: UINavigationController?
-    
+
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
+
         setupRouter()
+        FirebaseApp.configure()
+
+        if AuthManagerImpl.shared.isUserLogged() {
+            print("User logged")
+        } else {
+            print("User is not logged")
+        }
+
         return true
     }
 }
