@@ -34,8 +34,7 @@ extension TabBarController {
                                         image:  ImageAsset.map_icon,
                                         selectedImage: nil)
         
-        let signInView = SignInView()
-        let signInVc = SignInViewController(contentView: signInView)
+        let signInVc = vcFactory.getViewController(for: .signIn)
         signInVc.tabBarItem = UITabBarItem(title: StringsAsset.profile,
                                            image: ImageAsset.profile_icon,
                                            selectedImage: nil)

@@ -75,13 +75,13 @@ final class VCFactory: DefaultVCFactory {
             vc.presenter = presenter
             vc.title = StringsAsset.books
             return vc
-        case .settings:
-            let layout: DefaultSettingsLayout = SettingsLayout()
-            let view = SettingsView(layout: layout)
-            let vc = SettingsViewController(contentView: view)
-            let presenter = SettingsPresenterImpl(view: vc)
+        case .myDetails:
+            let layout: DefaultSettingsLayout = MyDetailsLayout()
+            let view = MyDetailsView(layout: layout)
+            let vc = MyDetailsViewController(contentView: view)
+            let presenter = MyDetailsPresenterImpl(view: vc)
             vc.presenter = presenter
-            vc.title = StringsAsset.settings
+            vc.title = StringsAsset.details
             return vc
         case .booking:
             return BookingViewController()
@@ -89,6 +89,12 @@ final class VCFactory: DefaultVCFactory {
             let view = SelectableMapView()
             let vc = SelectableViewController(contentView: view)
             let presenter = SelectableMapPresenter(view: vc, model: model)
+            vc.presenter = presenter
+            return vc
+        case .signIn:
+            let view = SignInView()
+            let vc = SignInViewController(contentView: view)
+            let presenter = SignInPresenter(view: vc)
             vc.presenter = presenter
             return vc
         }

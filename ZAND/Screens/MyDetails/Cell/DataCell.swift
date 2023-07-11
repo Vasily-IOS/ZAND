@@ -19,6 +19,7 @@ final class DataCell: BaseCollectionCell {
     
     override func setup() {
         super.setup()
+
         setViews()
     }
     

@@ -76,7 +76,7 @@ enum StringsAsset {
     
     // MARK: - ProfileMenu
     static let books = "Записи"
-    static let settings = "Настройки"
+    static let details = "Мои данные"
     static let logOut = "Выйти"
     
     // MARK: - Tabbar

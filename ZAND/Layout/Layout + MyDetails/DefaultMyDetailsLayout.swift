@@ -8,5 +8,5 @@
 import UIKit
 
 protocol DefaultSettingsLayout {
-    func createSection(type: SettingsSection) -> NSCollectionLayoutSection
+    func createSection(type: MyDetailsSection) -> NSCollectionLayoutSection
 }
