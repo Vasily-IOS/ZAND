@@ -40,10 +40,9 @@ final class RegisterViewController: BaseViewController<RegisterView> {
     private func subscribeDelegate() {
         contentView.delegate = self
         [contentView.nameTextField,
-         contentView.emailTextField,
          contentView.phoneTextField,
-         contentView.smsCodeTextField,
-         contentView.smsCodeTextField].forEach {
+         contentView.smsCodeTextField
+        ].forEach {
             $0.delegate = self
         }
     }
@@ -91,7 +90,7 @@ extension RegisterViewController: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         if textField == contentView.phoneTextField {
             let fullNumber = (textField.text ?? "") + string
-            textField.text = presenter?.numberCorrector(phoneNumber: fullNumber,
+            textField.text = (textField.text ?? "").numberCorrector(phoneNumber: fullNumber,
                                                         shouldRemoveLastDigit: range.length == 1)
             return false
         }

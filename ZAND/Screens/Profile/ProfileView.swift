@@ -18,6 +18,8 @@ final class ProfileView: BaseUIView {
 
     weak var delegate: ProfileViewDelegate?
 
+    let userNameView = UserNameView()
+
     lazy var collectionView: UICollectionView = {
         var layout = createLayout()
         var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -39,8 +41,6 @@ final class ProfileView: BaseUIView {
     }()
     
     private let layout: DefaultProfileLayout
-
-    private let userNameView = UserNameView()
 
     private lazy var callUsButton: BottomButton = {
         let callUsButton = BottomButton(buttonText: .callUs)

@@ -39,7 +39,9 @@ final class SignInViewController: BaseViewController<SignInView> {
 
     private func subscribeDelegate() {
         contentView.delegate = self
-        [contentView.emailTextField, contentView.passwordTextField].forEach {
+        [contentView.nameTextField,
+         contentView.phoneTextField,
+         contentView.smsCodeTextField].forEach {
             $0.delegate = self
         }
     }
@@ -58,8 +60,11 @@ extension SignInViewController: SignInDelegate {
     }
 
     func signIn() {
-        presenter?.signIn()
-//        AppRouter.shared.push(.profile)
+        if !presenter!.codeAreSuccessfullySended {
+            presenter?.enterNamePhone()
+        } else {
+            presenter?.enterSmsCode()
+        }
     }
 }
 
@@ -71,10 +76,12 @@ extension SignInViewController: UITextFieldDelegate {
         let text = textField.text ?? ""
 
         switch textField {
-        case contentView.emailTextField:
-            presenter?.email = text
-        case contentView.passwordTextField:
-            presenter?.password = text
+        case contentView.nameTextField:
+            presenter?.registerModel.name = text
+        case contentView.phoneTextField:
+            presenter?.registerModel.phone = text
+        case contentView.smsCodeTextField:
+            presenter?.registerModel.verifyCode = text
         default:
             break
         }
@@ -85,8 +92,21 @@ extension SignInViewController: SignInViewInput {
 
     // MARK: - SignInViewInput methods
 
-    func signInSuccess() {
-        view.backgroundColor = .red
+    func showAlert(type: AlertType) {
+        AppRouter.shared.showAlert(type: type)
+    }
+
+    func updateUI(state: RegisterViewState) {
+        switch state {
+        case .sendCode:
+            contentView.updateUI()
+        case .showProfile:
+            AppRouter.shared.switchRoot(type: .profile)
+        }
+    }
+
+    func dismiss() {
+        AppRouter.shared.popViewController()
     }
 }
 

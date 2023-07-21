@@ -19,4 +19,7 @@ protocol DefaultRouter: AnyObject {
     
     func presentWithNav(type: VCType)
     func presentSearch(type: VCType, completion: ((SaloonMockModel) -> ())?)
+
+    func switchRoot(type: ReplacedControllerType)
+    func checkAuth()
 }

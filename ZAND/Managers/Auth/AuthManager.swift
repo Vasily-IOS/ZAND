@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseDatabase
 
 protocol AuthManager: AnyObject {
-    func startAuth(phone: String, completion: @escaping ((Bool) -> Void))
+    func startAuth(name: String, phone: String, completion: @escaping ((Bool) -> Void))
     func verifyCode(code: String, completion: @escaping ((Bool) -> Void))
     func logOut()
 }
@@ -21,9 +21,13 @@ final class AuthManagerImpl: AuthManager {
 
     static let shared = AuthManagerImpl()
 
+    var name: String = ""
+
     private var verificationID: String?
 
     private let auth = Auth.auth()
+
+    private let uDmanager: UDManagerImpl = UDManager()
 
     private let reference = Database.database().reference().child("users")
 
@@ -33,7 +37,7 @@ final class AuthManagerImpl: AuthManager {
 
     // MARK: - Instance methods
 
-    func startAuth(phone: String, completion: @escaping ((Bool) -> Void)) {
+    func startAuth(name: String, phone: String, completion: @escaping ((Bool) -> Void)) {
         PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { [weak self] verificationID, error in
             guard let verificationID = verificationID,
                   error == nil else {
@@ -41,6 +45,7 @@ final class AuthManagerImpl: AuthManager {
                 return
             }
 
+            self?.name = name
             self?.verificationID = verificationID
             completion(true)
         }
@@ -62,6 +67,9 @@ final class AuthManagerImpl: AuthManager {
                 return
             }
 
+            let model = UserModel(name: self.name, phone: authCredential?.user.phoneNumber ?? "")
+            self.uDmanager.save(model, Config.userData)
+            
             completion(true)
         }
     }

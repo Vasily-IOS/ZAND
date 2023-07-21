@@ -1,8 +1,8 @@
 //
-//  RegisterModel.swift
+//  SignInModel.swift
 //  ZAND
 //
-//  Created by Василий on 11.07.2023.
+//  Created by Василий on 22.07.2023.
 //
 
 import Foundation

@@ -7,6 +7,12 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
+
+enum ReplacedControllerType {
+    case signIn
+    case profile
+}
 
 final class AppRouter {
     
@@ -30,7 +36,46 @@ final class AppRouter {
 extension AppRouter {
     
     // MARK: - Instance methods
-    
+
+    func switchRoot(type: ReplacedControllerType) {
+        guard
+            let window = appDelegate?.window,
+            let rootController = window.rootViewController as? UINavigationController,
+            let tabBarController = rootController.viewControllers.first as? UITabBarController
+        else { return }
+
+        let tabBarItem = UITabBarItem(title: AssetString.profile,
+                                      image: AssetImage.profile_icon,
+                                      selectedImage: nil)
+
+        let signInViewController = UINavigationController(
+            rootViewController: vcFactory.getViewController(for: .signIn)
+        )
+
+        let profileViewController = UINavigationController(
+            rootViewController: vcFactory.getViewController(for: .profile)
+        )
+
+        [signInViewController, profileViewController].forEach { $0.tabBarItem = tabBarItem }
+
+        switch type {
+        case .profile:
+            tabBarController.viewControllers?[2] = profileViewController
+        case .signIn:
+            tabBarController.viewControllers?[2] =  signInViewController
+        }
+    }
+
+    func checkAuth() {
+        if Auth.auth().currentUser == nil {
+            switchRoot(type: .signIn)
+            print("TYpe = .signIn")
+        } else {
+            switchRoot(type: .profile)
+            print("TYpe = .profile")
+        }
+    }
+
     private func setup() {
         let videoVC = LaunchVideoScreenViewController()
         let tabBar = vcFactory.getViewController(for: .tabBar)
