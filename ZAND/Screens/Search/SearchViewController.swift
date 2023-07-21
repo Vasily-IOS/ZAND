@@ -101,7 +101,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        if searchBar.text == StringsAsset.where_wanna_go {
+        if searchBar.text == AssetString.where_wanna_go {
             contentView.searchBar.text = nil
         }
         contentView.searchBar.searchTextField.textColor = .black

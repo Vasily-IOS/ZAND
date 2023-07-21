@@ -20,13 +20,13 @@ final class ReuseHeaderView: UICollectionReusableView {
         var description: String {
             switch self {
             case .services:
-                return StringsAsset.services
+                return AssetString.services
             case .favourites:
-                return StringsAsset.favourites
+                return AssetString.favourites
             case .data:
-                return StringsAsset.myData
+                return AssetString.myData
             case .pushes:
-                return StringsAsset.pushSms
+                return AssetString.pushSms
             }
         }
     }

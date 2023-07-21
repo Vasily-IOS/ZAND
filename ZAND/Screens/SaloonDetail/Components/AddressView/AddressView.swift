@@ -16,15 +16,15 @@ final class AddressView: BaseUIView {
 
     // MARK: - Properties
 
-    private let addressLabel = UILabel(.systemFont(ofSize: 16), .black, StringsAsset.address)
+    private let addressLabel = UILabel(.systemFont(ofSize: 16), .black, AssetString.address)
 
     private let viewOnMapButton = TransparentButton(state: .viewOnMap)
 
-    private let weedDaysLabel = UILabel(.systemFont(ofSize: 12), .black, StringsAsset.weekDays)
+    private let weedDaysLabel = UILabel(.systemFont(ofSize: 12), .black, AssetString.weekDays)
 
     private let weekDaysDescriptionLabel = UILabel(.systemFont(ofSize: 12))
 
-    private let weekendDaysLabel = UILabel(.systemFont(ofSize: 12), .black, StringsAsset.weekendDays)
+    private let weekendDaysLabel = UILabel(.systemFont(ofSize: 12), .black, AssetString.weekendDays)
 
     private let weekendDaysDescriptionLabel = UILabel(.systemFont(ofSize: 12))
 
@@ -69,12 +69,12 @@ final class AddressView: BaseUIView {
             addressDescriptionLabel.text = model.adress
             weekDaysDescriptionLabel.text = model.weekdays
             weekendDaysDescriptionLabel.text = model.weekend
-            minPriceLabel.text = "\(StringsAsset.from) \(model.min_price) \(StringsAsset.rub)"
+            minPriceLabel.text = "\(AssetString.from) \(model.min_price) \(AssetString.rub)"
         case .dbModel(let model):
             addressDescriptionLabel.text = model.adress
             weekDaysDescriptionLabel.text = model.weekdays
             weekendDaysDescriptionLabel.text = model.weekend
-            minPriceLabel.text = "\(StringsAsset.from) \(model.min_price) \(StringsAsset.rub)"
+            minPriceLabel.text = "\(AssetString.from) \(model.min_price) \(AssetString.rub)"
         }
     }
     

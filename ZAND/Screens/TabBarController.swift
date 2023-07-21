@@ -13,6 +13,7 @@ final class TabBarController: UITabBarController {
     
     override func loadView() {
         super.loadView()
+        
         setViews()
         setBackButton()
     }
@@ -25,18 +26,18 @@ extension TabBarController {
     private func setViews() {
         let vcFactory: DefaultVCFactory = VCFactory()
         let mainVC = vcFactory.getViewController(for: .main)
-        mainVC.tabBarItem = UITabBarItem(title: StringsAsset.main,
-                                         image: ImageAsset.main_icon,
+        mainVC.tabBarItem = UITabBarItem(title: AssetString.main,
+                                         image: AssetImage.main_icon,
                                          selectedImage: nil)
 
         let mapVC = vcFactory.getViewController(for: .map)
-        mapVC.tabBarItem = UITabBarItem(title: StringsAsset.map,
-                                        image:  ImageAsset.map_icon,
+        mapVC.tabBarItem = UITabBarItem(title: AssetString.map,
+                                        image:  AssetImage.map_icon,
                                         selectedImage: nil)
         
         let signInVc = vcFactory.getViewController(for: .signIn)
-        signInVc.tabBarItem = UITabBarItem(title: StringsAsset.profile,
-                                           image: ImageAsset.profile_icon,
+        signInVc.tabBarItem = UITabBarItem(title: AssetString.profile,
+                                           image: AssetImage.profile_icon,
                                            selectedImage: nil)
 
         UITabBar.appearance().tintColor = .mainGreen

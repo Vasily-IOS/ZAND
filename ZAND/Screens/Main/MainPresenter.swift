@@ -18,12 +18,10 @@ protocol MainPresenterOutput: AnyObject {
     func getModel(by id: Int) -> SaloonMockModel?
     func applyDB(by id: Int, completion: () -> ())
     func contains(by id: Int) -> Bool
-    func checkIsUserLaunched()
 }
 
 protocol MainViewInput: AnyObject {
     func hideTabBar()
-    func checkIsUserLaunched(result: Bool)
     func changeFavouritesAppearence(indexPath: IndexPath)
 }
 
@@ -111,10 +109,6 @@ extension MainPresenter {
     func contains(by id: Int) -> Bool {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
         return realmManager.contains(predicate: predicate, DetailModelDB.self)
-    }
-
-    func checkIsUserLaunched() {
-        view?.checkIsUserLaunched(result: OnboardManager.shared.isUserFirstLaunch())
     }
 
     // MARK: - Private

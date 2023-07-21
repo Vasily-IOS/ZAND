@@ -25,10 +25,8 @@ final class RegisterView: BaseUIView {
     lazy var entranceStackView = UIStackView(alignment: .fill,
                                                      arrangedSubviews: [
                                                         nameTextField,
-                                                        emailTextField,
                                                         phoneTextField,
-                                                        passwordTextField,
-                                                        confirmPasswordTextField
+                                                        smsCodeTextField
                                                      ],
                                                      axis: .vertical,
                                                      distribution: .fill,
@@ -50,24 +48,22 @@ final class RegisterView: BaseUIView {
 
     let phoneTextField = PaddingTextField(state: .phone)
 
-    let passwordTextField = PaddingTextField(state: .password)
+    let smsCodeTextField = PaddingTextField(state: .smsCode)
 
-    let confirmPasswordTextField = PaddingTextField(state: .confirmPassword)
-    
     private let registerLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                         .black,
-                                        StringsAsset.registation)
+                                        AssetString.registation)
 
     private let transparentButton = TransparentButton(state: .accountExist)
 
-    private let registerButton = BottomButton(buttonText: .register)
+    private var registerButton = BottomButton(buttonText: .sendCode)
 
     private let skipButton: UIButton = {
         let skipButton = UIButton()
         skipButton.layer.borderColor = UIColor.lightGreen.cgColor
         skipButton.layer.borderWidth = 1
         skipButton.backgroundColor = .mainGray
-        skipButton.setTitle(StringsAsset.skip, for: .normal)
+        skipButton.setTitle(AssetString.skip, for: .normal)
         skipButton.setTitleColor(.mainGreen, for: .normal)
         skipButton.layer.cornerRadius = 15
         skipButton.isHidden = !OnboardManager.shared.isUserFirstLaunch()
@@ -79,9 +75,18 @@ final class RegisterView: BaseUIView {
     override func setup() {
         super.setup()
 
+        smsCodeTextField.isHidden = true
+
         setViews()
         setRecognizer()
         addTargets()
+    }
+
+    func updateUI() {
+        smsCodeTextField.isHidden = false
+        nameTextField.isHidden = true
+        phoneTextField.isHidden = true
+        registerButton.stateText = .register
     }
     
     // MARK: - Action

@@ -14,7 +14,7 @@ final class RatingView: BaseUIView {
     
     private lazy var starImage: UIImageView = {
         var starImage = UIImageView()
-        starImage.image = ImageAsset.star_icon
+        starImage.image = AssetImage.star_icon
         return starImage
     }()
     

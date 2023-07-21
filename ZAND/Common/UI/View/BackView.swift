@@ -18,7 +18,7 @@ final class BackView: BaseUIView {
     
     private lazy var backButton: UIButton = {
         let backButton = UIButton()
-        backButton.setImage(ImageAsset.back_icon, for: .normal)
+        backButton.setImage(AssetImage.back_icon, for: .normal)
         backButton.addTarget(self, action: #selector(didTapAction), for: .touchUpInside)
         return backButton
     }()

@@ -10,10 +10,9 @@ import FirebaseAuth
 import FirebaseDatabase
 
 protocol AuthManager: AnyObject {
-    func isUserLogged() -> Bool
-    func registerUser(model: RegisterModel, completion: @escaping (Bool) -> Void)
-    func signIn(email: String, password: String, completion: @escaping (Bool) -> Void)
-    func signOut()
+    func startAuth(name: String, phone: String, completion: @escaping ((Bool) -> Void))
+    func verifyCode(code: String, completion: @escaping ((Bool) -> Void))
+    func logOut()
 }
 
 final class AuthManagerImpl: AuthManager {
@@ -22,7 +21,13 @@ final class AuthManagerImpl: AuthManager {
 
     static let shared = AuthManagerImpl()
 
+    var name: String = ""
+
+    private var verificationID: String?
+
     private let auth = Auth.auth()
+
+    private let uDmanager: UDManagerImpl = UDManager()
 
     private let reference = Database.database().reference().child("users")
 
@@ -32,53 +37,48 @@ final class AuthManagerImpl: AuthManager {
 
     // MARK: - Instance methods
 
-    func isUserLogged() -> Bool {
-        return auth.currentUser == nil
-    }
-
-    func registerUser(model: RegisterModel, completion: @escaping (Bool) -> Void) {
-        auth.createUser(withEmail: model.email, password: model.password) { [weak self] result, error in
-            guard let self else { return }
-
-            if result != nil, error == nil {
-                if let result = result {
-                    self.reference.child(result.user.uid).updateChildValues(
-                        ["phoneNumber": model.phone,
-                         "email": model.email,
-                         "displayName": model.name
-                        ]
-                    )
-                }
-                print("User created")
-                completion(true)
-            } else {
+    func startAuth(name: String, phone: String, completion: @escaping ((Bool) -> Void)) {
+        PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { [weak self] verificationID, error in
+            guard let verificationID = verificationID,
+                  error == nil else {
                 completion(false)
+                return
             }
+
+            self?.name = name
+            self?.verificationID = verificationID
+            completion(true)
         }
     }
 
-    func signIn(email: String, password: String, completion: @escaping (Bool) -> Void) {
-        if !email.isEmpty && !password.isEmpty {
-            auth.signIn(withEmail: email, password: password) { result, error in
-                if result != nil, error == nil {
-                    print("Logged successfull")
-                    if let result = result {
+    func verifyCode(code: String, completion: @escaping ((Bool) -> Void)) {
+        guard let verificationID = verificationID else {
+            completion(false)
+            return
+        }
 
-                    }
-                    completion(true)
-                } else {
-                    completion(false)
-                }
+        let credential = PhoneAuthProvider.provider().credential(
+            withVerificationID: verificationID, verificationCode: code
+        )
+
+        auth.signIn(with: credential) { authCredential, error in
+            guard authCredential != nil, error == nil else {
+                completion(false)
+                return
             }
+
+            let model = UserModel(name: self.name, phone: authCredential?.user.phoneNumber ?? "")
+            self.uDmanager.save(model, Config.userData)
+            
+            completion(true)
         }
     }
 
-    func signOut() {
+    func logOut() {
         do {
-            print("LogOut")
-            try auth.signOut()
-        } catch let error {
-            debugPrint(error)
+          try auth.signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
         }
     }
 }

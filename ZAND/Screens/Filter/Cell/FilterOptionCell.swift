@@ -24,7 +24,7 @@ final class FilterOptionCell: BaseCollectionCell {
     // MARK: - UI
     
     private let filterDescription = UILabel(.systemFont(ofSize: 16))
-    private let circleImage = UIImageView(image: ImageAsset.emptyCircle_icon)
+    private let circleImage = UIImageView(image: AssetImage.emptyCircle_icon)
     
     private let fillCircleImage: CheckMarkImageView = {
         let fillCircleImage = CheckMarkImageView(frame: .zero)

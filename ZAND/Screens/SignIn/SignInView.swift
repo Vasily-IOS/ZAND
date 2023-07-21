@@ -20,32 +20,30 @@ final class SignInView: BaseUIView {
 
     weak var delegate: SignInDelegate?
 
-    let emailTextField = PaddingTextField(state: .email)
+    let nameTextField = PaddingTextField(state: .name)
 
-    let passwordTextField = PaddingTextField(state: .password)
+    let phoneTextField = PaddingTextField(state: .phone)
+
+    let smsCodeTextField = PaddingTextField(state: .smsCode)
 
     private let signInLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                       .black,
-                                      StringsAsset.entrance)
+                                      AssetString.entrance)
 
-    private let transparentButton = TransparentButton(state: .forgotPassword)
-    
     private lazy var entranceStackView = UIStackView(alignment: .fill,
                                                      arrangedSubviews: [
-                                                        emailTextField,
-                                                        passwordTextField
+                                                        nameTextField,
+                                                        phoneTextField,
+                                                        smsCodeTextField
                                                      ],
                                                      axis: .vertical,
                                                      distribution: .fill,
                                                      spacing: 20)
 
-    private let registerButton = TransparentButton(state: .register)
-
-    private let signInButton = BottomButton(buttonText: .enter)
+    private let signInButton = BottomButton(buttonText: .contin)
 
     private lazy var bottomButtonsStackView = UIStackView(alignment: .center,
                                                       arrangedSubviews: [
-                                                        registerButton,
                                                         signInButton
                                                       ],
                                                       axis: .vertical,
@@ -60,6 +58,16 @@ final class SignInView: BaseUIView {
         setViews()
         setRecognizer()
         addTargets()
+
+        smsCodeTextField.isHidden = true
+    }
+
+    func updateUI() {
+        nameTextField.isHidden = true
+        phoneTextField.isHidden = true
+        smsCodeTextField.isHidden = false
+
+        signInButton.stateText = .enter
     }
     
     // MARK: - Action
@@ -67,12 +75,7 @@ final class SignInView: BaseUIView {
     @objc
     private func dismissKeyboard() {
         delegate?.stopEditing()
-    }
-    
-    @objc
-    private func navigateToRegisterAction() {
-        delegate?.navigateToRegister()
-    }
+    } 
     
     @objc
     private func signInAction() {
@@ -87,8 +90,7 @@ extension SignInView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([signInLabel, entranceStackView,
-                     bottomButtonsStackView, transparentButton])
+        addSubviews([signInLabel, entranceStackView, bottomButtonsStackView])
         
         signInLabel.snp.makeConstraints { make in
             make.top.equalTo(self).offset(200)
@@ -111,11 +113,6 @@ extension SignInView {
             make.width.equalTo(280)
             make.height.equalTo(44)
         }
-        
-        transparentButton.snp.makeConstraints { make in
-            make.right.equalTo(entranceStackView.snp.right)
-            make.top.equalTo(entranceStackView.snp.bottom).offset(14)
-        }
     }
     
     private func setRecognizer() {
@@ -124,6 +121,5 @@ extension SignInView {
     
     private func addTargets() {
         signInButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
-        registerButton.addTarget(self, action: #selector(navigateToRegisterAction), for: .touchUpInside)
     }
 }

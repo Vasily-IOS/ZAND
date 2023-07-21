@@ -91,7 +91,7 @@ final class AppoitmentsCell: BaseTableCell {
             saloonNameLabel.text = model.saloon_name
             saloonAddressLabel.text = model.saloon_address
             dateLabel.text = model.bookingDate
-            priceLabel.text = "\(StringsAsset.from) \(model.servicePrice) \(StringsAsset.rub)"
+            priceLabel.text = "\(AssetString.from) \(model.servicePrice) \(AssetString.rub)"
             timeLabel.text = model.bookingTime
             serviceTypeLabel.text = model.serviceName
         }

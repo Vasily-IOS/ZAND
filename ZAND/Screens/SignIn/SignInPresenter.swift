@@ -8,14 +8,42 @@
 import Foundation
 
 protocol SignInPresenterOutput: AnyObject {
-    var email: String { get set }
-    var password: String { get set }
+    var registerModel: RegisterModel { get set }
+    var codeAreSuccessfullySended: Bool { get set  }
 
-    func signIn()
+    func enterNamePhone()
+    func enterSmsCode()
 }
 
 protocol SignInViewInput: AnyObject {
-    func signInSuccess()
+    func showAlert(type: AlertType)
+    func dismiss()
+    func updateUI(state: RegisterViewState)
+}
+
+enum AlertType {
+    case enterYourName
+    case phoneNumberLessThanEleven
+    case codeIsInvalid
+    case enterYourCode
+
+    var textValue: String {
+        switch self {
+        case .enterYourName:
+            return AssetString.enterYourName
+        case .phoneNumberLessThanEleven:
+            return AssetString.phoneNumberLessThanEleven
+        case .codeIsInvalid:
+            return AssetString.codeIsInvalid
+        case .enterYourCode:
+            return AssetString.enterYourCode
+        }
+    }
+}
+
+enum RegisterViewState {
+    case sendCode
+    case showProfile
 }
 
 final class SignInPresenter: SignInPresenterOutput {
@@ -24,9 +52,9 @@ final class SignInPresenter: SignInPresenterOutput {
 
     weak var view: SignInViewInput?
 
-    var email: String = ""
+    var registerModel = RegisterModel()
 
-    var password: String = ""
+    var codeAreSuccessfullySended: Bool = false
 
     // MARK: - Initiailers
 
@@ -34,10 +62,32 @@ final class SignInPresenter: SignInPresenterOutput {
         self.view = view
     }
 
-    func signIn() {
-        AuthManagerImpl.shared.signIn(email: email, password: password) { [weak self] result in
-            if result == true {
-                self?.view?.signInSuccess()
+    // MARK: - Instance methods
+
+    func enterNamePhone() {
+        if registerModel.name.isEmpty {
+            view?.showAlert(type: .enterYourName)
+        } else if registerModel.phone.count < 11 {
+            view?.showAlert(type: .phoneNumberLessThanEleven)
+        } else {
+            AuthManagerImpl.shared.startAuth(name: registerModel.name, phone: registerModel.phone)
+            { [weak self] success in
+                guard success else { return }
+
+                self?.codeAreSuccessfullySended = true
+                self?.view?.updateUI(state: .sendCode)
+            }
+        }
+    }
+
+    func enterSmsCode() {
+        if registerModel.verifyCode.isEmpty {
+            view?.showAlert(type: .enterYourCode)
+        } else {
+            AuthManagerImpl.shared.verifyCode(code: registerModel.verifyCode) { [weak self] success in
+                guard success else { return }
+
+                self?.view?.updateUI(state: .showProfile)
             }
         }
     }

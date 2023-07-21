@@ -12,8 +12,8 @@ final class PushCell: BaseCollectionCell {
     
     // MARK: - Properties
     
-    private let pushLabel = UILabel(.systemFont(ofSize: 12), .black, StringsAsset.pushesAboutOrder)
-    private let optionDescriptionLabel = UILabel(.systemFont(ofSize: 12), .textGray, StringsAsset.writeAboutBook)
+    private let pushLabel = UILabel(.systemFont(ofSize: 12), .black, AssetString.pushesAboutOrder)
+    private let optionDescriptionLabel = UILabel(.systemFont(ofSize: 12), .textGray, AssetString.writeAboutBook)
     private lazy var stackView = UIStackView(alignment: .leading,
                                              arrangedSubviews: [
                                                 pushLabel,

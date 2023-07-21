@@ -44,6 +44,7 @@ final class ProfileViewController: BaseViewController<ProfileView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        presenter?.checkLogIn()
         contentView.emptyLabel.isHidden = !saloonDBmodel.isEmpty
     }
  
@@ -65,11 +66,13 @@ extension ProfileViewController {
     // MARK: - Instance methods
     
     private func makeAlertController() {
-        let alertController = UIAlertController(title: StringsAsset.exitMessage,
+        let alertController = UIAlertController(title: AssetString.exitMessage,
                                                 message: nil,
                                                 preferredStyle: .alert)
-        let noAction = UIAlertAction(title: StringsAsset.no, style: .cancel)
-        let yesAction = UIAlertAction(title: StringsAsset.yes, style: .default)
+        let noAction = UIAlertAction(title: AssetString.no, style: .cancel)
+        let yesAction = UIAlertAction(title: AssetString.yes, style: .default) { [weak self] _ in
+            self?.presenter?.signUp()
+        }
         alertController.addAction(noAction)
         alertController.addAction(yesAction)
         present(alertController, animated: true)
@@ -169,6 +172,10 @@ extension ProfileViewController: UICollectionViewDelegate {
 extension ProfileViewController: ProfileViewInput {
 
     // MARK: - ProfileViewInput methods
+
+    func updateWithLoggedData(model: UserModel) {
+        contentView.userNameView.configure(model: model)
+    }
 }
 
 extension ProfileViewController: HideBackButtonTitle, ShowNavigationBar {}

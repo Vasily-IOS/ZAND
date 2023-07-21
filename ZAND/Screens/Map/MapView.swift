@@ -127,7 +127,7 @@ extension MapView: MKMapViewDelegate {
         if annotation is MKUserLocation {
             var userAnnotation = mapView.dequeueReusableAnnotationView(withIdentifier: "user")
             userAnnotation = MKAnnotationView(annotation: annotation, reuseIdentifier: "user")
-            userAnnotation?.image = ImageAsset.fillCircle_icon
+            userAnnotation?.image = AssetImage.fillCircle_icon
             return userAnnotation
         } else {
             if let annotation = annotation as? SaloonAnnotation {
@@ -138,7 +138,7 @@ extension MapView: MKMapViewDelegate {
                 } else {
                     annotationView?.annotation = annotation
                 }
-                annotationView?.image = ImageAsset.pin_icon
+                annotationView?.image = AssetImage.pin_icon
                 let button = UIButton(type: .custom)
                 button.setTitle(annotation.model.saloon_name, for: .normal)
                 button.setTitleColor(.black, for: .normal)

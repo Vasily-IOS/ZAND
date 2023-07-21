@@ -18,6 +18,8 @@ final class ProfileView: BaseUIView {
 
     weak var delegate: ProfileViewDelegate?
 
+    let userNameView = UserNameView()
+
     lazy var collectionView: UICollectionView = {
         var layout = createLayout()
         var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -34,13 +36,11 @@ final class ProfileView: BaseUIView {
         var emptyLabel = UILabel()
         emptyLabel.font = .systemFont(ofSize: 20, weight: .regular)
         emptyLabel.textColor = .textGray
-        emptyLabel.text = StringsAsset.empty
+        emptyLabel.text = AssetString.empty
         return emptyLabel
     }()
     
     private let layout: DefaultProfileLayout
-
-    private let userNameView = UserNameView()
 
     private lazy var callUsButton: BottomButton = {
         let callUsButton = BottomButton(buttonText: .callUs)

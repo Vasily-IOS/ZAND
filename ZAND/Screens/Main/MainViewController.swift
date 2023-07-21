@@ -56,7 +56,6 @@ final class MainViewController: BaseViewController<MainView> {
         super.viewWillAppear(animated)
 
         hideNavigationBar()
-        presenter?.checkIsUserLaunched()
     }
 
     deinit {
@@ -69,19 +68,6 @@ final class MainViewController: BaseViewController<MainView> {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
         contentView.delegate = self
-    }
-    
-    private func checkIsUserLaunched() {
-        if OnboardManager.shared.isUserFirstLaunch() {
-            addChild()
-        }
-    }
-    
-    private func addChild() {
-        let factory: DefaultVCFactory = VCFactory()
-        let viewController = factory.getViewController(for: .register)
-        addChildren(viewController: viewController)
-        tabBarController?.tabBar.isHidden = true
     }
 }
 
@@ -179,12 +165,6 @@ extension MainViewController: MainViewInput {
 
     func hideTabBar() {
         tabBarController?.tabBar.isHidden = false
-    }
-
-    func checkIsUserLaunched(result: Bool) {
-        if result == true {
-            addChild()
-        }
     }
 
     func changeFavouritesAppearence(indexPath: IndexPath) {

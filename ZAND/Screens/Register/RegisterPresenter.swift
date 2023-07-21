@@ -9,38 +9,17 @@ import Foundation
 
 protocol RegisterPresenterOutput: AnyObject {
     var registerModel: RegisterModel { get set }
-    var filledFields: Int { get set }
+    var codeAreSuccessfullySended: Bool { get set  }
 
-    func register()
-    func numberCorrector(phoneNumber: String, shouldRemoveLastDigit: Bool) -> String
+    func enterNamePhone()
+    func enterSmsCode()
 }
 
 protocol RegisterViewInput: AnyObject {
     func showAlert(type: AlertType)
     func dismiss()
-}
 
-enum AlertType {
-    case incorrectEmail
-    case isPasswordsEqual
-    case passwordCountLessThanSix
-    case phoneNumberLessThanEleven
-    case fillAllFields
-
-    var textValue: String {
-        switch self {
-        case .incorrectEmail:
-            return "Неправильно введен Email"
-        case .isPasswordsEqual:
-            return "Пароли не совпадают"
-        case .passwordCountLessThanSix:
-            return "Количество символов в пароле меньше 6"
-        case .phoneNumberLessThanEleven:
-            return "Общее количество символов телефона должно быть 11"
-        case .fillAllFields:
-            return "Заполните все поля"
-        }
-    }
+    func updateUI(state: RegisterViewState)
 }
 
 final class RegisterPresenter: RegisterPresenterOutput {
@@ -48,15 +27,8 @@ final class RegisterPresenter: RegisterPresenterOutput {
     // MARK: - Properties
 
     weak var view: RegisterViewInput?
-
-    var requiredFieldCount: Int = 5
-    var filledFields: Int = 0
-
     var registerModel = RegisterModel()
-
-    private var regex: NSRegularExpression {
-        return try! NSRegularExpression(pattern: RegexMask.phone, options: .caseInsensitive)
-    }
+    var codeAreSuccessfullySended: Bool = false
 
     // MARK: - Initializers
 
@@ -64,73 +36,33 @@ final class RegisterPresenter: RegisterPresenterOutput {
         self.view = view
     }
 
-    // MARK: - Instance properties
+    // MARK: - Instance methods
 
-    func register() {
-        if !(filledFields == requiredFieldCount) {
-            view?.showAlert(type: .fillAllFields)
-        } else if !isEmailCorrect(email: registerModel.email) {
-            view?.showAlert(type: .incorrectEmail)
+    func enterNamePhone() {
+        if registerModel.name.isEmpty {
+            view?.showAlert(type: .enterYourName)
         } else if registerModel.phone.count < 11 {
             view?.showAlert(type: .phoneNumberLessThanEleven)
-        } else if !registerModel.isPasswordsEqual {
-            view?.showAlert(type: .isPasswordsEqual)
-        } else if registerModel.password.count < 6 || registerModel.confirmPassword.count < 6 {
-            view?.showAlert(type: .passwordCountLessThanSix)
         } else {
-            AuthManagerImpl.shared.registerUser(model: registerModel) { [weak self] result in
-                if result == true {
-                    self?.view?.dismiss()
-                }
+            AuthManagerImpl.shared.startAuth(name: registerModel.name, phone: registerModel.phone)
+            { [weak self] success in
+                guard success else { return }
+
+                self?.codeAreSuccessfullySended = true
+                self?.view?.updateUI(state: .sendCode)
             }
         }
     }
 
-    func isEmailCorrect(email: String) -> Bool {
-        let emailPattern = RegexMask.email
-        let isEmailCorrect = email.range(of: emailPattern, options: .regularExpression)
-        return (isEmailCorrect != nil)
-    }
-
-    func numberCorrector(phoneNumber: String, shouldRemoveLastDigit: Bool) -> String {
-        guard !(shouldRemoveLastDigit && phoneNumber.count <= 2) else {
-            return "+"
-        }
-        
-        let maxNumberCount = 11
-        let range = NSString(string: phoneNumber).range(of: phoneNumber)
-        var number = regex.stringByReplacingMatches(in: phoneNumber,
-                                                    options: [],
-                                                    range: range,
-                                                    withTemplate: "")
-
-        if number.count > maxNumberCount {
-            let maxIndex = number.index(number.startIndex, offsetBy: maxNumberCount)
-            number = String(number[number.startIndex..<maxIndex])
-        }
-
-        if shouldRemoveLastDigit {
-            let maxIndex = number.index(number.startIndex, offsetBy: number.count - 1)
-            number = String(number[number.startIndex..<maxIndex])
-        }
-
-        let maxIndex = number.index(number.startIndex, offsetBy: number.count)
-        let regRange = number.startIndex..<maxIndex
-
-        if number.count < 7 {
-            let pattern = "(\\d)(\\d{3})(\\d+)"
-            number = number.replacingOccurrences(of: pattern,
-                                                 with: "$1 ($2) $3",
-                                                 options: .regularExpression,
-                                                 range: regRange)
+    func enterSmsCode() {
+        if registerModel.verifyCode.isEmpty {
+            view?.showAlert(type: .enterYourCode)
         } else {
-            let pattern = "(\\d)(\\d{3})(\\d{3})(\\d{2})(\\d+)"
-            number = number.replacingOccurrences(of: pattern,
-                                                 with: "$1 ($2) $3-$4-$5",
-                                                 options: .regularExpression,
-                                                 range: regRange)
-        }
+            AuthManagerImpl.shared.verifyCode(code: registerModel.verifyCode) { [weak self] success in
+                guard success else { return }
 
-        return "+" + number
+                self?.view?.updateUI(state: .showProfile)
+            }
+        }
     }
 }

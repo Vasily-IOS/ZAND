@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,17 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupRouter()
         FirebaseApp.configure()
 
-        if AuthManagerImpl.shared.isUserLogged() {
-            print("User logged")
-        } else {
-            print("User is not logged")
-        }
+        AppRouter.shared.checkAuth()
 
         return true
     }
 }
 
 extension AppDelegate {
+
+    // MARK: - Instance methods
     
     func setupRouter() {
         AppRouter.shared.appDelegate = self

@@ -19,7 +19,7 @@ final class SaloonPhotoCollection: BaseUIView {
     var inFavourite: Bool = false {
         didSet {
             heartButton.setImage(
-                inFavourite ? ImageAsset.fillHeart_icon : ImageAsset.heart, for: .normal
+                inFavourite ? AssetImage.fillHeart_icon : AssetImage.heart, for: .normal
             )
         }
     }
@@ -62,9 +62,9 @@ final class SaloonPhotoCollection: BaseUIView {
 
     private let ratingLabel = UILabel(.systemFont(ofSize: 12))
 
-    private let starImage = UIImageView(image: ImageAsset.star_icon)
+    private let starImage = UIImageView(image: AssetImage.star_icon)
 
-    private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, StringsAsset.grades)
+    private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, AssetString.grades)
 
     private let gradeCountLabel = UILabel(.systemFont(ofSize: 12))
 
