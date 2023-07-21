@@ -101,7 +101,6 @@ extension SignInView {
             make.top.equalTo(signInLabel.snp.bottom).offset(30)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
-            
         }
         
         bottomButtonsStackView.snp.makeConstraints { make in

@@ -72,6 +72,18 @@ extension SignInViewController: UITextFieldDelegate {
 
     // MARK: - UITextFieldDelegate methods
 
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if textField == contentView.phoneTextField {
+            let fullNumber = (textField.text ?? "") + string
+            textField.text = (textField.text ?? "").numberCorrector(phoneNumber: fullNumber,
+                                                        shouldRemoveLastDigit: range.length == 1)
+            return false
+        }
+        return true
+    }
+
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let text = textField.text ?? ""
 

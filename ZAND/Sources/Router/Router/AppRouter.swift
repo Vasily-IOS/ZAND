@@ -48,15 +48,12 @@ extension AppRouter {
                                       image: AssetImage.profile_icon,
                                       selectedImage: nil)
 
-        let signInViewController = UINavigationController(
-            rootViewController: vcFactory.getViewController(for: .signIn)
-        )
+        let signInViewController = vcFactory.getViewController(for: .signIn)
+        let profileViewController = vcFactory.getViewController(for: .profile)
 
-        let profileViewController = UINavigationController(
-            rootViewController: vcFactory.getViewController(for: .profile)
-        )
-
-        [signInViewController, profileViewController].forEach { $0.tabBarItem = tabBarItem }
+        [signInViewController, profileViewController].forEach {
+            $0.tabBarItem = tabBarItem
+        }
 
         switch type {
         case .profile:
@@ -69,10 +66,8 @@ extension AppRouter {
     func checkAuth() {
         if Auth.auth().currentUser == nil {
             switchRoot(type: .signIn)
-            print("TYpe = .signIn")
         } else {
             switchRoot(type: .profile)
-            print("TYpe = .profile")
         }
     }
 
