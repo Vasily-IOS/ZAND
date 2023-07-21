@@ -14,7 +14,7 @@ final class UserNameView: BaseUIView {
     
     private let userAccountLabel = UILabel(.systemFont(ofSize: 14),
                                            .black,
-                                           StringsAsset.user_name)
+                                           AssetString.user_name)
 
     private let nameLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                     .black,

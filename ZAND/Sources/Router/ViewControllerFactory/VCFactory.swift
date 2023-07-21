@@ -73,7 +73,7 @@ final class VCFactory: DefaultVCFactory {
             let vc = AppointmentsViewController(contentView: view)
             let presenter = AppointmentsPresenterImpl(view: vc)
             vc.presenter = presenter
-            vc.title = StringsAsset.books
+            vc.title = AssetString.books
             return vc
         case .myDetails:
             let layout: DefaultSettingsLayout = MyDetailsLayout()
@@ -81,7 +81,7 @@ final class VCFactory: DefaultVCFactory {
             let vc = MyDetailsViewController(contentView: view)
             let presenter = MyDetailsPresenterImpl(view: vc)
             vc.presenter = presenter
-            vc.title = StringsAsset.details
+            vc.title = AssetString.details
             return vc
         case .booking:
             return BookingViewController()

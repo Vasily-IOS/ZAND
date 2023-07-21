@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Combine
 
 protocol SearchViewDelegate: AnyObject {
     func dismiss()
@@ -19,14 +18,12 @@ final class SearchView: BaseUIView {
     
     weak var delegate: SearchViewDelegate?
 
-    private var cancellables = Set<AnyCancellable>()
-    
     // MARK: - UI
 
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.text = StringsAsset.where_wanna_go
-        UISearchBar.appearance().setImage(ImageAsset.search_icon,
+        searchBar.text = AssetString.where_wanna_go
+        UISearchBar.appearance().setImage(AssetImage.search_icon,
                                           for: .search,
                                           state: .normal)
         searchBar.layer.cornerRadius = 15
@@ -48,14 +45,14 @@ final class SearchView: BaseUIView {
     
     private let searchLabel: UILabel = {
         let searchLabel = UILabel()
-        searchLabel.text = StringsAsset.search
+        searchLabel.text = AssetString.search
         searchLabel.font = .systemFont(ofSize: 22, weight: .regular)
         return searchLabel
     }()
 
     private let cancelButton: UIButton = {
         let cancelButton = UIButton()
-        cancelButton.setTitle(StringsAsset.cancel, for: .normal)
+        cancelButton.setTitle(AssetString.cancel, for: .normal)
         cancelButton.setTitleColor(.textGray, for: .normal)
         cancelButton.titleLabel?.font = .systemFont(ofSize: 22)
         return cancelButton
@@ -75,6 +72,12 @@ final class SearchView: BaseUIView {
     @objc
     private func cancelTapAction() {
         delegate?.dismiss()
+    }
+
+    @objc
+    private func cancelEditing() {
+        endEditing(true)
+        setSearchPlaceholderText()
     }
 }
 
@@ -112,17 +115,12 @@ extension SearchView {
     }
 
     private func setSearchPlaceholderText() {
-        searchBar.text = StringsAsset.where_wanna_go
+        searchBar.text = AssetString.where_wanna_go
         searchBar.searchTextField.textColor = .lightGray
     }
 
     private func setTargets() {
-        gesture(.tap())
-            .sink { [weak self] _ in
-                self?.endEditing(true)
-                self?.setSearchPlaceholderText()
-            }.store(in: &cancellables)
-
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cancelEditing)))
         cancelButton.addTarget(self, action: #selector(cancelTapAction),
                                for: .touchUpInside)
     }

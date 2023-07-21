@@ -19,6 +19,7 @@ final class LaunchVideoScreenViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         playVideo()
     }
 }
@@ -28,7 +29,7 @@ extension LaunchVideoScreenViewController {
     // MARK: - Instance methods
     
     private func playVideo() {
-        guard let path = Bundle.main.path(forResource: "splash_video_long", ofType: "mp4") else {
+        guard let path = Bundle.main.path(forResource: "splash_video", ofType: "mp4") else {
             debugPrint("splash_video is not found")
             return
         }

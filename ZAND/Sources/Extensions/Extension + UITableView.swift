@@ -36,7 +36,4 @@ public extension UITableView {
         }
         return cell
     }
-
-
-
 }

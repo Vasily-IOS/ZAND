@@ -14,7 +14,7 @@ final class PaddingTextField: UITextField {
     
     enum State {
         case email
-        case password
+        case smsCode
         case name
         case surname
         case age
@@ -26,23 +26,23 @@ final class PaddingTextField: UITextField {
         var placeholder_text: String {
             switch self {
             case .email:
-                return StringsAsset.email
-            case .password:
-                return StringsAsset.password
+                return AssetString.email
+            case .smsCode:
+                return AssetString.smsCode
             case .name:
-                return StringsAsset.name
+                return AssetString.name
             case .surname:
-                return StringsAsset.surname
+                return AssetString.surname
             case .age:
-                return StringsAsset.age
+                return AssetString.age
             case .usename:
-                return StringsAsset.userName
+                return AssetString.userName
             case .confirmPassword:
-                return StringsAsset.confirmPassword
+                return AssetString.confirmPassword
             case .confirmation_code:
-                return StringsAsset.confirmationCode
+                return AssetString.confirmationCode
             case .phone:
-                return StringsAsset.phoneNumber
+                return AssetString.phoneNumber
             }
         }
     }
@@ -60,6 +60,7 @@ final class PaddingTextField: UITextField {
     
     init(state: State) {
         super.init(frame: .zero)
+
         setSelf()
         setup(with: state)
     }
@@ -74,7 +75,7 @@ final class PaddingTextField: UITextField {
     private func setup(with state: State) {
         placeholder = state.placeholder_text
 
-        if state == .phone {
+        if state == .phone || state == .smsCode {
             keyboardType = .numberPad
         }
     }

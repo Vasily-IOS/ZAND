@@ -1,5 +1,5 @@
 //
-//  YClientsMockURL.swift
+//  URLS.swift
 //  ZAND
 //
 //  Created by Василий on 22.05.2023.

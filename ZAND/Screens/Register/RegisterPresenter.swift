@@ -9,38 +9,43 @@ import Foundation
 
 protocol RegisterPresenterOutput: AnyObject {
     var registerModel: RegisterModel { get set }
-    var filledFields: Int { get set }
+    var codeAreSuccessfullySended: Bool { get set  }
 
-    func register()
+    func enterNamePhone()
+    func enterSmsCode()
     func numberCorrector(phoneNumber: String, shouldRemoveLastDigit: Bool) -> String
 }
 
 protocol RegisterViewInput: AnyObject {
     func showAlert(type: AlertType)
     func dismiss()
+
+    func updateUI(state: RegisterViewState)
 }
 
 enum AlertType {
-    case incorrectEmail
-    case isPasswordsEqual
-    case passwordCountLessThanSix
+    case enterYourName
     case phoneNumberLessThanEleven
-    case fillAllFields
+    case codeIsInvalid
+    case enterYourCode
 
     var textValue: String {
         switch self {
-        case .incorrectEmail:
-            return "Неправильно введен Email"
-        case .isPasswordsEqual:
-            return "Пароли не совпадают"
-        case .passwordCountLessThanSix:
-            return "Количество символов в пароле меньше 6"
+        case .enterYourName:
+            return AssetString.enterYourName
         case .phoneNumberLessThanEleven:
-            return "Общее количество символов телефона должно быть 11"
-        case .fillAllFields:
-            return "Заполните все поля"
+            return AssetString.phoneNumberLessThanEleven
+        case .codeIsInvalid:
+            return AssetString.codeIsInvalid
+        case .enterYourCode:
+            return AssetString.enterYourCode
         }
     }
+}
+
+enum RegisterViewState {
+    case sendCode
+    case showProfile
 }
 
 final class RegisterPresenter: RegisterPresenterOutput {
@@ -48,11 +53,8 @@ final class RegisterPresenter: RegisterPresenterOutput {
     // MARK: - Properties
 
     weak var view: RegisterViewInput?
-
-    var requiredFieldCount: Int = 5
-    var filledFields: Int = 0
-
     var registerModel = RegisterModel()
+    var codeAreSuccessfullySended: Bool = false
 
     private var regex: NSRegularExpression {
         return try! NSRegularExpression(pattern: RegexMask.phone, options: .caseInsensitive)
@@ -66,30 +68,31 @@ final class RegisterPresenter: RegisterPresenterOutput {
 
     // MARK: - Instance properties
 
-    func register() {
-        if !(filledFields == requiredFieldCount) {
-            view?.showAlert(type: .fillAllFields)
-        } else if !isEmailCorrect(email: registerModel.email) {
-            view?.showAlert(type: .incorrectEmail)
+    func enterNamePhone() {
+        if registerModel.name.isEmpty {
+            view?.showAlert(type: .enterYourName)
         } else if registerModel.phone.count < 11 {
             view?.showAlert(type: .phoneNumberLessThanEleven)
-        } else if !registerModel.isPasswordsEqual {
-            view?.showAlert(type: .isPasswordsEqual)
-        } else if registerModel.password.count < 6 || registerModel.confirmPassword.count < 6 {
-            view?.showAlert(type: .passwordCountLessThanSix)
         } else {
-            AuthManagerImpl.shared.registerUser(model: registerModel) { [weak self] result in
-                if result == true {
-                    self?.view?.dismiss()
-                }
+            AuthManagerImpl.shared.startAuth(phone: registerModel.phone) { [weak self] success in
+                guard success else { return }
+
+                self?.codeAreSuccessfullySended = true
+                self?.view?.updateUI(state: .sendCode)
             }
         }
     }
 
-    func isEmailCorrect(email: String) -> Bool {
-        let emailPattern = RegexMask.email
-        let isEmailCorrect = email.range(of: emailPattern, options: .regularExpression)
-        return (isEmailCorrect != nil)
+    func enterSmsCode() {
+        if registerModel.verifyCode.isEmpty {
+            view?.showAlert(type: .enterYourCode)
+        } else {
+            AuthManagerImpl.shared.verifyCode(code: registerModel.verifyCode) { [weak self] success in
+                guard success else { return }
+
+                self?.view?.updateUI(state: .showProfile)
+            }
+        }
     }
 
     func numberCorrector(phoneNumber: String, shouldRemoveLastDigit: Bool) -> String {

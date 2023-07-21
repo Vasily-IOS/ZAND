@@ -65,11 +65,11 @@ extension ProfileViewController {
     // MARK: - Instance methods
     
     private func makeAlertController() {
-        let alertController = UIAlertController(title: StringsAsset.exitMessage,
+        let alertController = UIAlertController(title: AssetString.exitMessage,
                                                 message: nil,
                                                 preferredStyle: .alert)
-        let noAction = UIAlertAction(title: StringsAsset.no, style: .cancel)
-        let yesAction = UIAlertAction(title: StringsAsset.yes, style: .default)
+        let noAction = UIAlertAction(title: AssetString.no, style: .cancel)
+        let yesAction = UIAlertAction(title: AssetString.yes, style: .default)
         alertController.addAction(noAction)
         alertController.addAction(yesAction)
         present(alertController, animated: true)

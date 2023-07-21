@@ -35,10 +35,6 @@ final class SignInPresenter: SignInPresenterOutput {
     }
 
     func signIn() {
-        AuthManagerImpl.shared.signIn(email: email, password: password) { [weak self] result in
-            if result == true {
-                self?.view?.signInSuccess()
-            }
-        }
+        
     }
 }

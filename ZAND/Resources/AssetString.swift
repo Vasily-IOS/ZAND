@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum StringsAsset {
+enum AssetString {
     static let where_wanna_go = "Куда хотите пойти?"
     static let filter = "Фильтры"
     static let hair = "Волосы"
@@ -48,6 +48,13 @@ enum StringsAsset {
     static let search = "Поиск"
     static let cancel = "Отмена"
     static let empty = "Пока что пусто"
+    static let ok = "Понятно"
+    static let smsCode = "Код из смс"
+    static let enterYourName = "Вы не написали как вас зовут :)"
+    static let phoneNumberLessThanEleven = "Общее количество символов телефона должно быть 11"
+    static let codeIsInvalid = "Код не верен"
+    static let sendCode = "Отправить код"
+    static let enterYourCode = "Введите код"
     
     // MARK: - Bottom button values
     static let apply = "Применить"

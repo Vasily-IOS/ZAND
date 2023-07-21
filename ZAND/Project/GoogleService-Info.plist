@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>637685502905-0p9ml3hnd7jkdo5ko4gbrfhqu3bkgj75.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.637685502905-0p9ml3hnd7jkdo5ko4gbrfhqu3bkgj75</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCwUFnbveKlvmxr3GeoP-wKRltxXZfL7J8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>637685502905</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.zand.ZAND</string>
+	<key>PROJECT_ID</key>
+	<string>zand-2364e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>zand-2364e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:637685502905:ios:09195d0c6da97dc0f89c68</string>
+	<key>DATABASE_URL</key>
+	<string>https://zand-2364e-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

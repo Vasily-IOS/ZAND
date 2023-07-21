@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum ImageAsset {
+enum AssetImage {
     // MARK: - Tabbar
     static let main_icon = UIImage(named: "main_icon")
     static let map_icon = UIImage(named: "map_icon")

@@ -11,8 +11,8 @@ struct FilterModel: CommonFilterProtocol {
     let filterDescription: String
 
     static let filterModel: [Self] = [
-        .init(filterDescription: StringsAsset.highGrade),
-        .init(filterDescription: StringsAsset.chip),
-        .init(filterDescription: StringsAsset.expensive),
+        .init(filterDescription: AssetString.highGrade),
+        .init(filterDescription: AssetString.chip),
+        .init(filterDescription: AssetString.expensive),
     ]
 }

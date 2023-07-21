@@ -14,11 +14,11 @@ final class DescriptionShowcaseView: BaseUIView {
     
     private let topDescriptionLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                               .black,
-                                              StringsAsset.description)
+                                              AssetString.description)
 
     private let showCaseLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                         .black,
-                                        StringsAsset.showCase)
+                                        AssetString.showCase)
     
     private let descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()

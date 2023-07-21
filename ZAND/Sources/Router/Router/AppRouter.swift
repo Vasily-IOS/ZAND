@@ -11,22 +11,20 @@ import SnapKit
 final class AppRouter {
     
     static let shared: DefaultRouter = AppRouter()
-    
+
     var appDelegate: AppDelegate? {
         didSet {
             setup()
         }
     }
-    
-    // MARK: - Init
-    
-    private init() {}
-    
-    // MARK: -
-    
+
     var navigationController = UINavigationController()
     var tabBarController: UITabBarController?
     private let vcFactory: DefaultVCFactory = VCFactory()
+    
+    // MARK: - Initializers
+    
+    private init() {}
 }
 
 extension AppRouter {
@@ -114,7 +112,7 @@ extension AppRouter: DefaultRouter {
 
     func showAlert(type: AlertType) {
         let alertController = UIAlertController(title: type.textValue, message: nil, preferredStyle: .alert)
-        let understandAction = UIAlertAction(title: "Понятно", style: .cancel)
+        let understandAction = UIAlertAction(title: AssetString.ok, style: .cancel)
         alertController.addAction(understandAction)
         navigationController.present(alertController, animated: true)
     }

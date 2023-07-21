@@ -19,12 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupRouter()
         FirebaseApp.configure()
 
-        if AuthManagerImpl.shared.isUserLogged() {
-            print("User logged")
-        } else {
-            print("User is not logged")
-        }
-
         return true
     }
 }

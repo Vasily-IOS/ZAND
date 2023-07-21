@@ -42,8 +42,8 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         [contentView.nameTextField,
          contentView.emailTextField,
          contentView.phoneTextField,
-         contentView.passwordTextField,
-         contentView.confirmPasswordTextField].forEach {
+         contentView.smsCodeTextField,
+         contentView.smsCodeTextField].forEach {
             $0.delegate = self
         }
     }
@@ -74,7 +74,11 @@ extension RegisterViewController: RegisterViewDelegate {
     }
 
     func register() {
-        presenter?.register()
+        if !presenter!.codeAreSuccessfullySended {
+            presenter?.enterNamePhone()
+        } else {
+            presenter?.enterSmsCode()
+        }
     }
 }
 
@@ -100,22 +104,13 @@ extension RegisterViewController: UITextFieldDelegate {
         switch textField {
         case contentView.nameTextField:
             presenter?.registerModel.name = text
-        case contentView.emailTextField:
-            presenter?.registerModel.email = text
         case contentView.phoneTextField:
             presenter?.registerModel.phone = text
-        case contentView.passwordTextField:
-            presenter?.registerModel.password = text
-        case contentView.confirmPasswordTextField:
-            presenter?.registerModel.confirmPassword = text
+        case contentView.smsCodeTextField:
+            presenter?.registerModel.verifyCode = text
         default:
             break
         }
-
-        presenter?.filledFields = [
-            contentView.nameTextField, contentView.emailTextField, contentView.phoneTextField,
-            contentView.passwordTextField, contentView.confirmPasswordTextField
-        ].filter({ !($0.text ?? "").isEmpty}).count
     }
 }
 
@@ -125,6 +120,16 @@ extension RegisterViewController: RegisterViewInput {
 
     func showAlert(type: AlertType) {
         AppRouter.shared.showAlert(type: type)
+    }
+
+    func updateUI(state: RegisterViewState) {
+        switch state {
+        case .sendCode:
+            contentView.updateUI()
+        case .showProfile:
+            print("Show profile")
+            contentView.backgroundColor = .systemTeal
+        }
     }
 
     func dismiss() {

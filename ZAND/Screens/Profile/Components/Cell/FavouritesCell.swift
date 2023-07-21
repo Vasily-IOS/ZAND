@@ -20,7 +20,7 @@ final class FavouritesCell: BaseCollectionCell {
         return saloonName
     }()
     
-    private let favouritesStarImage = UIImageView(image: ImageAsset.star_icon)
+    private let favouritesStarImage = UIImageView(image: AssetImage.star_icon)
     
     private let ratingLabel: UILabel = {
         let ratingLabel = UILabel()

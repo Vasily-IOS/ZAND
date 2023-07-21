@@ -22,14 +22,12 @@ final class SignInView: BaseUIView {
 
     let emailTextField = PaddingTextField(state: .email)
 
-    let passwordTextField = PaddingTextField(state: .password)
+    let passwordTextField = PaddingTextField(state: .smsCode)
 
     private let signInLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                       .black,
-                                      StringsAsset.entrance)
+                                      AssetString.entrance)
 
-    private let transparentButton = TransparentButton(state: .forgotPassword)
-    
     private lazy var entranceStackView = UIStackView(alignment: .fill,
                                                      arrangedSubviews: [
                                                         emailTextField,
@@ -87,8 +85,7 @@ extension SignInView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([signInLabel, entranceStackView,
-                     bottomButtonsStackView, transparentButton])
+        addSubviews([signInLabel, entranceStackView, bottomButtonsStackView])
         
         signInLabel.snp.makeConstraints { make in
             make.top.equalTo(self).offset(200)
@@ -110,11 +107,6 @@ extension SignInView {
         signInButton.snp.makeConstraints { make in
             make.width.equalTo(280)
             make.height.equalTo(44)
-        }
-        
-        transparentButton.snp.makeConstraints { make in
-            make.right.equalTo(entranceStackView.snp.right)
-            make.top.equalTo(entranceStackView.snp.bottom).offset(14)
         }
     }
     

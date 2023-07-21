@@ -14,21 +14,24 @@ enum ButtonText {
     case book //"Записаться"
     case contin //"Далее"
     case callUs //"Свяжитесь с нами"
+    case sendCode
     
     var text: String {
         switch self {
         case .apply:
-            return StringsAsset.apply
+            return AssetString.apply
         case .enter:
-            return StringsAsset.enter
+            return AssetString.enter
         case .register:
-            return StringsAsset.register
+            return AssetString.register
         case .book:
-            return StringsAsset.book
+            return AssetString.book
         case .contin:
-            return StringsAsset.contin
+            return AssetString.contin
         case .callUs:
-            return StringsAsset.callUs
+            return AssetString.callUs
+        case .sendCode:
+            return AssetString.sendCode
         }
     }
 }
@@ -36,8 +39,7 @@ enum ButtonText {
 final class BottomButton: UIButton {
     
     // MARK: - Properties
-    
-    /// костыль, будет MVVM!!
+   
     var stateText: ButtonText? = nil {
         didSet {
             if let stateText = stateText {
@@ -50,6 +52,7 @@ final class BottomButton: UIButton {
 
     init(buttonText: ButtonText) {
         super.init(frame: .zero)
+
         setup()
         setTitleForSelf(text: buttonText.text)
     }

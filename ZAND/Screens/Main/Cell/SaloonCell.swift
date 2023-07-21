@@ -25,7 +25,7 @@ final class SaloonCell: BaseCollectionCell {
     
     var isInFavourite: Bool = false {
         didSet {
-            let image = isInFavourite ? ImageAsset.fillHeart_icon : ImageAsset.heart
+            let image = isInFavourite ? AssetImage.fillHeart_icon : AssetImage.heart
             favouritesButton.setImage(image, for: .normal)
         }
     }
@@ -68,7 +68,7 @@ final class SaloonCell: BaseCollectionCell {
     
     private let favouritesButton: UIButton = {
         let favouritesButton = UIButton()
-        favouritesButton.setImage(ImageAsset.heart, for: .normal)
+        favouritesButton.setImage(AssetImage.heart, for: .normal)
         return favouritesButton
     }()
     
@@ -76,7 +76,7 @@ final class SaloonCell: BaseCollectionCell {
     
     private let starImage: UIImageView = {
         let starImage = UIImageView()
-        starImage.image = ImageAsset.star_icon
+        starImage.image = AssetImage.star_icon
         return starImage
     }()
     

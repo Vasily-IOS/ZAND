@@ -66,7 +66,7 @@ extension SelectableMapView: MKMapViewDelegate {
             } else {
                 annotationView?.annotation = annotation
             }
-            annotationView?.image = ImageAsset.pin_icon
+            annotationView?.image = AssetImage.pin_icon
             annotationView?.canShowCallout = true
             return annotationView
         }

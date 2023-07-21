@@ -11,8 +11,8 @@ struct SettingsMenuModel: Hashable {
     let description: String
 
     static let model: [Self] = [
-        .init(description: StringsAsset.name),
-        .init(description: StringsAsset.email),
-        .init(description: StringsAsset.phoneNumber)
+        .init(description: AssetString.name),
+        .init(description: AssetString.email),
+        .init(description: AssetString.phoneNumber)
     ]
 }
