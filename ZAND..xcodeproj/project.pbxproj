@@ -196,7 +196,7 @@
 		FF3E65D62A55BC40007EC56D /* SaloonDetailDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonDetailDBManager.swift; sourceTree = "<group>"; };
 		FF3E65D82A55C1F6007EC56D /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVideoScreenViewController.swift; sourceTree = "<group>"; };
-		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF45A12929E7EC1200587DAF /* ZAND..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND..app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF45A13529E7EC1300587DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF45A13829E7EC1300587DAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -504,7 +504,7 @@
 		FF45A12A29E7EC1200587DAF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FF45A12929E7EC1200587DAF /* ZAND.app */,
+				FF45A12929E7EC1200587DAF /* ZAND..app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -944,9 +944,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FF45A12829E7EC1200587DAF /* ZAND */ = {
+		FF45A12829E7EC1200587DAF /* ZAND. */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FF45A15329E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZAND" */;
+			buildConfigurationList = FF45A15329E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZAND." */;
 			buildPhases = (
 				FF45A12529E7EC1200587DAF /* Sources */,
 				FF45A12629E7EC1200587DAF /* Frameworks */,
@@ -956,7 +956,7 @@
 			);
 			dependencies = (
 			);
-			name = ZAND;
+			name = ZAND.;
 			packageProductDependencies = (
 				FFB6577E2A6A99C200451D65 /* SnapKit */,
 				FFB657812A6A9A5700451D65 /* Lottie */,
@@ -972,7 +972,7 @@
 				FFB657982A6ABF3500451D65 /* Moya */,
 			);
 			productName = ZAND;
-			productReference = FF45A12929E7EC1200587DAF /* ZAND.app */;
+			productReference = FF45A12929E7EC1200587DAF /* ZAND..app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -990,7 +990,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FF45A12429E7EC1200587DAF /* Build configuration list for PBXProject "ZAND" */;
+			buildConfigurationList = FF45A12429E7EC1200587DAF /* Build configuration list for PBXProject "ZAND." */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1010,7 +1010,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FF45A12829E7EC1200587DAF /* ZAND */,
+				FF45A12829E7EC1200587DAF /* ZAND. */,
 			);
 		};
 /* End PBXProject section */
@@ -1229,7 +1229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1283,7 +1283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1298,9 +1298,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7P89GZBVJ2;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9TT2NS548Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1308,14 +1310,16 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zand.ZAND;
+				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = NewJustProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1330,9 +1334,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2A23R4N5M7;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9TT2NS548Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1340,14 +1346,16 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zand.ZAND;
+				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = NewJustProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1360,7 +1368,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FF45A12429E7EC1200587DAF /* Build configuration list for PBXProject "ZAND" */ = {
+		FF45A12429E7EC1200587DAF /* Build configuration list for PBXProject "ZAND." */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FF45A15129E7EC1300587DAF /* Debug */,
@@ -1369,7 +1377,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FF45A15329E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZAND" */ = {
+		FF45A15329E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZAND." */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FF45A15429E7EC1300587DAF /* Debug */,
