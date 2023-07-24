@@ -77,7 +77,7 @@ extension SignInViewController: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         if textField == contentView.phoneTextField {
             let fullNumber = (textField.text ?? "") + string
-            textField.text = (textField.text ?? "").numberCorrector(phoneNumber: fullNumber,
+            textField.text = fullNumber.numberCorrector(phoneNumber: fullNumber,
                                                         shouldRemoveLastDigit: range.length == 1)
             return false
         }

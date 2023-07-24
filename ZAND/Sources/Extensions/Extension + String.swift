@@ -15,7 +15,7 @@ extension String {
 
     func numberCorrector(phoneNumber: String, shouldRemoveLastDigit: Bool) -> String {
         guard !(shouldRemoveLastDigit && phoneNumber.count <= 2) else {
-            return "+"
+            return ""
         }
 
         let maxNumberCount = 11
