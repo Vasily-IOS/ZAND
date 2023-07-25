@@ -16,34 +16,15 @@ protocol SignInPresenterOutput: AnyObject {
 }
 
 protocol SignInViewInput: AnyObject {
-    func showAlert(type: AlertType)
+    func showAlert(type: AlertType, message: String?)
     func dismiss()
     func updateUI(state: RegisterViewState)
-}
-
-enum AlertType {
-    case enterYourName
-    case phoneNumberLessThanEleven
-    case codeIsInvalid
-    case enterYourCode
-
-    var textValue: String {
-        switch self {
-        case .enterYourName:
-            return AssetString.enterYourName
-        case .phoneNumberLessThanEleven:
-            return AssetString.phoneNumberLessThanEleven
-        case .codeIsInvalid:
-            return AssetString.codeIsInvalid
-        case .enterYourCode:
-            return AssetString.enterYourCode
-        }
-    }
 }
 
 enum RegisterViewState {
     case sendCode
     case showProfile
+    case backToTop
 }
 
 final class SignInPresenter: SignInPresenterOutput {
@@ -66,26 +47,34 @@ final class SignInPresenter: SignInPresenterOutput {
 
     func enterNamePhone() {
         if registerModel.name.isEmpty {
-            view?.showAlert(type: .enterYourName)
+            view?.showAlert(type: .enterYourName, message: nil)
         } else if registerModel.phone.count < 11 {
-            view?.showAlert(type: .phoneNumberLessThanEleven)
+            view?.showAlert(type: .phoneNumberLessThanEleven, message: nil)
         } else {
             AuthManagerImpl.shared.startAuth(name: registerModel.name, phone: registerModel.phone)
             { [weak self] success in
-                guard success else { return }
+                guard success,
+                let self else {
+                    self?.view?.showAlert(type: .phoneInputError, message: AssetString.phoneInputError)
+                    return
+                }
 
-                self?.codeAreSuccessfullySended = true
-                self?.view?.updateUI(state: .sendCode)
+                self.codeAreSuccessfullySended = true
+                self.view?.updateUI(state: .sendCode)
             }
         }
     }
 
     func enterSmsCode() {
         if registerModel.verifyCode.isEmpty {
-            view?.showAlert(type: .enterYourCode)
+            view?.showAlert(type: .enterYourCode, message: nil)
         } else {
             AuthManagerImpl.shared.verifyCode(code: registerModel.verifyCode) { [weak self] success in
-                guard success else { return }
+                guard success else {
+                    self?.view?.updateUI(state: .backToTop)
+                    self?.view?.showAlert(type: .codeIsInvalid, message: AssetString.tryAgain)
+                    return
+                }
 
                 self?.view?.updateUI(state: .showProfile)
             }

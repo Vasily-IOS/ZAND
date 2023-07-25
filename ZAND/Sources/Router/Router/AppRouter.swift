@@ -64,11 +64,11 @@ extension AppRouter {
     }
 
     func checkAuth() {
-        if Auth.auth().currentUser == nil {
-            switchRoot(type: .signIn)
-        } else {
-            switchRoot(type: .profile)
-        }
+//        if Auth.auth().currentUser == nil {
+//            switchRoot(type: .signIn)
+//        } else {
+//            switchRoot(type: .profile)
+//        }
     }
 
     private func setup() {
@@ -150,8 +150,8 @@ extension AppRouter: DefaultRouter {
         navigationController.present(vc, animated: true)
     }
 
-    func showAlert(type: AlertType) {
-        let alertController = UIAlertController(title: type.textValue, message: nil, preferredStyle: .alert)
+    func showAlert(type: AlertType, message: String? = "") {
+        let alertController = UIAlertController(title: type.textValue, message: message, preferredStyle: .alert)
         let understandAction = UIAlertAction(title: AssetString.ok, style: .cancel)
         alertController.addAction(understandAction)
         navigationController.present(alertController, animated: true)

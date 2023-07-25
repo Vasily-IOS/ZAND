@@ -59,6 +59,7 @@ final class SignInView: BaseUIView {
         setRecognizer()
         addTargets()
 
+        smsCodeTextField.resignFirstResponder()
         smsCodeTextField.isHidden = true
     }
 
@@ -68,6 +69,18 @@ final class SignInView: BaseUIView {
         smsCodeTextField.isHidden = false
 
         signInButton.stateText = .enter
+    }
+
+    func initialStartMode() {
+        nameTextField.isHidden = false
+        phoneTextField.isHidden = false
+        smsCodeTextField.isHidden = true
+
+        signInButton.stateText = .contin
+    }
+
+    func hideKeyboard() {
+        phoneTextField.resignFirstResponder()
     }
     
     // MARK: - Action

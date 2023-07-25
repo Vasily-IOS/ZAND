@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 protocol SearchViewDelegate: AnyObject {
     func dismiss()
@@ -17,6 +18,8 @@ final class SearchView: BaseUIView {
     // MARK: - Properties
     
     weak var delegate: SearchViewDelegate?
+
+    private var cancellabes = Set<AnyCancellable>()
 
     // MARK: - UI
 
@@ -120,7 +123,13 @@ extension SearchView {
     }
 
     private func setTargets() {
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cancelEditing)))
+//        self.gesture(.tap()).sink { [weak self] _ in
+//            guard let self else { return }
+//
+//            self.endEditing(true)
+//            self.setSearchPlaceholderText()
+//        }.store(in: &cancellabes)
+
         cancelButton.addTarget(self, action: #selector(cancelTapAction),
                                for: .touchUpInside)
     }

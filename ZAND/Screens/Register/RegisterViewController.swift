@@ -118,17 +118,17 @@ extension RegisterViewController: RegisterViewInput {
     // MARK: - RegisterViewInput methods
 
     func showAlert(type: AlertType) {
-        AppRouter.shared.showAlert(type: type)
+        AppRouter.shared.showAlert(type: type, message: nil)
     }
 
     func updateUI(state: RegisterViewState) {
-        switch state {
-        case .sendCode:
-            contentView.updateUI()
-        case .showProfile:
-            print("Show profile")
-            contentView.backgroundColor = .systemTeal
-        }
+//        switch state {
+//        case .sendCode:
+//            contentView.updateUI()
+//        case .showProfile:
+//            print("Show profile")
+//            contentView.backgroundColor = .systemTeal
+//        }
     }
 
     func dismiss() {
