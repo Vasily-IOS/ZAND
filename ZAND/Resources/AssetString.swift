@@ -55,6 +55,7 @@ enum AssetString {
     static let codeIsInvalid = "Код не верен"
     static let sendCode = "Отправить код"
     static let enterYourCode = "Введите код"
+    static let gotError = "Произошла ошибка"
     
     // MARK: - Bottom button values
     static let apply = "Применить"
@@ -65,6 +66,8 @@ enum AssetString {
     static let callUs = "Свяжитесь с нами"
     static let myData = "Мои данные"
     static let pushSms = "Уведомления и смс"
+    static let phoneInputError = "Ошибка ввода номера телефона"
+    static let tryAgain = "Попробуйте еще раз"
     
     // MARK: - Padding textfield
     static let email = "Email"

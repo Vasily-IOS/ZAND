@@ -32,7 +32,7 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         super.loadView()
 
         showNavigationBar()
-        hideBackButtonTitle()
+//        hideBackButtonTitle()
     }
     
     override func viewDidLoad() {
@@ -45,6 +45,8 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         super.viewWillAppear(animated)
 
         presenter?.checkLogIn()
+        contentView.collectionView.reloadData()
+
         contentView.emptyLabel.isHidden = !saloonDBmodel.isEmpty
     }
  
@@ -145,8 +147,6 @@ extension ProfileViewController: UICollectionViewDelegate {
             case 0:
                 AppRouter.shared.push(.appointments)
             case 1:
-                AppRouter.shared.push(.myDetails)
-            case 2:
                 makeAlertController()
             default:
                 break

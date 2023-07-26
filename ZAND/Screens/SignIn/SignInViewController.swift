@@ -16,6 +16,8 @@ final class SignInViewController: BaseViewController<SignInView> {
     var navController: UINavigationController? {
         return self.navigationController ?? UINavigationController()
     }
+
+    var activityIndicatorView: ActivityIndicatorImpl = ActivityIndicatorView()
     
     // MARK: - Lifecycle
     
@@ -79,6 +81,9 @@ extension SignInViewController: UITextFieldDelegate {
             let fullNumber = (textField.text ?? "") + string
             textField.text = fullNumber.numberCorrector(phoneNumber: fullNumber,
                                                         shouldRemoveLastDigit: range.length == 1)
+            if fullNumber.count == 18 {
+                contentView.hidePhoneKeyboard()
+            }
             return false
         }
         return true
@@ -93,6 +98,9 @@ extension SignInViewController: UITextFieldDelegate {
         case contentView.phoneTextField:
             presenter?.registerModel.phone = text
         case contentView.smsCodeTextField:
+            if text.count == 6 {
+                contentView.hideSmsCodeKeyboard()
+            }
             presenter?.registerModel.verifyCode = text
         default:
             break
@@ -104,22 +112,31 @@ extension SignInViewController: SignInViewInput {
 
     // MARK: - SignInViewInput methods
 
-    func showAlert(type: AlertType) {
-        AppRouter.shared.showAlert(type: type)
+    func showAlert(type: AlertType, message: String?) {
+        AppRouter.shared.showAlert(type: type, message: message)
     }
 
     func updateUI(state: RegisterViewState) {
         switch state {
         case .sendCode:
+            hideIndicator()
             contentView.updateUI()
         case .showProfile:
+            hideIndicator()
             AppRouter.shared.switchRoot(type: .profile)
+        case .backToTop:
+            hideIndicator()
+            contentView.initialStartMode()
         }
     }
 
     func dismiss() {
         AppRouter.shared.popViewController()
     }
+
+    func showIndicatorView() {
+        showIndicator()
+    }
 }
 
-extension SignInViewController: HideNavigationBar {}
+extension SignInViewController: ActivityIndicator, HideNavigationBar {}

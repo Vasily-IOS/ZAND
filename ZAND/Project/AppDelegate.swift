@@ -7,7 +7,7 @@
 
 import UIKit
 import FirebaseCore
-import FirebaseAuth
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,12 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        setupRouter()
         FirebaseApp.configure()
-
-        AppRouter.shared.checkAuth()
+        setupRouter()
 
         return true
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        AppRouter.shared.checkAuth()
     }
 }
 

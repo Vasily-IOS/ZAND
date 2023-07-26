@@ -27,7 +27,7 @@ final class AppRouter {
     var navigationController = UINavigationController()
     var tabBarController: UITabBarController?
     private let vcFactory: DefaultVCFactory = VCFactory()
-    
+
     // MARK: - Initializers
     
     private init() {}
@@ -59,15 +59,17 @@ extension AppRouter {
         case .profile:
             tabBarController.viewControllers?[2] = profileViewController
         case .signIn:
-            tabBarController.viewControllers?[2] =  signInViewController
+            tabBarController.viewControllers?[2] = signInViewController
         }
     }
 
     func checkAuth() {
         if Auth.auth().currentUser == nil {
-            switchRoot(type: .signIn)
+            print("User: \(String(describing: Auth.auth().currentUser)) is not exist - show sign in")
+//            switchRoot(type: .signIn)
         } else {
-            switchRoot(type: .profile)
+            print("User: \(String(describing: Auth.auth().currentUser)) is exist - show profile")
+//            switchRoot(type: .profile)
         }
     }
 
@@ -150,8 +152,8 @@ extension AppRouter: DefaultRouter {
         navigationController.present(vc, animated: true)
     }
 
-    func showAlert(type: AlertType) {
-        let alertController = UIAlertController(title: type.textValue, message: nil, preferredStyle: .alert)
+    func showAlert(type: AlertType, message: String? = "") {
+        let alertController = UIAlertController(title: type.textValue, message: message, preferredStyle: .alert)
         let understandAction = UIAlertAction(title: AssetString.ok, style: .cancel)
         alertController.addAction(understandAction)
         navigationController.present(alertController, animated: true)

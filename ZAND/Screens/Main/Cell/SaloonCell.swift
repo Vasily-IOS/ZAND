@@ -53,7 +53,9 @@ final class SaloonCell: BaseCollectionCell {
     }()
     
     private let saloonDescriptionLabel = UILabel(.systemFont(ofSize: 20))
+
     private let categoryLabel = UILabel(.systemFont(ofSize: 12), .textGray)
+
     private let adressLabel = UILabel(.systemFont(ofSize: 12))
     
     private lazy var leftStackView = UIStackView(alignment: .top,
@@ -66,11 +68,7 @@ final class SaloonCell: BaseCollectionCell {
                                                  distribution: .equalSpacing,
                                                  spacing: 4)
     
-    private let favouritesButton: UIButton = {
-        let favouritesButton = UIButton()
-        favouritesButton.setImage(AssetImage.heart, for: .normal)
-        return favouritesButton
-    }()
+    private let favouritesButton = UIButton()
     
     private let viewOnMapButton = TransparentButton(state: .viewOnMap)
     

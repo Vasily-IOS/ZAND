@@ -97,6 +97,10 @@
 		FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45329F2CC320067CC6F /* BottomButton.swift */; };
 		FFA3D45629F2D0780067CC6F /* SalonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45529F2D0780067CC6F /* SalonDetailViewController.swift */; };
 		FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45729F2D0A60067CC6F /* SaloonDetailView.swift */; };
+		FFA9211D2A6ECE3300FDB977 /* Combine+GesturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA9211C2A6ECE3300FDB977 /* Combine+GesturePublisher.swift */; };
+		FFA921202A6ECE8200FDB977 /* GesturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA9211F2A6ECE8200FDB977 /* GesturePublisher.swift */; };
+		FFA921222A6ECEB200FDB977 /* GestureSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA921212A6ECEB200FDB977 /* GestureSubscription.swift */; };
+		FFA921242A6ECED600FDB977 /* GestureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA921232A6ECED600FDB977 /* GestureType.swift */; };
 		FFB6577F2A6A99C200451D65 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FFB6577E2A6A99C200451D65 /* SnapKit */; };
 		FFB657822A6A9A5700451D65 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657812A6A9A5700451D65 /* Lottie */; };
 		FFB657852A6ABDDA00451D65 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657842A6ABDDA00451D65 /* Realm */; };
@@ -110,7 +114,6 @@
 		FFB657962A6ABE3F00451D65 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657952A6ABE3F00451D65 /* FirebaseFirestoreSwift */; };
 		FFB657992A6ABF3500451D65 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657982A6ABF3500451D65 /* Moya */; };
 		FFB6579D2A6AC5B700451D65 /* splash_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFB6579C2A6AC5B700451D65 /* splash_video.mp4 */; };
-		FFB6579F2A6B153200451D65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFB6579E2A6B153200451D65 /* GoogleService-Info.plist */; };
 		FFB657A12A6B1A3F00451D65 /* Extension + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A02A6B1A3F00451D65 /* Extension + String.swift */; };
 		FFB657A32A6B29A600451D65 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A22A6B29A600451D65 /* RegisterModel.swift */; };
 		FFB657A62A6B2CDB00451D65 /* UDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A52A6B2CDB00451D65 /* UDManager.swift */; };
@@ -151,6 +154,10 @@
 		FFF16A812A6B2FA300D83E5B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF16A802A6B2FA300D83E5B /* UserModel.swift */; };
 		FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */; };
 		FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */; };
+		FFF600282A6FD312009813E6 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF600272A6FD312009813E6 /* AlertType.swift */; };
+		FFF6002B2A6FD60B009813E6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */; };
+		FFF6002D2A6FD6A6009813E6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6002C2A6FD6A6009813E6 /* ActivityIndicatorView.swift */; };
+		FFF6002F2A701B94009813E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFF6002E2A701B94009813E6 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -246,8 +253,11 @@
 		FFA3D45329F2CC320067CC6F /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		FFA3D45529F2D0780067CC6F /* SalonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonDetailViewController.swift; sourceTree = "<group>"; };
 		FFA3D45729F2D0A60067CC6F /* SaloonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonDetailView.swift; sourceTree = "<group>"; };
+		FFA9211C2A6ECE3300FDB977 /* Combine+GesturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+GesturePublisher.swift"; sourceTree = "<group>"; };
+		FFA9211F2A6ECE8200FDB977 /* GesturePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturePublisher.swift; sourceTree = "<group>"; };
+		FFA921212A6ECEB200FDB977 /* GestureSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureSubscription.swift; sourceTree = "<group>"; };
+		FFA921232A6ECED600FDB977 /* GestureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureType.swift; sourceTree = "<group>"; };
 		FFB6579C2A6AC5B700451D65 /* splash_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = splash_video.mp4; path = ../../../../splash_video.mp4; sourceTree = "<group>"; };
-		FFB6579E2A6B153200451D65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FFB657A02A6B1A3F00451D65 /* Extension + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + String.swift"; sourceTree = "<group>"; };
 		FFB657A22A6B29A600451D65 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		FFB657A52A6B2CDB00451D65 /* UDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDManager.swift; sourceTree = "<group>"; };
@@ -285,9 +295,14 @@
 		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
 		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
+		FFEC7B3F2A71320D0010573A /* ZAND..entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZAND..entitlements; sourceTree = "<group>"; };
 		FFF16A802A6B2FA300D83E5B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCollection.swift; sourceTree = "<group>"; };
 		FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCell.swift; sourceTree = "<group>"; };
+		FFF600272A6FD312009813E6 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
+		FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		FFF6002C2A6FD6A6009813E6 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		FFF6002E2A701B94009813E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -461,6 +476,7 @@
 				FF27FC272A2E07A9006DE1B9 /* ShowNavigationBar.swift */,
 				FF1961AD2A4C4F0A00434AC7 /* CommonModel.swift */,
 				FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */,
+				FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -495,6 +511,7 @@
 		FF45A12029E7EC1200587DAF = {
 			isa = PBXGroup;
 			children = (
+				FFEC7B3F2A71320D0010573A /* ZAND..entitlements */,
 				FF25632E29F571D200091374 /* MARKS.swift */,
 				FF45A12B29E7EC1200587DAF /* ZAND */,
 				FF45A12A29E7EC1200587DAF /* Products */,
@@ -569,6 +586,7 @@
 		FF45A15E29E7EF3A00587DAF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FFF600292A6FD5D5009813E6 /* Enum */,
 				FF18BEEC2A5D9DAD00547D4C /* RegexMask */,
 				FF27FC222A2E047B006DE1B9 /* Protocols */,
 				FF8AAF6029EEA202007D6A60 /* UI */,
@@ -626,7 +644,7 @@
 			children = (
 				FF45A12C29E7EC1200587DAF /* AppDelegate.swift */,
 				FF45A13A29E7EC1300587DAF /* Info.plist */,
-				FFB6579E2A6B153200451D65 /* GoogleService-Info.plist */,
+				FFF6002E2A701B94009813E6 /* GoogleService-Info.plist */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -678,6 +696,7 @@
 				FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */,
 				FF27FC202A2DE4C3006DE1B9 /* BackView.swift */,
 				FF76E8D52A32244200DCF779 /* RatingView.swift */,
+				FFF6002C2A6FD6A6009813E6 /* ActivityIndicatorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -741,6 +760,25 @@
 			path = SaloonDetail;
 			sourceTree = "<group>";
 		};
+		FFA9211B2A6ECE0B00FDB977 /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				FFA9211C2A6ECE3300FDB977 /* Combine+GesturePublisher.swift */,
+				FFA9211E2A6ECE6100FDB977 /* Gesture */,
+			);
+			path = Combine;
+			sourceTree = "<group>";
+		};
+		FFA9211E2A6ECE6100FDB977 /* Gesture */ = {
+			isa = PBXGroup;
+			children = (
+				FFA9211F2A6ECE8200FDB977 /* GesturePublisher.swift */,
+				FFA921212A6ECEB200FDB977 /* GestureSubscription.swift */,
+				FFA921232A6ECED600FDB977 /* GestureType.swift */,
+			);
+			path = Gesture;
+			sourceTree = "<group>";
+		};
 		FFB6579A2A6ABFC700451D65 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -758,6 +796,7 @@
 		FFB6579B2A6AC05700451D65 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				FFA9211B2A6ECE0B00FDB977 /* Combine */,
 				FF99B8F829EEB4D600F4E4C3 /* Router */,
 				FF1961C12A4C7B5800434AC7 /* Layout */,
 				FF25635029F69BD100091374 /* Model */,
@@ -941,6 +980,14 @@
 			path = SaloonCollection;
 			sourceTree = "<group>";
 		};
+		FFF600292A6FD5D5009813E6 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				FFF600272A6FD312009813E6 /* AlertType.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1021,7 +1068,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFB6579D2A6AC5B700451D65 /* splash_video.mp4 in Resources */,
-				FFB6579F2A6B153200451D65 /* GoogleService-Info.plist in Resources */,
+				FFF6002F2A701B94009813E6 /* GoogleService-Info.plist in Resources */,
 				FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */,
 				FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */,
 			);
@@ -1099,11 +1146,14 @@
 				FF1961B82A4C78B900434AC7 /* SettingsMenuModel.swift in Sources */,
 				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,
 				FF45A16029E7F4BC00587DAF /* Extension + UIStackView.swift in Sources */,
+				FFA921242A6ECED600FDB977 /* GestureType.swift in Sources */,
 				FF8AAF6629EEA256007D6A60 /* BaseUIView.swift in Sources */,
 				FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */,
 				FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */,
+				FFF600282A6FD312009813E6 /* AlertType.swift in Sources */,
 				FF25633629F5886700091374 /* SignInViewController.swift in Sources */,
 				FF69DAE12A5467FB00481CF1 /* Extension + UIImage.swift in Sources */,
+				FFA921222A6ECEB200FDB977 /* GestureSubscription.swift in Sources */,
 				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
 				FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */,
 				FFB657A62A6B2CDB00451D65 /* UDManager.swift in Sources */,
@@ -1118,13 +1168,16 @@
 				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
 				FFB9855F2A2F52CC00ABEFBB /* SearchCell.swift in Sources */,
 				FF25632D29F5718C00091374 /* DescriptionShowcaseView.swift in Sources */,
+				FFA921202A6ECE8200FDB977 /* GesturePublisher.swift in Sources */,
 				FF25633D29F5A16A00091374 /* RegisterViewController.swift in Sources */,
 				FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */,
 				FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */,
+				FFA9211D2A6ECE3300FDB977 /* Combine+GesturePublisher.swift in Sources */,
 				FF27FC282A2E07A9006DE1B9 /* ShowNavigationBar.swift in Sources */,
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
 				FF69DADB2A53089200481CF1 /* DetailModelDB.swift in Sources */,
 				FF25634A29F687B900091374 /* FilterLayout.swift in Sources */,
+				FFF6002D2A6FD6A6009813E6 /* ActivityIndicatorView.swift in Sources */,
 				FF69DADD2A545F5700481CF1 /* Extension + StringProtocol.swift in Sources */,
 				FF1961BC2A4C79B000434AC7 /* FilterModel.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
@@ -1139,6 +1192,7 @@
 				FF1961BE2A4C7A2B00434AC7 /* MapModel.swift in Sources */,
 				FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */,
 				FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */,
+				FFF6002B2A6FD60B009813E6 /* ActivityIndicator.swift in Sources */,
 				FFB985682A30AFD100ABEFBB /* VibrationManager.swift in Sources */,
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,
 				FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */,
@@ -1229,7 +1283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1283,7 +1337,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1298,11 +1352,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = ZAND..entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9TT2NS548Z;
+				DEVELOPMENT_TEAM = 9TT2NS548Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1319,7 +1373,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = NewJustProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1334,11 +1387,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = ZAND..entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9TT2NS548Z;
+				DEVELOPMENT_TEAM = 9TT2NS548Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1355,7 +1408,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = NewJustProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
