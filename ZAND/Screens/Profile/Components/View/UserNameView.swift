@@ -30,11 +30,11 @@ final class UserNameView: BaseUIView {
     
     override func setup() {
         super.setup()
+
         setViews()
     }
 
     func configure(model: UserModel) {
-        print(model.name)
         nameLabel.text = model.name
         phoneLabel.text = model.phone
     }

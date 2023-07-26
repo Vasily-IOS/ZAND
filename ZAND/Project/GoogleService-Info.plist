@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>637685502905-0p9ml3hnd7jkdo5ko4gbrfhqu3bkgj75.apps.googleusercontent.com</string>
+	<string>102387260014-laonrhjt9738su6750gtme9h6317fetg.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.637685502905-0p9ml3hnd7jkdo5ko4gbrfhqu3bkgj75</string>
+	<string>com.googleusercontent.apps.102387260014-laonrhjt9738su6750gtme9h6317fetg</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCwUFnbveKlvmxr3GeoP-wKRltxXZfL7J8</string>
+	<string>AIzaSyDMWsFDXUOJ5w_v6Ewa60GYd1N1lrdg598</string>
 	<key>GCM_SENDER_ID</key>
-	<string>637685502905</string>
+	<string>102387260014</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.zand.ZAND</string>
+	<string>com.io.zand</string>
 	<key>PROJECT_ID</key>
-	<string>zand-2364e</string>
+	<string>zand-da891</string>
 	<key>STORAGE_BUCKET</key>
-	<string>zand-2364e.appspot.com</string>
+	<string>zand-da891.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:637685502905:ios:09195d0c6da97dc0f89c68</string>
-	<key>DATABASE_URL</key>
-	<string>https://zand-2364e-default-rtdb.firebaseio.com</string>
+	<string>1:102387260014:ios:c8d823fad283fb7dd4647f</string>
 </dict>
 </plist>

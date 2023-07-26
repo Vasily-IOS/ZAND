@@ -114,7 +114,6 @@
 		FFB657962A6ABE3F00451D65 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657952A6ABE3F00451D65 /* FirebaseFirestoreSwift */; };
 		FFB657992A6ABF3500451D65 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657982A6ABF3500451D65 /* Moya */; };
 		FFB6579D2A6AC5B700451D65 /* splash_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFB6579C2A6AC5B700451D65 /* splash_video.mp4 */; };
-		FFB6579F2A6B153200451D65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFB6579E2A6B153200451D65 /* GoogleService-Info.plist */; };
 		FFB657A12A6B1A3F00451D65 /* Extension + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A02A6B1A3F00451D65 /* Extension + String.swift */; };
 		FFB657A32A6B29A600451D65 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A22A6B29A600451D65 /* RegisterModel.swift */; };
 		FFB657A62A6B2CDB00451D65 /* UDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A52A6B2CDB00451D65 /* UDManager.swift */; };
@@ -158,6 +157,7 @@
 		FFF600282A6FD312009813E6 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF600272A6FD312009813E6 /* AlertType.swift */; };
 		FFF6002B2A6FD60B009813E6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */; };
 		FFF6002D2A6FD6A6009813E6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6002C2A6FD6A6009813E6 /* ActivityIndicatorView.swift */; };
+		FFF6002F2A701B94009813E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFF6002E2A701B94009813E6 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -258,7 +258,6 @@
 		FFA921212A6ECEB200FDB977 /* GestureSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureSubscription.swift; sourceTree = "<group>"; };
 		FFA921232A6ECED600FDB977 /* GestureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureType.swift; sourceTree = "<group>"; };
 		FFB6579C2A6AC5B700451D65 /* splash_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = splash_video.mp4; path = ../../../../splash_video.mp4; sourceTree = "<group>"; };
-		FFB6579E2A6B153200451D65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FFB657A02A6B1A3F00451D65 /* Extension + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + String.swift"; sourceTree = "<group>"; };
 		FFB657A22A6B29A600451D65 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		FFB657A52A6B2CDB00451D65 /* UDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDManager.swift; sourceTree = "<group>"; };
@@ -296,12 +295,14 @@
 		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
 		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
+		FFEC7B3F2A71320D0010573A /* ZAND..entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZAND..entitlements; sourceTree = "<group>"; };
 		FFF16A802A6B2FA300D83E5B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCollection.swift; sourceTree = "<group>"; };
 		FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCell.swift; sourceTree = "<group>"; };
 		FFF600272A6FD312009813E6 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		FFF6002C2A6FD6A6009813E6 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		FFF6002E2A701B94009813E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -510,6 +511,7 @@
 		FF45A12029E7EC1200587DAF = {
 			isa = PBXGroup;
 			children = (
+				FFEC7B3F2A71320D0010573A /* ZAND..entitlements */,
 				FF25632E29F571D200091374 /* MARKS.swift */,
 				FF45A12B29E7EC1200587DAF /* ZAND */,
 				FF45A12A29E7EC1200587DAF /* Products */,
@@ -642,7 +644,7 @@
 			children = (
 				FF45A12C29E7EC1200587DAF /* AppDelegate.swift */,
 				FF45A13A29E7EC1300587DAF /* Info.plist */,
-				FFB6579E2A6B153200451D65 /* GoogleService-Info.plist */,
+				FFF6002E2A701B94009813E6 /* GoogleService-Info.plist */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -1066,7 +1068,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFB6579D2A6AC5B700451D65 /* splash_video.mp4 in Resources */,
-				FFB6579F2A6B153200451D65 /* GoogleService-Info.plist in Resources */,
+				FFF6002F2A701B94009813E6 /* GoogleService-Info.plist in Resources */,
 				FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */,
 				FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */,
 			);
@@ -1350,10 +1352,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ZAND..entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7P89GZBVJ2;
+				DEVELOPMENT_TEAM = 9TT2NS548Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1384,6 +1387,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ZAND..entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

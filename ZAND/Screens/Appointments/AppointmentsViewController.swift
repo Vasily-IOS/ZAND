@@ -33,7 +33,7 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         subscribeDelegate()
         presenter?.getData(by: .upcoming)
     }

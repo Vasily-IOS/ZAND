@@ -23,8 +23,12 @@ final class MainViewController: BaseViewController<MainView> {
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
         guard let self else { return }
 
-        self.presenter?.applyDB(by: id) { [weak self] in
-            self?.contentView.changeHeartAppearence(by: indexPath)
+        if AuthManagerImpl.shared.currentUser == nil {
+            AppRouter.shared.changeTabBarVC(to: 2)
+        } else {
+            self.presenter?.applyDB(by: id) { [weak self] in
+                self?.contentView.changeHeartAppearence(by: indexPath)
+            }
         }
     }
     

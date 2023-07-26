@@ -23,13 +23,15 @@ final class AuthManagerImpl: AuthManager {
 
     var name: String = ""
 
+    var currentUser: User? {
+        return auth.currentUser
+    }
+
     private var verificationID: String?
 
     private let auth = Auth.auth()
 
     private let uDmanager: UDManagerImpl = UDManager()
-
-    private let reference = Database.database().reference().child("users")
 
     // MARK: - Initializers
 
@@ -41,6 +43,7 @@ final class AuthManagerImpl: AuthManager {
         PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { [weak self] verificationID, error in
             guard let verificationID = verificationID,
                   error == nil else {
+                debugPrint("Error of start auth: \(String(describing: error))")
                 completion(false)
                 return
             }
@@ -64,8 +67,11 @@ final class AuthManagerImpl: AuthManager {
         auth.signIn(with: credential) { authCredential, error in
             guard authCredential != nil, error == nil else {
                 completion(false)
+                debugPrint("Error of code verifying: \(String(describing: error))")
                 return
             }
+
+//            print(authCredential?.user)
 
             let model = UserModel(name: self.name, phone: authCredential?.user.phoneNumber ?? "")
             self.uDmanager.save(model, Config.userData)

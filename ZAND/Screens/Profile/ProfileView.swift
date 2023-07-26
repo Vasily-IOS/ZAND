@@ -34,7 +34,7 @@ final class ProfileView: BaseUIView {
 
     lazy var emptyLabel: UILabel = {
         var emptyLabel = UILabel()
-        emptyLabel.font = .systemFont(ofSize: 20, weight: .regular)
+        emptyLabel.font = .systemFont(ofSize: 24, weight: .regular)
         emptyLabel.textColor = .textGray
         emptyLabel.text = AssetString.empty
         return emptyLabel
@@ -52,6 +52,7 @@ final class ProfileView: BaseUIView {
     
     init(layout: DefaultProfileLayout) {
         self.layout = layout
+
         super.init(frame: .zero)
     }
     
@@ -99,8 +100,8 @@ extension ProfileView {
         }
 
         emptyLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(callUsButton).inset(150)
+//            make.left.equalTo(collectionView)
+            make.center.equalToSuperview()
         }
     }
     

@@ -55,6 +55,7 @@ enum AssetString {
     static let codeIsInvalid = "Код не верен"
     static let sendCode = "Отправить код"
     static let enterYourCode = "Введите код"
+    static let gotError = "Произошла ошибка"
     
     // MARK: - Bottom button values
     static let apply = "Применить"

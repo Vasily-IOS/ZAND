@@ -55,7 +55,8 @@ final class SignInPresenter: SignInPresenterOutput {
             { [weak self] success in
                 guard success,
                 let self else {
-                    self?.view?.showAlert(type: .phoneInputError, message: AssetString.phoneInputError)
+                    self?.view?.updateUI(state: .backToTop)
+                    self?.view?.showAlert(type: .gotError, message: AssetString.tryAgain)
                     return
                 }
 
@@ -72,7 +73,7 @@ final class SignInPresenter: SignInPresenterOutput {
             AuthManagerImpl.shared.verifyCode(code: registerModel.verifyCode) { [weak self] success in
                 guard success else {
                     self?.view?.updateUI(state: .backToTop)
-                    self?.view?.showAlert(type: .codeIsInvalid, message: AssetString.tryAgain)
+                    self?.view?.showAlert(type: .gotError, message: AssetString.tryAgain)
                     return
                 }
 

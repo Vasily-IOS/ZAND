@@ -27,7 +27,7 @@ final class AppRouter {
     var navigationController = UINavigationController()
     var tabBarController: UITabBarController?
     private let vcFactory: DefaultVCFactory = VCFactory()
-    
+
     // MARK: - Initializers
     
     private init() {}
@@ -59,16 +59,18 @@ extension AppRouter {
         case .profile:
             tabBarController.viewControllers?[2] = profileViewController
         case .signIn:
-            tabBarController.viewControllers?[2] =  signInViewController
+            tabBarController.viewControllers?[2] = signInViewController
         }
     }
 
     func checkAuth() {
-//        if Auth.auth().currentUser == nil {
+        if Auth.auth().currentUser == nil {
+            print("User: \(String(describing: Auth.auth().currentUser)) is not exist - show sign in")
 //            switchRoot(type: .signIn)
-//        } else {
+        } else {
+            print("User: \(String(describing: Auth.auth().currentUser)) is exist - show profile")
 //            switchRoot(type: .profile)
-//        }
+        }
     }
 
     private func setup() {

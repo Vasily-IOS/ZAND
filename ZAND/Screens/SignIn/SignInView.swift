@@ -79,8 +79,12 @@ final class SignInView: BaseUIView {
         signInButton.stateText = .contin
     }
 
-    func hideKeyboard() {
+    func hidePhoneKeyboard() {
         phoneTextField.resignFirstResponder()
+    }
+
+    func hideSmsCodeKeyboard() {
+        smsCodeTextField.resignFirstResponder()
     }
     
     // MARK: - Action

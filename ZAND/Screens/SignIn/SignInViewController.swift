@@ -84,7 +84,7 @@ extension SignInViewController: UITextFieldDelegate {
             textField.text = fullNumber.numberCorrector(phoneNumber: fullNumber,
                                                         shouldRemoveLastDigit: range.length == 1)
             if fullNumber.count == 18 {
-                contentView.hideKeyboard()
+                contentView.hidePhoneKeyboard()
             }
             return false
         }
@@ -101,7 +101,7 @@ extension SignInViewController: UITextFieldDelegate {
             presenter?.registerModel.phone = text
         case contentView.smsCodeTextField:
             if text.count == 6 {
-                contentView.hideKeyboard()
+                contentView.hideSmsCodeKeyboard()
             }
             presenter?.registerModel.verifyCode = text
         default:
@@ -137,6 +137,4 @@ extension SignInViewController: SignInViewInput {
     }
 }
 
-extension SignInViewController: ActivityIndicator {}
-
-extension SignInViewController: HideNavigationBar {}
+extension SignInViewController: ActivityIndicator, HideNavigationBar {}

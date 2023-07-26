@@ -8,7 +8,27 @@
 import UIKit
 
 final class TabBarController: UITabBarController {
-    
+
+    // MARK: - Properties
+
+    var switchedViewController: UIViewController {
+        let tabBarItem = UITabBarItem(title: AssetString.profile,
+                                      image: AssetImage.profile_icon,
+                                      selectedImage: nil)
+        var vc = UIViewController()
+        if AuthManagerImpl.shared.currentUser == nil {
+            vc = vcFactory.getViewController(for: .signIn)
+            vc.tabBarItem = tabBarItem
+            return vc
+        } else {
+            vc = vcFactory.getViewController(for: .profile)
+            vc.tabBarItem = tabBarItem
+            return vc
+        }
+    }
+
+    private let vcFactory: DefaultVCFactory = VCFactory()
+
     // MARK: - Lifecycle
     
     override func loadView() {
@@ -34,11 +54,6 @@ extension TabBarController {
         mapVC.tabBarItem = UITabBarItem(title: AssetString.map,
                                         image:  AssetImage.map_icon,
                                         selectedImage: nil)
-        
-        let signInVc = vcFactory.getViewController(for: .signIn)
-        signInVc.tabBarItem = UITabBarItem(title: AssetString.profile,
-                                           image: AssetImage.profile_icon,
-                                           selectedImage: nil)
 
         UITabBar.appearance().tintColor = .mainGreen
         UITabBar.appearance().backgroundColor = .white
@@ -48,7 +63,7 @@ extension TabBarController {
         tabBar.layer.shadowRadius = 2.5
         tabBar.layer.shadowColor = UIColor.black.cgColor
         tabBar.layer.shadowOpacity = 0.3
-        viewControllers = [mainVC, mapVC, signInVc]
+        viewControllers = [mainVC, mapVC, switchedViewController]
     }
     
     private func setBackButton() {
