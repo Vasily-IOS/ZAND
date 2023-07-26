@@ -64,9 +64,7 @@ extension SignInViewController: SignInDelegate {
     func signIn() {
         if !presenter!.codeAreSuccessfullySended {
             presenter?.enterNamePhone()
-            showIndicator()
         } else {
-            showIndicator()
             presenter?.enterSmsCode()
         }
     }
@@ -134,6 +132,10 @@ extension SignInViewController: SignInViewInput {
 
     func dismiss() {
         AppRouter.shared.popViewController()
+    }
+
+    func showIndicatorView() {
+        showIndicator()
     }
 }
 

@@ -40,6 +40,7 @@ final class AuthManagerImpl: AuthManager {
     // MARK: - Instance methods
 
     func startAuth(name: String, phone: String, completion: @escaping ((Bool) -> Void)) {
+        NotificationCenter.default.post(name: .showIndicator, object: nil)
         PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { [weak self] verificationID, error in
             guard let verificationID = verificationID,
                   error == nil else {
@@ -55,6 +56,7 @@ final class AuthManagerImpl: AuthManager {
     }
 
     func verifyCode(code: String, completion: @escaping ((Bool) -> Void)) {
+        NotificationCenter.default.post(name: .showIndicator, object: nil)
         guard let verificationID = verificationID else {
             completion(false)
             return
@@ -70,8 +72,6 @@ final class AuthManagerImpl: AuthManager {
                 debugPrint("Error of code verifying: \(String(describing: error))")
                 return
             }
-
-//            print(authCredential?.user)
 
             let model = UserModel(name: self.name, phone: authCredential?.user.phoneNumber ?? "")
             self.uDmanager.save(model, Config.userData)

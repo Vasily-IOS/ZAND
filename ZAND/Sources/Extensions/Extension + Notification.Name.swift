@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let isInFavourite = Notification.Name(rawValue: "isInFavourite")
+    static let showIndicator = Notification.Name("showIndicator")
 }

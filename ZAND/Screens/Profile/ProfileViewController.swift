@@ -32,7 +32,7 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         super.loadView()
 
         showNavigationBar()
-        hideBackButtonTitle()
+//        hideBackButtonTitle()
     }
     
     override func viewDidLoad() {
@@ -45,6 +45,8 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         super.viewWillAppear(animated)
 
         presenter?.checkLogIn()
+        contentView.collectionView.reloadData()
+
         contentView.emptyLabel.isHidden = !saloonDBmodel.isEmpty
     }
  

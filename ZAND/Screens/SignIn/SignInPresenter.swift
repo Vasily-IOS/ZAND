@@ -19,6 +19,7 @@ protocol SignInViewInput: AnyObject {
     func showAlert(type: AlertType, message: String?)
     func dismiss()
     func updateUI(state: RegisterViewState)
+    func showIndicatorView() 
 }
 
 enum RegisterViewState {
@@ -41,6 +42,19 @@ final class SignInPresenter: SignInPresenterOutput {
 
     init(view: SignInViewInput) {
         self.view = view
+
+        subscribeNotification()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Action
+
+    @objc
+    private func showIndicatorView() {
+        view?.showIndicatorView()
     }
 
     // MARK: - Instance methods
@@ -80,5 +94,11 @@ final class SignInPresenter: SignInPresenterOutput {
                 self?.view?.updateUI(state: .showProfile)
             }
         }
+    }
+
+    private func subscribeNotification() {
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(showIndicatorView), name: .showIndicator, object: nil
+        )
     }
 }
