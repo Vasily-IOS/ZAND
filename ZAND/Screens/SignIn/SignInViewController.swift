@@ -81,9 +81,12 @@ extension SignInViewController: UITextFieldDelegate {
             let fullNumber = (textField.text ?? "") + string
             textField.text = fullNumber.numberCorrector(phoneNumber: fullNumber,
                                                         shouldRemoveLastDigit: range.length == 1)
-            if fullNumber.count == 18 {
+
+            if (textField.text?.count ?? 0) == 18 && (presenter?.keyboardAlreadyHidined ?? false) == false {
+                presenter?.keyboardAlreadyHidined = true
                 contentView.hidePhoneKeyboard()
             }
+
             return false
         }
         return true

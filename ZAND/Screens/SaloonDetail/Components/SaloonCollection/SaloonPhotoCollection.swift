@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 final class SaloonPhotoCollection: BaseUIView {
 
@@ -21,14 +22,32 @@ final class SaloonPhotoCollection: BaseUIView {
             heartButton.setImage(
                 inFavourite ? AssetImage.fillHeart_icon : AssetImage.heart, for: .normal
             )
+
+            if inFavourite {
+                animationView.isHidden = false
+                heartButton.isUserInteractionEnabled = false
+                animationView.play()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.heartButton.isUserInteractionEnabled = true
+                    self.animationView.isHidden = true
+                }
+            }
         }
     }
+
 
     var id: Int = 0
 
     var mockPhotos: [UIImage] = []
 
     var dbPhotos: [Data] = []
+
+    lazy var animationView: LottieAnimationView = {
+        var animationView = LottieAnimationView(name: Config.animation_fav)
+        animationView.isHidden = true
+        return animationView
+    }()
 
     private (set) lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -179,6 +198,13 @@ extension SaloonPhotoCollection {
             make.height.equalTo(44)
             make.centerX.equalTo(self)
             make.bottom.equalTo(self).inset(35)
+        }
+
+        heartButton.addSubview(animationView)
+
+        animationView.snp.makeConstraints { make in
+            make.bottom.equalTo(heartButton)
+            make.centerX.equalTo(heartButton)
         }
     }
     

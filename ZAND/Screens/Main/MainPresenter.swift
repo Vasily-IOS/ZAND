@@ -104,6 +104,7 @@ extension MainPresenter {
     func remove(by id: Int) {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
         realmManager.removeObjectByID(object: DetailModelDB.self, predicate: predicate)
+        VibrationManager.shared.vibrate(for: .success)
     }
 
     func contains(by id: Int) -> Bool {

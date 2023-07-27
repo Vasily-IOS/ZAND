@@ -50,7 +50,7 @@ enum AssetString {
     static let empty = "Пока что пусто"
     static let ok = "Понятно"
     static let smsCode = "Код из смс"
-    static let enterYourName = "Вы не написали как вас зовут :)"
+    static let enterYourName = "Вы не написали своё имя :)"
     static let phoneNumberLessThanEleven = "Общее количество символов телефона должно быть 11"
     static let codeIsInvalid = "Код не верен"
     static let sendCode = "Отправить код"

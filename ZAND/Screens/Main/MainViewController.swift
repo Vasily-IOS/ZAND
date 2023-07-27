@@ -17,7 +17,7 @@ final class MainViewController: BaseViewController<MainView> {
         guard let self,
               let model = self.presenter?.getModel(by: id) else { return }
 
-        AppRouter.shared.push(.selectableMap(model))
+        AppRouter.shared.presentWithNav(type: .selectableMap(model))
     }
 
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
@@ -27,7 +27,7 @@ final class MainViewController: BaseViewController<MainView> {
             AppRouter.shared.changeTabBarVC(to: 2)
         } else {
             self.presenter?.applyDB(by: id) { [weak self] in
-                self?.contentView.changeHeartAppearence(by: indexPath)
+                self?.contentView.changeHeartAppearance(by: indexPath)
             }
         }
     }
@@ -143,10 +143,6 @@ extension MainViewController: UICollectionViewDelegate {
 extension MainViewController: MainViewDelegate {
     
     // MARK: - MainViewDelegate methods
-    
-    func showSelectableMap(model: CommonModel) {
-        AppRouter.shared.push(.selectableMap(model))
-    }
     
     func showSearch() {
         guard let model = presenter?.getModel(by: .saloons) as? [SaloonMockModel] else {
