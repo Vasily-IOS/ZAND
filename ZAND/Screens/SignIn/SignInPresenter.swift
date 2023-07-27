@@ -9,7 +9,8 @@ import Foundation
 
 protocol SignInPresenterOutput: AnyObject {
     var registerModel: RegisterModel { get set }
-    var codeAreSuccessfullySended: Bool { get set  }
+    var codeAreSuccessfullySended: Bool { get set }
+    var keyboardAlreadyHidined: Bool { get set }
 
     func enterNamePhone()
     func enterSmsCode()
@@ -37,6 +38,8 @@ final class SignInPresenter: SignInPresenterOutput {
     var registerModel = RegisterModel()
 
     var codeAreSuccessfullySended: Bool = false
+
+    var keyboardAlreadyHidined: Bool = false
 
     // MARK: - Initiailers
 

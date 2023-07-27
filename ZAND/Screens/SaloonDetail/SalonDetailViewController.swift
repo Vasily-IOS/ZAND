@@ -93,9 +93,9 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
 
     func openMap() {
         if let model = presenter?.getModel() {
-            AppRouter.shared.push(.selectableMap(model))
+            AppRouter.shared.presentWithNav(type: .selectableMap(model))
         } else if let dbModel = presenter?.getDBModel() {
-            AppRouter.shared.push(.selectableMap(dbModel))
+            AppRouter.shared.presentWithNav(type: .selectableMap(dbModel))
         }
     }
 

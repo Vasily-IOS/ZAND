@@ -78,7 +78,7 @@ extension AppointemtsView {
 
         addSubviews([segmentControl, tableView])
         segmentControl.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(130)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(30)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
             make.height.equalTo(30)

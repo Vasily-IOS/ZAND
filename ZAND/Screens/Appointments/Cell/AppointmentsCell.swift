@@ -84,6 +84,8 @@ final class AppoitmentsCell: BaseTableCell {
         setViews()
         setSelf()
         setTarget()
+
+        viewOnMapButton.isHidden = true
     }
     
     func configure(model: CommonModel) {

@@ -51,10 +51,9 @@ final class MainView: BaseUIView {
         setViews()
     }
 
-    func changeHeartAppearence(by indexPath: IndexPath) {
+    func changeHeartAppearance(by indexPath: IndexPath) {
         let cell = self.collectionView.cellForItem(at: indexPath) as! SaloonCell
         cell.isInFavourite = !cell.isInFavourite
-        cell.shouldPlayAnimation = !cell.shouldPlayAnimation
     }
 
     func scrollToItem(at indexPath: IndexPath) {

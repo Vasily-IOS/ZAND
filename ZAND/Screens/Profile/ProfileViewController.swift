@@ -145,7 +145,7 @@ extension ProfileViewController: UICollectionViewDelegate {
         case .profileFields:
             switch indexPath.row {
             case 0:
-                AppRouter.shared.push(.appointments)
+                AppRouter.shared.presentWithNav(type: .appointments)
             case 1:
                 makeAlertController()
             default:
