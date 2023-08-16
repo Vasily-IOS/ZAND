@@ -51,13 +51,8 @@ final class MainViewController: BaseViewController<MainView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        subscribeDelegate()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
         hideNavigationBar()
+        subscribeDelegate()
     }
 
     deinit {

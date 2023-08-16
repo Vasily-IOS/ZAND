@@ -80,7 +80,6 @@ extension SignInViewController: UITextFieldDelegate {
         if textField == contentView.phoneTextField {
             guard let text = textField.text else { return false }
 
-
             let phoneString = (text as NSString).replacingCharacters(in: range, with: string)
             textField.text = text.format(with: "+X (XXX) XXX-XX-XX", phone: phoneString)
 
@@ -88,7 +87,7 @@ extension SignInViewController: UITextFieldDelegate {
                 presenter?.keyboardAlreadyHidined = true
                 contentView.hidePhoneKeyboard()
             }
-            
+
             return false
         }
         return true
