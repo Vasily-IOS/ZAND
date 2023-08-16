@@ -78,15 +78,17 @@ extension SignInViewController: UITextFieldDelegate {
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         if textField == contentView.phoneTextField {
-            let fullNumber = (textField.text ?? "") + string
-            textField.text = fullNumber.numberCorrector(phoneNumber: fullNumber,
-                                                        shouldRemoveLastDigit: range.length == 1)
+            guard let text = textField.text else { return false }
+
+
+            let phoneString = (text as NSString).replacingCharacters(in: range, with: string)
+            textField.text = text.format(with: "+X (XXX) XXX-XX-XX", phone: phoneString)
 
             if (textField.text?.count ?? 0) == 18 && (presenter?.keyboardAlreadyHidined ?? false) == false {
                 presenter?.keyboardAlreadyHidined = true
                 contentView.hidePhoneKeyboard()
             }
-
+            
             return false
         }
         return true

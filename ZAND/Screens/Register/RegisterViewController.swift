@@ -89,9 +89,9 @@ extension RegisterViewController: UITextFieldDelegate {
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         if textField == contentView.phoneTextField {
-            let fullNumber = (textField.text ?? "") + string
-            textField.text = (textField.text ?? "").numberCorrector(phoneNumber: fullNumber,
-                                                        shouldRemoveLastDigit: range.length == 1)
+//            let fullNumber = (textField.text ?? "") + string
+//            textField.text = (textField.text ?? "").numberCorrector(phoneNumber: fullNumber,
+//                                                        shouldRemoveLastDigit: range.length == 1)
             return false
         }
         return true
