@@ -22,7 +22,11 @@ final class SignInView: BaseUIView {
 
     let nameTextField = PaddingTextField(state: .name)
 
-    let phoneTextField = PaddingTextField(state: .phone)
+    let phoneTextField: PaddingTextField = {
+        let phoneTextField = PaddingTextField(state: .phone)
+        phoneTextField.text = "+7"
+        return phoneTextField
+    }()
 
     let smsCodeTextField = PaddingTextField(state: .smsCode)
 

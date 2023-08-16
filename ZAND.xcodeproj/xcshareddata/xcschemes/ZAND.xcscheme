@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FF45A12829E7EC1200587DAF"
-               BuildableName = "ZAND..app"
-               BlueprintName = "ZAND."
-               ReferencedContainer = "container:ZAND..xcodeproj">
+               BuildableName = "ZAND.app"
+               BlueprintName = "ZAND"
+               ReferencedContainer = "container:ZAND.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,7 +36,7 @@
                BlueprintIdentifier = "FF45A13E29E7EC1300587DAF"
                BuildableName = "ZANDTests.xctest"
                BlueprintName = "ZANDTests"
-               ReferencedContainer = "container:ZAND..xcodeproj">
+               ReferencedContainer = "container:ZAND.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,7 +47,7 @@
                BlueprintIdentifier = "FF45A14829E7EC1300587DAF"
                BuildableName = "ZANDUITests.xctest"
                BlueprintName = "ZANDUITests"
-               ReferencedContainer = "container:ZAND..xcodeproj">
+               ReferencedContainer = "container:ZAND.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -67,9 +67,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF45A12829E7EC1200587DAF"
-            BuildableName = "ZAND..app"
-            BlueprintName = "ZAND."
-            ReferencedContainer = "container:ZAND..xcodeproj">
+            BuildableName = "ZAND.app"
+            BlueprintName = "ZAND"
+            ReferencedContainer = "container:ZAND.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -91,9 +91,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF45A12829E7EC1200587DAF"
-            BuildableName = "ZAND..app"
-            BlueprintName = "ZAND."
-            ReferencedContainer = "container:ZAND..xcodeproj">
+            BuildableName = "ZAND.app"
+            BlueprintName = "ZAND"
+            ReferencedContainer = "container:ZAND.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

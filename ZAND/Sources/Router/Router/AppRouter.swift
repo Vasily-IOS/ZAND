@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import FirebaseAuth
 
 enum ReplacedControllerType {
     case signIn
@@ -64,13 +63,7 @@ extension AppRouter {
     }
 
     func checkAuth() {
-        if Auth.auth().currentUser == nil {
-            print("User: \(String(describing: Auth.auth().currentUser)) is not exist - show sign in")
-//            switchRoot(type: .signIn)
-        } else {
-            print("User: \(String(describing: Auth.auth().currentUser)) is exist - show profile")
-//            switchRoot(type: .profile)
-        }
+       
     }
 
     private func setup() {

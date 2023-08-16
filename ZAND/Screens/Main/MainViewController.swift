@@ -23,12 +23,10 @@ final class MainViewController: BaseViewController<MainView> {
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
         guard let self else { return }
 
-        if AuthManagerImpl.shared.currentUser == nil {
-            AppRouter.shared.changeTabBarVC(to: 2)
-        } else {
-            self.presenter?.applyDB(by: id) { [weak self] in
-                self?.contentView.changeHeartAppearance(by: indexPath)
-            }
+        // if we have not user we will show sign in screen
+
+        self.presenter?.applyDB(by: id) { [weak self] in
+            self?.contentView.changeHeartAppearance(by: indexPath)
         }
     }
     
@@ -53,13 +51,8 @@ final class MainViewController: BaseViewController<MainView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        subscribeDelegate()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
         hideNavigationBar()
+        subscribeDelegate()
     }
 
     deinit {
