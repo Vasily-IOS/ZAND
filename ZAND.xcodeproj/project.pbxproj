@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E63E4D874CA2C42699F3CB1F /* Pods_ZAND.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9B65E19747D5AB4F3AD14C6 /* Pods_ZAND.framework */; };
 		FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E3382A02C3C4006476F0 /* ProfileCell.swift */; };
 		FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */; };
 		FF18BEEB2A5D625000547D4C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF18BEEA2A5D625000547D4C /* AuthManager.swift */; };
@@ -101,11 +102,6 @@
 		FFA921202A6ECE8200FDB977 /* GesturePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA9211F2A6ECE8200FDB977 /* GesturePublisher.swift */; };
 		FFA921222A6ECEB200FDB977 /* GestureSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA921212A6ECEB200FDB977 /* GestureSubscription.swift */; };
 		FFA921242A6ECED600FDB977 /* GestureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA921232A6ECED600FDB977 /* GestureType.swift */; };
-		FFB6577F2A6A99C200451D65 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FFB6577E2A6A99C200451D65 /* SnapKit */; };
-		FFB657822A6A9A5700451D65 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657812A6A9A5700451D65 /* Lottie */; };
-		FFB657852A6ABDDA00451D65 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657842A6ABDDA00451D65 /* Realm */; };
-		FFB657872A6ABDDA00451D65 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657862A6ABDDA00451D65 /* RealmSwift */; };
-		FFB657992A6ABF3500451D65 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = FFB657982A6ABF3500451D65 /* Moya */; };
 		FFB6579D2A6AC5B700451D65 /* splash_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFB6579C2A6AC5B700451D65 /* splash_video.mp4 */; };
 		FFB657A12A6B1A3F00451D65 /* Extension + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A02A6B1A3F00451D65 /* Extension + String.swift */; };
 		FFB657A32A6B29A600451D65 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A22A6B29A600451D65 /* RegisterModel.swift */; };
@@ -153,6 +149,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D64C2B23E8298FFED41E857 /* Pods-ZAND.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.debug.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.debug.xcconfig"; sourceTree = "<group>"; };
+		E033D12BA663B4F5DE743EE5 /* Pods-ZAND.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.release.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.release.xcconfig"; sourceTree = "<group>"; };
+		F9B65E19747D5AB4F3AD14C6 /* Pods_ZAND.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF01E3382A02C3C4006476F0 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCell.swift; sourceTree = "<group>"; };
 		FF18BEEA2A5D625000547D4C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -301,17 +300,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFB657872A6ABDDA00451D65 /* RealmSwift in Frameworks */,
-				FFB657992A6ABF3500451D65 /* Moya in Frameworks */,
-				FFB657852A6ABDDA00451D65 /* Realm in Frameworks */,
-				FFB6577F2A6A99C200451D65 /* SnapKit in Frameworks */,
-				FFB657822A6A9A5700451D65 /* Lottie in Frameworks */,
+				E63E4D874CA2C42699F3CB1F /* Pods_ZAND.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92076542BD6D23C622198DA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0D64C2B23E8298FFED41E857 /* Pods-ZAND.debug.xcconfig */,
+				E033D12BA663B4F5DE743EE5 /* Pods-ZAND.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		937314982A3E063BEB40070C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F9B65E19747D5AB4F3AD14C6 /* Pods_ZAND.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FF01E3372A02C3B1006476F0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +512,8 @@
 				FF8B12292A8BD45200837E29 /* ZAND..entitlements */,
 				FF45A12B29E7EC1200587DAF /* ZAND */,
 				FF45A12A29E7EC1200587DAF /* Products */,
+				92076542BD6D23C622198DA9 /* Pods */,
+				937314982A3E063BEB40070C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -978,22 +993,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF45A15329E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZAND" */;
 			buildPhases = (
+				F0F835CF12B52B527D2E0206 /* [CP] Check Pods Manifest.lock */,
 				FF45A12529E7EC1200587DAF /* Sources */,
 				FF45A12629E7EC1200587DAF /* Frameworks */,
 				FF45A12729E7EC1200587DAF /* Resources */,
+				A708B94827CDFCC0FCEC6AD3 /* [CP] Embed Pods Frameworks */,
+				2646544BD1B6F4FFD23CA093 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ZAND;
-			packageProductDependencies = (
-				FFB6577E2A6A99C200451D65 /* SnapKit */,
-				FFB657812A6A9A5700451D65 /* Lottie */,
-				FFB657842A6ABDDA00451D65 /* Realm */,
-				FFB657862A6ABDDA00451D65 /* RealmSwift */,
-				FFB657982A6ABF3500451D65 /* Moya */,
-			);
 			productName = ZAND;
 			productReference = FF45A12929E7EC1200587DAF /* ZAND.app */;
 			productType = "com.apple.product-type.application";
@@ -1022,12 +1033,6 @@
 				Base,
 			);
 			mainGroup = FF45A12029E7EC1200587DAF;
-			packageReferences = (
-				FFB6577D2A6A99C200451D65 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				FFB657802A6A9A5700451D65 /* XCRemoteSwiftPackageReference "lottie-spm" */,
-				FFB657832A6ABDDA00451D65 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				FFB657972A6ABF3500451D65 /* XCRemoteSwiftPackageReference "Moya" */,
-			);
 			productRefGroup = FF45A12A29E7EC1200587DAF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1049,6 +1054,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2646544BD1B6F4FFD23CA093 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A708B94827CDFCC0FCEC6AD3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0F835CF12B52B527D2E0206 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZAND-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF45A12529E7EC1200587DAF /* Sources */ = {
@@ -1323,6 +1387,7 @@
 		};
 		FF45A15429E7EC1300587DAF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D64C2B23E8298FFED41E857 /* Pods-ZAND.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1360,6 +1425,7 @@
 		};
 		FF45A15529E7EC1300587DAF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E033D12BA663B4F5DE743EE5 /* Pods-ZAND.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1417,69 +1483,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		FFB6577D2A6A99C200451D65 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
-		FFB657802A6A9A5700451D65 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		FFB657832A6ABDDA00451D65 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		FFB657972A6ABF3500451D65 /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		FFB6577E2A6A99C200451D65 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FFB6577D2A6A99C200451D65 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		FFB657812A6A9A5700451D65 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FFB657802A6A9A5700451D65 /* XCRemoteSwiftPackageReference "lottie-spm" */;
-			productName = Lottie;
-		};
-		FFB657842A6ABDDA00451D65 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FFB657832A6ABDDA00451D65 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		FFB657862A6ABDDA00451D65 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FFB657832A6ABDDA00451D65 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-		FFB657982A6ABF3500451D65 /* Moya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FFB657972A6ABF3500451D65 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF45A12129E7EC1200587DAF /* Project object */;
 }
