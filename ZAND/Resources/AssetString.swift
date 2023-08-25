@@ -56,6 +56,8 @@ enum AssetString {
     static let sendCode = "Отправить код"
     static let enterYourCode = "Введите код"
     static let gotError = "Произошла ошибка"
+    static let getCode = "Получить код"
+    static let enterPhone = "Введите номер телефона"
     
     // MARK: - Bottom button values
     static let apply = "Применить"

@@ -7,9 +7,15 @@
 
 import Foundation
 
+struct RegisterModel {
+    var phone: String = ""
+    var verifyCode: String = ""
+}
+
 protocol RegisterPresenterOutput: AnyObject {
     var registerModel: RegisterModel { get set }
-    var codeAreSuccessfullySended: Bool { get set  }
+    var codeAreSuccessfullySended: Bool { get set }
+    var keyboardAlreadyHidined: Bool { get set }
 
     func enterNamePhone()
     func enterSmsCode()
@@ -27,8 +33,12 @@ final class RegisterPresenter: RegisterPresenterOutput {
     // MARK: - Properties
 
     weak var view: RegisterViewInput?
+
     var registerModel = RegisterModel()
+
     var codeAreSuccessfullySended: Bool = false
+
+    var keyboardAlreadyHidined: Bool = false
 
     // MARK: - Initializers
 
@@ -39,17 +49,18 @@ final class RegisterPresenter: RegisterPresenterOutput {
     // MARK: - Instance methods
 
     func enterNamePhone() {
-        if registerModel.name.isEmpty {
-            view?.showAlert(type: .enterYourName)
-        } else if registerModel.phone.count < 11 {
+        if registerModel.phone.isEmpty {
+            view?.showAlert(type: .enterPhone)
+        } else if registerModel.phone.count < 10 {
             view?.showAlert(type: .phoneNumberLessThanEleven)
         } else {
-            AuthManagerImpl.shared.startAuth(name: registerModel.name, phone: registerModel.phone)
-            { [weak self] success in
-                guard success else { return }
+            AGConnectManagerImpl.shared.sendVerifyCode(
+                phoneNumber: registerModel.phone
+            ) { [weak self] success in
+                guard let self, success else { return }
 
-                self?.codeAreSuccessfullySended = true
-                self?.view?.updateUI(state: .sendCode)
+                self.codeAreSuccessfullySended = true
+                self.view?.updateUI(state: .sendCode)
             }
         }
     }
@@ -58,10 +69,13 @@ final class RegisterPresenter: RegisterPresenterOutput {
         if registerModel.verifyCode.isEmpty {
             view?.showAlert(type: .enterYourCode)
         } else {
-            AuthManagerImpl.shared.verifyCode(code: registerModel.verifyCode) { [weak self] success in
-                guard success else { return }
+            AGConnectManagerImpl.shared.createUser(
+                phoneNumber: registerModel.phone,
+                verifyCode: registerModel.verifyCode
+            ) { [weak self] success in
+                guard let self, success else { return }
 
-                self?.view?.updateUI(state: .showProfile)
+                self.view?.updateUI(state: .showProfile)
             }
         }
     }

@@ -104,7 +104,7 @@
 		FFA921242A6ECED600FDB977 /* GestureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA921232A6ECED600FDB977 /* GestureType.swift */; };
 		FFB6579D2A6AC5B700451D65 /* splash_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFB6579C2A6AC5B700451D65 /* splash_video.mp4 */; };
 		FFB657A12A6B1A3F00451D65 /* Extension + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A02A6B1A3F00451D65 /* Extension + String.swift */; };
-		FFB657A32A6B29A600451D65 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A22A6B29A600451D65 /* RegisterModel.swift */; };
+		FFB657A32A6B29A600451D65 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A22A6B29A600451D65 /* SignInModel.swift */; };
 		FFB657A62A6B2CDB00451D65 /* UDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB657A52A6B2CDB00451D65 /* UDManager.swift */; };
 		FFB9855F2A2F52CC00ABEFBB /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB9855E2A2F52CC00ABEFBB /* SearchCell.swift */; };
 		FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985602A2F551600ABEFBB /* SearchPresenter.swift */; };
@@ -140,6 +140,8 @@
 		FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49329FACE9700FDB519 /* UserNameView.swift */; };
 		FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */; };
 		FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */; };
+		FFF01C2F2A98BCD400F5D350 /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFF01C2E2A98BCD400F5D350 /* agconnect-services.plist */; };
+		FFF01C322A98CF1200F5D350 /* AGConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF01C312A98CF1200F5D350 /* AGConnectManager.swift */; };
 		FFF16A812A6B2FA300D83E5B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF16A802A6B2FA300D83E5B /* UserModel.swift */; };
 		FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */; };
 		FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */; };
@@ -251,7 +253,7 @@
 		FFA921232A6ECED600FDB977 /* GestureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureType.swift; sourceTree = "<group>"; };
 		FFB6579C2A6AC5B700451D65 /* splash_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = splash_video.mp4; path = ../../../../splash_video.mp4; sourceTree = "<group>"; };
 		FFB657A02A6B1A3F00451D65 /* Extension + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + String.swift"; sourceTree = "<group>"; };
-		FFB657A22A6B29A600451D65 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
+		FFB657A22A6B29A600451D65 /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		FFB657A52A6B2CDB00451D65 /* UDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDManager.swift; sourceTree = "<group>"; };
 		FFB9855E2A2F52CC00ABEFBB /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		FFB985602A2F551600ABEFBB /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
@@ -287,6 +289,8 @@
 		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
 		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
+		FFF01C2E2A98BCD400F5D350 /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
+		FFF01C312A98CF1200F5D350 /* AGConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGConnectManager.swift; sourceTree = "<group>"; };
 		FFF16A802A6B2FA300D83E5B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCollection.swift; sourceTree = "<group>"; };
 		FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCell.swift; sourceTree = "<group>"; };
@@ -313,7 +317,6 @@
 				0D64C2B23E8298FFED41E857 /* Pods-ZAND.debug.xcconfig */,
 				E033D12BA663B4F5DE743EE5 /* Pods-ZAND.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -451,7 +454,7 @@
 				FF1961BD2A4C7A2B00434AC7 /* MapModel.swift */,
 				FF1961BF2A4C7A7800434AC7 /* ProfileMenuModel.swift */,
 				FF69DADA2A53089200481CF1 /* DetailModelDB.swift */,
-				FFB657A22A6B29A600451D65 /* RegisterModel.swift */,
+				FFB657A22A6B29A600451D65 /* SignInModel.swift */,
 				FFF16A802A6B2FA300D83E5B /* UserModel.swift */,
 			);
 			path = Model;
@@ -642,6 +645,7 @@
 			isa = PBXGroup;
 			children = (
 				FF45A12C29E7EC1200587DAF /* AppDelegate.swift */,
+				FFF01C2E2A98BCD400F5D350 /* agconnect-services.plist */,
 				FF45A13A29E7EC1300587DAF /* Info.plist */,
 			);
 			path = Project;
@@ -830,6 +834,7 @@
 		FFB985662A30AF7A00ABEFBB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				FFF01C302A98CF0100F5D350 /* AGConnectManager */,
 				FFB657A42A6B2CCB00451D65 /* UserDefaults */,
 				FF18BEE92A5D623600547D4C /* Auth */,
 				FF3E65DA2A55C202007EC56D /* API */,
@@ -959,6 +964,14 @@
 			path = "Layout + Profile";
 			sourceTree = "<group>";
 		};
+		FFF01C302A98CF0100F5D350 /* AGConnectManager */ = {
+			isa = PBXGroup;
+			children = (
+				FFF01C312A98CF1200F5D350 /* AGConnectManager.swift */,
+			);
+			path = AGConnectManager;
+			sourceTree = "<group>";
+		};
 		FFF5574329F2FA7A00758A31 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -1048,6 +1061,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFB6579D2A6AC5B700451D65 /* splash_video.mp4 in Resources */,
+				FFF01C2F2A98BCD400F5D350 /* agconnect-services.plist in Resources */,
 				FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */,
 				FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */,
 			);
@@ -1160,7 +1174,7 @@
 				FF25634829F687A900091374 /* DefaultFilterLayout.swift in Sources */,
 				FFC01B5B2A03DD37005CE41B /* MyDetailsLayout.swift in Sources */,
 				FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */,
-				FFB657A32A6B29A600451D65 /* RegisterModel.swift in Sources */,
+				FFB657A32A6B29A600451D65 /* SignInModel.swift in Sources */,
 				FFB9856E2A30D40400ABEFBB /* RegisterPresenter.swift in Sources */,
 				FF1961B02A4C51BC00434AC7 /* AppointmentsPresenter.swift in Sources */,
 				FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */,
@@ -1181,6 +1195,7 @@
 				FF50CF972A4EFD9E00AACC5B /* Extension + UIViewController.swift in Sources */,
 				FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */,
 				FF1961BA2A4C78E700434AC7 /* MyDetailsPresenter.swift in Sources */,
+				FFF01C322A98CF1200F5D350 /* AGConnectManager.swift in Sources */,
 				FF1961B82A4C78B900434AC7 /* SettingsMenuModel.swift in Sources */,
 				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,
 				FF45A16029E7F4BC00587DAF /* Extension + UIStackView.swift in Sources */,

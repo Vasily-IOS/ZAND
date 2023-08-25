@@ -24,7 +24,6 @@ final class RegisterView: BaseUIView {
 
     lazy var entranceStackView = UIStackView(alignment: .fill,
                                                      arrangedSubviews: [
-                                                        nameTextField,
                                                         phoneTextField,
                                                         smsCodeTextField
                                                      ],
@@ -46,9 +45,13 @@ final class RegisterView: BaseUIView {
 
     let emailTextField = PaddingTextField(state: .email)
 
-    let phoneTextField = PaddingTextField(state: .phone)
-
     let smsCodeTextField = PaddingTextField(state: .smsCode)
+
+    let phoneTextField: PaddingTextField = {
+        let phoneTextField = PaddingTextField(state: .phone)
+        phoneTextField.text = "+7"
+        return phoneTextField
+    }()
 
     private let registerLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
                                         .black,
@@ -56,7 +59,7 @@ final class RegisterView: BaseUIView {
 
     private let transparentButton = TransparentButton(state: .accountExist)
 
-    private var registerButton = BottomButton(buttonText: .sendCode)
+    private var registerButton = BottomButton(buttonText: .getCode)
 
     private let skipButton: UIButton = {
         let skipButton = UIButton()
@@ -66,7 +69,8 @@ final class RegisterView: BaseUIView {
         skipButton.setTitle(AssetString.skip, for: .normal)
         skipButton.setTitleColor(.mainGreen, for: .normal)
         skipButton.layer.cornerRadius = 15
-        skipButton.isHidden = !OnboardManager.shared.isUserFirstLaunch()
+//        skipButton.isHidden = !OnboardManager.shared.isUserFirstLaunch()
+        skipButton.isHidden = true
         return skipButton
     }()
 
@@ -74,8 +78,6 @@ final class RegisterView: BaseUIView {
     
     override func setup() {
         super.setup()
-
-        smsCodeTextField.isHidden = true
 
         setViews()
         setRecognizer()
@@ -85,8 +87,11 @@ final class RegisterView: BaseUIView {
     func updateUI() {
         smsCodeTextField.isHidden = false
         nameTextField.isHidden = true
-        phoneTextField.isHidden = true
         registerButton.stateText = .register
+    }
+
+    func hidePhoneKeyboard() {
+        phoneTextField.resignFirstResponder()
     }
     
     // MARK: - Action

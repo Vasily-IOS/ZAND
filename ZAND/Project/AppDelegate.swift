@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AGConnectCore
+import AGConnectAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        // сетим роутер
         setupRouter()
+        // сетим сервис авторизации
+        AGCInstance.startUp()
+
+        let user = AGCAuth.instance().currentUser
+        print(user?.displayName)
 
         return true
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RegisterModel {
+struct SignInModel {
     var name: String = ""
     var phone: String = ""
     var verifyCode = ""

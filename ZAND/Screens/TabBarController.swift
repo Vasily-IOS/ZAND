@@ -12,7 +12,7 @@ final class TabBarController: UITabBarController {
     // MARK: - Properties
 
     var switchedViewController: UIViewController {
-        let vc = vcFactory.getViewController(for: .profile)
+        let vc = vcFactory.getViewController(for: .signIn)
         vc.tabBarItem = UITabBarItem(title: AssetString.profile,
                                      image: AssetImage.profile_icon,
                                      selectedImage: nil)

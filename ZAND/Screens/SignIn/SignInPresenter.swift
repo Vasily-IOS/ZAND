@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SignInPresenterOutput: AnyObject {
-    var registerModel: RegisterModel { get set }
+    var registerModel: SignInModel { get set }
     var codeAreSuccessfullySended: Bool { get set }
     var keyboardAlreadyHidined: Bool { get set }
 
@@ -35,7 +35,7 @@ final class SignInPresenter: SignInPresenterOutput {
 
     weak var view: SignInViewInput?
 
-    var registerModel = RegisterModel()
+    var registerModel = SignInModel()
 
     var codeAreSuccessfullySended: Bool = false
 

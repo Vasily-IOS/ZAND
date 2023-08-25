@@ -14,7 +14,8 @@ enum ButtonText {
     case book //"Записаться"
     case contin //"Далее"
     case callUs //"Свяжитесь с нами"
-    case sendCode
+    case sendCode // "Отправить код"
+    case getCode // "Получить код"
     
     var text: String {
         switch self {
@@ -32,6 +33,8 @@ enum ButtonText {
             return AssetString.callUs
         case .sendCode:
             return AssetString.sendCode
+        case .getCode:
+            return AssetString.getCode
         }
     }
 }
