@@ -1,0 +1,56 @@
+PODS:
+  - AGConnectAuth (1.8.0.300):
+    - AGConnectCredential (~> 1.4)
+  - AGConnectCore (1.8.0.300):
+    - HMFoundation (~> 1.4)
+  - AGConnectCredential (1.8.0.300):
+    - AGConnectCore (~> 1.4)
+  - Alamofire (5.6.4)
+  - HMFoundation (1.8.0.300)
+  - lottie-ios (4.1.3)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - Realm (10.38.0):
+    - Realm/Headers (= 10.38.0)
+  - Realm/Headers (10.38.0)
+  - RealmSwift (10.38.0):
+    - Realm (= 10.38.0)
+  - SnapKit (5.6.0)
+
+DEPENDENCIES:
+  - AGConnectAuth
+  - lottie-ios
+  - Moya (~> 15.0)
+  - RealmSwift (~> 10)
+  - SnapKit (~> 5.6.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AGConnectAuth
+    - AGConnectCore
+    - AGConnectCredential
+    - Alamofire
+    - HMFoundation
+    - lottie-ios
+    - Moya
+    - Realm
+    - RealmSwift
+    - SnapKit
+
+SPEC CHECKSUMS:
+  AGConnectAuth: 6cc94745d20596d370d5980bbd7bde522d98644a
+  AGConnectCore: 4d95388b97ccbc00c7eb1895d832d5429f847f9f
+  AGConnectCredential: 52b6a1846193e7ea83610b78fb4b82d516df4936
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  HMFoundation: 578af8b08444653a722a62e32ec681d954775942
+  lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  Realm: 5902885dd1d5e71b0b020830caab937ecdf5bf07
+  RealmSwift: 0fc037d6c32c7c4fc9362892380f380114ecdcf0
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+
+PODFILE CHECKSUM: 2338be4caa7296c406514a1878d3f93fa83001d8
+
+COCOAPODS: 1.11.3

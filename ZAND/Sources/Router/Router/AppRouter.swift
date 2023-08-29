@@ -63,7 +63,7 @@ extension AppRouter {
     }
 
     func checkAuth() {
-       
+       // смотрим авторизован ли юзер и показываем нужный экран
     }
 
     private func setup() {

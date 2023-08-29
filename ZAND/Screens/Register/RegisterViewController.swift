@@ -89,9 +89,16 @@ extension RegisterViewController: UITextFieldDelegate {
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         if textField == contentView.phoneTextField {
-//            let fullNumber = (textField.text ?? "") + string
-//            textField.text = (textField.text ?? "").numberCorrector(phoneNumber: fullNumber,
-//                                                        shouldRemoveLastDigit: range.length == 1)
+            guard let text = textField.text else { return false }
+
+            let phoneString = (text as NSString).replacingCharacters(in: range, with: string)
+            textField.text = text.format(with: "+X (XXX) XXX-XX-XX", phone: phoneString)
+
+            if (textField.text?.count ?? 0) == 18 && (presenter?.keyboardAlreadyHidined ?? false) == false {
+                presenter?.keyboardAlreadyHidined = true
+                contentView.hidePhoneKeyboard()
+            }
+
             return false
         }
         return true
@@ -101,10 +108,9 @@ extension RegisterViewController: UITextFieldDelegate {
         let text = textField.text ?? ""
 
         switch textField {
-        case contentView.nameTextField:
-            presenter?.registerModel.name = text
         case contentView.phoneTextField:
-            presenter?.registerModel.phone = text
+            let result = text.filter("0123456789.".contains).dropFirst()
+            presenter?.registerModel.phone = String(result)
         case contentView.smsCodeTextField:
             presenter?.registerModel.verifyCode = text
         default:
@@ -122,13 +128,15 @@ extension RegisterViewController: RegisterViewInput {
     }
 
     func updateUI(state: RegisterViewState) {
-//        switch state {
-//        case .sendCode:
-//            contentView.updateUI()
-//        case .showProfile:
-//            print("Show profile")
-//            contentView.backgroundColor = .systemTeal
-//        }
+        switch state {
+        case .sendCode:
+            contentView.updateUI()
+        case .showProfile:
+            print("Show profile")
+            contentView.backgroundColor = .systemTeal
+        case .backToTop:
+            break
+        }
     }
 
     func dismiss() {

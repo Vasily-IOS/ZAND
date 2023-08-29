@@ -46,6 +46,8 @@ final class SignInView: BaseUIView {
 
     private let signInButton = BottomButton(buttonText: .contin)
 
+    private let registerButton = TransparentButton(state: .register)
+
     private lazy var bottomButtonsStackView = UIStackView(alignment: .center,
                                                       arrangedSubviews: [
                                                         signInButton
@@ -77,7 +79,9 @@ final class SignInView: BaseUIView {
 
     func initialStartMode() {
         nameTextField.isHidden = false
+        nameTextField.text = nil
         phoneTextField.isHidden = false
+        phoneTextField.text = nil
         smsCodeTextField.isHidden = true
 
         signInButton.stateText = .contin
@@ -102,6 +106,11 @@ final class SignInView: BaseUIView {
     private func signInAction() {
         delegate?.signIn()
     }
+
+    @objc
+    private func registerAction() {
+        delegate?.navigateToRegister()
+    }
 }
 
 extension SignInView {
@@ -111,8 +120,8 @@ extension SignInView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([signInLabel, entranceStackView, bottomButtonsStackView])
-        
+        addSubviews([signInLabel, entranceStackView, registerButton, bottomButtonsStackView])
+
         signInLabel.snp.makeConstraints { make in
             make.top.equalTo(self).offset(200)
             make.centerX.equalTo(self)
@@ -122,6 +131,11 @@ extension SignInView {
             make.top.equalTo(signInLabel.snp.bottom).offset(30)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
+        }
+
+        registerButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(bottomButtonsStackView.snp.top).inset(-20)
         }
         
         bottomButtonsStackView.snp.makeConstraints { make in
@@ -141,5 +155,6 @@ extension SignInView {
     
     private func addTargets() {
         signInButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
     }
 }
