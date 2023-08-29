@@ -97,6 +97,18 @@ final class VCFactory: DefaultVCFactory {
             let presenter = SignInPresenter(view: vc)
             vc.presenter = presenter
             return vc
+        case .appleSignIn:
+            let view = AppleSignInView()
+            let vc = AppleSignInViewController(contentView: view)
+            let presenter = AppleSignInPresenter(view: vc)
+            vc.presenter = presenter
+            return vc
+        case .registerN(let user):
+            let view = RegisterNView()
+            let vc = RegisterNViewController(contentView: view)
+            let presenter = RegisterNPresenter(view: vc, user: user)
+            vc.presenter = presenter
+            return vc
         }
     }
 }

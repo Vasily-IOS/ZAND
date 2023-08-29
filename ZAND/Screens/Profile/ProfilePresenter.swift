@@ -60,6 +60,6 @@ final class ProfilePresenter: ProfilePresenterOutput {
     func signOut() {
         uDmanager.deleteElement(by: Config.userData)
         AppRouter.shared.switchRoot(type: .signIn)
-        AGСConnectManagerImpl.shared.signOut()
+//        AGСConnectManagerImpl.shared.signOut()
     }
 }

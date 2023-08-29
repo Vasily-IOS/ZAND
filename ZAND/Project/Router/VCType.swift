@@ -21,4 +21,7 @@ enum VCType {
     case booking
     case selectableMap(CommonModel)
     case signIn
+
+    case appleSignIn
+    case registerN(User)
 }

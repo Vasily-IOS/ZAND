@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import AuthenticationServices
 
 enum ReplacedControllerType {
     case signIn
@@ -63,7 +64,20 @@ extension AppRouter {
     }
 
     func checkAuth() {
-       // смотрим авторизован ли юзер и показываем нужный экран
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//           appleIDProvider.getCredentialState(forUserID: KeychainItem.currentUserIdentifier) { (credentialState, error) in
+//               switch credentialState {
+//               case .authorized:
+//                   break // The Apple ID credential is valid.
+//               case .revoked, .notFound:
+//                   // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
+//                   DispatchQueue.main.async {
+//                       self.window?.rootViewController?.showLoginViewController()
+//                   }
+//               default:
+//                   break
+//               }
+//           }
     }
 
     private func setup() {

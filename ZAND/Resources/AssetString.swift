@@ -58,6 +58,8 @@ enum AssetString {
     static let gotError = "Произошла ошибка"
     static let getCode = "Получить код"
     static let enterPhone = "Введите номер телефона"
+    static let youIsNotRegister = "Вы не вошли в аккаунт"
+    static let pleaseRegister = "Для просмотра профиля войдите в аккаунт"
     
     // MARK: - Bottom button values
     static let apply = "Применить"
