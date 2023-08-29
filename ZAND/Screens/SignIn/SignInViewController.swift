@@ -98,14 +98,14 @@ extension SignInViewController: UITextFieldDelegate {
 
         switch textField {
         case contentView.nameTextField:
-            presenter?.registerModel.name = text
+            presenter?.signInModel.name = text
         case contentView.phoneTextField:
-            presenter?.registerModel.phone = text
+            presenter?.signInModel.phone = text
         case contentView.smsCodeTextField:
             if text.count == 6 {
                 contentView.hideSmsCodeKeyboard()
             }
-            presenter?.registerModel.verifyCode = text
+            presenter?.signInModel.verifyCode = text
         default:
             break
         }

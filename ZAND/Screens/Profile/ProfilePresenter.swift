@@ -17,7 +17,7 @@ protocol ProfilePresenterOutput: AnyObject {
     func getMenuModel() -> [ProfileMenuModel]
     func getDBmodel() -> [DetailModelDB]
     func checkLogIn()
-    func signUp()
+    func signOut()
 }
 
 protocol ProfileViewInput: AnyObject {
@@ -57,9 +57,9 @@ final class ProfilePresenter: ProfilePresenterOutput {
         }
     }
 
-    func signUp() {
+    func signOut() {
         uDmanager.deleteElement(by: Config.userData)
         AppRouter.shared.switchRoot(type: .signIn)
-        AuthManagerImpl.shared.logOut()
+        AGСConnectManagerImpl.shared.signOut()
     }
 }

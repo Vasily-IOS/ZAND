@@ -79,7 +79,9 @@ final class SignInView: BaseUIView {
 
     func initialStartMode() {
         nameTextField.isHidden = false
+        nameTextField.text = nil
         phoneTextField.isHidden = false
+        phoneTextField.text = nil
         smsCodeTextField.isHidden = true
 
         signInButton.stateText = .contin
@@ -119,7 +121,7 @@ extension SignInView {
         backgroundColor = .mainGray
 
         addSubviews([signInLabel, entranceStackView, registerButton, bottomButtonsStackView])
-        
+
         signInLabel.snp.makeConstraints { make in
             make.top.equalTo(self).offset(200)
             make.centerX.equalTo(self)

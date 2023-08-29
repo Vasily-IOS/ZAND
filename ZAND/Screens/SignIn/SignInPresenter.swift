@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SignInPresenterOutput: AnyObject {
-    var registerModel: SignInModel { get set }
+    var signInModel: SignInModel { get set }
     var codeAreSuccessfullySended: Bool { get set }
     var keyboardAlreadyHidined: Bool { get set }
 
@@ -35,7 +35,7 @@ final class SignInPresenter: SignInPresenterOutput {
 
     weak var view: SignInViewInput?
 
-    var registerModel = SignInModel()
+    var signInModel = SignInModel()
 
     var codeAreSuccessfullySended: Bool = false
 
@@ -63,31 +63,44 @@ final class SignInPresenter: SignInPresenterOutput {
     // MARK: - Instance methods
 
     func enterNamePhone() {
-        if registerModel.name.isEmpty {
+        if signInModel.name.isEmpty {
             view?.showAlert(type: .enterYourName, message: nil)
-        } else if registerModel.phone.count < 11 {
+        } else if signInModel.phone.count < 11 {
             view?.showAlert(type: .phoneNumberLessThanEleven, message: nil)
         } else {
-            AuthManagerImpl.shared.startAuth(name: registerModel.name, phone: registerModel.phone)
-            { [weak self] success in
-                guard success,
-                let self else {
-                    self?.view?.updateUI(state: .backToTop)
-                    self?.view?.showAlert(type: .gotError, message: AssetString.tryAgain)
-                    return
+            AGСConnectManagerImpl.shared.sendVerifyCode(
+                name: signInModel.name,
+                phoneNumber: signInModel.phone) { [weak self] success in
+                    guard let self else {
+                        self?.view?.updateUI(state: .backToTop)
+                        self?.view?.showAlert(type: .gotError, message: AssetString.tryAgain)
+                        return
+                    }
+
+                    self.codeAreSuccessfullySended = true
+                    self.view?.updateUI(state: .sendCode)
                 }
 
-                self.codeAreSuccessfullySended = true
-                self.view?.updateUI(state: .sendCode)
-            }
+//            AuthManagerImpl.shared.startAuth(name: signInModel.name, phone: signInModel.phone)
+//            { [weak self] success in
+//                guard success,
+//                let self else {
+//                    self?.view?.updateUI(state: .backToTop)
+//                    self?.view?.showAlert(type: .gotError, message: AssetString.tryAgain)
+//                    return
+//                }
+//
+//                self.codeAreSuccessfullySended = true
+//                self.view?.updateUI(state: .sendCode)
+//            }
         }
     }
 
     func enterSmsCode() {
-        if registerModel.verifyCode.isEmpty {
+        if signInModel.verifyCode.isEmpty {
             view?.showAlert(type: .enterYourCode, message: nil)
         } else {
-            AuthManagerImpl.shared.verifyCode(code: registerModel.verifyCode) { [weak self] success in
+            AGСConnectManagerImpl.shared.signIn(code: signInModel.verifyCode) { [weak self] success in
                 guard success else {
                     self?.view?.updateUI(state: .backToTop)
                     self?.view?.showAlert(type: .gotError, message: AssetString.tryAgain)
@@ -96,6 +109,16 @@ final class SignInPresenter: SignInPresenterOutput {
 
                 self?.view?.updateUI(state: .showProfile)
             }
+
+//            AuthManagerImpl.shared.verifyCode(code: signInModel.verifyCode) { [weak self] success in
+//                guard success else {
+//                    self?.view?.updateUI(state: .backToTop)
+//                    self?.view?.showAlert(type: .gotError, message: AssetString.tryAgain)
+//                    return
+//                }
+//
+//                self?.view?.updateUI(state: .showProfile)
+//            }
         }
     }
 

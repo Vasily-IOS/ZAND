@@ -32,7 +32,6 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         super.loadView()
 
         showNavigationBar()
-//        hideBackButtonTitle()
     }
     
     override func viewDidLoad() {
@@ -73,7 +72,7 @@ extension ProfileViewController {
                                                 preferredStyle: .alert)
         let noAction = UIAlertAction(title: AssetString.no, style: .cancel)
         let yesAction = UIAlertAction(title: AssetString.yes, style: .default) { [weak self] _ in
-            self?.presenter?.signUp()
+            self?.presenter?.signOut()
         }
         alertController.addAction(noAction)
         alertController.addAction(yesAction)

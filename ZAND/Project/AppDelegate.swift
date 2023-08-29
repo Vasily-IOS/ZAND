@@ -17,13 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        // сетим роутер
-        setupRouter()
         // сетим сервис авторизации
         AGCInstance.startUp()
+        // сетим роутер
+        setupRouter()
 
-        let user = AGCAuth.instance().currentUser
-        print(user?.displayName)
+        print(AGCAuth.instance().currentUser)
 
         return true
     }

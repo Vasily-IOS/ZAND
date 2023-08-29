@@ -49,34 +49,34 @@ final class RegisterPresenter: RegisterPresenterOutput {
     // MARK: - Instance methods
 
     func enterNamePhone() {
-        if registerModel.phone.isEmpty {
-            view?.showAlert(type: .enterPhone)
-        } else if registerModel.phone.count < 10 {
-            view?.showAlert(type: .phoneNumberLessThanEleven)
-        } else {
-            AGConnectManagerImpl.shared.sendVerifyCode(
-                phoneNumber: registerModel.phone
-            ) { [weak self] success in
-                guard let self, success else { return }
-
-                self.codeAreSuccessfullySended = true
-                self.view?.updateUI(state: .sendCode)
-            }
-        }
+//        if registerModel.phone.isEmpty {
+//            view?.showAlert(type: .enterPhone)
+//        } else if registerModel.phone.count < 10 {
+//            view?.showAlert(type: .phoneNumberLessThanEleven)
+//        } else {
+//            AGСConnectManagerImpl.shared.sendVerifyCode(
+//                phoneNumber: registerModel.phone
+//            ) { [weak self] success in
+//                guard let self, success else { return }
+//
+//                self.codeAreSuccessfullySended = true
+//                self.view?.updateUI(state: .sendCode)
+//            }
+//        }
     }
 
     func enterSmsCode() {
-        if registerModel.verifyCode.isEmpty {
-            view?.showAlert(type: .enterYourCode)
-        } else {
-            AGConnectManagerImpl.shared.createUser(
-                phoneNumber: registerModel.phone,
-                verifyCode: registerModel.verifyCode
-            ) { [weak self] success in
-                guard let self, success else { return }
-
-                self.view?.updateUI(state: .showProfile)
-            }
-        }
+//        if registerModel.verifyCode.isEmpty {
+//            view?.showAlert(type: .enterYourCode)
+//        } else {
+//            AGСConnectManagerImpl.shared.createCredential(
+//                phoneNumber: registerModel.phone,
+//                verifyCode: registerModel.verifyCode
+//            ) { [weak self] success in
+//                guard let self, success else { return }
+//
+//                self.view?.updateUI(state: .showProfile)
+//            }
+//        }
     }
 }

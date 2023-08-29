@@ -24,4 +24,6 @@ enum Config {
     static let notifyTabBar = "notifyTabBar"
     // userdefaults
     static let userData = "userData"
+    // other
+    static let countyCode = "7"
 }

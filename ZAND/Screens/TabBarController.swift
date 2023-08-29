@@ -12,11 +12,20 @@ final class TabBarController: UITabBarController {
     // MARK: - Properties
 
     var switchedViewController: UIViewController {
-        let vc = vcFactory.getViewController(for: .signIn)
-        vc.tabBarItem = UITabBarItem(title: AssetString.profile,
+        var vc = UIViewController()
+        let tabBarItem = UITabBarItem(title: AssetString.profile,
                                      image: AssetImage.profile_icon,
                                      selectedImage: nil)
-        return vc
+
+        if AGСConnectManagerImpl.shared.user == nil {
+            vc = vcFactory.getViewController(for: .signIn)
+            vc.tabBarItem = tabBarItem
+            return vc
+        } else {
+            vc = vcFactory.getViewController(for: .profile)
+            vc.tabBarItem = tabBarItem
+            return vc
+        }
     }
 
     private let vcFactory: DefaultVCFactory = VCFactory()

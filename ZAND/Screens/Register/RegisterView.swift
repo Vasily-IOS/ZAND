@@ -22,24 +22,28 @@ final class RegisterView: BaseUIView {
 
     // MARK: - UI
 
-    lazy var entranceStackView = UIStackView(alignment: .fill,
-                                                     arrangedSubviews: [
-                                                        phoneTextField,
-                                                        smsCodeTextField
-                                                     ],
-                                                     axis: .vertical,
-                                                     distribution: .fill,
-                                                     spacing: 20)
+    lazy var entranceStackView = UIStackView(
+        alignment: .fill,
+        arrangedSubviews: [
+            phoneTextField,
+            smsCodeTextField
+        ],
+        axis: .vertical,
+        distribution: .fill,
+        spacing: 20
+    )
 
-    lazy var bottomButtonsStackView = UIStackView(alignment: .center,
-                                                      arrangedSubviews: [
-                                                        transparentButton,
-                                                        registerButton,
-                                                        skipButton
-                                                      ],
-                                                      axis: .vertical,
-                                                      distribution: .fill,
-                                                      spacing: 10)
+    lazy var bottomButtonsStackView = UIStackView(
+        alignment: .center,
+        arrangedSubviews: [
+            transparentButton,
+            registerButton,
+            skipButton
+        ],
+        axis: .vertical,
+        distribution: .fill,
+        spacing: 10
+    )
 
     let nameTextField = PaddingTextField(state: .name)
 
