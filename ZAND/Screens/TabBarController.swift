@@ -17,12 +17,12 @@ final class TabBarController: UITabBarController {
                                      image: AssetImage.profile_icon,
                                      selectedImage: nil)
 
-        if AGСConnectManagerImpl.shared.user == nil {
-            vc = vcFactory.getViewController(for: .signIn)
+        if UserDBManager.shared.contains() {
+            vc = vcFactory.getViewController(for: .profile)
             vc.tabBarItem = tabBarItem
             return vc
         } else {
-            vc = vcFactory.getViewController(for: .profile)
+            vc = vcFactory.getViewController(for: .appleSignIn)
             vc.tabBarItem = tabBarItem
             return vc
         }

@@ -1,55 +1,23 @@
 //
-//  RegisterView.swift
+//  RegisterNView.swift
 //  ZAND
 //
-//  Created by Василий on 23.04.2023.
+//  Created by Василий on 29.08.2023.
 //
 
 import UIKit
+import SnapKit
 
-protocol RegisterViewDelegate: AnyObject {
-    func skip()
-    func popViewController()
-    func stopEditing()
+protocol RegisterNDelegate: AnyObject {
+    func cancelEditing()
     func register()
 }
 
 final class RegisterView: BaseUIView {
-    
+
     // MARK: - Properties
-    
-    weak var delegate: RegisterViewDelegate?
 
-    // MARK: - UI
-
-    lazy var entranceStackView = UIStackView(
-        alignment: .fill,
-        arrangedSubviews: [
-            phoneTextField,
-            smsCodeTextField
-        ],
-        axis: .vertical,
-        distribution: .fill,
-        spacing: 20
-    )
-
-    lazy var bottomButtonsStackView = UIStackView(
-        alignment: .center,
-        arrangedSubviews: [
-            transparentButton,
-            registerButton,
-            skipButton
-        ],
-        axis: .vertical,
-        distribution: .fill,
-        spacing: 10
-    )
-
-    let nameTextField = PaddingTextField(state: .name)
-
-    let emailTextField = PaddingTextField(state: .email)
-
-    let smsCodeTextField = PaddingTextField(state: .smsCode)
+    weak var delegate: RegisterNDelegate?
 
     let phoneTextField: PaddingTextField = {
         let phoneTextField = PaddingTextField(state: .phone)
@@ -57,120 +25,118 @@ final class RegisterView: BaseUIView {
         return phoneTextField
     }()
 
-    private let registerLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
-                                        .black,
-                                        AssetString.registation)
+    let nameTextField = PaddingTextField(state: .name)
 
-    private let transparentButton = TransparentButton(state: .accountExist)
+    let surnameTextField = PaddingTextField(state: .surname)
 
-    private var registerButton = BottomButton(buttonText: .getCode)
+    let emailTextField = PaddingTextField(state: .email)
 
-    private let skipButton: UIButton = {
-        let skipButton = UIButton()
-        skipButton.layer.borderColor = UIColor.lightGreen.cgColor
-        skipButton.layer.borderWidth = 1
-        skipButton.backgroundColor = .mainGray
-        skipButton.setTitle(AssetString.skip, for: .normal)
-        skipButton.setTitleColor(.mainGreen, for: .normal)
-        skipButton.layer.cornerRadius = 15
-//        skipButton.isHidden = !OnboardManager.shared.isUserFirstLaunch()
-        skipButton.isHidden = true
-        return skipButton
-    }()
+    private let registerButton = BottomButton(buttonText: .register)
+
+    private let registerLabel = UILabel(
+        .systemFont(ofSize: 24, weight: .bold),
+        .black,
+        AssetString.registation
+    )
+
+    private lazy var interiorStackView = UIStackView(
+        alignment: .center,
+        arrangedSubviews: [nameTextField,
+                           surnameTextField,
+                           emailTextField,
+                           phoneTextField],
+        axis: .vertical,
+        distribution: .fill,
+        spacing: 16
+    )
+
+    private lazy var baseStackView = UIStackView(
+        alignment: .center,
+        arrangedSubviews: [registerLabel,
+                           interiorStackView],
+        axis: .vertical,
+        distribution: .fill,
+        spacing: 30)
 
     // MARK: - Instance methods
-    
+
     override func setup() {
         super.setup()
 
         setViews()
         setRecognizer()
-        addTargets()
-    }
-
-    func updateUI() {
-        smsCodeTextField.isHidden = false
-        nameTextField.isHidden = true
-        registerButton.stateText = .register
+        setTargets()
     }
 
     func hidePhoneKeyboard() {
         phoneTextField.resignFirstResponder()
     }
-    
+
+    func makeRedBorder() {
+        phoneTextField.layer.borderColor = UIColor.red.cgColor
+        phoneTextField.layer.borderWidth = 0.5
+    }
+
+    func removeBorder() {
+        phoneTextField.layer.borderWidth = 0.0
+    }
+
     // MARK: - Action
-    
+
     @objc
-    private func dismissKeyboard() {
-        delegate?.stopEditing()
+    private func cancelEditingAction() {
+        delegate?.cancelEditing()
     }
-    
+
     @objc
-    private func backToSignInAction() {
-        delegate?.popViewController()
-    }
-    
-    @objc
-    private func registerButtonAction() {
+    private func registerAction() {
         delegate?.register()
-    }
-    
-    @objc
-    private func skipAction() {
-        delegate?.skip()
     }
 }
 
 extension RegisterView {
-    
+
     // MARK: - Instance methods
-    
+
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([registerLabel, entranceStackView, bottomButtonsStackView])
-        registerLabel.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(200)
-            make.centerX.equalTo(self)
+        addSubviews([baseStackView, registerButton])
+
+        [nameTextField, surnameTextField, emailTextField, phoneTextField].forEach {
+            $0.snp.makeConstraints { make in
+                make.left.equalTo(self.snp.left).offset(16)
+                make.right.equalTo(self.snp.right).inset(16)
+            }
         }
-        
-        entranceStackView.snp.makeConstraints { make in
-            make.top.equalTo(registerLabel.snp.bottom).offset(30)
-            make.left.equalTo(self).offset(16)
-            make.right.equalTo(self).inset(16)
+
+        baseStackView.snp.makeConstraints { make in
+            make.top.equalTo(self.snp.top).offset(200)
+            make.centerX.equalToSuperview()
         }
-        
-        bottomButtonsStackView.snp.makeConstraints { make in
-            make.bottom.equalTo(self).inset(120)
-            make.centerX.equalTo(self)
-        }
-        
+
         registerButton.snp.makeConstraints { make in
-            make.width.equalTo(280)
+            make.top.equalTo(baseStackView.snp.bottom).offset(60)
+            make.width.equalTo(interiorStackView)
             make.height.equalTo(44)
-        }
-        
-        skipButton.snp.makeConstraints { make in
-            make.width.height.equalTo(registerButton)
+            make.centerX.equalToSuperview()
         }
     }
-    
+
     private func setRecognizer() {
-        addGestureRecognizer(UITapGestureRecognizer(target: self,
-                                                    action: #selector(dismissKeyboard)))
+        addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(cancelEditingAction)
+            )
+        )
     }
-    
-    private func addTargets() {
-        transparentButton.addTarget(self,
-                                    action: #selector(backToSignInAction),
-                                    for: .touchUpInside)
 
-        registerButton.addTarget(self,
-                               action: #selector(registerButtonAction),
-                               for: .touchUpInside)
-
-        skipButton.addTarget(self,
-                             action: #selector(skipAction),
-                             for: .touchUpInside)
+    private func setTargets() {
+        registerButton.addTarget(
+            self,
+            action: #selector(registerAction),
+            for: .touchUpInside
+        )
     }
 }

@@ -15,6 +15,8 @@ enum AlertType {
     case phoneInputError
     case gotError
     case enterPhone
+    case fillAllFields
+    case invalidEmailInput
 
     var textValue: String {
         switch self {
@@ -32,6 +34,10 @@ enum AlertType {
             return AssetString.gotError
         case .enterPhone:
             return AssetString.enterPhone
+        case .fillAllFields:
+            return AssetString.fillAllFields
+        case .invalidEmailInput:
+            return AssetString.invalidEmailInput
         }
     }
 }

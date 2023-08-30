@@ -42,15 +42,11 @@ final class VCFactory: DefaultVCFactory {
             let realmManager: RealmManager = RealmManagerImpl()
             let view = SaloonDetailView()
             let vc = SaloonDetailViewController(contentView: view)
-            let presenter = SaloonDetailPresenter(view: vc,
-                                                  type: type,
-                                                  realmManager: realmManager)
-            vc.presenter = presenter
-            return vc
-        case .register:
-            let view = RegisterView()
-            let vc = RegisterViewController(contentView: view)
-            let presenter = RegisterPresenter(view: vc)
+            let presenter = SaloonDetailPresenter(
+                view: vc,
+                type: type,
+                realmManager: realmManager
+            )
             vc.presenter = presenter
             return vc
         case .filter:
@@ -91,10 +87,16 @@ final class VCFactory: DefaultVCFactory {
             let presenter = SelectableMapPresenter(view: vc, model: model)
             vc.presenter = presenter
             return vc
-        case .signIn:
+        case .appleSignIn:
             let view = SignInView()
             let vc = SignInViewController(contentView: view)
             let presenter = SignInPresenter(view: vc)
+            vc.presenter = presenter
+            return vc
+        case .registerN(let user):
+            let view = RegisterView()
+            let vc = RegisterViewController(contentView: view)
+            let presenter = RegisterPresenter(view: vc, user: user)
             vc.presenter = presenter
             return vc
         }

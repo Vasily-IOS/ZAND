@@ -48,6 +48,8 @@ final class PaddingTextField: UITextField {
     }
     
     // MARK: - Properties
+
+    var textDidChange: ((String) -> Void)?
     
     var textPadding = UIEdgeInsets(
         top: 0,
@@ -75,6 +77,11 @@ final class PaddingTextField: UITextField {
     private func setup(with state: State) {
         placeholder = state.placeholder_text
 
+        if self.text == "" {
+            layer.borderWidth = 0.5
+            layer.borderColor = UIColor.red.cgColor
+        }
+
         if state == .phone || state == .smsCode {
             keyboardType = .numberPad
         }
@@ -83,9 +90,22 @@ final class PaddingTextField: UITextField {
     private func setSelf() {
         layer.cornerRadius = 15.0
         backgroundColor = .white
+        addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+
         self.snp.makeConstraints { make in
             make.height.equalTo(48)
         }
+    }
+
+    @objc
+    private func textDidChange(_ sender: UITextField) {
+        if sender.text == "" {
+            layer.borderWidth = 0.5
+            layer.borderColor = UIColor.red.cgColor
+        } else {
+            layer.borderWidth = 0
+        }
+        textDidChange?(sender.text ?? "")
     }
     
     // MARK: - UITextField Methods

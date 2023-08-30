@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import AuthenticationServices
 
 enum ReplacedControllerType {
     case signIn
@@ -47,7 +48,7 @@ extension AppRouter {
                                       image: AssetImage.profile_icon,
                                       selectedImage: nil)
 
-        let signInViewController = vcFactory.getViewController(for: .signIn)
+        let signInViewController = vcFactory.getViewController(for: .appleSignIn)
         let profileViewController = vcFactory.getViewController(for: .profile)
 
         [signInViewController, profileViewController].forEach {
@@ -63,7 +64,15 @@ extension AppRouter {
     }
 
     func checkAuth() {
-       // смотрим авторизован ли юзер и показываем нужный экран
+        if UserDBManager.shared.contains() {
+            DispatchQueue.main.async {
+                self.switchRoot(type: .profile)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.switchRoot(type: .signIn)
+            }
+        }
     }
 
     private func setup() {

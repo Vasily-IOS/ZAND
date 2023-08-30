@@ -1,160 +1,80 @@
 //
-//  SignInView.swift
+//  AppleSignInView.swift
 //  ZAND
 //
-//  Created by Василий on 23.04.2023.
+//  Created by Василий on 29.08.2023.
 //
 
 import UIKit
 import SnapKit
+import AuthenticationServices
 
 protocol SignInDelegate: AnyObject {
-    func stopEditing()
-    func navigateToRegister()
-    func signIn()
+    func signInButtonTap()
 }
 
 final class SignInView: BaseUIView {
-    
+
     // MARK: - Properties
 
     weak var delegate: SignInDelegate?
 
-    let nameTextField = PaddingTextField(state: .name)
+    private let topLabel = UILabel(
+        .systemFont(ofSize: 24, weight: .bold),
+        .black,
+        AssetString.youIsNotRegister
+    )
 
-    let phoneTextField: PaddingTextField = {
-        let phoneTextField = PaddingTextField(state: .phone)
-        phoneTextField.text = "+7"
-        return phoneTextField
-    }()
+    private let mediumLabel = UILabel(
+        .systemFont(ofSize: 16, weight: .regular),
+        .black,
+        AssetString.pleaseRegister)
 
-    let smsCodeTextField = PaddingTextField(state: .smsCode)
+    private let appleButton = ASAuthorizationAppleIDButton()
 
-    private let signInLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
-                                      .black,
-                                      AssetString.entrance)
-
-    private lazy var entranceStackView = UIStackView(alignment: .fill,
-                                                     arrangedSubviews: [
-                                                        nameTextField,
-                                                        phoneTextField,
-                                                        smsCodeTextField
-                                                     ],
-                                                     axis: .vertical,
-                                                     distribution: .fill,
-                                                     spacing: 20)
-
-    private let signInButton = BottomButton(buttonText: .contin)
-
-    private let registerButton = TransparentButton(state: .register)
-
-    private lazy var bottomButtonsStackView = UIStackView(alignment: .center,
-                                                      arrangedSubviews: [
-                                                        signInButton
-                                                      ],
-                                                      axis: .vertical,
-                                                      distribution: .fill,
-                                                      spacing: 10)
+    private lazy var stackView = UIStackView(
+        alignment: .center,
+        arrangedSubviews: [topLabel, mediumLabel, appleButton],
+        axis: .vertical,
+        distribution: .equalSpacing,
+        spacing: 60
+    )
 
     // MARK: - Instance methods
-    
+
     override func setup() {
         super.setup()
 
         setViews()
-        setRecognizer()
         addTargets()
-
-        smsCodeTextField.resignFirstResponder()
-        smsCodeTextField.isHidden = true
     }
 
-    func updateUI() {
-        nameTextField.isHidden = true
-        phoneTextField.isHidden = true
-        smsCodeTextField.isHidden = false
-
-        signInButton.stateText = .enter
-    }
-
-    func initialStartMode() {
-        nameTextField.isHidden = false
-        nameTextField.text = nil
-        phoneTextField.isHidden = false
-        phoneTextField.text = nil
-        smsCodeTextField.isHidden = true
-
-        signInButton.stateText = .contin
-    }
-
-    func hidePhoneKeyboard() {
-        phoneTextField.resignFirstResponder()
-    }
-
-    func hideSmsCodeKeyboard() {
-        smsCodeTextField.resignFirstResponder()
-    }
-    
     // MARK: - Action
-    
-    @objc
-    private func dismissKeyboard() {
-        delegate?.stopEditing()
-    } 
-    
+
     @objc
     private func signInAction() {
-        delegate?.signIn()
-    }
-
-    @objc
-    private func registerAction() {
-        delegate?.navigateToRegister()
+        delegate?.signInButtonTap()
     }
 }
 
 extension SignInView {
-    
+
     // MARK: - Instance methods
-    
+
     private func setViews() {
-        backgroundColor = .mainGray
+        addSubview(stackView)
 
-        addSubviews([signInLabel, entranceStackView, registerButton, bottomButtonsStackView])
-
-        signInLabel.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(200)
-            make.centerX.equalTo(self)
-        }
-        
-        entranceStackView.snp.makeConstraints { make in
-            make.top.equalTo(signInLabel.snp.bottom).offset(30)
-            make.left.equalTo(self).offset(16)
-            make.right.equalTo(self).inset(16)
+        stackView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
 
-        registerButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(bottomButtonsStackView.snp.top).inset(-20)
-        }
-        
-        bottomButtonsStackView.snp.makeConstraints { make in
-            make.bottom.equalTo(self).inset(120)
-            make.centerX.equalTo(self)
-        }
-        
-        signInButton.snp.makeConstraints { make in
-            make.width.equalTo(280)
-            make.height.equalTo(44)
+        appleButton.snp.makeConstraints { make in
+            make.width.equalTo(mediumLabel)
+            make.height.equalTo(50)
         }
     }
-    
-    private func setRecognizer() {
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
-    }
-    
+
     private func addTargets() {
-        signInButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
-        registerButton.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
+        appleButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
     }
 }

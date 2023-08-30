@@ -13,15 +13,18 @@ final class UserNameView: BaseUIView {
     // MARK: - Properties
 
     private let nameLabel = UILabel(
-        .systemFont(ofSize: 20, weight: .bold), .black
+        .systemFont(ofSize: 24, weight: .bold), .black
     )
 
     private let phoneLabel = UILabel(.systemFont(ofSize: 16), .black)
+
+    private let emailLabel = UILabel(.systemFont(ofSize: 16), .black)
     
     private lazy var userNameStackView = UIStackView(
         arrangedSubviews:
-            [nameLabel,
-             phoneLabel],
+            [phoneLabel,
+                nameLabel,
+             emailLabel],
         axis: .vertical,
         spacing: 10
     )
@@ -34,9 +37,10 @@ final class UserNameView: BaseUIView {
         setViews()
     }
 
-    func configure(model: UserModel) {
-        nameLabel.text = model.name
+    func configure(model: UserModelDB) {
+        nameLabel.text = model.givenName + " " + model.familyName
         phoneLabel.text = model.phone
+        emailLabel.text = model.email
     }
 }
 

@@ -13,12 +13,12 @@ enum VCType {
     case main
     case map
     case saloonDetail(SaloonDetailType)
-    case register
     case filter
     case profile
     case appointments
     case myDetails
     case booking
     case selectableMap(CommonModel)
-    case signIn
+    case appleSignIn
+    case registerN(User)
 }

@@ -13,7 +13,6 @@ struct ProfileMenuModel {
 
     static let model: [Self] = [
         .init(image: AssetImage.books_icon!, description: AssetString.books),
-//        .init(image: AssetImage.settings_icon!, description: AssetString.details),
         .init(image: AssetImage.logout_icon!, description: AssetString.logOut)
     ]
 }
