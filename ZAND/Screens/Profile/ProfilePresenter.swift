@@ -21,7 +21,7 @@ protocol ProfilePresenterOutput: AnyObject {
 }
 
 protocol ProfileViewInput: AnyObject {
-    func updateWithLoggedData(model: UserModel)
+    func updateWithLoggedData(model: UserModelDB)
 }
 
 final class ProfilePresenter: ProfilePresenterOutput {
@@ -33,8 +33,6 @@ final class ProfilePresenter: ProfilePresenterOutput {
     private let profileMenuModel = ProfileMenuModel.model
 
     private let realmManager: RealmManager
-
-    private let uDmanager: UDManagerImpl = UDManager()
 
     // MARK: - Initializers
 
@@ -52,14 +50,13 @@ final class ProfilePresenter: ProfilePresenterOutput {
     }
 
     func checkLogIn() {
-        if let model = uDmanager.loadElement(to: UserModel.self, Config.userData) {
-            view?.updateWithLoggedData(model: model)
+        if let user = UserDBManager.shared.get() {
+            view?.updateWithLoggedData(model: user)
         }
     }
 
     func signOut() {
-        uDmanager.deleteElement(by: Config.userData)
+        UserDBManager.shared.exit()
         AppRouter.shared.switchRoot(type: .signIn)
-//        AGСConnectManagerImpl.shared.signOut()
     }
 }

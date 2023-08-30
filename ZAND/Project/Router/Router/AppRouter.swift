@@ -48,7 +48,7 @@ extension AppRouter {
                                       image: AssetImage.profile_icon,
                                       selectedImage: nil)
 
-        let signInViewController = vcFactory.getViewController(for: .signIn)
+        let signInViewController = vcFactory.getViewController(for: .appleSignIn)
         let profileViewController = vcFactory.getViewController(for: .profile)
 
         [signInViewController, profileViewController].forEach {
@@ -64,20 +64,15 @@ extension AppRouter {
     }
 
     func checkAuth() {
-//        let appleIDProvider = ASAuthorizationAppleIDProvider()
-//           appleIDProvider.getCredentialState(forUserID: KeychainItem.currentUserIdentifier) { (credentialState, error) in
-//               switch credentialState {
-//               case .authorized:
-//                   break // The Apple ID credential is valid.
-//               case .revoked, .notFound:
-//                   // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
-//                   DispatchQueue.main.async {
-//                       self.window?.rootViewController?.showLoginViewController()
-//                   }
-//               default:
-//                   break
-//               }
-//           }
+        if UserDBManager.shared.contains() {
+            DispatchQueue.main.async {
+                self.switchRoot(type: .profile)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.switchRoot(type: .signIn)
+            }
+        }
     }
 
     private func setup() {

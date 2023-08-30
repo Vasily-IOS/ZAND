@@ -1,146 +1,83 @@
 //
-//  SignInViewController.swift
+//  AppleSignInViewController.swift
 //  ZAND
 //
-//  Created by Василий on 23.04.2023.
+//  Created by Василий on 29.08.2023.
 //
 
 import UIKit
+import AuthenticationServices
 
 final class SignInViewController: BaseViewController<SignInView> {
-    
+
     // MARK: - Properties
 
-    var presenter: SignInPresenterOutput?
-    
-    var navController: UINavigationController? {
-        return self.navigationController ?? UINavigationController()
-    }
+    var presenter: SignInPresenter?
 
-    var activityIndicatorView: ActivityIndicatorImpl = ActivityIndicatorView()
-    
     // MARK: - Lifecycle
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        hideNavigationBar()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        subscribeDelegate()
-    }
-    
-    deinit {
-        print("SignInViewController died")
+        subscribeDelegates()
     }
 
     // MARK: - Instance methods
 
-    private func subscribeDelegate() {
+    private func subscribeDelegates() {
         contentView.delegate = self
-        [contentView.nameTextField,
-         contentView.phoneTextField,
-         contentView.smsCodeTextField].forEach {
-            $0.delegate = self
-        }
     }
 }
 
 extension SignInViewController: SignInDelegate {
 
-    // MARK: - SignInDelegate methods
+    // MARK: - AppleSignInDelegate methods
 
-    func stopEditing() {
-        contentView.endEditing(true)
-    }
-
-    func navigateToRegister() {
-        AppRouter.shared.push(.register)
-    }
-
-    func signIn() {
-        if !presenter!.codeAreSuccessfullySended {
-            presenter?.enterNamePhone()
-        } else {
-            presenter?.enterSmsCode()
-        }
-    }
-}
-
-extension SignInViewController: UITextFieldDelegate {
-
-    // MARK: - UITextFieldDelegate methods
-
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-        if textField == contentView.phoneTextField {
-            guard let text = textField.text else { return false }
-
-            let phoneString = (text as NSString).replacingCharacters(in: range, with: string)
-            textField.text = text.format(with: "+X (XXX) XXX-XX-XX", phone: phoneString)
-
-            if (textField.text?.count ?? 0) == 18 && (presenter?.keyboardAlreadyHidined ?? false) == false {
-                presenter?.keyboardAlreadyHidined = true
-                contentView.hidePhoneKeyboard()
-            }
-
-            return false
-        }
-        return true
-    }
-
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        let text = textField.text ?? ""
-
-        switch textField {
-        case contentView.nameTextField:
-            presenter?.signInModel.name = text
-        case contentView.phoneTextField:
-            presenter?.signInModel.phone = text
-        case contentView.smsCodeTextField:
-            if text.count == 6 {
-                contentView.hideSmsCodeKeyboard()
-            }
-            presenter?.signInModel.verifyCode = text
-        default:
-            break
-        }
+    func signInButtonTap() {
+        presenter?.createAuthRequest()
     }
 }
 
 extension SignInViewController: SignInViewInput {
 
-    // MARK: - SignInViewInput methods
+    // MARK: - AppleSignInViewInput methods
+    
+    func showASAuthController(request: ASAuthorizationOpenIDRequest) {
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
 
-    func showAlert(type: AlertType, message: String?) {
-        AppRouter.shared.showAlert(type: type, message: message)
-    }
-
-    func updateUI(state: RegisterViewState) {
-        switch state {
-        case .sendCode:
-            hideIndicator()
-            contentView.updateUI()
-        case .showProfile:
-            hideIndicator()
-            AppRouter.shared.switchRoot(type: .profile)
-        case .backToTop:
-            hideIndicator()
-            contentView.initialStartMode()
-        }
-    }
-
-    func dismiss() {
-        AppRouter.shared.popViewController()
-    }
-
-    func showIndicatorView() {
-        showIndicator()
+        controller.performRequests()
     }
 }
 
-extension SignInViewController: ActivityIndicator, HideNavigationBar {}
+extension SignInViewController: ASAuthorizationControllerDelegate {
+
+    // MARK: - ASAuthorizationControllerDelegate methods
+
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let credential as ASAuthorizationAppleIDCredential:
+            let user = User(credential: credential)
+
+            AppRouter.shared.push(.registerN(user))
+        default:
+            break
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithError error: Error) {
+        debugPrint(error)
+    }
+}
+
+extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
+
+    // MARK: - ASAuthorizationControllerPresentationContextProviding methods
+
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
+    }
+}

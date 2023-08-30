@@ -102,14 +102,26 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
     func openBooking() {
         // if we have not user we will show sign in screen
 
-        AppRouter.shared.presentWithNav(type: .booking)
+        if !UserDBManager.shared.contains() {
+            AppRouter.shared.popViewController()
+            AppRouter.shared.changeTabBarVC(to: 2)
+            print("Failed to open booking")
+        } else {
+            AppRouter.shared.presentWithNav(type: .booking)
+            print("Open booking")
+        }
     }
 
     func applyDB() {
         // if we have not user we will show sign in screen
 
-        presenter?.applyDB {
-            contentView.inFavourite = !contentView.inFavourite
+        if !UserDBManager.shared.contains() {
+            AppRouter.shared.popViewController()
+            AppRouter.shared.changeTabBarVC(to: 2)
+        } else {
+            presenter?.applyDB {
+                contentView.inFavourite = !contentView.inFavourite
+            }
         }
     }
 }

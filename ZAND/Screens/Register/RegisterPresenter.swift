@@ -1,32 +1,19 @@
 //
-//  RegisterPresenter.swift
+//  RegisterNPresenter.swift
 //  ZAND
 //
-//  Created by Василий on 07.06.2023.
+//  Created by Василий on 29.08.2023.
 //
 
 import Foundation
 
-struct RegisterModel {
-    var phone: String = ""
-    var verifyCode: String = ""
-}
-
 protocol RegisterPresenterOutput: AnyObject {
-    var registerModel: RegisterModel { get set }
-    var codeAreSuccessfullySended: Bool { get set }
     var keyboardAlreadyHidined: Bool { get set }
-
-    func enterNamePhone()
-    func enterSmsCode()
+    var user: User { get set }
+    func save()
 }
 
-protocol RegisterViewInput: AnyObject {
-    func showAlert(type: AlertType)
-    func dismiss()
-
-    func updateUI(state: RegisterViewState)
-}
+protocol RegisterViewInput: AnyObject {}
 
 final class RegisterPresenter: RegisterPresenterOutput {
 
@@ -34,49 +21,20 @@ final class RegisterPresenter: RegisterPresenterOutput {
 
     weak var view: RegisterViewInput?
 
-    var registerModel = RegisterModel()
-
-    var codeAreSuccessfullySended: Bool = false
+    var user: User
 
     var keyboardAlreadyHidined: Bool = false
 
     // MARK: - Initializers
 
-    init(view: RegisterViewInput) {
+    init(view: RegisterViewInput, user: User) {
         self.view = view
+        self.user = user
     }
 
     // MARK: - Instance methods
 
-    func enterNamePhone() {
-//        if registerModel.phone.isEmpty {
-//            view?.showAlert(type: .enterPhone)
-//        } else if registerModel.phone.count < 10 {
-//            view?.showAlert(type: .phoneNumberLessThanEleven)
-//        } else {
-//            AGСConnectManagerImpl.shared.sendVerifyCode(
-//                phoneNumber: registerModel.phone
-//            ) { [weak self] success in
-//                guard let self, success else { return }
-//
-//                self.codeAreSuccessfullySended = true
-//                self.view?.updateUI(state: .sendCode)
-//            }
-//        }
-    }
-
-    func enterSmsCode() {
-//        if registerModel.verifyCode.isEmpty {
-//            view?.showAlert(type: .enterYourCode)
-//        } else {
-//            AGСConnectManagerImpl.shared.createCredential(
-//                phoneNumber: registerModel.phone,
-//                verifyCode: registerModel.verifyCode
-//            ) { [weak self] success in
-//                guard let self, success else { return }
-//
-//                self.view?.updateUI(state: .showProfile)
-//            }
-//        }
+    func save() {
+        UserDBManager.shared.save(user: user)
     }
 }

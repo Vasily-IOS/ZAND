@@ -60,6 +60,7 @@ enum AssetString {
     static let enterPhone = "Введите номер телефона"
     static let youIsNotRegister = "Вы не вошли в аккаунт"
     static let pleaseRegister = "Для просмотра профиля войдите в аккаунт"
+    static let invalidEmailInput = "Неверный ввод почты" 
     
     // MARK: - Bottom button values
     static let apply = "Применить"
@@ -72,7 +73,8 @@ enum AssetString {
     static let pushSms = "Уведомления и смс"
     static let phoneInputError = "Ошибка ввода номера телефона"
     static let tryAgain = "Попробуйте еще раз"
-    
+    static let fillAllFields = "Заполните все поля"
+
     // MARK: - Padding textfield
     static let email = "Email"
     static let password = "Пароль"

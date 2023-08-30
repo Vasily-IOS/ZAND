@@ -23,10 +23,12 @@ final class MainViewController: BaseViewController<MainView> {
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
         guard let self else { return }
 
-        // if we have not user we will show sign in screen
-
-        self.presenter?.applyDB(by: id) { [weak self] in
-            self?.contentView.changeHeartAppearance(by: indexPath)
+        if !UserDBManager.shared.contains() {
+            AppRouter.shared.changeTabBarVC(to: 2)
+        } else {
+            self.presenter?.applyDB(by: id) { [weak self] in
+                self?.contentView.changeHeartAppearance(by: indexPath)
+            }
         }
     }
     
