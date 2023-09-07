@@ -151,7 +151,7 @@ extension ProfileViewController: UICollectionViewDelegate {
                 break
             }
         case .favourites:
-            AppRouter.shared.push(.saloonDetail(.dbModel(saloonDBmodel[indexPath.row])))
+            AppRouter.shared.push(.saloonDetail(.dataBase(saloonDBmodel[indexPath.row])))
         default:
             break
         }

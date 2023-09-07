@@ -8,12 +8,14 @@
 import UIKit
 
 enum SaloonDetailType {
-    case apiModel(SaloonMockModel)
-    case dbModel(DetailModelDB)
+    case api(Saloon)
+    case dataBase(DetailModelDB)
 }
 
 final class VCFactory: DefaultVCFactory {
     func getViewController(for type: VCType) -> UIViewController {
+        let apiManager: HTTP = APIManager()
+
         switch type {
         case .tabBar:
             let vc = TabBarController()
@@ -27,15 +29,21 @@ final class VCFactory: DefaultVCFactory {
         case .main:
             let layotBuilder: DefaultMainLayout = MainLayout()
             let realmManager: RealmManager = RealmManagerImpl()
+            let provider: SaloonProvider = SaloonProviderImpl()
             let view = MainView(layoutBuilder: layotBuilder)
             let vc = MainViewController(contentView: view)
-            let presenter = MainPresenter(view: vc, realmManager: realmManager)
+            let presenter = MainPresenter(
+                view: vc,
+                realmManager: realmManager,
+                provider: provider
+            )
             vc.presenter = presenter
             return vc
         case .map:
             let view = MapView()
             let vc = MapViewController(contentView: view)
-            let presenter = MapPresenter(view: vc)
+            let provider: SaloonProvider = SaloonProviderImpl()
+            let presenter = MapPresenter(view: vc, provider: provider)
             vc.presenter = presenter
             return vc
         case .saloonDetail(let type):

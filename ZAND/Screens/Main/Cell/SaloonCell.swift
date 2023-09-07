@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Lottie
+import Kingfisher
 
 final class SaloonCell: BaseCollectionCell {
     
@@ -45,6 +46,8 @@ final class SaloonCell: BaseCollectionCell {
     
     private let saloonImage: UIImageView = {
         let saloonImage = UIImageView()
+        saloonImage.contentMode = .scaleAspectFill
+        saloonImage.clipsToBounds = true
         return saloonImage
     }()
     
@@ -52,17 +55,23 @@ final class SaloonCell: BaseCollectionCell {
 
     private let categoryLabel = UILabel(.systemFont(ofSize: 12), .textGray)
 
-    private let adressLabel = UILabel(.systemFont(ofSize: 12))
+    private let adressLabel: UILabel = {
+        let adressLabel = UILabel(.systemFont(ofSize: 12))
+        adressLabel.numberOfLines = 0
+        return adressLabel
+    }()
     
-    private lazy var leftStackView = UIStackView(alignment: .top,
-                                                 arrangedSubviews: [
-                                                    saloonDescriptionLabel,
-                                                    categoryLabel,
-                                                    adressLabel
-                                                 ],
-                                                 axis: .vertical,
-                                                 distribution: .equalSpacing,
-                                                 spacing: 4)
+    private lazy var leftStackView = UIStackView(
+        alignment: .top,
+        arrangedSubviews: [
+            saloonDescriptionLabel,
+            categoryLabel,
+            adressLabel
+        ],
+        axis: .vertical,
+        distribution: .equalSpacing,
+        spacing: 4
+    )
     
     private let favouritesButton = UIButton()
     
@@ -72,12 +81,6 @@ final class SaloonCell: BaseCollectionCell {
         let starImage = UIImageView()
         starImage.image = AssetImage.star_icon
         return starImage
-    }()
-    
-    private let ratingLabel: UILabel = {
-        let ratingLabel = UILabel()
-        ratingLabel.font = .systemFont(ofSize: 12)
-        return ratingLabel
     }()
 
     private lazy var animationView: LottieAnimationView = {
@@ -97,15 +100,21 @@ final class SaloonCell: BaseCollectionCell {
     }
     
     // MARK: - Configuration
-    
-    func configure(model: SaloonMockModel, indexPath: IndexPath) {
-        self.saloonImage.image = model.image
-        self.saloonDescriptionLabel.text = model.saloon_name
-        self.categoryLabel.text = model.category.name
-        self.adressLabel.text = model.adress
-        self.ratingLabel.text = "\(model.rating)"
-        self.indexPath = indexPath
+
+    func configure(model: Saloon, indexPath: IndexPath) {
+        self.saloonDescriptionLabel.text = model.title
+        self.categoryLabel.text = model.short_descr
+        self.adressLabel.text = model.address
         self.id = model.id
+        self.indexPath = indexPath
+
+        if model.photos.isEmpty && model.company_photos.isEmpty {
+            saloonImage.image = AssetImage.noFoto_icon
+        } else {
+            if let url = URL(string: model.company_photos.first ?? "") {
+                saloonImage.kf.setImage(with: url)
+            }
+        }
     }
     
     // MARK: - Action
@@ -131,7 +140,7 @@ extension SaloonCell {
     
     private func setViews() {
         addSubviews([saloonImage, leftStackView, favouritesButton,
-                     viewOnMapButton, starImage, ratingLabel, animationView])
+                     viewOnMapButton, animationView])
         
         saloonImage.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
@@ -150,18 +159,9 @@ extension SaloonCell {
         
         viewOnMapButton.snp.makeConstraints { make in
             make.right.equalTo(self).inset(16)
+            make.left.equalTo(leftStackView.snp.right).offset(16)
             make.height.equalTo(15)
             make.centerY.equalTo(leftStackView.subviews[2])
-        }
-        
-        starImage.snp.makeConstraints { make in
-            make.right.equalTo(self).inset(16)
-            make.top.equalTo(saloonImage.snp.bottom).offset(12)
-        }
-        
-        ratingLabel.snp.makeConstraints { make in
-            make.right.equalTo(starImage.snp.right).inset(10)
-            make.centerY.equalTo(starImage)
         }
 
         animationView.snp.makeConstraints { make in

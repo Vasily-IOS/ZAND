@@ -18,7 +18,9 @@ enum VCType {
     case appointments
     case myDetails
     case booking
-    case selectableMap(CommonModel)
+    case selectableMap(SaloonMapModel)
     case appleSignIn
     case registerN(User)
+
+//    case onMapSelect(SaloonMapModel)
 }

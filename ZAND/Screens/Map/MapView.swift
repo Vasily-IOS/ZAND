@@ -44,11 +44,15 @@ final class MapView: BaseUIView {
     
     // MARK: - 
 
-    func addPinsOnMap(model: [SaloonMockModel]) {
+    func addPinsOnMap(model: [SaloonMapModel]) {
         model.forEach {
-            let bothCoordinates = $0.coordinates.components(separatedBy: ",")
-            let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
-                                                  longitude: Double(bothCoordinates[1] ) ?? 0)
+//            let bothCoordinates = $0.coordinates.components(separatedBy: ",")
+//            let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
+//                                                  longitude: Double(bothCoordinates[1] ) ?? 0)
+            let coordinates = CLLocationCoordinate2D(
+                latitude: $0.coordinate_lat,
+                longitude: $0.coordinate_lon
+            )
             mapView.addAnnotation(SaloonAnnotation(coordinate: coordinates,
                                                    model: $0))
         }
@@ -140,7 +144,7 @@ extension MapView: MKMapViewDelegate {
                 }
                 annotationView?.image = AssetImage.pin_icon
                 let button = UIButton(type: .custom)
-                button.setTitle(annotation.model.saloon_name, for: .normal)
+                button.setTitle(annotation.model.title, for: .normal)
                 button.setTitleColor(.black, for: .normal)
                 button.addTarget(self, action: #selector(navigateToSaloonDetail), for: .touchUpInside)
                 annotationView?.detailCalloutAccessoryView = button

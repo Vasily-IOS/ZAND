@@ -45,7 +45,7 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
             [weak self] tableView, indexPath, item  in
             let cell = tableView.dequeueCell(withType: AppoitmentsCell.self, for: indexPath)
             cell.configure(model: item)
-            cell.mapHandler = self?.mapHandler
+//            cell.mapHandler = self?.mapHandler
             return cell
         }
     }

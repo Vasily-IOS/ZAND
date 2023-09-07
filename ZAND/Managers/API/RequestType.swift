@@ -15,11 +15,11 @@ enum RequestType {
     case appointments // Записи пользователя
 
     var applicationID: Int {
-        return 1
+        return 1168
     }
 
     var bearerToken: String {
-        return "tokenExample"
+        return "t6gxuau9m54msjpu29s5"
     }
 
     var recordID: Int {
@@ -67,6 +67,6 @@ extension RequestType: TargetType {
     var headers: [String : String]? {
         return ["Authorization": "Bearer \(bearerToken)",
                 "Content-type": "multipart/form-data",
-                "Accept": "application/json"]
+                "Accept": "application/vnd.api.v2+json"]
     }
 }

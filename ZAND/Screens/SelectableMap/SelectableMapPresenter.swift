@@ -9,7 +9,7 @@ import Foundation
 
 // input - делает что-то с UI
 protocol SelectablePresenter: AnyObject {
-    func updateUI(model: CommonModel)
+    func updateUI(model: SaloonMapModel)
 }
 
 // output - presenter сделай что-то
@@ -23,11 +23,11 @@ final class SelectableMapPresenter: SelectablePresenterImpl {
 
     weak var view: SelectablePresenter?
 
-    var model: CommonModel
+    private var model: SaloonMapModel
 
     // MARK: - Initializers
 
-    init(view: SelectablePresenter, model: CommonModel) {
+    init(view: SelectablePresenter, model: SaloonMapModel) {
         self.view = view
         self.model = model
     }

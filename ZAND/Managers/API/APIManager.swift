@@ -24,7 +24,7 @@ final class APIManager: HTTP {
     ) where T : Decodable, T : Encodable {
         provider.request(type) { [weak self] result in
             guard let self else { return }
-
+            
             switch result {
             case .success(let response):
                 if let httpResponse = response.response?.statusCode {

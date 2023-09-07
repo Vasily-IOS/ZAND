@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SaloonPresenterOutput: AnyObject {
-    func getModel() -> SaloonMockModel?
+    func getModel() -> Saloon?
     func getDBModel() -> DetailModelDB?
     func isInFavourite()
     func applyDB(completion: () -> ())
@@ -26,7 +26,7 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
 
     weak var view: SaloonViewInput?
 
-    private var apiModel: SaloonMockModel?
+    private var apiModel: Saloon?
 
     private var modelDB: DetailModelDB?
 
@@ -39,9 +39,9 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
         self.realmManager = realmManager
 
         switch type {
-        case .apiModel(let apiModel):
+        case .api(let apiModel):
             self.apiModel = apiModel
-        case .dbModel(let modelDB):
+        case .dataBase(let modelDB):
             self.modelDB = modelDB
         }
 
@@ -50,7 +50,7 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
 
     // MARK: - Instance methods
 
-    func getModel() -> SaloonMockModel? {
+    func getModel() -> Saloon? {
         guard let apiModel else { return nil }
 
         return apiModel
@@ -72,15 +72,15 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
     func applyDB(completion: () -> ()) {
         guard let modelForSave = apiModel else { return }
 
-        if contains(by: modelForSave.id) {
-            SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-            sendNotification(userId: modelForSave.id, isInFavourite: true)
-            completion()
-        } else {
-            remove(by: modelForSave.id)
-            sendNotification(userId: modelForSave.id, isInFavourite: false)
-            completion()
-        }
+//        if contains(by: modelForSave.id) {
+//            SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
+//            sendNotification(userId: modelForSave.id, isInFavourite: true)
+//            completion()
+//        } else {
+//            remove(by: modelForSave.id)
+//            sendNotification(userId: modelForSave.id, isInFavourite: false)
+//            completion()
+//        }
     }
 
     func remove(by id: Int) {

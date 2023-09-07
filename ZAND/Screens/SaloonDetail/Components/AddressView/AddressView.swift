@@ -65,12 +65,12 @@ final class AddressView: BaseUIView {
 
     func configure(type: SaloonDetailType) {
         switch type {
-        case .apiModel(let model):
-            addressDescriptionLabel.text = model.adress
-            weekDaysDescriptionLabel.text = model.weekdays
-            weekendDaysDescriptionLabel.text = model.weekend
-            minPriceLabel.text = "\(AssetString.from) \(model.min_price) \(AssetString.rub)"
-        case .dbModel(let model):
+        case .api(let model):
+            addressDescriptionLabel.text = model.address
+            weekDaysDescriptionLabel.text = model.schedule
+            weekendDaysDescriptionLabel.text = model.schedule
+//            minPriceLabel.text = "\(AssetString.from) \(model.min_price) \(AssetString.rub)"
+        case .dataBase(let model):
             addressDescriptionLabel.text = model.adress
             weekDaysDescriptionLabel.text = model.weekdays
             weekendDaysDescriptionLabel.text = model.weekend

@@ -27,17 +27,17 @@ final class DescriptionShowcaseView: BaseUIView {
         return descriptionLabel
     }()
     
-    private var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 15
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(cellType: ShowCaseItemCell.self)
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = .mainGray
-        return collectionView
-    }()
+//    private var collectionView: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal
+//        layout.minimumLineSpacing = 15
+//
+//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        collectionView.register(cellType: ShowCaseItemCell.self)
+//        collectionView.showsHorizontalScrollIndicator = false
+//        collectionView.backgroundColor = .mainGray
+//        return collectionView
+//    }()
     
     // MARK: - Instance methods
     
@@ -50,9 +50,9 @@ final class DescriptionShowcaseView: BaseUIView {
 
     func configure(type: SaloonDetailType) {
         switch type {
-        case .apiModel(let model):
+        case .api(let model):
             descriptionLabel.text = model.description
-        case .dbModel(let model):
+        case .dataBase(let model):
             descriptionLabel.text = model.descriptions
         }
     }
@@ -65,8 +65,7 @@ extension DescriptionShowcaseView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([topDescriptionLabel, descriptionLabel,
-                     showCaseLabel, collectionView])
+        addSubviews([topDescriptionLabel, descriptionLabel])
         
         topDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(self).offset(22)
@@ -77,25 +76,26 @@ extension DescriptionShowcaseView {
             make.top.equalTo(topDescriptionLabel.snp.bottom).offset(20)
             make.left.equalTo(topDescriptionLabel)
             make.right.equalTo(self).inset(38)
-        }
-        
-        showCaseLabel.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
-            make.left.equalTo(topDescriptionLabel)
-        }
-        
-        collectionView.snp.makeConstraints { make in
-            make.top.equalTo(showCaseLabel.snp.bottom).offset(20)
-            make.left.equalTo(self).offset(16)
-            make.right.equalTo(self).inset(16)
-            make.height.equalTo(160)
             make.bottom.equalTo(self).inset(30)
         }
+        
+//        showCaseLabel.snp.makeConstraints { make in
+//            make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
+//            make.left.equalTo(topDescriptionLabel)
+//        }
+//
+//        collectionView.snp.makeConstraints { make in
+//            make.top.equalTo(showCaseLabel.snp.bottom).offset(20)
+//            make.left.equalTo(self).offset(16)
+//            make.right.equalTo(self).inset(16)
+//            make.height.equalTo(160)
+//            make.bottom.equalTo(self).inset(30)
+//        }
     }
     
     private func subscribeDelegate() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
+//        collectionView.dataSource = self
+//        collectionView.delegate = self
     }
 }
 

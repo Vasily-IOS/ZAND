@@ -39,7 +39,7 @@ final class SaloonPhotoCollection: BaseUIView {
 
     var id: Int = 0
 
-    var mockPhotos: [UIImage] = []
+    var mockPhotos: [String] = []
 
     var dbPhotos: [Data] = []
 
@@ -81,8 +81,6 @@ final class SaloonPhotoCollection: BaseUIView {
 
     private let ratingLabel = UILabel(.systemFont(ofSize: 12))
 
-    private let starImage = UIImageView(image: AssetImage.star_icon)
-
     private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, AssetString.grades)
 
     private let gradeCountLabel = UILabel(.systemFont(ofSize: 12))
@@ -103,15 +101,20 @@ final class SaloonPhotoCollection: BaseUIView {
 
     func configure(type: SaloonDetailType) {
         switch type {
-        case .apiModel(let model):
+        case .api(let model):
+
+            if model.company_photos.isEmpty && model.photos.isEmpty {
+//                mockPhotos.append(AssetImage.noFoto_icon ?? UIImage())
+            } else {
+                mockPhotos = model.company_photos
+            }
+
             pageControl.numberOfPages = model.photos.count
-            nameLabel.text = model.saloon_name
-            categoryLabel.text = model.category.name
-            ratingLabel.text = "\(model.rating)"
-            gradeCountLabel.text = "\(model.scores)"
+            nameLabel.text = model.title
+            categoryLabel.text = model.short_descr
             id = model.id
-            mockPhotos = model.photos
-        case .dbModel(let model):
+
+        case .dataBase(let model):
             pageControl.numberOfPages = model.photos.count
             nameLabel.text = model.saloon_name
             categoryLabel.text = model.category?.name
@@ -143,7 +146,7 @@ extension SaloonPhotoCollection {
         backgroundColor = .mainGray
 
         addSubviews([collectionView, pageControl, nameLabel, categoryLabel, ratingLabel,
-                     starImage, gradeLabel, gradeCountLabel, heartButton, bottomButton])
+                    gradeLabel, gradeCountLabel, heartButton, bottomButton])
         
         collectionView.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
@@ -170,21 +173,6 @@ extension SaloonPhotoCollection {
         ratingLabel.snp.makeConstraints { make in
             make.left.equalTo(self).offset(16)
             make.top.equalTo(categoryLabel.snp.bottom).offset(8)
-        }
-        
-        starImage.snp.makeConstraints { make in
-            make.left.equalTo(ratingLabel.snp.right).offset(1)
-            make.centerY.equalTo(ratingLabel)
-        }
-        
-        gradeLabel.snp.makeConstraints { make in
-            make.left.equalTo(starImage.snp.right).offset(15)
-            make.centerY.equalTo(starImage)
-        }
-        
-        gradeCountLabel.snp.makeConstraints { make in
-            make.left.equalTo(gradeLabel.snp.right).offset(2)
-            make.centerY.equalTo(starImage)
         }
         
         heartButton.snp.makeConstraints { make in

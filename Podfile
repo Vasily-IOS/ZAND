@@ -9,7 +9,7 @@ target 'ZAND' do
   pod 'lottie-ios'
   pod 'SnapKit', '~> 5.6.0'
   pod 'RealmSwift', '~>10'
-  pod 'AGConnectCore'
+  pod 'Kingfisher', '~> 7.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
 

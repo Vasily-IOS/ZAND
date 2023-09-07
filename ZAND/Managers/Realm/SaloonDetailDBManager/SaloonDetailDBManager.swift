@@ -31,7 +31,7 @@ final class SaloonDetailDBManager {
         modelDB.category?.id = modelForSave.category.id
         modelDB.category?.name = modelForSave.category.name
         modelDB.adress = modelForSave.adress
-        modelDB.coordinates = modelForSave.coordinates
+//        modelDB.coordinates = modelForSave.coordinates
         modelDB.descriptions = modelForSave.description
         modelDB.weekend = modelForSave.weekend
         modelDB.weekdays = modelForSave.weekdays

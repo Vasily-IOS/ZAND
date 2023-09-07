@@ -8,8 +8,9 @@
 import Foundation
 import RealmSwift
 
-class DetailModelDB: Object, CommonModel {
+class DetailModelDB: Object, SaloonMapModel {
     @Persisted var id = 0
+    @Persisted var title: String = ""
     @Persisted var category: CategoryDB? = CategoryDB()
     @Persisted var saloon_name = ""
     @Persisted var adress = ""
@@ -21,7 +22,8 @@ class DetailModelDB: Object, CommonModel {
     @Persisted var weekend = ""
     @Persisted var min_price = 0
     @Persisted var descriptions = ""
-    @Persisted var coordinates = ""
+    @Persisted var coordinate_lat: Double = 0
+    @Persisted var coordinate_lon: Double = 0
 
     func getPhotos() -> List<Data> {
         return photos

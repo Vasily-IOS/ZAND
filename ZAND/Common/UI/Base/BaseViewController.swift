@@ -13,6 +13,7 @@ class BaseViewController<View: UIView>: UIViewController {
     
     init(contentView: View) {
         self.contentView = contentView
+        
         super.init(nibName: nil, bundle: nil)
     }
     
