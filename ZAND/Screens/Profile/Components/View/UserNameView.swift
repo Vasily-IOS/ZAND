@@ -37,7 +37,7 @@ final class UserNameView: BaseUIView {
         setViews()
     }
 
-    func configure(model: UserModelDB) {
+    func configure(model: UserDataBaseModel) {
         nameLabel.text = model.givenName + " " + model.familyName
         phoneLabel.text = model.phone
         emailLabel.text = model.email

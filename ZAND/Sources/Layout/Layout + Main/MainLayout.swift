@@ -38,7 +38,7 @@ final class MainLayout: DefaultMainLayout {
             item.contentInsets = .init(top: 10, leading: 0, bottom: 10, trailing: 0)
 
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .estimated(315))
+                                                   heightDimension: .estimated(325))
             let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                          subitems: [item])
             group.interItemSpacing = .fixed(20)

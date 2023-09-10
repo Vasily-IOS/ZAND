@@ -23,12 +23,16 @@ final class SelectableMapView: BaseUIView {
         subscribeDelegate()
     }
 
-    func addPinsOnMap(model: CommonModel) {
-        let bothCoordinates = model.coordinates.components(separatedBy: Config.separatedBy)
-        let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
-                                                 longitude: Double(bothCoordinates[1] ) ?? 0)
+    func addPinsOnMap(model: SaloonMapModel) {
+//        let bothCoordinates = model.coordinates.components(separatedBy: Config.separatedBy)
+//        let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
+//                                                 longitude: Double(bothCoordinates[1] ) ?? 0)
+        let coordinates = CLLocationCoordinate2D(
+            latitude: model.coordinate_lat,
+            longitude: model.coordinate_lon
+        )
         let annotation = SaloonAnnotation(coordinate: coordinates, model: model)
-        annotation.title = model.saloon_name
+        annotation.title = model.title
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
         mapView.showAnnotations(self.mapView.annotations, animated: true)

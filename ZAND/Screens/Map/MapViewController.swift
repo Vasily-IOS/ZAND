@@ -47,7 +47,7 @@ extension MapViewController: MapViewInput {
 
     // MARK: - MapViewInput methods
 
-    func updateUI(model: [SaloonMockModel]) {
+    func updateUI(model: [SaloonMapModel]) {
         contentView.addPinsOnMap(model: model)
     }
 }
@@ -57,16 +57,19 @@ extension MapViewController: MapDelegate {
     // MARK: - MapDelegate methods
 
     func showSearch() {
-        if let model = presenter?.getModel() {
+        if let model = presenter?.getModel() as? [Saloon] {
             AppRouter.shared.presentSearch(type: .search(model)) { [weak self] model in
-                self?.contentView.showSinglePin(model: model.coordinates)
+                self?.contentView.showSinglePin(
+                    coordinate_lat: model.coordinate_lat,
+                    coordinate_lon: model.coordinate_lon
+                )
             }
         }
     }
 
     func showDetail(by id: Int) {
-        if let model = presenter?.getModel(by: id) {
-            AppRouter.shared.push(.saloonDetail(.apiModel(model)))
+        if let model = presenter?.getModel(by: id) as? Saloon {
+            AppRouter.shared.push(.saloonDetail(.api(model)))
         }
     }
 }

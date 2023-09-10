@@ -13,12 +13,10 @@ final class SearchCell: BaseTableCell {
     // MARK: - Properties
 
     private let saloonNameLabel = UILabel(.systemFont(ofSize: 16))
-    private let ratingView = RatingView()
-    private let saloonClassLabel = UILabel(.systemFont(ofSize: 14), .black)
+    private let saloonClassLabel = UILabel(.systemFont(ofSize: 14), .textGray)
     
     private lazy var rightStackView = UIStackView(alignment: .trailing,
                                                   arrangedSubviews: [
-                                                    ratingView,
                                                     saloonClassLabel
                                                   ],
                                                   axis: .vertical,
@@ -36,10 +34,9 @@ final class SearchCell: BaseTableCell {
 
     // MARK: - Configure
 
-    func configure(model: SaloonMockModel) {
-        self.saloonNameLabel.text = model.saloon_name
-        self.saloonClassLabel.text = String(model.category.name)
-        self.ratingView.configure(rating: model.rating)
+    func configure(model: Saloon) {
+        saloonNameLabel.text = model.title
+        saloonClassLabel.text = String(model.short_descr)
     }
 }
 
@@ -51,9 +48,9 @@ extension SearchCell {
         contentView.addSubviews([rightStackView, saloonNameLabel])
         
         rightStackView.snp.makeConstraints { make in
-            make.top.equalTo(contentView).offset(8)
+            make.top.equalTo(contentView).offset(20)
             make.right.equalTo(contentView).inset(16)
-            make.bottom.equalTo(contentView).inset(8)
+            make.bottom.equalTo(contentView).inset(20)
         }
         
         saloonNameLabel.snp.makeConstraints { make in

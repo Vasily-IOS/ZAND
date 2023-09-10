@@ -44,8 +44,12 @@ final class MainViewController: BaseViewController<MainView> {
         presenter?.getModel(by: .options) as! [OptionsModel]
     }
 
-    var saloons: [SaloonMockModel] {
-        presenter?.getModel(by: .saloons) as! [SaloonMockModel]
+    var saloons: [Saloon]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.contentView.collectionView.reloadData()
+            }
+        }
     }
 
     // MARK: - Lifecycle
@@ -54,6 +58,8 @@ final class MainViewController: BaseViewController<MainView> {
         super.viewDidLoad()
         
         subscribeDelegate()
+
+        presenter?.fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +95,7 @@ extension MainViewController: UICollectionViewDataSource {
         case .option:
             return options.count
         case .beautySaloon:
-            return saloons.count
+            return (saloons ?? []).count
         default:
             return 0
         }
@@ -105,11 +111,11 @@ extension MainViewController: UICollectionViewDataSource {
             optionCell.configure(model: options[indexPath.item], state: .onMain)
             return optionCell
         case .beautySaloon:
-            saloonCell.configure(model: saloons[indexPath.item], indexPath: indexPath)
+            saloonCell.configure(model: (saloons ?? [])[indexPath.item], indexPath: indexPath)
             saloonCell.mapHandler = mapHandler
             saloonCell.favouritesHandler = favouritesHandler
 
-            if let isInFavourite = presenter?.contains(by: saloons[indexPath.item].id) {
+            if let isInFavourite = presenter?.contains(by: (saloons ?? [])[indexPath.item].id) {
                 saloonCell.isInFavourite = !isInFavourite
             }
 
@@ -133,7 +139,7 @@ extension MainViewController: UICollectionViewDelegate {
             }
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         case .beautySaloon:
-            AppRouter.shared.push(.saloonDetail(.apiModel(saloons[indexPath.item])))
+            AppRouter.shared.push(.saloonDetail(.api((saloons ?? [])[indexPath.item])))
         default:
             break
         }
@@ -145,7 +151,7 @@ extension MainViewController: MainViewDelegate {
     // MARK: - MainViewDelegate methods
     
     func showSearch() {
-        guard let model = presenter?.getModel(by: .saloons) as? [SaloonMockModel] else {
+        guard let model = presenter?.getModel(by: .saloons) as? [Saloon] else {
             return
         }
 
@@ -169,6 +175,10 @@ extension MainViewController: MainViewInput {
 
     func changeFavouritesAppearence(indexPath: IndexPath) {
         contentView.collectionView.reloadItems(at: [indexPath])
+    }
+
+    func updateUI(model: [Saloon]) {
+        saloons = model
     }
 }
 

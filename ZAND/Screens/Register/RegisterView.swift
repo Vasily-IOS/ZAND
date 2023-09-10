@@ -8,16 +8,18 @@
 import UIKit
 import SnapKit
 
-protocol RegisterNDelegate: AnyObject {
+protocol RegisterDelegate: AnyObject {
     func cancelEditing()
     func register()
+    func showPolicy()
+    func changePolicy(isConfirmed: Bool)
 }
 
 final class RegisterView: BaseUIView {
 
     // MARK: - Properties
 
-    weak var delegate: RegisterNDelegate?
+    weak var delegate: RegisterDelegate?
 
     let phoneTextField: PaddingTextField = {
         let phoneTextField = PaddingTextField(state: .phone)
@@ -31,6 +33,34 @@ final class RegisterView: BaseUIView {
 
     let emailTextField = PaddingTextField(state: .email)
 
+    let policySwitchControl = UISwitch()
+
+    private let agreeButton: UIButton = {
+        let policyButton = UIButton()
+        policyButton.setTitle("Согласен с", for: .normal)
+        policyButton.setTitleColor(.black, for: .normal)
+        policyButton.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
+        return policyButton
+    }()
+
+    private let policyButton: UIButton = {
+        let policyButton = UIButton()
+
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+              .font: UIFont.systemFont(ofSize: 13),
+              .foregroundColor: UIColor.mainGreen,
+              .underlineStyle: NSUnderlineStyle.single.rawValue
+          ]
+
+        let attributeString = NSMutableAttributedString(
+                string: "политикой конфиденциальности",
+                attributes: yourAttributes
+             )
+
+        policyButton.setAttributedTitle(attributeString, for: .normal)
+        return policyButton
+    }()
+
     private let registerButton = BottomButton(buttonText: .register)
 
     private let registerLabel = UILabel(
@@ -38,6 +68,13 @@ final class RegisterView: BaseUIView {
         .black,
         AssetString.registation
     )
+
+    private lazy var policyStackView = UIStackView(
+        alignment: .leading,
+        arrangedSubviews: [agreeButton, policyButton],
+        axis: .horizontal,
+        distribution: .fillProportionally,
+        spacing: 5)
 
     private lazy var interiorStackView = UIStackView(
         alignment: .center,
@@ -92,6 +129,16 @@ final class RegisterView: BaseUIView {
     private func registerAction() {
         delegate?.register()
     }
+
+    @objc
+    private func openPolicyAction() {
+        delegate?.showPolicy()
+    }
+
+    @objc
+    private func switchAction(_ sender: UISwitch) {
+        delegate?.changePolicy(isConfirmed: sender.isOn)
+    }
 }
 
 extension RegisterView {
@@ -101,7 +148,7 @@ extension RegisterView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([baseStackView, registerButton])
+        addSubviews([baseStackView, policySwitchControl, policyStackView, registerButton])
 
         [nameTextField, surnameTextField, emailTextField, phoneTextField].forEach {
             $0.snp.makeConstraints { make in
@@ -115,8 +162,18 @@ extension RegisterView {
             make.centerX.equalToSuperview()
         }
 
-        registerButton.snp.makeConstraints { make in
+        policyStackView.snp.makeConstraints { make in
+            make.left.equalTo(baseStackView)
             make.top.equalTo(baseStackView.snp.bottom).offset(60)
+        }
+
+        policySwitchControl.snp.makeConstraints { make in
+            make.centerY.equalTo(policyStackView)
+            make.right.equalTo(baseStackView)
+        }
+
+        registerButton.snp.makeConstraints { make in
+            make.top.equalTo(agreeButton.snp.bottom).offset(60)
             make.width.equalTo(interiorStackView)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
@@ -137,6 +194,18 @@ extension RegisterView {
             self,
             action: #selector(registerAction),
             for: .touchUpInside
+        )
+
+        policyButton.addTarget(
+            self,
+            action: #selector(openPolicyAction),
+            for: .touchUpInside
+        )
+
+        policySwitchControl.addTarget(
+            self,
+            action: #selector(switchAction),
+            for: .valueChanged
         )
     }
 }

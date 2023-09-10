@@ -6,7 +6,8 @@
 //
 
 import UIKit
-//import RealmSwift
+import Kingfisher
+import RealmSwift
 
 final class SaloonDetailDBManager {
 
@@ -22,28 +23,26 @@ final class SaloonDetailDBManager {
 
     // MARK: - Instance methods
 
-    func save(modelForSave: SaloonMockModel) {
-        let modelDB = DetailModelDB()
+    func save(modelForSave: Saloon) {
+        let modelDB = SaloonDataBaseModel()
         modelDB.id = modelForSave.id
-        modelDB.saloon_name = modelForSave.saloon_name
-        modelDB.rating = (modelForSave.rating).toData() ?? Data()
-        modelDB.image = (modelForSave.image).toData() ?? Data()
-        modelDB.category?.id = modelForSave.category.id
-        modelDB.category?.name = modelForSave.category.name
-        modelDB.adress = modelForSave.adress
-        modelDB.coordinates = modelForSave.coordinates
-        modelDB.descriptions = modelForSave.description
-        modelDB.weekend = modelForSave.weekend
-        modelDB.weekdays = modelForSave.weekdays
-        modelDB.scores = modelForSave.scores
-        modelDB.min_price = modelForSave.min_price
+        modelDB.title = modelForSave.title
+        modelDB.coordinate_lon = modelForSave.coordinate_lon
+        modelDB.coordinate_lat = modelForSave.coordinate_lat
+        modelDB.public_title = modelForSave.public_title
+        modelDB.descriptionDB = modelForSave.description
+        modelDB.schedule = modelForSave.schedule
+        modelDB.address = modelForSave.address
+        modelDB.bookforms.first?.id = modelForSave.bookforms.first?.id ?? 0
+        modelDB.bookforms.first?.title = modelForSave.bookforms.first?.title ?? ""
+        modelDB.bookforms.first?.url = modelForSave.bookforms.first?.url ?? ""
+        modelDB.bookforms.first?.is_default = modelForSave.bookforms.first?.is_default ?? 0
 
-        for photo in modelForSave.photos {
-            photo.toData { resultData in
-                modelDB.photos.append(resultData)
-            }
+        for photo in modelForSave.company_photos {
+            let data = try? Data(contentsOf: URL(string: photo)!)
+            modelDB.company_photos.append(data ?? Data())
         }
-        
+
         realmManager.save(object: modelDB)
         VibrationManager.shared.vibrate(for: .success)
     }

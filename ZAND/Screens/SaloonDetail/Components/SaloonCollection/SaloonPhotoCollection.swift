@@ -39,7 +39,7 @@ final class SaloonPhotoCollection: BaseUIView {
 
     var id: Int = 0
 
-    var mockPhotos: [UIImage] = []
+    var photos: [String] = []
 
     var dbPhotos: [Data] = []
 
@@ -81,8 +81,6 @@ final class SaloonPhotoCollection: BaseUIView {
 
     private let ratingLabel = UILabel(.systemFont(ofSize: 12))
 
-    private let starImage = UIImageView(image: AssetImage.star_icon)
-
     private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, AssetString.grades)
 
     private let gradeCountLabel = UILabel(.systemFont(ofSize: 12))
@@ -103,22 +101,25 @@ final class SaloonPhotoCollection: BaseUIView {
 
     func configure(type: SaloonDetailType) {
         switch type {
-        case .apiModel(let model):
+        case .api(let model):
+
+            if !model.company_photos.isEmpty {
+                photos = model.company_photos
+            } else if !model.photos.isEmpty {
+                photos = model.photos
+            }
+
             pageControl.numberOfPages = model.photos.count
-            nameLabel.text = model.saloon_name
-            categoryLabel.text = model.category.name
-            ratingLabel.text = "\(model.rating)"
-            gradeCountLabel.text = "\(model.scores)"
+            nameLabel.text = model.title
+            categoryLabel.text = model.short_descr
             id = model.id
-            mockPhotos = model.photos
-        case .dbModel(let model):
-            pageControl.numberOfPages = model.photos.count
-            nameLabel.text = model.saloon_name
-            categoryLabel.text = model.category?.name
-            ratingLabel.text = "\(CGFloat(data: model.rating))"
-            gradeCountLabel.text = "\(model.scores)"
+
+        case .dataBase(let model):
+            pageControl.numberOfPages = model.company_photos.count
+            nameLabel.text = model.title
+            categoryLabel.text = model.short_descr
             id = model.id
-            dbPhotos = Array(model.getPhotos())
+            dbPhotos = Array(model.company_photos)
         }
     }
     
@@ -143,7 +144,7 @@ extension SaloonPhotoCollection {
         backgroundColor = .mainGray
 
         addSubviews([collectionView, pageControl, nameLabel, categoryLabel, ratingLabel,
-                     starImage, gradeLabel, gradeCountLabel, heartButton, bottomButton])
+                    gradeLabel, gradeCountLabel, heartButton, bottomButton])
         
         collectionView.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
@@ -170,21 +171,6 @@ extension SaloonPhotoCollection {
         ratingLabel.snp.makeConstraints { make in
             make.left.equalTo(self).offset(16)
             make.top.equalTo(categoryLabel.snp.bottom).offset(8)
-        }
-        
-        starImage.snp.makeConstraints { make in
-            make.left.equalTo(ratingLabel.snp.right).offset(1)
-            make.centerY.equalTo(ratingLabel)
-        }
-        
-        gradeLabel.snp.makeConstraints { make in
-            make.left.equalTo(starImage.snp.right).offset(15)
-            make.centerY.equalTo(starImage)
-        }
-        
-        gradeCountLabel.snp.makeConstraints { make in
-            make.left.equalTo(gradeLabel.snp.right).offset(2)
-            make.centerY.equalTo(starImage)
         }
         
         heartButton.snp.makeConstraints { make in
@@ -225,15 +211,15 @@ extension SaloonPhotoCollection: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return mockPhotos.isEmpty ? dbPhotos.count : mockPhotos.count
+        return photos.isEmpty ? dbPhotos.count : photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonPhotoCell.self)
 
-        mockPhotos.isEmpty ? cell.configure(image: dbPhotos[indexPath.item]) :
-        cell.configure(image: mockPhotos[indexPath.item])
+        photos.isEmpty ? cell.configure(image: dbPhotos[indexPath.item]) :
+        cell.configure(image: photos[indexPath.item])
 
         return cell
     }

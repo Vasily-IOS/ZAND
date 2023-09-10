@@ -17,6 +17,7 @@ enum AlertType {
     case enterPhone
     case fillAllFields
     case invalidEmailInput
+    case shouldAcceptPolicy
 
     var textValue: String {
         switch self {
@@ -38,6 +39,8 @@ enum AlertType {
             return AssetString.fillAllFields
         case .invalidEmailInput:
             return AssetString.invalidEmailInput
+        case .shouldAcceptPolicy:
+            return AssetString.shouldAcceptPolicy
         }
     }
 }

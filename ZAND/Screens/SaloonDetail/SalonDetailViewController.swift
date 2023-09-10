@@ -107,7 +107,7 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
             AppRouter.shared.changeTabBarVC(to: 2)
             print("Failed to open booking")
         } else {
-            AppRouter.shared.presentWithNav(type: .booking)
+            AppRouter.shared.presentWithNav(type: .booking(""))
             print("Open booking")
         }
     }

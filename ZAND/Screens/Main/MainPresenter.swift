@@ -15,14 +15,17 @@ enum MainType {
 protocol MainPresenterOutput: AnyObject {
     func getModel(by type: MainType) -> [CommonFilterProtocol]
     func getSearchIndex(id: Int) -> IndexPath?
-    func getModel(by id: Int) -> SaloonMockModel?
+    func getModel(by id: Int) -> SaloonMapModel?
     func applyDB(by id: Int, completion: () -> ())
     func contains(by id: Int) -> Bool
+
+    func fetchData()
 }
 
 protocol MainViewInput: AnyObject {
     func hideTabBar()
     func changeFavouritesAppearence(indexPath: IndexPath)
+    func updateUI(model: [Saloon])
 }
 
 final class MainPresenter: MainPresenterOutput {
@@ -31,19 +34,22 @@ final class MainPresenter: MainPresenterOutput {
     
     private let optionsModel = OptionsModel.options
 
-    private let saloonsModel = SaloonMockModel.saloons
+    private var saloons: [Saloon] = []
 
     private let realmManager: RealmManager
-    
+
+    private let provider: SaloonProvider
+
     // MARK: - UI
     
     weak var view: MainViewInput?
     
     // MARK: - Initializer
     
-    init(view: MainViewInput, realmManager: RealmManager) {
+    init(view: MainViewInput, realmManager: RealmManager, provider: SaloonProvider) {
         self.view = view
         self.realmManager = realmManager
+        self.provider = provider
 
         subscribeTabBarNotification()
         subcribeFavouritesNotification()
@@ -69,8 +75,15 @@ extension MainPresenter {
     
     // MARK: - Instance methods
 
+    func fetchData() {
+        provider.fetchData { [weak self] saloons in
+            self?.saloons = saloons
+            self?.view?.updateUI(model: saloons)
+        }
+    }
+
     func getSearchIndex(id: Int) -> IndexPath? {
-        if let index = saloonsModel.firstIndex(where: { $0.id == id }) {
+        if let index = saloons.firstIndex(where: { $0.id == id }) {
             return [1, index]
         }
         return nil
@@ -81,17 +94,17 @@ extension MainPresenter {
         case .options:
             return optionsModel
         case .saloons:
-            return saloonsModel
+            return saloons
         }
     }
 
-    func getModel(by id: Int) -> SaloonMockModel? {
-        return saloonsModel.first(where: { $0.id == id })
+    func getModel(by id: Int) -> SaloonMapModel? {
+        return saloons.first(where: { $0.id == id })
     }
 
     func applyDB(by id: Int, completion: () -> ()) {
         if contains(by: id) {
-            if let modelForSave = getModel(by: id) {
+            if let modelForSave = getModel(by: id) as? Saloon {
                 SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
                 completion()
             }
@@ -103,13 +116,13 @@ extension MainPresenter {
 
     func remove(by id: Int) {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        realmManager.removeObjectByID(object: DetailModelDB.self, predicate: predicate)
+        realmManager.removeObjectByID(object: SaloonDataBaseModel.self, predicate: predicate)
         VibrationManager.shared.vibrate(for: .success)
     }
 
     func contains(by id: Int) -> Bool {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        return realmManager.contains(predicate: predicate, DetailModelDB.self)
+        return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
     }
 
     // MARK: - Private

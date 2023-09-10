@@ -13,6 +13,7 @@ class BaseUIView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        
         setup()
     }
     

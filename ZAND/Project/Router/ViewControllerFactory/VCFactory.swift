@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum SaloonDetailType {
-    case apiModel(SaloonMockModel)
-    case dbModel(DetailModelDB)
-}
-
 final class VCFactory: DefaultVCFactory {
     func getViewController(for type: VCType) -> UIViewController {
         switch type {
@@ -27,15 +22,21 @@ final class VCFactory: DefaultVCFactory {
         case .main:
             let layotBuilder: DefaultMainLayout = MainLayout()
             let realmManager: RealmManager = RealmManagerImpl()
+            let provider: SaloonProvider = SaloonProviderImpl()
             let view = MainView(layoutBuilder: layotBuilder)
             let vc = MainViewController(contentView: view)
-            let presenter = MainPresenter(view: vc, realmManager: realmManager)
+            let presenter = MainPresenter(
+                view: vc,
+                realmManager: realmManager,
+                provider: provider
+            )
             vc.presenter = presenter
             return vc
         case .map:
             let view = MapView()
             let vc = MapViewController(contentView: view)
-            let presenter = MapPresenter(view: vc)
+            let provider: SaloonProvider = SaloonProviderImpl()
+            let presenter = MapPresenter(view: vc, provider: provider)
             vc.presenter = presenter
             return vc
         case .saloonDetail(let type):
@@ -79,8 +80,8 @@ final class VCFactory: DefaultVCFactory {
             vc.presenter = presenter
             vc.title = AssetString.details
             return vc
-        case .booking:
-            return BookingViewController()
+        case .booking(let url):
+            return BookingViewController(url: url)
         case .selectableMap(let model):
             let view = SelectableMapView()
             let vc = SelectableViewController(contentView: view)

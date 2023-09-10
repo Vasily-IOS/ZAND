@@ -11,4 +11,5 @@ enum URLS {
     static let baseURL = "https://api.yclients.com"
     static let yClientsBase = "https://n134214.yclients.com"
     static let telegram_bot = "https://t.me/zandcenter_bot"
+    static let privacy_policy = "https://zandbeauty.ru/information"
 }

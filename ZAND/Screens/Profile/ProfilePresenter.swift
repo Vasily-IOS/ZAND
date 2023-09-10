@@ -15,13 +15,13 @@ enum ProfileType {
 
 protocol ProfilePresenterOutput: AnyObject {
     func getMenuModel() -> [ProfileMenuModel]
-    func getDBmodel() -> [DetailModelDB]
+    func getDBmodel() -> [SaloonDataBaseModel]
     func checkLogIn()
     func signOut()
 }
 
 protocol ProfileViewInput: AnyObject {
-    func updateWithLoggedData(model: UserModelDB)
+    func updateWithLoggedData(model: UserDataBaseModel)
 }
 
 final class ProfilePresenter: ProfilePresenterOutput {
@@ -45,8 +45,8 @@ final class ProfilePresenter: ProfilePresenterOutput {
         return profileMenuModel
     }
 
-    func getDBmodel() -> [DetailModelDB] {
-        return Array(realmManager.get(DetailModelDB.self))
+    func getDBmodel() -> [SaloonDataBaseModel] {
+        return Array(realmManager.get(SaloonDataBaseModel.self))
     }
 
     func checkLogIn() {

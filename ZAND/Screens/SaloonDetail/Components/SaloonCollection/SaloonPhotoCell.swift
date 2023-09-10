@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class SaloonPhotoCell: BaseCollectionCell {
     
@@ -14,7 +15,8 @@ final class SaloonPhotoCell: BaseCollectionCell {
     
     private let saloonImage: UIImageView = {
         let saloonImage = UIImageView()
-        saloonImage.contentMode = .scaleToFill
+        saloonImage.contentMode = .scaleAspectFill
+        saloonImage.clipsToBounds = true
         return saloonImage
     }()
     
@@ -30,6 +32,16 @@ final class SaloonPhotoCell: BaseCollectionCell {
     
     func configure(image: UIImage) {
         saloonImage.image = image
+    }
+
+    func configure(image: String) {
+        if image.isEmpty {
+            saloonImage.image = AssetImage.noFoto_icon
+        } else {
+            if let url = URL(string: image) {
+                saloonImage.kf.setImage(with: url)
+            }
+        }
     }
 
     func configure(image: Data) {

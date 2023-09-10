@@ -28,4 +28,5 @@ enum AssetImage {
     static let heart = UIImage(named: "heart_icon")
     static let fillHeart_icon = UIImage(named: "fill_heart_icon")
     static let search_icon = UIImage(named: "search_icon")
+    static let noFoto_icon = UIImage(named: "noFoto_icon")
 }

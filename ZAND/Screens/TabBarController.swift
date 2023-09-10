@@ -68,7 +68,12 @@ extension TabBarController {
     }
     
     private func setBackButton() {
-        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        let backBarButtonItem = UIBarButtonItem(
+            title: nil,
+            style: .plain,
+            target: nil,
+            action: nil
+        )
         navigationItem.backBarButtonItem = backBarButtonItem
     }
 }

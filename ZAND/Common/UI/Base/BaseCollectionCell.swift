@@ -13,6 +13,7 @@ class BaseCollectionCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        
         setup()
     }
     

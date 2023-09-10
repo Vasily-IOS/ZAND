@@ -22,7 +22,7 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         return presenter?.getMenuModel() ?? []
     }
 
-    var saloonDBmodel: [DetailModelDB] {
+    var saloonDBmodel: [SaloonDataBaseModel] {
         return presenter?.getDBmodel() ?? []
     }
     
@@ -151,7 +151,7 @@ extension ProfileViewController: UICollectionViewDelegate {
                 break
             }
         case .favourites:
-            AppRouter.shared.push(.saloonDetail(.dbModel(saloonDBmodel[indexPath.row])))
+            AppRouter.shared.push(.saloonDetail(.dataBase(saloonDBmodel[indexPath.row])))
         default:
             break
         }
@@ -172,7 +172,7 @@ extension ProfileViewController: ProfileViewInput {
 
     // MARK: - ProfileViewInput methods
 
-    func updateWithLoggedData(model: UserModelDB) {
+    func updateWithLoggedData(model: UserDataBaseModel) {
         contentView.userNameView.configure(model: model)
     }
 }
