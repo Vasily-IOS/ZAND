@@ -12,21 +12,27 @@ final class FavouritesCell: BaseCollectionCell {
     
     // MARK: - Properties
     
-    private let saloonImage = UIImageView()
+    private let saloonImage: UIImageView = {
+        let saloonImage = UIImageView()
+        saloonImage.contentMode = .scaleAspectFill
+        saloonImage.clipsToBounds = true
+        return saloonImage
+    }()
 
-    private let saloonName: UILabel = {
+    private let saloonNameLabel: UILabel = {
         let saloonName = UILabel()
         saloonName.font = .systemFont(ofSize: 12, weight: .bold)
+        saloonName.numberOfLines = 0
         return saloonName
     }()
     
-    private let favouritesStarImage = UIImageView(image: AssetImage.star_icon)
-    
-    private let ratingLabel: UILabel = {
-        let ratingLabel = UILabel()
-        ratingLabel.font = .systemFont(ofSize: 12)
-        return ratingLabel
-    }()
+//    private let favouritesStarImage = UIImageView(image: AssetImage.star_icon)
+//
+//    private let ratingLabel: UILabel = {
+//        let ratingLabel = UILabel()
+//        ratingLabel.font = .systemFont(ofSize: 12)
+//        return ratingLabel
+//    }()
 
     // MARK: - Instance methods
     
@@ -37,10 +43,9 @@ final class FavouritesCell: BaseCollectionCell {
         setViews()
     }
 
-    func configure(model: DetailModelDB) {
-        saloonImage.image = UIImage(data: model.image)
-        saloonName.text = model.saloon_name
-        ratingLabel.text = "\(CGFloat(data: model.rating))"
+    func configure(model: SaloonDataBaseModel) {
+        saloonImage.image = UIImage(data: model.company_photos.first ?? Data())
+        saloonNameLabel.text = model.title
     }
 }
 
@@ -49,29 +54,18 @@ extension FavouritesCell {
     // MARK: - Instance methods
     
     private func setViews() {
-        addSubviews([saloonImage, saloonName,
-                     favouritesStarImage, ratingLabel])
+        addSubviews([saloonImage, saloonNameLabel])
         
         saloonImage.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
             make.height.equalTo(101)
         }
         
-        saloonName.snp.makeConstraints { make in
+        saloonNameLabel.snp.makeConstraints { make in
             make.top.equalTo(saloonImage.snp.bottom).offset(3)
             make.left.equalTo(self).offset(10)
-            make.width.equalTo(110)
-            make.bottom.equalTo(self).inset(10)
-        }
-        
-        favouritesStarImage.snp.makeConstraints { make in
-            make.centerY.equalTo(saloonName.snp.centerY)
             make.right.equalTo(self).inset(10)
-        }
-
-        ratingLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(saloonName)
-            make.right.equalTo(self).inset(20)
+            make.bottom.equalTo(self).inset(10)
         }
     }
     

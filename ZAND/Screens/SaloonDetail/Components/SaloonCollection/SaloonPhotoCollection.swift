@@ -108,20 +108,18 @@ final class SaloonPhotoCollection: BaseUIView {
             } else if !model.photos.isEmpty {
                 photos = model.photos
             }
-  
+
             pageControl.numberOfPages = model.photos.count
             nameLabel.text = model.title
             categoryLabel.text = model.short_descr
             id = model.id
 
         case .dataBase(let model):
-            pageControl.numberOfPages = model.photos.count
-            nameLabel.text = model.saloon_name
-            categoryLabel.text = model.category?.name
-            ratingLabel.text = "\(CGFloat(data: model.rating))"
-            gradeCountLabel.text = "\(model.scores)"
+            pageControl.numberOfPages = model.company_photos.count
+            nameLabel.text = model.title
+            categoryLabel.text = model.short_descr
             id = model.id
-            dbPhotos = Array(model.getPhotos())
+            dbPhotos = Array(model.company_photos)
         }
     }
     

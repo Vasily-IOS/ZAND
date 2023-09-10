@@ -22,7 +22,7 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         return presenter?.getMenuModel() ?? []
     }
 
-    var saloonDBmodel: [DetailModelDB] {
+    var saloonDBmodel: [SaloonDataBaseModel] {
         return presenter?.getDBmodel() ?? []
     }
     
@@ -172,7 +172,7 @@ extension ProfileViewController: ProfileViewInput {
 
     // MARK: - ProfileViewInput methods
 
-    func updateWithLoggedData(model: UserModelDB) {
+    func updateWithLoggedData(model: UserDataBaseModel) {
         contentView.userNameView.configure(model: model)
     }
 }

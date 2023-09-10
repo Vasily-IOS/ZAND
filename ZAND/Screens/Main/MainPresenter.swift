@@ -104,8 +104,8 @@ extension MainPresenter {
 
     func applyDB(by id: Int, completion: () -> ()) {
         if contains(by: id) {
-            if let modelForSave = getModel(by: id) {
-//                SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
+            if let modelForSave = getModel(by: id) as? Saloon {
+                SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
                 completion()
             }
         } else {
@@ -116,13 +116,13 @@ extension MainPresenter {
 
     func remove(by id: Int) {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        realmManager.removeObjectByID(object: DetailModelDB.self, predicate: predicate)
+        realmManager.removeObjectByID(object: SaloonDataBaseModel.self, predicate: predicate)
         VibrationManager.shared.vibrate(for: .success)
     }
 
     func contains(by id: Int) -> Bool {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        return realmManager.contains(predicate: predicate, DetailModelDB.self)
+        return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
     }
 
     // MARK: - Private

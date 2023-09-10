@@ -9,7 +9,7 @@ import Foundation
 
 protocol SaloonPresenterOutput: AnyObject {
     func getModel() -> Saloon?
-    func getDBModel() -> DetailModelDB?
+    func getDBModel() -> SaloonMapModel?
     func isInFavourite()
     func applyDB(completion: () -> ())
 
@@ -28,7 +28,7 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
 
     private var apiModel: Saloon?
 
-    private var modelDB: DetailModelDB?
+    private var modelDB: SaloonDataBaseModel?
 
     private let realmManager: RealmManager
 
@@ -56,7 +56,7 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
         return apiModel
     }
 
-    func getDBModel() -> DetailModelDB? {
+    func getDBModel() -> SaloonMapModel? {
         guard let modelDB else { return nil }
 
         return modelDB
@@ -66,32 +66,32 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
         guard let apiModel else { return }
 
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: apiModel.id))
-        view?.isInFavourite(result: realmManager.contains(predicate: predicate, DetailModelDB.self))
+        view?.isInFavourite(result: realmManager.contains(predicate: predicate, SaloonDataBaseModel.self))
     }
 
     func applyDB(completion: () -> ()) {
         guard let modelForSave = apiModel else { return }
 
-//        if contains(by: modelForSave.id) {
-//            SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-//            sendNotification(userId: modelForSave.id, isInFavourite: true)
-//            completion()
-//        } else {
-//            remove(by: modelForSave.id)
-//            sendNotification(userId: modelForSave.id, isInFavourite: false)
-//            completion()
-//        }
+        if contains(by: modelForSave.id) {
+            SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
+            sendNotification(userId: modelForSave.id, isInFavourite: true)
+            completion()
+        } else {
+            remove(by: modelForSave.id)
+            sendNotification(userId: modelForSave.id, isInFavourite: false)
+            completion()
+        }
     }
 
     func remove(by id: Int) {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        realmManager.removeObjectByID(object: DetailModelDB.self, predicate: predicate)
+        realmManager.removeObjectByID(object: SaloonDataBaseModel.self, predicate: predicate)
         VibrationManager.shared.vibrate(for: .success)
     }
 
     func contains(by id: Int) -> Bool {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        return realmManager.contains(predicate: predicate, DetailModelDB.self)
+        return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
     }
 
     // MARK: - Private

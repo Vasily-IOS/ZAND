@@ -53,7 +53,7 @@ final class DescriptionShowcaseView: BaseUIView {
         case .api(let model):
             descriptionLabel.text = model.description
         case .dataBase(let model):
-            descriptionLabel.text = model.descriptions
+            descriptionLabel.text = model.descriptionDB
         }
     }
 }

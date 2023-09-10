@@ -22,7 +22,7 @@ final class UserDBManager {
     // MARK: - Instance methods
 
     func save(user: User) {
-        let userDB = UserModelDB()
+        let userDB = UserDataBaseModel()
         userDB.id = user.id
         userDB.givenName = user.name
         userDB.familyName = user.surname
@@ -32,16 +32,16 @@ final class UserDBManager {
         realmManager.save(object: userDB)
     }
 
-    func get() -> UserModelDB? {
-        return realmManager.get(UserModelDB.self).first
+    func get() -> UserDataBaseModel? {
+        return realmManager.get(UserDataBaseModel.self).first
     }
 
     func contains() -> Bool {
-        return !realmManager.get(UserModelDB.self).isEmpty
+        return !realmManager.get(UserDataBaseModel.self).isEmpty
     }
 
     func exit() {
-        if let object = realmManager.get(UserModelDB.self).first {
+        if let object = realmManager.get(UserDataBaseModel.self).first {
             realmManager.removeObject(object: object)
         } else {
             print("Have no objects of this type")

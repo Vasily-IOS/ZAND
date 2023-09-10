@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum SaloonDetailType {
+    case api(Saloon)
+    case dataBase(SaloonDataBaseModel)
+}
+
 enum VCType {
     case tabBar
     case search([Saloon])
@@ -17,10 +22,8 @@ enum VCType {
     case profile
     case appointments
     case myDetails
-    case booking
+    case booking(String)
     case selectableMap(SaloonMapModel)
     case appleSignIn
     case registerN(User)
-
-//    case onMapSelect(SaloonMapModel)
 }

@@ -15,11 +15,11 @@ enum RequestType {
     case appointments // Записи пользователя
 
     var applicationID: Int {
-        return 1168
+        return 1825
     }
 
     var bearerToken: String {
-        return "t6gxuau9m54msjpu29s5"
+        return "fbast32fa6hp2j6wz8hg"
     }
 
     var recordID: Int {

@@ -37,7 +37,7 @@ final class RegisterViewController: BaseViewController<RegisterView> {
     }
 }
 
-extension RegisterViewController: RegisterNDelegate {
+extension RegisterViewController: RegisterDelegate {
 
     // MARK: - RegisterNDelegate methods
     
@@ -48,15 +48,28 @@ extension RegisterViewController: RegisterNDelegate {
     func register() {
         if presenter?.user.isAllFieldsFilled == true {
             if presenter?.user.isEmailCanValidate == true {
-                presenter?.save()
-                AppRouter.shared.popViewController()
-                AppRouter.shared.switchRoot(type: .profile)
+                if presenter?.user.isPolicyConfirmed == true {
+                    presenter?.save()
+                    AppRouter.shared.popViewController()
+                    AppRouter.shared.switchRoot(type: .profile)
+                } else {
+                    AppRouter.shared.showAlert(type: .shouldAcceptPolicy, message: nil)
+                }
             } else {
                 AppRouter.shared.showAlert(type: .invalidEmailInput, message: nil)
             }
         } else {
             AppRouter.shared.showAlert(type: .fillAllFields, message: nil)
         }
+    }
+
+    func showPolicy() {
+        AppRouter.shared.presentWithNav(type: .booking(URLS.privacy_policy))
+    }
+
+    func changePolicy(isConfirmed: Bool) {
+        presenter?.user.isPolicyConfirmed = isConfirmed
+        print(isConfirmed)
     }
 }
 

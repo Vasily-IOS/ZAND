@@ -48,9 +48,9 @@ extension SearchCell {
         contentView.addSubviews([rightStackView, saloonNameLabel])
         
         rightStackView.snp.makeConstraints { make in
-            make.top.equalTo(contentView).offset(8)
+            make.top.equalTo(contentView).offset(20)
             make.right.equalTo(contentView).inset(16)
-            make.bottom.equalTo(contentView).inset(8)
+            make.bottom.equalTo(contentView).inset(20)
         }
         
         saloonNameLabel.snp.makeConstraints { make in
