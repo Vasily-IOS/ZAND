@@ -11,7 +11,7 @@ struct Saloons: Codable {
     let data: [Saloon]
 }
 
-struct Saloon: Codable, SaloonMapModel, CommonFilterProtocol {
+struct Saloon: Codable {
     let id: Int
     let title: String
     let public_title: String
@@ -36,4 +36,16 @@ struct BookForm: Codable {
     let title: String
     let is_default: Int
     let url: String
+}
+
+extension Saloon: SaloonMapModel, CommonFilterProtocol, Hashable {
+    static func == (lhs: Saloon, rhs: Saloon) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension BookForm: Hashable {
+    static func == (lhs: BookForm, rhs: BookForm) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

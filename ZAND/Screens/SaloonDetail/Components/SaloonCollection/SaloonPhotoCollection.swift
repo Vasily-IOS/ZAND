@@ -39,7 +39,7 @@ final class SaloonPhotoCollection: BaseUIView {
 
     var id: Int = 0
 
-    var mockPhotos: [String] = []
+    var photos: [String] = []
 
     var dbPhotos: [Data] = []
 
@@ -103,12 +103,12 @@ final class SaloonPhotoCollection: BaseUIView {
         switch type {
         case .api(let model):
 
-            if model.company_photos.isEmpty && model.photos.isEmpty {
-//                mockPhotos.append(AssetImage.noFoto_icon ?? UIImage())
-            } else {
-                mockPhotos = model.company_photos
+            if !model.company_photos.isEmpty {
+                photos = model.company_photos
+            } else if !model.photos.isEmpty {
+                photos = model.photos
             }
-
+  
             pageControl.numberOfPages = model.photos.count
             nameLabel.text = model.title
             categoryLabel.text = model.short_descr
@@ -213,15 +213,15 @@ extension SaloonPhotoCollection: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return mockPhotos.isEmpty ? dbPhotos.count : mockPhotos.count
+        return photos.isEmpty ? dbPhotos.count : photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonPhotoCell.self)
 
-        mockPhotos.isEmpty ? cell.configure(image: dbPhotos[indexPath.item]) :
-        cell.configure(image: mockPhotos[indexPath.item])
+        photos.isEmpty ? cell.configure(image: dbPhotos[indexPath.item]) :
+        cell.configure(image: photos[indexPath.item])
 
         return cell
     }

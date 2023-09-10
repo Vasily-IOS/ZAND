@@ -58,10 +58,22 @@ final class MapView: BaseUIView {
         }
     }
 
-    func showSinglePin(model: String) {
-        let bothCoordinates = model.components(separatedBy: ",")
-        let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
-                                                 longitude: Double(bothCoordinates[1] ) ?? 0)
+//    func showSinglePin(model: String) {
+//        let bothCoordinates = model.components(separatedBy: ",")
+//        let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
+//                                                 longitude: Double(bothCoordinates[1] ) ?? 0)
+//        let region = MKCoordinateRegion(center: coordinates,
+//                                        span: MKCoordinateSpan(latitudeDelta: 0.01,
+//                                                               longitudeDelta: 0.01))
+//        if let myAnnotation = mapView.annotations.first(where: { $0.coordinate.latitude == coordinates.latitude }) {
+//            mapView.selectAnnotation(myAnnotation, animated: true)
+//        }
+//        mapView.setRegion(region, animated: true)
+//    }
+
+    func showSinglePin(coordinate_lat: Double, coordinate_lon: Double) {
+        let coordinates = CLLocationCoordinate2D(latitude: coordinate_lat,
+                                                 longitude: coordinate_lon)
         let region = MKCoordinateRegion(center: coordinates,
                                         span: MKCoordinateSpan(latitudeDelta: 0.01,
                                                                longitudeDelta: 0.01))

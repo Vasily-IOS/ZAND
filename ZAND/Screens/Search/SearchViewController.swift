@@ -15,13 +15,13 @@ final class SearchViewController: BaseViewController<SearchView> {
         case single
     }
 
-    typealias DataSource = UITableViewDiffableDataSource<Section, SaloonMockModel>
+    typealias DataSource = UITableViewDiffableDataSource<Section, Saloon>
 
     var dataSource: DataSource?
     
     // MARK: - Closures
     
-    var completionHandler: ((SaloonMockModel) -> ())?
+    var completionHandler: ((Saloon) -> ())?
     
     // MARK: - Properties
     
@@ -58,7 +58,7 @@ final class SearchViewController: BaseViewController<SearchView> {
         contentView.searchBar.delegate = self
     }
 
-    private func setupDataSource(model: [SaloonMockModel]) {
+    private func setupDataSource(model: [Saloon]) {
         dataSource = DataSource(tableView: contentView.tableView) {
             tableView, indexPath, item in
             let cell = tableView.dequeueCell(withType: SearchCell.self, for: indexPath)
@@ -67,14 +67,14 @@ final class SearchViewController: BaseViewController<SearchView> {
         }
     }
 
-    private func applySnapShot(model: [SaloonMockModel]) {
-        var snapShot = NSDiffableDataSourceSnapshot<Section, SaloonMockModel>()
+    private func applySnapShot(model: [Saloon]) {
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Saloon>()
         snapShot.appendSections([.single])
         snapShot.appendItems(model)
         dataSource?.apply(snapShot, animatingDifferences: false)
     }
 
-    private func dismiss(value: SaloonMockModel) {
+    private func dismiss(value: Saloon) {
         completionHandler?(value)
         AppRouter.shared.dismiss()
     }
@@ -112,7 +112,7 @@ extension SearchViewController: SearchViewInput {
     
     // MARK: - SearchViewProtocol methods
     
-    func updateUI(with model: [SaloonMockModel]) {
+    func updateUI(with model: [Saloon]) {
         setupDataSource(model: model)
         applySnapShot(model: model)
     }

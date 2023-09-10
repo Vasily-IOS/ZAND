@@ -8,12 +8,12 @@
 import Foundation
 
 protocol SearchViewInput: AnyObject {
-    func updateUI(with model: [SaloonMockModel])
+    func updateUI(with model: [Saloon])
 }
 
 protocol SearchPresenterOutput: AnyObject {
     func updateUI()
-    func getModel() -> [SaloonMockModel]
+    func getModel() -> [Saloon]
     func search(text: String)
 }
 
@@ -23,13 +23,13 @@ final class SearchPresenter: SearchPresenterOutput {
     
     weak var view: SearchViewInput?
 
-    var currentModel: [SaloonMockModel] = []
+    var currentModel: [Saloon] = []
 
-    private let model: [SaloonMockModel]
+    private let model: [Saloon]
 
     // MARK: - Initializers
     
-    init(view: SearchViewInput, model: [SaloonMockModel]) {
+    init(view: SearchViewInput, model: [Saloon]) {
         self.view = view
         self.model = model
     }
@@ -50,14 +50,14 @@ extension SearchPresenter {
             currentModel = model
         } else {
             let filtedModel = model.filter({ model in
-                model.saloon_name.uppercased().contains(text.uppercased())})
+                model.title.uppercased().contains(text.uppercased())})
 
             view?.updateUI(with: filtedModel)
             currentModel = filtedModel
         }
     }
 
-    func getModel() -> [SaloonMockModel] {
+    func getModel() -> [Saloon] {
         return model
     }
 }

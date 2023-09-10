@@ -14,8 +14,6 @@ enum SaloonDetailType {
 
 final class VCFactory: DefaultVCFactory {
     func getViewController(for type: VCType) -> UIViewController {
-        let apiManager: HTTP = APIManager()
-
         switch type {
         case .tabBar:
             let vc = TabBarController()

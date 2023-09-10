@@ -57,16 +57,19 @@ extension MapViewController: MapDelegate {
     // MARK: - MapDelegate methods
 
     func showSearch() {
-//        if let model = presenter?.getModel() {
-//            AppRouter.shared.presentSearch(type: .search(model)) { [weak self] model in
-//                self?.contentView.showSinglePin(model: model.coordinates)
-//            }
-//        }
+        if let model = presenter?.getModel() as? [Saloon] {
+            AppRouter.shared.presentSearch(type: .search(model)) { [weak self] model in
+                self?.contentView.showSinglePin(
+                    coordinate_lat: model.coordinate_lat,
+                    coordinate_lon: model.coordinate_lon
+                )
+            }
+        }
     }
 
     func showDetail(by id: Int) {
-        if let model = presenter?.getModel(by: id) {
-//            AppRouter.shared.push(.saloonDetail(.api(model)))
+        if let model = presenter?.getModel(by: id) as? Saloon {
+            AppRouter.shared.push(.saloonDetail(.api(model)))
         }
     }
 }

@@ -18,7 +18,7 @@ protocol DefaultRouter: AnyObject {
     func showAlert(type: AlertType, message: String?)
     
     func presentWithNav(type: VCType)
-    func presentSearch(type: VCType, completion: ((SaloonMockModel) -> ())?)
+    func presentSearch(type: VCType, completion: ((Saloon) -> ())?)
 
     func switchRoot(type: ReplacedControllerType)
     func checkAuth()

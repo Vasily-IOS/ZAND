@@ -9,7 +9,7 @@ import Foundation
 
 protocol MapPresenterOutput: AnyObject {
     func updateUI()
-//    func getModel() -> [SaloonMapModel]
+    func getModel() -> [SaloonMapModel]
     func getModel(by id: Int) -> SaloonMapModel?
 }
 
@@ -23,6 +23,8 @@ final class MapPresenter: MapPresenterOutput {
 
     weak var view: MapViewInput?
 
+    var saloons: [Saloon] = []
+
     private let provider: SaloonProvider
 
     // MARK: - Initializers
@@ -30,6 +32,10 @@ final class MapPresenter: MapPresenterOutput {
     init(view: MapViewInput, provider: SaloonProvider) {
         self.view = view
         self.provider = provider
+
+        provider.fetchData { saloons in
+            self.saloons = saloons
+        }
     }
 
     // MARK: - Instance methods
@@ -40,19 +46,12 @@ final class MapPresenter: MapPresenterOutput {
         }
     }
 
-//    func getModel() -> [SaloonMapModel] {
-//        return model
-//    }
+    func getModel() -> [SaloonMapModel] {
+        return saloons
+    }
 
     func getModel(by id: Int) -> SaloonMapModel? {
-        var saloonMapModel: SaloonMapModel?
-
-        provider.fetchData { saloons in
-            if let model = saloons.first(where: { $0.id == id }) {
-                saloonMapModel = model
-            }
-        }
-        
-        return saloonMapModel
+        let model = saloons.first(where: { $0.id == id })
+        return model == nil ? nil : model
     }
 }

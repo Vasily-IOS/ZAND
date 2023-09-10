@@ -13,12 +13,10 @@ final class SearchCell: BaseTableCell {
     // MARK: - Properties
 
     private let saloonNameLabel = UILabel(.systemFont(ofSize: 16))
-    private let ratingView = RatingView()
-    private let saloonClassLabel = UILabel(.systemFont(ofSize: 14), .black)
+    private let saloonClassLabel = UILabel(.systemFont(ofSize: 14), .textGray)
     
     private lazy var rightStackView = UIStackView(alignment: .trailing,
                                                   arrangedSubviews: [
-                                                    ratingView,
                                                     saloonClassLabel
                                                   ],
                                                   axis: .vertical,
@@ -36,10 +34,9 @@ final class SearchCell: BaseTableCell {
 
     // MARK: - Configure
 
-    func configure(model: SaloonMockModel) {
-        self.saloonNameLabel.text = model.saloon_name
-        self.saloonClassLabel.text = String(model.category.name)
-        self.ratingView.configure(rating: model.rating)
+    func configure(model: Saloon) {
+        saloonNameLabel.text = model.title
+        saloonClassLabel.text = String(model.short_descr)
     }
 }
 

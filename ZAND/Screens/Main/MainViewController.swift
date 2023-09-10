@@ -151,7 +151,7 @@ extension MainViewController: MainViewDelegate {
     // MARK: - MainViewDelegate methods
     
     func showSearch() {
-        guard let model = presenter?.getModel(by: .saloons) as? [SaloonMockModel] else {
+        guard let model = presenter?.getModel(by: .saloons) as? [Saloon] else {
             return
         }
 

@@ -9,7 +9,7 @@ import Foundation
 
 enum VCType {
     case tabBar
-    case search([SaloonMockModel])
+    case search([Saloon])
     case main
     case map
     case saloonDetail(SaloonDetailType)

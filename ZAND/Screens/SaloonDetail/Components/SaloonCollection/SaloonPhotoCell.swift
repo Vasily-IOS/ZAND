@@ -35,8 +35,12 @@ final class SaloonPhotoCell: BaseCollectionCell {
     }
 
     func configure(image: String) {
-        if let url = URL(string: image) {
-            saloonImage.kf.setImage(with: url)
+        if image.isEmpty {
+            saloonImage.image = AssetImage.noFoto_icon
+        } else {
+            if let url = URL(string: image) {
+                saloonImage.kf.setImage(with: url)
+            }
         }
     }
 

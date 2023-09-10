@@ -69,7 +69,6 @@ final class AddressView: BaseUIView {
             addressDescriptionLabel.text = model.address
             weekDaysDescriptionLabel.text = model.schedule
             weekendDaysDescriptionLabel.text = model.schedule
-//            minPriceLabel.text = "\(AssetString.from) \(model.min_price) \(AssetString.rub)"
         case .dataBase(let model):
             addressDescriptionLabel.text = model.adress
             weekDaysDescriptionLabel.text = model.weekdays
