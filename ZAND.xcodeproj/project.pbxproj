@@ -61,6 +61,7 @@
 		FF45A16829E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16729E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift */; };
 		FF45A16A29E7F67600587DAF /* Extension + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16929E7F67600587DAF /* Extension + UIView.swift */; };
 		FF45A16C29E7F70D00587DAF /* Extension + UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16B29E7F70D00587DAF /* Extension + UserDefaults.swift */; };
+		FF49C9CC2AB067620086847C /* Extension + Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49C9CB2AB067620086847C /* Extension + Data.swift */; };
 		FF4F757D2A9E38DD001E8731 /* UserDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */; };
 		FF4F75802A9E41A9001E8731 /* UserDataBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */; };
 		FF50CF972A4EFD9E00AACC5B /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */; };
@@ -205,6 +206,7 @@
 		FF45A16729E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITableViewHeaderFooterView.swift"; sourceTree = "<group>"; };
 		FF45A16929E7F67600587DAF /* Extension + UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIView.swift"; sourceTree = "<group>"; };
 		FF45A16B29E7F70D00587DAF /* Extension + UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UserDefaults.swift"; sourceTree = "<group>"; };
+		FF49C9CB2AB067620086847C /* Extension + Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Data.swift"; sourceTree = "<group>"; };
 		FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBManager.swift; sourceTree = "<group>"; };
 		FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataBaseModel.swift; sourceTree = "<group>"; };
 		FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */,
 				FFB657A02A6B1A3F00451D65 /* Extension + String.swift */,
 				FF30A1C02A4A156D00DD6E29 /* Reusable.swift */,
+				FF49C9CB2AB067620086847C /* Extension + Data.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1159,6 +1162,7 @@
 				FFDCE4BB2A1BB47000CEA0E1 /* AssetImage.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */,
+				FF49C9CC2AB067620086847C /* Extension + Data.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
 				FF2DB97A2A9DFAF40036356B /* RegisterViewController.swift in Sources */,
 				FF69DADF2A5465BF00481CF1 /* Extension + CGFloat.swift in Sources */,

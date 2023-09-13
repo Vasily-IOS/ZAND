@@ -51,9 +51,9 @@ final class DescriptionShowcaseView: BaseUIView {
     func configure(type: SaloonDetailType) {
         switch type {
         case .api(let model):
-            descriptionLabel.text = model.description
+            descriptionLabel.text = model.description.html2String
         case .dataBase(let model):
-            descriptionLabel.text = model.descriptionDB
+            descriptionLabel.text = model.descriptionDB.html2String
         }
     }
 }
