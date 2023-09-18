@@ -21,9 +21,12 @@ enum VCType {
     case filter
     case profile
     case appointments
-    case myDetails
-    case booking(String)
+    case myDetails // not use
+    case privacyPolicy(String)
     case selectableMap(SaloonMapModel)
     case appleSignIn
-    case registerN(User)
+    case register(User)
+
+    case startBooking(Int)
+    case services
 }

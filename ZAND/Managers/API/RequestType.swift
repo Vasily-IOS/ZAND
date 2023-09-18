@@ -10,9 +10,8 @@ import Moya
 
 enum RequestType {
     case salons // Данные о салонах, подключивших приложение
-    case company // Получить список компаний (не уверен, что нужен)
-    case userToken // метод, который возвращает токен для просмотра записей пользователя
-    case appointments // Записи пользователя
+    case serviceCategory(Int) // категория услуг/получить список категории услуг
+    case staff(Int) // получить список сотрудников/конкретного сотрудника
 
     var applicationID: Int {
         return 1825
@@ -22,12 +21,8 @@ enum RequestType {
         return "fbast32fa6hp2j6wz8hg"
     }
 
-    var recordID: Int {
-        return 1
-    }
-
-    var recordHash: Int {
-        return 1
+    var userToken: String {
+        return "983196026753a4a61b7a6c638cc7dea7"
     }
 }
 
@@ -41,32 +36,36 @@ extension RequestType: TargetType {
         switch self {
         case .salons:
             return "/marketplace/application/\(applicationID)/salons"
-        case .company:
-            return "api/v1/companies"
-        case .appointments:
-            return "/api/v1/user/records/\(recordID)\(recordHash)"
-        case .userToken:
-            return "/api/v1/user/auth"
+        case .serviceCategory(let company_id):
+            return "/api/v1/company/\(company_id)/service_categories/"
+        case .staff(let company_id):
+            return "/api/v1/company/\(company_id)/staff/"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .salons, .company, .appointments, .userToken:
+        case .salons, .serviceCategory, .staff:
             return .get
         }
     }
 
     var task: Moya.Task {
         switch self {
-        case .salons, .company, .appointments, .userToken:
+        case .salons, .serviceCategory, .staff:
             return .requestPlain
         }
     }
 
     var headers: [String : String]? {
-        return ["Authorization": "Bearer \(bearerToken)",
-                "Content-type": "multipart/form-data",
-                "Accept": "application/vnd.api.v2+json"]
+        switch self {
+        case .salons:
+            return ["Authorization": "Bearer \(bearerToken)",
+                    "Accept": "application/vnd.api.v2+json"]
+        case .serviceCategory, .staff:
+            return ["Content-type": "application/json",
+                    "Accept": "application/vnd.api.v2+json",
+                    "Authorization": "Bearer \(bearerToken), User \(userToken)"]
+        }
     }
 }

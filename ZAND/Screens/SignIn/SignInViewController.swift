@@ -61,7 +61,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
         case let credential as ASAuthorizationAppleIDCredential:
             let user = User(credential: credential)
 
-            AppRouter.shared.push(.registerN(user))
+            AppRouter.shared.push(.register(user))
         default:
             break
         }

@@ -101,14 +101,13 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
 
     func openBooking() {
         // if we have not user we will show sign in screen
-
         if !UserDBManager.shared.contains() {
             AppRouter.shared.popViewController()
             AppRouter.shared.changeTabBarVC(to: 2)
             print("Failed to open booking")
         } else {
-            AppRouter.shared.presentWithNav(type: .booking(""))
-            print("Open booking")
+            // push booking vc
+            AppRouter.shared.presentWithNav(type: .startBooking(presenter?.getModel()?.id ?? 0))
         }
     }
 

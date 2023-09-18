@@ -64,7 +64,7 @@ extension RegisterViewController: RegisterDelegate {
     }
 
     func showPolicy() {
-        AppRouter.shared.presentWithNav(type: .booking(URLS.privacy_policy))
+        AppRouter.shared.presentWithNav(type: .privacyPolicy(URLS.privacy_policy))
     }
 
     func changePolicy(isConfirmed: Bool) {

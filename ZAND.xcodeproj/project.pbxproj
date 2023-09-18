@@ -33,6 +33,18 @@
 		FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634C29F68CE800091374 /* FilterOptionCell.swift */; };
 		FF25635229F69BE100091374 /* OptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635129F69BE100091374 /* OptionModel.swift */; };
 		FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeaderView.swift */; };
+		FF27B0A92AB8CA4E00611F47 /* ServiceByCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0A82AB8CA4E00611F47 /* ServiceByCategoryModel.swift */; };
+		FF27B0AC2AB8D09700611F47 /* StartBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0AB2AB8D09700611F47 /* StartBookingViewController.swift */; };
+		FF27B0AE2AB8D0A100611F47 /* StartBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0AD2AB8D0A100611F47 /* StartBookingView.swift */; };
+		FF27B0B02AB8D0B000611F47 /* StartBookingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0AF2AB8D0B000611F47 /* StartBookingPresenter.swift */; };
+		FF27B0B22AB8DB9400611F47 /* StartBookingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0B12AB8DB9400611F47 /* StartBookingButton.swift */; };
+		FF27B0B52AB8DF6900611F47 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0B42AB8DF6900611F47 /* ServicesViewController.swift */; };
+		FF27B0B72AB8DF7100611F47 /* ServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0B62AB8DF7100611F47 /* ServicesView.swift */; };
+		FF27B0B92AB8DF7A00611F47 /* ServicesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0B82AB8DF7A00611F47 /* ServicesPresenter.swift */; };
+		FF27B0BC2AB8F07600611F47 /* StaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0BB2AB8F07600611F47 /* StaffViewController.swift */; };
+		FF27B0BE2AB8F07D00611F47 /* StaffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0BD2AB8F07D00611F47 /* StaffView.swift */; };
+		FF27B0C02AB8F08500611F47 /* StaffPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0BF2AB8F08500611F47 /* StaffPresenter.swift */; };
+		FF27B0C22AB8F1E500611F47 /* EmployeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0C12AB8F1E500611F47 /* EmployeeModel.swift */; };
 		FF27FC212A2DE4C3006DE1B9 /* BackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27FC202A2DE4C3006DE1B9 /* BackView.swift */; };
 		FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27FC232A2E0494006DE1B9 /* HideBackButtonTitle.swift */; };
 		FF27FC262A2E079F006DE1B9 /* HideNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27FC252A2E079F006DE1B9 /* HideNavigationBar.swift */; };
@@ -127,7 +139,7 @@
 		FFD0DA082A4C907D006752B7 /* DefautMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */; };
 		FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */; };
 		FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */; };
-		FFD3E1D72A054E7C00680ED5 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */; };
+		FFD3E1D72A054E7C00680ED5 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3E1D62A054E7C00680ED5 /* PrivacyPolicyViewController.swift */; };
 		FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */; };
 		FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B42A1B8E9000CEA0E1 /* SelectableMapViewController.swift */; };
 		FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B62A1B8E9900CEA0E1 /* SelectableMapView.swift */; };
@@ -176,6 +188,18 @@
 		FF25634C29F68CE800091374 /* FilterOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionCell.swift; sourceTree = "<group>"; };
 		FF25635129F69BE100091374 /* OptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionModel.swift; sourceTree = "<group>"; };
 		FF25635329F6B46800091374 /* ReuseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeaderView.swift; sourceTree = "<group>"; };
+		FF27B0A82AB8CA4E00611F47 /* ServiceByCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceByCategoryModel.swift; sourceTree = "<group>"; };
+		FF27B0AB2AB8D09700611F47 /* StartBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingViewController.swift; sourceTree = "<group>"; };
+		FF27B0AD2AB8D0A100611F47 /* StartBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingView.swift; sourceTree = "<group>"; };
+		FF27B0AF2AB8D0B000611F47 /* StartBookingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingPresenter.swift; sourceTree = "<group>"; };
+		FF27B0B12AB8DB9400611F47 /* StartBookingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingButton.swift; sourceTree = "<group>"; };
+		FF27B0B42AB8DF6900611F47 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
+		FF27B0B62AB8DF7100611F47 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
+		FF27B0B82AB8DF7A00611F47 /* ServicesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesPresenter.swift; sourceTree = "<group>"; };
+		FF27B0BB2AB8F07600611F47 /* StaffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffViewController.swift; sourceTree = "<group>"; };
+		FF27B0BD2AB8F07D00611F47 /* StaffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffView.swift; sourceTree = "<group>"; };
+		FF27B0BF2AB8F08500611F47 /* StaffPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffPresenter.swift; sourceTree = "<group>"; };
+		FF27B0C12AB8F1E500611F47 /* EmployeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeModel.swift; sourceTree = "<group>"; };
 		FF27FC202A2DE4C3006DE1B9 /* BackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
 		FF27FC232A2E0494006DE1B9 /* HideBackButtonTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideBackButtonTitle.swift; sourceTree = "<group>"; };
 		FF27FC252A2E079F006DE1B9 /* HideNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideNavigationBar.swift; sourceTree = "<group>"; };
@@ -273,7 +297,7 @@
 		FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefautMainLayout.swift; sourceTree = "<group>"; };
 		FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
 		FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
-		FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
+		FFD3E1D62A054E7C00680ED5 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkView.swift; sourceTree = "<group>"; };
 		FFDCE4B42A1B8E9000CEA0E1 /* SelectableMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapViewController.swift; sourceTree = "<group>"; };
 		FFDCE4B62A1B8E9900CEA0E1 /* SelectableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapView.swift; sourceTree = "<group>"; };
@@ -414,13 +438,15 @@
 		FF25635029F69BD100091374 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FF27B0A82AB8CA4E00611F47 /* ServiceByCategoryModel.swift */,
+				FF4401312AA7B09F00318A76 /* SaloonModel.swift */,
+				FF27B0C12AB8F1E500611F47 /* EmployeeModel.swift */,
 				FF25635129F69BE100091374 /* OptionModel.swift */,
 				FF1961B72A4C78B900434AC7 /* SettingsMenuModel.swift */,
 				FF1961BB2A4C79B000434AC7 /* FilterModel.swift */,
 				FF1961BD2A4C7A2B00434AC7 /* MapModel.swift */,
 				FF1961BF2A4C7A7800434AC7 /* ProfileMenuModel.swift */,
 				FFF16A802A6B2FA300D83E5B /* UserModel.swift */,
-				FF4401312AA7B09F00318A76 /* SaloonModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -431,6 +457,36 @@
 				FF25634C29F68CE800091374 /* FilterOptionCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		FF27B0AA2AB8D07A00611F47 /* StartBooking */ = {
+			isa = PBXGroup;
+			children = (
+				FF27B0AB2AB8D09700611F47 /* StartBookingViewController.swift */,
+				FF27B0AD2AB8D0A100611F47 /* StartBookingView.swift */,
+				FF27B0AF2AB8D0B000611F47 /* StartBookingPresenter.swift */,
+			);
+			path = StartBooking;
+			sourceTree = "<group>";
+		};
+		FF27B0B32AB8DF5300611F47 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FF27B0B42AB8DF6900611F47 /* ServicesViewController.swift */,
+				FF27B0B62AB8DF7100611F47 /* ServicesView.swift */,
+				FF27B0B82AB8DF7A00611F47 /* ServicesPresenter.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FF27B0BA2AB8F05000611F47 /* Staff */ = {
+			isa = PBXGroup;
+			children = (
+				FF27B0BB2AB8F07600611F47 /* StaffViewController.swift */,
+				FF27B0BD2AB8F07D00611F47 /* StaffView.swift */,
+				FF27B0BF2AB8F08500611F47 /* StaffPresenter.swift */,
+			);
+			path = Staff;
 			sourceTree = "<group>";
 		};
 		FF27FC222A2E047B006DE1B9 /* Protocols */ = {
@@ -477,8 +533,8 @@
 		FF3E65DA2A55C202007EC56D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				FFDE118E2A5C436C00CEF390 /* APIManager.swift */,
 				FF3E65D82A55C1F6007EC56D /* RequestType.swift */,
+				FFDE118E2A5C436C00CEF390 /* APIManager.swift */,
 				FFDE118C2A5C424000CEF390 /* HTTP.swift */,
 			);
 			path = API;
@@ -517,6 +573,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5F29EEA176007D6A60 /* Project */,
+				FF4F75812A9E429C001E8731 /* Models */,
 				FF862A4B2AA88B560083DEB7 /* Providers */,
 				FFB6579A2A6ABFC700451D65 /* Resources */,
 				FFB6579B2A6AC05700451D65 /* Sources */,
@@ -531,6 +588,9 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FF27B0BA2AB8F05000611F47 /* Staff */,
+				FF27B0B32AB8DF5300611F47 /* Services */,
+				FF27B0AA2AB8D07A00611F47 /* StartBooking */,
 				FF2DB9782A9DFADE0036356B /* Register */,
 				FF2DB9712A9DE1F40036356B /* SignIn */,
 				FFA3D45229F2CABE0067CC6F /* SaloonDetail */,
@@ -539,7 +599,7 @@
 				FF8AAF5A29EE96E9007D6A60 /* Profile */,
 				FF8AAF5729EE96BA007D6A60 /* Map */,
 				FFDCE4B32A1B8E6F00CEA0E1 /* SelectableMap */,
-				FFD3E1D52A054E6400680ED5 /* Booking */,
+				FFD3E1D52A054E6400680ED5 /* PrivacyPolicy */,
 				FFC01B4A2A03CA65005CE41B /* MyDetails */,
 				FFC01B452A03C7D8005CE41B /* Appointments */,
 				FF25634129F682B500091374 /* Filter */,
@@ -627,6 +687,7 @@
 				FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */,
 				FF25632929F5675900091374 /* TransparentButton.swift */,
 				FFA3D45329F2CC320067CC6F /* BottomButton.swift */,
+				FF27B0B12AB8DB9400611F47 /* StartBookingButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -811,7 +872,6 @@
 		FFB6579B2A6AC05700451D65 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				FF4F75812A9E429C001E8731 /* Models */,
 				FF1961C12A4C7B5800434AC7 /* Layout */,
 				FF45A15D29E7EF3200587DAF /* Extensions */,
 			);
@@ -845,9 +905,9 @@
 		FFB985662A30AF7A00ABEFBB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				FF3E65DA2A55C202007EC56D /* API */,
 				FF4F757A2A9E3889001E8731 /* Realm */,
 				FFB657A42A6B2CCB00451D65 /* UserDefaults */,
-				FF3E65DA2A55C202007EC56D /* API */,
 				FFB9857C2A30E96100ABEFBB /* OnboardManager */,
 				FFB9857B2A30E95300ABEFBB /* VibrationManager */,
 			);
@@ -919,12 +979,12 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		FFD3E1D52A054E6400680ED5 /* Booking */ = {
+		FFD3E1D52A054E6400680ED5 /* PrivacyPolicy */ = {
 			isa = PBXGroup;
 			children = (
-				FFD3E1D62A054E7C00680ED5 /* BookingViewController.swift */,
+				FFD3E1D62A054E7C00680ED5 /* PrivacyPolicyViewController.swift */,
 			);
-			path = Booking;
+			path = PrivacyPolicy;
 			sourceTree = "<group>";
 		};
 		FFDCE4B32A1B8E6F00CEA0E1 /* SelectableMap */ = {
@@ -1114,6 +1174,7 @@
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,
 				FF45A16A29E7F67600587DAF /* Extension + UIView.swift in Sources */,
 				FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */,
+				FF27B0BE2AB8F07D00611F47 /* StaffView.swift in Sources */,
 				FF25633329F57A3000091374 /* ShowCaseItemCell.swift in Sources */,
 				FF25635229F69BE100091374 /* OptionModel.swift in Sources */,
 				FF1961B22A4C5FE300434AC7 /* MapPresenter.swift in Sources */,
@@ -1121,6 +1182,7 @@
 				FFB657A12A6B1A3F00451D65 /* Extension + String.swift in Sources */,
 				FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */,
 				FF45A16429E7F5C100587DAF /* Extension + UILabel.swift in Sources */,
+				FF27B0BC2AB8F07600611F47 /* StaffViewController.swift in Sources */,
 				FF4F757D2A9E38DD001E8731 /* UserDBManager.swift in Sources */,
 				FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */,
 				FF45A16829E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift in Sources */,
@@ -1128,8 +1190,9 @@
 				FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */,
 				FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */,
 				FFB985722A30E6E700ABEFBB /* RealmManager.swift in Sources */,
+				FF27B0AE2AB8D0A100611F47 /* StartBookingView.swift in Sources */,
 				FF2DB9752A9DE2250036356B /* SignInPresenter.swift in Sources */,
-				FFD3E1D72A054E7C00680ED5 /* BookingViewController.swift in Sources */,
+				FFD3E1D72A054E7C00680ED5 /* PrivacyPolicyViewController.swift in Sources */,
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */,
 				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
@@ -1147,6 +1210,8 @@
 				FFC01B5B2A03DD37005CE41B /* MyDetailsLayout.swift in Sources */,
 				FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */,
 				FF1961B02A4C51BC00434AC7 /* AppointmentsPresenter.swift in Sources */,
+				FF27B0AC2AB8D09700611F47 /* StartBookingViewController.swift in Sources */,
+				FF27B0B22AB8DB9400611F47 /* StartBookingButton.swift in Sources */,
 				FF2DB9772A9DE2360036356B /* SignInView.swift in Sources */,
 				FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */,
 				FF45A16C29E7F70D00587DAF /* Extension + UserDefaults.swift in Sources */,
@@ -1156,8 +1221,10 @@
 				FF30A1BD2A4A138800DD6E29 /* Config.swift in Sources */,
 				FF45A16629E7F5ED00587DAF /* Extension + UITableViewCell.swift in Sources */,
 				FF8AAF6C29EEA392007D6A60 /* ProfileView.swift in Sources */,
+				FF27B0C22AB8F1E500611F47 /* EmployeeModel.swift in Sources */,
 				FF2DB97C2A9DFAFD0036356B /* RegisterView.swift in Sources */,
 				FF8AAF6A29EEA389007D6A60 /* MainView.swift in Sources */,
+				FF27B0B72AB8DF7100611F47 /* ServicesView.swift in Sources */,
 				FF27FC262A2E079F006DE1B9 /* HideNavigationBar.swift in Sources */,
 				FFDCE4BB2A1BB47000CEA0E1 /* AssetImage.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
@@ -1180,10 +1247,12 @@
 				FF69DAE12A5467FB00481CF1 /* Extension + UIImage.swift in Sources */,
 				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
 				FF2DB9732A9DE2110036356B /* SignInViewController.swift in Sources */,
+				FF27B0B52AB8DF6900611F47 /* ServicesViewController.swift in Sources */,
 				FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */,
 				FFB657A62A6B2CDB00451D65 /* UDManager.swift in Sources */,
 				FF27FC212A2DE4C3006DE1B9 /* BackView.swift in Sources */,
 				FFDE118F2A5C436C00CEF390 /* APIManager.swift in Sources */,
+				FF27B0B02AB8D0B000611F47 /* StartBookingPresenter.swift in Sources */,
 				FFC01B4C2A03CA78005CE41B /* MyDetailsViewController.swift in Sources */,
 				FFB9856A2A30B5D500ABEFBB /* OnboardManager.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
@@ -1191,11 +1260,13 @@
 				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
 				FFDE118D2A5C424000CEF390 /* HTTP.swift in Sources */,
 				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
+				FF27B0B92AB8DF7A00611F47 /* ServicesPresenter.swift in Sources */,
 				FFC3F44B2AAE2C4100A774B3 /* SaloonDataBaseModel.swift in Sources */,
 				FFB9855F2A2F52CC00ABEFBB /* SearchCell.swift in Sources */,
 				FF25632D29F5718C00091374 /* DescriptionShowcaseView.swift in Sources */,
 				FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */,
 				FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */,
+				FF27B0A92AB8CA4E00611F47 /* ServiceByCategoryModel.swift in Sources */,
 				FF27FC282A2E07A9006DE1B9 /* ShowNavigationBar.swift in Sources */,
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
 				FF25634A29F687B900091374 /* FilterLayout.swift in Sources */,
@@ -1238,6 +1309,7 @@
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,
 				FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */,
 				FF99B90329EEB95400F4E4C3 /* VCFactory.swift in Sources */,
+				FF27B0C02AB8F08500611F47 /* StaffPresenter.swift in Sources */,
 				FF25633A29F591F600091374 /* PaddingTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

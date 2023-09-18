@@ -62,6 +62,9 @@ enum AssetString {
     static let pleaseRegister = "Для просмотра профиля войдите в аккаунт"
     static let invalidEmailInput = "Неверный ввод почты"
     static let shouldAcceptPolicy = "Необходимо ознакомиться с политикой конфиденциальности"
+    static let howStart = "С чего начать?"
+    static let selectService = "Выбрать услуги"
+    static let selectStaff = "Выбрать специалиста"
     
     // MARK: - Bottom button values
     static let apply = "Применить"

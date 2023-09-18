@@ -1,0 +1,39 @@
+//
+//  ServicesView.swift
+//  ZAND
+//
+//  Created by Василий on 18.09.2023.
+//
+
+import UIKit
+import SnapKit
+
+final class ServicesView: BaseUIView {
+
+    // MARK: - Properties
+
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.registerCell(type: UITableViewCell.self)
+        return tableView
+    }()
+
+    // MARK: - Instance methods
+
+    override func setup() {
+        super.setup()
+
+        setViews()
+    }
+
+    private func setViews() {
+        addSubviews([tableView])
+
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().inset(16)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+        }
+    }
+}

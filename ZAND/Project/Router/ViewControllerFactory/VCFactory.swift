@@ -80,8 +80,8 @@ final class VCFactory: DefaultVCFactory {
             vc.presenter = presenter
             vc.title = AssetString.details
             return vc
-        case .booking(let url):
-            return BookingViewController(url: url)
+        case .privacyPolicy(let url):
+            return PrivacyPolicyViewController(url: url)
         case .selectableMap(let model):
             let view = SelectableMapView()
             let vc = SelectableViewController(contentView: view)
@@ -94,12 +94,21 @@ final class VCFactory: DefaultVCFactory {
             let presenter = SignInPresenter(view: vc)
             vc.presenter = presenter
             return vc
-        case .registerN(let user):
+        case .register(let user):
             let view = RegisterView()
             let vc = RegisterViewController(contentView: view)
             let presenter = RegisterPresenter(view: vc, user: user)
             vc.presenter = presenter
             return vc
+        case .startBooking(let saloonID):
+            let view = StartBookingView()
+            let vc = StartBookingViewController(contentView: view)
+            let presenter = StartBookingPresenter(view: vc, saloonID: saloonID)
+            vc.presenter = presenter
+            return vc
+        case .services:
+            return UIViewController()
+//            return ServicesViewController()
         }
     }
 }

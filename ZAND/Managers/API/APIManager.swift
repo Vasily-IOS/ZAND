@@ -23,10 +23,12 @@ final class APIManager: HTTP {
         completion: @escaping (T) -> Void
     ) where T : Decodable, T : Encodable {
         provider.request(type) { [weak self] result in
+            print(String(describing: result))
             guard let self else { return }
-            
+
             switch result {
             case .success(let response):
+                print(response.request?.url)
                 if let httpResponse = response.response?.statusCode {
                     let successRange = (200...299)
                     if successRange.contains(httpResponse)  {
