@@ -37,7 +37,6 @@
 		FF27B0AC2AB8D09700611F47 /* StartBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0AB2AB8D09700611F47 /* StartBookingViewController.swift */; };
 		FF27B0AE2AB8D0A100611F47 /* StartBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0AD2AB8D0A100611F47 /* StartBookingView.swift */; };
 		FF27B0B02AB8D0B000611F47 /* StartBookingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0AF2AB8D0B000611F47 /* StartBookingPresenter.swift */; };
-		FF27B0B22AB8DB9400611F47 /* StartBookingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0B12AB8DB9400611F47 /* StartBookingButton.swift */; };
 		FF27B0B52AB8DF6900611F47 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0B42AB8DF6900611F47 /* ServicesViewController.swift */; };
 		FF27B0B72AB8DF7100611F47 /* ServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0B62AB8DF7100611F47 /* ServicesView.swift */; };
 		FF27B0B92AB8DF7A00611F47 /* ServicesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0B82AB8DF7A00611F47 /* ServicesPresenter.swift */; };
@@ -58,6 +57,7 @@
 		FF30A1BD2A4A138800DD6E29 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BC2A4A138800DD6E29 /* Config.swift */; };
 		FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */; };
 		FF30A1C12A4A156D00DD6E29 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1C02A4A156D00DD6E29 /* Reusable.swift */; };
+		FF3C62C42ABA123100032803 /* StaffCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3C62C32ABA123100032803 /* StaffCell.swift */; };
 		FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */; };
 		FF3E65D72A55BC40007EC56D /* SaloonDetailDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D62A55BC40007EC56D /* SaloonDetailDBManager.swift */; };
 		FF3E65D92A55C1F6007EC56D /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D82A55C1F6007EC56D /* RequestType.swift */; };
@@ -99,6 +99,7 @@
 		FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE229EF260500644208 /* BaseCollectionCell.swift */; };
 		FF8E7BE529EF293100644208 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE429EF293100644208 /* OptionView.swift */; };
 		FF8E7BE829EF2BD200644208 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE729EF2BD200644208 /* MainModel.swift */; };
+		FF94D66F2AB9FC4A00730721 /* StartBookingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF94D66E2AB9FC4A00730721 /* StartBookingButtonView.swift */; };
 		FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F229EEAB1500F4E4C3 /* AssetString.swift */; };
 		FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */; };
 		FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */; };
@@ -192,7 +193,6 @@
 		FF27B0AB2AB8D09700611F47 /* StartBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingViewController.swift; sourceTree = "<group>"; };
 		FF27B0AD2AB8D0A100611F47 /* StartBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingView.swift; sourceTree = "<group>"; };
 		FF27B0AF2AB8D0B000611F47 /* StartBookingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingPresenter.swift; sourceTree = "<group>"; };
-		FF27B0B12AB8DB9400611F47 /* StartBookingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingButton.swift; sourceTree = "<group>"; };
 		FF27B0B42AB8DF6900611F47 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		FF27B0B62AB8DF7100611F47 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
 		FF27B0B82AB8DF7A00611F47 /* ServicesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesPresenter.swift; sourceTree = "<group>"; };
@@ -213,6 +213,7 @@
 		FF30A1BC2A4A138800DD6E29 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UICollectionView.swift"; sourceTree = "<group>"; };
 		FF30A1C02A4A156D00DD6E29 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		FF3C62C32ABA123100032803 /* StaffCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCell.swift; sourceTree = "<group>"; };
 		FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Notification.Name.swift"; sourceTree = "<group>"; };
 		FF3E65D62A55BC40007EC56D /* SaloonDetailDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonDetailDBManager.swift; sourceTree = "<group>"; };
 		FF3E65D82A55C1F6007EC56D /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
@@ -257,6 +258,7 @@
 		FF8E7BE229EF260500644208 /* BaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
 		FF8E7BE429EF293100644208 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		FF8E7BE729EF2BD200644208 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		FF94D66E2AB9FC4A00730721 /* StartBookingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingButtonView.swift; sourceTree = "<group>"; };
 		FF99B8F229EEAB1500F4E4C3 /* AssetString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetString.swift; sourceTree = "<group>"; };
 		FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIColor.swift"; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				FF27B0BB2AB8F07600611F47 /* StaffViewController.swift */,
 				FF27B0BD2AB8F07D00611F47 /* StaffView.swift */,
 				FF27B0BF2AB8F08500611F47 /* StaffPresenter.swift */,
+				FF3C62C22ABA122200032803 /* Components */,
 			);
 			path = Staff;
 			sourceTree = "<group>";
@@ -520,6 +523,14 @@
 				FF2DB97D2A9DFB0B0036356B /* RegisterPresenter.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		FF3C62C22ABA122200032803 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FF3C62C32ABA123100032803 /* StaffCell.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		FF3E65D52A55BC0B007EC56D /* SaloonDetailDBManager */ = {
@@ -687,7 +698,6 @@
 				FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */,
 				FF25632929F5675900091374 /* TransparentButton.swift */,
 				FFA3D45329F2CC320067CC6F /* BottomButton.swift */,
-				FF27B0B12AB8DB9400611F47 /* StartBookingButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -792,6 +802,7 @@
 				FF27FC202A2DE4C3006DE1B9 /* BackView.swift */,
 				FF76E8D52A32244200DCF779 /* RatingView.swift */,
 				FFF6002C2A6FD6A6009813E6 /* ActivityIndicatorView.swift */,
+				FF94D66E2AB9FC4A00730721 /* StartBookingButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1202,6 +1213,7 @@
 				FF862A4D2AA88B660083DEB7 /* SaloonProvider.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */,
 				FF3E65D72A55BC40007EC56D /* SaloonDetailDBManager.swift in Sources */,
+				FF3C62C42ABA123100032803 /* StaffCell.swift in Sources */,
 				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
 				FFC01B4E2A03CA83005CE41B /* MyDetailsView.swift in Sources */,
 				FFDCE4BD2A1BB7E300CEA0E1 /* URL.swift in Sources */,
@@ -1211,7 +1223,6 @@
 				FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */,
 				FF1961B02A4C51BC00434AC7 /* AppointmentsPresenter.swift in Sources */,
 				FF27B0AC2AB8D09700611F47 /* StartBookingViewController.swift in Sources */,
-				FF27B0B22AB8DB9400611F47 /* StartBookingButton.swift in Sources */,
 				FF2DB9772A9DE2360036356B /* SignInView.swift in Sources */,
 				FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */,
 				FF45A16C29E7F70D00587DAF /* Extension + UserDefaults.swift in Sources */,
@@ -1237,6 +1248,7 @@
 				FF50CF972A4EFD9E00AACC5B /* Extension + UIViewController.swift in Sources */,
 				FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */,
 				FF1961BA2A4C78E700434AC7 /* MyDetailsPresenter.swift in Sources */,
+				FF94D66F2AB9FC4A00730721 /* StartBookingButtonView.swift in Sources */,
 				FF1961B82A4C78B900434AC7 /* SettingsMenuModel.swift in Sources */,
 				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,
 				FF45A16029E7F4BC00587DAF /* Extension + UIStackView.swift in Sources */,

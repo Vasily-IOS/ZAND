@@ -65,6 +65,9 @@ enum AssetString {
     static let howStart = "С чего начать?"
     static let selectService = "Выбрать услуги"
     static let selectStaff = "Выбрать специалиста"
+    static let service = "Услуги"
+    static let staff = "Специалисты"
+    static let findInServices = "Найти в услугах"
     
     // MARK: - Bottom button values
     static let apply = "Применить"

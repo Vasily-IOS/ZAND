@@ -18,6 +18,9 @@ final class StartBookingViewController: BaseViewController<StartBookingView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = AssetString.howStart
+
+        hideBackButtonTitle()
         subscribeDelegate()
     }
 
@@ -52,3 +55,5 @@ extension StartBookingViewController: StartBookingDelegate {
 }
 
 extension StartBookingViewController: StartBookingViewInput {}
+
+extension StartBookingViewController: HideBackButtonTitle {}

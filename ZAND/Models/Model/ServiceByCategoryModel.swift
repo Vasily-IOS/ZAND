@@ -13,7 +13,7 @@ struct ServiceByCategoryModel: Codable {
     let meta: Meta
 }
 
-struct Service: Codable {
+struct Service: Codable, Hashable {
     let id: Int
     let category_id: Int
     let salon_service_id: Int

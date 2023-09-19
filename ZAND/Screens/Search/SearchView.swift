@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Combine
 
 protocol SearchViewDelegate: AnyObject {
     func dismiss()
@@ -19,16 +18,13 @@ final class SearchView: BaseUIView {
     
     weak var delegate: SearchViewDelegate?
 
-    private var cancellabes = Set<AnyCancellable>()
-
-    // MARK: - UI
-
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.text = AssetString.where_wanna_go
-        UISearchBar.appearance().setImage(AssetImage.search_icon,
-                                          for: .search,
-                                          state: .normal)
+        UISearchBar.appearance().setImage(
+            AssetImage.search_icon,
+            for: .search,
+            state: .normal)
         searchBar.layer.cornerRadius = 15
         searchBar.backgroundColor = .white
         searchBar.searchTextField.backgroundColor = .white
@@ -43,6 +39,7 @@ final class SearchView: BaseUIView {
         tableView.registerCell(type: SearchCell.self)
         tableView.backgroundColor = .mainGray
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
@@ -123,14 +120,9 @@ extension SearchView {
     }
 
     private func setTargets() {
-//        self.gesture(.tap()).sink { [weak self] _ in
-//            guard let self else { return }
-//
-//            self.endEditing(true)
-//            self.setSearchPlaceholderText()
-//        }.store(in: &cancellabes)
-
-        cancelButton.addTarget(self, action: #selector(cancelTapAction),
-                               for: .touchUpInside)
+        cancelButton.addTarget(
+            self,
+            action: #selector(cancelTapAction),
+            for: .touchUpInside)
     }
 }

@@ -14,7 +14,9 @@ final class StaffView: BaseUIView {
 
     let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.registerCell(type: UITableViewCell.self)
+        tableView.registerCell(type: StaffCell.self)
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
 
@@ -30,7 +32,7 @@ final class StaffView: BaseUIView {
         addSubviews([tableView])
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(16)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().inset(16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)

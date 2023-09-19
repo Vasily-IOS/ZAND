@@ -18,6 +18,8 @@ final class StaffViewController: BaseViewController<StaffView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = AssetString.staff
+        
         presenter?.fetchStaff()
         subscribeDelegates()
     }
@@ -34,18 +36,32 @@ extension StaffViewController: UITableViewDataSource {
 
     // MARK: - UITableViewDataSource methods
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return presenter?.staff.count ?? 0
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueCell(withType: UITableViewCell.self, for: indexPath)
-        cell.textLabel?.text = presenter?.staff[indexPath.row].name
+        let cell = tableView.dequeueCell(withType: StaffCell.self, for: indexPath)
+        cell.configure(model: (presenter?.staff[indexPath.section])!)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 16
     }
 }
 
 extension StaffViewController: UITableViewDelegate {
+
+    // MARK: - UITableViewDelegate methods
 
 
 }

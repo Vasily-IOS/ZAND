@@ -13,6 +13,9 @@ enum RequestType {
     case serviceCategory(Int) // категория услуг/получить список категории услуг
     case staff(Int) // получить список сотрудников/конкретного сотрудника
 
+//    case allSaloonServices // https://api.yclients.com/api/v1/company/{company_id}/services/{service_id}
+    // список всех услуг сети (Вкладка Услуги)
+
     var applicationID: Int {
         return 1825
     }

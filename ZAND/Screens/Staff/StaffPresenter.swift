@@ -41,7 +41,7 @@ final class StaffPresenter: StaffPresenterOutput {
     func fetchStaff() {
         network.performRequest(type: .staff(saloonID), expectation: EmployeeModel.self)
         { [weak self] result in
-            self?.staff = result.data
+            self?.staff = result.data.filter({ $0.fired == 0 })
             self?.view?.reloadData()
         }
     }

@@ -44,23 +44,23 @@ extension SearchCell {
     private func setViews()  {
         contentView.addSubviews([saloonNameLabel, saloonClassLabel])
 
-        saloonClassLabel.snp.makeConstraints { make in
-            make.right.equalTo(contentView)
-            make.bottom.equalTo(contentView).inset(16)
-        }
-
         saloonNameLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView).offset(16)
             make.left.equalTo(contentView)
-            make.bottom.equalTo(saloonClassLabel)
-            make.width.equalTo(300)
+            make.right.equalTo(contentView)
+        }
+
+        saloonClassLabel.snp.makeConstraints { make in
+            make.top.equalTo(saloonNameLabel.snp.bottom).offset(5)
+            make.left.equalTo(contentView)
+            make.right.equalTo(contentView)
+            make.bottom.equalTo(contentView).inset(16)
         }
     }
     
     private func setSelf() {
         contentView.backgroundColor = .mainGray
         selectionStyle = .none
-        contentView.layer.cornerRadius = 0
         addLine()
     }
 }

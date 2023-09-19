@@ -13,8 +13,11 @@ struct EmployeeModel: Codable {
 }
 
 struct Employee: Codable {
-//    let id: Int
+    let id: Int
     let name: String
-//    let company_id: Int
-//    let specialization: String
+    let company_id: Int
+    let specialization: String
+    let avatar: String
+    let avatar_big: String
+    let fired: Int
 }

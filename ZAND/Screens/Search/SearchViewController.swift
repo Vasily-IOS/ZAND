@@ -17,13 +17,11 @@ final class SearchViewController: BaseViewController<SearchView> {
 
     typealias DataSource = UITableViewDiffableDataSource<Section, Saloon>
 
+    // MARK: - Properties
+
     var dataSource: DataSource?
     
-    // MARK: - Closures
-    
     var completionHandler: ((Saloon) -> ())?
-    
-    // MARK: - Properties
     
     var presenter: SearchPresenter?
     

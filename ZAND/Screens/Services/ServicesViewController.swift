@@ -9,7 +9,17 @@ import UIKit
 
 final class ServicesViewController: BaseViewController<ServicesView> {
 
+    // MARK: - Nested types
+
+    enum Section {
+        case single
+    }
+
+    typealias DataSource = UITableViewDiffableDataSource<Section, Service>
+
     // MARK: - Properties
+
+    var dataSource: DataSource?
 
     var presenter: ServicesPresenterOutput?
 
@@ -18,42 +28,59 @@ final class ServicesViewController: BaseViewController<ServicesView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        presenter?.showServices()
+        title = AssetString.service
+
         subscribeDelegates()
     }
 
     // MARK: - Instance methods
 
+    private func setupDataSource(model: [Service]) {
+        dataSource = DataSource(tableView: contentView.tableView) {
+            tableView, indexPath, item in
+            let cell = tableView.dequeueCell(withType: UITableViewCell.self, for: indexPath)
+            cell.textLabel?.text = item.title
+            return cell
+        }
+    }
+
+    private func applySnapShot(model: [Service]) {
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Service>()
+        snapShot.appendSections([.single])
+        snapShot.appendItems(model)
+        dataSource?.apply(snapShot, animatingDifferences: false)
+    }
+
     private func subscribeDelegates() {
-        contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
+        contentView.searchBar.delegate = self
     }
 }
 
-extension ServicesViewController: UITableViewDataSource {
+extension ServicesViewController: UISearchBarDelegate {
 
-    // MARK: - UITableViewDataSource methods
+    // MARK: - UISearchBarDelegate
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.services.count ?? 0
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter?.search(text: searchText)
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueCell(withType: UITableViewCell.self, for: indexPath)
-        cell.textLabel?.text = presenter?.services[indexPath.row].title
-        return cell
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if searchBar.text == AssetString.findInServices {
+            contentView.searchBar.text = nil
+        }
+        contentView.searchBar.searchTextField.textColor = .black
     }
 }
-
-extension ServicesViewController: UITableViewDelegate {}
 
 extension ServicesViewController: ServicesViewInput {
 
     // MARK: - ServicesViewInput methods
 
-    func reloadData() {
-        DispatchQueue.main.async {
-            self.contentView.tableView.reloadData()
-        }
+    func updateUI(model: [Service]) {
+        setupDataSource(model: model)
+        applySnapShot(model: model)
     }
 }
+
+extension ServicesViewController: UITableViewDelegate {}

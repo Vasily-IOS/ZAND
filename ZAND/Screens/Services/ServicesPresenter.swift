@@ -8,12 +8,15 @@
 import Foundation
 
 protocol ServicesPresenterOutput: AnyObject {
-    func showServices()
     var services: [Service] { get }
+//    var filterServices: [Service] { get }
+    func search(text: String)
+    func fetchServices()
+//    func getServices()
 }
 
 protocol ServicesViewInput: AnyObject {
-    func reloadData()
+    func updateUI(model: [Service])
 }
 
 final class ServicesPresenter: ServicesPresenterOutput {
@@ -34,17 +37,27 @@ final class ServicesPresenter: ServicesPresenterOutput {
         self.view = view
         self.saloonID = saloonID
         self.network = network
+
+        self.fetchServices()
     }
 
     // MARK: - Instance methods
 
-    func showServices() {
+    func search(text: String) {
+        text.isEmpty ? view?.updateUI(model: services) :
+        view?.updateUI(model: services.filter { model in
+            model.title.uppercased().contains(text.uppercased())})
+    }
+
+    func fetchServices() {
         network.performRequest(
             type: .serviceCategory(saloonID),
             expectation: ServiceByCategoryModel.self)
         { [weak self] result in
-            self?.services = result.data
-            self?.view?.reloadData()
+            guard let self else { return }
+
+            self.services = result.data
+            self.view?.updateUI(model: result.data)
         }
     }
 }

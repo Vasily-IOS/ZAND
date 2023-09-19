@@ -24,15 +24,15 @@ final class StartBookingView: BaseUIView {
         .black, AssetString.howStart
     )
 
-    private let serviceButton = StartBookingButton(title: AssetString.selectService)
+    private let serviceButtonView = StartBookingButtonView(state: .service)
 
-    private let staffButton = StartBookingButton(title: AssetString.selectStaff)
+    private let staffButtonView = StartBookingButtonView(state: .sprecialist)
 
     private lazy var buttonStackView = UIStackView(
         alignment: .fill,
         arrangedSubviews: [
-            serviceButton,
-            staffButton
+            serviceButtonView,
+            staffButtonView
         ],
         axis: .horizontal,
         distribution: .fillEqually,
@@ -54,35 +54,28 @@ final class StartBookingView: BaseUIView {
         super.setup()
 
         setViews()
-        setTargets()
+        setBookingViewActions()
     }
 
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([titleLabel, buttonStackView])
-
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
-            make.left.equalToSuperview().offset(16)
-        }
-
+        addSubviews([buttonStackView])
         buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(32)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().inset(16)
             make.height.equalTo(170)
         }
     }
 
-    private func setTargets() {
-        serviceButton.addTarget(
-            self,
-            action: #selector(showServicesAction),
-            for: .touchUpInside)
-        staffButton.addTarget(
-            self,
-            action: #selector(showStaffAction),
-            for: .touchUpInside)
+    private func setBookingViewActions() {
+        serviceButtonView.tapHandler = { [weak self] in
+            self?.delegate?.openServices()
+        }
+
+        staffButtonView.tapHandler = { [weak self] in
+            self?.delegate?.openStaff()
+        }
     }
 }
