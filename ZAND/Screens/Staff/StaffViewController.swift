@@ -20,8 +20,8 @@ final class StaffViewController: BaseViewController<StaffView> {
 
         title = AssetString.staff
         
-        presenter?.fetchStaff()
         subscribeDelegates()
+        hideBackButtonTitle()
     }
 
     // MARK: - Instance methods
@@ -37,7 +37,7 @@ extension StaffViewController: UITableViewDataSource {
     // MARK: - UITableViewDataSource methods
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter?.staff.count ?? 0
+        return presenter?.fetchedStaff.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,7 +46,7 @@ extension StaffViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(withType: StaffCell.self, for: indexPath)
-        cell.configure(model: (presenter?.staff[indexPath.section])!)
+        cell.configure(model: (presenter?.fetchedStaff[indexPath.section])!)
         return cell
     }
 
@@ -63,7 +63,20 @@ extension StaffViewController: UITableViewDelegate {
 
     // MARK: - UITableViewDelegate methods
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
+        let contentView = TimetableView()
+        let view = TimetableViewController(contentView: contentView)
+        let network: HTTP = APIManager()
+        let presenter = TimeTablePresenter(
+            view: view,
+            network: network,
+            saloonID: presenter?.saloonID ?? 0,
+            staffID: presenter?.fetchedStaff[indexPath.row].id ?? 0)
+        view.presenter = presenter
+        navigationController?.pushViewController(view, animated: true)
+    }
 }
 
 extension StaffViewController: StaffViewInput {
@@ -76,3 +89,5 @@ extension StaffViewController: StaffViewInput {
         }
     }
 }
+
+extension StaffViewController: HideBackButtonTitle {}

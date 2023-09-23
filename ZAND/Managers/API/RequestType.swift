@@ -10,11 +10,18 @@ import Moya
 
 enum RequestType {
     case salons // Данные о салонах, подключивших приложение
-    case serviceCategory(Int) // категория услуг/получить список категории услуг
-    case staff(Int) // получить список сотрудников/конкретного сотрудника
+    case categories(Int) // категория услуг/получить список категории услуг
+    case services(company_id: Int, category_id: Int) // получить сервисов по данной категории
+    case staff(company_id: Int, staff_id: Int=0) // получить список сотрудников/конкретного сотрудника
+    case freeTime(company_id: Int, staff_id: Int, time: String)
 
-//    case allSaloonServices // https://api.yclients.com/api/v1/company/{company_id}/services/{service_id}
-    // список всех услуг сети (Вкладка Услуги)
+//https://api.yclients.com/api/v1/schedule/{company_id}/{staff_id}/{start_date}/{end_date} расписание работы сотрудника
+
+//     https://api.yclients.com/api/v1/timetable/seances/{company_id}/{staff_id}/{date}
+//     https://api.yclients.com/api/v1/timetable/seances/490172/2687145/2023-09-24
+//    получение времени сотрудника, чтобы не получить ошибку
+//    case createRecord // https://api.yclients.com/api/v1/records/{company_id}
+//    создание записи POST
 
     var applicationID: Int {
         return 1825
@@ -39,24 +46,38 @@ extension RequestType: TargetType {
         switch self {
         case .salons:
             return "/marketplace/application/\(applicationID)/salons"
-        case .serviceCategory(let company_id):
+        case .categories(let company_id):
             return "/api/v1/company/\(company_id)/service_categories/"
-        case .staff(let company_id):
+        case .services(let company_id, _):
+            return "/api/v1/company/\(company_id)/services/"
+        case .staff(let company_id, _):
             return "/api/v1/company/\(company_id)/staff/"
+        case .freeTime(let company_id, let staff_id, let time):
+            return "/api/v1/timetable/seances/\(company_id)/\(staff_id)/\(time)"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .salons, .serviceCategory, .staff:
+        case .salons, .categories, .services, .staff, .freeTime:
             return .get
         }
     }
 
     var task: Moya.Task {
         switch self {
-        case .salons, .serviceCategory, .staff:
+        case .salons, .categories, .staff, .freeTime:
             return .requestPlain
+        case .services(_, let category_id):
+            if category_id == 0 {
+                return .requestPlain
+            } else {
+                let parameters: [String: Any] = ["category_id":"\(category_id)"]
+                return .requestParameters(
+                    parameters: parameters,
+                    encoding: URLEncoding.default
+                )
+            }
         }
     }
 
@@ -65,7 +86,7 @@ extension RequestType: TargetType {
         case .salons:
             return ["Authorization": "Bearer \(bearerToken)",
                     "Accept": "application/vnd.api.v2+json"]
-        case .serviceCategory, .staff:
+        case .categories, .services, .staff, .freeTime:
             return ["Content-type": "application/json",
                     "Accept": "application/vnd.api.v2+json",
                     "Authorization": "Bearer \(bearerToken), User \(userToken)"]

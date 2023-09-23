@@ -20,4 +20,7 @@ struct Employee: Codable {
     let avatar: String
     let avatar_big: String
     let fired: Int
+    let hidden: Int // Скрыт ли сотрудник для онлайн-записи, 1 - скрыт, 0 - не скрыт
+    let is_bookable: Bool
+    let schedule_till: String?
 }

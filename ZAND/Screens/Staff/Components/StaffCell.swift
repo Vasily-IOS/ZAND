@@ -33,6 +33,16 @@ final class StaffCell: BaseTableCell {
         return specializationLabel
     }()
 
+    private lazy var stackView = UIStackView(
+        alignment: .leading,
+        arrangedSubviews: [
+            nameLabel,
+            specializationLabel
+        ],
+        axis: .vertical,
+        distribution: .equalSpacing,
+        spacing: 20)
+
     // MARK: - Instance methods
 
     func configure(model: Employee) {
@@ -43,15 +53,23 @@ final class StaffCell: BaseTableCell {
             avatarImage.kf.setImage(with: url)
         }
     }
+//
+//    func configure(model: Staff) {
+//        nameLabel.text = model.name
+//
+//        if let url = URL(string: model.image_url) {
+//            avatarImage.kf.setImage(with: url)
+//        }
+//    }
 
     override func setup() {
         super.setup()
 
-        contentView.backgroundColor = .textGray
+        contentView.backgroundColor = .textGray.withAlphaComponent(0.3)
         contentView.layer.cornerRadius = 15.0
         layer.cornerRadius = 15.0
 
-        contentView.addSubviews([avatarImage, nameLabel, specializationLabel])
+        contentView.addSubviews([avatarImage, stackView])
 
         avatarImage.snp.makeConstraints { make in
             make.width.height.equalTo(88)
@@ -60,14 +78,9 @@ final class StaffCell: BaseTableCell {
             make.bottom.equalTo(contentView.snp.bottom).inset(16)
         }
 
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(avatarImage)
+        stackView.snp.makeConstraints { make in
             make.left.equalTo(avatarImage.snp.right).offset(16)
-        }
-
-        specializationLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(16)
-            make.left.equalTo(nameLabel)
+            make.centerY.equalTo(avatarImage)
             make.right.equalTo(contentView.snp.right).inset(16)
         }
     }

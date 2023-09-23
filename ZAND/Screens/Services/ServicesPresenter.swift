@@ -8,15 +8,13 @@
 import Foundation
 
 protocol ServicesPresenterOutput: AnyObject {
-    var services: [Service] { get }
-//    var filterServices: [Service] { get }
+    var model: [Categories] { get set }
+    var saloonID: Int { get }
     func search(text: String)
-    func fetchServices()
-//    func getServices()
 }
 
 protocol ServicesViewInput: AnyObject {
-    func updateUI(model: [Service])
+    func reloadData()
 }
 
 final class ServicesPresenter: ServicesPresenterOutput {
@@ -25,11 +23,13 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     weak var view: ServicesViewInput?
 
-    var services: [Service] = []
+    var model: [Categories] = []
+
+    var adittionalModel: [Categories] = []
+
+    let saloonID: Int
 
     private let network: HTTP
-
-    private let saloonID: Int
 
     // MARK: - Initializers
 
@@ -38,26 +38,101 @@ final class ServicesPresenter: ServicesPresenterOutput {
         self.saloonID = saloonID
         self.network = network
 
-        self.fetchServices()
+        self.fetchData()
     }
 
     // MARK: - Instance methods
 
     func search(text: String) {
-        text.isEmpty ? view?.updateUI(model: services) :
-        view?.updateUI(model: services.filter { model in
-            model.title.uppercased().contains(text.uppercased())})
+        let sortedModel = adittionalModel.filter { model in
+            model.category.title.uppercased().contains(text.uppercased())
+        }
+        model = text.isEmpty ? adittionalModel : sortedModel
+        view?.reloadData()
     }
 
-    func fetchServices() {
-        network.performRequest(
-            type: .serviceCategory(saloonID),
-            expectation: ServiceByCategoryModel.self)
-        { [weak self] result in
-            guard let self else { return }
+    private func fetchData() {
+        let group = DispatchGroup()
+        var result: [Categories] = []
 
-            self.services = result.data
-            self.view?.updateUI(model: result.data)
+        group.enter()
+        fetchCategoriesAndServices { (categories, services) in
+            self.createResultModel(categories: categories, services: services) { resultModel in
+                result = resultModel
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) {
+            self.model = result
+            self.adittionalModel = result
+            self.view?.reloadData()
         }
     }
+
+    private func fetchCategories(completion: @escaping (([CategoryJSON]) -> Void)) {
+        network.performRequest(
+            type: .categories(saloonID),
+            expectation: CategoriesJSON.self)
+        { categories in
+            completion(categories.data)
+        }
+    }
+
+    private func fetchServices(completion: @escaping (([Service]) -> Void)) {
+        network.performRequest(
+            type: .services(
+                company_id: saloonID,
+                category_id: 0),
+            expectation: Services.self) { result in
+                completion(result.data)
+            }
+    }
+
+    private func fetchCategoriesAndServices(
+        completion: @escaping ([CategoryJSON], [Service]) -> Void) {
+            let group = DispatchGroup()
+            var servicesToFetch: [Service] = []
+            var categoriesToFetch: [CategoryJSON] = []
+
+            group.enter()
+            fetchCategories { categoriesJSON in
+                categoriesToFetch = categoriesJSON
+                group.leave()
+            }
+
+            group.enter()
+            fetchServices { services in
+                servicesToFetch = services
+                group.leave()
+            }
+
+            group.notify(queue: .main) {
+                completion(categoriesToFetch, servicesToFetch)
+            }
+
+        }
+
+    private func createResultModel(
+        categories: [CategoryJSON],
+        services: [Service],
+        completion: @escaping (([Categories]) -> Void)) {
+            let group = DispatchGroup()
+            var result: [Categories] = []
+
+            group.enter()
+            categories.forEach { category in
+                let category = Categories(
+                    category: category,
+                    services: services.filter(
+                        { $0.category_id == category.id })
+                )
+                result.append(category)
+            }
+            group.leave()
+
+            group.notify(queue: .main) {
+                completion(result.filter({ !$0.services.isEmpty }))
+            }
+        }
 }

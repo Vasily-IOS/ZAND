@@ -30,7 +30,8 @@ final class ServicesView: BaseUIView {
 
     let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.registerCell(type: UITableViewCell.self)
+        tableView.registerCell(type: CategoryCell.self)
+        tableView.registerCell(type: ServiceCell.self)
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .mainGray
@@ -74,9 +75,9 @@ final class ServicesView: BaseUIView {
     }
 
     private func setGesture() {
-        addGestureRecognizer(UITapGestureRecognizer(
-            target: self,
-            action: #selector(cancelEditingAction))
-        )
+//        addGestureRecognizer(UITapGestureRecognizer(
+//            target: self,
+//            action: #selector(cancelEditingAction))
+//        )
     }
 }

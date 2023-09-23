@@ -1,5 +1,5 @@
 //
-//  ServiceByCategoryModel.swift
+//  CategoriesJSON.swift
 //  ZAND
 //
 //  Created by Василий on 18.09.2023.
@@ -7,13 +7,11 @@
 
 import Foundation
 
-struct ServiceByCategoryModel: Codable {
-    let success: Bool
-    let data: [Service]
-    let meta: Meta
+struct CategoriesJSON: Codable {
+    let data: [CategoryJSON]
 }
 
-struct Service: Codable, Hashable {
+struct CategoryJSON: Codable, Hashable {
     let id: Int
     let category_id: Int
     let salon_service_id: Int
@@ -26,8 +24,4 @@ struct Service: Codable, Hashable {
     let price_max: Int
     let sex: Int
     let is_chain: Bool
-}
-
-struct Meta: Codable {
-    let total_count: Int
 }

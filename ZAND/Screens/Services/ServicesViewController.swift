@@ -7,19 +7,9 @@
 
 import UIKit
 
-final class ServicesViewController: BaseViewController<ServicesView> {
-
-    // MARK: - Nested types
-
-    enum Section {
-        case single
-    }
-
-    typealias DataSource = UITableViewDiffableDataSource<Section, Service>
+final class ServicesViewController: BaseViewController<ServicesView>, UITableViewDelegate {
 
     // MARK: - Properties
-
-    var dataSource: DataSource?
 
     var presenter: ServicesPresenterOutput?
 
@@ -31,29 +21,75 @@ final class ServicesViewController: BaseViewController<ServicesView> {
         title = AssetString.service
 
         subscribeDelegates()
+        hideBackButtonTitle()
     }
 
     // MARK: - Instance methods
 
-    private func setupDataSource(model: [Service]) {
-        dataSource = DataSource(tableView: contentView.tableView) {
-            tableView, indexPath, item in
-            let cell = tableView.dequeueCell(withType: UITableViewCell.self, for: indexPath)
-            cell.textLabel?.text = item.title
-            return cell
+    private func subscribeDelegates() {
+        contentView.tableView.dataSource = self
+        contentView.tableView.delegate = self
+        contentView.searchBar.delegate = self
+    }
+}
+
+extension ServicesViewController: UITableViewDataSource {
+
+    // MARK: - UITableViewDataSource methods
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return presenter?.model.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let section = presenter?.model[section]
+
+        if section?.isOpened == true {
+            return (section?.services.count ?? 0) + 1
+        } else {
+            return 1
         }
     }
 
-    private func applySnapShot(model: [Service]) {
-        var snapShot = NSDiffableDataSourceSnapshot<Section, Service>()
-        snapShot.appendSections([.single])
-        snapShot.appendItems(model)
-        dataSource?.apply(snapShot, animatingDifferences: false)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueCell(withType: CategoryCell.self, for: indexPath)
+            if let categories = presenter?.model[indexPath.section] {
+                cell.configure(model: categories)
+            }
+            return cell
+        } else {
+            let cell = tableView.dequeueCell(withType: ServiceCell.self, for: indexPath)
+            cell.configure(model: presenter?.model[indexPath.section].services[indexPath.row - 1])
+            return cell
+        }
     }
+}
 
-    private func subscribeDelegates() {
-        contentView.tableView.delegate = self
-        contentView.searchBar.delegate = self
+extension ServicesViewController {
+
+    // MARK: - UITableViewDelegate
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        if indexPath.row == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
+            presenter?.model[indexPath.section].isOpened = !(presenter?.model[indexPath.section].isOpened)!
+            tableView.reloadSections([indexPath.section], with: .none)
+        } else {
+            let staff = presenter?.model[indexPath.section].services[indexPath.row - 1].staff
+            let view = StaffView()
+            let vc = StaffViewController(contentView: view)
+            let network: HTTP = APIManager()
+            let presenter = StaffPresenter(
+                view: vc,
+                saloonID: presenter?.saloonID ?? 0,
+                network: network,
+                staffID: [])
+            vc.presenter = presenter
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
@@ -77,10 +113,11 @@ extension ServicesViewController: ServicesViewInput {
 
     // MARK: - ServicesViewInput methods
 
-    func updateUI(model: [Service]) {
-        setupDataSource(model: model)
-        applySnapShot(model: model)
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.contentView.tableView.reloadData()
+        }
     }
 }
 
-extension ServicesViewController: UITableViewDelegate {}
+extension ServicesViewController: HideBackButtonTitle {}
