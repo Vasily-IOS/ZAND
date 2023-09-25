@@ -81,9 +81,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     private func fetchServices(completion: @escaping (([Service]) -> Void)) {
         network.performRequest(
-            type: .services(
-                company_id: saloonID,
-                category_id: 0),
+            type: .services(company_id: saloonID, category_id: 0),
             expectation: Services.self) { result in
                 // услуги, на которые можно записаться
                 completion(result.data.filter({ !$0.staff.isEmpty }))

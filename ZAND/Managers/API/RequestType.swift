@@ -12,15 +12,11 @@ enum RequestType {
     case salons // Данные о салонах, подключивших приложение
     case categories(Int) // категория услуг/получить список категории услуг
     case services(company_id: Int, category_id: Int) // получить сервисов по данной категории
-    case staff(company_id: Int) // получить список сотрудников/конкретного сотрудника
-    case staffByID(company_id: Int, staff_id: Int)
-    case freeTime(company_id: Int, staff_id: Int, time: String)
+    case staff(company_id: Int) // получить список сотрудников
+    case staffByID(company_id: Int, staff_id: Int) // получить конкретного сотрудника
+    case employeeSchedule(company_id: Int, staff_id: Int, start_date: Int, end_date: Int) // получить расписание сотрудника
+    case freeTime(company_id: Int, staff_id: Int, date: String) // cвободное время сотрудника по определенному дню
 
-//https://api.yclients.com/api/v1/schedule/{company_id}/{staff_id}/{start_date}/{end_date} расписание работы сотрудника
-
-//     https://api.yclients.com/api/v1/timetable/seances/{company_id}/{staff_id}/{date}
-//     https://api.yclients.com/api/v1/timetable/seances/490172/2687145/2023-09-24
-//    получение времени сотрудника, чтобы не получить ошибку
 //    case createRecord // https://api.yclients.com/api/v1/records/{company_id}
 //    создание записи POST
 
@@ -55,21 +51,24 @@ extension RequestType: TargetType {
             return "/api/v1/company/\(company_id)/staff/"
         case .staffByID(let company_id, let staff_id):
             return "/api/v1/company/\(company_id)/staff/\(staff_id)"
-        case .freeTime(let company_id, let staff_id, let time):
-            return "/api/v1/timetable/seances/\(company_id)/\(staff_id)/\(time)"
+        case .employeeSchedule(let company_id, let staff_id, let start_date, let end_date):
+            return "/api/v1/schedule/\(company_id)/\(staff_id)/\(start_date)/\(end_date)"
+        case .freeTime(let company_id, let staff_id, let date):
+            return "/api/v1/timetable/seances/\(company_id)/\(staff_id)/\(date)"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .salons, .categories, .services, .staff, .staffByID, .freeTime:
+        case .salons, .categories, .services, .staff,
+                .staffByID, .employeeSchedule, .freeTime:
             return .get
         }
     }
 
     var task: Moya.Task {
         switch self {
-        case .salons, .categories, .staff, .staffByID, .freeTime:
+        case .salons, .categories, .staff, .staffByID, .employeeSchedule, .freeTime:
             return .requestPlain
         case .services(_, let category_id):
             if category_id == 0 {
@@ -89,7 +88,7 @@ extension RequestType: TargetType {
         case .salons:
             return ["Authorization": "Bearer \(bearerToken)",
                     "Accept": "application/vnd.api.v2+json"]
-        case .categories, .services, .staff, .staffByID, .freeTime:
+        case .categories, .services, .staff, .staffByID, .employeeSchedule, .freeTime:
             return ["Content-type": "application/json",
                     "Accept": "application/vnd.api.v2+json",
                     "Authorization": "Bearer \(bearerToken), User \(userToken)"]

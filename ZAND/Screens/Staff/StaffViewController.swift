@@ -69,7 +69,7 @@ extension StaffViewController: UITableViewDelegate {
         let contentView = TimetableView()
         let view = TimetableViewController(contentView: contentView)
         let network: HTTP = APIManager()
-        let presenter = TimeTablePresenter(
+        let presenter = TimetablePresenter(
             view: view,
             network: network,
             saloonID: presenter?.saloonID ?? 0,

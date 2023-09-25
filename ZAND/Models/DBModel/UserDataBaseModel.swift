@@ -7,7 +7,6 @@
 
 import Foundation
 import RealmSwift
-import Realm
 
 class UserDataBaseModel: Object {
     @Persisted var id: String = ""

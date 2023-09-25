@@ -60,7 +60,6 @@ final class StaffPresenter: StaffPresenterOutput {
                 }
             }
         }
-
         group.notify(queue: .main) {
             self.view?.reloadData()
         }
@@ -71,7 +70,6 @@ final class StaffPresenter: StaffPresenterOutput {
         { [weak self] result in
             let resultStaff = result.data.filter({ $0.fired == 0 && $0.hidden == 0 })
             self?.fetchedStaff = resultStaff
-
             self?.view?.reloadData()
         }
     }

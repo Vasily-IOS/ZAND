@@ -12,8 +12,10 @@ final class TimetableView: BaseUIView {
 
     // MARK: - Properties
 
-    // MARK: - Initializers
-
     // MARK: - Instance methods
 
+    override func setup() {
+        super.setup()
+
+    }
 }
