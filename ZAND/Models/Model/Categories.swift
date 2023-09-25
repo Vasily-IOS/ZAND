@@ -7,14 +7,12 @@
 
 import Foundation
 
-// общая модель
 struct Categories {
-    let category: CategoryJSON
-    let services: [Service]
-    var isOpened: Bool = false
+    let category: CategoryJSON // категория
+    let services: [Service] // сервисы в категории
+    var isOpened: Bool = false // открыта ли секция с сервисами
 }
 
-// модель сервиса
 struct Services: Codable {
     let success: Bool
     let data: [Service]
@@ -36,6 +34,7 @@ struct Service: Codable {
     let duration: Int
     let is_online: Bool
     let comment: String
+//    let active: Bool
 }
 
 struct Staff: Codable {

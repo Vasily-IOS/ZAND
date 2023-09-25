@@ -45,7 +45,7 @@ final class StaffCell: BaseTableCell {
 
     // MARK: - Instance methods
 
-    func configure(model: Employee) {
+    func configure(model: EmployeeCommon) {
         nameLabel.text = model.name
         specializationLabel.text = model.specialization
 
@@ -53,14 +53,6 @@ final class StaffCell: BaseTableCell {
             avatarImage.kf.setImage(with: url)
         }
     }
-//
-//    func configure(model: Staff) {
-//        nameLabel.text = model.name
-//
-//        if let url = URL(string: model.image_url) {
-//            avatarImage.kf.setImage(with: url)
-//        }
-//    }
 
     override func setup() {
         super.setup()

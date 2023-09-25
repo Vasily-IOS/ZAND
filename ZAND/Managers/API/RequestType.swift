@@ -12,7 +12,8 @@ enum RequestType {
     case salons // Данные о салонах, подключивших приложение
     case categories(Int) // категория услуг/получить список категории услуг
     case services(company_id: Int, category_id: Int) // получить сервисов по данной категории
-    case staff(company_id: Int, staff_id: Int=0) // получить список сотрудников/конкретного сотрудника
+    case staff(company_id: Int) // получить список сотрудников/конкретного сотрудника
+    case staffByID(company_id: Int, staff_id: Int)
     case freeTime(company_id: Int, staff_id: Int, time: String)
 
 //https://api.yclients.com/api/v1/schedule/{company_id}/{staff_id}/{start_date}/{end_date} расписание работы сотрудника
@@ -50,8 +51,10 @@ extension RequestType: TargetType {
             return "/api/v1/company/\(company_id)/service_categories/"
         case .services(let company_id, _):
             return "/api/v1/company/\(company_id)/services/"
-        case .staff(let company_id, _):
+        case .staff(let company_id):
             return "/api/v1/company/\(company_id)/staff/"
+        case .staffByID(let company_id, let staff_id):
+            return "/api/v1/company/\(company_id)/staff/\(staff_id)"
         case .freeTime(let company_id, let staff_id, let time):
             return "/api/v1/timetable/seances/\(company_id)/\(staff_id)/\(time)"
         }
@@ -59,14 +62,14 @@ extension RequestType: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .salons, .categories, .services, .staff, .freeTime:
+        case .salons, .categories, .services, .staff, .staffByID, .freeTime:
             return .get
         }
     }
 
     var task: Moya.Task {
         switch self {
-        case .salons, .categories, .staff, .freeTime:
+        case .salons, .categories, .staff, .staffByID, .freeTime:
             return .requestPlain
         case .services(_, let category_id):
             if category_id == 0 {
@@ -86,7 +89,7 @@ extension RequestType: TargetType {
         case .salons:
             return ["Authorization": "Bearer \(bearerToken)",
                     "Accept": "application/vnd.api.v2+json"]
-        case .categories, .services, .staff, .freeTime:
+        case .categories, .services, .staff, .staffByID, .freeTime:
             return ["Content-type": "application/json",
                     "Accept": "application/vnd.api.v2+json",
                     "Authorization": "Bearer \(bearerToken), User \(userToken)"]

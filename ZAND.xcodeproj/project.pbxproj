@@ -76,6 +76,7 @@
 		FF49C9CC2AB067620086847C /* Extension + Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49C9CB2AB067620086847C /* Extension + Data.swift */; };
 		FF4F757D2A9E38DD001E8731 /* UserDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */; };
 		FF4F75802A9E41A9001E8731 /* UserDataBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */; };
+		FF4FB5E12AC1D68600F29959 /* SingleEmployeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FB5E02AC1D68600F29959 /* SingleEmployeeModel.swift */; };
 		FF50CF972A4EFD9E00AACC5B /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */; };
 		FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */; };
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
@@ -241,6 +242,7 @@
 		FF49C9CB2AB067620086847C /* Extension + Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Data.swift"; sourceTree = "<group>"; };
 		FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBManager.swift; sourceTree = "<group>"; };
 		FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataBaseModel.swift; sourceTree = "<group>"; };
+		FF4FB5E02AC1D68600F29959 /* SingleEmployeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEmployeeModel.swift; sourceTree = "<group>"; };
 		FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackView.swift; sourceTree = "<group>"; };
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 			children = (
 				FF4401312AA7B09F00318A76 /* SaloonModel.swift */,
 				FF27B0C12AB8F1E500611F47 /* EmployeeModel.swift */,
+				FF4FB5E02AC1D68600F29959 /* SingleEmployeeModel.swift */,
 				FF25635129F69BE100091374 /* OptionModel.swift */,
 				FF1961B72A4C78B900434AC7 /* SettingsMenuModel.swift */,
 				FF1961BB2A4C79B000434AC7 /* FilterModel.swift */,
@@ -582,7 +585,6 @@
 			children = (
 				FF25632E29F571D200091374 /* MARKS.swift */,
 				FF8B12292A8BD45200837E29 /* ZAND..entitlements */,
-				FF45A15D29E7EF3200587DAF /* Extensions */,
 				FF45A12B29E7EC1200587DAF /* ZAND */,
 				FF45A12A29E7EC1200587DAF /* Products */,
 				92076542BD6D23C622198DA9 /* Pods */,
@@ -602,10 +604,11 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5F29EEA176007D6A60 /* Project */,
+				FFB6579B2A6AC05700451D65 /* Sources */,
+				FFB6579A2A6ABFC700451D65 /* Resources */,
+				FF45A15D29E7EF3200587DAF /* Extensions */,
 				FF4F75812A9E429C001E8731 /* Models */,
 				FF862A4B2AA88B560083DEB7 /* Providers */,
-				FFB6579A2A6ABFC700451D65 /* Resources */,
-				FFB6579B2A6AC05700451D65 /* Sources */,
 				FF45A15E29E7EF3A00587DAF /* Common */,
 				FFB985662A30AF7A00ABEFBB /* Managers */,
 				FF45A15C29E7EF2600587DAF /* Screens */,
@@ -1217,6 +1220,7 @@
 				FF8E7BE829EF2BD200644208 /* MainModel.swift in Sources */,
 				FF1961C02A4C7A7900434AC7 /* ProfileMenuModel.swift in Sources */,
 				FF99B90129EEB90100F4E4C3 /* DefaultVCFactory.swift in Sources */,
+				FF4FB5E12AC1D68600F29959 /* SingleEmployeeModel.swift in Sources */,
 				FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */,
 				FF1961AE2A4C4F0A00434AC7 /* CommonModel.swift in Sources */,
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,

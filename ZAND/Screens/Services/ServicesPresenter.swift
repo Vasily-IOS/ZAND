@@ -85,7 +85,8 @@ final class ServicesPresenter: ServicesPresenterOutput {
                 company_id: saloonID,
                 category_id: 0),
             expectation: Services.self) { result in
-                completion(result.data)
+                // услуги, на которые можно записаться
+                completion(result.data.filter({ !$0.staff.isEmpty }))
             }
     }
 
@@ -110,7 +111,6 @@ final class ServicesPresenter: ServicesPresenterOutput {
             group.notify(queue: .main) {
                 completion(categoriesToFetch, servicesToFetch)
             }
-
         }
 
     private func createResultModel(

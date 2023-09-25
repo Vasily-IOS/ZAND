@@ -7,15 +7,10 @@
 
 import Foundation
 
-//enum StaffAppearanceState {
-//    case modelExist
-//    case modelIsNotExist
-//}
-
 protocol StaffPresenterOutput: AnyObject {
     func fetchStaff()
     var saloonID: Int { get }
-    var fetchedStaff: [Employee] { get }
+    var fetchedStaff: [EmployeeCommon] { get }
 }
 
 protocol StaffViewInput: AnyObject {
@@ -28,7 +23,7 @@ final class StaffPresenter: StaffPresenterOutput {
 
     weak var view: StaffViewInput?
 
-    var fetchedStaff: [Employee] = []
+    var fetchedStaff: [EmployeeCommon] = []
 
     let saloonID: Int
 
@@ -38,20 +33,38 @@ final class StaffPresenter: StaffPresenterOutput {
 
     // MARK: - Initializers
 
-    init(view: StaffViewInput, saloonID: Int, network: HTTP, staffID: [Int] = []) {
+    init(view: StaffViewInput, saloonID: Int, network: HTTP, staffIDs: [Int] = []) {
         self.view = view
         self.saloonID = saloonID
         self.network = network
-        self.staffID = staffID
+        self.staffID = staffIDs
 
         if staffID.isEmpty {
             self.fetchStaff()
         } else {
-
+            self.fetchStaffByID(staffIDs: staffIDs)
         }
     }
 
     // MARK: - Instance methods
+
+    private func fetchStaffByID(staffIDs: [Int]) {
+        let group = DispatchGroup()
+
+        staffIDs.forEach { id in
+            group.enter()
+            DispatchQueue.global().async {
+                self.getEmployee(saloonID: self.saloonID, staff_id: id) { employee in
+                    self.fetchedStaff.append(employee)
+                    group.leave()
+                }
+            }
+        }
+
+        group.notify(queue: .main) {
+            self.view?.reloadData()
+        }
+    }
 
     func fetchStaff() {
         network.performRequest(type: .staff(company_id: saloonID), expectation: EmployeeModel.self)
@@ -63,12 +76,11 @@ final class StaffPresenter: StaffPresenterOutput {
         }
     }
 
-    func fetchEmployee(by staff_id: Int, completion: @escaping ((Employee) -> Void)) {
+    private func getEmployee(saloonID: Int, staff_id: Int, completion: @escaping ((EmployeeCommon) -> Void)) {
         network.performRequest(
-            type: .staff(company_id: saloonID,
-                         staff_id: staff_id),
-            expectation: Employee.self) { [weak self] employee in
-                completion(employee)
+            type: .staffByID(company_id: saloonID, staff_id: staff_id),
+            expectation: SingleEmployeeModel.self) { employee in
+                completion(employee.data)
             }
     }
 }

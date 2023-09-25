@@ -38,9 +38,9 @@ final class ServiceCell: BaseTableCell {
     func configure(model: Service?) {
         guard let model = model else { return }
 
-        titleLabel.text = model.title
+        titleLabel.text = model.title.html2String
         priceLabel.text = model.price_min == 0 ?
-        String(model.price_max) + " " + "руб." : String(model.price_min) + " " + "руб."
+        (String(model.price_max) + " " + "руб.").html2String : (String(model.price_min) + " " + "руб.").html2String
         descriptionLabel.text = model.comment
     }
 
