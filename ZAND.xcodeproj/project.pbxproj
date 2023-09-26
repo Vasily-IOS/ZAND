@@ -10,7 +10,6 @@
 		E63E4D874CA2C42699F3CB1F /* Pods_ZAND.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9B65E19747D5AB4F3AD14C6 /* Pods_ZAND.framework */; };
 		FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E3382A02C3C4006476F0 /* ProfileCell.swift */; };
 		FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */; };
-		FF0F5DE32AC226330022B9F5 /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F5DE22AC226330022B9F5 /* TimetableModel.swift */; };
 		FF18BEEE2A5D9DC400547D4C /* RegexMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF18BEED2A5D9DC400547D4C /* RegexMask.swift */; };
 		FF1961AE2A4C4F0A00434AC7 /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961AD2A4C4F0A00434AC7 /* CommonModel.swift */; };
 		FF1961B02A4C51BC00434AC7 /* AppointmentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961AF2A4C51BC00434AC7 /* AppointmentsPresenter.swift */; };
@@ -76,12 +75,13 @@
 		FF49C9CC2AB067620086847C /* Extension + Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49C9CB2AB067620086847C /* Extension + Data.swift */; };
 		FF4F757D2A9E38DD001E8731 /* UserDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */; };
 		FF4F75802A9E41A9001E8731 /* UserDataBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */; };
-		FF4FB5E12AC1D68600F29959 /* SingleEmployeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FB5E02AC1D68600F29959 /* SingleEmployeeModel.swift */; };
 		FF50CF972A4EFD9E00AACC5B /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */; };
 		FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */; };
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
 		FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */; };
+		FF63B97D2AC3469C00DFD932 /* BookServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63B97C2AC3469C00DFD932 /* BookServicesModel.swift */; };
+		FF63B97F2AC35EF000DFD932 /* BookTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63B97E2AC35EF000DFD932 /* BookTimes.swift */; };
 		FF69DADD2A545F5700481CF1 /* Extension + StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */; };
 		FF69DADF2A5465BF00481CF1 /* Extension + CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DADE2A5465BF00481CF1 /* Extension + CGFloat.swift */; };
 		FF69DAE12A5467FB00481CF1 /* Extension + UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DAE02A5467FB00481CF1 /* Extension + UIImage.swift */; };
@@ -164,13 +164,13 @@
 		FFFE2AC82AC2D8D4000A940A /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2AC72AC2D8D4000A940A /* DayCell.swift */; };
 		FFFE2ACA2AC2DD9F000A940A /* WorkingRangeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2AC92AC2DD9F000A940A /* WorkingRangeItem.swift */; };
 		FFFE2ACC2AC2FD14000A940A /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2ACB2AC2FD14000A940A /* TimeCell.swift */; };
+		FFFE2ACE2AC31705000A940A /* BookDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2ACD2AC31705000A940A /* BookDates.swift */; };
 		FFFFDD372ABE66AE00FA5B92 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD362ABE66AE00FA5B92 /* Categories.swift */; };
 		FFFFDD3A2ABF2B7A00FA5B92 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD392ABF2B7A00FA5B92 /* CategoryCell.swift */; };
 		FFFFDD3C2ABF564A00FA5B92 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD3B2ABF564A00FA5B92 /* ServiceCell.swift */; };
 		FFFFDD3F2ABF785F00FA5B92 /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD3E2ABF785F00FA5B92 /* TimetableViewController.swift */; };
 		FFFFDD412ABF786700FA5B92 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD402ABF786700FA5B92 /* TimetableView.swift */; };
 		FFFFDD432ABF787000FA5B92 /* TimetablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD422ABF787000FA5B92 /* TimetablePresenter.swift */; };
-		FFFFDD452ABF7A0700FA5B92 /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD442ABF7A0700FA5B92 /* ScheduleModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -179,7 +179,6 @@
 		F9B65E19747D5AB4F3AD14C6 /* Pods_ZAND.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF01E3382A02C3C4006476F0 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCell.swift; sourceTree = "<group>"; };
-		FF0F5DE22AC226330022B9F5 /* TimetableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableModel.swift; sourceTree = "<group>"; };
 		FF18BEED2A5D9DC400547D4C /* RegexMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexMask.swift; sourceTree = "<group>"; };
 		FF1961AD2A4C4F0A00434AC7 /* CommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		FF1961AF2A4C51BC00434AC7 /* AppointmentsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsPresenter.swift; sourceTree = "<group>"; };
@@ -247,12 +246,13 @@
 		FF49C9CB2AB067620086847C /* Extension + Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Data.swift"; sourceTree = "<group>"; };
 		FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBManager.swift; sourceTree = "<group>"; };
 		FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataBaseModel.swift; sourceTree = "<group>"; };
-		FF4FB5E02AC1D68600F29959 /* SingleEmployeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEmployeeModel.swift; sourceTree = "<group>"; };
 		FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackView.swift; sourceTree = "<group>"; };
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
 		FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterProtocol.swift; sourceTree = "<group>"; };
+		FF63B97C2AC3469C00DFD932 /* BookServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookServicesModel.swift; sourceTree = "<group>"; };
+		FF63B97E2AC35EF000DFD932 /* BookTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTimes.swift; sourceTree = "<group>"; };
 		FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + StringProtocol.swift"; sourceTree = "<group>"; };
 		FF69DADE2A5465BF00481CF1 /* Extension + CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + CGFloat.swift"; sourceTree = "<group>"; };
 		FF69DAE02A5467FB00481CF1 /* Extension + UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImage.swift"; sourceTree = "<group>"; };
@@ -336,13 +336,13 @@
 		FFFE2AC72AC2D8D4000A940A /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		FFFE2AC92AC2DD9F000A940A /* WorkingRangeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingRangeItem.swift; sourceTree = "<group>"; };
 		FFFE2ACB2AC2FD14000A940A /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
+		FFFE2ACD2AC31705000A940A /* BookDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDates.swift; sourceTree = "<group>"; };
 		FFFFDD362ABE66AE00FA5B92 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		FFFFDD392ABF2B7A00FA5B92 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		FFFFDD3B2ABF564A00FA5B92 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		FFFFDD3E2ABF785F00FA5B92 /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
 		FFFFDD402ABF786700FA5B92 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		FFFFDD422ABF787000FA5B92 /* TimetablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetablePresenter.swift; sourceTree = "<group>"; };
-		FFFFDD442ABF7A0700FA5B92 /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -469,7 +469,6 @@
 			children = (
 				FF4401312AA7B09F00318A76 /* SaloonModel.swift */,
 				FF27B0C12AB8F1E500611F47 /* EmployeeModel.swift */,
-				FF4FB5E02AC1D68600F29959 /* SingleEmployeeModel.swift */,
 				FF25635129F69BE100091374 /* OptionModel.swift */,
 				FF1961B72A4C78B900434AC7 /* SettingsMenuModel.swift */,
 				FF1961BB2A4C79B000434AC7 /* FilterModel.swift */,
@@ -477,9 +476,10 @@
 				FF1961BF2A4C7A7800434AC7 /* ProfileMenuModel.swift */,
 				FFF16A802A6B2FA300D83E5B /* UserModel.swift */,
 				FFFFDD362ABE66AE00FA5B92 /* Categories.swift */,
-				FFFFDD442ABF7A0700FA5B92 /* ScheduleModel.swift */,
-				FF0F5DE22AC226330022B9F5 /* TimetableModel.swift */,
 				FFFE2AC92AC2DD9F000A940A /* WorkingRangeItem.swift */,
+				FFFE2ACD2AC31705000A940A /* BookDates.swift */,
+				FF63B97E2AC35EF000DFD932 /* BookTimes.swift */,
+				FF63B97C2AC3469C00DFD932 /* BookServicesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1243,7 +1243,6 @@
 				FF8E7BE829EF2BD200644208 /* MainModel.swift in Sources */,
 				FF1961C02A4C7A7900434AC7 /* ProfileMenuModel.swift in Sources */,
 				FF99B90129EEB90100F4E4C3 /* DefaultVCFactory.swift in Sources */,
-				FF4FB5E12AC1D68600F29959 /* SingleEmployeeModel.swift in Sources */,
 				FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */,
 				FF1961AE2A4C4F0A00434AC7 /* CommonModel.swift in Sources */,
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,
@@ -1263,6 +1262,7 @@
 				FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */,
 				FF45A16829E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift in Sources */,
 				FFFE2AC32AC2D5E4000A940A /* DefaultTimetableLayout .swift in Sources */,
+				FF63B97F2AC35EF000DFD932 /* BookTimes.swift in Sources */,
 				FF1961B62A4C740700434AC7 /* SaloonDetailPresenter.swift in Sources */,
 				FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */,
 				FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */,
@@ -1307,6 +1307,7 @@
 				FF27B0B72AB8DF7100611F47 /* ServicesView.swift in Sources */,
 				FF27FC262A2E079F006DE1B9 /* HideNavigationBar.swift in Sources */,
 				FFDCE4BB2A1BB47000CEA0E1 /* AssetImage.swift in Sources */,
+				FF63B97D2AC3469C00DFD932 /* BookServicesModel.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */,
 				FF49C9CC2AB067620086847C /* Extension + Data.swift in Sources */,
@@ -1341,6 +1342,7 @@
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
 				FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */,
 				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
+				FFFE2ACE2AC31705000A940A /* BookDates.swift in Sources */,
 				FFDE118D2A5C424000CEF390 /* HTTP.swift in Sources */,
 				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
 				FF27B0B92AB8DF7A00611F47 /* ServicesPresenter.swift in Sources */,
@@ -1366,7 +1368,6 @@
 				FF25632829F561FD00091374 /* AddressView.swift in Sources */,
 				FFA3D44E29F2A21D0067CC6F /* MainLayout.swift in Sources */,
 				FF25632F29F571D200091374 /* MARKS.swift in Sources */,
-				FF0F5DE32AC226330022B9F5 /* TimetableModel.swift in Sources */,
 				FF1961BE2A4C7A2B00434AC7 /* MapModel.swift in Sources */,
 				FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */,
 				FF4401322AA7B09F00318A76 /* SaloonModel.swift in Sources */,
@@ -1392,7 +1393,6 @@
 				FFC01B592A03DCA5005CE41B /* DefaultMyDetailsLayout.swift in Sources */,
 				FFF16A812A6B2FA300D83E5B /* UserModel.swift in Sources */,
 				FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */,
-				FFFFDD452ABF7A0700FA5B92 /* ScheduleModel.swift in Sources */,
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,
 				FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */,
 				FF99B90329EEB95400F4E4C3 /* VCFactory.swift in Sources */,

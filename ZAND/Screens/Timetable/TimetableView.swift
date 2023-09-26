@@ -19,6 +19,7 @@ final class TimetableView: BaseUIView {
         collectionView.register(cellType: DayCell.self)
         collectionView.register(cellType: TimeCell.self)
         collectionView.register(view: ReuseHeaderView.self)
+//        collectionView.allowsMultipleSelection = true
         return collectionView
     }()
 
@@ -28,6 +29,8 @@ final class TimetableView: BaseUIView {
         monthLabel.text = "Cентябрь"
         return monthLabel
     }()
+
+    private let bottomButton = BottomButton(buttonText: .contin)
 
     private let layout: DefaultTimetableLayout
 
@@ -44,7 +47,7 @@ final class TimetableView: BaseUIView {
     override func setup() {
         super.setup()
 
-        addSubviews([monthLabel, collectionView])
+        addSubviews([monthLabel, collectionView, bottomButton])
 
         monthLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
@@ -55,7 +58,14 @@ final class TimetableView: BaseUIView {
             make.top.equalTo(monthLabel.snp.bottom).offset(20)
             make.left.equalTo(monthLabel)
             make.right.equalToSuperview()
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(20)
+        }
+
+        bottomButton.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom).offset(20)
+            make.height.equalTo(44)
+            make.right.equalToSuperview().inset(16)
+            make.left.equalToSuperview().offset(16)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(10)
         }
     }
 

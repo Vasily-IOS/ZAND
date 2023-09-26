@@ -11,9 +11,9 @@ final class DayCell: BaseCollectionCell {
 
     // MARK: - Properties
 
-    var dayIsSelected: Bool = false {
+    var isChoosen: Bool = false {
         didSet {
-            if dayIsSelected {
+            if isChoosen {
                 backgroundColor = .mainGreen
                 [dayNumericLabel, daySringLabel].forEach { $0.textColor = .white }
             } else {

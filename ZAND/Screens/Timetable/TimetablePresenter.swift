@@ -5,17 +5,18 @@
 //  Created by Василий on 23.09.2023.
 //
 
-import Foundation
+import UIKit
 
 protocol TimetablePresenterOutput: AnyObject {
-    var workingRangeModel: [WorkingRangeItem] { get }
+    var workingRangeModel: [WorkingRangeItem] { get set }
+    var bookTimeModel: [BookTime] { get set }
+    func fetchBookTimes(date: String)
 }
 
 protocol TimetableInput: AnyObject {
-
+    func reloadData()
+    func reloadSection()
 }
-
-// при инициализации берем диапазон дат в 10 дней, начиная с первой и загружаем данные сразу
 
 final class TimetablePresenter: TimetablePresenterOutput {
 
@@ -25,7 +26,15 @@ final class TimetablePresenter: TimetablePresenterOutput {
 
     var workingRangeModel: [WorkingRangeItem] = []
 
+    var bookTimeModel: [BookTime] = []
+
     private let network: HTTP
+
+    private let saloonID: Int
+
+    private let staffID: Int
+
+    private let serviceToProvideID: Int
 
     private let scheduleTill: String
 
@@ -35,57 +44,73 @@ final class TimetablePresenter: TimetablePresenterOutput {
          network: HTTP,
          saloonID: Int,
          staffID: Int,
-         scheduleTill: String
+         scheduleTill: String,
+         serviceToProvideID: Int
     ) {
         self.view = view
         self.network = network
+        self.saloonID = saloonID
+        self.staffID = staffID
         self.scheduleTill = scheduleTill
+        self.serviceToProvideID = serviceToProvideID
 
-        self.getWorkingRange() { [weak self] day in
-            self?.fetchTimetableByDay(
-                saloonID: saloonID,
-                staffID: staffID,
-                date: day.dateString
-            )
+        self.fetchBookDates(company_id: saloonID,
+                            service_ids: [String(serviceToProvideID)],
+                            staff_id: staffID, date_to: scheduleTill
+        ) { [weak self] bookingDates in
+            self?.setActualDates(dates: bookingDates) { firstDate in
+                self?.view?.reloadData()
+                self?.fetchBookTimes(date: firstDate)
+            }
         }
     }
 
     // MARK: - Instance methods
 
-//    func currentDate() -> String {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-//        return formatter.string(from: Date())
-//    }
-
-    private func fetchTimetableByDay(
-        saloonID: Int,
-        staffID: Int,
-        date: String)
-    {
-        network.performRequest(type: .freeTime(
-            company_id: saloonID,
-            staff_id: staffID,
-            date: date), expectation: TimetableModel.self)
-        { [weak self] timetable in
-            print(timetable.data.filter({ $0.is_free }))
+    func fetchBookTimes(date: String) {
+        network.performRequest(
+            type: .bookTimes(
+                company_id: saloonID,
+                staff_id: staffID,
+                date: date,
+                service_id: serviceToProvideID),
+            expectation: BookTimes.self)
+        { [weak self] bookTimes in
+            self?.bookTimeModel = bookTimes.data
+            self?.view?.reloadSection()
         }
     }
 
-    func getWorkingRange(completion: @escaping (WorkingRangeItem) -> Void) {
-        let startDate = Date()
+    private func fetchBookDates(
+        company_id: Int,
+        service_ids: [String],
+        staff_id: Int,
+        date_to: String, completion: @escaping (([String]) -> Void)
+    ) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let currentDay = formatter.string(from: Date())
+
+        network.performRequest(type: .bookDates(
+            company_id: company_id,
+            service_ids: service_ids,
+            staff_id: staff_id,
+            date: currentDay,
+            date_from: currentDay,
+            date_to: date_to),
+            expectation: BookDates.self
+        )
+        { bookDates in
+            completion(bookDates.data.booking_dates)
+        }
+    }
+
+    private func setActualDates(dates: [String], completion: @escaping (String) -> Void) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let endDate = dateFormatter.date(from: scheduleTill) ?? Date()
+        let datesData = dates.compactMap { dateFormatter.date(from: $0) }
 
-        var dateArray = [Date]()
-        var currentDate = startDate
-        while currentDate <= endDate {
-            dateArray.append(currentDate)
-            currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
-        }
-
-        dateArray.forEach { date in
+        datesData.forEach { date in
             let dayNumericFormatter = DateFormatter()
             dayNumericFormatter.dateFormat = "dd"
 
@@ -99,9 +124,6 @@ final class TimetablePresenter: TimetablePresenterOutput {
             )
             workingRangeModel.append(item)
         }
-
-        if !workingRangeModel.isEmpty {
-            completion(workingRangeModel.first!)
-        }
+        completion(dates.first ?? "")
     }
 }

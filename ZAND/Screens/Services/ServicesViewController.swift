@@ -78,10 +78,6 @@ extension ServicesViewController {
             presenter?.model[indexPath.section].isOpened = !(presenter?.model[indexPath.section].isOpened)!
             tableView.reloadSections([indexPath.section], with: .none)
         } else {
-            let staffIDs = presenter?.model[indexPath.section].services[indexPath.row - 1].staff.map({ $0.id }) ?? []
-
-//            print("Service number: \(presenter?.model[indexPath.section].services[indexPath.row - 1].id ?? 0), service gives \(staffIDs) people")
-
             let view = StaffView()
             let vc = StaffViewController(contentView: view)
             let network: HTTP = APIManager()
@@ -89,7 +85,7 @@ extension ServicesViewController {
                 view: vc,
                 saloonID: presenter?.saloonID ?? 0,
                 network: network,
-                staffIDs: staffIDs)
+                serviceToProvideID: presenter?.model[indexPath.section].services[indexPath.row - 1].id ?? 0)
             vc.presenter = presenter
             navigationController?.pushViewController(vc, animated: true)
         }

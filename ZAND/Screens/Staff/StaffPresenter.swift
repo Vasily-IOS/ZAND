@@ -9,6 +9,7 @@ import Foundation
 
 protocol StaffPresenterOutput: AnyObject {
     func fetchStaff()
+    var serviceToProvideID: Int { get }
     var saloonID: Int { get }
     var fetchedStaff: [EmployeeCommon] { get }
 }
@@ -27,72 +28,57 @@ final class StaffPresenter: StaffPresenterOutput {
 
     let saloonID: Int
 
-    private let staffID: [Int]
+    let serviceToProvideID: Int
 
     private let network: HTTP
 
     // MARK: - Initializers
 
-    init(view: StaffViewInput, saloonID: Int, network: HTTP, staffIDs: [Int] = []) {
+    init(
+        view: StaffViewInput,
+        saloonID: Int,
+        network: HTTP,
+        serviceToProvideID: Int)
+    {
         self.view = view
         self.saloonID = saloonID
         self.network = network
-        self.staffID = staffIDs
+        self.serviceToProvideID = serviceToProvideID
 
-        if staffID.isEmpty {
+        if serviceToProvideID == 0 {
             self.fetchStaff()
         } else {
-            self.fetchStaffByID(staffIDs: staffIDs)
+            self.fetchBookStaff(saloonID: saloonID, serviceID: serviceToProvideID)
         }
     }
 
     // MARK: - Instance methods
 
-    private func fetchStaffByID(staffIDs: [Int]) {
-        let group = DispatchGroup()
+    private func fetchBookStaff(saloonID: Int, serviceID: Int) {
+        network.performRequest(
+            type: .bookStaff(
+                company_id: saloonID,
+                service_id: [serviceID]),
+            expectation: EmployeeModel.self)
+        { [weak self] staff in
+            guard let self else { return }
 
-        staffIDs.forEach { id in
-            group.enter()
-            DispatchQueue.global().async {
-                self.getEmployee(saloonID: self.saloonID, staff_id: id) { employee in
-                    self.fetchedStaff.append(employee)
-                    group.leave()
-                }
-            }
-        }
-        group.notify(queue: .main) {
+            self.fetchedStaff = staff.data
             self.view?.reloadData()
         }
     }
 
     func fetchStaff() {
-        network.performRequest(type: .staff(company_id: saloonID), expectation: EmployeeModel.self)
-        { [weak self] result in
-            let currentDate = self?.currentDate()
-
-            let resultStaff = result.data.filter(
-                { $0.fired == 0 && $0.hidden == 0 && $0.status == 0 && ($0.schedule_till ?? "") > currentDate ?? ""}
-            )
-            self?.fetchedStaff = resultStaff
-            self?.view?.reloadData()
-        }
-    }
-
-    private func getEmployee(saloonID: Int, staff_id: Int, completion: @escaping ((EmployeeCommon) -> Void)) {
         network.performRequest(
-            type: .staffByID(company_id: saloonID, staff_id: staff_id),
-            expectation: SingleEmployeeModel.self) { [weak self] employee in
-                if (employee.data.schedule_till ?? "") < (self?.currentDate() ?? "") {
-                    print("\(employee.data.name) have no schedule")
-                } else {
-                    completion(employee.data)
-                }
-            }
-    }
+            type: .bookStaff(
+                company_id: saloonID,
+                service_id: []),
+            expectation: EmployeeModel.self)
+        { [weak self] staff in
+            guard let self else { return }
 
-    private func currentDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: Date())
+            self.fetchedStaff = staff.data
+            self.view?.reloadData()
+        }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 struct Categories {
     let category: CategoryJSON // категория
-    let services: [Service] // сервисы в категории
+    let services: [BookService] // сервисы в категории
     var isOpened: Bool = false // открыта ли секция с сервисами
 }
 

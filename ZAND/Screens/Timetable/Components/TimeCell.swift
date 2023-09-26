@@ -11,22 +11,22 @@ final class TimeCell: BaseCollectionCell {
 
     // MARK: - Properties
 
-    var timeIsSelected: Bool = false {
+    override var isSelected: Bool {
         didSet {
-            timeLabel.textColor = timeIsSelected ? .black : .black.withAlphaComponent(0.5)
+            timeLabel.textColor = isSelected ? .black : .black.withAlphaComponent(0.5)
         }
     }
 
     private let timeLabel: UILabel = {
         let timeLabel = UILabel()
-        timeLabel.text = "10:00"
+        timeLabel.textColor = .black.withAlphaComponent(0.5)
         return timeLabel
     }()
 
     // MARK: - Instance methods
 
-    func configure(model: String) {
-        timeLabel.text = model
+    func configure(model: BookTime) {
+        timeLabel.text = model.time
     }
 
     override func setup() {

@@ -51,7 +51,8 @@ extension StartBookingViewController: StartBookingDelegate {
         let presenter = StaffPresenter(
             view: vc,
             saloonID: presenter?.saloonID ?? 0,
-            network: network)
+            network: network,
+            serviceToProvideID: 0)
         vc.presenter = presenter
         navigationController?.pushViewController(vc, animated: true)
     }

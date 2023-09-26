@@ -27,6 +27,10 @@ final class APIManager: HTTP {
 
             switch result {
             case .success(let response):
+//                print(response.request?.url ?? "")
+
+//                print(String(data: response.data, encoding: .utf8)!)
+
                 if let httpResponse = response.response?.statusCode {
                     let successRange = (200...299)
                     if successRange.contains(httpResponse)  {

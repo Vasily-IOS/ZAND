@@ -75,7 +75,8 @@ extension StaffViewController: UITableViewDelegate {
             network: network,
             saloonID: presenter?.saloonID ?? 0,
             staffID: presenter?.fetchedStaff[indexPath.section].id ?? 0,
-            scheduleTill: presenter?.fetchedStaff[indexPath.section].schedule_till ?? "")
+            scheduleTill: presenter?.fetchedStaff[indexPath.section].schedule_till ?? "",
+            serviceToProvideID: presenter?.serviceToProvideID ?? 0)
         vс.presenter = presenter
         
         navigationController?.pushViewController(vс, animated: true)

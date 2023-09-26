@@ -79,20 +79,19 @@ final class ServicesPresenter: ServicesPresenterOutput {
         }
     }
 
-    private func fetchServices(completion: @escaping (([Service]) -> Void)) {
+    private func fetchBookServices(completion: @escaping (([BookService]) -> Void)) {
         network.performRequest(
-            type: .services(company_id: saloonID, category_id: 0),
-            expectation: Services.self) { result in
-                // услуги, на которые можно записаться
-                completion(result.data.filter({ !$0.staff.isEmpty }))
+            type: .bookServices(company_id: saloonID),
+            expectation: BookServicesModel.self) { bookServices in
+                completion(bookServices.data.services)
             }
     }
 
     private func fetchCategoriesAndServices(
-        completion: @escaping ([CategoryJSON], [Service]) -> Void) {
+        completion: @escaping ([CategoryJSON], [BookService]) -> Void) {
             let group = DispatchGroup()
-            var servicesToFetch: [Service] = []
             var categoriesToFetch: [CategoryJSON] = []
+            var servicesToFetch: [BookService] = []
 
             group.enter()
             fetchCategories { categoriesJSON in
@@ -101,7 +100,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
             }
 
             group.enter()
-            fetchServices { services in
+            fetchBookServices() { services in
                 servicesToFetch = services
                 group.leave()
             }
@@ -113,7 +112,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     private func createResultModel(
         categories: [CategoryJSON],
-        services: [Service],
+        services: [BookService],
         completion: @escaping (([Categories]) -> Void)) {
             let group = DispatchGroup()
             var result: [Categories] = []
@@ -123,7 +122,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
                 let category = Categories(
                     category: category,
                     services: services.filter(
-                        { $0.category_id == category.id })
+                        { $0.category_id == category.id && $0.active == 1 })
                 )
                 result.append(category)
             }
