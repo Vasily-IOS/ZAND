@@ -66,16 +66,19 @@ extension StaffViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let contentView = TimetableView()
-        let view = TimetableViewController(contentView: contentView)
+        let layout: DefaultTimetableLayout = TimetableLayout()
+        let contentView = TimetableView(layout: layout)
+        let vс = TimetableViewController(contentView: contentView)
         let network: HTTP = APIManager()
         let presenter = TimetablePresenter(
-            view: view,
+            view: vс,
             network: network,
             saloonID: presenter?.saloonID ?? 0,
-            staffID: presenter?.fetchedStaff[indexPath.row].id ?? 0)
-        view.presenter = presenter
-        navigationController?.pushViewController(view, animated: true)
+            staffID: presenter?.fetchedStaff[indexPath.section].id ?? 0,
+            scheduleTill: presenter?.fetchedStaff[indexPath.section].schedule_till ?? "")
+        vс.presenter = presenter
+        
+        navigationController?.pushViewController(vс, animated: true)
     }
 }
 

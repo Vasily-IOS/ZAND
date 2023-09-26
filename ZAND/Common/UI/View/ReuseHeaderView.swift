@@ -11,11 +11,13 @@ import SnapKit
 final class ReuseHeaderView: UICollectionReusableView {
     
     // MARK: - Nested types
+
     enum HeaderText {
         case services
         case favourites
         case data
         case pushes
+        case time
         
         var description: String {
             switch self {
@@ -27,6 +29,8 @@ final class ReuseHeaderView: UICollectionReusableView {
                 return AssetString.myData
             case .pushes:
                 return AssetString.pushSms
+            case .time:
+                return "Время"
             }
         }
     }

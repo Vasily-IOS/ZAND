@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TimetablePresenterOutput: AnyObject {
-
+    var workingRangeModel: [WorkingRangeItem] { get }
 }
 
 protocol TimetableInput: AnyObject {
@@ -23,24 +23,42 @@ final class TimetablePresenter: TimetablePresenterOutput {
 
     weak var view: TimetableInput?
 
+    var workingRangeModel: [WorkingRangeItem] = []
+
     private let network: HTTP
+
+    private let scheduleTill: String
 
     // MARK: - Initializers
 
     init(view: TimetableInput,
          network: HTTP,
          saloonID: Int,
-         staffID: Int
+         staffID: Int,
+         scheduleTill: String
     ) {
         self.view = view
         self.network = network
+        self.scheduleTill = scheduleTill
 
-        self.fetchData(saloonID: saloonID, staffID: staffID, date: actualDate())
+        self.getWorkingRange() { [weak self] day in
+            self?.fetchTimetableByDay(
+                saloonID: saloonID,
+                staffID: staffID,
+                date: day.dateString
+            )
+        }
     }
 
     // MARK: - Instance methods
 
-    private func fetchData(
+//    func currentDate() -> String {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        return formatter.string(from: Date())
+//    }
+
+    private func fetchTimetableByDay(
         saloonID: Int,
         staffID: Int,
         date: String)
@@ -54,9 +72,36 @@ final class TimetablePresenter: TimetablePresenterOutput {
         }
     }
 
-    private func actualDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: Date())
+    func getWorkingRange(completion: @escaping (WorkingRangeItem) -> Void) {
+        let startDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let endDate = dateFormatter.date(from: scheduleTill) ?? Date()
+
+        var dateArray = [Date]()
+        var currentDate = startDate
+        while currentDate <= endDate {
+            dateArray.append(currentDate)
+            currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+
+        dateArray.forEach { date in
+            let dayNumericFormatter = DateFormatter()
+            dayNumericFormatter.dateFormat = "dd"
+
+            let dayStringFormatter = DateFormatter()
+            dayStringFormatter.dateFormat = "E"
+
+            let item = WorkingRangeItem(
+                dateString: dateFormatter.string(from: date),
+                dayNumeric: dayNumericFormatter.string(from: date),
+                dayString: dayStringFormatter.string(from: date)
+            )
+            workingRangeModel.append(item)
+        }
+
+        if !workingRangeModel.isEmpty {
+            completion(workingRangeModel.first!)
+        }
     }
 }

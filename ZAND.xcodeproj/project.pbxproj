@@ -159,6 +159,11 @@
 		FFF600282A6FD312009813E6 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF600272A6FD312009813E6 /* AlertType.swift */; };
 		FFF6002B2A6FD60B009813E6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */; };
 		FFF6002D2A6FD6A6009813E6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6002C2A6FD6A6009813E6 /* ActivityIndicatorView.swift */; };
+		FFFE2AC32AC2D5E4000A940A /* DefaultTimetableLayout .swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2AC22AC2D5E4000A940A /* DefaultTimetableLayout .swift */; };
+		FFFE2AC52AC2D605000A940A /* TimetableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2AC42AC2D605000A940A /* TimetableLayout.swift */; };
+		FFFE2AC82AC2D8D4000A940A /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2AC72AC2D8D4000A940A /* DayCell.swift */; };
+		FFFE2ACA2AC2DD9F000A940A /* WorkingRangeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2AC92AC2DD9F000A940A /* WorkingRangeItem.swift */; };
+		FFFE2ACC2AC2FD14000A940A /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2ACB2AC2FD14000A940A /* TimeCell.swift */; };
 		FFFFDD372ABE66AE00FA5B92 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD362ABE66AE00FA5B92 /* Categories.swift */; };
 		FFFFDD3A2ABF2B7A00FA5B92 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD392ABF2B7A00FA5B92 /* CategoryCell.swift */; };
 		FFFFDD3C2ABF564A00FA5B92 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFDD3B2ABF564A00FA5B92 /* ServiceCell.swift */; };
@@ -326,6 +331,11 @@
 		FFF600272A6FD312009813E6 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		FFF6002C2A6FD6A6009813E6 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		FFFE2AC22AC2D5E4000A940A /* DefaultTimetableLayout .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultTimetableLayout .swift"; sourceTree = "<group>"; };
+		FFFE2AC42AC2D605000A940A /* TimetableLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLayout.swift; sourceTree = "<group>"; };
+		FFFE2AC72AC2D8D4000A940A /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		FFFE2AC92AC2DD9F000A940A /* WorkingRangeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingRangeItem.swift; sourceTree = "<group>"; };
+		FFFE2ACB2AC2FD14000A940A /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		FFFFDD362ABE66AE00FA5B92 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		FFFFDD392ABF2B7A00FA5B92 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		FFFFDD3B2ABF564A00FA5B92 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
@@ -384,6 +394,7 @@
 		FF1961C12A4C7B5800434AC7 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				FFFE2AC12AC2D5C2000A940A /* Layout + Timetable */,
 				FFE6F49929FAD72900FDB519 /* Layout + Profile */,
 				FFA3D44C29F2A2020067CC6F /* Layout + Main */,
 				FF25634629F6879000091374 /* Layout + Filter */,
@@ -468,6 +479,7 @@
 				FFFFDD362ABE66AE00FA5B92 /* Categories.swift */,
 				FFFFDD442ABF7A0700FA5B92 /* ScheduleModel.swift */,
 				FF0F5DE22AC226330022B9F5 /* TimetableModel.swift */,
+				FFFE2AC92AC2DD9F000A940A /* WorkingRangeItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -603,8 +615,8 @@
 		FF45A12B29E7EC1200587DAF /* ZAND */ = {
 			isa = PBXGroup;
 			children = (
+				FF1961C12A4C7B5800434AC7 /* Layout */,
 				FF8AAF5F29EEA176007D6A60 /* Project */,
-				FFB6579B2A6AC05700451D65 /* Sources */,
 				FFB6579A2A6ABFC700451D65 /* Resources */,
 				FF45A15D29E7EF3200587DAF /* Extensions */,
 				FF4F75812A9E429C001E8731 /* Models */,
@@ -902,14 +914,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		FFB6579B2A6AC05700451D65 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				FF1961C12A4C7B5800434AC7 /* Layout */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
 		FFB657A42A6B2CCB00451D65 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -1082,6 +1086,24 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		FFFE2AC12AC2D5C2000A940A /* Layout + Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				FFFE2AC22AC2D5E4000A940A /* DefaultTimetableLayout .swift */,
+				FFFE2AC42AC2D605000A940A /* TimetableLayout.swift */,
+			);
+			path = "Layout + Timetable";
+			sourceTree = "<group>";
+		};
+		FFFE2AC62AC2D8C3000A940A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FFFE2AC72AC2D8D4000A940A /* DayCell.swift */,
+				FFFE2ACB2AC2FD14000A940A /* TimeCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		FFFFDD382ABF2B6C00FA5B92 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -1097,6 +1119,7 @@
 				FFFFDD3E2ABF785F00FA5B92 /* TimetableViewController.swift */,
 				FFFFDD402ABF786700FA5B92 /* TimetableView.swift */,
 				FFFFDD422ABF787000FA5B92 /* TimetablePresenter.swift */,
+				FFFE2AC62AC2D8C3000A940A /* Components */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -1231,6 +1254,7 @@
 				FF25635229F69BE100091374 /* OptionModel.swift in Sources */,
 				FF1961B22A4C5FE300434AC7 /* MapPresenter.swift in Sources */,
 				FFC01B602A03F147005CE41B /* BaseTableCell.swift in Sources */,
+				FFFE2ACA2AC2DD9F000A940A /* WorkingRangeItem.swift in Sources */,
 				FFB657A12A6B1A3F00451D65 /* Extension + String.swift in Sources */,
 				FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */,
 				FF45A16429E7F5C100587DAF /* Extension + UILabel.swift in Sources */,
@@ -1238,9 +1262,11 @@
 				FF4F757D2A9E38DD001E8731 /* UserDBManager.swift in Sources */,
 				FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */,
 				FF45A16829E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift in Sources */,
+				FFFE2AC32AC2D5E4000A940A /* DefaultTimetableLayout .swift in Sources */,
 				FF1961B62A4C740700434AC7 /* SaloonDetailPresenter.swift in Sources */,
 				FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */,
 				FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */,
+				FFFE2AC52AC2D605000A940A /* TimetableLayout.swift in Sources */,
 				FFB985722A30E6E700ABEFBB /* RealmManager.swift in Sources */,
 				FF27B0AE2AB8D0A100611F47 /* StartBookingView.swift in Sources */,
 				FF2DB9752A9DE2250036356B /* SignInPresenter.swift in Sources */,
@@ -1296,10 +1322,12 @@
 				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,
 				FF45A16029E7F4BC00587DAF /* Extension + UIStackView.swift in Sources */,
 				FF8AAF6629EEA256007D6A60 /* BaseUIView.swift in Sources */,
+				FFFE2AC82AC2D8D4000A940A /* DayCell.swift in Sources */,
 				FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */,
 				FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */,
 				FFF600282A6FD312009813E6 /* AlertType.swift in Sources */,
 				FF69DAE12A5467FB00481CF1 /* Extension + UIImage.swift in Sources */,
+				FFFE2ACC2AC2FD14000A940A /* TimeCell.swift in Sources */,
 				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
 				FF2DB9732A9DE2110036356B /* SignInViewController.swift in Sources */,
 				FF27B0B52AB8DF6900611F47 /* ServicesViewController.swift in Sources */,

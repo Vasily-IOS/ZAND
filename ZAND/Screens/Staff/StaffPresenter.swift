@@ -68,7 +68,11 @@ final class StaffPresenter: StaffPresenterOutput {
     func fetchStaff() {
         network.performRequest(type: .staff(company_id: saloonID), expectation: EmployeeModel.self)
         { [weak self] result in
-            let resultStaff = result.data.filter({ $0.fired == 0 && $0.hidden == 0 })
+            let currentDate = self?.currentDate()
+
+            let resultStaff = result.data.filter(
+                { $0.fired == 0 && $0.hidden == 0 && $0.status == 0 && ($0.schedule_till ?? "") > currentDate ?? ""}
+            )
             self?.fetchedStaff = resultStaff
             self?.view?.reloadData()
         }
@@ -77,8 +81,18 @@ final class StaffPresenter: StaffPresenterOutput {
     private func getEmployee(saloonID: Int, staff_id: Int, completion: @escaping ((EmployeeCommon) -> Void)) {
         network.performRequest(
             type: .staffByID(company_id: saloonID, staff_id: staff_id),
-            expectation: SingleEmployeeModel.self) { employee in
-                completion(employee.data)
+            expectation: SingleEmployeeModel.self) { [weak self] employee in
+                if (employee.data.schedule_till ?? "") < (self?.currentDate() ?? "") {
+                    print("\(employee.data.name) have no schedule")
+                } else {
+                    completion(employee.data)
+                }
             }
+    }
+
+    private func currentDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: Date())
     }
 }
