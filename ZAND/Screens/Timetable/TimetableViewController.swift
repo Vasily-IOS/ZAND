@@ -11,7 +11,8 @@ final class TimetableViewController: BaseViewController<TimetableView> {
 
     // MARK: - Properties
 
-    var selectedDays: [IndexPath: Bool] = [:]
+    // to presenter
+    var selectedDays: [IndexPath: Bool] = [[0,0]:true]
 
     var presenter: TimetablePresenterOutput?
 
@@ -30,13 +31,6 @@ final class TimetableViewController: BaseViewController<TimetableView> {
     private func subscribeDelegates() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
-    }
-
-    private func deselectAllRows(collectionView: UICollectionView, in section: Int) {
-        for item in 0..<collectionView.numberOfItems(inSection: section) {
-            let index = IndexPath(row: item, section: section)
-            collectionView.deselectItem(at: index, animated: false)
-        }
     }
 }
 
@@ -91,10 +85,9 @@ extension TimetableViewController: UICollectionViewDelegate {
             if cell.isChoosen == false {
                 cell.isChoosen = true
                 selectedDays[indexPath] = true
-                let test = selectedDays.filter({ $0.key != indexPath})
-                for (index, _) in test {
+                let unnecessaryIndexes = selectedDays.filter({ $0.key != indexPath})
+                for (index, _) in unnecessaryIndexes {
                     selectedDays[index] = false
-                    print(index)
                     if let cell = collectionView.cellForItem(at: index) as? DayCell {
                         cell.isChoosen = false
                     }
@@ -107,6 +100,8 @@ extension TimetableViewController: UICollectionViewDelegate {
             presenter?.fetchBookTimes(
                 date: presenter?.workingRangeModel[indexPath.item].dateString ?? ""
             )
+            presenter?.updateDateLabel(date: (presenter?.workingRangeModel[indexPath.item].date)!)
+            
         case .time:
             let cell = collectionView.cellForItem(at: indexPath) as! TimeCell
             cell.isSelected = !cell.isSelected
@@ -149,5 +144,9 @@ extension TimetableViewController: TimetableInput {
         DispatchQueue.main.async {
             self.contentView.collectionView.reloadSections(IndexSet(integer: 1))
         }
+    }
+
+    func updateDate(date: String) {
+        contentView.setMonth(month: date)
     }
 }

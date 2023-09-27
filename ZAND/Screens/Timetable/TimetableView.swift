@@ -19,14 +19,12 @@ final class TimetableView: BaseUIView {
         collectionView.register(cellType: DayCell.self)
         collectionView.register(cellType: TimeCell.self)
         collectionView.register(view: ReuseHeaderView.self)
-//        collectionView.allowsMultipleSelection = true
         return collectionView
     }()
 
     private let monthLabel: UILabel = {
         let monthLabel = UILabel()
         monthLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        monthLabel.text = "Cентябрь"
         return monthLabel
     }()
 
@@ -67,6 +65,10 @@ final class TimetableView: BaseUIView {
             make.left.equalToSuperview().offset(16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(10)
         }
+    }
+
+    func setMonth(month: String) {
+        monthLabel.text = month
     }
 
     private func createLayout() -> UICollectionViewCompositionalLayout {

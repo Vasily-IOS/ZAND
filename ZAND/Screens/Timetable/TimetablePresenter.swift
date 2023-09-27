@@ -11,11 +11,13 @@ protocol TimetablePresenterOutput: AnyObject {
     var workingRangeModel: [WorkingRangeItem] { get set }
     var bookTimeModel: [BookTime] { get set }
     func fetchBookTimes(date: String)
+    func updateDateLabel(date: Date)
 }
 
 protocol TimetableInput: AnyObject {
     func reloadData()
     func reloadSection()
+    func updateDate(date: String)
 }
 
 final class TimetablePresenter: TimetablePresenterOutput {
@@ -60,12 +62,30 @@ final class TimetablePresenter: TimetablePresenterOutput {
         ) { [weak self] bookingDates in
             self?.setActualDates(dates: bookingDates) { firstDate in
                 self?.view?.reloadData()
+                self?.updateDateLabel(date: firstDate)
                 self?.fetchBookTimes(date: firstDate)
             }
         }
     }
 
     // MARK: - Instance methods
+
+    func updateDateLabel(date: String) {
+        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ru_RU")
+        let date = formatter.date(from: date) ?? Date()
+        updateDateLabel(date: date)
+    }
+
+    func updateDateLabel(date: Date) {
+        let formatter = DateFormatter()
+//        formatter.locale = Locale.current
+        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateStyle = .medium
+        view?.updateDate(date: formatter.string(from: date))
+    }
 
     func fetchBookTimes(date: String) {
         network.performRequest(
