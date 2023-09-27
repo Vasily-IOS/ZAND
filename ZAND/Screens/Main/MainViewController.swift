@@ -58,7 +58,6 @@ final class MainViewController: BaseViewController<MainView> {
         super.viewDidLoad()
         
         subscribeDelegate()
-
         presenter?.fetchData()
     }
 
@@ -103,14 +102,13 @@ extension MainViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
-        let saloonCell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonCell.self)
-
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
+            let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
             optionCell.configure(model: options[indexPath.item], state: .onMain)
             return optionCell
         case .beautySaloon:
+            let saloonCell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonCell.self)
             saloonCell.configure(model: (saloons ?? [])[indexPath.item], indexPath: indexPath)
             saloonCell.mapHandler = mapHandler
             saloonCell.favouritesHandler = favouritesHandler

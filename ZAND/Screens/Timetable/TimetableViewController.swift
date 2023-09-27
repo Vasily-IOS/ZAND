@@ -91,19 +91,13 @@ extension TimetableViewController: UICollectionViewDelegate {
             if cell.isChoosen == false {
                 cell.isChoosen = true
                 selectedDays[indexPath] = true
-
                 let test = selectedDays.filter({ $0.key != indexPath})
-
                 for (index, _) in test {
-//                    guard index == nil else { return }
                     selectedDays[index] = false
                     print(index)
                     if let cell = collectionView.cellForItem(at: index) as? DayCell {
                         cell.isChoosen = false
-
                     }
-
-
                 }
             } else {
                 cell.isChoosen = false
@@ -113,7 +107,6 @@ extension TimetableViewController: UICollectionViewDelegate {
             presenter?.fetchBookTimes(
                 date: presenter?.workingRangeModel[indexPath.item].dateString ?? ""
             )
-
         case .time:
             let cell = collectionView.cellForItem(at: indexPath) as! TimeCell
             cell.isSelected = !cell.isSelected

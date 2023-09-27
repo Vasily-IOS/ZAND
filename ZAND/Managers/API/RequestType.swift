@@ -31,8 +31,10 @@ enum RequestType {
         date_to: String
     )
 
-    // Получить список сеансов, доступных для бронирования
+    // Получить список сеансов, доступных для бронирования 👍
     case bookTimes(company_id: Int, staff_id: Int, date: String, service_id: Int)
+
+
 
 
     // получить список сотрудников
@@ -80,18 +82,17 @@ extension RequestType: TargetType {
             return "/api/v1/book_services/\(company_id)"
         case .bookStaff(let company_id, _):
             return "/api/v1/book_staff/\(company_id)"
-
-
-        case .staff(let company_id):
-            return "/api/v1/company/\(company_id)/staff/"
-        case .staffByID(let company_id, let staff_id):
-            return "/api/v1/company/\(company_id)/staff/\(staff_id)"
         case .bookDates(let company_id,_, _, _, _, _):
             return "/api/v1/book_dates/\(company_id)"
         case .bookTimes(let company_id, let staff_id, let date, _):
             return "/api/v1/book_times/\(company_id)/\(staff_id)/\(date)"
 
+
             // MARK: - deprecated
+        case .staff(let company_id):
+            return "/api/v1/company/\(company_id)/staff/"
+        case .staffByID(let company_id, let staff_id):
+            return "/api/v1/company/\(company_id)/staff/\(staff_id)"
         case .services(let company_id):
             return "/api/v1/company/\(company_id)/services/"
         case .employeeSchedule(let company_id, let staff_id, let start_date, let end_date):
@@ -119,12 +120,22 @@ extension RequestType: TargetType {
         case .salons, .categories, .bookServices, .staff, .staffByID, .bookTimes:
             return .requestPlain
         case .bookStaff(_, let service_id):
-            let parameters: [String: Any] = ["service_ids": service_id]
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+            if service_id.isEmpty {
+                return .requestPlain
+            } else {
+                let parameters: [String: Any] = ["service_ids": service_id]
+                return .requestParameters(
+                    parameters: parameters,
+                    encoding: URLEncoding.queryString
+                )
+            }
         case .bookDates(_, let service_ids, let staff_id, _, _, _):
             let parameters: [String: Any] = ["staff_id": staff_id,
                                              "service_ids": service_ids]
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+            return .requestParameters(
+                parameters: parameters,
+                encoding: URLEncoding.queryString
+            )
 
             // MARK: - deprecated
 
@@ -149,7 +160,6 @@ extension RequestType: TargetType {
             return ["Content-type": "application/json",
                     "Accept": "application/vnd.api.v2+json",
                     "Authorization": "Bearer \(bearerToken), User \(userToken)"]
-
         }
     }
 }

@@ -59,6 +59,7 @@ extension SearchCell {
     }
     
     private func setSelf() {
+        backgroundColor = .mainGray
         contentView.backgroundColor = .mainGray
         selectionStyle = .none
         addLine()

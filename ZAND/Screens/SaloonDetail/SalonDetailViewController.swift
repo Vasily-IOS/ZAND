@@ -15,12 +15,12 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
     var presenter: SaloonPresenterOutput?
     
     private let backView = BackView()
- 
+
     // MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         backViewAction()
         subscribeDelegate()
         hideBackButtonTitle()
@@ -100,20 +100,10 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
     }
 
     func openBooking() {
-        // if we have not user we will show sign in screen
-//        if !UserDBManager.shared.contains() {
-//            AppRouter.shared.popViewController()
-//            AppRouter.shared.changeTabBarVC(to: 2)
-//            print("Failed to open booking")
-//        } else {
-            // push booking vc
-            AppRouter.shared.presentWithNav(type: .startBooking(presenter?.getModel()?.id ?? 0))
-//        }
+        AppRouter.shared.presentWithNav(type: .startBooking(presenter?.getModel()?.id ?? 0))
     }
 
     func applyDB() {
-        // if we have not user we will show sign in screen
-
         if !UserDBManager.shared.contains() {
             AppRouter.shared.popViewController()
             AppRouter.shared.changeTabBarVC(to: 2)
