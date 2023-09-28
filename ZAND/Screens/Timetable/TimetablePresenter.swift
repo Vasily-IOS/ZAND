@@ -10,6 +10,7 @@ import UIKit
 protocol TimetablePresenterOutput: AnyObject {
     var workingRangeModel: [WorkingRangeItem] { get set }
     var bookTimeModel: [BookTime] { get set }
+    var viewModel: ConfirmationViewModel { get set }
     func fetchBookTimes(date: String)
     func updateDateLabel(date: Date)
 }
@@ -30,6 +31,12 @@ final class TimetablePresenter: TimetablePresenterOutput {
 
     var bookTimeModel: [BookTime] = []
 
+    var viewModel: ConfirmationViewModel {
+        didSet {
+            viewModel.staffID = staffID
+        }
+    }
+
     private let network: HTTP
 
     private let saloonID: Int
@@ -47,7 +54,8 @@ final class TimetablePresenter: TimetablePresenterOutput {
          saloonID: Int,
          staffID: Int,
          scheduleTill: String,
-         serviceToProvideID: Int
+         serviceToProvideID: Int,
+         viewModel: ConfirmationViewModel
     ) {
         self.view = view
         self.network = network
@@ -55,6 +63,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
         self.staffID = staffID
         self.scheduleTill = scheduleTill
         self.serviceToProvideID = serviceToProvideID
+        self.viewModel = viewModel
 
         self.fetchBookDates(company_id: saloonID,
                             service_ids: [String(serviceToProvideID)],
@@ -87,6 +96,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
                 service_id: serviceToProvideID),
             expectation: BookTimes.self)
         { [weak self] bookTimes in
+
             self?.bookTimeModel = bookTimes.data
             self?.view?.reloadSection()
         }

@@ -100,6 +100,15 @@
 		FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE229EF260500644208 /* BaseCollectionCell.swift */; };
 		FF8E7BE529EF293100644208 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE429EF293100644208 /* OptionView.swift */; };
 		FF94D66F2AB9FC4A00730721 /* StartBookingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF94D66E2AB9FC4A00730721 /* StartBookingButtonView.swift */; };
+		FF95F8922AC58ABF005DA310 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8912AC58ABF005DA310 /* ConfirmationViewController.swift */; };
+		FF95F8942AC58AC8005DA310 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8932AC58AC8005DA310 /* ConfirmationView.swift */; };
+		FF95F8962AC58AD0005DA310 /* ConfirmationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8952AC58AD0005DA310 /* ConfirmationPresenter.swift */; };
+		FF95F8A12AC5A7DC005DA310 /* ConfirmationComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A02AC5A7DC005DA310 /* ConfirmationComponentView.swift */; };
+		FF95F8A32AC5AA59005DA310 /* StaffComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A22AC5AA59005DA310 /* StaffComponentView.swift */; };
+		FF95F8A52AC5AB7C005DA310 /* BookingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A42AC5AB7C005DA310 /* BookingRouter.swift */; };
+		FF95F8A82AC5AC5B005DA310 /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A72AC5AC5B005DA310 /* ConfirmationViewModel.swift */; };
+		FF95F8AB2AC5AD8F005DA310 /* ConfirmationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */; };
+		FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AC2AC5BCD6005DA310 /* AppID.swift */; };
 		FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F229EEAB1500F4E4C3 /* AssetString.swift */; };
 		FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */; };
 		FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */; };
@@ -272,6 +281,15 @@
 		FF8E7BE229EF260500644208 /* BaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
 		FF8E7BE429EF293100644208 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		FF94D66E2AB9FC4A00730721 /* StartBookingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingButtonView.swift; sourceTree = "<group>"; };
+		FF95F8912AC58ABF005DA310 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		FF95F8932AC58AC8005DA310 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		FF95F8952AC58AD0005DA310 /* ConfirmationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationPresenter.swift; sourceTree = "<group>"; };
+		FF95F8A02AC5A7DC005DA310 /* ConfirmationComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationComponentView.swift; sourceTree = "<group>"; };
+		FF95F8A22AC5AA59005DA310 /* StaffComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffComponentView.swift; sourceTree = "<group>"; };
+		FF95F8A42AC5AB7C005DA310 /* BookingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRouter.swift; sourceTree = "<group>"; };
+		FF95F8A72AC5AC5B005DA310 /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
+		FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationModel.swift; sourceTree = "<group>"; };
+		FF95F8AC2AC5BCD6005DA310 /* AppID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppID.swift; sourceTree = "<group>"; };
 		FF99B8F229EEAB1500F4E4C3 /* AssetString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetString.swift; sourceTree = "<group>"; };
 		FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIColor.swift"; sourceTree = "<group>"; };
@@ -480,6 +498,7 @@
 				FFFE2ACD2AC31705000A940A /* BookDates.swift */,
 				FF63B97E2AC35EF000DFD932 /* BookTimes.swift */,
 				FF63B97C2AC3469C00DFD932 /* BookServicesModel.swift */,
+				FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -498,6 +517,7 @@
 				FF27B0AB2AB8D09700611F47 /* StartBookingViewController.swift */,
 				FF27B0AD2AB8D0A100611F47 /* StartBookingView.swift */,
 				FF27B0AF2AB8D0B000611F47 /* StartBookingPresenter.swift */,
+				FF95F8A62AC5AC2E005DA310 /* ConfirmationViewModel */,
 			);
 			path = StartBooking;
 			sourceTree = "<group>";
@@ -632,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FF95F8902AC58A71005DA310 /* Сonfirmation */,
 				FFFFDD3D2ABF771800FA5B92 /* Timetable */,
 				FF27B0BA2AB8F05000611F47 /* Staff */,
 				FF27B0B32AB8DF5300611F47 /* Services */,
@@ -816,6 +837,34 @@
 			path = OptionCell;
 			sourceTree = "<group>";
 		};
+		FF95F8902AC58A71005DA310 /* Сonfirmation */ = {
+			isa = PBXGroup;
+			children = (
+				FF95F8912AC58ABF005DA310 /* ConfirmationViewController.swift */,
+				FF95F8932AC58AC8005DA310 /* ConfirmationView.swift */,
+				FF95F8952AC58AD0005DA310 /* ConfirmationPresenter.swift */,
+				FF95F8972AC59793005DA310 /* Components */,
+			);
+			path = "Сonfirmation";
+			sourceTree = "<group>";
+		};
+		FF95F8972AC59793005DA310 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FF95F8A22AC5AA59005DA310 /* StaffComponentView.swift */,
+				FF95F8A02AC5A7DC005DA310 /* ConfirmationComponentView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FF95F8A62AC5AC2E005DA310 /* ConfirmationViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FF95F8A72AC5AC5B005DA310 /* ConfirmationViewModel.swift */,
+			);
+			path = ConfirmationViewModel;
+			sourceTree = "<group>";
+		};
 		FF99B8ED29EEA9EA00F4E4C3 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,6 +924,7 @@
 			children = (
 				FF99B8FD29EEB6AD00F4E4C3 /* AppRouter.swift */,
 				FF99B8F929EEB4F000F4E4C3 /* DefaulRouter.swift */,
+				FF95F8A42AC5AB7C005DA310 /* BookingRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -908,6 +958,7 @@
 				FFDCE4BA2A1BB47000CEA0E1 /* AssetImage.swift */,
 				FFDCE4BC2A1BB7E300CEA0E1 /* URL.swift */,
 				FF30A1BC2A4A138800DD6E29 /* Config.swift */,
+				FF95F8AC2AC5BCD6005DA310 /* AppID.swift */,
 				FF427DD82A128622007DF80A /* LaunchVideoScreen */,
 			);
 			path = Resources;
@@ -1254,6 +1305,7 @@
 				FF1961AE2A4C4F0A00434AC7 /* CommonModel.swift in Sources */,
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,
 				FF45A16A29E7F67600587DAF /* Extension + UIView.swift in Sources */,
+				FF95F8922AC58ABF005DA310 /* ConfirmationViewController.swift in Sources */,
 				FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */,
 				FF27B0BE2AB8F07D00611F47 /* StaffView.swift in Sources */,
 				FF25633329F57A3000091374 /* ShowCaseItemCell.swift in Sources */,
@@ -1278,11 +1330,13 @@
 				FF27B0AE2AB8D0A100611F47 /* StartBookingView.swift in Sources */,
 				FF2DB9752A9DE2250036356B /* SignInPresenter.swift in Sources */,
 				FFD3E1D72A054E7C00680ED5 /* PrivacyPolicyViewController.swift in Sources */,
+				FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */,
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */,
 				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
 				FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */,
 				FF3E65D92A55C1F6007EC56D /* RequestType.swift in Sources */,
+				FF95F8A82AC5AC5B005DA310 /* ConfirmationViewModel.swift in Sources */,
 				FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */,
 				FF862A4D2AA88B660083DEB7 /* SaloonProvider.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */,
@@ -1297,6 +1351,7 @@
 				FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */,
 				FF1961B02A4C51BC00434AC7 /* AppointmentsPresenter.swift in Sources */,
 				FFFFDD432ABF787000FA5B92 /* TimetablePresenter.swift in Sources */,
+				FF95F8AB2AC5AD8F005DA310 /* ConfirmationModel.swift in Sources */,
 				FF27B0AC2AB8D09700611F47 /* StartBookingViewController.swift in Sources */,
 				FF2DB9772A9DE2360036356B /* SignInView.swift in Sources */,
 				FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */,
@@ -1307,6 +1362,7 @@
 				FFFFDD372ABE66AE00FA5B92 /* Categories.swift in Sources */,
 				FF30A1BD2A4A138800DD6E29 /* Config.swift in Sources */,
 				FF45A16629E7F5ED00587DAF /* Extension + UITableViewCell.swift in Sources */,
+				FF95F8942AC58AC8005DA310 /* ConfirmationView.swift in Sources */,
 				FF8AAF6C29EEA392007D6A60 /* ProfileView.swift in Sources */,
 				FF27B0C22AB8F1E500611F47 /* EmployeeModel.swift in Sources */,
 				FF2DB97C2A9DFAFD0036356B /* RegisterView.swift in Sources */,
@@ -1326,6 +1382,7 @@
 				FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */,
 				FF1961BA2A4C78E700434AC7 /* MyDetailsPresenter.swift in Sources */,
 				FF94D66F2AB9FC4A00730721 /* StartBookingButtonView.swift in Sources */,
+				FF95F8A32AC5AA59005DA310 /* StaffComponentView.swift in Sources */,
 				FF1961B82A4C78B900434AC7 /* SettingsMenuModel.swift in Sources */,
 				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,
 				FF45A16029E7F4BC00587DAF /* Extension + UIStackView.swift in Sources */,
@@ -1348,6 +1405,7 @@
 				FFB9856A2A30B5D500ABEFBB /* OnboardManager.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
 				FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */,
+				FF95F8A52AC5AB7C005DA310 /* BookingRouter.swift in Sources */,
 				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
 				FFFE2ACE2AC31705000A940A /* BookDates.swift in Sources */,
 				FFDE118D2A5C424000CEF390 /* HTTP.swift in Sources */,
@@ -1369,6 +1427,7 @@
 				FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */,
 				FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */,
 				FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */,
+				FF95F8A12AC5A7DC005DA310 /* ConfirmationComponentView.swift in Sources */,
 				FFFFDD3A2ABF2B7A00FA5B92 /* CategoryCell.swift in Sources */,
 				FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */,
 				FFC01B532A03D673005CE41B /* PushCell.swift in Sources */,
@@ -1391,6 +1450,7 @@
 				FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */,
 				FFDCE4B92A1B8EA500CEA0E1 /* SelectableMapPresenter.swift in Sources */,
 				FFFFDD412ABF786700FA5B92 /* TimetableView.swift in Sources */,
+				FF95F8962AC58AD0005DA310 /* ConfirmationPresenter.swift in Sources */,
 				FF99B90829EEBA7F00F4E4C3 /* SearchView.swift in Sources */,
 				FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */,
 				FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */,

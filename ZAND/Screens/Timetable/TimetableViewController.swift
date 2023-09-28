@@ -24,6 +24,7 @@ final class TimetableViewController: BaseViewController<TimetableView> {
         title = AssetString.selectDateAndTime
 
         subscribeDelegates()
+        hideBackButtonTitle()
     }
 
     // MARK: - Instance methods
@@ -31,6 +32,17 @@ final class TimetableViewController: BaseViewController<TimetableView> {
     private func subscribeDelegates() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
+        contentView.delegate = self
+    }
+
+    private func showAlert() {
+        let alertController = UIAlertController(
+            title: AssetString.chooseTime,
+            message: nil,
+            preferredStyle: .alert)
+        let understandAction = UIAlertAction(title: AssetString.ok, style: .cancel)
+        alertController.addAction(understandAction)
+        present(alertController, animated: true)
     }
 }
 
@@ -80,6 +92,9 @@ extension TimetableViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch TimetableSection.init(rawValue: indexPath.section) {
         case .day:
+            guard let viewModel = presenter?.viewModel else { return }
+            viewModel.bookTime = nil
+
             let cell = collectionView.cellForItem(at: indexPath) as! DayCell
 
             if cell.isChoosen == false {
@@ -105,7 +120,11 @@ extension TimetableViewController: UICollectionViewDelegate {
         case .time:
             let cell = collectionView.cellForItem(at: indexPath) as! TimeCell
             cell.isSelected = !cell.isSelected
-            print(presenter?.bookTimeModel[indexPath.item].datetime ?? "")
+
+            if let viewModel = presenter?.viewModel {
+                viewModel.bookTime = presenter?.bookTimeModel[indexPath.item].datetime ?? ""
+            }
+
         default:
             break
         }
@@ -150,3 +169,26 @@ extension TimetableViewController: TimetableInput {
         contentView.setMonth(month: date)
     }
 }
+
+extension TimetableViewController: TimetableViewDelegate {
+
+    // MARK: - TimetableViewDelegate methods
+
+    func navigateToConfirmation() {
+        if presenter?.viewModel.bookTime == nil {
+            showAlert()
+        } else {
+            guard let viewModel = presenter?.viewModel else { return }
+            viewModel.build()
+
+            let view = ConfirmationView()
+            let vc = ConfirmationViewController(contentView: view)
+            let presenter = ConfirmationPresenter(view: vc, viewModel: viewModel)
+            vc.presenter = presenter
+
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
+extension TimetableViewController: HideBackButtonTitle {}

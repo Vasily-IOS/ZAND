@@ -8,12 +8,21 @@
 import UIKit
 import SnapKit
 
+protocol TimetableViewDelegate: AnyObject {
+    func navigateToConfirmation()
+}
+
 final class TimetableView: BaseUIView {
 
     // MARK: - Properties
 
+    weak var delegate: TimetableViewDelegate?
+
     lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: createLayout()
+        )
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .white
         collectionView.register(cellType: DayCell.self)
@@ -42,11 +51,17 @@ final class TimetableView: BaseUIView {
 
     // MARK: - Instance methods
 
+    @objc
+    private func bottomButtonAction() {
+        delegate?.navigateToConfirmation()
+    }
+
     override func setup() {
         super.setup()
 
-        addSubviews([monthLabel, collectionView, bottomButton])
+        setTarget()
 
+        addSubviews([monthLabel, collectionView, bottomButton])
         monthLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.left.equalToSuperview().offset(16)
@@ -63,7 +78,7 @@ final class TimetableView: BaseUIView {
             make.height.equalTo(44)
             make.right.equalToSuperview().inset(16)
             make.left.equalToSuperview().offset(16)
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(20)
         }
     }
 
@@ -85,5 +100,13 @@ final class TimetableView: BaseUIView {
             }
         }
         return layout
+    }
+
+    private func setTarget() {
+        bottomButton.addTarget(
+            self,
+            action: #selector(bottomButtonAction),
+            for: .touchUpInside
+        )
     }
 }

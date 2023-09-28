@@ -10,7 +10,9 @@ import Foundation
 protocol ServicesPresenterOutput: AnyObject {
     var model: [Categories] { get set }
     var saloonID: Int { get }
+    var viewModel: ConfirmationViewModel { get set }
     func search(text: String)
+    func setServiceID(serviceID: Int)
 }
 
 protocol ServicesViewInput: AnyObject {
@@ -29,14 +31,21 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     let saloonID: Int
 
+    var viewModel: ConfirmationViewModel
+
     private let network: HTTP
 
     // MARK: - Initializers
 
-    init(view: ServicesViewInput, saloonID: Int, network: HTTP) {
+    init(view: ServicesViewInput,
+         saloonID: Int,
+         network: HTTP,
+         viewModel: ConfirmationViewModel
+    ) {
         self.view = view
         self.saloonID = saloonID
         self.network = network
+        self.viewModel = viewModel
 
         self.fetchData()
     }
@@ -49,6 +58,10 @@ final class ServicesPresenter: ServicesPresenterOutput {
         }
         model = text.isEmpty ? adittionalModel : sortedModel
         view?.reloadData()
+    }
+
+    func setServiceID(serviceID: Int) {
+        viewModel.serviceID = serviceID
     }
 
     private func fetchData() {

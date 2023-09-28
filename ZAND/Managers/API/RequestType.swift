@@ -54,7 +54,7 @@ enum RequestType {
     // MARK: -
 
     var applicationID: Int {
-        return 1825
+        return AppID.id
     }
 
     var bearerToken: String {

@@ -78,15 +78,23 @@ extension ServicesViewController {
             presenter?.model[indexPath.section].isOpened = !(presenter?.model[indexPath.section].isOpened)!
             tableView.reloadSections([indexPath.section], with: .none)
         } else {
+            guard let viewModel = presenter?.viewModel else { return }
+
+            let serviceID = presenter?.model[indexPath.section].services[indexPath.row - 1].id ?? 0
+            viewModel.serviceID = serviceID
+            
             let view = StaffView()
             let vc = StaffViewController(contentView: view)
             let network: HTTP = APIManager()
+
             let presenter = StaffPresenter(
                 view: vc,
                 saloonID: presenter?.saloonID ?? 0,
                 network: network,
-                serviceToProvideID: presenter?.model[indexPath.section].services[indexPath.row - 1].id ?? 0)
+                serviceToProvideID: serviceID,
+                viewModel: viewModel)
             vc.presenter = presenter
+
             navigationController?.pushViewController(vc, animated: true)
         }
     }

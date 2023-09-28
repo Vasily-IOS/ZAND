@@ -39,22 +39,27 @@ extension StartBookingViewController: StartBookingDelegate {
         let view = ServicesView()
         let vc = ServicesViewController(contentView: view)
         let network: HTTP = APIManager()
-        let presenter = ServicesPresenter(view: vc, saloonID: presenter?.saloonID ?? 0, network: network)
+        let viewModel = ConfirmationViewModel(bookingType: .service)
+        let presenter = ServicesPresenter(
+            view: vc,
+            saloonID: presenter?.saloonID ?? 0,
+            network: network,
+            viewModel: viewModel)
         vc.presenter = presenter
         navigationController?.pushViewController(vc, animated: true)
     }
 
     func openStaff() {
-        let view = StaffView()
-        let vc = StaffViewController(contentView: view)
-        let network: HTTP = APIManager()
-        let presenter = StaffPresenter(
-            view: vc,
-            saloonID: presenter?.saloonID ?? 0,
-            network: network,
-            serviceToProvideID: 0)
-        vc.presenter = presenter
-        navigationController?.pushViewController(vc, animated: true)
+//        let view = StaffView()
+//        let vc = StaffViewController(contentView: view)
+//        let network: HTTP = APIManager()
+//        let presenter = StaffPresenter(
+//            view: vc,
+//            saloonID: presenter?.saloonID ?? 0,
+//            network: network,
+//            serviceToProvideID: 0)
+//        vc.presenter = presenter
+//        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

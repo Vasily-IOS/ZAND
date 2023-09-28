@@ -69,6 +69,9 @@ enum AssetString {
     static let staff = "Специалисты"
     static let findInServices = "Найти в услугах"
     static let selectDateAndTime = "Выберите дату и время"
+    static let checkAppointment = "Проверьте запись"
+    static let approveAppointment = "Подтвердите запись"
+    static let chooseTime = "Выберите время"
     
     // MARK: - Bottom button values
     static let apply = "Применить"

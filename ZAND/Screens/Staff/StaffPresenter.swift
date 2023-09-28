@@ -8,10 +8,13 @@
 import Foundation
 
 protocol StaffPresenterOutput: AnyObject {
-    func fetchStaff()
+    var viewModel: ConfirmationViewModel { get set }
     var serviceToProvideID: Int { get }
     var saloonID: Int { get }
     var fetchedStaff: [EmployeeCommon] { get }
+
+    func fetchStaff()
+    func setStaffID(staffID: Int)
 }
 
 protocol StaffViewInput: AnyObject {
@@ -26,6 +29,8 @@ final class StaffPresenter: StaffPresenterOutput {
 
     var fetchedStaff: [EmployeeCommon] = []
 
+    var viewModel: ConfirmationViewModel
+
     let saloonID: Int
 
     let serviceToProvideID: Int
@@ -38,11 +43,13 @@ final class StaffPresenter: StaffPresenterOutput {
         view: StaffViewInput,
         saloonID: Int,
         network: HTTP,
-        serviceToProvideID: Int)
+        serviceToProvideID: Int,
+        viewModel: ConfirmationViewModel)
     {
         self.view = view
         self.saloonID = saloonID
         self.network = network
+        self.viewModel = viewModel
         self.serviceToProvideID = serviceToProvideID
 
         if serviceToProvideID == 0 {
@@ -54,18 +61,8 @@ final class StaffPresenter: StaffPresenterOutput {
 
     // MARK: - Instance methods
 
-    private func fetchBookStaff(saloonID: Int, serviceID: Int) {
-        network.performRequest(
-            type: .bookStaff(
-                company_id: saloonID,
-                service_id: [serviceID]),
-            expectation: EmployeeModel.self)
-        { [weak self] staff in
-            guard let self else { return }
-
-            self.fetchedStaff = staff.data.filter { ($0.schedule_till ?? "") > self.currentDate() }
-            self.view?.reloadData()
-        }
+    func setStaffID(staffID: Int) {
+        print()
     }
 
     func fetchStaff() {
@@ -86,5 +83,19 @@ final class StaffPresenter: StaffPresenterOutput {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: Date())
+    }
+
+    private func fetchBookStaff(saloonID: Int, serviceID: Int) {
+        network.performRequest(
+            type: .bookStaff(
+                company_id: saloonID,
+                service_id: [serviceID]),
+            expectation: EmployeeModel.self)
+        { [weak self] staff in
+            guard let self else { return }
+
+            self.fetchedStaff = staff.data.filter { ($0.schedule_till ?? "") > self.currentDate() }
+            self.view?.reloadData()
+        }
     }
 }
