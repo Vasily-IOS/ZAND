@@ -48,14 +48,16 @@ final class StaffComponentView: BaseUIView {
 
     // MARK: - Instance methods
 
-//    func configure(model: EmployeeCommon) {
-//        nameLabel.text = model.name
-//        specializationLabel.text = model.specialization
-//
-//        if let url = URL(string: model.avatar) {
-//            avatarImage.kf.setImage(with: url)
-//        }
-//    }
+    func configure(model: EmployeeCommon?) {
+        guard let model else { return }
+        
+        nameLabel.text = model.name
+        specializationLabel.text = model.specialization
+
+        if let url = URL(string: model.avatar) {
+            avatarImage.kf.setImage(with: url)
+        }
+    }
 
     override func setup() {
         super.setup()

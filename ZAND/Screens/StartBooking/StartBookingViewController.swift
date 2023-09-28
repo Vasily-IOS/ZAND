@@ -39,7 +39,10 @@ extension StartBookingViewController: StartBookingDelegate {
         let view = ServicesView()
         let vc = ServicesViewController(contentView: view)
         let network: HTTP = APIManager()
-        let viewModel = ConfirmationViewModel(bookingType: .service)
+        let viewModel = ConfirmationViewModel(
+            bookingType: .service,
+            company_id: presenter?.saloonID ?? 0
+        )
         let presenter = ServicesPresenter(
             view: vc,
             saloonID: presenter?.saloonID ?? 0,

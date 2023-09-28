@@ -13,9 +13,11 @@ final class ConfirmationViewController: BaseViewController<ConfirmationView> {
 
     var presenter: ConfirmationPresenter?
 
-    // MARK: - Initializers
-
     // MARK: - Lifecycle
+
+    deinit {
+        print("ConfirmationViewController died")
+    }
 
     // MARK: - Instance methods
 
@@ -37,11 +39,32 @@ extension ConfirmationViewController: ConfirmationViewDelegate {
     // MARK: - ConfirmationViewDelegate methods
 
     func confirm() {
-        print(presenter?.viewModel.resultModel)
+        presenter?.createRecord()
     }
 }
 
 extension ConfirmationViewController: ConfirmationInput {
 
-    
+    // MARK: - ConfirmationInput methods
+
+    func configure(viewModel: ConfirmationViewModel) {
+        contentView.staffComponentView.configure(model: viewModel.employeeCommon)
+        contentView.nameComponentView.configure(
+            topText: "Имя",
+            bottomText: viewModel.fullName
+        )
+        contentView.phoneComponentView.configure(
+            topText: "Телефон",
+            bottomText: viewModel.phone
+        )
+        contentView.serviceComponentView.configure(
+            topText: viewModel.bookService?.title ?? "",
+            bottomText: "\(viewModel.bookService?.price_max ?? 0) руб."
+        )
+
+        contentView.dateComponentView.configure(
+            topText: viewModel.startSeanceDate ?? "",
+            bottomText: viewModel.startSeanceTime ?? ""
+        )
+    }
 }

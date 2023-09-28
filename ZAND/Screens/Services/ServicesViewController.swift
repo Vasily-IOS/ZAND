@@ -82,6 +82,7 @@ extension ServicesViewController {
 
             let serviceID = presenter?.model[indexPath.section].services[indexPath.row - 1].id ?? 0
             viewModel.serviceID = serviceID
+            viewModel.bookService = presenter?.model[indexPath.section].services[indexPath.row - 1]
             
             let view = StaffView()
             let vc = StaffViewController(contentView: view)

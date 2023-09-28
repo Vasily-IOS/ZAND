@@ -122,7 +122,7 @@ extension TimetableViewController: UICollectionViewDelegate {
             cell.isSelected = !cell.isSelected
 
             if let viewModel = presenter?.viewModel {
-                viewModel.bookTime = presenter?.bookTimeModel[indexPath.item].datetime ?? ""
+                viewModel.bookTime = presenter?.bookTimeModel[indexPath.item]
             }
 
         default:
@@ -181,9 +181,14 @@ extension TimetableViewController: TimetableViewDelegate {
             guard let viewModel = presenter?.viewModel else { return }
             viewModel.build()
 
+            let network: HTTP = APIManager()
             let view = ConfirmationView()
             let vc = ConfirmationViewController(contentView: view)
-            let presenter = ConfirmationPresenter(view: vc, viewModel: viewModel)
+            let presenter = ConfirmationPresenter(
+                view: vc,
+                viewModel: viewModel,
+                network: network
+            )
             vc.presenter = presenter
 
             navigationController?.pushViewController(vc, animated: true)

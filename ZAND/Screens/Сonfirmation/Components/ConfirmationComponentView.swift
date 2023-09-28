@@ -12,18 +12,17 @@ final class ConfirmationComponentView: BaseUIView {
     // MARK: - Properties
 
     private let topLabel: UILabel = {
-        let nameLabel = UILabel()
-        nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        nameLabel.text = "tect 1"
-        return nameLabel
+        let topLabel = UILabel()
+        topLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        topLabel.numberOfLines = 0
+        return topLabel
     }()
 
     private let bottomLabel: UILabel = {
-        let specializationLabel = UILabel()
-        specializationLabel.font = .systemFont(ofSize: 15, weight: .medium)
-        specializationLabel.numberOfLines = 0
-        specializationLabel.text = "tect 2"
-        return specializationLabel
+        let bottomLabel = UILabel()
+        bottomLabel.font = .systemFont(ofSize: 15, weight: .medium)
+        bottomLabel.numberOfLines = 0
+        return bottomLabel
     }()
 
     private lazy var stackView = UIStackView(
@@ -37,14 +36,12 @@ final class ConfirmationComponentView: BaseUIView {
         spacing: 20
     )
 
-    // MARK: - Initializers
-
     // MARK: - Instance methods
 
-//    func configure(model: EmployeeCommon) {
-//
-
-//    }
+    func configure(topText: String, bottomText: String) {
+        topLabel.text = topText
+        bottomLabel.text = bottomText
+    }
 
     override func setup() {
         super.setup()

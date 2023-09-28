@@ -18,16 +18,15 @@ final class ConfirmationView: BaseUIView {
 
     weak var delegate: ConfirmationViewDelegate?
 
-    private let staffComponentView = StaffComponentView()
+    let staffComponentView = StaffComponentView()
 
-    private let dateComponentView = ConfirmationComponentView()
+    let dateComponentView = ConfirmationComponentView()
 
-    private let serviceComponentView = ConfirmationComponentView()
+    let serviceComponentView = ConfirmationComponentView()
 
-    private let nameComponentView = ConfirmationComponentView()
+    let nameComponentView = ConfirmationComponentView()
 
-    private let phoneComponentView = ConfirmationComponentView()
-
+    let phoneComponentView = ConfirmationComponentView()
     private let bottomButton = BottomButton(buttonText: .approve)
 
     private lazy var topStackView = UIStackView(
@@ -52,6 +51,12 @@ final class ConfirmationView: BaseUIView {
         distribution: .fillProportionally,
         spacing: 20
     )
+
+    // MARK: - Lifecycle
+
+    deinit {
+        print("ConfirmationView died")
+    }
 
     // MARK: - Instance methods
 

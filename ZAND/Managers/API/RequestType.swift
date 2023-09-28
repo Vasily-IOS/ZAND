@@ -35,6 +35,10 @@ enum RequestType {
     case bookTimes(company_id: Int, staff_id: Int, date: String, service_id: Int)
 
 
+    // Создать запись на сеанс
+    case createRecord(company_id: Int, model: ConfirmationModel)
+
+
 
 
     // получить список сотрудников
@@ -42,8 +46,6 @@ enum RequestType {
 
     // получить конкретного сотрудника
     case staffByID(company_id: Int, staff_id: Int) // получить конкретного сотрудника
-
-
 
     // MARK: - deprecated requests
 
@@ -86,6 +88,8 @@ extension RequestType: TargetType {
             return "/api/v1/book_dates/\(company_id)"
         case .bookTimes(let company_id, let staff_id, let date, _):
             return "/api/v1/book_times/\(company_id)/\(staff_id)/\(date)"
+        case .createRecord(let company_id, _):
+            return "/api/v1/book_record/\(company_id)"
 
 
             // MARK: - deprecated
@@ -107,6 +111,8 @@ extension RequestType: TargetType {
         case .salons, .categories, .bookServices, .bookStaff, .staff,
                 .staffByID, .bookDates, .bookTimes:
             return .get
+        case .createRecord:
+            return .post
 
         // MARK: - deprecated
 
@@ -136,6 +142,8 @@ extension RequestType: TargetType {
                 parameters: parameters,
                 encoding: URLEncoding.queryString
             )
+        case .createRecord(_, let model):
+            return .requestJSONEncodable(model)
 
             // MARK: - deprecated
 
@@ -146,7 +154,7 @@ extension RequestType: TargetType {
 
     var headers: [String : String]? {
         switch self {
-        case .salons, .bookServices, .bookDates, .bookStaff:
+        case .salons, .bookServices, .bookDates, .bookStaff, .createRecord:
             return ["Authorization": "Bearer \(bearerToken)",
                     "Accept": "application/vnd.api.v2+json"]
         case .categories, .staff, .staffByID, .bookTimes:

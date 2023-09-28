@@ -70,6 +70,7 @@ extension StaffViewController: UITableViewDelegate {
 
         let staffID = presenter?.fetchedStaff[indexPath.section].id ?? 0
         viewModel.staffID = staffID
+        viewModel.employeeCommon = presenter?.fetchedStaff[indexPath.section]
 
         let layout: DefaultTimetableLayout = TimetableLayout()
         let contentView = TimetableView(layout: layout)
