@@ -156,7 +156,7 @@ extension SaloonCell {
         }
         
         viewOnMapButton.snp.makeConstraints { make in
-            make.right.equalTo(contentView.snp.right).inset(16)
+            make.right.equalTo(snp.right).inset(16)
             make.left.equalTo(leftStackView.snp.right).offset(16)
             make.height.equalTo(15)
             make.width.equalTo(125)

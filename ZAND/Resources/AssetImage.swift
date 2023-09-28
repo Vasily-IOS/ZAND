@@ -32,4 +32,5 @@ enum AssetImage {
     static let start_booking_service_icon = UIImage(named: "start_booking_service_icon")
     static let start_booking_specialist_icon = UIImage(named: "start_booking_specialist_icon")
     static let arrow_icon = UIImage(named: "arrow_icon")
+    static let lostConnection_icon = UIImage(named: "lost_connection_icon")
 }

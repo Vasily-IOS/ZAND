@@ -16,8 +16,8 @@ protocol MainPresenterOutput: AnyObject {
     func getModel(by type: MainType) -> [CommonFilterProtocol]
     func getSearchIndex(id: Int) -> IndexPath?
     func getModel(by id: Int) -> SaloonMapModel?
-    func applyDB(by id: Int, completion: () -> ())
-    func contains(by id: Int) -> Bool
+    func applyDB(by id: Int, completion: @escaping () -> ())
+    func notContains(by id: Int) -> Bool
 
     func fetchData()
 }
@@ -31,6 +31,8 @@ protocol MainViewInput: AnyObject {
 final class MainPresenter: MainPresenterOutput {
 
     // MARK: - Properties
+
+    weak var view: MainViewInput?
     
     private let optionsModel = OptionsModel.options
 
@@ -39,10 +41,6 @@ final class MainPresenter: MainPresenterOutput {
     private let realmManager: RealmManager
 
     private let provider: SaloonProvider
-
-    // MARK: - UI
-    
-    weak var view: MainViewInput?
     
     // MARK: - Initializer
     
@@ -102,16 +100,43 @@ extension MainPresenter {
         return saloons.first(where: { $0.id == id })
     }
 
-    func applyDB(by id: Int, completion: () -> ()) {
-        if contains(by: id) {
-            if let modelForSave = getModel(by: id) as? Saloon {
-                SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-                completion()
+    func applyDB(by id: Int, completion: @escaping () -> ()) {
+//        DispatchQueue.global().async {
+            if self.notContains(by: id) {
+                if let modelForSave = self.getModel(by: id) as? Saloon {
+                    let group = DispatchGroup()
+
+                    group.enter()
+                    DispatchQueue.global().async {
+                        SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
+                    }
+                    group.leave()
+
+                    group.notify(queue: .main) {
+                        print("Success")
+                    }
+//                    }
+//                    SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
+                }
+            } else {
+//                DispatchQueue.global().async {
+                    self.remove(by: id)
+//                }
             }
-        } else {
-            remove(by: id)
-            completion()
-        }
+
+            //            if self.notContains(by: id) {
+            //                if let modelForSave = self.getModel(by: id) as? Saloon {
+            //                    SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
+            ////                    DispatchQueue.main.async {
+            ////                        completion()
+            ////                    }
+            //                }
+            //            } else {
+            ////                self.remove(by: id)
+            ////                completion()
+            //            }
+//        }
+        completion()
     }
 
     func remove(by id: Int) {
@@ -120,7 +145,7 @@ extension MainPresenter {
         VibrationManager.shared.vibrate(for: .success)
     }
 
-    func contains(by id: Int) -> Bool {
+    func notContains(by id: Int) -> Bool {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
         return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
     }

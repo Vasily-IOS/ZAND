@@ -62,7 +62,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
         ) { [weak self] bookingDates in
             self?.setActualDates(dates: bookingDates) { firstDate in
                 self?.view?.reloadData()
-                self?.updateDateLabel(date: firstDate)
+                self?.updateDateLabel(date: self?.workingRangeModel.first?.date ?? Date())
                 self?.fetchBookTimes(date: firstDate)
             }
         }
@@ -70,17 +70,8 @@ final class TimetablePresenter: TimetablePresenterOutput {
 
     // MARK: - Instance methods
 
-    func updateDateLabel(date: String) {
-        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.locale = Locale(identifier: "ru_RU")
-        let date = formatter.date(from: date) ?? Date()
-        updateDateLabel(date: date)
-    }
-
     func updateDateLabel(date: Date) {
         let formatter = DateFormatter()
-//        formatter.locale = Locale.current
         formatter.locale = Locale(identifier: "ru_RU")
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.dateStyle = .medium
@@ -135,6 +126,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
             dayNumericFormatter.dateFormat = "dd"
 
             let dayStringFormatter = DateFormatter()
+            dayStringFormatter.locale = Locale(identifier: "ru_RU")
             dayStringFormatter.dateFormat = "E"
 
             let item = WorkingRangeItem(

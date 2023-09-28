@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         setupRouter()
+        NetworkMonitor.shared.startMonitoring()
 
         return true
     }

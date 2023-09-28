@@ -44,6 +44,6 @@ final class SaloonDetailDBManager {
         }
 
         realmManager.save(object: modelDB)
-        VibrationManager.shared.vibrate(for: .success)
+//        VibrationManager.shared.vibrate(for: .success)
     }
 }

@@ -30,6 +30,8 @@ final class MainView: BaseUIView {
 
     private lazy var searchButton = SearchButton()
 
+    private let lostConnectionImage = UIImageView(image: AssetImage.lostConnection_icon)
+
     private let layoutBuilder: DefaultMainLayout
     
     // MARK: - Initializers
@@ -54,10 +56,20 @@ final class MainView: BaseUIView {
     func changeHeartAppearance(by indexPath: IndexPath) {
         let cell = self.collectionView.cellForItem(at: indexPath) as! SaloonCell
         cell.isInFavourite = !cell.isInFavourite
+        VibrationManager.shared.vibrate(for: .success)
     }
 
     func scrollToItem(at indexPath: IndexPath) {
         collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+    }
+
+    func setLostConnectionImage(isConnected: Bool) {
+        addSubview(lostConnectionImage)
+
+        lostConnectionImage.isHidden = isConnected
+        lostConnectionImage.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
 }
 

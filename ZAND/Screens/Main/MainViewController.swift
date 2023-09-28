@@ -58,11 +58,30 @@ final class MainViewController: BaseViewController<MainView> {
         super.viewDidLoad()
         
         subscribeDelegate()
-        presenter?.fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        presenter?.fetchData()
+
+        contentView.setLostConnectionImage(isConnected: NetworkMonitor.shared.isConnected)
+        NetworkMonitor.shared.connectionHandler = { [weak self] isConnected in
+            guard let self else { return }
+            
+            if isConnected {
+                DispatchQueue.main.async {
+                    self.contentView.collectionView.isHidden = false
+                    self.presenter?.fetchData()
+                    self.contentView.setLostConnectionImage(isConnected: true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.contentView.collectionView.isHidden = true
+                    self.contentView.setLostConnectionImage(isConnected: false)
+                }
+            }
+        }
 
         hideNavigationBar()
     }
@@ -113,7 +132,7 @@ extension MainViewController: UICollectionViewDataSource {
             saloonCell.mapHandler = mapHandler
             saloonCell.favouritesHandler = favouritesHandler
 
-            if let isInFavourite = presenter?.contains(by: (saloons ?? [])[indexPath.item].id) {
+            if let isInFavourite = presenter?.notContains(by: (saloons ?? [])[indexPath.item].id) {
                 saloonCell.isInFavourite = !isInFavourite
             }
 

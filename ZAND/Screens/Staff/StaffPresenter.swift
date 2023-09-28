@@ -63,7 +63,7 @@ final class StaffPresenter: StaffPresenterOutput {
         { [weak self] staff in
             guard let self else { return }
 
-            self.fetchedStaff = staff.data
+            self.fetchedStaff = staff.data.filter { ($0.schedule_till ?? "") > self.currentDate() }
             self.view?.reloadData()
         }
     }
@@ -80,5 +80,11 @@ final class StaffPresenter: StaffPresenterOutput {
             self.fetchedStaff = staff.data
             self.view?.reloadData()
         }
+    }
+
+    private func currentDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: Date())
     }
 }
