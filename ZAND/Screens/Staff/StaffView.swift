@@ -17,8 +17,11 @@ final class StaffView: BaseUIView {
         tableView.registerCell(type: StaffCell.self)
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        tableView.isHidden = true
         return tableView
     }()
+
+    private let activityIndicatorView = UIActivityIndicatorView()
 
     // MARK: - Instance methods
 
@@ -26,6 +29,22 @@ final class StaffView: BaseUIView {
         super.setup()
 
         setViews()
+    }
+
+    func showActivity(_ isShow: Bool) {
+        if isShow {
+            addSubview(activityIndicatorView)
+            activityIndicatorView.startAnimating()
+            tableView.isHidden = true
+
+            activityIndicatorView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+            }
+        } else {
+            tableView.isHidden = false
+            activityIndicatorView.removeFromSuperview()
+            activityIndicatorView.stopAnimating()
+        }
     }
 
     private func setViews() {

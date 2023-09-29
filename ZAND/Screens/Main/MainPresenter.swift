@@ -26,6 +26,7 @@ protocol MainViewInput: AnyObject {
     func hideTabBar()
     func changeFavouritesAppearence(indexPath: IndexPath)
     func updateUI(model: [Saloon])
+    func isActivityIndicatorShouldRotate(_ isRotate: Bool)
 }
 
 final class MainPresenter: MainPresenterOutput {
@@ -49,8 +50,8 @@ final class MainPresenter: MainPresenterOutput {
         self.realmManager = realmManager
         self.provider = provider
 
-        subscribeTabBarNotification()
-        subcribeFavouritesNotification()
+        subscribeNotifications()
+        fetchData()
     }
 
     // MARK: - Action
@@ -67,6 +68,12 @@ final class MainPresenter: MainPresenterOutput {
 
         view?.changeFavouritesAppearence(indexPath: (getSearchIndex(id: userId) ?? [0, 0]))
     }
+
+    @objc
+    private func updateData(_ nnotification: Notification) {
+        fetchData()
+        print("Main updated")
+    }
 }
 
 extension MainPresenter {
@@ -74,9 +81,13 @@ extension MainPresenter {
     // MARK: - Instance methods
 
     func fetchData() {
+        view?.isActivityIndicatorShouldRotate(true)
         provider.fetchData { [weak self] saloons in
-            self?.saloons = saloons
-            self?.view?.updateUI(model: saloons)
+            guard let self else { return }
+
+            self.saloons = saloons
+            self.view?.updateUI(model: saloons)
+            self.view?.isActivityIndicatorShouldRotate(false)
         }
     }
 
@@ -152,18 +163,22 @@ extension MainPresenter {
 
     // MARK: - Private
 
-    private func subcribeFavouritesNotification() {
+    private func subscribeNotifications() {
         NotificationCenter.default.addObserver(
             self, selector: #selector(isInFavouriteNotificationAction(_ :)),
             name: .isInFavourite,
-            object: nil)
-    }
-
-    private func subscribeTabBarNotification() {
+            object: nil
+        )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(hideTabBarNotificationAction(_:)),
             name: .showTabBar,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateData(_ :)),
+            name: .updateData,
             object: nil
         )
     }

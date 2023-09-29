@@ -36,6 +36,8 @@ final class MainViewController: BaseViewController<MainView> {
     
     var presenter: MainPresenterOutput?
 
+    var activityIndicatorView: ActivityIndicatorImpl = ActivityIndicatorView()
+
     var navController: UINavigationController? {
         return self.navigationController ?? UINavigationController()
     }
@@ -44,13 +46,7 @@ final class MainViewController: BaseViewController<MainView> {
         presenter?.getModel(by: .options) as! [OptionsModel]
     }
 
-    var saloons: [Saloon]? {
-        didSet {
-            DispatchQueue.main.async {
-                self.contentView.collectionView.reloadData()
-            }
-        }
-    }
+    var saloons: [Saloon]?
 
     // MARK: - Lifecycle
 
@@ -63,9 +59,8 @@ final class MainViewController: BaseViewController<MainView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        presenter?.fetchData()
-
         contentView.setLostConnectionImage(isConnected: NetworkMonitor.shared.isConnected)
+
         NetworkMonitor.shared.connectionHandler = { [weak self] isConnected in
             guard let self else { return }
             
@@ -196,7 +191,14 @@ extension MainViewController: MainViewInput {
 
     func updateUI(model: [Saloon]) {
         saloons = model
+        DispatchQueue.main.async {
+            self.contentView.collectionView.reloadData()
+        }
+    }
+
+    func isActivityIndicatorShouldRotate(_ isRotate: Bool) {
+        isRotate ? showIndicator() : hideIndicator()
     }
 }
 
-extension MainViewController: HideNavigationBar {}
+extension MainViewController: HideNavigationBar, ActivityIndicator {}

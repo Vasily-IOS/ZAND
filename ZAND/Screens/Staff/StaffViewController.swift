@@ -99,6 +99,10 @@ extension StaffViewController: StaffViewInput {
             self.contentView.tableView.reloadData()
         }
     }
+
+    func showIndicator(_ isShow: Bool) {
+        contentView.showActivity(isShow)
+    }
 }
 
 extension StaffViewController: HideBackButtonTitle {}

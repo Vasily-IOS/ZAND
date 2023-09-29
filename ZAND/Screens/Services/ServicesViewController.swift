@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ServicesViewController: BaseViewController<ServicesView>, UITableViewDelegate {
+final class ServicesViewController: BaseViewController<ServicesView> {
 
     // MARK: - Properties
 
@@ -66,7 +66,7 @@ extension ServicesViewController: UITableViewDataSource {
     }
 }
 
-extension ServicesViewController {
+extension ServicesViewController: UITableViewDelegate {
 
     // MARK: - UITableViewDelegate
 
@@ -125,6 +125,10 @@ extension ServicesViewController: ServicesViewInput {
         DispatchQueue.main.async {
             self.contentView.tableView.reloadData()
         }
+    }
+
+    func showIndicator(_ isShow: Bool) {
+        contentView.showActivity(isShow)
     }
 }
 

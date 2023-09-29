@@ -36,9 +36,18 @@ final class MapPresenter: MapPresenterOutput {
         provider.fetchData { saloons in
             self.saloons = saloons
         }
+
+        updateUI()
+        subscribeNotifications()
     }
 
     // MARK: - Instance methods
+
+    @objc
+    private func updateData(_ nnotification: Notification) {
+        updateUI()
+        print("Map updated")
+    }
 
     func updateUI() {
         provider.fetchData { [weak self] saloons in
@@ -53,5 +62,16 @@ final class MapPresenter: MapPresenterOutput {
     func getModel(by id: Int) -> SaloonMapModel? {
         let model = saloons.first(where: { $0.id == id })
         return model == nil ? nil : model
+    }
+
+    // MARK: - Private
+
+    private func subscribeNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateData(_ :)),
+            name: .updateData,
+            object: nil
+        )
     }
 }

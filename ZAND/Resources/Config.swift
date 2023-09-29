@@ -20,8 +20,6 @@ enum Config {
     static let separatedBy = ","
     // animation
     static let animation_fav = "animation_fav"
-    // tabbar
-    static let notifyTabBar = "notifyTabBar"
     // userdefaults
     static let userData = "userData"
     // other

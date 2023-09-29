@@ -168,6 +168,10 @@ extension TimetableViewController: TimetableInput {
     func updateDate(date: String) {
         contentView.setMonth(month: date)
     }
+
+    func showIndicator(_ isShow: Bool) {
+        contentView.showActivity(isShow)
+    }
 }
 
 extension TimetableViewController: TimetableViewDelegate {

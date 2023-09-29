@@ -19,6 +19,7 @@ protocol TimetableInput: AnyObject {
     func reloadData()
     func reloadSection()
     func updateDate(date: String)
+    func showIndicator(_ isShow: Bool)
 }
 
 final class TimetablePresenter: TimetablePresenterOutput {
@@ -33,7 +34,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
 
     var viewModel: ConfirmationViewModel {
         didSet {
-            viewModel.staffID = staffID
+            viewModel.staffID  = staffID
         }
     }
 
@@ -98,6 +99,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
         { [weak self] bookTimes in
 
             self?.bookTimeModel = bookTimes.data
+            self?.view?.showIndicator(false)
             self?.view?.reloadSection()
         }
     }
@@ -112,6 +114,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
         formatter.dateFormat = "yyyy-MM-dd"
         let currentDay = formatter.string(from: Date())
 
+        view?.showIndicator(true)
         network.performRequest(type: .bookDates(
             company_id: company_id,
             service_ids: service_ids,

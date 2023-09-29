@@ -25,6 +25,7 @@ final class ServicesView: BaseUIView {
         searchBar.searchBarStyle = .prominent
         searchBar.searchTextField.textColor = .lightGray
         searchBar.backgroundImage = UIImage()
+        searchBar.isHidden = true
         return searchBar
     }()
 
@@ -35,8 +36,11 @@ final class ServicesView: BaseUIView {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .mainGray
+        tableView.isHidden = true
         return tableView
     }()
+
+    private let activityIndicatorView = UIActivityIndicatorView()
 
     // MARK: - Instance methods
 
@@ -52,6 +56,22 @@ final class ServicesView: BaseUIView {
 
         setViews()
         setGesture()
+    }
+
+    func showActivity(_ isShow: Bool) {
+        if isShow {
+            addSubview(activityIndicatorView)
+            activityIndicatorView.startAnimating()
+            [searchBar, tableView].forEach({ $0.isHidden = true })
+
+            activityIndicatorView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+            }
+        } else {
+            [searchBar, tableView].forEach({ $0.isHidden = false })
+            activityIndicatorView.removeFromSuperview()
+            activityIndicatorView.stopAnimating()
+        }
     }
 
     private func setViews() {

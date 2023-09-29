@@ -28,14 +28,18 @@ final class TimetableView: BaseUIView {
         collectionView.register(cellType: DayCell.self)
         collectionView.register(cellType: TimeCell.self)
         collectionView.register(view: ReuseHeaderView.self)
+        collectionView.isHidden = true
         return collectionView
     }()
 
     private let monthLabel: UILabel = {
         let monthLabel = UILabel()
         monthLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        monthLabel.isHidden = true
         return monthLabel
     }()
+
+    private let activityIndicatorView = UIActivityIndicatorView()
 
     private let bottomButton = BottomButton(buttonText: .contin)
 
@@ -84,6 +88,22 @@ final class TimetableView: BaseUIView {
 
     func setMonth(month: String) {
         monthLabel.text = month
+    }
+
+    func showActivity(_ isShow: Bool) {
+        if isShow {
+            addSubview(activityIndicatorView)
+            activityIndicatorView.startAnimating()
+            [monthLabel, collectionView].forEach{ $0.isHidden = true }
+
+            activityIndicatorView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+            }
+        } else {
+            [monthLabel, collectionView].forEach{ $0.isHidden = false }
+            activityIndicatorView.removeFromSuperview()
+            activityIndicatorView.stopAnimating()
+        }
     }
 
     private func createLayout() -> UICollectionViewCompositionalLayout {

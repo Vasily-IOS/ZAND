@@ -17,6 +17,7 @@ protocol ServicesPresenterOutput: AnyObject {
 
 protocol ServicesViewInput: AnyObject {
     func reloadData()
+    func showIndicator(_ isShow: Bool)
 }
 
 final class ServicesPresenter: ServicesPresenterOutput {
@@ -68,6 +69,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
         let group = DispatchGroup()
         var result: [Categories] = []
 
+        view?.showIndicator(true)
         group.enter()
         fetchCategoriesAndServices { (categories, services) in
             self.createResultModel(categories: categories, services: services) { resultModel in
@@ -79,6 +81,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
         group.notify(queue: .main) {
             self.model = result
             self.adittionalModel = result
+            self.view?.showIndicator(false)
             self.view?.reloadData()
         }
     }

@@ -19,6 +19,7 @@ protocol StaffPresenterOutput: AnyObject {
 
 protocol StaffViewInput: AnyObject {
     func reloadData()
+    func showIndicator(_ isShow: Bool)
 }
 
 final class StaffPresenter: StaffPresenterOutput {
@@ -66,6 +67,7 @@ final class StaffPresenter: StaffPresenterOutput {
     }
 
     func fetchStaff() {
+        view?.showIndicator(true)
         network.performRequest(
             type: .bookStaff(
                 company_id: saloonID,
@@ -75,6 +77,7 @@ final class StaffPresenter: StaffPresenterOutput {
             guard let self else { return }
 
             self.fetchedStaff = staff.data
+            self.view?.showIndicator(false)
             self.view?.reloadData()
         }
     }
@@ -86,6 +89,7 @@ final class StaffPresenter: StaffPresenterOutput {
     }
 
     private func fetchBookStaff(saloonID: Int, serviceID: Int) {
+        view?.showIndicator(true)
         network.performRequest(
             type: .bookStaff(
                 company_id: saloonID,
@@ -95,6 +99,7 @@ final class StaffPresenter: StaffPresenterOutput {
             guard let self else { return }
 
             self.fetchedStaff = staff.data.filter { ($0.schedule_till ?? "") > self.currentDate() }
+            self.view?.showIndicator(false)
             self.view?.reloadData()
         }
     }
