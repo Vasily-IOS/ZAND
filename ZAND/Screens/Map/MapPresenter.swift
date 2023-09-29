@@ -46,7 +46,6 @@ final class MapPresenter: MapPresenterOutput {
     @objc
     private func updateData(_ nnotification: Notification) {
         updateUI()
-        print("Map updated")
     }
 
     func updateUI() {

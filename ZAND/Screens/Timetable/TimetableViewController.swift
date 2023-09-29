@@ -27,6 +27,10 @@ final class TimetableViewController: BaseViewController<TimetableView> {
         hideBackButtonTitle()
     }
 
+    deinit {
+        print("TimetableViewController died")
+    }
+
     // MARK: - Instance methods
 
     private func subscribeDelegates() {

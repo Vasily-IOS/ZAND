@@ -38,6 +38,12 @@ final class StartBookingView: BaseUIView {
         distribution: .fillEqually,
         spacing: 16)
 
+    // MARK: - Lifecyle
+
+    deinit {
+        print("StartBookingView died")
+    }
+
     // MARK: - Instance methods
 
     @objc

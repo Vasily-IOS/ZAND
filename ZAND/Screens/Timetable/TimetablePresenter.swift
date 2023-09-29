@@ -78,6 +78,10 @@ final class TimetablePresenter: TimetablePresenterOutput {
         }
     }
 
+    deinit {
+        print("TimetablePresenter died")
+    }
+
     // MARK: - Instance methods
 
     func updateDateLabel(date: Date) {

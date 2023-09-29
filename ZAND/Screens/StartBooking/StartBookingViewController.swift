@@ -24,6 +24,10 @@ final class StartBookingViewController: BaseViewController<StartBookingView> {
         subscribeDelegate()
     }
 
+    deinit {
+        print("StartBookingViewController died")
+    }
+
     // MARK: - Instance methods
 
     private func subscribeDelegate() {

@@ -11,9 +11,7 @@ protocol StartBookingPresenterOutput: AnyObject {
     var saloonID: Int { get }
 }
 
-protocol StartBookingViewInput: AnyObject {
-
-}
+protocol StartBookingViewInput: AnyObject {}
 
 final class StartBookingPresenter: StartBookingPresenterOutput {
 
@@ -30,5 +28,7 @@ final class StartBookingPresenter: StartBookingPresenterOutput {
         self.saloonID = saloonID
     }
 
-    // MARK: - Instance methods
+    deinit {
+        print("StartBookingPresenterOutput died")
+    }
 }

@@ -53,6 +53,10 @@ final class TimetableView: BaseUIView {
         super.init(frame: .zero)
     }
 
+    deinit {
+        print("TimetableView died")
+    }
+
     // MARK: - Instance methods
 
     @objc

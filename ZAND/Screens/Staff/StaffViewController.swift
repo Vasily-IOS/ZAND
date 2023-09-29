@@ -24,6 +24,10 @@ final class StaffViewController: BaseViewController<StaffView> {
         hideBackButtonTitle()
     }
 
+    deinit {
+        print("StaffViewController died")
+    }
+
     // MARK: - Instance methods
 
     private func subscribeDelegates() {

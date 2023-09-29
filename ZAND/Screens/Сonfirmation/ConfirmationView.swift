@@ -27,6 +27,13 @@ final class ConfirmationView: BaseUIView {
     let nameComponentView = ConfirmationComponentView()
 
     let phoneComponentView = ConfirmationComponentView()
+
+    lazy var entryConfirmedView: EntryConfirmedView = {
+        let entryConfirmedView = EntryConfirmedView()
+        entryConfirmedView.frame = bounds
+        return entryConfirmedView
+    }()
+
     private let bottomButton = BottomButton(buttonText: .approve)
 
     private lazy var topStackView = UIStackView(
@@ -70,6 +77,27 @@ final class ConfirmationView: BaseUIView {
 
         setupSubviews()
         setTargets()
+    }
+
+    func configure(viewModel: ConfirmationViewModel) {
+        staffComponentView.configure(model: viewModel.employeeCommon)
+        nameComponentView.configure(
+            topText: "Имя",
+            bottomText: viewModel.fullName
+        )
+        phoneComponentView.configure(
+            topText: "Телефон",
+            bottomText: viewModel.phone
+        )
+        serviceComponentView.configure(
+            topText: viewModel.bookService?.title ?? "",
+            bottomText: "\(viewModel.bookService?.price_max ?? 0) руб."
+        )
+
+        dateComponentView.configure(
+            topText: viewModel.startSeanceDate ?? "",
+            bottomText: viewModel.startSeanceTime ?? ""
+        )
     }
 
     private func setupSubviews() {

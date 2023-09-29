@@ -24,6 +24,10 @@ final class ServicesViewController: BaseViewController<ServicesView> {
         hideBackButtonTitle()
     }
 
+    deinit {
+        print("ServicesViewController died")
+    }
+
     // MARK: - Instance methods
 
     private func subscribeDelegates() {

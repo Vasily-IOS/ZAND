@@ -16,14 +16,16 @@ final class ConfirmationViewModel {
 
     // MARK: - Properties
 
-    // POST request properties
     var resultModel: ConfirmationModel?
-
     var phone = String()
     var fullName = String()
     var email = String()
     var serviceID = Int()
     var staffID = Int()
+    var startSeanceDate: String?
+    var startSeanceTime: String?
+    var employeeCommon: EmployeeCommon?
+    var bookService: BookService?
     var bookTime: BookTime? = nil {
         didSet {
             configureSeanceDate(model: bookTime)
@@ -36,12 +38,6 @@ final class ConfirmationViewModel {
     private let id = 0
     private let appID = AppID.id
 
-    // other properties
-    var startSeanceDate: String?
-    var startSeanceTime: String?
-    var employeeCommon: EmployeeCommon?
-    var bookService: BookService?
-
     // MARK: - Initializers
 
     init(bookingType: BookingType, company_id: Int) {
@@ -49,6 +45,10 @@ final class ConfirmationViewModel {
         self.company_id = company_id
 
         self.fetchUserData()
+    }
+
+    deinit {
+        print("❌ConfirmationViewModel died❌")
     }
 
     // MARK: - Instance methods
@@ -71,17 +71,15 @@ final class ConfirmationViewModel {
     }
 
     private func configureSeanceDate(model: BookTime?) {
-        if let model = model {
-            let date = try? Date(bookTime?.datetime ?? "", strategy: .iso8601)
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            formatter.locale = Locale(identifier: "ru_RU")
-            let seanceLength = "\((bookTime?.seance_length ?? 0)/60) мин."
-            let seanceFullData = (bookTime?.time ?? "") + "," + " " + seanceLength
+        let date = try? Date(bookTime?.datetime ?? "", strategy: .iso8601)
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.locale = Locale(identifier: "ru_RU")
+        let seanceLength = "\((bookTime?.seance_length ?? 0)/60) мин."
+        let seanceFullData = (bookTime?.time ?? "") + "," + " " + seanceLength
 
-            startSeanceDate = formatter.string(from: date ?? Date())
-            startSeanceTime = seanceFullData
-        }
+        startSeanceDate = formatter.string(from: date ?? Date())
+        startSeanceTime = seanceFullData
     }
 
     private func fetchUserData() {

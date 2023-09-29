@@ -67,7 +67,7 @@ final class MainViewController: BaseViewController<MainView> {
             if isConnected {
                 DispatchQueue.main.async {
                     self.contentView.collectionView.isHidden = false
-                    self.presenter?.fetchData()
+                    self.presenter?.updateUI()
                     self.contentView.setLostConnectionImage(isConnected: true)
                 }
             } else {

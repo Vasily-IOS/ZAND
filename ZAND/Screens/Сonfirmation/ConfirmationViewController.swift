@@ -48,23 +48,16 @@ extension ConfirmationViewController: ConfirmationInput {
     // MARK: - ConfirmationInput methods
 
     func configure(viewModel: ConfirmationViewModel) {
-        contentView.staffComponentView.configure(model: viewModel.employeeCommon)
-        contentView.nameComponentView.configure(
-            topText: "Имя",
-            bottomText: viewModel.fullName
-        )
-        contentView.phoneComponentView.configure(
-            topText: "Телефон",
-            bottomText: viewModel.phone
-        )
-        contentView.serviceComponentView.configure(
-            topText: viewModel.bookService?.title ?? "",
-            bottomText: "\(viewModel.bookService?.price_max ?? 0) руб."
-        )
+        contentView.configure(viewModel: viewModel)
+    }
 
-        contentView.dateComponentView.configure(
-            topText: viewModel.startSeanceDate ?? "",
-            bottomText: viewModel.startSeanceTime ?? ""
-        )
+    func showEntryConfirmedUI(isSuccess: Bool) {
+        contentView.addSubview(contentView.entryConfirmedView)
+        contentView.entryConfirmedView.configure(isSuccess: isSuccess)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.navigationController?.dismiss(animated: true)
+        }
     }
 }

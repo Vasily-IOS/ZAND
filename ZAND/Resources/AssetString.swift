@@ -72,6 +72,8 @@ enum AssetString {
     static let checkAppointment = "Проверьте запись"
     static let approveAppointment = "Подтвердите запись"
     static let chooseTime = "Выберите время"
+    static let finalText = "Поздравляем! Запись оформлена!"
+    static let errorText = "Произошла ошибка :("
     
     // MARK: - Bottom button values
     static let apply = "Применить"

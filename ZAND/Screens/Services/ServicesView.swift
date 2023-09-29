@@ -42,6 +42,12 @@ final class ServicesView: BaseUIView {
 
     private let activityIndicatorView = UIActivityIndicatorView()
 
+    // MARK: - Lifecycle
+
+    deinit {
+        print("ServicesView died")
+    }
+
     // MARK: - Instance methods
 
     @objc

@@ -51,6 +51,10 @@ final class ServicesPresenter: ServicesPresenterOutput {
         self.fetchData()
     }
 
+    deinit {
+        print("ServicesPresenter died")
+    }
+
     // MARK: - Instance methods
 
     func search(text: String) {

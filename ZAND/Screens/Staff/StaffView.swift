@@ -23,6 +23,12 @@ final class StaffView: BaseUIView {
 
     private let activityIndicatorView = UIActivityIndicatorView()
 
+    // MARK: - Lifecycle
+
+    deinit {
+        print("StaffView died")
+    }
+
     // MARK: - Instance methods
 
     override func setup() {

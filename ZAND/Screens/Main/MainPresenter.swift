@@ -19,7 +19,7 @@ protocol MainPresenterOutput: AnyObject {
     func applyDB(by id: Int, completion: @escaping () -> ())
     func notContains(by id: Int) -> Bool
 
-    func fetchData()
+    func updateUI()
 }
 
 protocol MainViewInput: AnyObject {
@@ -51,7 +51,7 @@ final class MainPresenter: MainPresenterOutput {
         self.provider = provider
 
         subscribeNotifications()
-        fetchData()
+        updateUI()
     }
 
     // MARK: - Action
@@ -71,8 +71,7 @@ final class MainPresenter: MainPresenterOutput {
 
     @objc
     private func updateData(_ nnotification: Notification) {
-        fetchData()
-        print("Main updated")
+        updateUI()
     }
 }
 
@@ -80,7 +79,7 @@ extension MainPresenter {
     
     // MARK: - Instance methods
 
-    func fetchData() {
+    func updateUI() {
         view?.isActivityIndicatorShouldRotate(true)
         provider.fetchData { [weak self] saloons in
             guard let self else { return }

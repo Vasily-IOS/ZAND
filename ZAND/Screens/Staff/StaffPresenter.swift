@@ -60,6 +60,10 @@ final class StaffPresenter: StaffPresenterOutput {
         }
     }
 
+    deinit {
+        print("StaffPresenter died")
+    }
+
     // MARK: - Instance methods
 
     func setStaffID(staffID: Int) {
