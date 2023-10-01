@@ -16,21 +16,24 @@ protocol MainPresenterOutput: AnyObject {
     func getModel(by type: MainType) -> [CommonFilterProtocol]
     func getSearchIndex(id: Int) -> IndexPath?
     func getModel(by id: Int) -> SaloonMapModel?
-    func applyDB(by id: Int, completion: () -> ())
-    func contains(by id: Int) -> Bool
+    func applyDB(by id: Int, completion: @escaping () -> ())
+    func notContains(by id: Int) -> Bool
 
-    func fetchData()
+    func updateUI()
 }
 
 protocol MainViewInput: AnyObject {
     func hideTabBar()
     func changeFavouritesAppearence(indexPath: IndexPath)
     func updateUI(model: [Saloon])
+    func isActivityIndicatorShouldRotate(_ isRotate: Bool)
 }
 
 final class MainPresenter: MainPresenterOutput {
 
     // MARK: - Properties
+
+    weak var view: MainViewInput?
     
     private let optionsModel = OptionsModel.options
 
@@ -39,10 +42,6 @@ final class MainPresenter: MainPresenterOutput {
     private let realmManager: RealmManager
 
     private let provider: SaloonProvider
-
-    // MARK: - UI
-    
-    weak var view: MainViewInput?
     
     // MARK: - Initializer
     
@@ -51,8 +50,8 @@ final class MainPresenter: MainPresenterOutput {
         self.realmManager = realmManager
         self.provider = provider
 
-        subscribeTabBarNotification()
-        subcribeFavouritesNotification()
+        subscribeNotifications()
+        updateUI()
     }
 
     // MARK: - Action
@@ -69,16 +68,26 @@ final class MainPresenter: MainPresenterOutput {
 
         view?.changeFavouritesAppearence(indexPath: (getSearchIndex(id: userId) ?? [0, 0]))
     }
+
+    @objc
+    private func updateData(_ nnotification: Notification) {
+        updateUI()
+        print("Data updated")
+    }
 }
 
 extension MainPresenter {
     
     // MARK: - Instance methods
 
-    func fetchData() {
+    func updateUI() {
+//        view?.isActivityIndicatorShouldRotate(true)
         provider.fetchData { [weak self] saloons in
-            self?.saloons = saloons
-            self?.view?.updateUI(model: saloons)
+            guard let self else { return }
+
+            self.saloons = saloons
+            self.view?.updateUI(model: saloons)
+//            self.view?.isActivityIndicatorShouldRotate(false)
         }
     }
 
@@ -102,16 +111,15 @@ extension MainPresenter {
         return saloons.first(where: { $0.id == id })
     }
 
-    func applyDB(by id: Int, completion: () -> ()) {
-        if contains(by: id) {
-            if let modelForSave = getModel(by: id) as? Saloon {
+    func applyDB(by id: Int, completion: @escaping () -> ()) {
+        if self.notContains(by: id) {
+            if let modelForSave = self.getModel(by: id) as? Saloon {
                 SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-                completion()
             }
         } else {
-            remove(by: id)
-            completion()
+            self.remove(by: id)
         }
+        completion()
     }
 
     func remove(by id: Int) {
@@ -120,25 +128,29 @@ extension MainPresenter {
         VibrationManager.shared.vibrate(for: .success)
     }
 
-    func contains(by id: Int) -> Bool {
+    func notContains(by id: Int) -> Bool {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
         return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
     }
 
     // MARK: - Private
 
-    private func subcribeFavouritesNotification() {
+    private func subscribeNotifications() {
         NotificationCenter.default.addObserver(
             self, selector: #selector(isInFavouriteNotificationAction(_ :)),
             name: .isInFavourite,
-            object: nil)
-    }
-
-    private func subscribeTabBarNotification() {
+            object: nil
+        )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(hideTabBarNotificationAction(_:)),
             name: .showTabBar,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateData(_ :)),
+            name: .updateData,
             object: nil
         )
     }

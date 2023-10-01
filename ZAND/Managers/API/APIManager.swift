@@ -24,9 +24,13 @@ final class APIManager: HTTP {
     ) where T : Decodable, T : Encodable {
         provider.request(type) { [weak self] result in
             guard let self else { return }
-            
+
             switch result {
             case .success(let response):
+//                print(response.request?.url ?? "")
+
+//                print(String(data: response.data, encoding: .utf8)!)
+
                 if let httpResponse = response.response?.statusCode {
                     let successRange = (200...299)
                     if successRange.contains(httpResponse)  {

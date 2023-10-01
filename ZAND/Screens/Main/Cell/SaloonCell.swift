@@ -53,7 +53,11 @@ final class SaloonCell: BaseCollectionCell {
     
     private let saloonDescriptionLabel = UILabel(.systemFont(ofSize: 20))
 
-    private let categoryLabel = UILabel(.systemFont(ofSize: 12), .textGray)
+    private let categoryLabel: UILabel = {
+        let categoryLabel = UILabel(.systemFont(ofSize: 12), .textGray)
+        categoryLabel.numberOfLines = 0
+        return categoryLabel
+    }()
 
     private let adressLabel: UILabel = {
         let adressLabel = UILabel(.systemFont(ofSize: 12))
@@ -76,12 +80,6 @@ final class SaloonCell: BaseCollectionCell {
     private let favouritesButton = UIButton()
     
     private let viewOnMapButton = TransparentButton(state: .viewOnMap)
-    
-    private let starImage: UIImageView = {
-        let starImage = UIImageView()
-        starImage.image = AssetImage.star_icon
-        return starImage
-    }()
 
     private lazy var animationView: LottieAnimationView = {
         var animationView = LottieAnimationView(name: Config.animation_fav)
@@ -158,9 +156,10 @@ extension SaloonCell {
         }
         
         viewOnMapButton.snp.makeConstraints { make in
-            make.right.equalTo(self).inset(16)
+            make.right.equalTo(snp.right).inset(16)
             make.left.equalTo(leftStackView.snp.right).offset(16)
             make.height.equalTo(15)
+            make.width.equalTo(125)
             make.centerY.equalTo(leftStackView.subviews[2])
         }
 
@@ -176,11 +175,15 @@ extension SaloonCell {
     }
     
     private func setTarget() {
-        viewOnMapButton.addTarget(self,
-                                  action: #selector(viewOnMapAction),
-                                  for: .touchUpInside)
-        favouritesButton.addTarget(self,
-                                   action: #selector(favouritesAction),
-                                   for: .touchUpInside)
+        viewOnMapButton.addTarget(
+            self,
+            action: #selector(viewOnMapAction),
+            for: .touchUpInside
+        )
+        favouritesButton.addTarget(
+            self,
+            action: #selector(favouritesAction),
+            for: .touchUpInside
+        )
     }
 }

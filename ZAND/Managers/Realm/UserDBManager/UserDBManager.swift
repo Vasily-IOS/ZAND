@@ -36,7 +36,7 @@ final class UserDBManager {
         return realmManager.get(UserDataBaseModel.self).first
     }
 
-    func contains() -> Bool {
+    func isUserContains() -> Bool {
         return !realmManager.get(UserDataBaseModel.self).isEmpty
     }
 

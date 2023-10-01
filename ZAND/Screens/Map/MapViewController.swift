@@ -23,12 +23,11 @@ final class MapViewController: BaseViewController<MapView> {
         super.viewDidLoad()
 
         subscribeDelegate()
-        presenter?.updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         hideNavigationBar()
     }
     

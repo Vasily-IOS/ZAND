@@ -26,8 +26,10 @@ final class MapView: BaseUIView {
                          count: BaseMapRectModel.coordinates.count)
     }
 
+    let mapView = MKMapView()
+
     private let searchButton = SearchButton()
-    private let mapView = MKMapView()
+
     private let locationManager = CLLocationManager()
 
     // MARK: - Instance methods
@@ -46,30 +48,14 @@ final class MapView: BaseUIView {
 
     func addPinsOnMap(model: [SaloonMapModel]) {
         model.forEach {
-//            let bothCoordinates = $0.coordinates.components(separatedBy: ",")
-//            let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
-//                                                  longitude: Double(bothCoordinates[1] ) ?? 0)
             let coordinates = CLLocationCoordinate2D(
                 latitude: $0.coordinate_lat,
                 longitude: $0.coordinate_lon
             )
-            mapView.addAnnotation(SaloonAnnotation(coordinate: coordinates,
-                                                   model: $0))
+            mapView.addAnnotation(
+                SaloonAnnotation(coordinate: coordinates, model: $0))
         }
     }
-
-//    func showSinglePin(model: String) {
-//        let bothCoordinates = model.components(separatedBy: ",")
-//        let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
-//                                                 longitude: Double(bothCoordinates[1] ) ?? 0)
-//        let region = MKCoordinateRegion(center: coordinates,
-//                                        span: MKCoordinateSpan(latitudeDelta: 0.01,
-//                                                               longitudeDelta: 0.01))
-//        if let myAnnotation = mapView.annotations.first(where: { $0.coordinate.latitude == coordinates.latitude }) {
-//            mapView.selectAnnotation(myAnnotation, animated: true)
-//        }
-//        mapView.setRegion(region, animated: true)
-//    }
 
     func showSinglePin(coordinate_lat: Double, coordinate_lon: Double) {
         let coordinates = CLLocationCoordinate2D(latitude: coordinate_lat,

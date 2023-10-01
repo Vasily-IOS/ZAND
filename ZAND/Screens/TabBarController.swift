@@ -17,7 +17,7 @@ final class TabBarController: UITabBarController {
                                      image: AssetImage.profile_icon,
                                      selectedImage: nil)
 
-        if UserDBManager.shared.contains() {
+        if UserDBManager.shared.isUserContains() {
             vc = vcFactory.getViewController(for: .profile)
             vc.tabBarItem = tabBarItem
             return vc

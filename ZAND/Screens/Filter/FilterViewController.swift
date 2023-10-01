@@ -97,9 +97,11 @@ extension FilterViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableView(for: indexPath,
-                                                            viewType: ReuseHeaderView.self,
-                                                            kind: .header)
+        let headerView = collectionView.dequeueReusableView(
+            for: indexPath,
+            viewType: ReuseHeaderView.self,
+            kind: .header
+        )
         headerView.state = .services
         return headerView
     }

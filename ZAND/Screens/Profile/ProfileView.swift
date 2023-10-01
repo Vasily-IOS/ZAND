@@ -100,7 +100,8 @@ extension ProfileView {
         }
 
         emptyLabel.snp.makeConstraints { make in
-            make.center.equalTo(collectionView)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(collectionView.snp.top).offset(270)
         }
     }
     

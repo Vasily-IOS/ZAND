@@ -23,7 +23,7 @@ final class MainViewController: BaseViewController<MainView> {
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
         guard let self else { return }
 
-        if !UserDBManager.shared.contains() {
+        if !UserDBManager.shared.isUserContains() {
             AppRouter.shared.changeTabBarVC(to: 2)
         } else {
             self.presenter?.applyDB(by: id) { [weak self] in
@@ -36,6 +36,8 @@ final class MainViewController: BaseViewController<MainView> {
     
     var presenter: MainPresenterOutput?
 
+    var activityIndicatorView: ActivityIndicatorImpl = ActivityIndicatorView()
+
     var navController: UINavigationController? {
         return self.navigationController ?? UINavigationController()
     }
@@ -44,13 +46,7 @@ final class MainViewController: BaseViewController<MainView> {
         presenter?.getModel(by: .options) as! [OptionsModel]
     }
 
-    var saloons: [Saloon]? {
-        didSet {
-            DispatchQueue.main.async {
-                self.contentView.collectionView.reloadData()
-            }
-        }
-    }
+    var saloons: [Saloon]?
 
     // MARK: - Lifecycle
 
@@ -58,12 +54,29 @@ final class MainViewController: BaseViewController<MainView> {
         super.viewDidLoad()
         
         subscribeDelegate()
-
-        presenter?.fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        contentView.setLostConnectionImage(isConnected: NetworkMonitor.shared.isConnected)
+
+        NetworkMonitor.shared.connectionHandler = { [weak self] isConnected in
+            guard let self else { return }
+            
+            if isConnected {
+                DispatchQueue.main.async {
+                    self.contentView.collectionView.isHidden = false
+                    self.presenter?.updateUI()
+                    self.contentView.setLostConnectionImage(isConnected: true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.contentView.collectionView.isHidden = true
+                    self.contentView.setLostConnectionImage(isConnected: false)
+                }
+            }
+        }
 
         hideNavigationBar()
     }
@@ -103,19 +116,18 @@ extension MainViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
-        let saloonCell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonCell.self)
-
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
+            let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
             optionCell.configure(model: options[indexPath.item], state: .onMain)
             return optionCell
         case .beautySaloon:
+            let saloonCell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonCell.self)
             saloonCell.configure(model: (saloons ?? [])[indexPath.item], indexPath: indexPath)
             saloonCell.mapHandler = mapHandler
             saloonCell.favouritesHandler = favouritesHandler
 
-            if let isInFavourite = presenter?.contains(by: (saloons ?? [])[indexPath.item].id) {
+            if let isInFavourite = presenter?.notContains(by: (saloons ?? [])[indexPath.item].id) {
                 saloonCell.isInFavourite = !isInFavourite
             }
 
@@ -179,7 +191,14 @@ extension MainViewController: MainViewInput {
 
     func updateUI(model: [Saloon]) {
         saloons = model
+        DispatchQueue.main.async {
+            self.contentView.collectionView.reloadData()
+        }
+    }
+
+    func isActivityIndicatorShouldRotate(_ isRotate: Bool) {
+        isRotate ? showIndicator() : hideIndicator()
     }
 }
 
-extension MainViewController: HideNavigationBar {}
+extension MainViewController: HideNavigationBar, ActivityIndicator {}

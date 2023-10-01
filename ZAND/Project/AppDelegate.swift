@@ -16,8 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         setupRouter()
+        NetworkMonitor.shared.startMonitoring()
 
         return true
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        NotificationCenter.default.post(name: .updateData, object: nil)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
