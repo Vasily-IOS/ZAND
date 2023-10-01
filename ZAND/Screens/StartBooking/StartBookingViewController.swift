@@ -57,19 +57,21 @@ extension StartBookingViewController: StartBookingDelegate {
     }
 
     func openStaff() {
-//        let view = StaffView()
-//        let vc = StaffViewController(contentView: view)
-//        let network: HTTP = APIManager()
-//        let presenter = StaffPresenter(
-//            view: vc,
-//            saloonID: presenter?.saloonID ?? 0,
-//            network: network,
-//            serviceToProvideID: 0)
-//        vc.presenter = presenter
-//        navigationController?.pushViewController(vc, animated: true)
+        let view = StaffView()
+        let vc = StaffViewController(contentView: view)
+        let network: HTTP = APIManager()
+        let viewModel = ConfirmationViewModel(
+            bookingType: .staff,
+            company_id: presenter?.saloonID ?? 0
+        )
+        let presenter = StaffPresenter(
+            view: vc,
+            saloonID: presenter?.saloonID ?? 0,
+            network: network,
+            viewModel: viewModel)
+        vc.presenter = presenter
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension StartBookingViewController: StartBookingViewInput {}
-
-extension StartBookingViewController: HideBackButtonTitle {}
+extension StartBookingViewController: StartBookingViewInput, HideBackButtonTitle {}

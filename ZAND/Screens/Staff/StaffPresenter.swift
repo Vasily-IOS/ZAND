@@ -44,7 +44,7 @@ final class StaffPresenter: StaffPresenterOutput {
         view: StaffViewInput,
         saloonID: Int,
         network: HTTP,
-        serviceToProvideID: Int,
+        serviceToProvideID: Int=0,
         viewModel: ConfirmationViewModel)
     {
         self.view = view
@@ -53,10 +53,11 @@ final class StaffPresenter: StaffPresenterOutput {
         self.viewModel = viewModel
         self.serviceToProvideID = serviceToProvideID
 
-        if serviceToProvideID == 0 {
-            self.fetchStaff()
-        } else {
+        switch viewModel.bookingType {
+        case .service:
             self.fetchBookStaff(saloonID: saloonID, serviceID: serviceToProvideID)
+        case .staff:
+            self.fetchStaff()
         }
     }
 
@@ -80,7 +81,7 @@ final class StaffPresenter: StaffPresenterOutput {
         { [weak self] staff in
             guard let self else { return }
 
-            self.fetchedStaff = staff.data
+            self.fetchedStaff = staff.data.filter { ($0.schedule_till ?? "") > self.currentDate() }
             self.view?.showIndicator(false)
             self.view?.reloadData()
         }

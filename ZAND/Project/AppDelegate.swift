@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         NotificationCenter.default.post(name: .updateData, object: nil)
     }
 

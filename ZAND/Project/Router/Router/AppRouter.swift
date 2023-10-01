@@ -64,7 +64,7 @@ extension AppRouter {
     }
 
     func checkAuth() {
-        if UserDBManager.shared.contains() {
+        if UserDBManager.shared.isUserContains() {
             DispatchQueue.main.async {
                 self.switchRoot(type: .profile)
             }
@@ -154,7 +154,7 @@ extension AppRouter: DefaultRouter {
         navigationController.present(vc, animated: true)
     }
 
-    func showAlert(type: AlertType, message: String? = "") {
+    func showAlert(type: AlertType, message: String? = nil) {
         let alertController = UIAlertController(title: type.textValue, message: message, preferredStyle: .alert)
         let understandAction = UIAlertAction(title: AssetString.ok, style: .cancel)
         alertController.addAction(understandAction)

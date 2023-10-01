@@ -16,7 +16,7 @@ enum RequestType {
     case categories(Int)
 
     // Получить список услуг, доступных для бронирования 👍
-    case bookServices(company_id: Int)
+    case bookServices(company_id: Int, staff_id: Int = 0)
 
     // Получить список сотрудников доступных для бронирования 👍
     case bookStaff(company_id: Int, service_id: [Int])
@@ -34,8 +34,7 @@ enum RequestType {
     // Получить список сеансов, доступных для бронирования 👍
     case bookTimes(company_id: Int, staff_id: Int, date: String, service_id: Int)
 
-
-    // Создать запись на сеанс
+    // Создать запись на сеанс 👍
     case createRecord(company_id: Int, model: ConfirmationModel)
 
 
@@ -80,7 +79,7 @@ extension RequestType: TargetType {
             return "/marketplace/application/\(applicationID)/salons"
         case .categories(let company_id):
             return "/api/v1/company/\(company_id)/service_categories/"
-        case .bookServices(let company_id):
+        case .bookServices(let company_id, _):
             return "/api/v1/book_services/\(company_id)"
         case .bookStaff(let company_id, _):
             return "/api/v1/book_staff/\(company_id)"
@@ -123,8 +122,18 @@ extension RequestType: TargetType {
 
     var task: Moya.Task {
         switch self {
-        case .salons, .categories, .bookServices, .staff, .staffByID, .bookTimes:
+        case .salons, .categories, .staff, .staffByID, .bookTimes:
             return .requestPlain
+        case .bookServices(_ , let staff_id):
+            if staff_id == 0 {
+                return .requestPlain
+            }  else {
+                let parameters: [String: Any] = ["staff_id": staff_id]
+                return .requestParameters(
+                    parameters: parameters,
+                    encoding: URLEncoding.queryString
+                )
+            }
         case .bookStaff(_, let service_id):
             if service_id.isEmpty {
                 return .requestPlain

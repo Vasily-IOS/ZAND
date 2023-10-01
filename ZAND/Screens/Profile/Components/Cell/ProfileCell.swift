@@ -48,6 +48,7 @@ extension ProfileCell {
         
         profileOptionImage.snp.makeConstraints { make in
             make.left.equalTo(self).offset(12)
+            make.width.height.equalTo(18)
             make.centerY.equalTo(self)
         }
         

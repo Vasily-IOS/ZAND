@@ -26,17 +26,18 @@ final class ConfirmationViewModel {
     var startSeanceTime: String?
     var employeeCommon: EmployeeCommon?
     var bookService: BookService?
+    var scheduleTill = String()
     var bookTime: BookTime? = nil {
         didSet {
             configureSeanceDate(model: bookTime)
         }
     }
+    
 
     let company_id: Int
-
-    private let bookingType: BookingType
+    let bookingType: BookingType
+    
     private let id = 0
-    private let appID = AppID.id
 
     // MARK: - Initializers
 
@@ -64,7 +65,7 @@ final class ConfirmationViewModel {
             phone: phone.filter("0123456789".contains),
             fullname: fullName,
             email: email,
-            api_id: appID,
+            api_id: AppID.id,
             appointments: [appointmet])
 
         resultModel = confirmationModel

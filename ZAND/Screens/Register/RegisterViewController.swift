@@ -46,20 +46,23 @@ extension RegisterViewController: RegisterDelegate {
     }
 
     func register() {
-        if presenter?.user.isAllFieldsFilled == true {
-            if presenter?.user.isEmailCanValidate == true {
-                if presenter?.user.isPolicyConfirmed == true {
-                    presenter?.save()
-                    AppRouter.shared.popViewController()
-                    AppRouter.shared.switchRoot(type: .profile)
-                } else {
-                    AppRouter.shared.showAlert(type: .shouldAcceptPolicy, message: nil)
-                }
-            } else {
-                AppRouter.shared.showAlert(type: .invalidEmailInput, message: nil)
-            }
-        } else {
+        guard let step = presenter?.user.isCanRegister() else { return }
+
+        switch step {
+        case .notAllFieldsAreFilledIn:
             AppRouter.shared.showAlert(type: .fillAllFields, message: nil)
+        case .emailIsNotCorrect:
+            AppRouter.shared.showAlert(type: .invalidEmailInput, message: nil)
+        case .phoneIsNotCorrect:
+            AppRouter.shared.showAlert(type: .invalidPhoneInput, message: nil)
+        case .policyIsNotConfirmed:
+            AppRouter.shared.showAlert(type: .shouldAcceptPolicy, message: nil)
+        case .phoneNumberCountIsSmall:
+            AppRouter.shared.showAlert(type: .phoneNumberLessThanEleven, message: nil)
+        case .register:
+            presenter?.save()
+            AppRouter.shared.popViewController()
+            AppRouter.shared.switchRoot(type: .profile)
         }
     }
 
@@ -69,7 +72,6 @@ extension RegisterViewController: RegisterDelegate {
 
     func changePolicy(isConfirmed: Bool) {
         presenter?.user.isPolicyConfirmed = isConfirmed
-        print(isConfirmed)
     }
 }
 

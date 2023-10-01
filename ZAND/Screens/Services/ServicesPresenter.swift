@@ -48,7 +48,12 @@ final class ServicesPresenter: ServicesPresenterOutput {
         self.network = network
         self.viewModel = viewModel
 
-        self.fetchData()
+        switch viewModel.bookingType {
+        case .service:
+            self.fetchData()
+        case .staff:
+            self.fetchData(staff_id: viewModel.staffID)
+        }
     }
 
     deinit {
@@ -69,14 +74,17 @@ final class ServicesPresenter: ServicesPresenterOutput {
         viewModel.serviceID = serviceID
     }
 
-    private func fetchData() {
+    private func fetchData(staff_id: Int = 0) {
         let group = DispatchGroup()
         var result: [Categories] = []
 
         view?.showIndicator(true)
         group.enter()
-        fetchCategoriesAndServices { (categories, services) in
-            self.createResultModel(categories: categories, services: services) { resultModel in
+        fetchCategoriesAndServices(staff_id: staff_id) { (categories, services) in
+            self.createResultModel(
+                categories: categories,
+                services: services)
+            { resultModel in
                 result = resultModel
                 group.leave()
             }
@@ -99,15 +107,19 @@ final class ServicesPresenter: ServicesPresenterOutput {
         }
     }
 
-    private func fetchBookServices(completion: @escaping (([BookService]) -> Void)) {
+    private func fetchBookServices(
+        staff_id: Int,
+        completion: @escaping (([BookService]) -> Void)
+    ) {
         network.performRequest(
-            type: .bookServices(company_id: saloonID),
+            type: .bookServices(company_id: saloonID, staff_id: staff_id),
             expectation: BookServicesModel.self) { bookServices in
                 completion(bookServices.data.services)
             }
     }
 
     private func fetchCategoriesAndServices(
+        staff_id: Int = 0,
         completion: @escaping ([CategoryJSON], [BookService]) -> Void) {
             let group = DispatchGroup()
             var categoriesToFetch: [CategoryJSON] = []
@@ -120,7 +132,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
             }
 
             group.enter()
-            fetchBookServices() { services in
+            fetchBookServices(staff_id: staff_id) { services in
                 servicesToFetch = services
                 group.leave()
             }

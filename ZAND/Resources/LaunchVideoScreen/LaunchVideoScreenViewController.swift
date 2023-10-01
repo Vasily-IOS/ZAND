@@ -16,6 +16,17 @@ final class LaunchVideoScreenViewController: UIViewController {
     private let videoController = AVPlayerViewController()
 
     // MARK: - Lifecycle
+
+//    override func loadView() {
+//        view.isUserInteractionEnabled = false
+//    }
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.isUserInteractionEnabled = false
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -34,11 +45,14 @@ extension LaunchVideoScreenViewController {
             return
         }
         let player = AVPlayer(url: URL(fileURLWithPath: path))
-        videoController.showsPlaybackControls = false
-        videoController.player = player
-        videoController.videoGravity = .resizeAspectFill
-        present(videoController, animated: true) {
-            player.play()
-        }
+
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.view.frame
+        playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        playerLayer.zPosition = -1
+
+        view.layer.addSublayer(playerLayer)
+        player.seek(to: CMTime.zero)
+        player.play()
     }
 }

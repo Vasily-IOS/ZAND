@@ -87,20 +87,39 @@ extension ServicesViewController: UITableViewDelegate {
             let serviceID = presenter?.model[indexPath.section].services[indexPath.row - 1].id ?? 0
             viewModel.serviceID = serviceID
             viewModel.bookService = presenter?.model[indexPath.section].services[indexPath.row - 1]
-            
-            let view = StaffView()
-            let vc = StaffViewController(contentView: view)
-            let network: HTTP = APIManager()
 
-            let presenter = StaffPresenter(
-                view: vc,
-                saloonID: presenter?.saloonID ?? 0,
-                network: network,
-                serviceToProvideID: serviceID,
-                viewModel: viewModel)
-            vc.presenter = presenter
+            switch viewModel.bookingType {
+            case .service:
+                let view = StaffView()
+                let vc = StaffViewController(contentView: view)
+                let network: HTTP = APIManager()
 
-            navigationController?.pushViewController(vc, animated: true)
+                let presenter = StaffPresenter(
+                    view: vc,
+                    saloonID: presenter?.saloonID ?? 0,
+                    network: network,
+                    serviceToProvideID: serviceID,
+                    viewModel: viewModel)
+                vc.presenter = presenter
+
+                navigationController?.pushViewController(vc, animated: true)
+            case .staff:
+                let layout: DefaultTimetableLayout = TimetableLayout()
+                let contentView = TimetableView(layout: layout)
+                let vс = TimetableViewController(contentView: contentView)
+                let network: HTTP = APIManager()
+                let presenter = TimetablePresenter(
+                    view: vс,
+                    network: network,
+                    saloonID: presenter?.saloonID ?? 0,
+                    staffID: viewModel.staffID,
+                    scheduleTill: viewModel.scheduleTill,
+                    serviceToProvideID: viewModel.serviceID,
+                    viewModel: viewModel)
+                vс.presenter = presenter
+
+                navigationController?.pushViewController(vс, animated: true)
+            }
         }
     }
 }

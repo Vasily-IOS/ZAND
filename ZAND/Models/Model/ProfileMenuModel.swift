@@ -8,11 +8,12 @@
 import UIKit
 
 struct ProfileMenuModel {
-    let image: UIImage
+    let image: UIImage?
     let description: String
 
     static let model: [Self] = [
         .init(image: AssetImage.books_icon!, description: AssetString.books),
-        .init(image: AssetImage.logout_icon!, description: AssetString.logOut)
+        .init(image: AssetImage.logout_icon!, description: AssetString.logOut),
+        .init(image: AssetImage.deleteProfile_icon, description: AssetString.deleteProfile)
     ]
 }

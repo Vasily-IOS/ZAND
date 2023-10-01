@@ -74,6 +74,10 @@ enum AssetString {
     static let chooseTime = "Выберите время"
     static let finalText = "Поздравляем! Запись оформлена!"
     static let errorText = "Произошла ошибка :("
+    static let phoneInput = "Номер телефона должен начинаться с +7 (9..."
+    static let deleteProfile = "Удалить профиль"
+    static let areYouSure = "Вы уверены?"
+    static let managerWillPhone = "Для удаления профиля наш менеджер свяжется в Вами"
     
     // MARK: - Bottom button values
     static let apply = "Применить"

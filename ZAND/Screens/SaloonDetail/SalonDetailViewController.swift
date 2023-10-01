@@ -100,11 +100,16 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
     }
 
     func openBooking() {
-        AppRouter.shared.presentWithNav(type: .startBooking(presenter?.getModel()?.id ?? 0))
+        if !UserDBManager.shared.isUserContains() {
+            AppRouter.shared.popViewController()
+            AppRouter.shared.changeTabBarVC(to: 2)
+        } else {
+            AppRouter.shared.presentWithNav(type: .startBooking(presenter?.salonID ?? 0))
+        }
     }
 
     func applyDB() {
-        if !UserDBManager.shared.contains() {
+        if !UserDBManager.shared.isUserContains() {
             AppRouter.shared.popViewController()
             AppRouter.shared.changeTabBarVC(to: 2)
         } else {

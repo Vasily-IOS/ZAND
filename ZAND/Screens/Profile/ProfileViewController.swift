@@ -66,13 +66,37 @@ extension ProfileViewController {
     
     // MARK: - Instance methods
     
-    private func makeAlertController() {
-        let alertController = UIAlertController(title: AssetString.exitMessage,
-                                                message: nil,
-                                                preferredStyle: .alert)
+    private func showLogOutAlert() {
+        let alertController = UIAlertController(
+            title: AssetString.exitMessage,
+            message: nil,
+            preferredStyle: .alert)
         let noAction = UIAlertAction(title: AssetString.no, style: .cancel)
         let yesAction = UIAlertAction(title: AssetString.yes, style: .default) { [weak self] _ in
             self?.presenter?.signOut()
+        }
+        alertController.addAction(noAction)
+        alertController.addAction(yesAction)
+        present(alertController, animated: true)
+    }
+
+    private func showDeleteProfileAlert() {
+        let alertController = UIAlertController(
+            title: AssetString.areYouSure,
+            message: nil,
+            preferredStyle: .alert)
+        let noAction = UIAlertAction(title: AssetString.no, style: .cancel)
+        let yesAction = UIAlertAction(
+            title: AssetString.yes,
+            style: .default) { [weak self] _ in
+            let alertConrol = UIAlertController(
+                title: AssetString.managerWillPhone,
+                message: nil,
+                preferredStyle: .alert)
+            let action = UIAlertAction(
+                title: AssetString.ok, style: .cancel)
+            alertConrol.addAction(action)
+            self?.present(alertConrol, animated: true)
         }
         alertController.addAction(noAction)
         alertController.addAction(yesAction)
@@ -119,13 +143,15 @@ extension ProfileViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch ProfileSection.init(rawValue: indexPath.section) {
         case .profileFields:
-            let cell = collectionView.dequeueReusableCell(for: indexPath,
-                                                          cellType: ProfileCell.self)
+            let cell = collectionView.dequeueReusableCell(
+                for: indexPath,
+                cellType: ProfileCell.self)
             cell.configure(model: profileMenuModel[indexPath.row])
             return cell
         case .favourites:
-            let cell = collectionView.dequeueReusableCell(for: indexPath,
-                                                          cellType: FavouritesCell.self)
+            let cell = collectionView.dequeueReusableCell(
+                for: indexPath,
+                cellType: FavouritesCell.self)
             cell.configure(model: saloonDBmodel[indexPath.row])
             return cell
         default:
@@ -146,7 +172,9 @@ extension ProfileViewController: UICollectionViewDelegate {
             case 0:
                 AppRouter.shared.presentWithNav(type: .appointments)
             case 1:
-                makeAlertController()
+                showLogOutAlert()
+            case 2:
+                showDeleteProfileAlert()
             default:
                 break
             }
@@ -160,9 +188,10 @@ extension ProfileViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableView(for: indexPath,
-                                                            viewType: ReuseHeaderView.self,
-                                                            kind: .header)
+        let headerView = collectionView.dequeueReusableView(
+            for: indexPath,
+            viewType: ReuseHeaderView.self,
+            kind: .header)
         headerView.state = .favourites
         return headerView
     }
