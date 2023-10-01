@@ -112,41 +112,13 @@ extension MainPresenter {
     }
 
     func applyDB(by id: Int, completion: @escaping () -> ()) {
-//        DispatchQueue.global().async {
-            if self.notContains(by: id) {
-                if let modelForSave = self.getModel(by: id) as? Saloon {
-                    let group = DispatchGroup()
-
-                    group.enter()
-                    DispatchQueue.global().async {
-                        SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-                    }
-                    group.leave()
-
-                    group.notify(queue: .main) {
-                        print("Success")
-                    }
-//                    }
-//                    SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-                }
-            } else {
-//                DispatchQueue.global().async {
-                    self.remove(by: id)
-//                }
+        if self.notContains(by: id) {
+            if let modelForSave = self.getModel(by: id) as? Saloon {
+                SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
             }
-
-            //            if self.notContains(by: id) {
-            //                if let modelForSave = self.getModel(by: id) as? Saloon {
-            //                    SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-            ////                    DispatchQueue.main.async {
-            ////                        completion()
-            ////                    }
-            //                }
-            //            } else {
-            ////                self.remove(by: id)
-            ////                completion()
-            //            }
-//        }
+        } else {
+            self.remove(by: id)
+        }
         completion()
     }
 

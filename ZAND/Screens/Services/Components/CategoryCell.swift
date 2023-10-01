@@ -14,9 +14,9 @@ final class CategoryCell: BaseTableCell {
 
     var isChoosen: Bool = false {
         didSet {
-            UIView.animate(withDuration: 0.4) {
-                self.arrowImage.rotate(self.isChoosen)
-            }
+//            UIView.animate(withDuration: 0.4) {
+//                self.arrowImage.rotate(self.isChoosen)
+//            }
         }
     }
 

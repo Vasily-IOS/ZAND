@@ -24,7 +24,6 @@ final class StaffComponentView: BaseUIView {
     private let nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        nameLabel.text = "tect 1"
         return nameLabel
     }()
 
@@ -32,7 +31,6 @@ final class StaffComponentView: BaseUIView {
         let specializationLabel = UILabel()
         specializationLabel.font = .systemFont(ofSize: 15, weight: .medium)
         specializationLabel.numberOfLines = 0
-        specializationLabel.text = "test 2"
         return specializationLabel
     }()
 

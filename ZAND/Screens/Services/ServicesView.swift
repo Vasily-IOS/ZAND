@@ -37,6 +37,7 @@ final class ServicesView: BaseUIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .mainGray
         tableView.isHidden = true
+        tableView.allowsMultipleSelection = false
         return tableView
     }()
 

@@ -76,11 +76,9 @@ extension ServicesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
         if indexPath.row == 0 {
-            tableView.deselectRow(at: indexPath, animated: true)
             presenter?.model[indexPath.section].isOpened = !(presenter?.model[indexPath.section].isOpened)!
-            tableView.reloadSections([indexPath.section], with: .none)
+            reloadData()
         } else {
             guard let viewModel = presenter?.viewModel else { return }
 
@@ -146,7 +144,12 @@ extension ServicesViewController: ServicesViewInput {
 
     func reloadData() {
         DispatchQueue.main.async {
-            self.contentView.tableView.reloadData()
+            UIView.transition(
+                with: self.contentView.tableView,
+                duration: 0.1,
+                options: .transitionCrossDissolve,
+                animations: { self.contentView.tableView.reloadData() }
+            )
         }
     }
 

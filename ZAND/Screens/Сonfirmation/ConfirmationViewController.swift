@@ -56,7 +56,7 @@ extension ConfirmationViewController: ConfirmationInput {
         contentView.entryConfirmedView.configure(isSuccess: isSuccess)
         
         navigationController?.setNavigationBarHidden(true, animated: false)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
             self.navigationController?.dismiss(animated: true)
         }
     }

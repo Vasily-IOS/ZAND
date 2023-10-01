@@ -43,7 +43,8 @@ final class SaloonDetailDBManager {
             modelDB.company_photos.append(data ?? Data())
         }
 
-        realmManager.save(object: modelDB)
-//        VibrationManager.shared.vibrate(for: .success)
+//        DispatchQueue.global().async {
+            self.realmManager.save(object: modelDB)
+//        }
     }
 }

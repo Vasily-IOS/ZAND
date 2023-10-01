@@ -13,9 +13,10 @@ final class EntryConfirmedView: BaseUIView {
 
     // MARK: - Properties
 
-    private let successAnimation: LottieAnimationView = {
+    private lazy var successAnimation: LottieAnimationView = {
         var successAnimation = LottieAnimationView(name: Config.animation_entryConfimed)
         successAnimation.play()
+//        successAnimation.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         return successAnimation
     }()
 
@@ -39,7 +40,7 @@ final class EntryConfirmedView: BaseUIView {
             finalLabel
         ],
         axis: .vertical,
-        distribution: .fillProportionally,
+        distribution: .fill,
         spacing: 40
     )
 
@@ -53,7 +54,8 @@ final class EntryConfirmedView: BaseUIView {
 
     func configure(isSuccess: Bool) {
         if isSuccess {
-            finalLabel.text = AssetString.finalText
+//            finalLabel.text = AssetString.finalText
+            finalLabel.text = ""
             stackView.subviews[1].isHidden = true
         } else {
             finalLabel.text = AssetString.errorText

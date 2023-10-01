@@ -76,6 +76,8 @@ extension StaffViewController: UITableViewDelegate {
         viewModel.staffID = staffID
         viewModel.employeeCommon = presenter?.fetchedStaff[indexPath.section]
 
+        print(presenter?.fetchedStaff[indexPath.section])
+
         switch viewModel.bookingType {
         case .service:
             let layout: DefaultTimetableLayout = TimetableLayout()
