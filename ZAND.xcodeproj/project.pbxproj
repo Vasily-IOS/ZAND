@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E63E4D874CA2C42699F3CB1F /* Pods_ZAND.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9B65E19747D5AB4F3AD14C6 /* Pods_ZAND.framework */; };
 		FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E3382A02C3C4006476F0 /* ProfileCell.swift */; };
 		FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */; };
 		FF18BEEE2A5D9DC400547D4C /* RegexMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF18BEED2A5D9DC400547D4C /* RegexMask.swift */; };
@@ -169,6 +168,12 @@
 		FFF600282A6FD312009813E6 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF600272A6FD312009813E6 /* AlertType.swift */; };
 		FFF6002B2A6FD60B009813E6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */; };
 		FFF6002D2A6FD6A6009813E6 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6002C2A6FD6A6009813E6 /* ActivityIndicatorView.swift */; };
+		FFF8961E2ACA3F60008E97D7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FFF8961D2ACA3F60008E97D7 /* SnapKit */; };
+		FFF896212ACA3F73008E97D7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FFF896202ACA3F73008E97D7 /* Lottie */; };
+		FFF896242ACA3F8E008E97D7 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = FFF896232ACA3F8E008E97D7 /* Moya */; };
+		FFF896272ACA3FA5008E97D7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FFF896262ACA3FA5008E97D7 /* Kingfisher */; };
+		FFF8962A2ACA3FCB008E97D7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FFF896292ACA3FCB008E97D7 /* Realm */; };
+		FFF8962C2ACA3FCB008E97D7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FFF8962B2ACA3FCB008E97D7 /* RealmSwift */; };
 		FFFE2AC32AC2D5E4000A940A /* DefaultTimetableLayout .swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2AC22AC2D5E4000A940A /* DefaultTimetableLayout .swift */; };
 		FFFE2AC52AC2D605000A940A /* TimetableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2AC42AC2D605000A940A /* TimetableLayout.swift */; };
 		FFFE2AC82AC2D8D4000A940A /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE2AC72AC2D8D4000A940A /* DayCell.swift */; };
@@ -184,9 +189,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0D64C2B23E8298FFED41E857 /* Pods-ZAND.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.debug.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.debug.xcconfig"; sourceTree = "<group>"; };
-		E033D12BA663B4F5DE743EE5 /* Pods-ZAND.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAND.release.xcconfig"; path = "Target Support Files/Pods-ZAND/Pods-ZAND.release.xcconfig"; sourceTree = "<group>"; };
-		F9B65E19747D5AB4F3AD14C6 /* Pods_ZAND.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZAND.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF01E3382A02C3C4006476F0 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCell.swift; sourceTree = "<group>"; };
 		FF18BEED2A5D9DC400547D4C /* RegexMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexMask.swift; sourceTree = "<group>"; };
@@ -370,30 +372,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E63E4D874CA2C42699F3CB1F /* Pods_ZAND.framework in Frameworks */,
+				FFF8962C2ACA3FCB008E97D7 /* RealmSwift in Frameworks */,
+				FFF896272ACA3FA5008E97D7 /* Kingfisher in Frameworks */,
+				FFF8961E2ACA3F60008E97D7 /* SnapKit in Frameworks */,
+				FFF896212ACA3F73008E97D7 /* Lottie in Frameworks */,
+				FFF896242ACA3F8E008E97D7 /* Moya in Frameworks */,
+				FFF8962A2ACA3FCB008E97D7 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		92076542BD6D23C622198DA9 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0D64C2B23E8298FFED41E857 /* Pods-ZAND.debug.xcconfig */,
-				E033D12BA663B4F5DE743EE5 /* Pods-ZAND.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		937314982A3E063BEB40070C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F9B65E19747D5AB4F3AD14C6 /* Pods_ZAND.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		FF01E3372A02C3B1006476F0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -622,8 +612,6 @@
 				FF8B12292A8BD45200837E29 /* ZAND..entitlements */,
 				FF45A12B29E7EC1200587DAF /* ZAND */,
 				FF45A12A29E7EC1200587DAF /* Products */,
-				92076542BD6D23C622198DA9 /* Pods */,
-				937314982A3E063BEB40070C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1193,17 +1181,23 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF45A15329E7EC1300587DAF /* Build configuration list for PBXNativeTarget "ZAND" */;
 			buildPhases = (
-				F0F835CF12B52B527D2E0206 /* [CP] Check Pods Manifest.lock */,
 				FF45A12529E7EC1200587DAF /* Sources */,
 				FF45A12629E7EC1200587DAF /* Frameworks */,
 				FF45A12729E7EC1200587DAF /* Resources */,
-				A708B94827CDFCC0FCEC6AD3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ZAND;
+			packageProductDependencies = (
+				FFF8961D2ACA3F60008E97D7 /* SnapKit */,
+				FFF896202ACA3F73008E97D7 /* Lottie */,
+				FFF896232ACA3F8E008E97D7 /* Moya */,
+				FFF896262ACA3FA5008E97D7 /* Kingfisher */,
+				FFF896292ACA3FCB008E97D7 /* Realm */,
+				FFF8962B2ACA3FCB008E97D7 /* RealmSwift */,
+			);
 			productName = ZAND;
 			productReference = FF45A12929E7EC1200587DAF /* ZAND.app */;
 			productType = "com.apple.product-type.application";
@@ -1232,6 +1226,13 @@
 				Base,
 			);
 			mainGroup = FF45A12029E7EC1200587DAF;
+			packageReferences = (
+				FFF8961C2ACA3F60008E97D7 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				FFF8961F2ACA3F73008E97D7 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				FFF896222ACA3F8E008E97D7 /* XCRemoteSwiftPackageReference "Moya" */,
+				FFF896252ACA3FA5008E97D7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				FFF896282ACA3FCB008E97D7 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = FF45A12A29E7EC1200587DAF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1253,48 +1254,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A708B94827CDFCC0FCEC6AD3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZAND/Pods-ZAND-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F0F835CF12B52B527D2E0206 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ZAND-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF45A12529E7EC1200587DAF /* Sources */ = {
@@ -1604,14 +1563,13 @@
 		};
 		FF45A15429E7EC1300587DAF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D64C2B23E8298FFED41E857 /* Pods-ZAND.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ZAND..entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 9TT2NS548Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
@@ -1627,7 +1585,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1642,14 +1600,13 @@
 		};
 		FF45A15529E7EC1300587DAF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E033D12BA663B4F5DE743EE5 /* Pods-ZAND.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ZAND..entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 9TT2NS548Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
@@ -1665,7 +1622,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1700,6 +1657,82 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FFF8961C2ACA3F60008E97D7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		FFF8961F2ACA3F73008E97D7 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		FFF896222ACA3F8E008E97D7 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+		FFF896252ACA3FA5008E97D7 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		FFF896282ACA3FCB008E97D7 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FFF8961D2ACA3F60008E97D7 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFF8961C2ACA3F60008E97D7 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		FFF896202ACA3F73008E97D7 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFF8961F2ACA3F73008E97D7 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		FFF896232ACA3F8E008E97D7 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFF896222ACA3F8E008E97D7 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		FFF896262ACA3FA5008E97D7 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFF896252ACA3FA5008E97D7 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		FFF896292ACA3FCB008E97D7 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFF896282ACA3FCB008E97D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		FFF8962B2ACA3FCB008E97D7 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFF896282ACA3FCB008E97D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF45A12129E7EC1200587DAF /* Project object */;
 }
