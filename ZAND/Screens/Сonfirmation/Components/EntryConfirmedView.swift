@@ -16,7 +16,6 @@ final class EntryConfirmedView: BaseUIView {
     private lazy var successAnimation: LottieAnimationView = {
         var successAnimation = LottieAnimationView(name: Config.animation_entryConfimed)
         successAnimation.play()
-//        successAnimation.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         return successAnimation
     }()
 
@@ -35,7 +34,6 @@ final class EntryConfirmedView: BaseUIView {
     private lazy var stackView = UIStackView(
         alignment: .center,
         arrangedSubviews: [
-            successAnimation,
             failureAnimation,
             finalLabel
         ],
@@ -46,24 +44,31 @@ final class EntryConfirmedView: BaseUIView {
 
     // MARK: - Instance methods
 
-    override func setup() {
-        super.setup()
-
-        setupSubviews()
-    }
-
     func configure(isSuccess: Bool) {
         if isSuccess {
-//            finalLabel.text = AssetString.finalText
-            finalLabel.text = ""
-            stackView.subviews[1].isHidden = true
+            finalLabel.text = AssetString.finalText
+            setupSuccessSubviews()
         } else {
             finalLabel.text = AssetString.errorText
-            stackView.subviews[0].isHidden = true
+            setupFailureSubviews()
+        }
+        VibrationManager.shared.vibrate(for: .success)
+    }
+
+    private func setupSuccessSubviews() {
+        addSubviews([successAnimation, finalLabel])
+
+        successAnimation.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+
+        finalLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(successAnimation).offset(180)
+            make.centerX.equalToSuperview()
         }
     }
 
-    private func setupSubviews() {
+    private func setupFailureSubviews() {
         addSubview(stackView)
 
         stackView.snp.makeConstraints { make in

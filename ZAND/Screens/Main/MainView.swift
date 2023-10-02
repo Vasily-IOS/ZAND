@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Lottie
 
 protocol MainViewDelegate: AnyObject {
     func showSearch()
@@ -29,6 +30,12 @@ final class MainView: BaseUIView {
     }()
 
     private lazy var searchButton = SearchButton()
+
+    private let lostConnectionAnimation: LottieAnimationView = {
+        var lostConnectionAnimation = LottieAnimationView(name: Config.animation_noInternet)
+        lostConnectionAnimation.play()
+        return lostConnectionAnimation
+    }()
 
     private let lostConnectionImage = UIImageView(image: AssetImage.lostConnection_icon)
 
@@ -63,11 +70,11 @@ final class MainView: BaseUIView {
         collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
     }
 
-    func setLostConnectionImage(isConnected: Bool) {
-        addSubview(lostConnectionImage)
+    func setLostConnectionAimation(isConnected: Bool) {
+        addSubview(lostConnectionAnimation)
 
-        lostConnectionImage.isHidden = isConnected
-        lostConnectionImage.snp.makeConstraints { make in
+        lostConnectionAnimation.isHidden = isConnected
+        lostConnectionAnimation.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
     }

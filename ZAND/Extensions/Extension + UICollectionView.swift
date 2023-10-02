@@ -50,9 +50,10 @@ extension UICollectionView {
     }
 
     func dequeueReusableView<T: Reusable>(for indexPath: IndexPath, viewType: T.Type = T.self, kind: Kind) -> T {
-        guard let view = dequeueReusableSupplementaryView(ofKind: kind.viewType,
-                                                          withReuseIdentifier: viewType.reuseIdentifier,
-                                                          for: indexPath) as? T else {
+        guard let view = dequeueReusableSupplementaryView(
+            ofKind: kind.viewType,
+            withReuseIdentifier: viewType.reuseIdentifier,
+            for: indexPath) as? T else {
             fatalError("Failed to dequeue a view with identifier \(viewType.reuseIdentifier) matching type \(viewType.self).")
         }
         return view

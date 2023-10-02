@@ -35,6 +35,10 @@ struct User {
     var phone: String = ""
     var isPolicyConfirmed: Bool = false
 
+    var fullName: String {
+        return "\(surname)" + " " + "\(name)"
+    }
+
     private var isAllFieldsFilled: Bool {
         return name != "" && surname != "" && email != "" && phone.count == 18
     }
