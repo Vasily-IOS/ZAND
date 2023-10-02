@@ -78,6 +78,10 @@ enum AssetString {
     static let deleteProfile = "Удалить профиль"
     static let areYouSure = "Вы уверены?"
     static let managerWillPhone = "Для удаления профиля наш менеджер свяжется в Вами"
+    static let checkYourData = "Проверьте свои данные"
+    static let fix = "Исправить"
+    static let good = "Как надо!"
+    static let phone = "Телефон"
     
     // MARK: - Bottom button values
     static let apply = "Применить"

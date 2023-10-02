@@ -35,6 +35,26 @@ final class RegisterViewController: BaseViewController<RegisterView> {
             $0.delegate = self
         }
     }
+
+    private func showFinalAlertController() {
+        let finalText = "\n\(AssetString.name): \(presenter?.user.fullName ?? "")\n\(AssetString.email): \(presenter?.user.email ?? "")\n\(AssetString.phone): \(presenter?.user.phone ?? "")"
+        let alertController = UIAlertController(
+            title: AssetString.checkYourData, message: finalText, preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(title: AssetString.fix, style: .destructive)
+        
+        let confirmAction = UIAlertAction(title: AssetString.good, style: .cancel) { [weak self]_ in
+            self?.presenter?.save()
+            AppRouter.shared.popViewController()
+            AppRouter.shared.switchRoot(type: .profile)
+        }
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+
+        present(alertController, animated: true)
+    }
 }
 
 extension RegisterViewController: RegisterDelegate {
@@ -60,9 +80,7 @@ extension RegisterViewController: RegisterDelegate {
         case .phoneNumberCountIsSmall:
             AppRouter.shared.showAlert(type: .phoneNumberLessThanEleven, message: nil)
         case .register:
-            presenter?.save()
-            AppRouter.shared.popViewController()
-            AppRouter.shared.switchRoot(type: .profile)
+            showFinalAlertController()
         }
     }
 
