@@ -132,7 +132,6 @@
 		FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985602A2F551600ABEFBB /* SearchPresenter.swift */; };
 		FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985642A308E1F00ABEFBB /* MainPresenter.swift */; };
 		FFB985682A30AFD100ABEFBB /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985672A30AFD100ABEFBB /* VibrationManager.swift */; };
-		FFB9856A2A30B5D500ABEFBB /* OnboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985692A30B5D500ABEFBB /* OnboardManager.swift */; };
 		FFB985722A30E6E700ABEFBB /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985712A30E6E700ABEFBB /* RealmManager.swift */; };
 		FFB9857A2A30E87B00ABEFBB /* RealmManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985792A30E87B00ABEFBB /* RealmManagerImpl.swift */; };
 		FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */; };
@@ -317,7 +316,6 @@
 		FFB985602A2F551600ABEFBB /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		FFB985642A308E1F00ABEFBB /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		FFB985672A30AFD100ABEFBB /* VibrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
-		FFB985692A30B5D500ABEFBB /* OnboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardManager.swift; sourceTree = "<group>"; };
 		FFB985712A30E6E700ABEFBB /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		FFB985792A30E87B00ABEFBB /* RealmManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManagerImpl.swift; sourceTree = "<group>"; };
 		FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsViewController.swift; sourceTree = "<group>"; };
@@ -682,8 +680,8 @@
 				FF69DAE02A5467FB00481CF1 /* Extension + UIImage.swift */,
 				FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */,
 				FFB657A02A6B1A3F00451D65 /* Extension + String.swift */,
-				FF30A1C02A4A156D00DD6E29 /* Reusable.swift */,
 				FF49C9CB2AB067620086847C /* Extension + Data.swift */,
+				FF30A1C02A4A156D00DD6E29 /* Reusable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -792,6 +790,7 @@
 			isa = PBXGroup;
 			children = (
 				FF45A12C29E7EC1200587DAF /* AppDelegate.swift */,
+				FF30A1BC2A4A138800DD6E29 /* Config.swift */,
 				FF45A13A29E7EC1300587DAF /* Info.plist */,
 				FF99B8F829EEB4D600F4E4C3 /* Router */,
 			);
@@ -948,7 +947,6 @@
 				FF99B8F229EEAB1500F4E4C3 /* AssetString.swift */,
 				FFDCE4BA2A1BB47000CEA0E1 /* AssetImage.swift */,
 				FFDCE4BC2A1BB7E300CEA0E1 /* URL.swift */,
-				FF30A1BC2A4A138800DD6E29 /* Config.swift */,
 				FF95F8AC2AC5BCD6005DA310 /* AppID.swift */,
 				FF427DD82A128622007DF80A /* LaunchVideoScreen */,
 			);
@@ -986,7 +984,6 @@
 				FF3E65DA2A55C202007EC56D /* API */,
 				FF4F757A2A9E3889001E8731 /* Realm */,
 				FFB657A42A6B2CCB00451D65 /* UserDefaults */,
-				FFB9857C2A30E96100ABEFBB /* OnboardManager */,
 				FFB9857B2A30E95300ABEFBB /* VibrationManager */,
 			);
 			path = Managers;
@@ -998,14 +995,6 @@
 				FFB985672A30AFD100ABEFBB /* VibrationManager.swift */,
 			);
 			path = VibrationManager;
-			sourceTree = "<group>";
-		};
-		FFB9857C2A30E96100ABEFBB /* OnboardManager */ = {
-			isa = PBXGroup;
-			children = (
-				FFB985692A30B5D500ABEFBB /* OnboardManager.swift */,
-			);
-			path = OnboardManager;
 			sourceTree = "<group>";
 		};
 		FFC01B452A03C7D8005CE41B /* Appointments */ = {
@@ -1365,7 +1354,6 @@
 				FFDE118F2A5C436C00CEF390 /* APIManager.swift in Sources */,
 				FF27B0B02AB8D0B000611F47 /* StartBookingPresenter.swift in Sources */,
 				FFC01B4C2A03CA78005CE41B /* MyDetailsViewController.swift in Sources */,
-				FFB9856A2A30B5D500ABEFBB /* OnboardManager.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
 				FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */,
 				FF95F8A52AC5AB7C005DA310 /* BookingRouter.swift in Sources */,

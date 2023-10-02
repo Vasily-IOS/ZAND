@@ -24,7 +24,7 @@ final class MapViewController: BaseViewController<MapView> {
 
         subscribeDelegate()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 

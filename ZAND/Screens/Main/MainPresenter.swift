@@ -27,6 +27,7 @@ protocol MainViewInput: AnyObject {
     func changeFavouritesAppearence(indexPath: IndexPath)
     func updateUI(model: [Saloon])
     func isActivityIndicatorShouldRotate(_ isRotate: Bool)
+    func updateUIConection(isUpdate: Bool)
 }
 
 final class MainPresenter: MainPresenterOutput {
@@ -50,8 +51,8 @@ final class MainPresenter: MainPresenterOutput {
         self.realmManager = realmManager
         self.provider = provider
 
-        subscribeNotifications()
         updateUI()
+        subscribeNotifications()
     }
 
     // MARK: - Action
@@ -72,7 +73,13 @@ final class MainPresenter: MainPresenterOutput {
     @objc
     private func updateData(_ nnotification: Notification) {
         updateUI()
-        print("Data updated")
+    }
+
+    @objc
+    private func connectivityStatus(_ notification: Notification) {
+        if let isConnected = notification.userInfo?["connectivityStatus"] as? Bool {
+            view?.updateUIConection(isUpdate: isConnected)
+        }
     }
 }
 
@@ -81,13 +88,11 @@ extension MainPresenter {
     // MARK: - Instance methods
 
     func updateUI() {
-//        view?.isActivityIndicatorShouldRotate(true)
         provider.fetchData { [weak self] saloons in
             guard let self else { return }
 
             self.saloons = saloons
             self.view?.updateUI(model: saloons)
-//            self.view?.isActivityIndicatorShouldRotate(false)
         }
     }
 
@@ -152,6 +157,11 @@ extension MainPresenter {
             selector: #selector(updateData(_ :)),
             name: .updateData,
             object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(connectivityStatus(_:)),
+            name: .connecivityChanged, object: nil
         )
     }
 }

@@ -59,25 +59,6 @@ final class MainViewController: BaseViewController<MainView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        contentView.setLostConnectionImage(isConnected: NetworkMonitor.shared.isConnected)
-
-        NetworkMonitor.shared.connectionHandler = { [weak self] isConnected in
-            guard let self else { return }
-            
-            if isConnected {
-                DispatchQueue.main.async {
-                    self.contentView.collectionView.isHidden = false
-                    self.presenter?.updateUI()
-                    self.contentView.setLostConnectionImage(isConnected: true)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.contentView.collectionView.isHidden = true
-                    self.contentView.setLostConnectionImage(isConnected: false)
-                }
-            }
-        }
-
         hideNavigationBar()
     }
 
@@ -198,6 +179,21 @@ extension MainViewController: MainViewInput {
 
     func isActivityIndicatorShouldRotate(_ isRotate: Bool) {
         isRotate ? showIndicator() : hideIndicator()
+    }
+
+    func updateUIConection(isUpdate: Bool) {
+        if isUpdate {
+            DispatchQueue.main.async {
+                self.contentView.collectionView.isHidden = false
+                self.presenter?.updateUI()
+                self.contentView.setLostConnectionAimation(isConnected: true)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.contentView.collectionView.isHidden = true
+                self.contentView.setLostConnectionAimation(isConnected: false)
+            }
+        }
     }
 }
 

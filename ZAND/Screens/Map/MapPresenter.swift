@@ -33,19 +33,23 @@ final class MapPresenter: MapPresenterOutput {
         self.view = view
         self.provider = provider
 
-        provider.fetchData { saloons in
-            self.saloons = saloons
-        }
-
-        updateUI()
         subscribeNotifications()
     }
 
     // MARK: - Instance methods
 
     @objc
-    private func updateData(_ nnotification: Notification) {
+    private func updateData() {
         updateUI()
+    }
+
+    @objc
+    private func connectivityStatus(_ notification: Notification) {
+        if let isConnected = notification.userInfo?["connectivityStatus"] as? Bool {
+            if isConnected {
+                updateUI()
+            }
+        }
     }
 
     func updateUI() {
@@ -68,9 +72,14 @@ final class MapPresenter: MapPresenterOutput {
     private func subscribeNotifications() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(updateData(_ :)),
+            selector: #selector(updateData),
             name: .updateData,
             object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(connectivityStatus(_:)),
+            name: .connecivityChanged, object: nil
         )
     }
 }
