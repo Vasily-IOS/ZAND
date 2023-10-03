@@ -73,17 +73,17 @@ final class SearchView: BaseUIView {
     private func cancelTapAction() {
         delegate?.dismiss()
     }
-
-    @objc
-    private func cancelEditing() {
-        endEditing(true)
-        setSearchPlaceholderText()
-    }
 }
 
 extension SearchView {
     
     // MARK: - Instance methods
+
+    func endEditing() {
+        searchBar.text = AssetString.where_wanna_go
+        searchBar.searchTextField.textColor = .lightGray
+        endEditing(true)
+    }
     
     private func setViews() {
         backgroundColor = .mainGray
@@ -110,19 +110,15 @@ extension SearchView {
             make.top.equalTo(searchBar.snp.bottom).offset(24)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
-            make.bottom.equalTo(self).inset(16)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(16)
         }
-    }
-
-    private func setSearchPlaceholderText() {
-        searchBar.text = AssetString.where_wanna_go
-        searchBar.searchTextField.textColor = .lightGray
     }
 
     private func setTargets() {
         cancelButton.addTarget(
             self,
             action: #selector(cancelTapAction),
-            for: .touchUpInside)
+            for: .touchUpInside
+        )
     }
 }

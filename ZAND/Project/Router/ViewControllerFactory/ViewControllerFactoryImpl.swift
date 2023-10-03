@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class VCFactory: DefaultVCFactory {
+final class ViewControllerFactoryImpl: ViewControllerFactory {
     func getViewController(for type: VCType) -> UIViewController {
         switch type {
         case .tabBar:

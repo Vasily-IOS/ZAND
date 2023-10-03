@@ -55,6 +55,7 @@ final class MapPresenter: MapPresenterOutput {
     func updateUI() {
         provider.fetchData { [weak self] saloons in
             self?.view?.updateUI(model: saloons)
+            self?.saloons = saloons
         }
     }
 

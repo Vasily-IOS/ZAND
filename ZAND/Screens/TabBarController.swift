@@ -28,7 +28,7 @@ final class TabBarController: UITabBarController {
         }
     }
 
-    private let vcFactory: DefaultVCFactory = VCFactory()
+    private let vcFactory: ViewControllerFactory = ViewControllerFactoryImpl()
 
     // MARK: - Lifecycle
     
@@ -45,7 +45,7 @@ extension TabBarController {
     // MARK: - Instance methods
     
     private func setViews() {
-        let vcFactory: DefaultVCFactory = VCFactory()
+        let vcFactory: ViewControllerFactory = ViewControllerFactoryImpl()
         let mainVC = vcFactory.getViewController(for: .main)
         mainVC.tabBarItem = UITabBarItem(title: AssetString.main,
                                          image: AssetImage.main_icon,

@@ -86,12 +86,12 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
             sendNotification(userId: modelForSave.id, isInFavourite: false)
             completion()
         }
+        VibrationManager.shared.vibrate(for: .success)
     }
 
     func remove(by id: Int) {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        realmManager.removeObjectByID(object: SaloonDataBaseModel.self, predicate: predicate)
-        VibrationManager.shared.vibrate(for: .success)
+        realmManager.removeObjectByPredicate(object: SaloonDataBaseModel.self, predicate: predicate)
     }
 
     func contains(by id: Int) -> Bool {

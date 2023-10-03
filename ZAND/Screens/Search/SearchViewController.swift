@@ -35,6 +35,7 @@ final class SearchViewController: BaseViewController<SearchView> {
         super.viewDidLoad()
 
         subscribeDelegate()
+        subscribeNotifications()
         presenter?.updateUI()
     }
     
@@ -49,6 +50,28 @@ final class SearchViewController: BaseViewController<SearchView> {
     }
     
     // MARK: - Instance methods
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if contentView.searchBar.text?.isEmpty == true {
+            contentView.endEditing()
+        }
+    }
+
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        contentView.tableView.contentSize.height += keyboardSize.height
+    }
+
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        contentView.tableView.contentSize.height -= (keyboardSize.height)
+    }
     
     private func subscribeDelegate() {
         contentView.delegate = self
@@ -75,6 +98,20 @@ final class SearchViewController: BaseViewController<SearchView> {
     private func dismiss(value: Saloon) {
         completionHandler?(value)
         AppRouter.shared.dismiss()
+    }
+
+    private func subscribeNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil
+        )
     }
 }
 
