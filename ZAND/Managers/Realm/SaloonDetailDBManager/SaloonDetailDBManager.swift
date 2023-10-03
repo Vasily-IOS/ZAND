@@ -37,14 +37,12 @@ final class SaloonDetailDBManager {
         modelDB.bookforms.first?.title = modelForSave.bookforms.first?.title ?? ""
         modelDB.bookforms.first?.url = modelForSave.bookforms.first?.url ?? ""
         modelDB.bookforms.first?.is_default = modelForSave.bookforms.first?.is_default ?? 0
-
+        
         for photo in modelForSave.company_photos {
             let data = try? Data(contentsOf: URL(string: photo)!)
             modelDB.company_photos.append(data ?? Data())
         }
-
-//        DispatchQueue.global().async {
-            self.realmManager.save(object: modelDB)
-//        }
+        
+        self.realmManager.save(object: modelDB)
     }
 }

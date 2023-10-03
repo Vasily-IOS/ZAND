@@ -76,6 +76,7 @@
 		FF4F75802A9E41A9001E8731 /* UserDataBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */; };
 		FF50CF972A4EFD9E00AACC5B /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */; };
 		FF519A852AC6F39100D490A4 /* EntryConfirmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF519A842AC6F39100D490A4 /* EntryConfirmedView.swift */; };
+		FF53F05A2ACCB54100FCA507 /* BackgroundRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53F0592ACCB54100FCA507 /* BackgroundRealm.swift */; };
 		FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */; };
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
 		FF5FB4972A04153500A06981 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FB4962A04153500A06981 /* AppointmentsModel.swift */; };
@@ -259,6 +260,7 @@
 		FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataBaseModel.swift; sourceTree = "<group>"; };
 		FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		FF519A842AC6F39100D490A4 /* EntryConfirmedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmedView.swift; sourceTree = "<group>"; };
+		FF53F0592ACCB54100FCA507 /* BackgroundRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRealm.swift; sourceTree = "<group>"; };
 		FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackView.swift; sourceTree = "<group>"; };
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
 		FF5FB4962A04153500A06981 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 			children = (
 				FFB985712A30E6E700ABEFBB /* RealmManager.swift */,
 				FFB985792A30E87B00ABEFBB /* RealmManagerImpl.swift */,
+				FF53F0592ACCB54100FCA507 /* BackgroundRealm.swift */,
 				FF4F757B2A9E38C8001E8731 /* UserDBManager */,
 				FF3E65D52A55BC0B007EC56D /* SaloonDetailDBManager */,
 			);
@@ -1288,6 +1291,7 @@
 				FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */,
 				FF3E65D92A55C1F6007EC56D /* RequestType.swift in Sources */,
 				FF95F8A82AC5AC5B005DA310 /* ConfirmationViewModel.swift in Sources */,
+				FF53F05A2ACCB54100FCA507 /* BackgroundRealm.swift in Sources */,
 				FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */,
 				FF862A4D2AA88B660083DEB7 /* SaloonProvider.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */,

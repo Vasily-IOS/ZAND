@@ -11,7 +11,7 @@ import RealmSwift
 final class RealmManagerImpl: RealmManager {
     
     private let defaultRealm: Realm
-    
+
     init() {
         do {
             let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
