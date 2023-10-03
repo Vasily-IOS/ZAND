@@ -5,7 +5,7 @@
 //  Created by Василий on 06.06.2023.
 //
 
-import Foundation
+import UIKit
 
 protocol SearchViewInput: AnyObject {
     func updateUI(with model: [Saloon])

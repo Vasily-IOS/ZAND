@@ -105,7 +105,6 @@
 		FF95F8962AC58AD0005DA310 /* ConfirmationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8952AC58AD0005DA310 /* ConfirmationPresenter.swift */; };
 		FF95F8A12AC5A7DC005DA310 /* ConfirmationComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A02AC5A7DC005DA310 /* ConfirmationComponentView.swift */; };
 		FF95F8A32AC5AA59005DA310 /* StaffComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A22AC5AA59005DA310 /* StaffComponentView.swift */; };
-		FF95F8A52AC5AB7C005DA310 /* BookingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A42AC5AB7C005DA310 /* BookingRouter.swift */; };
 		FF95F8A82AC5AC5B005DA310 /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A72AC5AC5B005DA310 /* ConfirmationViewModel.swift */; };
 		FF95F8AB2AC5AD8F005DA310 /* ConfirmationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */; };
 		FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AC2AC5BCD6005DA310 /* AppID.swift */; };
@@ -116,8 +115,8 @@
 		FF99B8FA29EEB4F000F4E4C3 /* DefaulRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F929EEB4F000F4E4C3 /* DefaulRouter.swift */; };
 		FF99B8FC29EEB58500F4E4C3 /* VCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8FB29EEB58500F4E4C3 /* VCType.swift */; };
 		FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8FD29EEB6AD00F4E4C3 /* AppRouter.swift */; };
-		FF99B90129EEB90100F4E4C3 /* DefaultVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90029EEB90100F4E4C3 /* DefaultVCFactory.swift */; };
-		FF99B90329EEB95400F4E4C3 /* VCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90229EEB95400F4E4C3 /* VCFactory.swift */; };
+		FF99B90129EEB90100F4E4C3 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90029EEB90100F4E4C3 /* ViewControllerFactory.swift */; };
+		FF99B90329EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90229EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift */; };
 		FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90529EEBA7800F4E4C3 /* SearchViewController.swift */; };
 		FF99B90829EEBA7F00F4E4C3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90729EEBA7F00F4E4C3 /* SearchView.swift */; };
 		FFA3D44E29F2A21D0067CC6F /* MainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D44D29F2A21D0067CC6F /* MainLayout.swift */; };
@@ -289,7 +288,6 @@
 		FF95F8952AC58AD0005DA310 /* ConfirmationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationPresenter.swift; sourceTree = "<group>"; };
 		FF95F8A02AC5A7DC005DA310 /* ConfirmationComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationComponentView.swift; sourceTree = "<group>"; };
 		FF95F8A22AC5AA59005DA310 /* StaffComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffComponentView.swift; sourceTree = "<group>"; };
-		FF95F8A42AC5AB7C005DA310 /* BookingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRouter.swift; sourceTree = "<group>"; };
 		FF95F8A72AC5AC5B005DA310 /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
 		FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationModel.swift; sourceTree = "<group>"; };
 		FF95F8AC2AC5BCD6005DA310 /* AppID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppID.swift; sourceTree = "<group>"; };
@@ -300,8 +298,8 @@
 		FF99B8F929EEB4F000F4E4C3 /* DefaulRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaulRouter.swift; sourceTree = "<group>"; };
 		FF99B8FB29EEB58500F4E4C3 /* VCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCType.swift; sourceTree = "<group>"; };
 		FF99B8FD29EEB6AD00F4E4C3 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
-		FF99B90029EEB90100F4E4C3 /* DefaultVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVCFactory.swift; sourceTree = "<group>"; };
-		FF99B90229EEB95400F4E4C3 /* VCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCFactory.swift; sourceTree = "<group>"; };
+		FF99B90029EEB90100F4E4C3 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		FF99B90229EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactoryImpl.swift; sourceTree = "<group>"; };
 		FF99B90529EEBA7800F4E4C3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FF99B90729EEBA7F00F4E4C3 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		FFA3D44D29F2A21D0067CC6F /* MainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLayout.swift; sourceTree = "<group>"; };
@@ -892,8 +890,8 @@
 		FF99B8FF29EEB8E000F4E4C3 /* ViewControllerFactory */ = {
 			isa = PBXGroup;
 			children = (
-				FF99B90029EEB90100F4E4C3 /* DefaultVCFactory.swift */,
-				FF99B90229EEB95400F4E4C3 /* VCFactory.swift */,
+				FF99B90029EEB90100F4E4C3 /* ViewControllerFactory.swift */,
+				FF99B90229EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift */,
 			);
 			path = ViewControllerFactory;
 			sourceTree = "<group>";
@@ -914,7 +912,6 @@
 			children = (
 				FF99B8FD29EEB6AD00F4E4C3 /* AppRouter.swift */,
 				FF99B8F929EEB4F000F4E4C3 /* DefaulRouter.swift */,
-				FF95F8A42AC5AB7C005DA310 /* BookingRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1251,7 +1248,7 @@
 			files = (
 				FF30A1C12A4A156D00DD6E29 /* Reusable.swift in Sources */,
 				FF1961C02A4C7A7900434AC7 /* ProfileMenuModel.swift in Sources */,
-				FF99B90129EEB90100F4E4C3 /* DefaultVCFactory.swift in Sources */,
+				FF99B90129EEB90100F4E4C3 /* ViewControllerFactory.swift in Sources */,
 				FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */,
 				FF1961AE2A4C4F0A00434AC7 /* CommonModel.swift in Sources */,
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,
@@ -1356,7 +1353,6 @@
 				FFC01B4C2A03CA78005CE41B /* MyDetailsViewController.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
 				FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */,
-				FF95F8A52AC5AB7C005DA310 /* BookingRouter.swift in Sources */,
 				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
 				FFFE2ACE2AC31705000A940A /* BookDates.swift in Sources */,
 				FFDE118D2A5C424000CEF390 /* HTTP.swift in Sources */,
@@ -1413,7 +1409,7 @@
 				FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */,
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,
 				FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */,
-				FF99B90329EEB95400F4E4C3 /* VCFactory.swift in Sources */,
+				FF99B90329EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift in Sources */,
 				FFFFDD3C2ABF564A00FA5B92 /* ServiceCell.swift in Sources */,
 				FF27B0C02AB8F08500611F47 /* StaffPresenter.swift in Sources */,
 				FF25633A29F591F600091374 /* PaddingTextField.swift in Sources */,

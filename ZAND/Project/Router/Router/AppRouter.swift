@@ -26,7 +26,7 @@ final class AppRouter {
 
     var navigationController = UINavigationController()
     var tabBarController: UITabBarController?
-    private let vcFactory: DefaultVCFactory = VCFactory()
+    private let vcFactory: ViewControllerFactory = ViewControllerFactoryImpl()
 
     // MARK: - Initializers
     

@@ -47,7 +47,7 @@ final class RealmManagerImpl: RealmManager {
         }
     }
     
-    func removeObjectByID<Element: Object>(object: Element.Type, predicate: NSPredicate) {
+    func removeObjectByPredicate<Element: Object>(object: Element.Type, predicate: NSPredicate) {
         do {
             try defaultRealm.write({
                 if let existingObject = defaultRealm.objects(Element.self).filter(predicate).first {
@@ -73,17 +73,7 @@ final class RealmManagerImpl: RealmManager {
             print(error.localizedDescription)
         }
     }
-    
-    func updateProperty(of instance: Object, value: Any, for filed: String) {
-        do {
-            try defaultRealm.write {
-                instance.setValue(value, forKey: filed)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
+
     func getObject<Element: Object>(
         _ type: Element.Type,
         key: Any) -> Element? {

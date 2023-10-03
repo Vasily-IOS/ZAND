@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol DefaultVCFactory: AnyObject {
+protocol ViewControllerFactory: AnyObject {
     func getViewController(for type: VCType) -> UIViewController
 }

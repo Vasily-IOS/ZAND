@@ -91,7 +91,7 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
 
     func remove(by id: Int) {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        realmManager.removeObjectByID(object: SaloonDataBaseModel.self, predicate: predicate)
+        realmManager.removeObjectByPredicate(object: SaloonDataBaseModel.self, predicate: predicate)
     }
 
     func contains(by id: Int) -> Bool {
