@@ -27,6 +27,8 @@ final class RegisterView: BaseUIView {
         return phoneTextField
     }()
 
+    let scrollView = UIScrollView()
+
     let nameTextField = PaddingTextField(state: .name)
 
     let surnameTextField = PaddingTextField(state: .surname)
@@ -76,14 +78,14 @@ final class RegisterView: BaseUIView {
         distribution: .fillProportionally,
         spacing: 5)
 
-    private lazy var interiorStackView = UIStackView(
-        alignment: .center,
+    lazy var interiorStackView = UIStackView(
+        alignment: .fill,
         arrangedSubviews: [nameTextField,
                            surnameTextField,
                            emailTextField,
                            phoneTextField],
         axis: .vertical,
-        distribution: .fill,
+        distribution: .fillEqually,
         spacing: 16
     )
 
@@ -93,7 +95,10 @@ final class RegisterView: BaseUIView {
                            interiorStackView],
         axis: .vertical,
         distribution: .fill,
-        spacing: 30)
+        spacing: 30
+    )
+
+    private let contentView = UIView()
 
     // MARK: - Instance methods
 
@@ -148,7 +153,18 @@ extension RegisterView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([baseStackView, policySwitchControl, policyStackView, registerButton])
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+
+        contentView.addSubviews([baseStackView, policySwitchControl, policyStackView, registerButton])
+
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(self)
+        }
+
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
 
         [nameTextField, surnameTextField, emailTextField, phoneTextField].forEach {
             $0.snp.makeConstraints { make in
@@ -158,25 +174,27 @@ extension RegisterView {
         }
 
         baseStackView.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(200)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(contentView.snp.top).offset(170)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().inset(16)
         }
 
         policyStackView.snp.makeConstraints { make in
-            make.left.equalTo(baseStackView)
-            make.top.equalTo(baseStackView.snp.bottom).offset(60)
+            make.top.equalTo(baseStackView.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(16)
         }
 
         policySwitchControl.snp.makeConstraints { make in
             make.centerY.equalTo(policyStackView)
-            make.right.equalTo(baseStackView)
+            make.right.equalToSuperview().inset(16)
         }
 
         registerButton.snp.makeConstraints { make in
-            make.top.equalTo(agreeButton.snp.bottom).offset(60)
+            make.top.equalTo(policyStackView.snp.bottom).offset(60)
             make.width.equalTo(interiorStackView)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(40)
         }
     }
 
