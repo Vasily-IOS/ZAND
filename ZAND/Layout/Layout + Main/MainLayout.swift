@@ -23,8 +23,8 @@ final class MainLayout: DefaultMainLayout {
             
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .absolute(85),
-                heightDimension: .absolute(110))
-            
+                heightDimension: .absolute(110)
+            )
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             group.interItemSpacing = .fixed(10)
             

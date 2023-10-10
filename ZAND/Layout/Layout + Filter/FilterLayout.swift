@@ -32,23 +32,36 @@ final class FilterLayout: DefaultFilterLayout {
             section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
             return section
         case .services:
-            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
-            let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
-                                                                     elementKind: UICollectionView.elementKindSectionHeader,
-                                                                     alignment: .top)
-    
-            let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(75),
-                                                  heightDimension: .estimated(90))
+            let headerSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44)
+            )
+            let header = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: headerSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .estimated(75),
+                heightDimension: .estimated(90)
+            )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
 
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(110))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .absolute(110)
+            )
+            let group = NSCollectionLayoutGroup.horizontal(
+                layoutSize: groupSize, subitems: [item]
+            )
             group.interItemSpacing = .fixed(10)
-            
+
             let section = NSCollectionLayoutSection(group: group)
             section.boundarySupplementaryItems = [header]
-            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 20, leading: 0, bottom: 20, trailing: 0
+            )
             return section
         }
     }
