@@ -167,7 +167,7 @@ extension MainViewController: MainViewInput {
     }
 
     func changeFavouritesAppearence(indexPath: IndexPath) {
-        contentView.collectionView.reloadItems(at: [indexPath])
+        contentView.changeHeartAppearance(by: indexPath)
     }
 
     func updateUI(model: [Saloon]) {
