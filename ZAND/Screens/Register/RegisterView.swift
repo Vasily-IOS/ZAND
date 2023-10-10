@@ -41,7 +41,7 @@ final class RegisterView: BaseUIView {
         let policyButton = UIButton()
         policyButton.setTitle("Согласен с", for: .normal)
         policyButton.setTitleColor(.black, for: .normal)
-        policyButton.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
+        policyButton.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
         return policyButton
     }()
 
@@ -49,7 +49,7 @@ final class RegisterView: BaseUIView {
         let policyButton = UIButton()
 
         let yourAttributes: [NSAttributedString.Key: Any] = [
-              .font: UIFont.systemFont(ofSize: 13),
+              .font: UIFont.systemFont(ofSize: 12),
               .foregroundColor: UIColor.mainGreen,
               .underlineStyle: NSUnderlineStyle.single.rawValue
           ]
@@ -182,6 +182,7 @@ extension RegisterView {
         policyStackView.snp.makeConstraints { make in
             make.top.equalTo(baseStackView.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(16)
+            make.width.equalTo(270)
         }
 
         policySwitchControl.snp.makeConstraints { make in
