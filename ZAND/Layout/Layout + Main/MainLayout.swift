@@ -32,22 +32,32 @@ final class MainLayout: DefaultMainLayout {
             section.orthogonalScrollingBehavior = .continuous
             return section
         case .beautySaloon:
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                  heightDimension: .fractionalHeight(1))
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalHeight(1)
+            )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = .init(top: 10, leading: 0, bottom: 10, trailing: 0)
 
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .estimated(325))
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                         subitems: [item])
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .estimated(333)
+            )
+            let group = NSCollectionLayoutGroup.vertical(
+                layoutSize: groupSize,
+                subitems: [item]
+            )
             group.interItemSpacing = .fixed(20)
-            group.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0,
-                                                          bottom: 10, trailing: 0)
+            group.contentInsets = NSDirectionalEdgeInsets(
+                top: 10, leading: 0,
+                bottom: 10, trailing: 0
+            )
 
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0,
-                                                            bottom: 20, trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 0, leading: 0,
+                bottom: 20, trailing: 0
+            )
             return section
         }
     }

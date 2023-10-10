@@ -39,15 +39,23 @@ final class ProfileView: BaseUIView {
         emptyLabel.text = AssetString.empty
         return emptyLabel
     }()
-    
-    private let layout: DefaultProfileLayout
 
     private lazy var callUsButton: BottomButton = {
         let callUsButton = BottomButton(buttonText: .callUs)
         callUsButton.addTarget(self, action: #selector(callUsAction), for: .touchUpInside)
         return callUsButton
     }()
-    
+
+    private let layout: DefaultProfileLayout
+
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.backgroundColor = .mainGray
+        return scrollView
+    }()
+
     // MARK: - Initializers
     
     init(layout: DefaultProfileLayout) {
@@ -77,26 +85,32 @@ extension ProfileView {
     // MARK: - Instance methods
     
     private func setViews() {
-        backgroundColor = .mainGray
+        addSubview(scrollView)
+        scrollView.addSubviews([userNameView, collectionView, callUsButton, emptyLabel])
 
-        addSubviews([userNameView, collectionView, callUsButton, emptyLabel])
-        userNameView.snp.makeConstraints { make in
-            make.left.equalTo(self).offset(16)
-            make.top.equalTo(self).offset(109)
+        scrollView.snp.makeConstraints { make in
+            make.left.top.right.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
-        
+
+        userNameView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.top).offset(110)
+            make.width.equalTo(scrollView)
+        }
+
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(userNameView.snp.bottom).offset(50)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
+            make.height.equalTo(400)
         }
-        
+
         callUsButton.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(45)
             make.width.equalTo(280)
             make.height.equalTo(44)
             make.centerX.equalTo(self)
-            make.bottom.equalTo(self).inset(120)
+            make.bottom.equalTo(scrollView.snp.bottom).inset(40)
         }
 
         emptyLabel.snp.makeConstraints { make in

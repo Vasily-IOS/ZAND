@@ -148,6 +148,7 @@ extension SaloonCell {
         leftStackView.snp.makeConstraints { make in
             make.top.equalTo(saloonImage.snp.bottom).offset(12)
             make.left.equalTo(self).offset(10)
+            make.bottom.equalTo(self).inset(10)
         }
 
         favouritesButton.snp.makeConstraints { make in

@@ -19,9 +19,25 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         super.viewDidLoad()
 
         subscribeDelegates()
+        subscribeNotifications()
     }
 
     // MARK: - Instance methods
+
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+
+        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        contentView.scrollView.contentInset = contentInset
+    }
+
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        contentView.scrollView.contentInset = .zero
+    }
 
     private func subscribeDelegates() {
         contentView.delegate = self
@@ -54,6 +70,20 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         alertController.addAction(confirmAction)
 
         present(alertController, animated: true)
+    }
+
+    private func subscribeNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil
+        )
     }
 }
 
