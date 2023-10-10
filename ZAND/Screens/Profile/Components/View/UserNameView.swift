@@ -12,9 +12,12 @@ final class UserNameView: BaseUIView {
     
     // MARK: - Properties
 
-    private let nameLabel = UILabel(
-        .systemFont(ofSize: 24, weight: .bold), .black
-    )
+    private let nameLabel: UILabel = {
+        let nameLabel = UILabel()
+        nameLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        nameLabel.numberOfLines = 0
+        return nameLabel
+    }()
 
     private let phoneLabel = UILabel(.systemFont(ofSize: 16), .black)
 
@@ -23,7 +26,7 @@ final class UserNameView: BaseUIView {
     private lazy var userNameStackView = UIStackView(
         arrangedSubviews:
             [phoneLabel,
-                nameLabel,
+             nameLabel,
              emailLabel],
         axis: .vertical,
         spacing: 10
@@ -53,7 +56,9 @@ extension UserNameView {
 
         addSubview(userNameStackView)
         userNameStackView.snp.makeConstraints { make in
-            make.edges.equalTo(self)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview()
         }
     }
 }
