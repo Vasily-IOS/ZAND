@@ -44,12 +44,12 @@ final class ConfirmationView: BaseUIView {
             serviceComponentView
         ],
         axis: .vertical,
-        distribution: .equalSpacing,
+        distribution: .fill,
         spacing: 20
     )
 
     private lazy var bottomStackView = UIStackView(
-        alignment: .fill,
+        alignment: .leading,
         arrangedSubviews: [
             nameComponentView,
             phoneComponentView
@@ -58,6 +58,13 @@ final class ConfirmationView: BaseUIView {
         distribution: .fillProportionally,
         spacing: 20
     )
+
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = .white
+        return scrollView
+    }()
 
     // MARK: - Lifecycle
 
@@ -101,25 +108,33 @@ final class ConfirmationView: BaseUIView {
     }
 
     private func setupSubviews() {
-        addSubviews([topStackView, bottomStackView, bottomButton])
-
-        topStackView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().inset(20)
-        }
-
-        bottomStackView.snp.makeConstraints { make in
-            make.top.equalTo(topStackView.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().inset(20)
-        }
+        addSubviews([scrollView, bottomButton])
+        scrollView.addSubviews([topStackView, bottomStackView])
 
         bottomButton.snp.makeConstraints { make in
             make.height.equalTo(44)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().inset(16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(20)
+        }
+
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(bottomButton.snp.top).inset(-10)
+        }
+
+        topStackView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.top).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalTo(scrollView.snp.right).inset(20)
+            make.centerX.equalTo(scrollView)
+        }
+
+        bottomStackView.snp.makeConstraints { make in
+            make.top.equalTo(topStackView.snp.bottom).offset(20)
+            make.left.right.equalTo(topStackView)
+            make.bottom.equalTo(scrollView)
         }
     }
 
