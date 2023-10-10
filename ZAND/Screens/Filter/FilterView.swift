@@ -122,7 +122,7 @@ extension FilterView {
     private func setViews() {
         backgroundColor = .white
         
-        addSubviews([lineImage, viewFirstLabel, collectionView,
+        addSubviews([lineImage, collectionView,
                      buttonStackView])
         
         lineImage.snp.makeConstraints { make in
@@ -130,13 +130,13 @@ extension FilterView {
             make.centerX.equalTo(self)
         }
         
-        viewFirstLabel.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(35)
-            make.left.equalTo(self).offset(16)
-        }
+//        viewFirstLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self).offset(35)
+//            make.left.equalTo(self).offset(16)
+//        }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(viewFirstLabel.snp.bottom).offset(20)
+            make.top.equalTo(lineImage.snp.bottom).offset(20)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
         }

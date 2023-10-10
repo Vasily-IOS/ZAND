@@ -10,9 +10,11 @@ import Foundation
 struct FilterModel: CommonFilterProtocol {
     let filterDescription: String
 
-    static let filterModel: [Self] = [
-        .init(filterDescription: AssetString.highGrade),
-        .init(filterDescription: AssetString.chip),
-        .init(filterDescription: AssetString.expensive),
-    ]
+    static let filterModel: [Self] = []
+
+//    static let filterModel: [Self] = [
+//        .init(filterDescription: AssetString.highGrade),
+//        .init(filterDescription: AssetString.chip),
+//        .init(filterDescription: AssetString.expensive),
+//    ]
 }
