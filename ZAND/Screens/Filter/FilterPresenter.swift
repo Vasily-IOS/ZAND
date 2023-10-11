@@ -33,7 +33,11 @@ final class FilterPresenter: FilterPresenterOutput {
         }
     }
 
-    var selectFiltersToTransfer: [IndexPath: Bool] = [:]
+    var selectFiltersToTransfer: [IndexPath: Bool] = [:] {
+        didSet {
+            view?.filterAlreadyContains(contains: selectFiltersToTransfer.isEmpty)
+        }
+    }
 
     // MARK: -  Initializers
 
