@@ -139,6 +139,11 @@ extension MainViewController: UICollectionViewDelegate {
                         self.selectedDays.removeAll()
                         self.saloons = self.presenter?.getModel(by: .saloons) as? [Saloon]
                         self.contentView.collectionView.reloadData()
+                    } else {
+                        let filterID = self.options[indexDict.keys.first?.item ?? 0].id ?? 0
+                        self.selectedDays = indexDict
+                        self.presenter?.sortModel(filterID: filterID)
+                        self.contentView.collectionView.reloadData()
                     }
                 }
             } else {

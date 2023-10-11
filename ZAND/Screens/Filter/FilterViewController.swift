@@ -25,10 +25,6 @@ final class FilterViewController: BaseViewController<FilterView> {
     
     deinit {
         print("FilterViewController died")
-
-        if let filters = presenter?.selectFilters {
-            completionHandler?(filters)
-        }
     }
 
     // MARK: - Instance methods
@@ -58,12 +54,10 @@ extension FilterViewController: UICollectionViewDataSource {
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let filterOptionCell = collectionView.dequeueReusableCell(
-            for: indexPath,
-            cellType: FilterOptionCell.self
-        )
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         let optionCell = collectionView.dequeueReusableCell(
             for: indexPath,
             cellType: OptionCell.self
@@ -95,7 +89,23 @@ extension FilterViewController: UICollectionViewDelegate {
     ) {
         switch FilterSection.init(rawValue: indexPath.section) {
         case .services:
-            contentView.isFilterSelected(isSelected: true)
+            let cell = collectionView.cellForItem(at: indexPath) as! OptionCell
+
+            if cell.isTapped == false {
+                cell.isTapped = true
+                contentView.buttonStackView.subviews[0].isHidden = false
+                presenter?.selectFilters[indexPath] = true
+                let unnecessaryIndexes = presenter?.selectFilters.filter({ $0.key != indexPath})
+                for (index, _) in unnecessaryIndexes! {
+                    presenter?.selectFilters[index] = false
+                    if let cell = collectionView.cellForItem(at: index) as? OptionCell {
+                        cell.isTapped = false
+                    }
+                }
+            } else {
+                cell.isTapped = false
+                presenter?.selectFilters[indexPath] = false
+            }
         default:
             break
         }
@@ -124,6 +134,18 @@ extension FilterViewController: FilerViewDelegate {
         contentView.buttonStackView.subviews[0].isHidden = true
         contentView.deselectRows(indexPath: presenter?.selectFilters.compactMap({ $0.key }) ?? [])
         presenter?.selectFilters.removeAll()
+    }
+
+    func applyButtonTap() {
+        if presenter?.selectFilters.isEmpty == true {
+            completionHandler?([:])
+            AppRouter.shared.dismiss()
+        } else {
+            if let selectFilters = presenter?.selectFiltersToTransfer {
+                completionHandler?(selectFilters)
+                AppRouter.shared.dismiss()
+            }
+        }
     }
 }
 

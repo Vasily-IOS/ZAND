@@ -10,6 +10,7 @@ import SnapKit
 
 protocol FilerViewDelegate: AnyObject {
     func clearFilterActions()
+    func applyButtonTap()
 }
 
 final class FilterView: BaseUIView {
@@ -17,14 +18,9 @@ final class FilterView: BaseUIView {
     // MARK: - Properties
 
     weak var delegate: FilerViewDelegate?
-    
-    private let layoutBulder: DefaultFilterLayout
-
-    // MARK: - UI
 
     lazy var collectionView: UICollectionView = {
-        let layout = createLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(cellType: FilterOptionCell.self)
         collectionView.register(cellType: OptionCell.self)
         collectionView.register(view: ReuseHeaderView.self)
@@ -32,7 +28,6 @@ final class FilterView: BaseUIView {
         collectionView.isScrollEnabled = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .white
-        collectionView.allowsMultipleSelection = true
         return collectionView
     }()
 
@@ -56,6 +51,8 @@ final class FilterView: BaseUIView {
     )
     
     private let applyButton = BottomButton(buttonText: .apply)
+
+    private let layoutBulder: DefaultFilterLayout
     
     private let cancelButton: UIButton = {
         let cancelButton = UIButton()
@@ -109,6 +106,11 @@ final class FilterView: BaseUIView {
     private func clearFiltersAction() {
         delegate?.clearFilterActions()
     }
+
+    @objc
+    private func applyButtonAction() {
+        delegate?.applyButtonTap()
+    }
     
     // MARK: - Instance methods
 
@@ -159,6 +161,11 @@ extension FilterView {
         cancelButton.addTarget(
             self,
             action: #selector(clearFiltersAction),
+            for: .touchUpInside
+        )
+        applyButton.addTarget(
+            self,
+            action: #selector(applyButtonAction),
             for: .touchUpInside
         )
     }
