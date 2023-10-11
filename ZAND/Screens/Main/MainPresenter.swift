@@ -14,6 +14,7 @@ enum MainType {
 }
 
 protocol MainPresenterOutput: AnyObject {
+    var selectedDays: [IndexPath: Bool] { get set }
     func getModel(by type: MainType) -> [CommonFilterProtocol]
     func getSearchIndex(id: Int) -> IndexPath?
     func getModel(by id: Int) -> SaloonMapModel?
@@ -40,6 +41,9 @@ final class MainPresenter: MainPresenterOutput {
     // MARK: - Properties
 
     weak var view: MainViewInput?
+
+    // to presenter
+    var selectedDays: [IndexPath: Bool] = [:]
     
     private let optionsModel = OptionsModel.options
 
@@ -78,7 +82,9 @@ final class MainPresenter: MainPresenterOutput {
 
     @objc
     private func updateData(_ nnotification: Notification) {
-        updateUI()
+        if selectedDays.isEmpty {
+            updateUI()
+        }
     }
 
     @objc

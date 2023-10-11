@@ -20,7 +20,9 @@ final class FilterView: BaseUIView {
     weak var delegate: FilerViewDelegate?
 
     lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        let collectionView = UICollectionView(
+            frame: .zero, collectionViewLayout: createLayout()
+        )
         collectionView.register(cellType: FilterOptionCell.self)
         collectionView.register(cellType: OptionCell.self)
         collectionView.register(view: ReuseHeaderView.self)
@@ -129,18 +131,12 @@ extension FilterView {
     private func setViews() {
         backgroundColor = .white
         
-        addSubviews([lineImage, collectionView,
-                     buttonStackView])
+        addSubviews([lineImage, collectionView, buttonStackView])
         
         lineImage.snp.makeConstraints { make in
             make.top.equalTo(self).offset(3)
             make.centerX.equalTo(self)
         }
-        
-//        viewFirstLabel.snp.makeConstraints { make in
-//            make.top.equalTo(self).offset(35)
-//            make.left.equalTo(self).offset(16)
-//        }
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(lineImage.snp.bottom).offset(20)

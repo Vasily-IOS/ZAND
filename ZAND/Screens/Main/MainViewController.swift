@@ -34,9 +34,6 @@ final class MainViewController: BaseViewController<MainView> {
     
     // MARK: - Properties
 
-    // to presenter
-    var selectedDays: [IndexPath: Bool] = [:]
-    
     var presenter: MainPresenterOutput?
 
     var activityIndicatorView: ActivityIndicatorImpl = ActivityIndicatorView()
@@ -74,6 +71,59 @@ final class MainViewController: BaseViewController<MainView> {
         contentView.collectionView.delegate = self
         contentView.delegate = self
     }
+
+    private func selectCellHelper(
+        cell: UICollectionViewCell?,
+        indexPath: IndexPath,
+        collectionView: UICollectionView
+    ) {
+        let cell = collectionView.cellForItem(at: indexPath) as! OptionCell
+
+        if cell.isTapped == false {
+            cell.isTapped = true
+            presenter?.selectedDays[indexPath] = true
+            let unnecessaryIndexes = presenter?.selectedDays.filter({ $0.key != indexPath}) ?? [:]
+            for (index, _) in unnecessaryIndexes {
+                presenter?.selectedDays[index] = false
+                if let cell = collectionView.cellForItem(at: index) as? OptionCell {
+                    cell.isTapped = false
+                }
+            }
+        } else {
+            cell.isTapped = false
+            presenter?.selectedDays[indexPath] = false
+        }
+    }
+
+    private func reloadData() {
+        DispatchQueue.main.async {
+            self.contentView.collectionView.reloadData()
+        }
+    }
+
+    private func showFilterVC() {
+        AppRouter.shared.presentCompletion(
+            type: .filter((presenter?.selectedDays ?? [:]).filter({ $0.value == true }))
+        ) { [weak self] indexDict in
+            guard let self else { return }
+
+            if indexDict.isEmpty {
+                self.presenter?.selectedDays.removeAll()
+                self.saloons = self.presenter?.getModel(by: .saloons) as? [Saloon]
+                self.contentView.collectionView.reloadData()
+            } else {
+                let filterID = self.options[indexDict.keys.first?.item ?? 0].id ?? 0
+                self.presenter?.selectedDays = indexDict
+                self.presenter?.sortModel(filterID: filterID)
+                self.contentView.collectionView.reloadData()
+                self.contentView.collectionView.scrollToItem(
+                    at: indexDict.keys.first!,
+                    at: .centeredHorizontally,
+                    animated: true
+                )
+            }
+        }
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -103,7 +153,7 @@ extension MainViewController: UICollectionViewDataSource {
             let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
             optionCell.configure(model: options[indexPath.item], state: .onMain)
 
-            let isCh = selectedDays[indexPath] ?? false
+            let isCh = presenter?.selectedDays[indexPath] ?? false
             isCh ? (optionCell.isTapped = true) : (optionCell.isTapped = false)
 
             return optionCell
@@ -116,6 +166,7 @@ extension MainViewController: UICollectionViewDataSource {
             if let isInFavourite = presenter?.notContains(by: (saloons ?? [])[indexPath.item].id) {
                 saloonCell.isInFavourite = !isInFavourite
             }
+            
             return saloonCell
         default:
             return UICollectionViewCell()
@@ -134,37 +185,12 @@ extension MainViewController: UICollectionViewDelegate {
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
             if indexPath.section == 0 && indexPath.item == 0 {
-                AppRouter.shared.presentCompletion(type: .filter(selectedDays.filter({ $0.value == true }))) { indexDict in
-                    if indexDict.isEmpty {
-                        self.selectedDays.removeAll()
-                        self.saloons = self.presenter?.getModel(by: .saloons) as? [Saloon]
-                        self.contentView.collectionView.reloadData()
-                    } else {
-                        let filterID = self.options[indexDict.keys.first?.item ?? 0].id ?? 0
-                        self.selectedDays = indexDict
-                        self.presenter?.sortModel(filterID: filterID)
-                        self.contentView.collectionView.reloadData()
-                        self.contentView.collectionView.scrollToItem(at: indexDict.keys.first!, at: .centeredHorizontally, animated: true)
-                    }
-                }
+                showFilterVC()
             } else {
+                let cell = collectionView.cellForItem(at: indexPath)
                 presenter?.sortModel(filterID: options[indexPath.item].id ?? 0)
-                let cell = collectionView.cellForItem(at: indexPath) as! OptionCell
-
-                if cell.isTapped == false {
-                    cell.isTapped = true
-                    selectedDays[indexPath] = true
-                    let unnecessaryIndexes = selectedDays.filter({ $0.key != indexPath})
-                    for (index, _) in unnecessaryIndexes {
-                        selectedDays[index] = false
-                        if let cell = collectionView.cellForItem(at: index) as? OptionCell {
-                            cell.isTapped = false
-                        }
-                    }
-                } else {
-                    cell.isTapped = false
-                    selectedDays[indexPath] = false
-                }
+                selectCellHelper(cell: cell, indexPath: indexPath, collectionView: collectionView)
+                contentView.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             }
         case .beautySaloon:
             AppRouter.shared.push(.saloonDetail(.api((saloons ?? [])[indexPath.item])))

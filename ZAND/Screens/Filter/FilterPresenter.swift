@@ -25,6 +25,8 @@ final class FilterPresenter: FilterPresenterOutput {
 
     // MARK: - Properties
 
+    weak var view: FilterViewInput?
+
     var selectFilters: [IndexPath: Bool] = [:] {
         didSet {
             configureModelToTransfer(selectDict: selectFilters)
@@ -32,8 +34,6 @@ final class FilterPresenter: FilterPresenterOutput {
     }
 
     var selectFiltersToTransfer: [IndexPath: Bool] = [:]
-
-    weak var view: FilterViewInput?
 
     // MARK: -  Initializers
 
@@ -70,5 +70,4 @@ final class FilterPresenter: FilterPresenterOutput {
         }
         self.selectFiltersToTransfer = indexesToTransfer.filter({ $0.value == true })
     }
-
 }
