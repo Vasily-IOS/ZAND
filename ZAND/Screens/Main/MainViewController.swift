@@ -144,6 +144,7 @@ extension MainViewController: UICollectionViewDelegate {
                         self.selectedDays = indexDict
                         self.presenter?.sortModel(filterID: filterID)
                         self.contentView.collectionView.reloadData()
+                        self.contentView.collectionView.scrollToItem(at: indexDict.keys.first!, at: .centeredHorizontally, animated: true)
                     }
                 }
             } else {
@@ -165,7 +166,6 @@ extension MainViewController: UICollectionViewDelegate {
                     selectedDays[indexPath] = false
                 }
             }
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         case .beautySaloon:
             AppRouter.shared.push(.saloonDetail(.api((saloons ?? [])[indexPath.item])))
         default:

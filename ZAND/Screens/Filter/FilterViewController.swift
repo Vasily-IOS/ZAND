@@ -24,6 +24,9 @@ final class FilterViewController: BaseViewController<FilterView> {
     }
     
     deinit {
+        if let selectedFilters = presenter?.selectFiltersToTransfer {
+            completionHandler?(selectedFilters)
+        }
         print("FilterViewController died")
     }
 
