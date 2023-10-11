@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 
 protocol RealmManager {
+    var isInWriteTransaction: Bool { get }
     func save<Element: Object>(object: Element)
     func get<Element>(_ type: Element.Type) -> Results<Element> where Element: RealmFetchable
     func removeObject<Element: Object>(object: Element)

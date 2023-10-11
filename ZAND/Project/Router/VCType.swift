@@ -18,7 +18,7 @@ enum VCType {
     case main
     case map
     case saloonDetail(SaloonDetailType)
-    case filter
+    case filter([IndexPath: Bool])
     case profile
     case appointments
     case myDetails // not use

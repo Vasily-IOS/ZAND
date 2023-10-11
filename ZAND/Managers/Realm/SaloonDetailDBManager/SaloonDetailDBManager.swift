@@ -82,8 +82,12 @@ final class SaloonDetailDBManager {
         }
 
         group.notify(queue: .main) {
-            self.realmManager.save(object: sortBaseModel)
-            print("Saved")
+            if !self.realmManager.isInWriteTransaction {
+                self.realmManager.save(object: sortBaseModel)
+                print("Saved")
+            } else {
+                print("Saving in process")
+            }
         }
     }
 }

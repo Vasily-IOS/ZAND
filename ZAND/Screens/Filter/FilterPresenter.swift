@@ -8,15 +8,18 @@
 import UIKit
 
 enum FilterType {
-    case filter
     case options
 }
 
 protocol FilterPresenterOutput: AnyObject {
+    var selectFilters: [IndexPath: Bool] { get set }
+    var selectFiltersToTransfer: [IndexPath: Bool] { get }
     func getModel(by type: FilterType) -> [CommonFilterProtocol]
 }
 
-protocol FilterViewInput: AnyObject {}
+protocol FilterViewInput: AnyObject {
+    func filterAlreadyContains(contains: Bool)
+}
 
 final class FilterPresenter: FilterPresenterOutput {
 
@@ -24,20 +27,47 @@ final class FilterPresenter: FilterPresenterOutput {
 
     weak var view: FilterViewInput?
 
+    var selectFilters: [IndexPath: Bool] = [:] {
+        didSet {
+            configureModelToTransfer(selectDict: selectFilters)
+        }
+    }
+
+    var selectFiltersToTransfer: [IndexPath: Bool] = [:]
+
     // MARK: -  Initializers
 
-    init(view: FilterViewInput) {
+    init(view: FilterViewInput, selectFilters: [IndexPath: Bool]) {
         self.view = view
+
+        configureModel(selectDict: selectFilters)
     }
 
     // MARK: - Instance methods
 
     func getModel(by type: FilterType) -> [CommonFilterProtocol] {
         switch type {
-        case .filter:
-            return FilterModel.filterModel
         case .options:
-            return OptionsModel.optionWithoutFilterModel
+            return OptionsModel.optionsWithoutFilter()
         }
+    }
+
+    private func configureModel(selectDict: [IndexPath: Bool]) {
+        var newIndexes: [IndexPath: Bool] = [:]
+        for (index, value) in selectDict {
+            let newIndex: IndexPath = [0, index.item - 1]
+            newIndexes[newIndex] = value
+        }
+        self.selectFilters = newIndexes
+        view?.filterAlreadyContains(contains: newIndexes.isEmpty)
+    }
+
+    private func configureModelToTransfer(selectDict: [IndexPath: Bool]) {
+        var indexesToTransfer: [IndexPath: Bool] = [:]
+        for (index, value) in selectDict {
+            let newIndex: IndexPath = [0, index.item + 1]
+            indexesToTransfer[newIndex] = value
+        }
+        self.selectFiltersToTransfer = indexesToTransfer.filter({ $0.value == true })
     }
 }

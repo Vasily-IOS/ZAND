@@ -29,6 +29,7 @@ struct Saloon: Codable {
     let company_photos: [String]
     let bookforms: [BookForm]
     let default_bookform_url: String
+    let business_type_id: Int
 }
 
 struct BookForm: Codable {

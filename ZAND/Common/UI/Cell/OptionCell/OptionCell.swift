@@ -25,10 +25,10 @@ final class OptionCell: BaseCollectionCell {
             }
         }
     }
-    
-    override var isSelected: Bool {
+
+    var isTapped: Bool = false {
         didSet {
-            optionView.isSelected = isSelected
+            optionView.isSelected = isTapped
         }
     }
 

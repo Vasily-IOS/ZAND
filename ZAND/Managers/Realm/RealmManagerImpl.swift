@@ -12,6 +12,10 @@ final class RealmManagerImpl: RealmManager {
     
     private let defaultRealm: Realm
 
+    var isInWriteTransaction: Bool {
+        return defaultRealm.isInWriteTransaction
+    }
+
     init() {
         do {
             let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)

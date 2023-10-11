@@ -7,38 +7,35 @@
 
 import UIKit
 
+enum FilterID: Int {
+    case beautySaloon = 1 // cалон красоты
+    case nail = 45 // ногти
+    case massage = 29 // массаж
+    case cosmetology = 35 // косметология
+    case spa = 25 // SPA
+    case eyes = 48 // глаза (брови и ресницы)
+    case epilation = 101 // епиляция и депиляция
+    case barbershop = 18 // мужчинам (барбершоп)
+}
+
 struct OptionsModel: CommonFilterProtocol {
+    let id: Int?
     let name: String
     let image: UIImage
     
     static let options: [Self] = [
-        .init(name: AssetString.filter, image: UIImage(named: "filter_icon")!),
-        .init(name: AssetString.hair, image: UIImage(named: "scissors_icon")!),
-        .init(name: AssetString.nail, image: UIImage(named: "nails_icon")!),
-        .init(name: AssetString.spa, image: UIImage(named: "massage_icon")!),
-        .init(name: AssetString.makeUp, image: UIImage(named: "makeup_icon")!),
-        .init(name: AssetString.face_care, image: UIImage(named: "faceCare_icon")!),
-        .init(name: AssetString.brows, image: UIImage(named: "brows_icon")!),
-        .init(name: "Эпиляция", image: UIImage(named: "epilation_icon")!),
-        .init(name: AssetString.mens, image: UIImage(named: "mens_icon")!)
+        .init(id: nil, name: AssetString.filter, image: UIImage(named: "filter_icon")!),
+        .init(id: FilterID.beautySaloon.rawValue, name: AssetString.hair, image: UIImage(named: "scissors_icon")!),
+        .init(id: FilterID.nail.rawValue, name: AssetString.nail, image: UIImage(named: "nails_icon")!),
+        .init(id: FilterID.massage.rawValue, name: AssetString.massage, image: UIImage(named: "massage_icon")!),
+        .init(id: FilterID.cosmetology.rawValue, name: AssetString.cosmetology, image: UIImage(named: "makeup_icon")!),
+        .init(id: FilterID.spa.rawValue, name: AssetString.spa, image: UIImage(named: "faceCare_icon")!),
+        .init(id: FilterID.eyes.rawValue, name: AssetString.eyes, image: UIImage(named: "brows_icon")!),
+        .init(id: FilterID.epilation.rawValue, name: AssetString.epilation, image: UIImage(named: "epilation_icon")!),
+        .init(id: FilterID.barbershop.rawValue, name: AssetString.mens, image: UIImage(named: "mens_icon")!)
     ]
 
-//    static let optionWithoutFilterModel: [Self] = []
-    
-    static let optionWithoutFilterModel: [Self] = [
-        .init(name: AssetString.hair, image: UIImage(named: "scissors_icon")!),
-        .init(name: AssetString.nail, image: UIImage(named: "nails_icon")!),
-        .init(name: AssetString.spa, image: UIImage(named: "massage_icon")!),
-        .init(name: AssetString.makeUp, image: UIImage(named: "makeup_icon")!),
-        .init(name: AssetString.face_care, image: UIImage(named: "faceCare_icon")!),
-        .init(name: AssetString.brows, image: UIImage(named: "brows_icon")!),
-        .init(name: "Эпиляция", image: UIImage(named: "epilation_icon")!),
-        .init(name: AssetString.mens, image: UIImage(named: "mens_icon")!)
-    ]
+    static func optionsWithoutFilter() -> [Self] {
+        return Array(options.dropFirst())
+    }
 }
-//Фильтры (все иконки остаются на месте - меняются только названия под ними):
-//-Заменить название фильтра «Брови» на «Брови и ресницы» // спросил
-//-Заменить название фильтра  «Уход» на «SPA» // готово
-//-Заменить название фильтра «SPA» на «Массаж» // готово
-//-Заменить название фильтра «Визаж» на «Косметология» // готово
-//- + Еще одну категорию «Эпиляция и депиляция» - иконку скинул 👇
