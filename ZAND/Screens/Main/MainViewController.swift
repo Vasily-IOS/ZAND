@@ -33,6 +33,9 @@ final class MainViewController: BaseViewController<MainView> {
     }
     
     // MARK: - Properties
+
+    // to presenter
+    var selectedDays: [IndexPath: Bool] = [:]
     
     var presenter: MainPresenterOutput?
 
@@ -42,9 +45,7 @@ final class MainViewController: BaseViewController<MainView> {
         return self.navigationController ?? UINavigationController()
     }
 
-    var options: [OptionsModel] {
-        presenter?.getModel(by: .options) as! [OptionsModel]
-    }
+    var options: [OptionsModel] = []
 
     var saloons: [Saloon]?
 
@@ -101,6 +102,10 @@ extension MainViewController: UICollectionViewDataSource {
         case .option:
             let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
             optionCell.configure(model: options[indexPath.item], state: .onMain)
+
+            let isCh = selectedDays[indexPath] ?? false
+            isCh ? (optionCell.isTapped = true) : (optionCell.isTapped = false)
+
             return optionCell
         case .beautySaloon:
             let saloonCell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonCell.self)
@@ -111,7 +116,6 @@ extension MainViewController: UICollectionViewDataSource {
             if let isInFavourite = presenter?.notContains(by: (saloons ?? [])[indexPath.item].id) {
                 saloonCell.isInFavourite = !isInFavourite
             }
-
             return saloonCell
         default:
             return UICollectionViewCell()
@@ -123,12 +127,32 @@ extension MainViewController: UICollectionViewDelegate {
 
     // MARK: - UICollectionViewDelegate methods
 
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
             if indexPath.section == 0 && indexPath.item == 0 {
                 AppRouter.shared.present(type: .filter)
+            } else {
+                presenter?.sortModel(filterID: options[indexPath.item].id ?? 0)
+                let cell = collectionView.cellForItem(at: indexPath) as! OptionCell
+
+                if cell.isTapped == false {
+                    cell.isTapped = true
+                    selectedDays[indexPath] = true
+                    let unnecessaryIndexes = selectedDays.filter({ $0.key != indexPath})
+                    for (index, _) in unnecessaryIndexes {
+                        selectedDays[index] = false
+                        if let cell = collectionView.cellForItem(at: index) as? OptionCell {
+                            cell.isTapped = false
+                        }
+                    }
+                } else {
+                    cell.isTapped = false
+                    selectedDays[indexPath] = false
+                }
             }
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         case .beautySaloon:
@@ -144,15 +168,13 @@ extension MainViewController: MainViewDelegate {
     // MARK: - MainViewDelegate methods
     
     func showSearch() {
-        guard let model = presenter?.getModel(by: .saloons) as? [Saloon] else {
-            return
-        }
+        guard let model = saloons else { return }
 
         AppRouter.shared.presentSearch(type: .search(model)) { [weak self] singleModel in
             guard let self else { return }
 
-            if let index = self.presenter?.getSearchIndex(id: singleModel.id) {
-                self.contentView.scrollToItem(at: index)
+            if let index = saloons?.firstIndex(where: { $0.id == singleModel.id} ) {
+                self.contentView.scrollToItem(at: [1, index])
             }
         }
     }
@@ -161,6 +183,17 @@ extension MainViewController: MainViewDelegate {
 extension MainViewController: MainViewInput {
 
     // MARK: - MainViewInput methods
+
+    func getOptions(model: [OptionsModel]) {
+        options = model
+    }
+
+    func updateWithSortModel(model: [Saloon]) {
+        saloons = model
+        DispatchQueue.main.async {
+            self.contentView.collectionView.reloadSections(IndexSet(integer: 1))
+        }
+    }
 
     func hideTabBar() {
         tabBarController?.tabBar.isHidden = false

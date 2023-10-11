@@ -82,8 +82,10 @@ extension FilterViewController: UICollectionViewDelegate {
 
     // MARK: - UICollectionViewDelegate methods
 
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         switch FilterSection.init(rawValue: indexPath.section) {
         case .filterOption:
             print(1)
@@ -94,9 +96,11 @@ extension FilterViewController: UICollectionViewDelegate {
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableView(
             for: indexPath,
             viewType: ReuseHeaderView.self,

@@ -19,8 +19,9 @@ protocol MainPresenterOutput: AnyObject {
     func getModel(by id: Int) -> SaloonMapModel?
     func applyDB(by id: Int, completion: @escaping () -> ())
     func notContains(by id: Int) -> Bool
-
     func updateUI()
+
+    func sortModel(filterID: Int)
 }
 
 protocol MainViewInput: AnyObject {
@@ -29,6 +30,9 @@ protocol MainViewInput: AnyObject {
     func updateUI(model: [Saloon])
     func isActivityIndicatorShouldRotate(_ isRotate: Bool)
     func updateUIConection(isUpdate: Bool)
+    func getOptions(model: [OptionsModel])
+
+    func updateWithSortModel(model: [Saloon])
 }
 
 final class MainPresenter: MainPresenterOutput {
@@ -54,6 +58,7 @@ final class MainPresenter: MainPresenterOutput {
 
         updateUI()
         subscribeNotifications()
+        view.getOptions(model: optionsModel)
     }
 
     // MARK: - Action
@@ -87,6 +92,11 @@ final class MainPresenter: MainPresenterOutput {
 extension MainPresenter {
     
     // MARK: - Instance methods
+
+    func sortModel(filterID: Int) {
+        let model = saloons.filter({ $0.business_type_id == filterID })
+        view?.updateWithSortModel(model: model)
+    }
 
     func updateUI() {
         provider.fetchData { [weak self] saloons in

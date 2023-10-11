@@ -37,7 +37,7 @@ final class FilterPresenter: FilterPresenterOutput {
         case .filter:
             return FilterModel.filterModel
         case .options:
-            return OptionsModel.optionWithoutFilterModel
+            return OptionsModel.optionsWithoutFilter()
         }
     }
 }

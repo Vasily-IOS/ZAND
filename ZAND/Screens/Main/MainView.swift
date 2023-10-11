@@ -26,6 +26,7 @@ final class MainView: BaseUIView {
         collectionView.backgroundColor = .mainGray
         collectionView.register(cellType: OptionCell.self)
         collectionView.register(cellType: SaloonCell.self)
+        collectionView.allowsMultipleSelection = false
         return collectionView
     }()
 
