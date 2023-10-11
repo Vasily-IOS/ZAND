@@ -134,7 +134,13 @@ extension MainViewController: UICollectionViewDelegate {
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
             if indexPath.section == 0 && indexPath.item == 0 {
-                AppRouter.shared.present(type: .filter)
+                AppRouter.shared.presentCompletion(type: .filter(selectedDays.filter({ $0.value == true }))) { indexDict in
+                    if indexDict.isEmpty {
+                        self.selectedDays.removeAll()
+                        self.saloons = self.presenter?.getModel(by: .saloons) as? [Saloon]
+                        self.contentView.collectionView.reloadData()
+                    }
+                }
             } else {
                 presenter?.sortModel(filterID: options[indexPath.item].id ?? 0)
                 let cell = collectionView.cellForItem(at: indexPath) as! OptionCell

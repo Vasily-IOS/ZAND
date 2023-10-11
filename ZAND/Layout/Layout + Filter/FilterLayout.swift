@@ -8,7 +8,6 @@
 import UIKit
 
 enum FilterSection: Int, CaseIterable {
-    case filterOption
     case services
 }
 
@@ -16,21 +15,21 @@ final class FilterLayout: DefaultFilterLayout {
     
     func createSection(type: FilterSection) -> NSCollectionLayoutSection {
         switch type {
-        case .filterOption:
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                  heightDimension: .fractionalHeight(1))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = .init(top: 10, leading: 0, bottom: 10, trailing: 0)
-            
-            let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(65))
-            
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
-            return section
+//        case .filterOption:
+//            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+//                                                  heightDimension: .fractionalHeight(1))
+//            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//            item.contentInsets = .init(top: 10, leading: 0, bottom: 10, trailing: 0)
+//            
+//            let groupSize = NSCollectionLayoutSize(
+//                widthDimension: .fractionalWidth(1),
+//                heightDimension: .absolute(65))
+//            
+//            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+//            
+//            let section = NSCollectionLayoutSection(group: group)
+//            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
+//            return section
         case .services:
             let headerSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44)

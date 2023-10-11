@@ -12,6 +12,8 @@ final class FilterViewController: BaseViewController<FilterView> {
     // MARK: - Presenter
 
     var presenter: FilterPresenterOutput?
+
+    var completionHandler: (([IndexPath: Bool]) -> Void)?
     
     // MARK: - Lifecycle
 
@@ -23,6 +25,10 @@ final class FilterViewController: BaseViewController<FilterView> {
     
     deinit {
         print("FilterViewController died")
+
+        if let filters = presenter?.selectFilters {
+            completionHandler?(filters)
+        }
     }
 
     // MARK: - Instance methods
@@ -45,8 +51,6 @@ extension FilterViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         switch FilterSection.init(rawValue: section) {
-        case .filterOption:
-            return presenter?.getModel(by: .filter).count ?? 0
         case .services:
             return presenter?.getModel(by: .options).count ?? 0
         default:
@@ -56,21 +60,24 @@ extension FilterViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let filterOptionCell = collectionView.dequeueReusableCell(for: indexPath,
-                                                                  cellType: FilterOptionCell.self)
-        let optionCell = collectionView.dequeueReusableCell(for: indexPath,
-                                                            cellType: OptionCell.self)
+        let filterOptionCell = collectionView.dequeueReusableCell(
+            for: indexPath,
+            cellType: FilterOptionCell.self
+        )
+        let optionCell = collectionView.dequeueReusableCell(
+            for: indexPath,
+            cellType: OptionCell.self
+        )
 
         switch FilterSection.init(rawValue: indexPath.section) {
-        case .filterOption:
-            if let filterModel = presenter?.getModel(by: .filter) {
-                filterOptionCell.configure(model: filterModel[indexPath.item], indexPath: indexPath)
-            }
-            return filterOptionCell
         case .services:
             if let optionModel = presenter?.getModel(by: .options) {
                 optionCell.configure(model: optionModel[indexPath.item], state: .onFilter)
             }
+
+            let isCh = presenter?.selectFilters[indexPath] ?? false
+            isCh ? (optionCell.isTapped = true) : (optionCell.isTapped = false)
+
             return optionCell
         default:
             return UICollectionViewCell()
@@ -87,10 +94,8 @@ extension FilterViewController: UICollectionViewDelegate {
         didSelectItemAt indexPath: IndexPath
     ) {
         switch FilterSection.init(rawValue: indexPath.section) {
-        case .filterOption:
-            print(1)
         case .services:
-            contentView.buttonStackView.subviews[0].isHidden = false
+            contentView.isFilterSelected(isSelected: true)
         default:
             break
         }
@@ -117,8 +122,16 @@ extension FilterViewController: FilerViewDelegate {
 
     func clearFilterActions() {
         contentView.buttonStackView.subviews[0].isHidden = true
-        contentView.deselectAllRows()
+        contentView.deselectRows(indexPath: presenter?.selectFilters.compactMap({ $0.key }) ?? [])
+        presenter?.selectFilters.removeAll()
     }
 }
 
-extension FilterViewController: FilterViewInput {}
+extension FilterViewController: FilterViewInput {
+
+    // MARK: - FilterViewInput methods
+
+    func filterAlreadyContains(contains: Bool) {
+        contentView.isFilterSelected(isSelected: contains)
+    }
+}

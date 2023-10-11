@@ -115,7 +115,7 @@ extension AppRouter {
 }
 
 extension AppRouter: DefaultRouter {
-    
+
     // MARK: - DefaultRouter methods
     
     func push(_ type: VCType) {
@@ -150,6 +150,12 @@ extension AppRouter: DefaultRouter {
     
     func presentSearch(type: VCType, completion: ((Saloon) -> ())?) {
         let vc = vcFactory.getViewController(for: type) as! SearchViewController
+        vc.completionHandler = completion
+        navigationController.present(vc, animated: true)
+    }
+
+    func presentCompletion(type: VCType, completion: @escaping ([IndexPath : Bool]) -> Void) {
+        let vc = vcFactory.getViewController(for: type) as! FilterViewController
         vc.completionHandler = completion
         navigationController.present(vc, animated: true)
     }
