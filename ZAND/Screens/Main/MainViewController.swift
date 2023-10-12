@@ -95,12 +95,6 @@ final class MainViewController: BaseViewController<MainView> {
         }
     }
 
-    private func reloadData() {
-        DispatchQueue.main.async {
-            self.contentView.collectionView.reloadData()
-        }
-    }
-
     private func showFilterVC() {
         AppRouter.shared.presentCompletion(
             type: .filter((presenter?.selectedDays ?? [:]).filter({ $0.value == true }))
@@ -110,18 +104,29 @@ final class MainViewController: BaseViewController<MainView> {
             if indexDict.isEmpty {
                 self.presenter?.selectedDays.removeAll()
                 self.saloons = self.presenter?.getModel(by: .saloons) as? [Saloon]
-                self.contentView.collectionView.reloadData()
+                self.reloadDataAnimation()
             } else {
                 let filterID = self.options[indexDict.keys.first?.item ?? 0].id ?? 0
                 self.presenter?.selectedDays = indexDict
+
                 self.presenter?.sortModel(filterID: filterID)
                 self.contentView.collectionView.reloadData()
+
                 self.contentView.collectionView.scrollToItem(
                     at: indexDict.keys.first!,
                     at: .centeredHorizontally,
                     animated: true
                 )
             }
+        }
+    }
+
+    private func reloadDataAnimation() {
+        let range = Range(uncheckedBounds: (0, 2))
+        let indexSet = IndexSet(integersIn: range)
+
+        self.contentView.collectionView.performBatchUpdates {
+            self.contentView.collectionView.reloadSections(indexSet)
         }
     }
 }
@@ -188,9 +193,18 @@ extension MainViewController: UICollectionViewDelegate {
                 showFilterVC()
             } else {
                 let cell = collectionView.cellForItem(at: indexPath)
-                presenter?.sortModel(filterID: options[indexPath.item].id ?? 0)
                 selectCellHelper(cell: cell, indexPath: indexPath, collectionView: collectionView)
-                contentView.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+
+                let isSelectedFiltersEmpty = (presenter?.selectedDays ?? [:]).filter{ $0.value == true }.isEmpty
+                if isSelectedFiltersEmpty {
+                    saloons = presenter?.getModel(by: .saloons) as? [Saloon]
+                    collectionView.reloadSections(IndexSet(integer: 1))
+                    collectionView.scrollToItem(at: [0,0], at: .left, animated: true)
+                } else {
+                    self.presenter?.sortModel(filterID: options[indexPath.item].id ?? 0)
+                    self.contentView.collectionView.reloadData()
+                    self.contentView.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                }
             }
         case .beautySaloon:
             AppRouter.shared.push(.saloonDetail(.api((saloons ?? [])[indexPath.item])))
@@ -227,9 +241,6 @@ extension MainViewController: MainViewInput {
 
     func updateWithSortModel(model: [Saloon]) {
         saloons = model
-        DispatchQueue.main.async {
-            self.contentView.collectionView.reloadSections(IndexSet(integer: 1))
-        }
     }
 
     func hideTabBar() {
@@ -242,9 +253,7 @@ extension MainViewController: MainViewInput {
 
     func updateUI(model: [Saloon]) {
         saloons = model
-        DispatchQueue.main.async {
-            self.contentView.collectionView.reloadData()
-        }
+        reloadDataAnimation()
     }
 
     func isActivityIndicatorShouldRotate(_ isRotate: Bool) {
