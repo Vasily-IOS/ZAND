@@ -71,12 +71,12 @@ final class RegisterView: BaseUIView {
         AssetString.registation
     )
 
-    private lazy var policyStackView = UIStackView(
+    private lazy var policyButtonsStackView = UIStackView(
         alignment: .leading,
         arrangedSubviews: [agreeButton, policyButton],
-        axis: .horizontal,
-        distribution: .fillProportionally,
-        spacing: 5)
+        axis: .vertical,
+        distribution: .fillProportionally
+    )
 
     lazy var interiorStackView = UIStackView(
         alignment: .fill,
@@ -96,6 +96,16 @@ final class RegisterView: BaseUIView {
         axis: .vertical,
         distribution: .fill,
         spacing: 30
+    )
+
+    private lazy var policyStackView = UIStackView(
+        alignment: .leading,
+        arrangedSubviews: [
+            policyButtonsStackView,
+            policySwitchControl
+        ],
+        axis: .horizontal,
+        spacing: 5
     )
 
     private let contentView = UIView()
@@ -152,11 +162,12 @@ extension RegisterView {
 
     private func setViews() {
         backgroundColor = .mainGray
+        policyButtonsStackView.sizeToFit()
 
         addSubview(scrollView)
         scrollView.addSubview(contentView)
 
-        contentView.addSubviews([baseStackView, policySwitchControl, policyStackView, registerButton])
+        contentView.addSubviews([baseStackView, policyStackView, registerButton])
 
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(self)
@@ -182,11 +193,6 @@ extension RegisterView {
         policyStackView.snp.makeConstraints { make in
             make.top.equalTo(baseStackView.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(16)
-            make.width.equalTo(270)
-        }
-
-        policySwitchControl.snp.makeConstraints { make in
-            make.centerY.equalTo(policyStackView)
             make.right.equalToSuperview().inset(16)
         }
 
