@@ -83,6 +83,12 @@ enum AssetString {
     static let fix = "Исправить"
     static let good = "Как надо!"
     static let phone = "Телефон"
+    static let noAppointments = "Записей нет"
+    static let areUsureCancelAppointpent = "Вы точно хотите отменить запись?"
+    static let appointmentWillDeleteForever = "Ваша запись удалится безвозвратно"
+    static let cancelAppointment = "Отменить запись"
+    static let appointmentDeleted = "Запись отменена"
+    static let appointmentProvided = "Услуга оказана"
     
     // MARK: - Bottom button values
     static let apply = "Применить"

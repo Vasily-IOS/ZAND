@@ -49,6 +49,7 @@ final class StartBookingButtonView: BaseUIView {
 
     private let typeImage: UIImageView = {
         let typeImage = UIImageView()
+        typeImage.contentMode = .scaleAspectFit
         return typeImage
     }()
 
@@ -87,6 +88,8 @@ final class StartBookingButtonView: BaseUIView {
         typeImage.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(8)
             make.bottom.equalToSuperview()
+            make.width.equalTo(141)
+            make.height.equalTo(70.5)
         }
     }
 

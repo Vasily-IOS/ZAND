@@ -10,11 +10,57 @@ import SnapKit
 
 final class AppoitmentsCell: BaseTableCell {
 
+    // MARK: - Nested types
+
+    enum ButtonState {
+        case cancelAppointment
+        case appointmentCanceled
+        case appointmentProvided
+
+        var title: String {
+            switch self {
+            case .cancelAppointment:
+                return AssetString.cancelAppointment
+            case .appointmentCanceled:
+                return AssetString.appointmentDeleted
+            case .appointmentProvided:
+                return AssetString.appointmentProvided
+            }
+        }
+
+        var isUserInteractionEnabled: Bool {
+            switch self {
+            case .appointmentCanceled, .appointmentProvided:
+                return false
+            case .cancelAppointment:
+                return true
+            }
+        }
+
+        var borderColor: UIColor {
+            switch self {
+            case .cancelAppointment, .appointmentProvided:
+                return .lightGreen
+            case .appointmentCanceled:
+                return .red
+            }
+        }
+
+        var textColor: UIColor {
+            switch self {
+            case .cancelAppointment, .appointmentProvided:
+                return .lightGreen
+            case .appointmentCanceled:
+                return .red
+            }
+        }
+    }
+
     // MARK: - Properties
 
-    var cancelButtonHandler: ((IndexPath) -> Void)?
+    var cancelButtonHandler: ((Int) -> Void)?
 
-    var indexPath: IndexPath?
+    var recordID = Int()
 
     private let saloonNameLabel: UILabel = {
         let saloonNameLabel = UILabel()
@@ -84,7 +130,6 @@ final class AppoitmentsCell: BaseTableCell {
         cancelRecordButton.layer.cornerRadius = 15.0
         cancelRecordButton.layer.borderWidth = 1
         cancelRecordButton.layer.borderColor = UIColor.lightGreen.cgColor
-        cancelRecordButton.setTitle("Отменить запись", for: .normal)
         cancelRecordButton.setTitleColor(.lightGreen, for: .normal)
         return cancelRecordButton
     }()
@@ -93,9 +138,7 @@ final class AppoitmentsCell: BaseTableCell {
 
     @objc
     private func cancelButtonAction() {
-        if let indexPath = indexPath {
-            cancelButtonHandler?(indexPath)
-        }
+        cancelButtonHandler?(recordID)
     }
     
     override func setup() {
@@ -107,12 +150,31 @@ final class AppoitmentsCell: BaseTableCell {
     }
 
     func configure(_ model: UIAppointmentModel) {
+        recordID = model.id
         saloonNameLabel.text = model.company_name
         saloonAddressLabel.text = model.company_address
         serviceTypeLabel.text = model.services.title
         priceLabel.text = "\(model.services.cost) \(AssetString.rub)"
         dateLabel.text = model.seance_start_date
         timeLabel.text = model.seance_start_time
+
+        switch model.buttonState {
+        case .appointmentCanceled:
+            configureButton(.appointmentCanceled)
+        case .appointmentProvided:
+            configureButton(.appointmentProvided)
+        case .cancelAppointment:
+            configureButton(.cancelAppointment)
+        case .none:
+            print("Have no state")
+        }
+    }
+
+    private func configureButton(_ state: ButtonState) {
+        cancelRecordButton.setTitle(state.title, for: .normal)
+        cancelRecordButton.setTitleColor(state.textColor, for: .normal)
+        cancelRecordButton.layer.borderColor = state.borderColor.cgColor
+        cancelRecordButton.isUserInteractionEnabled = state.isUserInteractionEnabled
     }
 }
 

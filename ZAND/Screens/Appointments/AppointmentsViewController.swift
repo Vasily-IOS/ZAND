@@ -23,8 +23,8 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
 
     var presenter: AppointmentsPresenterOutput?
 
-    private let cancelButtonHandler = { indexPath in
-        print(indexPath)
+    private lazy var cancelButtonHandler: ((Int) -> Void) = { [weak self] appointmentID in
+        self?.showCancelAppointmentAlertController(appointmentID: appointmentID)
     }
 
     // MARK: - Lifecycle
@@ -40,10 +40,11 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
     private func setupDataSource(model: [UIAppointmentModel]) {
         dataSource = DataSource(tableView: contentView.tableView)
         { [weak self] tableView, indexPath, item  in
+            guard let self else { return UITableViewCell() }
+
             let cell = tableView.dequeueCell(withType: AppoitmentsCell.self, for: indexPath)
             cell.configure(item)
-            cell.indexPath = indexPath
-            cell.cancelButtonHandler = self?.cancelButtonHandler
+            cell.cancelButtonHandler = self.cancelButtonHandler
             return cell
         }
     }
@@ -53,6 +54,22 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
         snapShot.appendSections([.appointments])
         snapShot.appendItems(model)
         dataSource?.apply(snapShot, animatingDifferences: false)
+    }
+
+    private func showCancelAppointmentAlertController(appointmentID: Int) {
+        let alertController = UIAlertController(
+            title: AssetString.areUsureCancelAppointpent,
+            message: nil,
+            preferredStyle: .alert
+        )
+        let approveCancelAction = UIAlertAction(title: AssetString.yes, style: .destructive
+        ) { [weak self] _ in
+            self?.presenter?.deleteAppointment(appointmentID: appointmentID)
+        }
+        let cancelAction = UIAlertAction(title: AssetString.no, style: .cancel)
+        alertController.addAction(approveCancelAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
     }
 }
 
@@ -72,6 +89,7 @@ extension AppointmentsViewController: AppointmentsInput {
     func updateUI(model: [UIAppointmentModel]) {
         setupDataSource(model: model)
         applySnapshot(model: model)
+        contentView.isShowEmptyLabel(model.isEmpty)
     }
 
     func showIndicator(_ isShow: Bool) {

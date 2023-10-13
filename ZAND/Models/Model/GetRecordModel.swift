@@ -32,6 +32,7 @@ struct GetRecord: Codable, Hashable {
     let length: Int? // длительность сеанса
     let api_id: String // внешний идентификатор записи
     let create_date: String
+    let deleted: Bool 
 }
 
 struct ServiceRecord: Codable, Hashable {

@@ -27,7 +27,7 @@ final class EntryConfirmedView: BaseUIView {
 
     private let finalLabel: UILabel = {
         let finalLabel = UILabel()
-        finalLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        finalLabel.font = .systemFont(ofSize: 16, weight: .bold)
         return finalLabel
     }()
 
@@ -72,7 +72,9 @@ final class EntryConfirmedView: BaseUIView {
         addSubview(stackView)
 
         stackView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
         }
     }
 }

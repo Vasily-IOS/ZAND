@@ -45,6 +45,14 @@ final class AppointemtsView: BaseUIView {
         return segmentControl
     }()
 
+    private let emptyLabel: UILabel = {
+        let emptyLabel = UILabel()
+        emptyLabel.text = AssetString.noAppointments
+        emptyLabel.font = .systemFont(ofSize: 24, weight: .regular)
+        emptyLabel.textColor = .textGray
+        return emptyLabel
+    }()
+
     private let activityIndicatorView = UIActivityIndicatorView()
 
     // MARK: - Instance methods
@@ -83,6 +91,10 @@ final class AppointemtsView: BaseUIView {
             activityIndicatorView.stopAnimating()
         }
     }
+
+    func isShowEmptyLabel(_ isShow: Bool) {
+        emptyLabel.isHidden = !isShow
+    }
 }
 
 extension AppointemtsView {
@@ -92,7 +104,7 @@ extension AppointemtsView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([segmentControl, tableView])
+        addSubviews([segmentControl, tableView, emptyLabel])
         segmentControl.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(30)
             make.left.equalTo(self).offset(16)
@@ -105,6 +117,11 @@ extension AppointemtsView {
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
             make.bottom.equalTo(self)
+        }
+
+        emptyLabel.snp.makeConstraints { make in
+            make.top.equalTo(segmentControl.snp.bottom).offset(60)
+            make.centerX.equalToSuperview()
         }
     }
 
