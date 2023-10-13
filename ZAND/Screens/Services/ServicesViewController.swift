@@ -22,6 +22,8 @@ final class ServicesViewController: BaseViewController<ServicesView> {
 
         subscribeDelegates()
         hideBackButtonTitle()
+        subscribeNotifications()
+        setupRecognizer()
     }
 
     deinit {
@@ -30,10 +32,58 @@ final class ServicesViewController: BaseViewController<ServicesView> {
 
     // MARK: - Instance methods
 
+    @objc
+    private func handleNavigationBarTouches(_ recognizer: UIGestureRecognizer) {
+        if contentView.searchBar.text?.isEmpty == true {
+            contentView.endEditing()
+        }
+    }
+
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (
+            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        contentView.tableView.contentSize.height += keyboardSize.height
+    }
+
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        guard let keyboardSize = (
+            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        contentView.tableView.contentSize.height -= (keyboardSize.height)
+    }
+
     private func subscribeDelegates() {
         contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
         contentView.searchBar.delegate = self
+    }
+
+    private func subscribeNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil
+        )
+    }
+
+    private func setupRecognizer() {
+        navigationController?.navigationBar.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(handleNavigationBarTouches)
+            )
+        )
     }
 }
 
@@ -78,6 +128,7 @@ extension ServicesViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 {
             presenter?.model[indexPath.section].isOpened = !(presenter?.model[indexPath.section].isOpened)!
+            contentView.endEditing(true)
             reloadData()
         } else {
             guard let viewModel = presenter?.viewModel else { return }

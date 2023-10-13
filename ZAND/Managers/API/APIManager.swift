@@ -29,7 +29,6 @@ final class APIManager: HTTP {
             case .success(let response):
                 if let httpResponse = response.response?.statusCode {
                     let successRange = (200...299)
-                    print(httpResponse)
                     if successRange.contains(httpResponse)  {
                         if let model = self.decoder(
                             data: response.data, expected: expectation

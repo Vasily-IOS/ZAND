@@ -81,6 +81,12 @@ final class ServicesView: BaseUIView {
         }
     }
 
+    func endEditing() {
+        searchBar.text = AssetString.findInServices
+        searchBar.searchTextField.textColor = .lightGray
+        endEditing(true)
+    }
+
     private func setViews() {
         backgroundColor = .mainGray
 
