@@ -65,8 +65,10 @@ extension SaloonDetailViewController: UIGestureRecognizerDelegate {
     
     // MARK: - UIGestureRecognizerDelegate methods
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
         guard (otherGestureRecognizer as? UIPanGestureRecognizer) != nil else {
             return true
         }
@@ -104,7 +106,13 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
             AppRouter.shared.popViewController()
             AppRouter.shared.changeTabBarVC(to: 2)
         } else {
-            AppRouter.shared.presentWithNav(type: .startBooking(presenter?.salonID ?? 0))
+            AppRouter.shared.presentWithNav(
+                type: .startBooking(
+                    presenter?.salonID ?? 0,
+                    presenter?.saloonName ?? "",
+                    presenter?.saloonAddress ?? ""
+                )
+            )
         }
     }
 

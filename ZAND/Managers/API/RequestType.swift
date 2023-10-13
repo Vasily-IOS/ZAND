@@ -37,8 +37,8 @@ enum RequestType {
     // Создать запись на сеанс 👍
     case createRecord(company_id: Int, model: ConfirmationModel)
 
-
-
+    // Получить запись 👍
+    case getRecord(company_id: Int, record_id: Int)
 
     // получить список сотрудников
     case staff(company_id: Int)
@@ -89,7 +89,8 @@ extension RequestType: TargetType {
             return "/api/v1/book_times/\(company_id)/\(staff_id)/\(date)"
         case .createRecord(let company_id, _):
             return "/api/v1/book_record/\(company_id)"
-
+        case .getRecord(let company_id, let record_id):
+            return "/api/v1/record/\(company_id)/\(record_id)"
 
             // MARK: - deprecated
         case .staff(let company_id):
@@ -108,7 +109,7 @@ extension RequestType: TargetType {
     var method: Moya.Method {
         switch self {
         case .salons, .categories, .bookServices, .bookStaff, .staff,
-                .staffByID, .bookDates, .bookTimes:
+                .staffByID, .bookDates, .bookTimes, .getRecord:
             return .get
         case .createRecord:
             return .post
@@ -122,7 +123,7 @@ extension RequestType: TargetType {
 
     var task: Moya.Task {
         switch self {
-        case .salons, .categories, .staff, .staffByID, .bookTimes:
+        case .salons, .categories, .staff, .staffByID, .bookTimes, .getRecord:
             return .requestPlain
         case .bookServices(_ , let staff_id):
             if staff_id == 0 {
@@ -166,7 +167,7 @@ extension RequestType: TargetType {
         case .salons, .bookServices, .bookDates, .bookStaff, .createRecord:
             return ["Authorization": "Bearer \(bearerToken)",
                     "Accept": "application/vnd.api.v2+json"]
-        case .categories, .staff, .staffByID, .bookTimes:
+        case .categories, .staff, .staffByID, .bookTimes, .getRecord:
             return ["Content-type": "application/json",
                     "Accept": "application/vnd.api.v2+json",
                     "Authorization": "Bearer \(bearerToken), User \(userToken)"]

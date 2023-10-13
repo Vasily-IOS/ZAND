@@ -9,29 +9,32 @@ import UIKit
 import SnapKit
 
 final class AppoitmentsCell: BaseTableCell {
-    
-    // MARK:  - Closures
-    
-    var mapHandler: ((CommonModel) -> ())?
-    
+
     // MARK: - Properties
-    
-    var model: CommonModel?
 
-    // MARK: - Private
+    var cancelButtonHandler: ((IndexPath) -> Void)?
 
-    private let saloonNameLabel = UILabel(.systemFont(ofSize: 20, weight: .bold))
+    var indexPath: IndexPath?
+
+    private let saloonNameLabel: UILabel = {
+        let saloonNameLabel = UILabel()
+        saloonNameLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        saloonNameLabel.numberOfLines = 0
+        return saloonNameLabel
+    }()
 
     private let saloonAddressLabel = UILabel(.systemFont(ofSize: 12))
     
-    private lazy var saloonNameAddressStack = UIStackView(alignment: .leading,
-                                                          arrangedSubviews: [
-                                                            saloonNameLabel,
-                                                            saloonAddressLabel
-                                                          ],
-                                                          axis: .vertical,
-                                                          distribution: .fill,
-                                                          spacing: 8)
+    private lazy var saloonNameAddressStack = UIStackView(
+        alignment: .leading,
+        arrangedSubviews: [
+            saloonNameLabel,
+            saloonAddressLabel
+        ],
+        axis: .vertical,
+        distribution: .fill,
+        spacing: 8
+    )
     
     private let dateLabel = UILabel(.systemFont(ofSize: 14))
 
@@ -41,16 +44,16 @@ final class AppoitmentsCell: BaseTableCell {
 
     private let serviceTypeLabel = UILabel(.systemFont(ofSize: 12))
     
-    private lazy var serviceTypeStackView = UIStackView(alignment: .leading,
-                                                        arrangedSubviews: [
-                                                            timeLabel,
-                                                            serviceTypeLabel
-                                                        ],
-                                                        axis: .vertical,
-                                                        distribution: .fill,
-                                                        spacing: 14)
-
-    private let viewOnMapButton = TransparentButton(state: .viewOnMap)
+    private lazy var serviceTypeStackView = UIStackView(
+        alignment: .leading,
+        arrangedSubviews: [
+            timeLabel,
+            serviceTypeLabel
+        ],
+        axis: .vertical,
+        distribution: .fill,
+        spacing: 14
+    )
 
     private let baseView: UIView = {
         let baseView = UIView()
@@ -76,7 +79,24 @@ final class AppoitmentsCell: BaseTableCell {
         return mainStackView
     }()
 
+    private let cancelRecordButton: UIButton = {
+        let cancelRecordButton = UIButton()
+        cancelRecordButton.layer.cornerRadius = 15.0
+        cancelRecordButton.layer.borderWidth = 1
+        cancelRecordButton.layer.borderColor = UIColor.lightGreen.cgColor
+        cancelRecordButton.setTitle("Отменить запись", for: .normal)
+        cancelRecordButton.setTitleColor(.lightGreen, for: .normal)
+        return cancelRecordButton
+    }()
+
     // MARK: - Instance methods
+
+    @objc
+    private func cancelButtonAction() {
+        if let indexPath = indexPath {
+            cancelButtonHandler?(indexPath)
+        }
+    }
     
     override func setup() {
         super.setup()
@@ -84,29 +104,15 @@ final class AppoitmentsCell: BaseTableCell {
         setViews()
         setSelf()
         setTarget()
-
-        viewOnMapButton.isHidden = true
-    }
-    
-    func configure(model: CommonModel) {
-        if let model = model as? AppointmentsModel {
-            saloonNameLabel.text = model.saloon_name
-            saloonAddressLabel.text = model.saloon_address
-            dateLabel.text = model.bookingDate
-            priceLabel.text = "\(AssetString.from) \(model.servicePrice) \(AssetString.rub)"
-            timeLabel.text = model.bookingTime
-            serviceTypeLabel.text = model.serviceName
-        }
-        self.model = model
     }
 
-    // MARK: - Action
-    
-    @objc
-    private func viewOnMapAction() {
-        guard let model else { return }
-
-        mapHandler?(model)
+    func configure(_ model: UIAppointmentModel) {
+        saloonNameLabel.text = model.company_name
+        saloonAddressLabel.text = model.company_address
+        serviceTypeLabel.text = model.services.title
+        priceLabel.text = "\(model.services.cost) \(AssetString.rub)"
+        dateLabel.text = model.seance_start_date
+        timeLabel.text = model.seance_start_time
     }
 }
 
@@ -121,13 +127,14 @@ extension AppoitmentsCell {
             make.edges.equalTo(contentView)
         }
 
-        baseView.addSubviews([saloonNameAddressStack, dateLabel,
-                                 priceLabel, serviceTypeStackView,
-                                 viewOnMapButton])
+        baseView.addSubviews(
+            [saloonNameAddressStack, dateLabel, priceLabel, serviceTypeStackView, cancelRecordButton]
+        )
 
         saloonNameAddressStack.snp.makeConstraints { make in
             make.top.equalTo(baseView.snp.top).offset(32)
             make.left.equalTo(baseView.snp.left).offset(16)
+            make.right.equalToSuperview().inset(70)
         }
 
         dateLabel.snp.makeConstraints { make in
@@ -143,12 +150,14 @@ extension AppoitmentsCell {
         serviceTypeStackView.snp.makeConstraints { make in
             make.top.equalTo(dateLabel.snp.bottom).offset(8)
             make.left.equalTo(baseView.snp.left).offset(16)
-            make.bottom.equalTo(baseView.snp.bottom).inset(33)
         }
 
-        viewOnMapButton.snp.makeConstraints { make in
-            make.right.equalTo(baseView.snp.right).inset(16)
-            make.bottom.equalTo(baseView.snp.bottom).inset(10)
+        cancelRecordButton.snp.makeConstraints { make in
+            make.top.equalTo(serviceTypeStackView.snp.bottom).offset(10)
+            make.height.equalTo(30)
+            make.right.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(10)
+            make.width.equalTo(170)
         }
     }
     
@@ -158,8 +167,10 @@ extension AppoitmentsCell {
     }
     
     private func setTarget() {
-        viewOnMapButton.addTarget(self,
-                                  action: #selector(viewOnMapAction),
-                                  for: .touchUpInside)
+        cancelRecordButton.addTarget(
+            self,
+            action: #selector(cancelButtonAction),
+            for: .touchUpInside
+        )
     }
 }

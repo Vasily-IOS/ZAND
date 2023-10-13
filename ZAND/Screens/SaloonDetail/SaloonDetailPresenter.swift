@@ -9,6 +9,8 @@ import Foundation
 
 protocol SaloonPresenterOutput: AnyObject {
     var salonID: Int? { get }
+    var saloonName: String? { get }
+    var saloonAddress: String? { get }
     func getModel() -> Saloon?
     func getDBModel() -> SaloonMapModel?
     func isInFavourite()
@@ -29,6 +31,10 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
 
     var salonID: Int?
 
+    var saloonName: String?
+
+    var saloonAddress: String?
+
     private var apiModel: Saloon?
 
     private var modelDB: SaloonDataBaseModel?
@@ -45,9 +51,13 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
         case .api(let apiModel):
             self.apiModel = apiModel
             self.salonID = apiModel.id
+            self.saloonName = apiModel.title
+            self.saloonAddress = apiModel.address
         case .dataBase(let modelDB):
             self.modelDB = modelDB
             self.salonID = modelDB.id
+            self.saloonName = modelDB.title
+            self.saloonAddress = modelDB.address
         }
 
         view.updateUI(type: type)

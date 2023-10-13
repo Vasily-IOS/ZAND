@@ -45,6 +45,8 @@ final class AppointemtsView: BaseUIView {
         return segmentControl
     }()
 
+    private let activityIndicatorView = UIActivityIndicatorView()
+
     // MARK: - Instance methods
     
     override func setup() {
@@ -54,17 +56,31 @@ final class AppointemtsView: BaseUIView {
         addTarget()
     }
 
-    // MARK: - Action
-    
     @objc
     private func changeModel(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            delegate?.changeModel(by: .upcoming)
+            delegate?.changeModel(by: .waitingServices)
         case 1:
-            delegate?.changeModel(by: .past)
+            delegate?.changeModel(by: .servicesProvided)
         default:
             break
+        }
+    }
+
+    func showActivity(_ isShow: Bool) {
+        if isShow {
+            addSubview(activityIndicatorView)
+            activityIndicatorView.startAnimating()
+            [segmentControl, tableView].forEach({ $0.isHidden = true })
+
+            activityIndicatorView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+            }
+        } else {
+            [segmentControl, tableView].forEach({ $0.isHidden = false })
+            activityIndicatorView.removeFromSuperview()
+            activityIndicatorView.stopAnimating()
         }
     }
 }
@@ -93,8 +109,10 @@ extension AppointemtsView {
     }
 
     private func addTarget() {
-        segmentControl.addTarget(self,
-                                 action: #selector(changeModel(_:)),
-                                 for: .valueChanged)
+        segmentControl.addTarget(
+            self,
+            action: #selector(changeModel(_:)),
+            for: .valueChanged
+        )
     }
 }

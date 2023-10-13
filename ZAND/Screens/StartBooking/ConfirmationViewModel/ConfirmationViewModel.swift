@@ -17,6 +17,8 @@ final class ConfirmationViewModel {
     // MARK: - Properties
 
     var resultModel: ConfirmationModel?
+    var companyName = String()
+    var companyAddress = String()
     var phone = String()
     var fullName = String()
     var email = String()
@@ -41,9 +43,16 @@ final class ConfirmationViewModel {
 
     // MARK: - Initializers
 
-    init(bookingType: BookingType, company_id: Int) {
+    init(
+        bookingType: BookingType,
+        company_id: Int,
+        companyName: String,
+        companyAddress: String
+    ) {
         self.bookingType = bookingType
         self.company_id = company_id
+        self.companyName = companyName
+        self.companyAddress = companyAddress
 
         self.fetchUserData()
     }
@@ -86,7 +95,7 @@ final class ConfirmationViewModel {
     private func fetchUserData() {
         let user = UserDBManager.shared.get()
         phone = "\(user?.phone ?? "")"
-        fullName = "\(user?.familyName ?? "")" + "" + "\(user?.givenName ?? "")"
+        fullName = "\(user?.familyName ?? "")" + " " + "\(user?.givenName ?? "")"
         email = "\(user?.email ?? "")"
     }
 }

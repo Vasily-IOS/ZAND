@@ -28,13 +28,21 @@ final class ConfirmationPresenter: ConfirmationOutput {
 
     private let network: HTTP
 
+    private let realm: RealmManager
+
     // MARK: - Initializers
 
-    init(view: ConfirmationInput, viewModel: ConfirmationViewModel, network: HTTP) {
+    init(
+        view: ConfirmationInput,
+        viewModel: ConfirmationViewModel,
+        network: HTTP,
+        realm: RealmManager
+    ) {
         self.view = view
         self.viewModel = viewModel
         self.network = network
-
+        self.realm = realm
+        
         self.updateUI()
     }
 
@@ -55,8 +63,17 @@ final class ConfirmationPresenter: ConfirmationOutput {
             type: .createRecord(
             company_id: viewModel.company_id,
             model: model), expectation: RecordCreatedModel.self)
-        { result in
-            print(result)
+        { [weak self] result in
+            guard let self else { return }
+
+            // save record info
+            let dataBaseModel = RecordDataBaseModel()
+            dataBaseModel.company_id = String(self.viewModel.company_id)
+            dataBaseModel.company_name = viewModel.companyName
+            dataBaseModel.company_address = viewModel.companyAddress
+            dataBaseModel.record_id = String(result.data.first?.record_id ?? 0)
+            realm.save(object: dataBaseModel)
+
             self.view?.showEntryConfirmedUI(isSuccess: result.success)
         }
     }
