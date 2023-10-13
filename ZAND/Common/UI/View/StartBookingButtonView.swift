@@ -86,10 +86,10 @@ final class StartBookingButtonView: BaseUIView {
         }
 
         typeImage.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(8)
+            make.right.equalToSuperview().inset(16)
             make.bottom.equalToSuperview()
-            make.width.equalTo(141)
-            make.height.equalTo(70.5)
+            make.width.equalTo(100)
+            make.height.equalTo(50)
         }
     }
 

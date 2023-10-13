@@ -59,7 +59,8 @@ final class SearchViewController: BaseViewController<SearchView> {
 
     @objc
     private func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+        guard let keyboardSize = (
+            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
         contentView.tableView.contentSize.height += keyboardSize.height
@@ -67,7 +68,8 @@ final class SearchViewController: BaseViewController<SearchView> {
 
     @objc
     private func keyboardWillHide(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+        guard let keyboardSize = (
+            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
         contentView.tableView.contentSize.height -= (keyboardSize.height)

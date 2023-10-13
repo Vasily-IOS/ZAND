@@ -17,11 +17,7 @@ final class LaunchVideoScreenViewController: UIViewController {
 
     // MARK: - Lifecycle
 
-//    override func loadView() {
-//        view.isUserInteractionEnabled = false
-//    }
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

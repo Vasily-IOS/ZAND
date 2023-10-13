@@ -14,26 +14,24 @@ enum MainType {
 }
 
 protocol MainPresenterOutput: AnyObject {
+    var saloons: [Saloon] { get set }
+    var optionsModel: [OptionsModel] { get }
+
     var selectedDays: [IndexPath: Bool] { get set }
     func getModel(by type: MainType) -> [CommonFilterProtocol]
-    func getSearchIndex(id: Int) -> IndexPath?
     func getModel(by id: Int) -> SaloonMapModel?
     func applyDB(by id: Int, completion: @escaping () -> ())
-    func notContains(by id: Int) -> Bool
+    func contains(by id: Int) -> Bool
     func updateUI()
-
+    func backToInitialState()
     func sortModel(filterID: Int)
 }
 
 protocol MainViewInput: AnyObject {
     func hideTabBar()
     func changeFavouritesAppearence(indexPath: IndexPath)
-    func updateUI(model: [Saloon])
     func isActivityIndicatorShouldRotate(_ isRotate: Bool)
     func updateUIConection(isUpdate: Bool)
-    func getOptions(model: [OptionsModel])
-
-    func updateWithSortModel(model: [Saloon])
 }
 
 final class MainPresenter: MainPresenterOutput {
@@ -42,12 +40,13 @@ final class MainPresenter: MainPresenterOutput {
 
     weak var view: MainViewInput?
 
-    // to presenter
     var selectedDays: [IndexPath: Bool] = [:]
-    
-    private let optionsModel = OptionsModel.options
 
-    private var saloons: [Saloon] = []
+    var saloons: [Saloon] = [] // дата сорс коллекции
+
+    var additiolSaloons: [Saloon] = [] // оставляем всегда нетронутым
+
+    var optionsModel = OptionsModel.options
 
     private let realmManager: RealmManager
 
@@ -60,9 +59,8 @@ final class MainPresenter: MainPresenterOutput {
         self.realmManager = realmManager
         self.provider = provider
 
-        updateUI()
-        subscribeNotifications()
-        view.getOptions(model: optionsModel)
+        self.updateUI()
+        self.subscribeNotifications()
     }
 
     // MARK: - Action
@@ -70,7 +68,6 @@ final class MainPresenter: MainPresenterOutput {
     @objc
     private func hideTabBarNotificationAction(_ notification: Notification) {
         view?.hideTabBar()
-        NotificationCenter.default.removeObserver(self)
     }
 
     @objc
@@ -99,25 +96,19 @@ extension MainPresenter {
     
     // MARK: - Instance methods
 
+    func backToInitialState() {
+        saloons = additiolSaloons
+    }
+
     func sortModel(filterID: Int) {
-        let model = saloons.filter({ $0.business_type_id == filterID })
-        view?.updateWithSortModel(model: model)
+        saloons = additiolSaloons.filter({ $0.business_type_id == filterID })
     }
 
     func updateUI() {
         provider.fetchData { [weak self] saloons in
-            guard let self else { return }
-
-            self.saloons = saloons
-            self.view?.updateUI(model: saloons)
+            self?.saloons = saloons
+            self?.additiolSaloons = saloons
         }
-    }
-
-    func getSearchIndex(id: Int) -> IndexPath? {
-        if let index = saloons.firstIndex(where: { $0.id == id }) {
-            return [1, index]
-        }
-        return nil
     }
 
     func getModel(by type: MainType) -> [CommonFilterProtocol] {
@@ -134,28 +125,35 @@ extension MainPresenter {
     }
 
     func applyDB(by id: Int, completion: @escaping () -> ()) {
-        if self.notContains(by: id) {
+        if self.contains(by: id) {
             if let modelForSave = self.getModel(by: id) as? Saloon {
                 SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
             }
         } else {
             self.remove(by: id)
         }
+        VibrationManager.shared.vibrate(for: .success)
         completion()
     }
 
     func remove(by id: Int) {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
         realmManager.removeObjectByPredicate(object: SaloonDataBaseModel.self, predicate: predicate)
-        VibrationManager.shared.vibrate(for: .success)
     }
 
-    func notContains(by id: Int) -> Bool {
+    func contains(by id: Int) -> Bool {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
         return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
     }
 
     // MARK: - Private
+
+    private func getSearchIndex(id: Int) -> IndexPath? {
+        if let index = saloons.firstIndex(where: { $0.id == id }) {
+            return [1, index]
+        }
+        return nil
+    }
 
     private func subscribeNotifications() {
         NotificationCenter.default.addObserver(

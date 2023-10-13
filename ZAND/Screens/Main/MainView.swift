@@ -62,9 +62,10 @@ final class MainView: BaseUIView {
     }
 
     func changeHeartAppearance(by indexPath: IndexPath) {
-        let cell = self.collectionView.cellForItem(at: indexPath) as! SaloonCell
-        cell.isInFavourite = !cell.isInFavourite
-        VibrationManager.shared.vibrate(for: .success)
+        print(indexPath)
+        if let cell = self.collectionView.cellForItem(at: indexPath) as? SaloonCell {
+            cell.isInFavourite = !cell.isInFavourite
+        }
     }
 
     func scrollToItem(at indexPath: IndexPath) {
