@@ -19,9 +19,10 @@ struct UIAppointmentModel: Hashable {
     let attendance: Int // Статус записи
     let confirmed: Int // Статус подтверждения записи, 0 - не подтверждена, 1 - подтверждена
     let seance_lenght_int: Int
+    let create_date: String
 
     var seance_start_date: String {
-        return makeStartSeanceDate(date)
+        return makeStartSeanceDate(datetime)
     }
 
     var seance_start_time: String {
@@ -40,6 +41,7 @@ struct UIAppointmentModel: Hashable {
         attendance = networkModel.attendance
         confirmed = networkModel.confirmed
         seance_lenght_int = networkModel.seance_length ?? 0
+        create_date = networkModel.create_date
     }
 
     private func makeStartSeanceDate(_ date: String) -> String {

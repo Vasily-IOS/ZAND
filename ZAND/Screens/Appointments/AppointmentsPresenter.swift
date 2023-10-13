@@ -62,28 +62,42 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
 
     private func performRequest(model: [RecordDataBaseModel]) {
         view?.showIndicator(true)
+
+        let group = DispatchGroup()
+        var waitingServiceSortedModel: [UIAppointmentModel] = []
+        var servicesProvidedSortedModel: [UIAppointmentModel] = []
+
         model.forEach { recordModel in
+            group.enter()
             network.performRequest(
                 type: .getRecord(
                     company_id: Int(recordModel.company_id) ?? 0,
                     record_id: Int(recordModel.record_id) ?? 0), expectation: GetRecordModel.self
             ) { [weak self] result in
-                self?.makeModel(result)
+                guard let self else { return }
+
+                self.makeModel(result) { model in
+                    if model.attendance == AttendanceID.waiting.rawValue {
+                        waitingServiceSortedModel.append(model)
+                    } else if model.attendance == AttendanceID.serviceDelivered.rawValue {
+                        servicesProvidedSortedModel.append(model)
+                    }
+                    group.leave()
+                }
             }
+        }
+
+        group.notify(queue: .main) {
+            self.waitingServicesModel = waitingServiceSortedModel.sorted(by: { $0.create_date > $1.create_date })
+            self.servicesProvidedModel = servicesProvidedSortedModel.sorted(by: { $0.create_date > $1.create_date })
         }
     }
 
-    private func makeModel(_ getRecord: GetRecordModel) {
+    private func makeModel(_ getRecord: GetRecordModel, completion: ((UIAppointmentModel) -> Void)) {
         if let dataBaseModel = Array(
             realm.get(RecordDataBaseModel.self)).first(where: { Int($0.record_id) == getRecord.data.id })
         {
-            if getRecord.data.attendance == AttendanceID.waiting.rawValue {
-                let uiModel = UIAppointmentModel(networkModel: getRecord.data, dataBaseModel: dataBaseModel)
-                waitingServicesModel.append(uiModel)
-            } else if getRecord.data.attendance == AttendanceID.serviceDelivered.rawValue {
-                let uiModel = UIAppointmentModel(networkModel: getRecord.data, dataBaseModel: dataBaseModel)
-                servicesProvidedModel.append(uiModel)
-            }
+            completion(UIAppointmentModel(networkModel: getRecord.data, dataBaseModel: dataBaseModel))
         }
     }
 }
