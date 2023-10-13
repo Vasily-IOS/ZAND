@@ -112,6 +112,7 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
     // MARK: - Private
 
     private func sendNotification(userId: Int, isInFavourite: Bool) {
+        print(userId)
         NotificationCenter.default.post(
             name: .isInFavourite,
             object: nil,
