@@ -44,6 +44,7 @@ final class ConfirmationPresenter: ConfirmationOutput {
         self.realm = realm
         
         self.updateUI()
+        self.suscribeNotifications()
     }
 
     deinit {
@@ -51,6 +52,11 @@ final class ConfirmationPresenter: ConfirmationOutput {
     }
 
     // MARK: - Instance methods
+
+    @objc
+    private func showBadRequestUI() {
+        view?.showEntryConfirmedUI(isSuccess: false)
+    }
 
     func updateUI() {
         view?.configure(viewModel: viewModel)
@@ -76,5 +82,14 @@ final class ConfirmationPresenter: ConfirmationOutput {
 
             self.view?.showEntryConfirmedUI(isSuccess: result.success)
         }
+    }
+
+    private func suscribeNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(showBadRequestUI),
+            name: .showBadRequestScreen,
+            object: nil
+        )
     }
 }
