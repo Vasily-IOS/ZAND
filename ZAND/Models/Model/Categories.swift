@@ -34,14 +34,10 @@ struct Service: Codable {
     let duration: Int
     let is_online: Bool
     let comment: String
-//    let active: Bool
 }
 
 struct Staff: Codable {
     let id: Int
-//    let seance_length: Int
-//    let technological_card_id: Int
-//    let image_url: String
     let name: String
 }
 

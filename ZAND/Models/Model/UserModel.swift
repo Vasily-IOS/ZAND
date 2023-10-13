@@ -8,11 +8,6 @@
 import Foundation
 import AuthenticationServices
 
-struct UserModel: Codable {
-    let name: String
-    let phone: String
-}
-
 struct User {
 
     // MARK: - Nested types

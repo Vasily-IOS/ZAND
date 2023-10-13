@@ -43,12 +43,12 @@ final class FilterOptionCell: BaseCollectionCell {
     
     // MARK: - Configure
     
-    func configure(model: CommonFilterProtocol, indexPath: IndexPath) {
-        if let model = model as? FilterModel {
-            self.filterDescription.text = model.filterDescription
-            self.indexPath = indexPath
-        }
-    }
+//    func configure(model: CommonFilterProtocol, indexPath: IndexPath) {
+//        if let model = model as? FilterModel {
+//            self.filterDescription.text = model.filterDescription
+//            self.indexPath = indexPath
+//        }
+//    }
 }
 
 extension FilterOptionCell {

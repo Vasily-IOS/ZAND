@@ -16,7 +16,6 @@
 		FF1961B62A4C740700434AC7 /* SaloonDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961B52A4C740700434AC7 /* SaloonDetailPresenter.swift */; };
 		FF1961B82A4C78B900434AC7 /* SettingsMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961B72A4C78B900434AC7 /* SettingsMenuModel.swift */; };
 		FF1961BA2A4C78E700434AC7 /* MyDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961B92A4C78E700434AC7 /* MyDetailsPresenter.swift */; };
-		FF1961BC2A4C79B000434AC7 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961BB2A4C79B000434AC7 /* FilterModel.swift */; };
 		FF1961BE2A4C7A2B00434AC7 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961BD2A4C7A2B00434AC7 /* MapModel.swift */; };
 		FF1961C02A4C7A7900434AC7 /* ProfileMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961BF2A4C7A7800434AC7 /* ProfileMenuModel.swift */; };
 		FF25632829F561FD00091374 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25632729F561FD00091374 /* AddressView.swift */; };
@@ -198,7 +197,6 @@
 		FF1961B52A4C740700434AC7 /* SaloonDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonDetailPresenter.swift; sourceTree = "<group>"; };
 		FF1961B72A4C78B900434AC7 /* SettingsMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuModel.swift; sourceTree = "<group>"; };
 		FF1961B92A4C78E700434AC7 /* MyDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailsPresenter.swift; sourceTree = "<group>"; };
-		FF1961BB2A4C79B000434AC7 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		FF1961BD2A4C7A2B00434AC7 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		FF1961BF2A4C7A7800434AC7 /* ProfileMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuModel.swift; sourceTree = "<group>"; };
 		FF25632729F561FD00091374 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
@@ -481,7 +479,6 @@
 				FF27B0C12AB8F1E500611F47 /* EmployeeModel.swift */,
 				FF25635129F69BE100091374 /* OptionModel.swift */,
 				FF1961B72A4C78B900434AC7 /* SettingsMenuModel.swift */,
-				FF1961BB2A4C79B000434AC7 /* FilterModel.swift */,
 				FF1961BD2A4C7A2B00434AC7 /* MapModel.swift */,
 				FF1961BF2A4C7A7800434AC7 /* ProfileMenuModel.swift */,
 				FFF16A802A6B2FA300D83E5B /* UserModel.swift */,
@@ -1378,7 +1375,6 @@
 				FF25634A29F687B900091374 /* FilterLayout.swift in Sources */,
 				FFF6002D2A6FD6A6009813E6 /* ActivityIndicatorView.swift in Sources */,
 				FF69DADD2A545F5700481CF1 /* Extension + StringProtocol.swift in Sources */,
-				FF1961BC2A4C79B000434AC7 /* FilterModel.swift in Sources */,
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
 				FF76E8D62A32244200DCF779 /* RatingView.swift in Sources */,
 				FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */,
