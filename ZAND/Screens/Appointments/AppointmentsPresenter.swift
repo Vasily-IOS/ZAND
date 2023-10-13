@@ -49,17 +49,19 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
         self.network = network
         self.realm = realm
 
-        self.getDataRourceRequest(model: Array(realm.get(RecordDataBaseModel.self)))
+        self.getDataRourceRequest()
     }
 
     // MARK: - Instance methods
 
     func getData(by type: AppointmentType) {
-        switch type {
-        case .waitingServices:
-            self.view?.updateUI(model: waitingServicesModel)
-        case .servicesProvided:
-            self.view?.updateUI(model: servicesProvidedModel)
+        DispatchQueue.main.async {
+            switch type {
+            case .waitingServices:
+                self.view?.updateUI(model: self.waitingServicesModel)
+            case .servicesProvided:
+                self.view?.updateUI(model: self.servicesProvidedModel)
+            }
         }
     }
 
@@ -68,10 +70,38 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
         let record_id = model?.id ?? 0
         let company_id = model?.company_id ?? 0
 
-        // delete appointment
+        let urlString = "https://api.yclients.com/api/v1/record/\(company_id)/\(record_id)"
+        let headers: [String: String]? = [
+            "Content-type": "application/json",
+            "Accept": "application/vnd.api.v2+json",
+            "Authorization": "Bearer fbast32fa6hp2j6wz8hg, User 983196026753a4a61b7a6c638cc7dea7"
+        ]
+        guard let url = URL(string: urlString) else { return }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.allHTTPHeaderFields = headers
+
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard error == nil else {
+                print("Error in appointment deletion")
+                return
+            }
+
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 204 {
+                    // perform update models
+                    DispatchQueue.main.async {
+                        self?.getDataRourceRequest()
+                    }
+                }
+                print("Response HTTP code: \(httpResponse.statusCode)")
+            }
+        }.resume()
     }
 
-    private func getDataRourceRequest(model: [RecordDataBaseModel]) {
+    private func getDataRourceRequest() {
+        let model = Array(realm.get(RecordDataBaseModel.self))
         view?.showIndicator(true)
 
         let group = DispatchGroup()
@@ -88,10 +118,15 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
                 guard let self else { return }
 
                 self.makeModel(result) { model in
-                    if model.attendance == AttendanceID.waiting.rawValue {
-                        waitingServiceSortedModel.append(model)
-                    } else if model.attendance == AttendanceID.serviceDelivered.rawValue {
+                    switch model.deleted {
+                    case true:
                         servicesProvidedSortedModel.append(model)
+                    case false:
+                        if model.attendance == AttendanceID.waiting.rawValue {
+                            waitingServiceSortedModel.append(model)
+                        } else if model.attendance == AttendanceID.serviceDelivered.rawValue && result.data.deleted {
+                            servicesProvidedSortedModel.append(model)
+                        }
                     }
                     group.leave()
                 }
@@ -112,10 +147,3 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
         }
     }
 }
-
-//enum AttendanceID: Int {
-//    case userDidNotCome = -1 // пользователь не пришел на визит
-//    case waiting = 0 // ожидание пользователя
-//    case serviceDelivered = 1 // услуги оказаны
-//    case userConfirmed = 2 // пользователь подтвердил запись
-//}

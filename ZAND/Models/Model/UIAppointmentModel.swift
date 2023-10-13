@@ -8,6 +8,14 @@
 import Foundation
 
 struct UIAppointmentModel: Hashable {
+
+    enum ButtonState {
+        case none
+        case cancelAppointment
+        case appointmentCanceled
+        case appointmentProvided
+    }
+    
     let id: Int // id записи
     let company_name: String
     let company_address: String
@@ -20,6 +28,8 @@ struct UIAppointmentModel: Hashable {
     let confirmed: Int // Статус подтверждения записи, 0 - не подтверждена, 1 - подтверждена
     let seance_lenght_int: Int
     let create_date: String
+    let deleted: Bool
+    var buttonState: ButtonState = .none
 
     var seance_start_date: String {
         return makeStartSeanceDate(datetime)
@@ -42,6 +52,17 @@ struct UIAppointmentModel: Hashable {
         confirmed = networkModel.confirmed
         seance_lenght_int = networkModel.seance_length ?? 0
         create_date = networkModel.create_date
+        deleted = networkModel.deleted
+
+        if networkModel.deleted {
+            buttonState = .appointmentCanceled
+        } else {
+            if networkModel.attendance == 0 {
+                buttonState = .cancelAppointment
+            } else if networkModel.attendance == 1 {
+                buttonState = .appointmentProvided
+            }
+        }
     }
 
     private func makeStartSeanceDate(_ date: String) -> String {

@@ -10,6 +10,52 @@ import SnapKit
 
 final class AppoitmentsCell: BaseTableCell {
 
+    // MARK: - Nested types
+
+    enum ButtonState {
+        case cancelAppointment
+        case appointmentCanceled
+        case appointmentProvided
+
+        var title: String {
+            switch self {
+            case .cancelAppointment:
+                return AssetString.cancelAppointment
+            case .appointmentCanceled:
+                return AssetString.appointmentDeleted
+            case .appointmentProvided:
+                return AssetString.appointmentProvided
+            }
+        }
+
+        var isUserInteractionEnabled: Bool {
+            switch self {
+            case .appointmentCanceled, .appointmentProvided:
+                return false
+            case .cancelAppointment:
+                return true
+            }
+        }
+
+        var borderColor: UIColor {
+            switch self {
+            case .cancelAppointment, .appointmentProvided:
+                return .lightGreen
+            case .appointmentCanceled:
+                return .red
+            }
+        }
+
+        var textColor: UIColor {
+            switch self {
+            case .cancelAppointment, .appointmentProvided:
+                return .lightGreen
+            case .appointmentCanceled:
+                return .red
+            }
+        }
+    }
+
     // MARK: - Properties
 
     var cancelButtonHandler: ((Int) -> Void)?
@@ -84,7 +130,6 @@ final class AppoitmentsCell: BaseTableCell {
         cancelRecordButton.layer.cornerRadius = 15.0
         cancelRecordButton.layer.borderWidth = 1
         cancelRecordButton.layer.borderColor = UIColor.lightGreen.cgColor
-        cancelRecordButton.setTitle("Отменить запись", for: .normal)
         cancelRecordButton.setTitleColor(.lightGreen, for: .normal)
         return cancelRecordButton
     }()
@@ -112,6 +157,24 @@ final class AppoitmentsCell: BaseTableCell {
         priceLabel.text = "\(model.services.cost) \(AssetString.rub)"
         dateLabel.text = model.seance_start_date
         timeLabel.text = model.seance_start_time
+
+        switch model.buttonState {
+        case .appointmentCanceled:
+            configureButton(.appointmentCanceled)
+        case .appointmentProvided:
+            configureButton(.appointmentProvided)
+        case .cancelAppointment:
+            configureButton(.cancelAppointment)
+        case .none:
+            print("Have no state")
+        }
+    }
+
+    private func configureButton(_ state: ButtonState) {
+        cancelRecordButton.setTitle(state.title, for: .normal)
+        cancelRecordButton.setTitleColor(state.textColor, for: .normal)
+        cancelRecordButton.layer.borderColor = state.borderColor.cgColor
+        cancelRecordButton.isUserInteractionEnabled = state.isUserInteractionEnabled
     }
 }
 
