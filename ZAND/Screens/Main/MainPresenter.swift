@@ -26,6 +26,7 @@ protocol MainPresenterOutput: AnyObject {
 }
 
 protocol MainViewInput: AnyObject {
+    var saloons: [Saloon]? { get }
     func hideTabBar()
     func changeFavouritesAppearence(indexPath: IndexPath)
     func updateUI(model: [Saloon])
@@ -77,6 +78,7 @@ final class MainPresenter: MainPresenterOutput {
     private func isInFavouriteNotificationAction(_ notification: Notification) {
         guard let userId = notification.userInfo?["userId"] as? Int else { return }
 
+        // берется индекс из старой модели
         view?.changeFavouritesAppearence(indexPath: (getSearchIndex(id: userId) ?? [0, 0]))
     }
 
@@ -113,8 +115,9 @@ extension MainPresenter {
         }
     }
 
+    // берется индекс из старой модели
     func getSearchIndex(id: Int) -> IndexPath? {
-        if let index = saloons.firstIndex(where: { $0.id == id }) {
+        if let index = (view?.saloons ?? []).firstIndex(where: { $0.id == id }) {
             return [1, index]
         }
         return nil
@@ -154,7 +157,7 @@ extension MainPresenter {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
         return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
     }
-
+    
     // MARK: - Private
 
     private func subscribeNotifications() {

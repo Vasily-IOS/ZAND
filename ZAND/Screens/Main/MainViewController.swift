@@ -23,6 +23,8 @@ final class MainViewController: BaseViewController<MainView> {
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
         guard let self else { return }
 
+        print(id, indexPath)
+
         if !UserDBManager.shared.isUserContains() {
             AppRouter.shared.changeTabBarVC(to: 2)
         } else {
