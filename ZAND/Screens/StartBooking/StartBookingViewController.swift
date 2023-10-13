@@ -45,7 +45,9 @@ extension StartBookingViewController: StartBookingDelegate {
         let network: HTTP = APIManager()
         let viewModel = ConfirmationViewModel(
             bookingType: .service,
-            company_id: presenter?.saloonID ?? 0
+            company_id: presenter?.saloonID ?? 0,
+            companyName: presenter?.companyName ?? "",
+            companyAddress: presenter?.saloonAddress ?? ""
         )
         let presenter = ServicesPresenter(
             view: vc,
@@ -62,7 +64,9 @@ extension StartBookingViewController: StartBookingDelegate {
         let network: HTTP = APIManager()
         let viewModel = ConfirmationViewModel(
             bookingType: .staff,
-            company_id: presenter?.saloonID ?? 0
+            company_id: presenter?.saloonID ?? 0,
+            companyName: presenter?.companyName ?? "",
+            companyAddress: presenter?.saloonAddress ?? ""
         )
         let presenter = StaffPresenter(
             view: vc,

@@ -66,9 +66,11 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             vc.presenter = presenter
             return vc
         case .appointments:
+            let realmManager: RealmManager = RealmManagerImpl()
+            let network: HTTP = APIManager()
             let view = AppointemtsView()
             let vc = AppointmentsViewController(contentView: view)
-            let presenter = AppointmentsPresenterImpl(view: vc)
+            let presenter = AppointmentsPresenterImpl(view: vc, network: network, realm: realmManager)
             vc.presenter = presenter
             vc.title = AssetString.books
             return vc
@@ -100,10 +102,15 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let presenter = RegisterPresenter(view: vc, user: user)
             vc.presenter = presenter
             return vc
-        case .startBooking(let saloonID):
+        case .startBooking(let saloonID, let companyName, let companyAddress):
             let view = StartBookingView()
             let vc = StartBookingViewController(contentView: view)
-            let presenter = StartBookingPresenter(view: vc, saloonID: saloonID)
+            let presenter = StartBookingPresenter(
+                view: vc,
+                saloonID: saloonID,
+                companyName: companyName,
+                saloonAddress: companyAddress
+            )
             vc.presenter = presenter
             return vc
         case .services:

@@ -189,13 +189,15 @@ extension TimetableViewController: TimetableViewDelegate {
             guard let viewModel = presenter?.viewModel else { return }
             viewModel.build()
 
+            let realm: RealmManager = RealmManagerImpl()
             let network: HTTP = APIManager()
             let view = ConfirmationView()
             let vc = ConfirmationViewController(contentView: view)
             let presenter = ConfirmationPresenter(
                 view: vc,
                 viewModel: viewModel,
-                network: network
+                network: network,
+                realm: realm
             )
             vc.presenter = presenter
 

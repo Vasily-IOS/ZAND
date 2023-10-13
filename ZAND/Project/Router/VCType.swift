@@ -26,6 +26,6 @@ enum VCType {
     case selectableMap(SaloonMapModel)
     case appleSignIn
     case register(User)
-    case startBooking(Int)
+    case startBooking(Int, String, String)
     case services
 }

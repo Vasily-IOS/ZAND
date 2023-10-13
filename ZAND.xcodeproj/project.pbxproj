@@ -72,6 +72,9 @@
 		FF45A16A29E7F67600587DAF /* Extension + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16929E7F67600587DAF /* Extension + UIView.swift */; };
 		FF45A16C29E7F70D00587DAF /* Extension + UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A16B29E7F70D00587DAF /* Extension + UserDefaults.swift */; };
 		FF49C9CC2AB067620086847C /* Extension + Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49C9CB2AB067620086847C /* Extension + Data.swift */; };
+		FF4D4BB62AD88E7C005DA53C /* GetRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D4BB52AD88E7C005DA53C /* GetRecordModel.swift */; };
+		FF4D4BB82AD89058005DA53C /* RecordDataBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D4BB72AD89058005DA53C /* RecordDataBaseModel.swift */; };
+		FF4D4BBA2AD8ACA7005DA53C /* UIAppointmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D4BB92AD8ACA7005DA53C /* UIAppointmentModel.swift */; };
 		FF4F757D2A9E38DD001E8731 /* UserDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */; };
 		FF4F75802A9E41A9001E8731 /* UserDataBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */; };
 		FF50CF972A4EFD9E00AACC5B /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */; };
@@ -108,7 +111,7 @@
 		FF95F8A82AC5AC5B005DA310 /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A72AC5AC5B005DA310 /* ConfirmationViewModel.swift */; };
 		FF95F8AB2AC5AD8F005DA310 /* ConfirmationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */; };
 		FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AC2AC5BCD6005DA310 /* AppID.swift */; };
-		FF95F8AF2AC5E1D9005DA310 /* RecordCreated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AE2AC5E1D9005DA310 /* RecordCreated.swift */; };
+		FF95F8AF2AC5E1D9005DA310 /* RecordCreatedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AE2AC5E1D9005DA310 /* RecordCreatedModel.swift */; };
 		FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F229EEAB1500F4E4C3 /* AssetString.swift */; };
 		FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */; };
 		FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */; };
@@ -254,6 +257,9 @@
 		FF45A16929E7F67600587DAF /* Extension + UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIView.swift"; sourceTree = "<group>"; };
 		FF45A16B29E7F70D00587DAF /* Extension + UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UserDefaults.swift"; sourceTree = "<group>"; };
 		FF49C9CB2AB067620086847C /* Extension + Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Data.swift"; sourceTree = "<group>"; };
+		FF4D4BB52AD88E7C005DA53C /* GetRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRecordModel.swift; sourceTree = "<group>"; };
+		FF4D4BB72AD89058005DA53C /* RecordDataBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDataBaseModel.swift; sourceTree = "<group>"; };
+		FF4D4BB92AD8ACA7005DA53C /* UIAppointmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAppointmentModel.swift; sourceTree = "<group>"; };
 		FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBManager.swift; sourceTree = "<group>"; };
 		FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataBaseModel.swift; sourceTree = "<group>"; };
 		FF50CF962A4EFD9E00AACC5B /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
@@ -291,7 +297,7 @@
 		FF95F8A72AC5AC5B005DA310 /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
 		FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationModel.swift; sourceTree = "<group>"; };
 		FF95F8AC2AC5BCD6005DA310 /* AppID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppID.swift; sourceTree = "<group>"; };
-		FF95F8AE2AC5E1D9005DA310 /* RecordCreated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreated.swift; sourceTree = "<group>"; };
+		FF95F8AE2AC5E1D9005DA310 /* RecordCreatedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreatedModel.swift; sourceTree = "<group>"; };
 		FF99B8F229EEAB1500F4E4C3 /* AssetString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetString.swift; sourceTree = "<group>"; };
 		FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		FF99B8F629EEB1A100F4E4C3 /* Extension + UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIColor.swift"; sourceTree = "<group>"; };
@@ -473,6 +479,7 @@
 		FF25635029F69BD100091374 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FF5FB4962A04153500A06981 /* AppointmentsModel.swift */,
 				FF4401312AA7B09F00318A76 /* SaloonModel.swift */,
 				FF27B0C12AB8F1E500611F47 /* EmployeeModel.swift */,
 				FF25635129F69BE100091374 /* OptionModel.swift */,
@@ -487,7 +494,9 @@
 				FF63B97E2AC35EF000DFD932 /* BookTimes.swift */,
 				FF63B97C2AC3469C00DFD932 /* BookServicesModel.swift */,
 				FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */,
-				FF95F8AE2AC5E1D9005DA310 /* RecordCreated.swift */,
+				FF95F8AE2AC5E1D9005DA310 /* RecordCreatedModel.swift */,
+				FF4D4BB52AD88E7C005DA53C /* GetRecordModel.swift */,
+				FF4D4BB92AD8ACA7005DA53C /* UIAppointmentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -719,6 +728,7 @@
 			children = (
 				FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */,
 				FFC3F44A2AAE2C4100A774B3 /* SaloonDataBaseModel.swift */,
+				FF4D4BB72AD89058005DA53C /* RecordDataBaseModel.swift */,
 			);
 			path = DBModel;
 			sourceTree = "<group>";
@@ -1000,7 +1010,6 @@
 				FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */,
 				FFC01B482A03C80A005CE41B /* AppointmentsView.swift */,
 				FF1961AF2A4C51BC00434AC7 /* AppointmentsPresenter.swift */,
-				FF5FB4962A04153500A06981 /* AppointmentsModel.swift */,
 				FFC01B5C2A03F0E6005CE41B /* Cell */,
 			);
 			path = Appointments;
@@ -1279,6 +1288,7 @@
 				FF2DB9752A9DE2250036356B /* SignInPresenter.swift in Sources */,
 				FFD3E1D72A054E7C00680ED5 /* PrivacyPolicyViewController.swift in Sources */,
 				FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */,
+				FF4D4BB82AD89058005DA53C /* RecordDataBaseModel.swift in Sources */,
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */,
 				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
@@ -1289,6 +1299,7 @@
 				FF862A4D2AA88B660083DEB7 /* SaloonProvider.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */,
 				FF3E65D72A55BC40007EC56D /* SaloonDetailDBManager.swift in Sources */,
+				FF4D4BB62AD88E7C005DA53C /* GetRecordModel.swift in Sources */,
 				FF519A852AC6F39100D490A4 /* EntryConfirmedView.swift in Sources */,
 				FF3C62C42ABA123100032803 /* StaffCell.swift in Sources */,
 				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
@@ -1319,7 +1330,7 @@
 				FF27FC262A2E079F006DE1B9 /* HideNavigationBar.swift in Sources */,
 				FFDCE4BB2A1BB47000CEA0E1 /* AssetImage.swift in Sources */,
 				FF63B97D2AC3469C00DFD932 /* BookServicesModel.swift in Sources */,
-				FF95F8AF2AC5E1D9005DA310 /* RecordCreated.swift in Sources */,
+				FF95F8AF2AC5E1D9005DA310 /* RecordCreatedModel.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterOptionCell.swift in Sources */,
 				FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */,
 				FF49C9CC2AB067620086847C /* Extension + Data.swift in Sources */,
@@ -1362,6 +1373,7 @@
 				FFB9855F2A2F52CC00ABEFBB /* SearchCell.swift in Sources */,
 				FF25632D29F5718C00091374 /* DescriptionShowcaseView.swift in Sources */,
 				FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */,
+				FF4D4BBA2AD8ACA7005DA53C /* UIAppointmentModel.swift in Sources */,
 				FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */,
 				FF27FC282A2E07A9006DE1B9 /* ShowNavigationBar.swift in Sources */,
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
@@ -1569,7 +1581,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.1;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1606,7 +1618,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.1;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
