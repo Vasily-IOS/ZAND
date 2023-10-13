@@ -15,6 +15,7 @@ enum AppointmentType {
 protocol AppointmentsPresenterOutput: AnyObject {
     var waitingServicesModel: [UIAppointmentModel] { get set }
     func getData(by type: AppointmentType)
+    func deleteAppointment(appointmentID: Int)
 }
 
 protocol AppointmentsInput: AnyObject {
@@ -48,8 +49,10 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
         self.network = network
         self.realm = realm
 
-        self.performRequest(model: Array(realm.get(RecordDataBaseModel.self)))
+        self.getDataRourceRequest(model: Array(realm.get(RecordDataBaseModel.self)))
     }
+
+    // MARK: - Instance methods
 
     func getData(by type: AppointmentType) {
         switch type {
@@ -60,7 +63,15 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
         }
     }
 
-    private func performRequest(model: [RecordDataBaseModel]) {
+    func deleteAppointment(appointmentID: Int) {
+        let model = waitingServicesModel.first(where: { $0.id == appointmentID })
+        let record_id = model?.id ?? 0
+        let company_id = model?.company_id ?? 0
+
+        // delete appointment
+    }
+
+    private func getDataRourceRequest(model: [RecordDataBaseModel]) {
         view?.showIndicator(true)
 
         let group = DispatchGroup()

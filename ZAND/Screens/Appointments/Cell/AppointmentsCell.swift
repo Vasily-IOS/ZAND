@@ -12,9 +12,9 @@ final class AppoitmentsCell: BaseTableCell {
 
     // MARK: - Properties
 
-    var cancelButtonHandler: ((IndexPath) -> Void)?
+    var cancelButtonHandler: ((Int) -> Void)?
 
-    var indexPath: IndexPath?
+    var recordID = Int()
 
     private let saloonNameLabel: UILabel = {
         let saloonNameLabel = UILabel()
@@ -93,9 +93,7 @@ final class AppoitmentsCell: BaseTableCell {
 
     @objc
     private func cancelButtonAction() {
-        if let indexPath = indexPath {
-            cancelButtonHandler?(indexPath)
-        }
+        cancelButtonHandler?(recordID)
     }
     
     override func setup() {
@@ -107,6 +105,7 @@ final class AppoitmentsCell: BaseTableCell {
     }
 
     func configure(_ model: UIAppointmentModel) {
+        recordID = model.id
         saloonNameLabel.text = model.company_name
         saloonAddressLabel.text = model.company_address
         serviceTypeLabel.text = model.services.title

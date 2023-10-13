@@ -40,6 +40,10 @@ enum RequestType {
     // Получить запись 👍
     case getRecord(company_id: Int, record_id: Int)
 
+    // удалить запись
+    case deleteRecord(company_id: Int, record_id: Int)
+//https://api.yclients.com/api/v1/record/{company_id}/{record_id}
+
     // получить список сотрудников
     case staff(company_id: Int)
 
@@ -91,6 +95,8 @@ extension RequestType: TargetType {
             return "/api/v1/book_record/\(company_id)"
         case .getRecord(let company_id, let record_id):
             return "/api/v1/record/\(company_id)/\(record_id)"
+        case .deleteRecord(let company_id, let record_id):
+            return "/api/v1/record/\(company_id)/\(record_id)"
 
             // MARK: - deprecated
         case .staff(let company_id):
@@ -113,6 +119,8 @@ extension RequestType: TargetType {
             return .get
         case .createRecord:
             return .post
+        case .deleteRecord:
+            return .delete
 
         // MARK: - deprecated
 
@@ -159,6 +167,8 @@ extension RequestType: TargetType {
 
         case .employeeSchedule, .freeTime, .services:
             return .requestPlain
+        case .deleteRecord:
+            return .requestPlain
         }
     }
 
@@ -167,7 +177,7 @@ extension RequestType: TargetType {
         case .salons, .bookServices, .bookDates, .bookStaff, .createRecord:
             return ["Authorization": "Bearer \(bearerToken)",
                     "Accept": "application/vnd.api.v2+json"]
-        case .categories, .staff, .staffByID, .bookTimes, .getRecord:
+        case .categories, .staff, .staffByID, .bookTimes, .getRecord, .deleteRecord:
             return ["Content-type": "application/json",
                     "Accept": "application/vnd.api.v2+json",
                     "Authorization": "Bearer \(bearerToken), User \(userToken)"]
