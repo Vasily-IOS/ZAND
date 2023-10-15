@@ -106,40 +106,89 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             )
             vc.presenter = presenter
             return vc
-        case .services(let booking_type, let company_id, let company_name, let company_address):
+        case .services(let booking_type, let company_id, let company_name, let company_address, let viewModel):
             let view = ServicesView()
             let vc = ServicesViewController(contentView: view)
             let network: APIManager = APIManagerImpl()
-            let viewModel = ConfirmationViewModel(
-                bookingType: booking_type,
-                company_id: company_id,
-                companyName: company_name,
-                companyAddress: company_address
-            )
+
+            var currentViewModel: ConfirmationViewModel?
+
+            if viewModel == nil {
+                currentViewModel = ConfirmationViewModel(
+                    bookingType: booking_type ?? .default,
+                    company_id: company_id ?? 0,
+                    companyName: company_name ?? "",
+                    companyAddress: company_address ?? ""
+                )
+            } else {
+                currentViewModel = viewModel
+            }
+
+            guard let currentViewModel = currentViewModel else { return UIViewController() }
+
             let presenter = ServicesPresenter(
                 view: vc,
-                company_id: company_id,
                 network: network,
-                viewModel: viewModel)
+                viewModel: currentViewModel)
+
             vc.presenter = presenter
+
+            vc.title = AssetString.service
             return vc
-        case .staff(let booking_type, let company_id, let company_name, let company_address):
+
+        case .staff(let booking_type, let company_id, let company_name, let company_address, let viewModel):
             let view = StaffView()
             let vc = StaffViewController(contentView: view)
             let network: APIManager = APIManagerImpl()
-            let viewModel = ConfirmationViewModel(
-                bookingType: booking_type,
-                company_id: company_id,
-                companyName: company_name,
-                companyAddress: company_address
-            )
+
+            var currentViewModel: ConfirmationViewModel?
+
+            if viewModel == nil {
+                currentViewModel = ConfirmationViewModel(
+                    bookingType: booking_type ?? .default,
+                    company_id: company_id ?? 0,
+                    companyName: company_name ?? "",
+                    companyAddress: company_address ?? ""
+                )
+            } else {
+                currentViewModel = viewModel
+            }
+
+            guard let currentViewModel = currentViewModel else { return UIViewController() }
+
             let presenter = StaffPresenter(
                 view: vc,
-                company_id: company_id,
                 network: network,
-                viewModel: viewModel)
+                viewModel: currentViewModel)
             vc.presenter = presenter
-           return vc
+            vc.title = AssetString.staff
+            return vc
+        case .timeTable(let viewModel):
+            let layout: DefaultTimetableLayout = TimetableLayout()
+            let contentView = TimetableView(layout: layout)
+            let vс = TimetableViewController(contentView: contentView)
+            let network: APIManager = APIManagerImpl()
+            let presenter = TimetablePresenter(
+                view: vс,
+                network: network,
+                viewModel:  viewModel)
+            vс.presenter = presenter
+            vс.title = AssetString.selectDateAndTime
+            return vс
+        case .confirmation(let viewModel):
+            let realm: RealmManager = RealmManagerImpl()
+            let network: APIManager = APIManagerImpl()
+            let view = ConfirmationView()
+            let vc = ConfirmationViewController(contentView: view)
+            let presenter = ConfirmationPresenter(
+                view: vc,
+                viewModel: viewModel,
+                network: network,
+                realm: realm
+            )
+            vc.presenter = presenter
+            vc.title = AssetString.checkAppointment
+            return vc
         }
     }
 }

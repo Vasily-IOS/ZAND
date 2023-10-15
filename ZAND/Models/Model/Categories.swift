@@ -19,11 +19,11 @@ struct Services: Codable {
 }
 
 struct Service: Codable {
+    let id: Int
     let booking_title: String
     let service_type: Int
     let api_service_id: Int
     let price_prepaid_percent: Int
-    let id: Int
     let salon_service_id: Int
     let title: String
     let category_id: Int

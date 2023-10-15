@@ -9,12 +9,9 @@ import Foundation
 
 protocol StaffPresenterOutput: AnyObject {
     var viewModel: ConfirmationViewModel { get set }
-    var serviceToProvideID: Int { get }
-    var company_id: Int { get }
     var fetchedStaff: [EmployeeCommon] { get }
 
     func fetchStaff()
-    func setStaffID(staffID: Int)
 }
 
 protocol StaffViewInput: AnyObject {
@@ -32,32 +29,27 @@ final class StaffPresenter: StaffPresenterOutput {
 
     var viewModel: ConfirmationViewModel
 
-    let company_id: Int
-
-    let serviceToProvideID: Int
-
     private let network: APIManager
 
     // MARK: - Initializers
 
     init(
         view: StaffViewInput,
-        company_id: Int,
         network: APIManager,
         serviceToProvideID: Int=0,
-        viewModel: ConfirmationViewModel)
-    {
+        viewModel: ConfirmationViewModel
+    ) {
         self.view = view
-        self.company_id = company_id
         self.network = network
         self.viewModel = viewModel
-        self.serviceToProvideID = serviceToProvideID
 
         switch viewModel.bookingType {
         case .service:
-            self.fetchBookStaff(company_id: company_id, serviceID: serviceToProvideID)
+            self.fetchBookStaff(company_id: viewModel.company_id, serviceID: viewModel.bookService?.id ?? 0)
         case .staff:
             self.fetchStaff()
+        case .default:
+            break
         }
     }
 
@@ -67,15 +59,11 @@ final class StaffPresenter: StaffPresenterOutput {
 
     // MARK: - Instance methods
 
-    func setStaffID(staffID: Int) {
-        print()
-    }
-
     func fetchStaff() {
         view?.showIndicator(true)
         network.performRequest(
             type: .bookStaff(
-                company_id: company_id,
+                company_id: viewModel.company_id,
                 service_id: []),
             expectation: EmployeeModel.self)
         { [weak self] staff in

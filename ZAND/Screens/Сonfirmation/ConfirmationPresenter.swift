@@ -45,6 +45,8 @@ final class ConfirmationPresenter: ConfirmationOutput {
         
         self.updateUI()
         self.suscribeNotifications()
+
+        viewModel.build()
     }
 
     deinit {

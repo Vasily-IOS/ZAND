@@ -11,8 +11,7 @@ final class TimetableViewController: BaseViewController<TimetableView> {
 
     // MARK: - Properties
 
-    // to presenter
-    var selectedDays: [IndexPath: Bool] = [[0,0]:true]
+    var selectedDays: [IndexPath: Bool] = [[0,0] : true]
 
     var presenter: TimetablePresenterOutput?
 
@@ -20,8 +19,6 @@ final class TimetableViewController: BaseViewController<TimetableView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = AssetString.selectDateAndTime
 
         subscribeDelegates()
         hideBackButtonTitle()
@@ -187,21 +184,8 @@ extension TimetableViewController: TimetableViewDelegate {
             showAlert()
         } else {
             guard let viewModel = presenter?.viewModel else { return }
-            viewModel.build()
 
-            let realm: RealmManager = RealmManagerImpl()
-            let network: APIManager = APIManagerImpl()
-            let view = ConfirmationView()
-            let vc = ConfirmationViewController(contentView: view)
-            let presenter = ConfirmationPresenter(
-                view: vc,
-                viewModel: viewModel,
-                network: network,
-                realm: realm
-            )
-            vc.presenter = presenter
-
-            navigationController?.pushViewController(vc, animated: true)
+            AppRouter.shared.pushCreateRecord(.confirmation(viewModel: viewModel))
         }
     }
 }

@@ -27,15 +27,19 @@ enum VCType {
     case register(_ user: User)
     case startBooking(Int, String, String)
     case services(
-        booking_type: BookingType,
-        company_id: Int,
-        company_name: String,
-        company_address: String
+        booking_type: BookingType?=nil,
+        company_id: Int?=nil,
+        company_name: String?=nil,
+        company_address: String?=nil,
+        viewModel: ConfirmationViewModel?=nil
     )
     case staff(
-        booking_type: BookingType,
-        company_id: Int,
-        company_name: String,
-        company_address: String
+        booking_type: BookingType?=nil,
+        company_id: Int?=nil,
+        company_name: String?=nil,
+        company_address: String?=nil,
+        viewModel: ConfirmationViewModel?=nil
     )
+    case timeTable(viewModel: ConfirmationViewModel)
+    case confirmation(viewModel: ConfirmationViewModel)
 }

@@ -23,5 +23,5 @@ protocol DefaultRouter: AnyObject {
     func presentSearch(type: VCType, completion: ((Saloon) -> ())?)
     func switchRoot(type: ReplacedControllerType)
 
-    func checkAuth() // ?
+    func checkAuth()
 }

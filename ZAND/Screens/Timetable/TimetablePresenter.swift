@@ -32,43 +32,24 @@ final class TimetablePresenter: TimetablePresenterOutput {
 
     var bookTimeModel: [BookTime] = []
 
-    var viewModel: ConfirmationViewModel {
-        didSet {
-            viewModel.staffID  = staffID
-        }
-    }
+    var viewModel: ConfirmationViewModel
 
     private let network: APIManager
-
-    private let company_id: Int
-
-    private let staffID: Int
-
-    private let serviceToProvideID: Int
-
-    private let scheduleTill: String
 
     // MARK: - Initializers
 
     init(view: TimetableInput,
          network: APIManager,
-         company_id: Int,
-         staffID: Int,
-         scheduleTill: String,
-         serviceToProvideID: Int,
          viewModel: ConfirmationViewModel
     ) {
+
         self.view = view
         self.network = network
-        self.company_id = company_id
-        self.staffID = staffID
-        self.scheduleTill = scheduleTill
-        self.serviceToProvideID = serviceToProvideID
         self.viewModel = viewModel
 
-        self.fetchBookDates(company_id: company_id,
-                            service_ids: [String(serviceToProvideID)],
-                            staff_id: staffID, date_to: scheduleTill
+        self.fetchBookDates(company_id: viewModel.company_id,
+                            service_ids: [String(viewModel.bookService?.id ?? 0)],
+                            staff_id: viewModel.staffID, date_to: viewModel.scheduleTill
         ) { [weak self] bookingDates in
             self?.setActualDates(dates: bookingDates) { firstDate in
                 self?.view?.reloadData()
@@ -95,10 +76,10 @@ final class TimetablePresenter: TimetablePresenterOutput {
     func fetchBookTimes(date: String) {
         network.performRequest(
             type: .bookTimes(
-                company_id: company_id,
-                staff_id: staffID,
+                company_id: viewModel.company_id,
+                staff_id: viewModel.staffID,
                 date: date,
-                service_id: serviceToProvideID),
+                service_id: viewModel.bookService?.id ?? 0),
             expectation: BookTimes.self)
         { [weak self] bookTimes in
 
