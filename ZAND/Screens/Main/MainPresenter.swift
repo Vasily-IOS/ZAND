@@ -33,6 +33,7 @@ protocol MainViewInput: AnyObject {
     func isActivityIndicatorShouldRotate(_ isRotate: Bool)
     func updateUIConection(isConnected: Bool)
     func reloadData()
+    func showEmptyLabel(isShow: Bool)
 }
 
 final class MainPresenter: MainPresenterOutput {
@@ -43,7 +44,11 @@ final class MainPresenter: MainPresenterOutput {
 
     var selectedDays: [IndexPath: Bool] = [:]
 
-    var saloons: [Saloon] = [] // дата сорс коллекции
+    var saloons: [Saloon] = [] { // дата сорс коллекции
+        didSet {
+            view?.showEmptyLabel(isShow: saloons.isEmpty)
+        }
+    }
 
     var additiolSaloons: [Saloon] = []  // оставляем всегда нетронутым
 

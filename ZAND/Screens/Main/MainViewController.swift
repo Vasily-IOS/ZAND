@@ -264,6 +264,10 @@ extension MainViewController: MainViewInput {
     func reloadData() {
         contentView.reloadData()
     }
+
+    func showEmptyLabel(isShow: Bool) {
+        contentView.isLabelShows(isShow)
+    }
 }
 
 extension MainViewController: HideNavigationBar, ActivityIndicator {}
