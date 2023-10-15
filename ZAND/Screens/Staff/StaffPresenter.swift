@@ -10,7 +10,7 @@ import Foundation
 protocol StaffPresenterOutput: AnyObject {
     var viewModel: ConfirmationViewModel { get set }
     var serviceToProvideID: Int { get }
-    var saloonID: Int { get }
+    var company_id: Int { get }
     var fetchedStaff: [EmployeeCommon] { get }
 
     func fetchStaff()
@@ -32,30 +32,30 @@ final class StaffPresenter: StaffPresenterOutput {
 
     var viewModel: ConfirmationViewModel
 
-    let saloonID: Int
+    let company_id: Int
 
     let serviceToProvideID: Int
 
-    private let network: HTTP
+    private let network: APIManager
 
     // MARK: - Initializers
 
     init(
         view: StaffViewInput,
-        saloonID: Int,
-        network: HTTP,
+        company_id: Int,
+        network: APIManager,
         serviceToProvideID: Int=0,
         viewModel: ConfirmationViewModel)
     {
         self.view = view
-        self.saloonID = saloonID
+        self.company_id = company_id
         self.network = network
         self.viewModel = viewModel
         self.serviceToProvideID = serviceToProvideID
 
         switch viewModel.bookingType {
         case .service:
-            self.fetchBookStaff(saloonID: saloonID, serviceID: serviceToProvideID)
+            self.fetchBookStaff(company_id: company_id, serviceID: serviceToProvideID)
         case .staff:
             self.fetchStaff()
         }
@@ -75,7 +75,7 @@ final class StaffPresenter: StaffPresenterOutput {
         view?.showIndicator(true)
         network.performRequest(
             type: .bookStaff(
-                company_id: saloonID,
+                company_id: company_id,
                 service_id: []),
             expectation: EmployeeModel.self)
         { [weak self] staff in
@@ -93,11 +93,11 @@ final class StaffPresenter: StaffPresenterOutput {
         return dateFormatter.string(from: Date())
     }
 
-    private func fetchBookStaff(saloonID: Int, serviceID: Int) {
+    private func fetchBookStaff(company_id: Int, serviceID: Int) {
         view?.showIndicator(true)
         network.performRequest(
             type: .bookStaff(
-                company_id: saloonID,
+                company_id: company_id,
                 service_id: [serviceID]),
             expectation: EmployeeModel.self)
         { [weak self] staff in

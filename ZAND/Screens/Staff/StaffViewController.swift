@@ -76,18 +76,16 @@ extension StaffViewController: UITableViewDelegate {
         viewModel.staffID = staffID
         viewModel.employeeCommon = presenter?.fetchedStaff[indexPath.section]
 
-        print(presenter?.fetchedStaff[indexPath.section])
-
         switch viewModel.bookingType {
         case .service:
             let layout: DefaultTimetableLayout = TimetableLayout()
             let contentView = TimetableView(layout: layout)
             let vс = TimetableViewController(contentView: contentView)
-            let network: HTTP = APIManager()
+            let network: APIManager = APIManagerImpl()
             let presenter = TimetablePresenter(
                 view: vс,
                 network: network,
-                saloonID: presenter?.saloonID ?? 0,
+                company_id: presenter?.company_id ?? 0,
                 staffID: staffID,
                 scheduleTill: presenter?.fetchedStaff[indexPath.section].schedule_till ?? "",
                 serviceToProvideID: presenter?.serviceToProvideID ?? 0,
@@ -100,11 +98,11 @@ extension StaffViewController: UITableViewDelegate {
 
             let view = ServicesView()
             let vc = ServicesViewController(contentView: view)
-            let network: HTTP = APIManager()
+            let network: APIManager = APIManagerImpl()
             
             let presenter = ServicesPresenter(
                 view: vc,
-                saloonID: presenter?.saloonID ?? 0,
+                company_id: presenter?.company_id ?? 0,
                 network: network,
                 viewModel: viewModel)
             vc.presenter = presenter

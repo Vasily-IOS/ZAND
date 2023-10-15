@@ -38,9 +38,9 @@ final class TimetablePresenter: TimetablePresenterOutput {
         }
     }
 
-    private let network: HTTP
+    private let network: APIManager
 
-    private let saloonID: Int
+    private let company_id: Int
 
     private let staffID: Int
 
@@ -51,8 +51,8 @@ final class TimetablePresenter: TimetablePresenterOutput {
     // MARK: - Initializers
 
     init(view: TimetableInput,
-         network: HTTP,
-         saloonID: Int,
+         network: APIManager,
+         company_id: Int,
          staffID: Int,
          scheduleTill: String,
          serviceToProvideID: Int,
@@ -60,13 +60,13 @@ final class TimetablePresenter: TimetablePresenterOutput {
     ) {
         self.view = view
         self.network = network
-        self.saloonID = saloonID
+        self.company_id = company_id
         self.staffID = staffID
         self.scheduleTill = scheduleTill
         self.serviceToProvideID = serviceToProvideID
         self.viewModel = viewModel
 
-        self.fetchBookDates(company_id: saloonID,
+        self.fetchBookDates(company_id: company_id,
                             service_ids: [String(serviceToProvideID)],
                             staff_id: staffID, date_to: scheduleTill
         ) { [weak self] bookingDates in
@@ -95,7 +95,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
     func fetchBookTimes(date: String) {
         network.performRequest(
             type: .bookTimes(
-                company_id: saloonID,
+                company_id: company_id,
                 staff_id: staffID,
                 date: date,
                 service_id: serviceToProvideID),
@@ -119,15 +119,15 @@ final class TimetablePresenter: TimetablePresenterOutput {
         let currentDay = formatter.string(from: Date())
 
         view?.showIndicator(true)
-        network.performRequest(type: .bookDates(
+        let model = FetchBookDate(
             company_id: company_id,
             service_ids: service_ids,
             staff_id: staff_id,
             date: currentDay,
             date_from: currentDay,
-            date_to: date_to),
-            expectation: BookDates.self
+            date_to: date_to
         )
+        network.performRequest(type: .bookDates(model), expectation: BookDates.self)
         { bookDates in
             completion(bookDates.data.booking_dates)
         }

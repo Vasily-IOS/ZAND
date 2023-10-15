@@ -170,7 +170,7 @@ extension ProfileViewController: UICollectionViewDelegate {
         case .profileFields:
             switch indexPath.row {
             case 0:
-                AppRouter.shared.presentWithNav(type: .appointments)
+                AppRouter.shared.presentRecordNavigation(type: .appointments)
             case 1:
                 showLogOutAlert()
             case 2:

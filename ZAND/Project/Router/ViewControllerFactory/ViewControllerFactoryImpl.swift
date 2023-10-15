@@ -67,20 +67,12 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             return vc
         case .appointments:
             let realmManager: RealmManager = RealmManagerImpl()
-            let network: HTTP = APIManager()
+            let network: APIManager = APIManagerImpl()
             let view = AppointemtsView()
             let vc = AppointmentsViewController(contentView: view)
             let presenter = AppointmentsPresenterImpl(view: vc, network: network, realm: realmManager)
             vc.presenter = presenter
             vc.title = AssetString.books
-            return vc
-        case .myDetails:
-            let layout: DefaultSettingsLayout = MyDetailsLayout()
-            let view = MyDetailsView(layout: layout)
-            let vc = MyDetailsViewController(contentView: view)
-            let presenter = MyDetailsPresenterImpl(view: vc)
-            vc.presenter = presenter
-            vc.title = AssetString.details
             return vc
         case .privacyPolicy(let url):
             return PrivacyPolicyViewController(url: url)
@@ -102,19 +94,52 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let presenter = RegisterPresenter(view: vc, user: user)
             vc.presenter = presenter
             return vc
-        case .startBooking(let saloonID, let companyName, let companyAddress):
+        case .startBooking(let company_id, let companyName, let companyAddress):
             let view = StartBookingView()
             let vc = StartBookingViewController(contentView: view)
+            vc.title = AssetString.howStart
             let presenter = StartBookingPresenter(
                 view: vc,
-                saloonID: saloonID,
+                company_id: company_id,
                 companyName: companyName,
                 saloonAddress: companyAddress
             )
             vc.presenter = presenter
             return vc
-        case .services:
-            return UIViewController()
+        case .services(let booking_type, let company_id, let company_name, let company_address):
+            let view = ServicesView()
+            let vc = ServicesViewController(contentView: view)
+            let network: APIManager = APIManagerImpl()
+            let viewModel = ConfirmationViewModel(
+                bookingType: booking_type,
+                company_id: company_id,
+                companyName: company_name,
+                companyAddress: company_address
+            )
+            let presenter = ServicesPresenter(
+                view: vc,
+                company_id: company_id,
+                network: network,
+                viewModel: viewModel)
+            vc.presenter = presenter
+            return vc
+        case .staff(let booking_type, let company_id, let company_name, let company_address):
+            let view = StaffView()
+            let vc = StaffViewController(contentView: view)
+            let network: APIManager = APIManagerImpl()
+            let viewModel = ConfirmationViewModel(
+                bookingType: booking_type,
+                company_id: company_id,
+                companyName: company_name,
+                companyAddress: company_address
+            )
+            let presenter = StaffPresenter(
+                view: vc,
+                company_id: company_id,
+                network: network,
+                viewModel: viewModel)
+            vc.presenter = presenter
+           return vc
         }
     }
 }

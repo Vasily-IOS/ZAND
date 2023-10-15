@@ -24,8 +24,12 @@ final class AppRouter {
         }
     }
 
-    var navigationController = UINavigationController()
-    var tabBarController: UITabBarController?
+    private var navigationController = UINavigationController()
+
+    private var tabBarController: UITabBarController?
+
+    private var createRecordNavigationController: UINavigationController?
+
     private let vcFactory: ViewControllerFactory = ViewControllerFactoryImpl()
 
     // MARK: - Initializers
@@ -44,9 +48,11 @@ extension AppRouter {
             let tabBarController = rootController.viewControllers.first as? UITabBarController
         else { return }
 
-        let tabBarItem = UITabBarItem(title: AssetString.profile,
-                                      image: AssetImage.profile_icon,
-                                      selectedImage: nil)
+        let tabBarItem = UITabBarItem(
+            title: AssetString.profile,
+            image: AssetImage.profile_icon,
+            selectedImage: nil
+        )
 
         let signInViewController = vcFactory.getViewController(for: .appleSignIn)
         let profileViewController = vcFactory.getViewController(for: .profile)
@@ -142,10 +148,10 @@ extension AppRouter: DefaultRouter {
         navigationController.dismiss(animated: true)
     }
     
-    func presentWithNav(type: VCType) {
+    func presentRecordNavigation(type: VCType) {
         let viewController = vcFactory.getViewController(for: type)
-        let myNavigationController = UINavigationController(rootViewController: viewController)
-        navigationController.present(myNavigationController, animated: true)
+        createRecordNavigationController = UINavigationController(rootViewController: viewController)
+        navigationController.present(createRecordNavigationController!, animated: true)
     }
     
     func presentSearch(type: VCType, completion: ((Saloon) -> ())?) {
@@ -165,5 +171,10 @@ extension AppRouter: DefaultRouter {
         let understandAction = UIAlertAction(title: AssetString.ok, style: .cancel)
         alertController.addAction(understandAction)
         navigationController.present(alertController, animated: true)
+    }
+
+    func pushCreateRecord(_ type: VCType) {
+        let viewController = vcFactory.getViewController(for: type)
+        createRecordNavigationController?.pushViewController(viewController, animated: true)
     }
 }

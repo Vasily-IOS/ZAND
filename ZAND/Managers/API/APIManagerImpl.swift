@@ -8,7 +8,15 @@
 import Foundation
 import Moya
 
-final class APIManager: HTTP {
+protocol APIManager: AnyObject {
+    func performRequest<T: Codable>(
+        type: RequestType,
+        expectation: T.Type,
+        completion: @escaping (T) -> Void
+    )
+}
+
+final class APIManagerImpl: APIManager {
 
     // MARK: - Properties
 

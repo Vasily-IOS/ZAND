@@ -141,11 +141,11 @@ extension ServicesViewController: UITableViewDelegate {
             case .service:
                 let view = StaffView()
                 let vc = StaffViewController(contentView: view)
-                let network: HTTP = APIManager()
+                let network: APIManager = APIManagerImpl()
 
                 let presenter = StaffPresenter(
                     view: vc,
-                    saloonID: presenter?.saloonID ?? 0,
+                    company_id: presenter?.company_id ?? 0,
                     network: network,
                     serviceToProvideID: serviceID,
                     viewModel: viewModel)
@@ -156,11 +156,11 @@ extension ServicesViewController: UITableViewDelegate {
                 let layout: DefaultTimetableLayout = TimetableLayout()
                 let contentView = TimetableView(layout: layout)
                 let vс = TimetableViewController(contentView: contentView)
-                let network: HTTP = APIManager()
+                let network: APIManager = APIManagerImpl()
                 let presenter = TimetablePresenter(
                     view: vс,
                     network: network,
-                    saloonID: presenter?.saloonID ?? 0,
+                    company_id: presenter?.company_id ?? 0,
                     staffID: viewModel.staffID,
                     scheduleTill: viewModel.scheduleTill,
                     serviceToProvideID: viewModel.serviceID,

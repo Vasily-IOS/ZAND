@@ -18,8 +18,6 @@ final class StartBookingViewController: BaseViewController<StartBookingView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = AssetString.howStart
-
         hideBackButtonTitle()
         subscribeDelegate()
     }
@@ -40,41 +38,21 @@ extension StartBookingViewController: StartBookingDelegate {
     // MARK: - StartBookingDelegate methods
 
     func openServices() {
-        let view = ServicesView()
-        let vc = ServicesViewController(contentView: view)
-        let network: HTTP = APIManager()
-        let viewModel = ConfirmationViewModel(
-            bookingType: .service,
-            company_id: presenter?.saloonID ?? 0,
-            companyName: presenter?.companyName ?? "",
-            companyAddress: presenter?.saloonAddress ?? ""
+        AppRouter.shared.pushCreateRecord(.services(
+            booking_type: .service,
+            company_id: presenter?.company_id ?? 0,
+            company_name: presenter?.companyName ?? "",
+            company_address: presenter?.saloonAddress ?? "")
         )
-        let presenter = ServicesPresenter(
-            view: vc,
-            saloonID: presenter?.saloonID ?? 0,
-            network: network,
-            viewModel: viewModel)
-        vc.presenter = presenter
-        navigationController?.pushViewController(vc, animated: true)
     }
 
     func openStaff() {
-        let view = StaffView()
-        let vc = StaffViewController(contentView: view)
-        let network: HTTP = APIManager()
-        let viewModel = ConfirmationViewModel(
-            bookingType: .staff,
-            company_id: presenter?.saloonID ?? 0,
-            companyName: presenter?.companyName ?? "",
-            companyAddress: presenter?.saloonAddress ?? ""
+        AppRouter.shared.pushCreateRecord(.staff(
+            booking_type: .staff,
+            company_id: presenter?.company_id ?? 0,
+            company_name: presenter?.companyName ?? "",
+            company_address: presenter?.saloonAddress ?? "")
         )
-        let presenter = StaffPresenter(
-            view: vc,
-            saloonID: presenter?.saloonID ?? 0,
-            network: network,
-            viewModel: viewModel)
-        vc.presenter = presenter
-        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

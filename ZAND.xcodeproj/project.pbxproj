@@ -15,9 +15,9 @@
 		FF1961B22A4C5FE300434AC7 /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961B12A4C5FE300434AC7 /* MapPresenter.swift */; };
 		FF1961B62A4C740700434AC7 /* SaloonDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961B52A4C740700434AC7 /* SaloonDetailPresenter.swift */; };
 		FF1961B82A4C78B900434AC7 /* SettingsMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961B72A4C78B900434AC7 /* SettingsMenuModel.swift */; };
-		FF1961BA2A4C78E700434AC7 /* MyDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961B92A4C78E700434AC7 /* MyDetailsPresenter.swift */; };
 		FF1961BE2A4C7A2B00434AC7 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961BD2A4C7A2B00434AC7 /* MapModel.swift */; };
 		FF1961C02A4C7A7900434AC7 /* ProfileMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961BF2A4C7A7800434AC7 /* ProfileMenuModel.swift */; };
+		FF1F3DB82ADC341B0023407C /* FetchBookDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1F3DB72ADC341B0023407C /* FetchBookDate.swift */; };
 		FF25632829F561FD00091374 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25632729F561FD00091374 /* AddressView.swift */; };
 		FF25632A29F5675900091374 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25632929F5675900091374 /* TransparentButton.swift */; };
 		FF25632D29F5718C00091374 /* DescriptionShowcaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25632C29F5718C00091374 /* DescriptionShowcaseView.swift */; };
@@ -130,10 +130,6 @@
 		FFB9857A2A30E87B00ABEFBB /* RealmManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB985792A30E87B00ABEFBB /* RealmManagerImpl.swift */; };
 		FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */; };
 		FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B482A03C80A005CE41B /* AppointmentsView.swift */; };
-		FFC01B4C2A03CA78005CE41B /* MyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B4B2A03CA78005CE41B /* MyDetailsViewController.swift */; };
-		FFC01B4E2A03CA83005CE41B /* MyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B4D2A03CA83005CE41B /* MyDetailsView.swift */; };
-		FFC01B512A03D661005CE41B /* DataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B502A03D661005CE41B /* DataCell.swift */; };
-		FFC01B532A03D673005CE41B /* PushCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B522A03D673005CE41B /* PushCell.swift */; };
 		FFC01B592A03DCA5005CE41B /* DefaultMyDetailsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B582A03DCA5005CE41B /* DefaultMyDetailsLayout.swift */; };
 		FFC01B5B2A03DD37005CE41B /* MyDetailsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5A2A03DD37005CE41B /* MyDetailsLayout.swift */; };
 		FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */; };
@@ -150,8 +146,7 @@
 		FFDCE4B92A1B8EA500CEA0E1 /* SelectableMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */; };
 		FFDCE4BB2A1BB47000CEA0E1 /* AssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4BA2A1BB47000CEA0E1 /* AssetImage.swift */; };
 		FFDCE4BD2A1BB7E300CEA0E1 /* AssetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4BC2A1BB7E300CEA0E1 /* AssetURL.swift */; };
-		FFDE118D2A5C424000CEF390 /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE118C2A5C424000CEF390 /* HTTP.swift */; };
-		FFDE118F2A5C436C00CEF390 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE118E2A5C436C00CEF390 /* APIManager.swift */; };
+		FFDE118F2A5C436C00CEF390 /* APIManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE118E2A5C436C00CEF390 /* APIManagerImpl.swift */; };
 		FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49329FACE9700FDB519 /* UserNameView.swift */; };
 		FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */; };
 		FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */; };
@@ -190,9 +185,9 @@
 		FF1961B12A4C5FE300434AC7 /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
 		FF1961B52A4C740700434AC7 /* SaloonDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonDetailPresenter.swift; sourceTree = "<group>"; };
 		FF1961B72A4C78B900434AC7 /* SettingsMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuModel.swift; sourceTree = "<group>"; };
-		FF1961B92A4C78E700434AC7 /* MyDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailsPresenter.swift; sourceTree = "<group>"; };
 		FF1961BD2A4C7A2B00434AC7 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		FF1961BF2A4C7A7800434AC7 /* ProfileMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuModel.swift; sourceTree = "<group>"; };
+		FF1F3DB72ADC341B0023407C /* FetchBookDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBookDate.swift; sourceTree = "<group>"; };
 		FF25632729F561FD00091374 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		FF25632929F5675900091374 /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
 		FF25632C29F5718C00091374 /* DescriptionShowcaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionShowcaseView.swift; sourceTree = "<group>"; };
@@ -308,10 +303,6 @@
 		FFB985792A30E87B00ABEFBB /* RealmManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManagerImpl.swift; sourceTree = "<group>"; };
 		FFC01B462A03C801005CE41B /* AppointmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsViewController.swift; sourceTree = "<group>"; };
 		FFC01B482A03C80A005CE41B /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
-		FFC01B4B2A03CA78005CE41B /* MyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailsViewController.swift; sourceTree = "<group>"; };
-		FFC01B4D2A03CA83005CE41B /* MyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailsView.swift; sourceTree = "<group>"; };
-		FFC01B502A03D661005CE41B /* DataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCell.swift; sourceTree = "<group>"; };
-		FFC01B522A03D673005CE41B /* PushCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushCell.swift; sourceTree = "<group>"; };
 		FFC01B582A03DCA5005CE41B /* DefaultMyDetailsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyDetailsLayout.swift; sourceTree = "<group>"; };
 		FFC01B5A2A03DD37005CE41B /* MyDetailsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailsLayout.swift; sourceTree = "<group>"; };
 		FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsCell.swift; sourceTree = "<group>"; };
@@ -328,8 +319,7 @@
 		FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapPresenter.swift; sourceTree = "<group>"; };
 		FFDCE4BA2A1BB47000CEA0E1 /* AssetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImage.swift; sourceTree = "<group>"; };
 		FFDCE4BC2A1BB7E300CEA0E1 /* AssetURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetURL.swift; sourceTree = "<group>"; };
-		FFDE118C2A5C424000CEF390 /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
-		FFDE118E2A5C436C00CEF390 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		FFDE118E2A5C436C00CEF390 /* APIManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManagerImpl.swift; sourceTree = "<group>"; };
 		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
 		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
@@ -479,6 +469,7 @@
 				FF95F8AE2AC5E1D9005DA310 /* RecordCreatedModel.swift */,
 				FF4D4BB52AD88E7C005DA53C /* GetRecordModel.swift */,
 				FF4D4BB92AD8ACA7005DA53C /* UIAppointmentModel.swift */,
+				FF1F3DB72ADC341B0023407C /* FetchBookDate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -577,8 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				FF3E65D82A55C1F6007EC56D /* RequestType.swift */,
-				FFDE118E2A5C436C00CEF390 /* APIManager.swift */,
-				FFDE118C2A5C424000CEF390 /* HTTP.swift */,
+				FFDE118E2A5C436C00CEF390 /* APIManagerImpl.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -643,7 +633,6 @@
 				FF8AAF5729EE96BA007D6A60 /* Map */,
 				FFDCE4B32A1B8E6F00CEA0E1 /* SelectableMap */,
 				FFD3E1D52A054E6400680ED5 /* PrivacyPolicy */,
-				FFC01B4A2A03CA65005CE41B /* MyDetails */,
 				FFC01B452A03C7D8005CE41B /* Appointments */,
 				FF25634129F682B500091374 /* Filter */,
 			);
@@ -975,26 +964,6 @@
 			path = Appointments;
 			sourceTree = "<group>";
 		};
-		FFC01B4A2A03CA65005CE41B /* MyDetails */ = {
-			isa = PBXGroup;
-			children = (
-				FFC01B4B2A03CA78005CE41B /* MyDetailsViewController.swift */,
-				FFC01B4D2A03CA83005CE41B /* MyDetailsView.swift */,
-				FF1961B92A4C78E700434AC7 /* MyDetailsPresenter.swift */,
-				FFC01B4F2A03D651005CE41B /* Cell */,
-			);
-			path = MyDetails;
-			sourceTree = "<group>";
-		};
-		FFC01B4F2A03D651005CE41B /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				FFC01B502A03D661005CE41B /* DataCell.swift */,
-				FFC01B522A03D673005CE41B /* PushCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		FFC01B572A03DC91005CE41B /* Layout + MyDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1255,7 +1224,6 @@
 				FF519A852AC6F39100D490A4 /* EntryConfirmedView.swift in Sources */,
 				FF3C62C42ABA123100032803 /* StaffCell.swift in Sources */,
 				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
-				FFC01B4E2A03CA83005CE41B /* MyDetailsView.swift in Sources */,
 				FFDCE4BD2A1BB7E300CEA0E1 /* AssetURL.swift in Sources */,
 				FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */,
 				FF25634829F687A900091374 /* DefaultFilterLayout.swift in Sources */,
@@ -1290,11 +1258,9 @@
 				FF2DB97A2A9DFAF40036356B /* RegisterViewController.swift in Sources */,
 				FF18BEEE2A5D9DC400547D4C /* Regex.swift in Sources */,
 				FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */,
-				FF1961BA2A4C78E700434AC7 /* MyDetailsPresenter.swift in Sources */,
 				FF94D66F2AB9FC4A00730721 /* StartBookingButtonView.swift in Sources */,
 				FF95F8A32AC5AA59005DA310 /* StaffComponentView.swift in Sources */,
 				FF1961B82A4C78B900434AC7 /* SettingsMenuModel.swift in Sources */,
-				FFC01B512A03D661005CE41B /* DataCell.swift in Sources */,
 				FF45A16029E7F4BC00587DAF /* Extension + UIStackView.swift in Sources */,
 				FF8AAF6629EEA256007D6A60 /* BaseUIView.swift in Sources */,
 				FFFE2AC82AC2D8D4000A940A /* DayCell.swift in Sources */,
@@ -1307,14 +1273,12 @@
 				FF27B0B52AB8DF6900611F47 /* ServicesViewController.swift in Sources */,
 				FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */,
 				FF27FC212A2DE4C3006DE1B9 /* BackView.swift in Sources */,
-				FFDE118F2A5C436C00CEF390 /* APIManager.swift in Sources */,
+				FFDE118F2A5C436C00CEF390 /* APIManagerImpl.swift in Sources */,
 				FF27B0B02AB8D0B000611F47 /* StartBookingPresenter.swift in Sources */,
-				FFC01B4C2A03CA78005CE41B /* MyDetailsViewController.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
 				FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */,
 				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
 				FFFE2ACE2AC31705000A940A /* BookDates.swift in Sources */,
-				FFDE118D2A5C424000CEF390 /* HTTP.swift in Sources */,
 				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
 				FF27B0B92AB8DF7A00611F47 /* ServicesPresenter.swift in Sources */,
 				FFC3F44B2AAE2C4100A774B3 /* SaloonDataBaseModel.swift in Sources */,
@@ -1335,7 +1299,6 @@
 				FF95F8A12AC5A7DC005DA310 /* ConfirmationComponentView.swift in Sources */,
 				FFFFDD3A2ABF2B7A00FA5B92 /* CategoryCell.swift in Sources */,
 				FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */,
-				FFC01B532A03D673005CE41B /* PushCell.swift in Sources */,
 				FF25632829F561FD00091374 /* AddressView.swift in Sources */,
 				FFA3D44E29F2A21D0067CC6F /* MainLayout.swift in Sources */,
 				FF1961BE2A4C7A2B00434AC7 /* MapModel.swift in Sources */,
@@ -1367,6 +1330,7 @@
 				FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */,
 				FF99B90329EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift in Sources */,
 				FFFFDD3C2ABF564A00FA5B92 /* ServiceCell.swift in Sources */,
+				FF1F3DB82ADC341B0023407C /* FetchBookDate.swift in Sources */,
 				FF27B0C02AB8F08500611F47 /* StaffPresenter.swift in Sources */,
 				FF25633A29F591F600091374 /* PaddingTextField.swift in Sources */,
 				FFD429102AC4C3030069E681 /* NetworkMonitorManager.swift in Sources */,

@@ -26,7 +26,7 @@ final class ConfirmationPresenter: ConfirmationOutput {
 
     var viewModel: ConfirmationViewModel
 
-    private let network: HTTP
+    private let network: APIManager
 
     private let realm: RealmManager
 
@@ -35,7 +35,7 @@ final class ConfirmationPresenter: ConfirmationOutput {
     init(
         view: ConfirmationInput,
         viewModel: ConfirmationViewModel,
-        network: HTTP,
+        network: APIManager,
         realm: RealmManager
     ) {
         self.view = view

@@ -13,14 +13,7 @@ enum RequestType {
     case categories(Int) // получить все категории услуг
     case bookServices(company_id: Int, staff_id: Int = 0) // Получить список услуг, доступных для бронирования
     case bookStaff(company_id: Int, service_id: [Int]) // Получить список сотрудников доступных для бронирования
-    case bookDates( // Получить список дат, доступных для бронирования
-        company_id: Int,
-        service_ids: [String],
-        staff_id: Int,
-        date: String,
-        date_from: String,
-        date_to: String
-    )
+    case bookDates(_ model: FetchBookDate) // Получить список дат, доступных для бронирования)
     case bookTimes(company_id: Int, staff_id: Int, date: String, service_id: Int) // Получить список сеансов, доступных для бронирования
     case createRecord(company_id: Int, model: ConfirmationModel) // Создать запись на сеанс
     case getRecord(company_id: Int, record_id: Int) // Получить запись
@@ -56,8 +49,8 @@ extension RequestType: TargetType {
             return "/api/v1/book_services/\(company_id)"
         case .bookStaff(let company_id, _):
             return "/api/v1/book_staff/\(company_id)"
-        case .bookDates(let company_id,_, _, _, _, _):
-            return "/api/v1/book_dates/\(company_id)"
+        case .bookDates(let model):
+            return "/api/v1/book_dates/\(model.company_id)"
         case .bookTimes(let company_id, let staff_id, let date, _):
             return "/api/v1/book_times/\(company_id)/\(staff_id)/\(date)"
         case .createRecord(let company_id, _):
@@ -100,10 +93,10 @@ extension RequestType: TargetType {
                     encoding: URLEncoding.queryString
                 )
             }
-        case .bookDates(_, let service_ids, let staff_id, _, _, _):
+        case .bookDates(let model):
             let parameters: [String: Any] = [
-                "staff_id": staff_id,
-                "service_ids": service_ids
+                "staff_id": model.staff_id,
+                "service_ids": model.service_ids
             ]
             return .requestParameters(
                 parameters: parameters,

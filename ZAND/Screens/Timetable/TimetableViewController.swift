@@ -190,7 +190,7 @@ extension TimetableViewController: TimetableViewDelegate {
             viewModel.build()
 
             let realm: RealmManager = RealmManagerImpl()
-            let network: HTTP = APIManager()
+            let network: APIManager = APIManagerImpl()
             let view = ConfirmationView()
             let vc = ConfirmationViewController(contentView: view)
             let presenter = ConfirmationPresenter(

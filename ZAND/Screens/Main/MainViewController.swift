@@ -17,7 +17,7 @@ final class MainViewController: BaseViewController<MainView> {
         guard let self,
               let model = self.presenter?.getModel(by: id) else { return }
 
-        AppRouter.shared.presentWithNav(type: .selectableMap(model))
+        AppRouter.shared.presentRecordNavigation(type: .selectableMap(model))
     }
 
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
