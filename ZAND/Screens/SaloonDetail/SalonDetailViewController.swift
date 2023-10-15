@@ -95,9 +95,9 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
 
     func openMap() {
         if let model = presenter?.getModel() {
-            AppRouter.shared.presentWithNav(type: .selectableMap(model))
+            AppRouter.shared.presentRecordNavigation(type: .selectableMap(model))
         } else if let dbModel = presenter?.getDBModel() {
-            AppRouter.shared.presentWithNav(type: .selectableMap(dbModel))
+            AppRouter.shared.presentRecordNavigation(type: .selectableMap(dbModel))
         }
     }
 
@@ -106,7 +106,7 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
             AppRouter.shared.popViewController()
             AppRouter.shared.changeTabBarVC(to: 2)
         } else {
-            AppRouter.shared.presentWithNav(
+            AppRouter.shared.presentRecordNavigation(
                 type: .startBooking(
                     presenter?.salonID ?? 0,
                     presenter?.saloonName ?? "",

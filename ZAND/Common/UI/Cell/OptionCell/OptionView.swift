@@ -9,15 +9,14 @@ import UIKit
 import SnapKit
 
 final class OptionView: BaseUIView {
+
+    // MARK: - Properties
     
     var isSelected: Bool = false {
         didSet {
-//            layer.borderColor = isSelected ?  UIColor.lightGreen.cgColor : UIColor.lightGreen.cgColor
             backgroundColor = isSelected ? .superLightGreen : .white
         }
     }
-    
-    // MARK: - Properties
     
     private let optionImage = UIImageView()
     
@@ -25,12 +24,11 @@ final class OptionView: BaseUIView {
     
     override func setup() {
         super.setup()
+        
         setSelf()
         setViews()
     }
-    
-    // MARK: - Configure
-    
+
     func configure(image: UIImage) {
         self.optionImage.image = image
     }

@@ -32,6 +32,8 @@ final class MainView: BaseUIView {
 
     private lazy var searchButton = SearchButton()
 
+    private let layoutBuilder: DefaultMainLayout
+
     private let lostConnectionAnimation: LottieAnimationView = {
         var lostConnectionAnimation = LottieAnimationView(name: Config.animation_noInternet)
         lostConnectionAnimation.play()
@@ -40,7 +42,16 @@ final class MainView: BaseUIView {
 
     private let lostConnectionImage = UIImageView(image: AssetImage.lostConnection_icon)
 
-    private let layoutBuilder: DefaultMainLayout
+    private let emptyLabel: UILabel = {
+        let emptyLabel = UILabel()
+        emptyLabel.text = AssetString.noSalons
+        emptyLabel.font = .systemFont(ofSize: 24, weight: .regular)
+        emptyLabel.textColor = .textGray
+        emptyLabel.textAlignment = .center
+        emptyLabel.numberOfLines = 0
+        emptyLabel.isHidden = true
+        return emptyLabel
+    }()
     
     // MARK: - Initializers
     
@@ -76,9 +87,25 @@ final class MainView: BaseUIView {
         addSubview(lostConnectionAnimation)
 
         lostConnectionAnimation.isHidden = isConnected
+        collectionView.isUserInteractionEnabled = isConnected
         lostConnectionAnimation.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+    }
+
+    func reloadData() {
+        DispatchQueue.main.async {
+            UIView.transition(
+                with: self.collectionView,
+                duration: 0.1,
+                options: .transitionCrossDissolve,
+                animations: { self.collectionView.reloadData() }
+            )
+        }
+    }
+
+    func isLabelShows(_ isShow: Bool) {
+        emptyLabel.isHidden = !isShow
     }
 }
 
@@ -89,7 +116,7 @@ extension MainView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([searchButton, collectionView])
+        addSubviews([searchButton, collectionView, emptyLabel])
         searchButton.snp.makeConstraints { make in
             make.top.equalTo(self).offset(50)
             make.left.equalTo(self).offset(16)
@@ -101,6 +128,12 @@ extension MainView {
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
             make.bottom.equalTo(self)
+        }
+
+        emptyLabel.snp.makeConstraints { make in
+            make.top.equalTo(searchButton.snp.bottom).offset(195)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().inset(20)
         }
     }
     

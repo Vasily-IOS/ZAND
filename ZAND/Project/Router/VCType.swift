@@ -14,18 +14,32 @@ enum SaloonDetailType {
 
 enum VCType {
     case tabBar
-    case search([Saloon])
+    case search(_ model: [Saloon])
     case main
     case map
-    case saloonDetail(SaloonDetailType)
-    case filter([IndexPath: Bool])
+    case saloonDetail(_ type: SaloonDetailType)
+    case filter(_ dict: [IndexPath: Bool])
     case profile
     case appointments
-    case myDetails // not use
-    case privacyPolicy(String)
-    case selectableMap(SaloonMapModel)
+    case privacyPolicy(_ urlString: String)
+    case selectableMap(_ model: SaloonMapModel)
     case appleSignIn
-    case register(User)
+    case register(_ user: User)
     case startBooking(Int, String, String)
-    case services
+    case services(
+        booking_type: BookingType?=nil,
+        company_id: Int?=nil,
+        company_name: String?=nil,
+        company_address: String?=nil,
+        viewModel: ConfirmationViewModel?=nil
+    )
+    case staff(
+        booking_type: BookingType?=nil,
+        company_id: Int?=nil,
+        company_name: String?=nil,
+        company_address: String?=nil,
+        viewModel: ConfirmationViewModel?=nil
+    )
+    case timeTable(viewModel: ConfirmationViewModel)
+    case confirmation(viewModel: ConfirmationViewModel)
 }

@@ -17,8 +17,6 @@ final class StaffViewController: BaseViewController<StaffView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = AssetString.staff
         
         subscribeDelegates()
         hideBackButtonTitle()
@@ -71,45 +69,16 @@ extension StaffViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         guard let viewModel = presenter?.viewModel else { return }
-
-        let staffID = presenter?.fetchedStaff[indexPath.section].id ?? 0
-        viewModel.staffID = staffID
+        viewModel.staffID = presenter?.fetchedStaff[indexPath.section].id ?? 0
         viewModel.employeeCommon = presenter?.fetchedStaff[indexPath.section]
-
-        print(presenter?.fetchedStaff[indexPath.section])
 
         switch viewModel.bookingType {
         case .service:
-            let layout: DefaultTimetableLayout = TimetableLayout()
-            let contentView = TimetableView(layout: layout)
-            let vс = TimetableViewController(contentView: contentView)
-            let network: HTTP = APIManager()
-            let presenter = TimetablePresenter(
-                view: vс,
-                network: network,
-                saloonID: presenter?.saloonID ?? 0,
-                staffID: staffID,
-                scheduleTill: presenter?.fetchedStaff[indexPath.section].schedule_till ?? "",
-                serviceToProvideID: presenter?.serviceToProvideID ?? 0,
-                viewModel: viewModel)
-            vс.presenter = presenter
-
-            navigationController?.pushViewController(vс, animated: true)
+            AppRouter.shared.pushCreateRecord(.timeTable(viewModel: viewModel))
         case .staff:
-            viewModel.scheduleTill = presenter?.fetchedStaff[indexPath.section].schedule_till ?? ""
-
-            let view = ServicesView()
-            let vc = ServicesViewController(contentView: view)
-            let network: HTTP = APIManager()
-            
-            let presenter = ServicesPresenter(
-                view: vc,
-                saloonID: presenter?.saloonID ?? 0,
-                network: network,
-                viewModel: viewModel)
-            vc.presenter = presenter
-            
-            navigationController?.pushViewController(vc, animated: true)
+            AppRouter.shared.pushCreateRecord(.services(viewModel: viewModel))
+        case .default:
+            break
         }
     }
 }

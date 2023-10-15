@@ -67,20 +67,12 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             return vc
         case .appointments:
             let realmManager: RealmManager = RealmManagerImpl()
-            let network: HTTP = APIManager()
+            let network: APIManager = APIManagerImpl()
             let view = AppointemtsView()
             let vc = AppointmentsViewController(contentView: view)
             let presenter = AppointmentsPresenterImpl(view: vc, network: network, realm: realmManager)
             vc.presenter = presenter
             vc.title = AssetString.books
-            return vc
-        case .myDetails:
-            let layout: DefaultSettingsLayout = MyDetailsLayout()
-            let view = MyDetailsView(layout: layout)
-            let vc = MyDetailsViewController(contentView: view)
-            let presenter = MyDetailsPresenterImpl(view: vc)
-            vc.presenter = presenter
-            vc.title = AssetString.details
             return vc
         case .privacyPolicy(let url):
             return PrivacyPolicyViewController(url: url)
@@ -102,20 +94,101 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let presenter = RegisterPresenter(view: vc, user: user)
             vc.presenter = presenter
             return vc
-        case .startBooking(let saloonID, let companyName, let companyAddress):
+        case .startBooking(let company_id, let companyName, let companyAddress):
             let view = StartBookingView()
             let vc = StartBookingViewController(contentView: view)
+            vc.title = AssetString.howStart
             let presenter = StartBookingPresenter(
                 view: vc,
-                saloonID: saloonID,
+                company_id: company_id,
                 companyName: companyName,
                 saloonAddress: companyAddress
             )
             vc.presenter = presenter
             return vc
-        case .services:
-            return UIViewController()
-//            return ServicesViewController()
+        case .services(let booking_type, let company_id, let company_name, let company_address, let viewModel):
+            let view = ServicesView()
+            let vc = ServicesViewController(contentView: view)
+            let network: APIManager = APIManagerImpl()
+
+            var currentViewModel: ConfirmationViewModel?
+
+            if viewModel == nil {
+                currentViewModel = ConfirmationViewModel(
+                    bookingType: booking_type ?? .default,
+                    company_id: company_id ?? 0,
+                    companyName: company_name ?? "",
+                    companyAddress: company_address ?? ""
+                )
+            } else {
+                currentViewModel = viewModel
+            }
+
+            guard let currentViewModel = currentViewModel else { return UIViewController() }
+
+            let presenter = ServicesPresenter(
+                view: vc,
+                network: network,
+                viewModel: currentViewModel)
+
+            vc.presenter = presenter
+
+            vc.title = AssetString.service
+            return vc
+
+        case .staff(let booking_type, let company_id, let company_name, let company_address, let viewModel):
+            let view = StaffView()
+            let vc = StaffViewController(contentView: view)
+            let network: APIManager = APIManagerImpl()
+
+            var currentViewModel: ConfirmationViewModel?
+
+            if viewModel == nil {
+                currentViewModel = ConfirmationViewModel(
+                    bookingType: booking_type ?? .default,
+                    company_id: company_id ?? 0,
+                    companyName: company_name ?? "",
+                    companyAddress: company_address ?? ""
+                )
+            } else {
+                currentViewModel = viewModel
+            }
+
+            guard let currentViewModel = currentViewModel else { return UIViewController() }
+
+            let presenter = StaffPresenter(
+                view: vc,
+                network: network,
+                viewModel: currentViewModel)
+            vc.presenter = presenter
+            vc.title = AssetString.staff
+            return vc
+        case .timeTable(let viewModel):
+            let layout: DefaultTimetableLayout = TimetableLayout()
+            let contentView = TimetableView(layout: layout)
+            let vс = TimetableViewController(contentView: contentView)
+            let network: APIManager = APIManagerImpl()
+            let presenter = TimetablePresenter(
+                view: vс,
+                network: network,
+                viewModel:  viewModel)
+            vс.presenter = presenter
+            vс.title = AssetString.selectDateAndTime
+            return vс
+        case .confirmation(let viewModel):
+            let realm: RealmManager = RealmManagerImpl()
+            let network: APIManager = APIManagerImpl()
+            let view = ConfirmationView()
+            let vc = ConfirmationViewController(contentView: view)
+            let presenter = ConfirmationPresenter(
+                view: vc,
+                viewModel: viewModel,
+                network: network,
+                realm: realm
+            )
+            vc.presenter = presenter
+            vc.title = AssetString.checkAppointment
+            return vc
         }
     }
 }

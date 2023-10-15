@@ -9,10 +9,8 @@ import Foundation
 
 protocol ServicesPresenterOutput: AnyObject {
     var model: [Categories] { get set }
-    var saloonID: Int { get }
     var viewModel: ConfirmationViewModel { get set }
     func search(text: String)
-    func setServiceID(serviceID: Int)
 }
 
 protocol ServicesViewInput: AnyObject {
@@ -30,21 +28,17 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     var adittionalModel: [Categories] = []
 
-    let saloonID: Int
-
     var viewModel: ConfirmationViewModel
 
-    private let network: HTTP
+    private let network: APIManager
 
     // MARK: - Initializers
 
     init(view: ServicesViewInput,
-         saloonID: Int,
-         network: HTTP,
+         network: APIManager,
          viewModel: ConfirmationViewModel
     ) {
         self.view = view
-        self.saloonID = saloonID
         self.network = network
         self.viewModel = viewModel
 
@@ -53,6 +47,8 @@ final class ServicesPresenter: ServicesPresenterOutput {
             self.fetchData()
         case .staff:
             self.fetchData(staff_id: viewModel.staffID)
+        case .default:
+            break
         }
     }
 
@@ -68,10 +64,6 @@ final class ServicesPresenter: ServicesPresenterOutput {
         }
         model = text.isEmpty ? adittionalModel : sortedModel
         view?.reloadData()
-    }
-
-    func setServiceID(serviceID: Int) {
-        viewModel.serviceID = serviceID
     }
 
     private func fetchData(staff_id: Int = 0) {
@@ -100,7 +92,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     private func fetchCategories(completion: @escaping (([CategoryJSON]) -> Void)) {
         network.performRequest(
-            type: .categories(saloonID),
+            type: .categories(viewModel.company_id),
             expectation: CategoriesJSON.self)
         { categories in
             completion(categories.data)
@@ -112,7 +104,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
         completion: @escaping (([BookService]) -> Void)
     ) {
         network.performRequest(
-            type: .bookServices(company_id: saloonID, staff_id: staff_id),
+            type: .bookServices(company_id: viewModel.company_id, staff_id: staff_id),
             expectation: BookServicesModel.self) { bookServices in
                 completion(bookServices.data.services)
             }

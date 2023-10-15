@@ -17,7 +17,7 @@ final class MainViewController: BaseViewController<MainView> {
         guard let self,
               let model = self.presenter?.getModel(by: id) else { return }
 
-        AppRouter.shared.presentWithNav(type: .selectableMap(model))
+        AppRouter.shared.presentRecordNavigation(type: .selectableMap(model))
     }
 
     private lazy var favouritesHandler: (Int, IndexPath) -> () = { [weak self] id, indexPath in
@@ -246,8 +246,8 @@ extension MainViewController: MainViewInput {
         isRotate ? showIndicator() : hideIndicator()
     }
 
-    func updateUIConection(isUpdate: Bool) {
-        if isUpdate {
+    func updateUIConection(isConnected: Bool) {
+        if isConnected {
             DispatchQueue.main.async {
                 self.contentView.collectionView.isHidden = false
                 self.presenter?.updateUI()
@@ -259,6 +259,14 @@ extension MainViewController: MainViewInput {
                 self.contentView.setLostConnectionAimation(isConnected: false)
             }
         }
+    }
+
+    func reloadData() {
+        contentView.reloadData()
+    }
+
+    func showEmptyLabel(isShow: Bool) {
+        contentView.isLabelShows(isShow)
     }
 }
 

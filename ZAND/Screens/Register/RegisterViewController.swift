@@ -115,7 +115,7 @@ extension RegisterViewController: RegisterDelegate {
     }
 
     func showPolicy() {
-        AppRouter.shared.presentWithNav(type: .privacyPolicy(URLS.privacy_policy))
+        AppRouter.shared.presentRecordNavigation(type: .privacyPolicy(AssetURL.privacy_policy))
     }
 
     func changePolicy(isConfirmed: Bool) {

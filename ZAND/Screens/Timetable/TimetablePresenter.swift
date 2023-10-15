@@ -32,43 +32,24 @@ final class TimetablePresenter: TimetablePresenterOutput {
 
     var bookTimeModel: [BookTime] = []
 
-    var viewModel: ConfirmationViewModel {
-        didSet {
-            viewModel.staffID  = staffID
-        }
-    }
+    var viewModel: ConfirmationViewModel
 
-    private let network: HTTP
-
-    private let saloonID: Int
-
-    private let staffID: Int
-
-    private let serviceToProvideID: Int
-
-    private let scheduleTill: String
+    private let network: APIManager
 
     // MARK: - Initializers
 
     init(view: TimetableInput,
-         network: HTTP,
-         saloonID: Int,
-         staffID: Int,
-         scheduleTill: String,
-         serviceToProvideID: Int,
+         network: APIManager,
          viewModel: ConfirmationViewModel
     ) {
+
         self.view = view
         self.network = network
-        self.saloonID = saloonID
-        self.staffID = staffID
-        self.scheduleTill = scheduleTill
-        self.serviceToProvideID = serviceToProvideID
         self.viewModel = viewModel
 
-        self.fetchBookDates(company_id: saloonID,
-                            service_ids: [String(serviceToProvideID)],
-                            staff_id: staffID, date_to: scheduleTill
+        self.fetchBookDates(company_id: viewModel.company_id,
+                            service_ids: [String(viewModel.bookService?.id ?? 0)],
+                            staff_id: viewModel.staffID, date_to: viewModel.scheduleTill
         ) { [weak self] bookingDates in
             self?.setActualDates(dates: bookingDates) { firstDate in
                 self?.view?.reloadData()
@@ -95,10 +76,10 @@ final class TimetablePresenter: TimetablePresenterOutput {
     func fetchBookTimes(date: String) {
         network.performRequest(
             type: .bookTimes(
-                company_id: saloonID,
-                staff_id: staffID,
+                company_id: viewModel.company_id,
+                staff_id: viewModel.staffID,
                 date: date,
-                service_id: serviceToProvideID),
+                service_id: viewModel.bookService?.id ?? 0),
             expectation: BookTimes.self)
         { [weak self] bookTimes in
 
@@ -119,15 +100,15 @@ final class TimetablePresenter: TimetablePresenterOutput {
         let currentDay = formatter.string(from: Date())
 
         view?.showIndicator(true)
-        network.performRequest(type: .bookDates(
+        let model = FetchBookDate(
             company_id: company_id,
             service_ids: service_ids,
             staff_id: staff_id,
             date: currentDay,
             date_from: currentDay,
-            date_to: date_to),
-            expectation: BookDates.self
+            date_to: date_to
         )
+        network.performRequest(type: .bookDates(model), expectation: BookDates.self)
         { bookDates in
             completion(bookDates.data.booking_dates)
         }

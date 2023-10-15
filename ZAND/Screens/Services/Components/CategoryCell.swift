@@ -12,14 +12,6 @@ final class CategoryCell: BaseTableCell {
 
     // MARK: - Properties
 
-    var isChoosen: Bool = false {
-        didSet {
-//            UIView.animate(withDuration: 0.4) {
-//                self.arrowImage.rotate(self.isChoosen)
-//            }
-        }
-    }
-
     private let categoryLabel: UILabel = {
         let categoryLabel = UILabel()
         categoryLabel.font = .systemFont(ofSize: 18, weight: .medium)
@@ -37,7 +29,6 @@ final class CategoryCell: BaseTableCell {
 
     func configure(model: Categories) {
         categoryLabel.text = model.category.title
-        isChoosen = model.isOpened
     }
 
     override func setup() {

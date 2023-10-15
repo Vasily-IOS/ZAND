@@ -30,7 +30,7 @@ final class ReuseHeaderView: UICollectionReusableView {
             case .pushes:
                 return AssetString.pushSms
             case .time:
-                return "Время"
+                return AssetString.time
             }
         }
     }
@@ -42,8 +42,6 @@ final class ReuseHeaderView: UICollectionReusableView {
             titleLabel.text = state.description
         }
     }
-    
-    // MARK: - UI
 
     private let titleLabel = UILabel(.systemFont(ofSize: 20, weight: .bold))
     
@@ -51,6 +49,7 @@ final class ReuseHeaderView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+
         setViews()
     }
     

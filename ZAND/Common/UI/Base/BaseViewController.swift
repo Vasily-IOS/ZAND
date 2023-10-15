@@ -8,8 +8,12 @@
 import UIKit
 
 class BaseViewController<View: UIView>: UIViewController {
+
+    // MARK: - Properties
     
     let contentView: View
+
+    // MARK: - Initializers
     
     init(contentView: View) {
         self.contentView = contentView
@@ -17,7 +21,6 @@ class BaseViewController<View: UIView>: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -26,6 +29,7 @@ class BaseViewController<View: UIView>: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.view = contentView
+
+        view = contentView
     }
 }

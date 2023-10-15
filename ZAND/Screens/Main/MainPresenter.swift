@@ -31,7 +31,9 @@ protocol MainViewInput: AnyObject {
     func hideTabBar()
     func changeFavouritesAppearence(indexPath: IndexPath)
     func isActivityIndicatorShouldRotate(_ isRotate: Bool)
-    func updateUIConection(isUpdate: Bool)
+    func updateUIConection(isConnected: Bool)
+    func reloadData()
+    func showEmptyLabel(isShow: Bool)
 }
 
 final class MainPresenter: MainPresenterOutput {
@@ -42,12 +44,16 @@ final class MainPresenter: MainPresenterOutput {
 
     var selectedDays: [IndexPath: Bool] = [:]
 
-    var saloons: [Saloon] = [] // дата сорс коллекции
+    var saloons: [Saloon] = [] { // дата сорс коллекции
+        didSet {
+            view?.showEmptyLabel(isShow: saloons.isEmpty)
+        }
+    }
 
-    var additiolSaloons: [Saloon] = [] // оставляем всегда нетронутым
+    var additiolSaloons: [Saloon] = []  // оставляем всегда нетронутым
 
     var optionsModel = OptionsModel.options
-
+    
     private let realmManager: RealmManager
 
     private let provider: SaloonProvider
@@ -86,8 +92,8 @@ final class MainPresenter: MainPresenterOutput {
 
     @objc
     private func connectivityStatus(_ notification: Notification) {
-        if let isConnected = notification.userInfo?["connectivityStatus"] as? Bool {
-            view?.updateUIConection(isUpdate: isConnected)
+        if let isConnected = notification.userInfo?[Config.connectivityStatus] as? Bool {
+            self.view?.updateUIConection(isConnected: isConnected)
         }
     }
 }
@@ -106,8 +112,11 @@ extension MainPresenter {
 
     func updateUI() {
         provider.fetchData { [weak self] saloons in
-            self?.saloons = saloons
-            self?.additiolSaloons = saloons
+            guard let self else { return }
+
+            self.saloons = saloons
+            self.additiolSaloons = saloons
+            self.view?.reloadData()
         }
     }
 

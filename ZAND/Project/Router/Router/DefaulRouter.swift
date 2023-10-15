@@ -9,18 +9,19 @@ import UIKit
 
 protocol DefaultRouter: AnyObject {
     var appDelegate: AppDelegate? { get set}
-    
+
+    func present(type: VCType)
     func push(_ type: VCType)
     func changeTabBarVC(to index: Int)
     func popViewController()
     func dismiss()
+
+    func pushCreateRecord(_ type: VCType)
     func showAlert(type: AlertType, message: String?)
-
     func presentCompletion(type: VCType, completion: @escaping ([IndexPath: Bool]) -> Void)
-    func present(type: VCType)
-    func presentWithNav(type: VCType)
+    func presentRecordNavigation(type: VCType)
     func presentSearch(type: VCType, completion: ((Saloon) -> ())?)
-
     func switchRoot(type: ReplacedControllerType)
+
     func checkAuth()
 }

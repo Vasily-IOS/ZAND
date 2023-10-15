@@ -10,6 +10,7 @@ import UIKit
 enum BookingType {
     case service
     case staff
+    case `default`
 }
 
 final class ConfirmationViewModel {
@@ -22,7 +23,6 @@ final class ConfirmationViewModel {
     var phone = String()
     var fullName = String()
     var email = String()
-    var serviceID = Int()
     var staffID = Int()
     var startSeanceDate: String?
     var startSeanceTime: String?
@@ -35,7 +35,6 @@ final class ConfirmationViewModel {
         }
     }
     
-
     let company_id: Int
     let bookingType: BookingType
     
@@ -66,7 +65,7 @@ final class ConfirmationViewModel {
     func build() {
         let appointmet = Appointment(
             id: id,
-            services: [serviceID],
+            services: [bookService?.id ?? 0],
             staff_id: staffID,
             datetime: bookTime?.datetime ?? "")
         

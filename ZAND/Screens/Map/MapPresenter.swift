@@ -45,7 +45,7 @@ final class MapPresenter: MapPresenterOutput {
 
     @objc
     private func connectivityStatus(_ notification: Notification) {
-        if let isConnected = notification.userInfo?["connectivityStatus"] as? Bool {
+        if let isConnected = notification.userInfo?[Config.connectivityStatus] as? Bool {
             if isConnected {
                 updateUI()
             }

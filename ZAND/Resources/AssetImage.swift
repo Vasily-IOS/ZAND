@@ -8,11 +8,9 @@
 import UIKit
 
 enum AssetImage {
-    // MARK: - Tabbar
     static let main_icon = UIImage(named: "main_icon")
     static let map_icon = UIImage(named: "map_icon")
     static let profile_icon = UIImage(named: "profile_icon")
-    // MARK: -
     static let pin_icon = UIImage(named: "pin_icon")
     static let line_icon = UIImage(named: "line_icon")
     static let emptyCircle_icon = UIImage(named: "emptyCircle_icon")

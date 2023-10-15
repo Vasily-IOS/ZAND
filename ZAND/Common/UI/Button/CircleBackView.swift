@@ -38,16 +38,11 @@ extension CircleBackView {
     // MARK: - Instance methods
     
     private func setup() {
-//        addSubview(backImage)
         layer.cornerRadius = 15
 
         snp.makeConstraints { make in
             make.width.height.equalTo(30)
         }
-        
-//        backImage.snp.makeConstraints { make in
-//            make.centerY.centerX.equalTo(self)
-//        }
     }
     
     private func setBackgroundColor() {

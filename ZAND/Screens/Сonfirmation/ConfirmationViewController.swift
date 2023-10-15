@@ -24,8 +24,6 @@ final class ConfirmationViewController: BaseViewController<ConfirmationView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = AssetString.checkAppointment
-
         subscribeDelegates()
     }
 

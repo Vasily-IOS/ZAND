@@ -15,7 +15,7 @@ final class SaloonProviderImpl: SaloonProvider {
 
     // MARK: - Properties
 
-    private let apiManager: HTTP = APIManager()
+    private let apiManager: APIManager = APIManagerImpl()
 
     // MARK: - Instance methods
 

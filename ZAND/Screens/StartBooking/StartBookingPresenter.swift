@@ -8,7 +8,7 @@
 import Foundation
 
 protocol StartBookingPresenterOutput: AnyObject {
-    var saloonID: Int { get }
+    var company_id: Int { get }
     var companyName: String { get }
     var saloonAddress: String { get }
 }
@@ -21,7 +21,7 @@ final class StartBookingPresenter: StartBookingPresenterOutput {
 
     weak var view: StartBookingViewInput?
     
-    let saloonID: Int
+    let company_id: Int
 
     let companyName: String
 
@@ -31,12 +31,12 @@ final class StartBookingPresenter: StartBookingPresenterOutput {
 
     init(
         view: StartBookingViewInput,
-        saloonID: Int,
+        company_id: Int,
         companyName: String,
         saloonAddress: String
     ) {
         self.view = view
-        self.saloonID = saloonID
+        self.company_id = company_id
         self.companyName = companyName
         self.saloonAddress = saloonAddress
     }

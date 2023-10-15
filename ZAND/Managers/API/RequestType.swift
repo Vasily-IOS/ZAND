@@ -9,49 +9,14 @@ import Foundation
 import Moya
 
 enum RequestType {
-    // Данные о салонах, подключивших приложение 👍
-    case salons
-
-    // получить все категории услуг 👍
-    case categories(Int)
-
-    // Получить список услуг, доступных для бронирования 👍
-    case bookServices(company_id: Int, staff_id: Int = 0)
-
-    // Получить список сотрудников доступных для бронирования 👍
-    case bookStaff(company_id: Int, service_id: [Int])
-
-    // Получить список дат, доступных для бронирования 👍
-    case bookDates(
-        company_id: Int,
-        service_ids: [String],
-        staff_id: Int,
-        date: String,
-        date_from: String,
-        date_to: String
-    )
-
-    // Получить список сеансов, доступных для бронирования 👍
-    case bookTimes(company_id: Int, staff_id: Int, date: String, service_id: Int)
-
-    // Создать запись на сеанс 👍
-    case createRecord(company_id: Int, model: ConfirmationModel)
-
-    // Получить запись 👍
-    case getRecord(company_id: Int, record_id: Int)
-
-
-    // получить список сотрудников
-    case staff(company_id: Int)
-
-    // получить конкретного сотрудника
-    case staffByID(company_id: Int, staff_id: Int) // получить конкретного сотрудника
-
-    // MARK: - deprecated requests
-
-    case freeTime(company_id: Int, staff_id: Int, date: String)
-    case services(company_id: Int) // получить услуги по данной категории
-    case employeeSchedule(company_id: Int, staff_id: Int, start_date: Int, end_date: Int) // получить расписание сотрудника
+    case salons // Данные о салонах, подключивших приложение
+    case categories(Int) // получить все категории услуг
+    case bookServices(company_id: Int, staff_id: Int = 0) // Получить список услуг, доступных для бронирования
+    case bookStaff(company_id: Int, service_id: [Int]) // Получить список сотрудников доступных для бронирования
+    case bookDates(_ model: FetchBookDate) // Получить список дат, доступных для бронирования)
+    case bookTimes(company_id: Int, staff_id: Int, date: String, service_id: Int) // Получить список сеансов, доступных для бронирования
+    case createRecord(company_id: Int, model: ConfirmationModel) // Создать запись на сеанс
+    case getRecord(company_id: Int, record_id: Int) // Получить запись
 
     // MARK: -
 
@@ -71,7 +36,7 @@ enum RequestType {
 extension RequestType: TargetType {
 
     var baseURL: URL {
-        return URL(string: URLS.baseURL)!
+        return URL(string: AssetURL.baseURL)!
     }
 
     var path: String {
@@ -84,47 +49,29 @@ extension RequestType: TargetType {
             return "/api/v1/book_services/\(company_id)"
         case .bookStaff(let company_id, _):
             return "/api/v1/book_staff/\(company_id)"
-        case .bookDates(let company_id,_, _, _, _, _):
-            return "/api/v1/book_dates/\(company_id)"
+        case .bookDates(let model):
+            return "/api/v1/book_dates/\(model.company_id)"
         case .bookTimes(let company_id, let staff_id, let date, _):
             return "/api/v1/book_times/\(company_id)/\(staff_id)/\(date)"
         case .createRecord(let company_id, _):
             return "/api/v1/book_record/\(company_id)"
         case .getRecord(let company_id, let record_id):
             return "/api/v1/record/\(company_id)/\(record_id)"
-
-            // MARK: - deprecated
-        case .staff(let company_id):
-            return "/api/v1/company/\(company_id)/staff/"
-        case .staffByID(let company_id, let staff_id):
-            return "/api/v1/company/\(company_id)/staff/\(staff_id)"
-        case .services(let company_id):
-            return "/api/v1/company/\(company_id)/services/"
-        case .employeeSchedule(let company_id, let staff_id, let start_date, let end_date):
-            return "/api/v1/schedule/\(company_id)/\(staff_id)/\(start_date)/\(end_date)"
-        case .freeTime(let company_id, let staff_id, let date):
-            return "/api/v1/timetable/seances/\(company_id)/\(staff_id)/\(date)"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .salons, .categories, .bookServices, .bookStaff, .staff,
-                .staffByID, .bookDates, .bookTimes, .getRecord:
+        case .salons, .categories, .bookServices, .bookStaff, .bookDates, .bookTimes, .getRecord:
             return .get
         case .createRecord:
             return .post
-
-        // MARK: - deprecated
-
-        case .employeeSchedule, .freeTime, .services:
-            return .get
         }
     }
 
     var task: Moya.Task {
         switch self {
-        case .salons, .categories, .staff, .staffByID, .bookTimes, .getRecord:
+        case .salons, .categories, .bookTimes, .getRecord:
             return .requestPlain
         case .bookServices(_ , let staff_id):
             if staff_id == 0 {
@@ -146,39 +93,23 @@ extension RequestType: TargetType {
                     encoding: URLEncoding.queryString
                 )
             }
-        case .bookDates(_, let service_ids, let staff_id, _, _, _):
-            let parameters: [String: Any] = ["staff_id": staff_id,
-                                             "service_ids": service_ids]
+        case .bookDates(let model):
+            let parameters: [String: Any] = [
+                "staff_id": model.staff_id,
+                "service_ids": model.service_ids
+            ]
             return .requestParameters(
                 parameters: parameters,
                 encoding: URLEncoding.queryString
             )
         case .createRecord(_, let model):
             return .requestJSONEncodable(model)
-
-            // MARK: - deprecated
-
-        case .employeeSchedule, .freeTime, .services:
-            return .requestPlain
         }
     }
 
     var headers: [String : String]? {
-        switch self {
-        case .salons, .bookServices, .bookDates, .bookStaff, .createRecord:
-            return ["Authorization": "Bearer \(bearerToken)",
-                    "Accept": "application/vnd.api.v2+json"]
-        case .categories, .staff, .staffByID, .bookTimes, .getRecord:
-            return ["Content-type": "application/json",
-                    "Accept": "application/vnd.api.v2+json",
-                    "Authorization": "Bearer \(bearerToken), User \(userToken)"]
-
-            // MARK: - deprecated
-
-        case .employeeSchedule, .freeTime, .services:
-            return ["Content-type": "application/json",
-                    "Accept": "application/vnd.api.v2+json",
-                    "Authorization": "Bearer \(bearerToken), User \(userToken)"]
-        }
+        return ["Content-type": "application/json",
+                "Accept": "application/vnd.api.v2+json",
+                "Authorization": "Bearer \(bearerToken), User \(userToken)"]
     }
 }

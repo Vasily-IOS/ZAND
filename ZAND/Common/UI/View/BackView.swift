@@ -27,8 +27,8 @@ final class BackView: BaseUIView {
     
     override func setup() {
         super.setup()
+        
         setViews()
-        setBackgroundColor()
     }
     
     // MARK: - Action
@@ -44,13 +44,11 @@ extension BackView {
     // MARK: - Instance methods
     
     private func setViews() {
+        backgroundColor = .clear
+
         addSubview(backButton)
         backButton.snp.makeConstraints { make in
             make.edges.equalTo(self)
         }
-    }
-    
-    private func setBackgroundColor() {
-        backgroundColor = .clear
     }
 }

@@ -8,10 +8,16 @@
 import UIKit
 
 final class VibrationManager {
+
+    // MARK: - Properties
     
     static let shared = VibrationManager()
+
+    // MARK: - Initializer
     
     private init() {}
+
+    // MARK: - Instance methods
     
     func selectionVibrate() {
         DispatchQueue.main.async {

@@ -109,7 +109,7 @@ extension ProfileViewController: ProfileViewDelegate {
     // MARK: - ProfileViewDelegate methods
 
     func showTelegramBot() {
-        guard let botURL = URL.init(string: URLS.telegram_bot) else {
+        guard let botURL = URL.init(string: AssetURL.telegram_bot) else {
             return
         }
 
@@ -170,7 +170,7 @@ extension ProfileViewController: UICollectionViewDelegate {
         case .profileFields:
             switch indexPath.row {
             case 0:
-                AppRouter.shared.presentWithNav(type: .appointments)
+                AppRouter.shared.presentRecordNavigation(type: .appointments)
             case 1:
                 showLogOutAlert()
             case 2:
