@@ -78,7 +78,7 @@ struct User {
     }
 
     private func isEmailCorrect(email: String) -> Bool {
-        let emailPattern = RegexMask.email
+        let emailPattern = Regex.email
         let isEmailCorrect = email.range(of: emailPattern, options: .regularExpression)
         return (isEmailCorrect != nil)
     }

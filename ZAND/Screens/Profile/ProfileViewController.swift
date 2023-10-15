@@ -109,7 +109,7 @@ extension ProfileViewController: ProfileViewDelegate {
     // MARK: - ProfileViewDelegate methods
 
     func showTelegramBot() {
-        guard let botURL = URL.init(string: URLS.telegram_bot) else {
+        guard let botURL = URL.init(string: AssetURL.telegram_bot) else {
             return
         }
 

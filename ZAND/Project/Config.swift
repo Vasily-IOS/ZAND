@@ -13,17 +13,13 @@ enum Config {
     // annotations
     static let customAnnotation = "customAnnotation"
     static let userAnnotation = "userAnnotation"
-    // separated
-    static let separatedBy = ","
     // animation
     static let animation_fav = "animation_fav"
     static let animation_entryConfimed = "animation_entryConfimed"
     static let animation_entryNoConfirmed = "animation_entryNoConfirmed"
     static let animation_noInternet = "animation_noInternet"
-    // userdefaults
-    static let userData = "userData"
-    // other
-    static let countyCode = "7"
     // connectivity status
     static let connectivityStatus = "connectivityStatus"
+    static let splash_video = "splash_video"
+    static let splash_video_type = "mp4"
 }

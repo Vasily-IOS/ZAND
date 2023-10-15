@@ -15,12 +15,6 @@ extension UIView {
         }
     }
     
-    func disableAutoresizeFramesFor(_ views: [UIView]) {
-        views.forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-    
     func createDefaultShadow(for myView: UIView) {
         myView.layer.shadowColor = UIColor.darkGray.cgColor
         myView.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -29,14 +23,6 @@ extension UIView {
         
         myView.clipsToBounds = false
         myView.layer.masksToBounds = false
-    }
-    
-    func rotateImageView(isSelected: Bool, image: UIImageView) {
-        UIView.animate(withDuration: 0.3) {
-            let upsideDown = CGAffineTransform(rotationAngle: .pi * -0.999 )
-            let down = CGAffineTransform(rotationAngle: 0)
-            image.transform = isSelected ? upsideDown : down
-        }
     }
     
     func rotate( _ isRotate: Bool) {

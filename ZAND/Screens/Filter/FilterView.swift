@@ -72,6 +72,7 @@ final class FilterView: BaseUIView {
     
     init(layout: DefaultFilterLayout) {
         self.layoutBulder = layout
+
         super.init(frame: .zero)
     }
 

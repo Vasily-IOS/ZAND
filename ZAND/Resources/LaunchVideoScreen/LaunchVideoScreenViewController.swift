@@ -16,13 +16,6 @@ final class LaunchVideoScreenViewController: UIViewController {
     private let videoController = AVPlayerViewController()
 
     // MARK: - Lifecycle
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.isUserInteractionEnabled = false
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -36,7 +29,10 @@ extension LaunchVideoScreenViewController {
     // MARK: - Instance methods
     
     private func playVideo() {
-        guard let path = Bundle.main.path(forResource: "splash_video", ofType: "mp4") else {
+        guard let path = Bundle.main.path(
+            forResource: Config.splash_video,
+            ofType: Config.splash_video_type
+        ) else {
             debugPrint("splash_video is not found")
             return
         }

@@ -23,7 +23,6 @@ class TransparentButton: UIButton {
                 return 12.0
             case .register:
                 return 16.0
-                
             }
         }
         

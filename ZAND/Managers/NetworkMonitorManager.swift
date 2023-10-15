@@ -40,7 +40,7 @@ final class NetworkMonitor {
             self?.currentConnectionType = NWInterface.InterfaceType.allCases.filter {
                 path.usesInterfaceType($0) }.first
 
-            let connecivityDict = ["connectivityStatus" : path.status != .unsatisfied]
+            let connecivityDict = [Config.connectivityStatus : path.status != .unsatisfied]
             NotificationCenter.default.post(
                 name: .connecivityChanged,
                 object: nil,

@@ -26,26 +26,26 @@ final class OptionCell: BaseCollectionCell {
         }
     }
 
+    // MARK: - Properties
+
     var isTapped: Bool = false {
         didSet {
             optionView.isSelected = isTapped
         }
     }
-
-    // MARK: - Properties
     
     private let optionView = OptionView()
+    
     private let descriptionLabel = UILabel(.systemFont(ofSize: 14), .black)
     
     // MARK: - Instance methods
     
     override func setup() {
         super.setup()
+
         setViews()
     }
-    
-    // MARK: - Configure
-    
+
     func configure(model: CommonFilterProtocol, state: State) {
         if let model = model as? OptionsModel {
             descriptionLabel.text = model.name
@@ -62,7 +62,7 @@ extension OptionCell {
     private func setViews() {
         addSubviews([optionView, descriptionLabel])
         
-        self.snp.makeConstraints { make in
+        snp.makeConstraints { make in
             make.height.equalTo(90)
         }
         

@@ -24,9 +24,6 @@ final class SelectableMapView: BaseUIView {
     }
 
     func addPinsOnMap(model: SaloonMapModel) {
-//        let bothCoordinates = model.coordinates.components(separatedBy: Config.separatedBy)
-//        let coordinates = CLLocationCoordinate2D(latitude: Double(bothCoordinates[0] ) ?? 0,
-//                                                 longitude: Double(bothCoordinates[1] ) ?? 0)
         let coordinates = CLLocationCoordinate2D(
             latitude: model.coordinate_lat,
             longitude: model.coordinate_lon
