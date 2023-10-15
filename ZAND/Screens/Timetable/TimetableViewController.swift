@@ -117,7 +117,6 @@ extension TimetableViewController: UICollectionViewDelegate {
                 date: presenter?.workingRangeModel[indexPath.item].dateString ?? ""
             )
             presenter?.updateDateLabel(date: (presenter?.workingRangeModel[indexPath.item].date)!)
-            
         case .time:
             let cell = collectionView.cellForItem(at: indexPath) as! TimeCell
             cell.isSelected = !cell.isSelected
@@ -125,16 +124,17 @@ extension TimetableViewController: UICollectionViewDelegate {
             if let viewModel = presenter?.viewModel {
                 viewModel.bookTime = presenter?.bookTimeModel[indexPath.item]
             }
-
         default:
             break
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        
         switch TimetableSection.init(rawValue: indexPath.section) {
         case .time:
             let headerView = collectionView.dequeueReusableView(

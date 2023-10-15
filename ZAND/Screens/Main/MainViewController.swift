@@ -246,8 +246,8 @@ extension MainViewController: MainViewInput {
         isRotate ? showIndicator() : hideIndicator()
     }
 
-    func updateUIConection(isUpdate: Bool) {
-        if isUpdate {
+    func updateUIConection(isConnected: Bool) {
+        if isConnected {
             DispatchQueue.main.async {
                 self.contentView.collectionView.isHidden = false
                 self.presenter?.updateUI()
@@ -259,6 +259,10 @@ extension MainViewController: MainViewInput {
                 self.contentView.setLostConnectionAimation(isConnected: false)
             }
         }
+    }
+
+    func reloadData() {
+        contentView.reloadData()
     }
 }
 

@@ -76,8 +76,20 @@ final class MainView: BaseUIView {
         addSubview(lostConnectionAnimation)
 
         lostConnectionAnimation.isHidden = isConnected
+        collectionView.isUserInteractionEnabled = isConnected
         lostConnectionAnimation.snp.makeConstraints { make in
             make.center.equalToSuperview()
+        }
+    }
+
+    func reloadData() {
+        DispatchQueue.main.async {
+            UIView.transition(
+                with: self.collectionView,
+                duration: 0.1,
+                options: .transitionCrossDissolve,
+                animations: { self.collectionView.reloadData() }
+            )
         }
     }
 }
