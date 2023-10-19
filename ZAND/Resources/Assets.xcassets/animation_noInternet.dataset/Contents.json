@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "animation_noInternet.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
