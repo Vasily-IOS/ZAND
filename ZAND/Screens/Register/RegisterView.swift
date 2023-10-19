@@ -63,12 +63,12 @@ final class RegisterView: BaseUIView {
         return policyButton
     }()
 
-    private let registerButton = BottomButton(buttonText: .register)
+    private let saveButton = BottomButton(buttonText: .save)
 
-    private let registerLabel = UILabel(
+    private let entranceLabel = UILabel(
         .systemFont(ofSize: 24, weight: .bold),
         .black,
-        AssetString.registation
+        AssetString.entrance
     )
 
     private lazy var policyButtonsStackView = UIStackView(
@@ -91,7 +91,7 @@ final class RegisterView: BaseUIView {
 
     private lazy var baseStackView = UIStackView(
         alignment: .center,
-        arrangedSubviews: [registerLabel,
+        arrangedSubviews: [entranceLabel,
                            interiorStackView],
         axis: .vertical,
         distribution: .fill,
@@ -167,7 +167,7 @@ extension RegisterView {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
 
-        contentView.addSubviews([baseStackView, policyStackView, registerButton])
+        contentView.addSubviews([baseStackView, policyStackView, saveButton])
 
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(self)
@@ -196,7 +196,7 @@ extension RegisterView {
             make.right.equalToSuperview().inset(16)
         }
 
-        registerButton.snp.makeConstraints { make in
+        saveButton.snp.makeConstraints { make in
             make.top.equalTo(policyStackView.snp.bottom).offset(60)
             make.width.equalTo(interiorStackView)
             make.height.equalTo(44)
@@ -215,7 +215,7 @@ extension RegisterView {
     }
 
     private func setTargets() {
-        registerButton.addTarget(
+        saveButton.addTarget(
             self,
             action: #selector(registerAction),
             for: .touchUpInside
