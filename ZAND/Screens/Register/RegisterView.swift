@@ -24,6 +24,8 @@ final class RegisterView: BaseUIView {
     let phoneTextField: PaddingTextField = {
         let phoneTextField = PaddingTextField(state: .phone)
         phoneTextField.text = "+7"
+        phoneTextField.layer.borderColor = UIColor.red.cgColor
+        phoneTextField.layer.borderWidth = 0.5
         return phoneTextField
     }()
 
@@ -131,6 +133,12 @@ final class RegisterView: BaseUIView {
 
     func removeBorder() {
         phoneTextField.layer.borderWidth = 0.0
+    }
+
+    func configure(model: User) {
+        nameTextField.configure(textInput: model.name)
+        surnameTextField.configure(textInput: model.surname)
+        emailTextField.configure(textInput: model.email)
     }
 
     // MARK: - Action
