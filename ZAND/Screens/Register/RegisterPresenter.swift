@@ -13,7 +13,9 @@ protocol RegisterPresenterOutput: AnyObject {
     func save()
 }
 
-protocol RegisterViewInput: AnyObject {}
+protocol RegisterViewInput: AnyObject {
+    func configure(model: User)
+}
 
 final class RegisterPresenter: RegisterPresenterOutput {
 
@@ -30,6 +32,8 @@ final class RegisterPresenter: RegisterPresenterOutput {
     init(view: RegisterViewInput, user: User) {
         self.view = view
         self.user = user
+
+        view.configure(model: user)
     }
 
     // MARK: - Instance methods
