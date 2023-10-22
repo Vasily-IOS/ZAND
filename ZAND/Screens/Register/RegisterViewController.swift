@@ -167,4 +167,11 @@ extension RegisterViewController: UITextFieldDelegate {
     }
 }
 
-extension RegisterViewController: RegisterViewInput {}
+extension RegisterViewController: RegisterViewInput {
+
+    // MARK: - RegisterViewInput methods
+
+    func configure(model: User) {
+        contentView.configure(model: model)
+    }
+}
