@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E3382A02C3C4006476F0 /* ProfileCell.swift */; };
 		FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */; };
+		FF0AC2062AE9602100EE999E /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0AC2052AE9602100EE999E /* PhotoModel.swift */; };
 		FF18BEEE2A5D9DC400547D4C /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF18BEED2A5D9DC400547D4C /* Regex.swift */; };
 		FF1961AE2A4C4F0A00434AC7 /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961AD2A4C4F0A00434AC7 /* CommonModel.swift */; };
 		FF1961B02A4C51BC00434AC7 /* AppointmentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1961AF2A4C51BC00434AC7 /* AppointmentsPresenter.swift */; };
@@ -78,6 +79,7 @@
 		FF519A852AC6F39100D490A4 /* EntryConfirmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF519A842AC6F39100D490A4 /* EntryConfirmedView.swift */; };
 		FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */; };
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
+		FF5FDCF12AEA9D710063400E /* FavoutriteSalonsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FDCF02AEA9D710063400E /* FavoutriteSalonsManager.swift */; };
 		FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */; };
 		FF63B97D2AC3469C00DFD932 /* BookServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63B97C2AC3469C00DFD932 /* BookServicesModel.swift */; };
 		FF63B97F2AC35EF000DFD932 /* BookTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63B97E2AC35EF000DFD932 /* BookTimes.swift */; };
@@ -179,6 +181,7 @@
 /* Begin PBXFileReference section */
 		FF01E3382A02C3C4006476F0 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		FF01E33A2A02CAD3006476F0 /* FavouritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCell.swift; sourceTree = "<group>"; };
+		FF0AC2052AE9602100EE999E /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		FF18BEED2A5D9DC400547D4C /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		FF1961AD2A4C4F0A00434AC7 /* CommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		FF1961AF2A4C51BC00434AC7 /* AppointmentsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsPresenter.swift; sourceTree = "<group>"; };
@@ -250,6 +253,7 @@
 		FF519A842AC6F39100D490A4 /* EntryConfirmedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmedView.swift; sourceTree = "<group>"; };
 		FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackView.swift; sourceTree = "<group>"; };
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
+		FF5FDCF02AEA9D710063400E /* FavoutriteSalonsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoutriteSalonsManager.swift; sourceTree = "<group>"; };
 		FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterProtocol.swift; sourceTree = "<group>"; };
 		FF63B97C2AC3469C00DFD932 /* BookServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookServicesModel.swift; sourceTree = "<group>"; };
 		FF63B97E2AC35EF000DFD932 /* BookTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTimes.swift; sourceTree = "<group>"; };
@@ -696,6 +700,7 @@
 				FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */,
 				FFC3F44A2AAE2C4100A774B3 /* SaloonDataBaseModel.swift */,
 				FF4D4BB72AD89058005DA53C /* RecordDataBaseModel.swift */,
+				FF0AC2052AE9602100EE999E /* PhotoModel.swift */,
 			);
 			path = DBModel;
 			sourceTree = "<group>";
@@ -947,6 +952,7 @@
 			children = (
 				FFD4290F2AC4C3030069E681 /* NetworkMonitorManager.swift */,
 				FFB985672A30AFD100ABEFBB /* VibrationManager.swift */,
+				FF5FDCF02AEA9D710063400E /* FavoutriteSalonsManager.swift */,
 				FF3E65DA2A55C202007EC56D /* API */,
 				FF4F757A2A9E3889001E8731 /* Realm */,
 			);
@@ -1182,6 +1188,7 @@
 				FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */,
 				FF1961AE2A4C4F0A00434AC7 /* CommonModel.swift in Sources */,
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,
+				FF5FDCF12AEA9D710063400E /* FavoutriteSalonsManager.swift in Sources */,
 				FF45A16A29E7F67600587DAF /* Extension + UIView.swift in Sources */,
 				FF95F8922AC58ABF005DA310 /* ConfirmationViewController.swift in Sources */,
 				FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */,
@@ -1278,6 +1285,7 @@
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
 				FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */,
 				FFDCE4B72A1B8E9900CEA0E1 /* SelectableMapView.swift in Sources */,
+				FF0AC2062AE9602100EE999E /* PhotoModel.swift in Sources */,
 				FFFE2ACE2AC31705000A940A /* BookDates.swift in Sources */,
 				FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */,
 				FF27B0B92AB8DF7A00611F47 /* ServicesPresenter.swift in Sources */,

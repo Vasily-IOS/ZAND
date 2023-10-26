@@ -22,8 +22,10 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         return presenter?.getMenuModel() ?? []
     }
 
-    var saloonDBmodel: [SaloonDataBaseModel] {
-        return presenter?.getDBmodel() ?? []
+    var saloonModel: [Saloon] = [] {
+        didSet {
+            contentView.emptyLabel.isHidden = !saloonModel.isEmpty
+        }
     }
     
     // MARK: - Lifecycle
@@ -44,9 +46,6 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         super.viewWillAppear(animated)
 
         presenter?.checkLogIn()
-        contentView.collectionView.reloadData()
-
-        contentView.emptyLabel.isHidden = !saloonDBmodel.isEmpty
     }
  
     deinit {
@@ -102,6 +101,17 @@ extension ProfileViewController {
         alertController.addAction(yesAction)
         present(alertController, animated: true)
     }
+
+    func reloadData() {
+        DispatchQueue.main.async {
+            UIView.transition(
+                with: self.contentView.collectionView,
+                duration: 0.3,
+                options: .transitionCrossDissolve,
+                animations: { self.contentView.collectionView.reloadData() }
+            )
+        }
+    }
 }
 
 extension ProfileViewController: ProfileViewDelegate {
@@ -127,20 +137,24 @@ extension ProfileViewController: UICollectionViewDataSource {
         return ProfileSection.allCases.count
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         switch ProfileSection.init(rawValue: section) {
         case .profileFields:
             return profileMenuModel.count
         case .favourites:
-            return saloonDBmodel.count
+            return saloonModel.count
         default:
             return 0
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         switch ProfileSection.init(rawValue: indexPath.section) {
         case .profileFields:
             let cell = collectionView.dequeueReusableCell(
@@ -152,7 +166,7 @@ extension ProfileViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(
                 for: indexPath,
                 cellType: FavouritesCell.self)
-            cell.configure(model: saloonDBmodel[indexPath.row])
+            cell.configure(model: saloonModel[indexPath.row])
             return cell
         default:
             return UICollectionViewCell()
@@ -164,8 +178,10 @@ extension ProfileViewController: UICollectionViewDelegate {
 
     // MARK: - UICollectionViewDelegate methods
 
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         switch ProfileSection.init(rawValue: indexPath.section) {
         case .profileFields:
             switch indexPath.row {
@@ -179,7 +195,7 @@ extension ProfileViewController: UICollectionViewDelegate {
                 break
             }
         case .favourites:
-            AppRouter.shared.push(.saloonDetail(.dataBase(saloonDBmodel[indexPath.row])))
+            AppRouter.shared.push(.saloonDetail(.api(saloonModel[indexPath.row])))
         default:
             break
         }
@@ -205,6 +221,11 @@ extension ProfileViewController: ProfileViewInput {
 
     func updateWithLoggedData(model: UserDataBaseModel) {
         contentView.userNameView.configure(model: model)
+    }
+
+    func updateWithSaloons(model: [Saloon]) {
+        saloonModel = model
+        reloadData()
     }
 }
 

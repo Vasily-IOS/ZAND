@@ -17,6 +17,7 @@ final class SaloonPhotoCell: BaseCollectionCell {
         let saloonImage = UIImageView()
         saloonImage.contentMode = .scaleAspectFill
         saloonImage.clipsToBounds = true
+//        saloonImage.image = AssetImage.noFoto_icon
         return saloonImage
     }()
     
@@ -29,23 +30,15 @@ final class SaloonPhotoCell: BaseCollectionCell {
     }
     
     // MARK: - Configure
-    
-    func configure(image: UIImage) {
-        saloonImage.image = image
-    }
 
     func configure(image: String) {
-        if image.isEmpty {
-            saloonImage.image = AssetImage.noFoto_icon
-        } else {
-            if let url = URL(string: image) {
-                saloonImage.kf.setImage(with: url)
-            }
+        if let url = URL(string: image) {
+            saloonImage.kf.setImage(with: url)
         }
     }
 
-    func configure(image: Data) {
-        saloonImage.image = UIImage(data: image)
+    func configure(image: Data?) {
+        saloonImage.image = AssetImage.noFoto_icon
     }
 }
 

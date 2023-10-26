@@ -17,4 +17,5 @@ protocol RealmManager {
     func removeAll()
     func getObject<Element: Object>(_ type: Element.Type, key: Any) -> Element?
     func contains<Element: Object>(predicate: NSPredicate, _ type: Element.Type) -> Bool
+    func getID<Element>(type: Element.Type, predicate: NSPredicate) -> Element? where Element : RealmFetchable
 }

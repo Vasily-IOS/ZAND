@@ -53,16 +53,13 @@ final class MainPresenter: MainPresenterOutput {
     var additiolSaloons: [Saloon] = []  // оставляем всегда нетронутым
 
     var optionsModel = OptionsModel.options
-    
-    private let realmManager: RealmManager
 
     private let provider: SaloonProvider
     
     // MARK: - Initializer
     
-    init(view: MainViewInput, realmManager: RealmManager, provider: SaloonProvider) {
+    init(view: MainViewInput, provider: SaloonProvider) {
         self.view = view
-        self.realmManager = realmManager
         self.provider = provider
 
         self.updateUI()
@@ -134,25 +131,19 @@ extension MainPresenter {
     }
 
     func applyDB(by id: Int, completion: @escaping () -> ()) {
-        if self.contains(by: id) {
-            if let modelForSave = self.getModel(by: id) as? Saloon {
-                SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-            }
+        let storageManager = FavouritesSalonsManager.shared
+
+        if storageManager.contains(modelID: id) {
+            storageManager.delete(modelID: id)
         } else {
-            self.remove(by: id)
+            storageManager.add(modelID: id)
         }
         VibrationManager.shared.vibrate(for: .success)
         completion()
     }
 
-    func remove(by id: Int) {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        realmManager.removeObjectByPredicate(object: SaloonDataBaseModel.self, predicate: predicate)
-    }
-
     func contains(by id: Int) -> Bool {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
+        return !FavouritesSalonsManager.shared.contains(modelID: id)
     }
 
     // MARK: - Private
