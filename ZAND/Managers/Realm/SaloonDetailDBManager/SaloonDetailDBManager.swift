@@ -47,21 +47,11 @@ final class SaloonDetailDBManager {
         }
     }
 
-    func photoRequest(model: Saloon, completion: @escaping ([Data]) -> Void) {
-        var arr: [Data?] = Array(repeating: nil, count: model.company_photos.count)
-        let group = DispatchGroup()
+    func firstPhotoRequest(model: Saloon, completion: @escaping (Data) -> Void) {
+        let firstPhoto = model.company_photos.first ?? ""
 
-        for (index, photo) in model.company_photos.enumerated() {
-            group.enter()
-            photo.imageToData { image in
-                arr[index] = image ?? Data()
-                group.leave()
-            }
-        }
-
-        group.notify(queue: .main) {
-            let sortedArr = arr.compactMap { $0 }
-            completion(sortedArr)
+        firstPhoto.imageToData { photoData in
+            completion(photoData ?? Data())
         }
     }
 
@@ -75,19 +65,35 @@ final class SaloonDetailDBManager {
             group.leave()
         }
 
-        group.enter()
-        photoRequest(model: modelForSave) { photoData in
-            sortBaseModel.company_photos.append(objectsIn: photoData)
-            group.leave()
-        }
-
         group.notify(queue: .main) {
             if !self.realmManager.isInWriteTransaction {
                 self.realmManager.save(object: sortBaseModel)
+                self.savePhotos(model: modelForSave)
                 print("Saved")
             } else {
                 print("Saving in process")
             }
+        }
+    }
+
+    private func savePhotos(model: Saloon) {
+        var arr: [Data?] = Array(repeating: nil, count: model.company_photos.count)
+        let group = DispatchGroup()
+
+        for (index, photo) in model.company_photos.enumerated() {
+            group.enter()
+            photo.imageToData { image in
+                arr[index] = image ?? Data()
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) { [weak self] in
+            let sortedArr = arr.compactMap { $0 }
+            let photosDB = PhotoModel()
+            photosDB.id = model.id
+            photosDB.photos.append(objectsIn: sortedArr)
+            self?.realmManager.save(object: photosDB)
         }
     }
 }

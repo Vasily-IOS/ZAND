@@ -40,6 +40,10 @@ final class RealmManagerImpl: RealmManager {
     func get<Element>(_ type: Element.Type) -> Results<Element> where Element : RealmFetchable {
         return defaultRealm.objects(type)
     }
+
+    func getID<Element>(type: Element.Type, predicate: NSPredicate) -> Element? where Element : RealmFetchable {
+        return defaultRealm.objects(type).filter(predicate).first
+    }
     
     func removeObject<Element: Object>(object: Element) {
         do {

@@ -22,7 +22,7 @@ class SaloonDataBaseModel: Object, SaloonMapModel {
     @Persisted var coordinate_lat: Double = 0.0
     @Persisted var coordinate_lon: Double = 0.0
     @Persisted var descriptionDB: String = ""
-    @Persisted var photos = List<Data>()
+    @Persisted var firstPhoto: Data? = Data()
     @Persisted var company_photos = List<Data>()
     @Persisted var bookforms = List<BookFormDataBase>()
     @Persisted var default_bookform_url: String = ""
