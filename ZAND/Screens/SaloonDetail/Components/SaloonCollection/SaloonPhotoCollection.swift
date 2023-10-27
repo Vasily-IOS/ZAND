@@ -102,7 +102,6 @@ final class SaloonPhotoCollection: BaseUIView {
     func configure(type: SaloonDetailType) {
         switch type {
         case .api(let model):
-
             if !model.company_photos.isEmpty {
                 photos = model.company_photos
             } else if !model.photos.isEmpty {
@@ -113,13 +112,6 @@ final class SaloonPhotoCollection: BaseUIView {
             nameLabel.text = model.title
             categoryLabel.text = model.short_descr
             id = model.id
-
-        case .dataBase(let model):
-            pageControl.numberOfPages = model.company_photos.count
-            nameLabel.text = model.title
-            categoryLabel.text = model.short_descr
-            id = model.id
-            dbPhotos = Array(model.company_photos)
         }
     }
     
@@ -209,13 +201,17 @@ extension SaloonPhotoCollection: UICollectionViewDataSource {
     
     // MARK: - UICollectionViewDataSource methods
     
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         return photos.isEmpty ? dbPhotos.count : photos.count
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonPhotoCell.self)
 
         photos.isEmpty ? cell.configure(image: dbPhotos[indexPath.item]) :
@@ -229,11 +225,15 @@ extension SaloonPhotoCollection: UICollectionViewDelegateFlowLayout {
     
     // MARK: - UICollectionViewDelegateFlowLayout methods
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width,
-                      height: collectionView.frame.size.height)
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(
+            width: collectionView.frame.size.width,
+            height: collectionView.frame.size.height
+        )
     }
 }
 
@@ -242,8 +242,10 @@ extension SaloonPhotoCollection: UICollectionViewDelegate {
     // MARK: - UICollectionViewDelegate methods
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let visibleRect = CGRect(origin: self.collectionView.contentOffset,
-                                 size: self.collectionView.bounds.size)
+        let visibleRect = CGRect(
+            origin: self.collectionView.contentOffset,
+            size: self.collectionView.bounds.size
+        )
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = self.collectionView.indexPathForItem(at: visiblePoint) {
             self.pageControl.currentPage = visibleIndexPath.row

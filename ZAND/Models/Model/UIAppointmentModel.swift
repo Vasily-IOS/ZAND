@@ -11,9 +11,8 @@ struct UIAppointmentModel: Hashable {
 
     enum ButtonState {
         case none
-        case cancelAppointment
-        case appointmentCanceled
-        case appointmentProvided
+        case cancelAppointment // отменить запись
+        case appointmentCanceled // запись отменена
     }
     
     let id: Int // id записи
@@ -25,11 +24,11 @@ struct UIAppointmentModel: Hashable {
     let datetime:  String // дата сеанса в ISO
     let visit_attendance: Int // cтатус визита
     let attendance: Int // Статус записи
-    let confirmed: Int // Статус подтверждения записи, 0 - не подтверждена, 1 - подтверждена
     let seance_lenght_int: Int
     let create_date: String
     let deleted: Bool
     var buttonState: ButtonState = .none
+    var isVisitValid: Bool?
 
     var seance_start_date: String {
         return makeStartSeanceDate(datetime)
@@ -49,18 +48,19 @@ struct UIAppointmentModel: Hashable {
         datetime = networkModel.datetime
         visit_attendance = networkModel.visit_attendance
         attendance = networkModel.attendance
-        confirmed = networkModel.confirmed
         seance_lenght_int = networkModel.seance_length ?? 0
         create_date = networkModel.create_date
         deleted = networkModel.deleted
 
         if networkModel.deleted {
             buttonState = .appointmentCanceled
+            isVisitValid = true
         } else {
-            if networkModel.attendance == 0 {
+            isVisitValid = isVisitVailed(visit_time: networkModel.date)
+            if isVisitValid == true {
                 buttonState = .cancelAppointment
-            } else if networkModel.attendance == 1 {
-                buttonState = .appointmentProvided
+            } else {
+                buttonState = .none
             }
         }
     }
@@ -83,6 +83,31 @@ struct UIAppointmentModel: Hashable {
         let seanceFullData = (formatter.string(from: date)) + "," + " " + seanceLength
 
         return seanceFullData
+    }
+
+    private func isVisitVailed(visit_time: String) -> Bool? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+
+        let date = Date()
+        let moscowTimeZone = TimeZone(identifier: "Europe/Moscow")!
+        let currentDate = date.addingTimeInterval(TimeInterval(moscowTimeZone.secondsFromGMT(for: date)))
+
+        if let visitDate = dateFormatter.date(from: visit_time) {
+            let current = Int(currentDate.timeIntervalSince1970)
+            let visit = Int(visitDate.timeIntervalSince1970)
+
+            print(company_name, "Визит актулен ли \(current > visit)")
+            print("Current time \(currentDate)")
+            print("Visit time \(visitDate)")
+            print("----------")
+
+            return current < visit
+        } else {
+            print("Не удалось преобразовать строку в дату")
+            return nil
+        }
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol SaloonProvider: AnyObject {
     func fetchData(completion: @escaping ([Saloon]) -> Void)

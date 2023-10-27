@@ -49,7 +49,7 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
         self.network = network
         self.realm = realm
 
-        self.getDataRourceRequest()
+        self.getDataSourceRequest()
     }
 
     // MARK: - Instance methods
@@ -92,7 +92,7 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
                 if httpResponse.statusCode == 204 {
                     // perform update models
                     DispatchQueue.main.async {
-                        self?.getDataRourceRequest()
+                        self?.getDataSourceRequest()
                     }
                 }
                 print("Response HTTP code: \(httpResponse.statusCode)")
@@ -100,7 +100,7 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
         }.resume()
     }
 
-    private func getDataRourceRequest() {
+    private func getDataSourceRequest() {
         let model = Array(realm.get(RecordDataBaseModel.self))
         view?.showIndicator(true)
 
@@ -122,9 +122,9 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
                     case true:
                         servicesProvidedSortedModel.append(model)
                     case false:
-                        if model.attendance == AttendanceID.waiting.rawValue {
+                        if model.isVisitValid == true {
                             waitingServiceSortedModel.append(model)
-                        } else if model.attendance == AttendanceID.serviceDelivered.rawValue && result.data.deleted {
+                        } else {
                             servicesProvidedSortedModel.append(model)
                         }
                     }
@@ -139,7 +139,10 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
         }
     }
 
-    private func makeModel(_ getRecord: GetRecordModel, completion: ((UIAppointmentModel) -> Void)) {
+    private func makeModel(
+        _ getRecord: GetRecordModel,
+        completion: ((UIAppointmentModel) -> Void)
+    ) {
         if let dataBaseModel = Array(
             realm.get(RecordDataBaseModel.self)).first(where: { Int($0.record_id) == getRecord.data.id })
         {

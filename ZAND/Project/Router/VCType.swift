@@ -9,7 +9,6 @@ import Foundation
 
 enum SaloonDetailType {
     case api(Saloon)
-    case dataBase(SaloonDataBaseModel)
 }
 
 enum VCType {

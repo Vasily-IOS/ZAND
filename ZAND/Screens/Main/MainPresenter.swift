@@ -14,7 +14,7 @@ enum MainType {
 }
 
 protocol MainPresenterOutput: AnyObject {
-    var saloons: [Saloon] { get set }
+    var sortedSaloons: [Saloon] { get set }
     var optionsModel: [OptionsModel] { get }
 
     var selectedDays: [IndexPath: Bool] { get set }
@@ -22,7 +22,7 @@ protocol MainPresenterOutput: AnyObject {
     func getModel(by id: Int) -> SaloonMapModel?
     func applyDB(by id: Int, completion: @escaping () -> ())
     func contains(by id: Int) -> Bool
-    func updateUI()
+    func fetchData()
     func backToInitialState()
     func sortModel(filterID: Int)
 }
@@ -44,28 +44,24 @@ final class MainPresenter: MainPresenterOutput {
 
     var selectedDays: [IndexPath: Bool] = [:]
 
-    var saloons: [Saloon] = [] { // дата сорс коллекции
+    var sortedSaloons: [Saloon] = [] { // дата сорс коллекции
         didSet {
-            view?.showEmptyLabel(isShow: saloons.isEmpty)
+            view?.showEmptyLabel(isShow: sortedSaloons.isEmpty)
         }
     }
 
-    var additiolSaloons: [Saloon] = []  // оставляем всегда нетронутым
+    var saloons: [Saloon] = []  // оставляем всегда нетронутым
 
     var optionsModel = OptionsModel.options
-    
-    private let realmManager: RealmManager
 
-    private let provider: SaloonProvider
+    private let network: APIManager
     
     // MARK: - Initializer
     
-    init(view: MainViewInput, realmManager: RealmManager, provider: SaloonProvider) {
+    init(view: MainViewInput, network: APIManager) {
         self.view = view
-        self.realmManager = realmManager
-        self.provider = provider
+        self.network = network
 
-        self.updateUI()
         self.subscribeNotifications()
     }
 
@@ -83,10 +79,12 @@ final class MainPresenter: MainPresenterOutput {
         view?.changeFavouritesAppearence(indexPath: (getSearchIndex(id: userId) ?? [0, 0]))
     }
 
+    // срабатывает когда пользователь заходит в приложение и обновляет коллекцию только
+    // тогда, когда фильтры пусты
     @objc
-    private func updateData(_ nnotification: Notification) {
+    private func updateDataSource() {
         if selectedDays.isEmpty {
-            updateUI()
+            fetchData()
         }
     }
 
@@ -102,20 +100,23 @@ extension MainPresenter {
     
     // MARK: - Instance methods
 
+    // либо это!!!!
     func backToInitialState() {
-        saloons = additiolSaloons
+        sortedSaloons = saloons
     }
 
     func sortModel(filterID: Int) {
-        saloons = additiolSaloons.filter({ $0.business_type_id == filterID })
+        sortedSaloons = saloons.filter({ $0.business_type_id == filterID })
     }
 
-    func updateUI() {
-        provider.fetchData { [weak self] saloons in
+    // либо это!!!!
+    func fetchData() {
+        network.performRequest(type: .salons, expectation: Saloons.self
+        ) { [weak self] saloonsData in
             guard let self else { return }
 
-            self.saloons = saloons
-            self.additiolSaloons = saloons
+            self.sortedSaloons = saloonsData.data
+            self.saloons = saloonsData.data
             self.view?.reloadData()
         }
     }
@@ -125,40 +126,34 @@ extension MainPresenter {
         case .options:
             return optionsModel
         case .saloons:
-            return saloons
+            return sortedSaloons
         }
     }
 
     func getModel(by id: Int) -> SaloonMapModel? {
-        return saloons.first(where: { $0.id == id })
+        return sortedSaloons.first(where: { $0.id == id })
     }
 
     func applyDB(by id: Int, completion: @escaping () -> ()) {
-        if self.contains(by: id) {
-            if let modelForSave = self.getModel(by: id) as? Saloon {
-                SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-            }
+        let storageManager = FavouritesSalonsManager.shared
+
+        if storageManager.contains(modelID: id) {
+            storageManager.delete(modelID: id)
         } else {
-            self.remove(by: id)
+            storageManager.add(modelID: id)
         }
         VibrationManager.shared.vibrate(for: .success)
         completion()
     }
 
-    func remove(by id: Int) {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        realmManager.removeObjectByPredicate(object: SaloonDataBaseModel.self, predicate: predicate)
-    }
-
     func contains(by id: Int) -> Bool {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
+        return !FavouritesSalonsManager.shared.contains(modelID: id)
     }
 
     // MARK: - Private
 
     private func getSearchIndex(id: Int) -> IndexPath? {
-        if let index = saloons.firstIndex(where: { $0.id == id }) {
+        if let index = sortedSaloons.firstIndex(where: { $0.id == id }) {
             return [1, index]
         }
         return nil
@@ -178,7 +173,7 @@ extension MainPresenter {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(updateData(_ :)),
+            selector: #selector(updateDataSource),
             name: .updateData,
             object: nil
         )

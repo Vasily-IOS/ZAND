@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 protocol SaloonPresenterOutput: AnyObject {
     var salonID: Int? { get }
     var saloonName: String? { get }
     var saloonAddress: String? { get }
     func getModel() -> Saloon?
-    func getDBModel() -> SaloonMapModel?
+//    func getDBModel() -> SaloonMapModel?
     func isInFavourite()
     func applyDB(completion: () -> ())
 
@@ -37,15 +38,10 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
 
     private var apiModel: Saloon?
 
-    private var modelDB: SaloonDataBaseModel?
-
-    private let realmManager: RealmManager
-
     // MARK: - Initializers
 
-    init(view: SaloonViewInput, type: SaloonDetailType, realmManager: RealmManager) {
+    init(view: SaloonViewInput, type: SaloonDetailType) {
         self.view = view
-        self.realmManager = realmManager
 
         switch type {
         case .api(let apiModel):
@@ -53,11 +49,6 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
             self.salonID = apiModel.id
             self.saloonName = apiModel.title
             self.saloonAddress = apiModel.address
-        case .dataBase(let modelDB):
-            self.modelDB = modelDB
-            self.salonID = modelDB.id
-            self.saloonName = modelDB.title
-            self.saloonAddress = modelDB.address
         }
 
         view.updateUI(type: type)
@@ -71,48 +62,36 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
         return apiModel
     }
 
-    func getDBModel() -> SaloonMapModel? {
-        guard let modelDB else { return nil }
-
-        return modelDB
-    }
-
     func isInFavourite() {
         guard let apiModel else { return }
 
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: apiModel.id))
-        view?.isInFavourite(result: realmManager.contains(predicate: predicate, SaloonDataBaseModel.self))
+        view?.isInFavourite(result: !FavouritesSalonsManager.shared.contains(modelID: apiModel.id))
     }
 
     func applyDB(completion: () -> ()) {
         guard let modelForSave = apiModel else { return }
 
-        if contains(by: modelForSave.id) {
-            SaloonDetailDBManager.shared.save(modelForSave: modelForSave)
-            sendNotification(userId: modelForSave.id, isInFavourite: true)
-            completion()
+        let id = modelForSave.id
+        let storageManager = FavouritesSalonsManager.shared
+
+        if storageManager.contains(modelID: id) {
+            storageManager.delete(modelID: id)
+            sendNotification(userId: id, isInFavourite: true)
         } else {
-            remove(by: modelForSave.id)
-            sendNotification(userId: modelForSave.id, isInFavourite: false)
-            completion()
+            storageManager.add(modelID: id)
+            sendNotification(userId: id, isInFavourite: false)
         }
         VibrationManager.shared.vibrate(for: .success)
-    }
-
-    func remove(by id: Int) {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        realmManager.removeObjectByPredicate(object: SaloonDataBaseModel.self, predicate: predicate)
+        completion()
     }
 
     func contains(by id: Int) -> Bool {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
-        return realmManager.contains(predicate: predicate, SaloonDataBaseModel.self)
+        return !FavouritesSalonsManager.shared.contains(modelID: id)
     }
 
     // MARK: - Private
 
     private func sendNotification(userId: Int, isInFavourite: Bool) {
-        print(userId)
         NotificationCenter.default.post(
             name: .isInFavourite,
             object: nil,

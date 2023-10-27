@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class FavouritesCell: BaseCollectionCell {
     
@@ -16,6 +17,7 @@ final class FavouritesCell: BaseCollectionCell {
         let saloonImage = UIImageView()
         saloonImage.contentMode = .scaleAspectFill
         saloonImage.clipsToBounds = true
+        saloonImage.image = AssetImage.noFoto_icon
         return saloonImage
     }()
 
@@ -25,14 +27,6 @@ final class FavouritesCell: BaseCollectionCell {
         saloonName.numberOfLines = 0
         return saloonName
     }()
-    
-//    private let favouritesStarImage = UIImageView(image: AssetImage.star_icon)
-//
-//    private let ratingLabel: UILabel = {
-//        let ratingLabel = UILabel()
-//        ratingLabel.font = .systemFont(ofSize: 12)
-//        return ratingLabel
-//    }()
 
     // MARK: - Instance methods
     
@@ -43,9 +37,9 @@ final class FavouritesCell: BaseCollectionCell {
         setViews()
     }
 
-    func configure(model: SaloonDataBaseModel) {
-        saloonImage.image = UIImage(data: model.company_photos.first ?? Data())
+    func configure(model: Saloon) {
         saloonNameLabel.text = model.title
+        saloonImage.kf.setImage(with: URL(string: model.company_photos.first ?? ""))
     }
 }
 

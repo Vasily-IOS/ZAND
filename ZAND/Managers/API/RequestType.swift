@@ -10,10 +10,11 @@ import Moya
 
 enum RequestType {
     case salons // Данные о салонах, подключивших приложение
+    case saloon(id: Int) // Конкретный салон
     case categories(Int) // получить все категории услуг
     case bookServices(company_id: Int, staff_id: Int = 0) // Получить список услуг, доступных для бронирования
     case bookStaff(company_id: Int, service_id: [Int]) // Получить список сотрудников доступных для бронирования
-    case bookDates(_ model: FetchBookDate) // Получить список дат, доступных для бронирования)
+    case bookDates(_ model: FetchBookDate) // Получить список дат, доступных для бронирования
     case bookTimes(company_id: Int, staff_id: Int, date: String, service_id: Int) // Получить список сеансов, доступных для бронирования
     case createRecord(company_id: Int, model: ConfirmationModel) // Создать запись на сеанс
     case getRecord(company_id: Int, record_id: Int) // Получить запись
@@ -43,6 +44,8 @@ extension RequestType: TargetType {
         switch self {
         case .salons:
             return "/marketplace/application/\(applicationID)/salons"
+        case .saloon(let id):
+            return "/api/v1/company/\(id)/"
         case .categories(let company_id):
             return "/api/v1/company/\(company_id)/service_categories/"
         case .bookServices(let company_id, _):
@@ -62,7 +65,8 @@ extension RequestType: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .salons, .categories, .bookServices, .bookStaff, .bookDates, .bookTimes, .getRecord:
+        case .salons, .categories, .bookServices, .bookStaff,
+             .bookDates, .bookTimes, .getRecord, .saloon:
             return .get
         case .createRecord:
             return .post
@@ -71,7 +75,7 @@ extension RequestType: TargetType {
 
     var task: Moya.Task {
         switch self {
-        case .salons, .categories, .bookTimes, .getRecord:
+        case .salons, .categories, .bookTimes, .getRecord, .saloon:
             return .requestPlain
         case .bookServices(_ , let staff_id):
             if staff_id == 0 {

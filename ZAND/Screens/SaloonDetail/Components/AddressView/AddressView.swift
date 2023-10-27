@@ -69,10 +69,6 @@ final class AddressView: BaseUIView {
             addressDescriptionLabel.text = model.address
             weekDaysDescriptionLabel.text = model.schedule
             weekendDaysDescriptionLabel.text = model.schedule
-        case .dataBase(let model):
-            addressDescriptionLabel.text = model.address
-            weekDaysDescriptionLabel.text = model.schedule
-            weekendDaysDescriptionLabel.text = model.schedule
         }
     }
     

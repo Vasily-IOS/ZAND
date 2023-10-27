@@ -15,7 +15,6 @@ final class AppoitmentsCell: BaseTableCell {
     enum ButtonState {
         case cancelAppointment
         case appointmentCanceled
-        case appointmentProvided
 
         var title: String {
             switch self {
@@ -23,14 +22,12 @@ final class AppoitmentsCell: BaseTableCell {
                 return AssetString.cancelAppointment
             case .appointmentCanceled:
                 return AssetString.appointmentDeleted
-            case .appointmentProvided:
-                return AssetString.appointmentProvided
             }
         }
 
         var isUserInteractionEnabled: Bool {
             switch self {
-            case .appointmentCanceled, .appointmentProvided:
+            case .appointmentCanceled:
                 return false
             case .cancelAppointment:
                 return true
@@ -39,7 +36,7 @@ final class AppoitmentsCell: BaseTableCell {
 
         var borderColor: UIColor {
             switch self {
-            case .cancelAppointment, .appointmentProvided:
+            case .cancelAppointment:
                 return .lightGreen
             case .appointmentCanceled:
                 return .red
@@ -48,7 +45,7 @@ final class AppoitmentsCell: BaseTableCell {
 
         var textColor: UIColor {
             switch self {
-            case .cancelAppointment, .appointmentProvided:
+            case .cancelAppointment:
                 return .lightGreen
             case .appointmentCanceled:
                 return .red
@@ -161,12 +158,12 @@ final class AppoitmentsCell: BaseTableCell {
         switch model.buttonState {
         case .appointmentCanceled:
             configureButton(.appointmentCanceled)
-        case .appointmentProvided:
-            configureButton(.appointmentProvided)
+            cancelRecordButton.isHidden = false
         case .cancelAppointment:
             configureButton(.cancelAppointment)
+            cancelRecordButton.isHidden = false
         case .none:
-            print("Have no state")
+            cancelRecordButton.isHidden = true
         }
     }
 

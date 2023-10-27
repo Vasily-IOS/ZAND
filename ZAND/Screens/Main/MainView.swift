@@ -57,6 +57,7 @@ final class MainView: BaseUIView {
     
     init(layoutBuilder: DefaultMainLayout) {
         self.layoutBuilder = layoutBuilder
+
         super.init(frame: .zero)
 
         searchButton.tapHandler = { [weak self] in
@@ -73,7 +74,6 @@ final class MainView: BaseUIView {
     }
 
     func changeHeartAppearance(by indexPath: IndexPath) {
-        print(indexPath)
         if let cell = self.collectionView.cellForItem(at: indexPath) as? SaloonCell {
             cell.isInFavourite = !cell.isInFavourite
         }

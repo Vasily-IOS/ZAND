@@ -91,6 +91,7 @@ final class MainViewController: BaseViewController<MainView> {
         }
     }
 
+    // лагов нет
     private func showFilterVC() {
         AppRouter.shared.presentCompletion(
             type: .filter((presenter?.selectedDays ?? [:]).filter({ $0.value == true }))
@@ -106,7 +107,7 @@ final class MainViewController: BaseViewController<MainView> {
                 self.presenter?.selectedDays = indexDict
 
                 self.presenter?.sortModel(filterID: filterID)
-                self.contentView.collectionView.reloadData()
+                self.reloadData()
                 self.contentView.collectionView.scrollToItem(
                     at: indexDict.keys.first!,
                     at: .centeredHorizontally,
@@ -142,14 +143,16 @@ extension MainViewController: UICollectionViewDataSource {
         case .option:
             return presenter?.optionsModel.count ?? 0
         case .beautySaloon:
-            return presenter?.saloons.count ?? 0
+            return presenter?.sortedSaloons.count ?? 0
         default:
             return 0
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
             let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
@@ -161,11 +164,11 @@ extension MainViewController: UICollectionViewDataSource {
             return optionCell
         case .beautySaloon:
             let saloonCell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonCell.self)
-            saloonCell.configure(model: (presenter?.saloons ?? [])[indexPath.item], indexPath: indexPath)
+            saloonCell.configure(model: (presenter?.sortedSaloons ?? [])[indexPath.item], indexPath: indexPath)
             saloonCell.mapHandler = mapHandler
             saloonCell.favouritesHandler = favouritesHandler
 
-            if let isInFavourite = presenter?.contains(by: (presenter?.saloons ?? [])[indexPath.item].id) {
+            if let isInFavourite = presenter?.contains(by: (presenter?.sortedSaloons ?? [])[indexPath.item].id) {
                 saloonCell.isInFavourite = !isInFavourite
             }
             
@@ -184,6 +187,7 @@ extension MainViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
             if indexPath.section == 0 && indexPath.item == 0 {
@@ -199,14 +203,14 @@ extension MainViewController: UICollectionViewDelegate {
                     collectionView.scrollToItem(at: [0,0], at: .left, animated: true)
                 } else {
                     self.presenter?.sortModel(filterID: presenter?.optionsModel[indexPath.item].id ?? 0)
-                    self.contentView.collectionView.reloadData()
+                    self.reloadData()
                     self.contentView.collectionView.scrollToItem(
                         at: indexPath, at: .centeredHorizontally, animated: true
                     )
                 }
             }
         case .beautySaloon:
-            AppRouter.shared.push(.saloonDetail(.api((presenter?.saloons ?? [])[indexPath.item])))
+            AppRouter.shared.push(.saloonDetail(.api((presenter?.sortedSaloons ?? [])[indexPath.item])))
         default:
             break
         }
@@ -218,7 +222,7 @@ extension MainViewController: MainViewDelegate {
     // MARK: - MainViewDelegate methods
     
     func showSearch() {
-        guard let model = presenter?.saloons else { return }
+        guard let model = presenter?.sortedSaloons else { return }
 
         AppRouter.shared.presentSearch(type: .search(model)) { [weak self] singleModel in
             guard let self else { return }
@@ -250,7 +254,7 @@ extension MainViewController: MainViewInput {
         if isConnected {
             DispatchQueue.main.async {
                 self.contentView.collectionView.isHidden = false
-                self.presenter?.updateUI()
+                self.presenter?.fetchData()
                 self.contentView.setLostConnectionAimation(isConnected: true)
             }
         } else {

@@ -13,4 +13,5 @@ extension Notification.Name {
     static let showTabBar = Notification.Name(rawValue: "notifyTabBar")
     static let connecivityChanged = Notification.Name(rawValue: "connecivityChanged")
     static let showBadRequestScreen = Notification.Name(rawValue: "showBadRequestScreen")
+    static let storageIDisChanged = Notification.Name(rawValue: "storageIDisChanged")
 }
