@@ -49,10 +49,6 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
             self.salonID = apiModel.id
             self.saloonName = apiModel.title
             self.saloonAddress = apiModel.address
-        case .dataBase(let modelDB): // deprecated
-            self.salonID = modelDB.id
-            self.saloonName = modelDB.title
-            self.saloonAddress = modelDB.address
         }
 
         view.updateUI(type: type)

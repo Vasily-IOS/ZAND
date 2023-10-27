@@ -21,12 +21,12 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             return vc
         case .main:
             let layotBuilder: DefaultMainLayout = MainLayout()
-            let provider: SaloonProvider = SaloonProviderImpl()
+            let network: APIManager = APIManagerImpl()
             let view = MainView(layoutBuilder: layotBuilder)
             let vc = MainViewController(contentView: view)
             let presenter = MainPresenter(
                 view: vc,
-                provider: provider
+                network: network
             )
             vc.presenter = presenter
             return vc
