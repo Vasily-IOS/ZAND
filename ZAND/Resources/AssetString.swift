@@ -89,6 +89,7 @@ enum AssetString {
     static let cancelAppointment = "Отменить запись"
     static let appointmentDeleted = "Запись отменена"
     static let appointmentProvided = "Услуга оказана"
+    static let appointmentNotProvided = "Услуга не оказана"
     static let time = "Время"
     static let noSalons = "В данной категории салоны отсутствуют"
     static let save = "Сохранить"
