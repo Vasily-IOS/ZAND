@@ -13,9 +13,11 @@ final class TabBarController: UITabBarController {
 
     var switchedViewController: UIViewController {
         var vc = UIViewController()
-        let tabBarItem = UITabBarItem(title: AssetString.profile,
-                                     image: AssetImage.profile_icon,
-                                     selectedImage: nil)
+        let tabBarItem = UITabBarItem(
+            title: AssetString.profile,
+            image: AssetImage.profile_icon,
+            selectedImage: nil
+        )
 
         if UserDBManager.shared.isUserContains() {
             vc = vcFactory.getViewController(for: .profile)

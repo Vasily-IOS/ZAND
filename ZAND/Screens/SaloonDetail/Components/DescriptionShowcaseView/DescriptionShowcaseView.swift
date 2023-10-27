@@ -52,8 +52,6 @@ final class DescriptionShowcaseView: BaseUIView {
         switch type {
         case .api(let model):
             descriptionLabel.text = model.description.html2String
-        case .dataBase(let model):
-            descriptionLabel.text = model.descriptionDB.html2String
         }
     }
 }

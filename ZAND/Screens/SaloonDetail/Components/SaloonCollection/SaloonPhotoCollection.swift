@@ -102,7 +102,6 @@ final class SaloonPhotoCollection: BaseUIView {
     func configure(type: SaloonDetailType) {
         switch type {
         case .api(let model):
-
             if !model.company_photos.isEmpty {
                 photos = model.company_photos
             } else if !model.photos.isEmpty {
@@ -113,20 +112,6 @@ final class SaloonPhotoCollection: BaseUIView {
             nameLabel.text = model.title
             categoryLabel.text = model.short_descr
             id = model.id
-
-        case .dataBase(let model):
-            pageControl.numberOfPages = model.company_photos.count == 1 ?
-            0 : model.company_photos.count
-
-            nameLabel.text = model.title
-            categoryLabel.text = model.short_descr
-            id = model.id
-
-            if dbPhotos.isEmpty {
-                dbPhotos.append(Data())
-            } else {
-                dbPhotos = Array(model.company_photos)
-            }
         }
     }
     
