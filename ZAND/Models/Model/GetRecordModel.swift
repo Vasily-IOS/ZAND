@@ -8,9 +8,7 @@
 import Foundation
 
 enum AttendanceID: Int {
-    case userDidNotCome = -1 // пользователь не пришел на визит
     case waiting = 0 // ожидание пользователя
-    case serviceDelivered = 1 // услуги оказаны
     case userConfirmed = 2 // пользователь подтвердил запись
 }
 
