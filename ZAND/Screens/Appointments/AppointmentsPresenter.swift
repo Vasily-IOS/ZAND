@@ -116,17 +116,13 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
                     record_id: Int(recordModel.record_id) ?? 0), expectation: GetRecordModel.self
             ) { [weak self] result in
                 guard let self else { return }
+                self.makeModel(result) { [weak self] model in
 
-                self.makeModel(result) { model in
-                    switch model.deleted {
-                    case true:
+                    let isVisitValid = self?.isVisitVailed(visit_time: model.date)
+                    if model.deleted || isVisitValid == true {
                         servicesProvidedSortedModel.append(model)
-                    case false:
-                        if model.isVisitValid == true {
-                            waitingServiceSortedModel.append(model)
-                        } else {
-                            servicesProvidedSortedModel.append(model)
-                        }
+                    } else {
+                        waitingServiceSortedModel.append(model)
                     }
                     group.leave()
                 }
@@ -147,6 +143,23 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
             realm.get(RecordDataBaseModel.self)).first(where: { Int($0.record_id) == getRecord.data.id })
         {
             completion(UIAppointmentModel(networkModel: getRecord.data, dataBaseModel: dataBaseModel))
+        }
+    }
+
+    private func isVisitVailed(visit_time: String) -> Bool? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+
+        let date = Date()
+        let moscowTimeZone = TimeZone(identifier: "Europe/Moscow")!
+        let currentDate = date.addingTimeInterval(TimeInterval(moscowTimeZone.secondsFromGMT(for: date)))
+
+        if let visitDate = dateFormatter.date(from: visit_time) {
+            return currentDate > visitDate
+        } else {
+            print("Не удалось преобразовать строку в дату")
+            return nil
         }
     }
 }

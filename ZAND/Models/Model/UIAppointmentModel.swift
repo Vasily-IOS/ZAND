@@ -28,7 +28,6 @@ struct UIAppointmentModel: Hashable {
     let create_date: String
     let deleted: Bool
     var buttonState: ButtonState = .none
-    var isVisitValid: Bool?
 
     var seance_start_date: String {
         return makeStartSeanceDate(datetime)
@@ -52,16 +51,12 @@ struct UIAppointmentModel: Hashable {
         create_date = networkModel.create_date
         deleted = networkModel.deleted
 
-        if networkModel.deleted {
+        if deleted {
             buttonState = .appointmentCanceled
-            isVisitValid = true
+        } else if isVisitVailed(visit_time: networkModel.date) == false {
+            buttonState = .cancelAppointment
         } else {
-            isVisitValid = isVisitVailed(visit_time: networkModel.date)
-            if isVisitValid == true {
-                buttonState = .cancelAppointment
-            } else {
-                buttonState = .none
-            }
+            buttonState = .none
         }
     }
 
@@ -95,15 +90,7 @@ struct UIAppointmentModel: Hashable {
         let currentDate = date.addingTimeInterval(TimeInterval(moscowTimeZone.secondsFromGMT(for: date)))
 
         if let visitDate = dateFormatter.date(from: visit_time) {
-            let current = Int(currentDate.timeIntervalSince1970)
-            let visit = Int(visitDate.timeIntervalSince1970)
-
-            print(company_name, "Визит актулен ли \(current > visit)")
-            print("Current time \(currentDate)")
-            print("Visit time \(visitDate)")
-            print("----------")
-
-            return current < visit
+            return currentDate > visitDate
         } else {
             print("Не удалось преобразовать строку в дату")
             return nil
