@@ -41,8 +41,6 @@ final class SaloonPhotoCollection: BaseUIView {
 
     var photos: [String] = []
 
-    var dbPhotos: [Data] = []
-
     lazy var animationView: LottieAnimationView = {
         var animationView = LottieAnimationView(name: Config.animation_fav)
         animationView.isHidden = true
@@ -102,13 +100,12 @@ final class SaloonPhotoCollection: BaseUIView {
     func configure(type: SaloonDetailType) {
         switch type {
         case .api(let model):
-            if !model.company_photos.isEmpty {
-                photos = model.company_photos
-            } else if !model.photos.isEmpty {
-                photos = model.photos
+            if model.company_photos.count == 1 {
+                pageControl.isHidden = true
+            } else {
+                pageControl.numberOfPages = model.photos.count
             }
-
-            pageControl.numberOfPages = model.photos.count
+            photos = model.company_photos
             nameLabel.text = model.title
             categoryLabel.text = model.short_descr
             id = model.id
@@ -205,7 +202,7 @@ extension SaloonPhotoCollection: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return photos.isEmpty ? dbPhotos.count : photos.count
+        return photos.isEmpty ? 1 : photos.count
     }
     
     func collectionView(
@@ -213,9 +210,7 @@ extension SaloonPhotoCollection: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SaloonPhotoCell.self)
-
-        photos.isEmpty ? cell.configure(image: dbPhotos[indexPath.item]) :
-        cell.configure(image: photos[indexPath.item])
+        photos.isEmpty ? cell.configureEmpty() : cell.configure(image: photos[indexPath.item])
 
         return cell
     }

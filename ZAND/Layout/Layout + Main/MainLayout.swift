@@ -41,7 +41,7 @@ final class MainLayout: DefaultMainLayout {
 
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .estimated(333)
+                heightDimension: .estimated(363)
             )
             let group = NSCollectionLayoutGroup.vertical(
                 layoutSize: groupSize,
