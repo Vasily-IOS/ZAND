@@ -17,7 +17,6 @@ final class SaloonPhotoCell: BaseCollectionCell {
         let saloonImage = UIImageView()
         saloonImage.contentMode = .scaleAspectFill
         saloonImage.clipsToBounds = true
-//        saloonImage.image = AssetImage.noFoto_icon
         return saloonImage
     }()
     
@@ -37,7 +36,7 @@ final class SaloonPhotoCell: BaseCollectionCell {
         }
     }
 
-    func configure(image: Data?) {
+    func configureEmpty() {
         saloonImage.image = AssetImage.noFoto_icon
     }
 }

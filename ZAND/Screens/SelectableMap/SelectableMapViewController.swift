@@ -41,7 +41,7 @@ extension SelectableViewController: SelectablePresenter {
     // MARK: - SelectablePresenter methods
 
     func updateUI(model: SaloonMapModel) {
-        contentView.addPinsOnMap(model: model)
+        contentView.addPinOnMap(model: model)
     }
 }
 
