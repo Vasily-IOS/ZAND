@@ -13,7 +13,6 @@ protocol SaloonPresenterOutput: AnyObject {
     var saloonName: String? { get }
     var saloonAddress: String? { get }
     func getModel() -> Saloon?
-//    func getDBModel() -> SaloonMapModel?
     func isInFavourite()
     func applyDB(completion: () -> ())
 

@@ -51,7 +51,11 @@ final class SaloonCell: BaseCollectionCell {
         return saloonImage
     }()
     
-    private let saloonDescriptionLabel = UILabel(.systemFont(ofSize: 20))
+    private let saloonDescriptionLabel: UILabel = {
+        let label = UILabel(.systemFont(ofSize: 20))
+        label.numberOfLines = 0
+        return label
+    }()
 
     private let categoryLabel: UILabel = {
         let categoryLabel = UILabel(.systemFont(ofSize: 12), .textGray)
@@ -74,7 +78,7 @@ final class SaloonCell: BaseCollectionCell {
         ],
         axis: .vertical,
         distribution: .equalSpacing,
-        spacing: 4
+        spacing: 2
     )
     
     private let favouritesButton = UIButton()
@@ -148,7 +152,7 @@ extension SaloonCell {
         leftStackView.snp.makeConstraints { make in
             make.top.equalTo(saloonImage.snp.bottom).offset(12)
             make.left.equalTo(self).offset(10)
-            make.bottom.equalTo(self).inset(10)
+            make.right.equalToSuperview().inset(10)
         }
 
         favouritesButton.snp.makeConstraints { make in
@@ -157,11 +161,11 @@ extension SaloonCell {
         }
         
         viewOnMapButton.snp.makeConstraints { make in
-            make.right.equalTo(snp.right).inset(16)
-            make.left.equalTo(leftStackView.snp.right).offset(16)
+            make.top.equalTo(leftStackView.snp.bottom).offset(13)
+            make.right.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(10)
             make.height.equalTo(15)
             make.width.equalTo(125)
-            make.centerY.equalTo(leftStackView.subviews[2])
         }
 
         animationView.snp.makeConstraints { make in

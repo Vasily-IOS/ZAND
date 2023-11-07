@@ -19,11 +19,12 @@ final class SelectableMapView: BaseUIView {
 
     override func setup() {
         super.setup()
+        
         setViews()
         subscribeDelegate()
     }
 
-    func addPinsOnMap(model: SaloonMapModel) {
+    func addPinOnMap(model: SaloonMapModel) {
         let coordinates = CLLocationCoordinate2D(
             latitude: model.coordinate_lat,
             longitude: model.coordinate_lon
@@ -59,11 +60,13 @@ extension SelectableMapView: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is SaloonAnnotation {
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier:
-                                                                        Config.customAnnotation)
+            var annotationView = mapView.dequeueReusableAnnotationView(
+                withIdentifier: Config.customAnnotation
+            )
             if annotationView == nil {
-                annotationView = MKAnnotationView(annotation: annotation,
-                                                  reuseIdentifier: Config.customAnnotation)
+                annotationView = MKAnnotationView(
+                    annotation: annotation,
+                    reuseIdentifier: Config.customAnnotation)
             } else {
                 annotationView?.annotation = annotation
             }
