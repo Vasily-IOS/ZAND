@@ -91,7 +91,6 @@ final class MainViewController: BaseViewController<MainView> {
         }
     }
 
-    // лагов нет
     private func showFilterVC() {
         AppRouter.shared.presentCompletion(
             type: .filter((presenter?.selectedDays ?? [:]).filter({ $0.value == true }))

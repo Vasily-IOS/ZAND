@@ -79,15 +79,6 @@ final class MainPresenter: MainPresenterOutput {
         view?.changeFavouritesAppearence(indexPath: (getSearchIndex(id: userId) ?? [0, 0]))
     }
 
-    // срабатывает когда пользователь заходит в приложение и обновляет коллекцию только
-    // тогда, когда фильтры пусты
-    @objc
-    private func updateDataSource() {
-        if selectedDays.isEmpty {
-            fetchData()
-        }
-    }
-
     @objc
     private func connectivityStatus(_ notification: Notification) {
         if let isConnected = notification.userInfo?[Config.connectivityStatus] as? Bool {
@@ -100,7 +91,6 @@ extension MainPresenter {
     
     // MARK: - Instance methods
 
-    // либо это!!!!
     func backToInitialState() {
         sortedSaloons = saloons
     }
@@ -109,7 +99,6 @@ extension MainPresenter {
         sortedSaloons = saloons.filter({ $0.business_type_id == filterID })
     }
 
-    // либо это!!!!
     func fetchData() {
         network.performRequest(type: .salons, expectation: Saloons.self
         ) { [weak self] saloonsData in
@@ -169,12 +158,6 @@ extension MainPresenter {
             self,
             selector: #selector(hideTabBarNotificationAction(_:)),
             name: .showTabBar,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateDataSource),
-            name: .updateData,
             object: nil
         )
         NotificationCenter.default.addObserver(
