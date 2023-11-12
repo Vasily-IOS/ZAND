@@ -53,6 +53,7 @@
 		FF30A1BD2A4A138800DD6E29 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BC2A4A138800DD6E29 /* Config.swift */; };
 		FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */; };
 		FF30A1C12A4A156D00DD6E29 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1C02A4A156D00DD6E29 /* Reusable.swift */; };
+		FF3B866C2B01703400EFE3CC /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B866B2B01703400EFE3CC /* UserAnnotation.swift */; };
 		FF3C62C42ABA123100032803 /* StaffCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3C62C32ABA123100032803 /* StaffCell.swift */; };
 		FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */; };
 		FF3E65D92A55C1F6007EC56D /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D82A55C1F6007EC56D /* RequestType.swift */; };
@@ -222,6 +223,7 @@
 		FF30A1BC2A4A138800DD6E29 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UICollectionView.swift"; sourceTree = "<group>"; };
 		FF30A1C02A4A156D00DD6E29 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		FF3B866B2B01703400EFE3CC /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		FF3C62C32ABA123100032803 /* StaffCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCell.swift; sourceTree = "<group>"; };
 		FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Notification.Name.swift"; sourceTree = "<group>"; };
 		FF3E65D82A55C1F6007EC56D /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
@@ -733,7 +735,7 @@
 				FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */,
 				FF8AAF6729EEA37F007D6A60 /* MapView.swift */,
 				FF1961B12A4C5FE300434AC7 /* MapPresenter.swift */,
-				FFB985622A2F5A1300ABEFBB /* Annotation */,
+				FFB985622A2F5A1300ABEFBB /* Annotations */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -922,12 +924,13 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		FFB985622A2F5A1300ABEFBB /* Annotation */ = {
+		FFB985622A2F5A1300ABEFBB /* Annotations */ = {
 			isa = PBXGroup;
 			children = (
 				FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */,
+				FF3B866B2B01703400EFE3CC /* UserAnnotation.swift */,
 			);
-			path = Annotation;
+			path = Annotations;
 			sourceTree = "<group>";
 		};
 		FFB985662A30AF7A00ABEFBB /* Managers */ = {
@@ -1260,6 +1263,7 @@
 				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
 				FF2DB9732A9DE2110036356B /* SignInViewController.swift in Sources */,
 				FF27B0B52AB8DF6900611F47 /* ServicesViewController.swift in Sources */,
+				FF3B866C2B01703400EFE3CC /* UserAnnotation.swift in Sources */,
 				FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */,
 				FF27FC212A2DE4C3006DE1B9 /* BackView.swift in Sources */,
 				FFDE118F2A5C436C00CEF390 /* APIManagerImpl.swift in Sources */,
@@ -1466,6 +1470,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ZAND;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow to see current location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -1503,6 +1508,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZAND/Project/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ZAND;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow to see current location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";

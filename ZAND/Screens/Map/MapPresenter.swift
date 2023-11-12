@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreLocation
+import MapKit
 
 protocol MapPresenterOutput: AnyObject {
     func updateUI()
@@ -39,11 +41,6 @@ final class MapPresenter: MapPresenterOutput {
     // MARK: - Instance methods
 
     @objc
-    private func updateData() {
-        updateUI()
-    }
-
-    @objc
     private func connectivityStatus(_ notification: Notification) {
         if let isConnected = notification.userInfo?[Config.connectivityStatus] as? Bool {
             if isConnected {
@@ -71,12 +68,6 @@ final class MapPresenter: MapPresenterOutput {
     // MARK: - Private
 
     private func subscribeNotifications() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateData),
-            name: .updateData,
-            object: nil
-        )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(connectivityStatus(_:)),

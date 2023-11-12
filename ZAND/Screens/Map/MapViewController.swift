@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 final class MapViewController: BaseViewController<MapView> {
     
@@ -16,6 +17,13 @@ final class MapViewController: BaseViewController<MapView> {
     var navController: UINavigationController? {
         return self.navigationController ?? UINavigationController()
     }
+
+    private lazy var locationManager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        return manager
+    }()
 
     // MARK: - Lifecycle
 
@@ -30,6 +38,12 @@ final class MapViewController: BaseViewController<MapView> {
 
         hideNavigationBar()
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        checkLocationServices()
+    }
     
     deinit {
         print("MapViewController died")
@@ -39,6 +53,58 @@ final class MapViewController: BaseViewController<MapView> {
 
     private func subscribeDelegate() {
         contentView.delegate = self
+    }
+
+    private func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            checkLocationAuthorization()
+        } else {
+            showAlertLocation()
+        }
+    }
+
+    private func checkLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+            break
+        case .denied:
+            showAlertLocation()
+            break
+        case .authorizedWhenInUse:
+            contentView.showUserLocation()
+            // start update location
+            break
+        default:
+            break
+        }
+    }
+
+    private func showAlertLocation() {
+        let alertController = UIAlertController(
+            title: "Геопозиция отключена",
+            message: "Включить?",
+            preferredStyle: .alert
+        )
+        let settingsAction = UIAlertAction(title: AssetString.yes, style: .default) { alert in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        }
+        let cancelAction = UIAlertAction(title: AssetString.no, style: .cancel)
+        alertController.addAction(settingsAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+
+    // MARK: - CLLocationManagerDelegate methods
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkLocationAuthorization()
     }
 }
 

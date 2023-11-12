@@ -26,11 +26,9 @@ final class MapView: BaseUIView {
                          count: BaseMapRectModel.coordinates.count)
     }
 
-    let mapView = MKMapView()
+    private let mapView = MKMapView()
 
     private let searchButton = SearchButton()
-
-    private let locationManager = CLLocationManager()
 
     // MARK: - Instance methods
     
@@ -38,7 +36,6 @@ final class MapView: BaseUIView {
         super.setup()
 
         setViews()
-        setupLocationManager()
         setBaseOverlay()
         subscribeDelegate()
         searchAction()
@@ -58,23 +55,29 @@ final class MapView: BaseUIView {
     }
 
     func showSinglePin(coordinate_lat: Double, coordinate_lon: Double) {
-        let coordinates = CLLocationCoordinate2D(latitude: coordinate_lat,
-                                                 longitude: coordinate_lon)
-        let region = MKCoordinateRegion(center: coordinates,
-                                        span: MKCoordinateSpan(latitudeDelta: 0.01,
-                                                               longitudeDelta: 0.01))
+        let coordinates = CLLocationCoordinate2D(
+            latitude: coordinate_lat,
+            longitude: coordinate_lon
+        )
+        let region = MKCoordinateRegion(
+            center: coordinates,
+            span: MKCoordinateSpan(
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01
+            )
+        )
         if let myAnnotation = mapView.annotations.first(where: { $0.coordinate.latitude == coordinates.latitude }) {
             mapView.selectAnnotation(myAnnotation, animated: true)
         }
         mapView.setRegion(region, animated: true)
     }
 
+    func showUserLocation() {
+        mapView.showsUserLocation = true
+    }
+
     // MARK: -
 
-    private func setupLocationManager() {
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
     private func subscribeDelegate() {
         mapView.delegate = self
     }
@@ -128,8 +131,7 @@ extension MapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             var userAnnotation = mapView.dequeueReusableAnnotationView(withIdentifier: "user")
-            userAnnotation = MKAnnotationView(annotation: annotation, reuseIdentifier: "user")
-            userAnnotation?.image = AssetImage.fillCircle_icon
+            userAnnotation = UserAnnotation(annotation: annotation, reuseIdentifier: "user")
             return userAnnotation
         } else {
             if let annotation = annotation as? SaloonAnnotation {
@@ -151,7 +153,7 @@ extension MapView: MKMapViewDelegate {
             return nil
         }
     }
-    
+
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let customAnnotation = view.annotation as? SaloonAnnotation {
             self.currentId = customAnnotation.model.id
