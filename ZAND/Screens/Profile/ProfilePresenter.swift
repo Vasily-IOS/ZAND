@@ -95,7 +95,7 @@ final class ProfilePresenter: ProfilePresenterOutput {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(notificationRecieved),
-            name: .storageIDisChanged,
+            name: .storageIDidChanged,
             object: nil
         )
     }

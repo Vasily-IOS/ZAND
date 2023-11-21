@@ -7,23 +7,46 @@
 
 import UIKit
 import MapKit
+import SnapKit
 
 protocol MapDelegate: AnyObject {
     func showSearch()
     func showDetail(by id: Int)
+    func changeScale()
 }
 
-final class MapView: BaseUIView {
+final class MapRectView: BaseUIView {
+
+    // MARK: - Nested types
+
+    enum Pins: String {
+        case saloon = "saloon"
+        case user = "user"
+    }
 
     // MARK: - Properties
 
     weak var delegate: MapDelegate?
 
-    var currentId: Int?
+    private var currentId: Int?
 
-    var rectangleOverlay: MKPolygon {
-        return MKPolygon(coordinates: BaseMapRectModel.coordinates,
-                         count: BaseMapRectModel.coordinates.count)
+    private lazy var onMapButton: UIButton = {
+        let button = UIButton(configuration: .borderless())
+        button.backgroundColor = .white
+        button.setTitle("Ближайшие", for: .normal)
+        button.setTitleColor(.mainGreen, for: .normal)
+        button.layer.cornerRadius = 15.0
+        button.layer.borderColor = UIColor.mainGreen.cgColor
+        button.layer.borderWidth = 2.0
+        button.addTarget(self, action: #selector(dropScale), for: .touchUpInside)
+        return button
+    }()
+
+    private var defaultOverlay: MKPolygon {
+        return MKPolygon(
+            coordinates: BaseMapRectModel.coordinates,
+            count: BaseMapRectModel.coordinates.count
+        )
     }
 
     private let mapView = MKMapView()
@@ -36,12 +59,32 @@ final class MapView: BaseUIView {
         super.setup()
 
         setViews()
-        setBaseOverlay()
         subscribeDelegate()
         searchAction()
     }
     
-    // MARK: - 
+    // MARK: - Public
+
+    func configure(isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
+        onMapButton.backgroundColor = isZoomed ? .superLightGreen : .white
+        onMapButton.setTitleColor(isZoomed ? .mainGreen : .black, for: .normal)
+
+        if isZoomed {
+            mapView.setRegion(
+                MKCoordinateRegion(
+                    center: userCoordinates,
+                    latitudinalMeters: 15000,
+                    longitudinalMeters: 15000
+                ),
+                animated: true
+            )
+
+        } else {
+            mapView.setRegion(
+                MKCoordinateRegion(defaultOverlay.boundingMapRect), animated: true
+            )
+        }
+    }
 
     func addPinsOnMap(model: [SaloonMapModel]) {
         model.forEach {
@@ -66,7 +109,9 @@ final class MapView: BaseUIView {
                 longitudeDelta: 0.01
             )
         )
-        if let myAnnotation = mapView.annotations.first(where: { $0.coordinate.latitude == coordinates.latitude }) {
+        if let myAnnotation = mapView.annotations.first(
+            where: { $0.coordinate.latitude == coordinates.latitude }
+        ) {
             mapView.selectAnnotation(myAnnotation, animated: true)
         }
         mapView.setRegion(region, animated: true)
@@ -76,18 +121,11 @@ final class MapView: BaseUIView {
         mapView.showsUserLocation = true
     }
 
-    // MARK: -
+    // MARK: - Private methods
 
     private func subscribeDelegate() {
         mapView.delegate = self
     }
-
-    private func setBaseOverlay() {
-        let region = MKCoordinateRegion(rectangleOverlay.boundingMapRect)
-        mapView.setRegion(region, animated: true)
-    }
-    
-    // MARK: - Action
 
     private func searchAction() {
         searchButton.tapHandler = { [weak self] in
@@ -101,9 +139,14 @@ final class MapView: BaseUIView {
 
         delegate?.showDetail(by: id)
     }
+
+    @objc
+    private func dropScale() {
+        delegate?.changeScale()
+    }
 }
 
-extension MapView {
+extension MapRectView {
     
     // MARK: - Instance methods
     
@@ -111,6 +154,8 @@ extension MapView {
         backgroundColor = .mainGray
 
         addSubviews([searchButton, mapView])
+        mapView.addSubview(onMapButton)
+
         searchButton.snp.makeConstraints { make in
             make.top.equalTo(self).offset(50)
             make.left.equalTo(self).offset(16)
@@ -121,23 +166,38 @@ extension MapView {
             make.top.equalTo(searchButton.snp.bottom).offset(10)
             make.left.bottom.right.equalTo(self)
         }
+
+        onMapButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(16)
+            make.height.equalTo(48)
+        }
     }
 }
 
-extension MapView: MKMapViewDelegate {
+extension MapRectView: MKMapViewDelegate {
     
     // MARK: - MKMapViewDelegate methods
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
-            var userAnnotation = mapView.dequeueReusableAnnotationView(withIdentifier: "user")
-            userAnnotation = UserAnnotation(annotation: annotation, reuseIdentifier: "user")
+            var userAnnotation = mapView.dequeueReusableAnnotationView(
+                withIdentifier: Pins.user.rawValue
+            )
+            userAnnotation = UserAnnotation(
+                annotation: annotation, reuseIdentifier: Pins.user.rawValue
+            )
             return userAnnotation
         } else {
             if let annotation = annotation as? SaloonAnnotation {
-                var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
+                var annotationView = mapView.dequeueReusableAnnotationView(
+                    withIdentifier: Pins.saloon.rawValue
+                )
                 if annotationView == nil {
-                    annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
+                    annotationView = MKAnnotationView(
+                        annotation: annotation,
+                        reuseIdentifier: Pins.saloon.rawValue
+                    )
                     annotationView?.canShowCallout = true
                 } else {
                     annotationView?.annotation = annotation

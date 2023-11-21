@@ -116,6 +116,7 @@ enum AssetString {
     static let user_name = "@username"
     static let confirmPassword = "Подтвердите пароль"
     static let confirmationCode = "Код подтверждения"
+    static let near = "Ближайшие"
     
     // MARK: - Filter options
     static let highGrade = "Высокий рейтинг"

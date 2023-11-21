@@ -1,5 +1,5 @@
 //
-//  FilterOptionCell.swift
+//  FilterCell.swift
 //  ZAND
 //
 //  Created by Василий on 24.04.2023.
@@ -8,22 +8,21 @@
 import UIKit
 import SnapKit
 
-final class FilterOptionCell: BaseCollectionCell {
+final class FilterCell: BaseCollectionCell {
     
     // MARK: - Properties
 
-    override var isSelected: Bool {
+    var isChoosen: Bool = false {
         didSet {
-            fillCircleImage.isHidden = !isSelected
-            backgroundColor = isSelected ? .superLightGreen : .white
+            fillCircleImage.isHidden = !isChoosen
+            backgroundColor = isChoosen ? .superLightGreen : .white
         }
     }
     
     var indexPath: IndexPath?
-    
-    // MARK: - UI
-    
+
     private let filterDescription = UILabel(.systemFont(ofSize: 16))
+
     private let circleImage = UIImageView(image: AssetImage.emptyCircle_icon)
     
     private let fillCircleImage: CheckMarkImageView = {
@@ -42,16 +41,20 @@ final class FilterOptionCell: BaseCollectionCell {
     }
     
     // MARK: - Configure
+
+    func toggle() {
+        isChoosen = !isChoosen
+    }
     
-//    func configure(model: CommonFilterProtocol, indexPath: IndexPath) {
-//        if let model = model as? FilterModel {
-//            self.filterDescription.text = model.filterDescription
-//            self.indexPath = indexPath
-//        }
-//    }
+    func configure(model: CommonFilterProtocol, indexPath: IndexPath) {
+        if let model = model as? FilterModel {
+            self.filterDescription.text = model.title
+            self.indexPath = indexPath
+        }
+    }
 }
 
-extension FilterOptionCell {
+extension FilterCell {
     
     private func setViews() {
         addSubviews([circleImage, filterDescription])

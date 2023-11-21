@@ -20,6 +20,27 @@ final class SearchCell: BaseTableCell {
 
     private let saloonClassLabel = UILabel(.systemFont(ofSize: 14), .textGray)
 
+    private let distanceLabel = UILabel(.systemFont(ofSize: 14), .textGray)
+
+    private lazy var leftAlignStackView = UIStackView(
+        alignment: .leading,
+        arrangedSubviews: [
+            saloonNameLabel,
+            saloonClassLabel
+        ],
+        axis: .vertical,
+        distribution: .equalSpacing,
+        spacing: 5)
+
+    private lazy var rightAlignStackView = UIStackView(
+        alignment: .trailing,
+        arrangedSubviews: [
+            distanceLabel
+        ],
+        axis: .vertical,
+        distribution: .equalSpacing,
+        spacing: 0)
+
     // MARK: - Instance methods
     
     override func setup() {
@@ -35,6 +56,10 @@ final class SearchCell: BaseTableCell {
         saloonNameLabel.text = model.title
         saloonClassLabel.text = String(model.short_descr)
     }
+
+    func configure(distance: String = "") {
+        distanceLabel.text = distance + " " + "км"
+    }
 }
 
 extension SearchCell {
@@ -42,17 +67,15 @@ extension SearchCell {
     // MARK: - Instance methods
     
     private func setViews()  {
-        contentView.addSubviews([saloonNameLabel, saloonClassLabel])
+        contentView.addSubviews([leftAlignStackView, rightAlignStackView])
 
-        saloonNameLabel.snp.makeConstraints { make in
+        leftAlignStackView.snp.makeConstraints { make in
             make.top.equalTo(contentView).offset(16)
-            make.left.equalTo(contentView)
-            make.right.equalTo(contentView)
+            make.left.right.equalTo(contentView)
         }
 
-        saloonClassLabel.snp.makeConstraints { make in
-            make.top.equalTo(saloonNameLabel.snp.bottom).offset(5)
-            make.left.equalTo(contentView)
+        rightAlignStackView.snp.makeConstraints { make in
+            make.top.equalTo(leftAlignStackView.snp.bottom).offset(5)
             make.right.equalTo(contentView)
             make.bottom.equalTo(contentView).inset(16)
         }

@@ -23,7 +23,7 @@ final class FilterView: BaseUIView {
         let collectionView = UICollectionView(
             frame: .zero, collectionViewLayout: createLayout()
         )
-        collectionView.register(cellType: FilterOptionCell.self)
+        collectionView.register(cellType: FilterCell.self)
         collectionView.register(cellType: OptionCell.self)
         collectionView.register(view: ReuseHeaderView.self)
 
@@ -94,6 +94,8 @@ final class FilterView: BaseUIView {
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] section, _ in
             switch FilterSection.init(rawValue: section) {
+            case .filterOption:
+                return self?.layoutBulder.createSection(type: .filterOption)
             case .services:
                 return self?.layoutBulder.createSection(type: .services)
             default:

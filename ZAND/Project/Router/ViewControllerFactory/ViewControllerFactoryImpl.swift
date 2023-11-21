@@ -13,10 +13,10 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
         case .tabBar:
             let vc = TabBarController()
             return vc
-        case .search(let model):
+        case .search(let model, let locations):
             let view = SearchView()
             let vc = SearchViewController(contentView: view)
-            let presenter = SearchPresenter(view: vc, model: model)
+            let presenter = SearchPresenter(view: vc, model: model, locations: locations)
             vc.presenter = presenter
             return vc
         case .main:
@@ -31,7 +31,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             vc.presenter = presenter
             return vc
         case .map:
-            let view = MapView()
+            let view = MapRectView()
             let vc = MapViewController(contentView: view)
             let provider: SaloonProvider = SaloonProviderImpl()
             let presenter = MapPresenter(view: vc, provider: provider)

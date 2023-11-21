@@ -8,6 +8,7 @@
 import UIKit
 
 enum FilterType {
+    case filter
     case options
 }
 
@@ -51,6 +52,8 @@ final class FilterPresenter: FilterPresenterOutput {
 
     func getModel(by type: FilterType) -> [CommonFilterProtocol] {
         switch type {
+        case .filter:
+            return FilterModel.model
         case .options:
             return OptionsModel.optionsWithoutFilter()
         }

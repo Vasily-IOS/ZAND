@@ -76,6 +76,8 @@ extension FilterViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         switch FilterSection.init(rawValue: section) {
+        case .filterOption:
+            return presenter?.getModel(by: .filter).count ?? 0
         case .services:
             return presenter?.getModel(by: .options).count ?? 0
         default:
@@ -87,13 +89,23 @@ extension FilterViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let optionCell = collectionView.dequeueReusableCell(
-            for: indexPath,
-            cellType: OptionCell.self
-        )
-
         switch FilterSection.init(rawValue: indexPath.section) {
+        case .filterOption:
+            let optionCell = collectionView.dequeueReusableCell(
+                for: indexPath,
+                cellType: FilterCell.self
+            )
+
+            if let model = presenter?.getModel(by: .filter) {
+                optionCell.configure(model: model[indexPath.item], indexPath: indexPath)
+            }
+            return optionCell
         case .services:
+            let optionCell = collectionView.dequeueReusableCell(
+                for: indexPath,
+                cellType: OptionCell.self
+            )
+
             if let optionModel = presenter?.getModel(by: .options) {
                 optionCell.configure(model: optionModel[indexPath.item], state: .onFilter)
             }
@@ -117,6 +129,9 @@ extension FilterViewController: UICollectionViewDelegate {
         didSelectItemAt indexPath: IndexPath
     ) {
         switch FilterSection.init(rawValue: indexPath.section) {
+        case .filterOption:
+            let cell = collectionView.cellForItem(at: indexPath) as? FilterCell
+            cell?.toggle()
         case .services:
             let cell = collectionView.cellForItem(at: indexPath)
             selectCellHelper(cell: cell, indexPath: indexPath, collectionView: collectionView)
@@ -135,7 +150,7 @@ extension FilterViewController: UICollectionViewDelegate {
             viewType: ReuseHeaderView.self,
             kind: .header
         )
-        headerView.state = .services
+        headerView.state = indexPath.section == 0 ? .filters : .services
         return headerView
     }
 }

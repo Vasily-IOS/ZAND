@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 final class SearchViewController: BaseViewController<SearchView> {
 
@@ -81,16 +82,21 @@ final class SearchViewController: BaseViewController<SearchView> {
         contentView.searchBar.delegate = self
     }
 
-    private func setupDataSource(model: [Saloon]) {
+    private func setupDataSource(model: [Saloon], distance: [DistanceModel]) {
         dataSource = DataSource(tableView: contentView.tableView) {
             tableView, indexPath, item in
             let cell = tableView.dequeueCell(withType: SearchCell.self, for: indexPath)
             cell.configure(model: item)
+
+            if !distance.isEmpty {
+                cell.configure(distance: distance[indexPath.item].distanceInKilometers)
+            }
+
             return cell
         }
     }
 
-    private func applySnapShot(model: [Saloon]) {
+    private func applySnapShot(model: [Saloon], distance: [DistanceModel]) {
         var snapShot = NSDiffableDataSourceSnapshot<Section, Saloon>()
         snapShot.appendSections([.single])
         snapShot.appendItems(model)
@@ -149,9 +155,9 @@ extension SearchViewController: SearchViewInput {
     
     // MARK: - SearchViewProtocol methods
     
-    func updateUI(with model: [Saloon]) {
-        setupDataSource(model: model)
-        applySnapShot(model: model)
+    func updateUI(with model: [Saloon], and distances: [DistanceModel]) {
+        setupDataSource(model: model, distance: distances)
+        applySnapShot(model: model, distance: distances)
     }
 }
 

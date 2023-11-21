@@ -17,7 +17,6 @@ final class FavouritesSalonsManager {
 
     var storageID: [Int] = [] {
         didSet {
-            print(storageID.count)
             save(model: storageID, key: saloonStorageKey)
         }
     }
@@ -55,6 +54,6 @@ final class FavouritesSalonsManager {
     }
 
     private func createNotification() {
-        NotificationCenter.default.post(name: .storageIDisChanged, object: nil)
+        NotificationCenter.default.post(name: .storageIDidChanged, object: nil)
     }
 }

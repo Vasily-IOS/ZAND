@@ -7,8 +7,9 @@
 
 import UIKit
 import CoreLocation
+import Combine
 
-final class MapViewController: BaseViewController<MapView> {
+final class MapViewController: BaseViewController<MapRectView> {
     
     // MARK: - Properties
 
@@ -18,19 +19,14 @@ final class MapViewController: BaseViewController<MapView> {
         return self.navigationController ?? UINavigationController()
     }
 
-    private lazy var locationManager: CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        return manager
-    }()
-
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         subscribeDelegate()
+
+        presenter?.isZoomed = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +38,7 @@ final class MapViewController: BaseViewController<MapView> {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        checkLocationServices()
+        DeviceLocationService.shared.requestLocationUpdates()
     }
     
     deinit {
@@ -53,32 +49,6 @@ final class MapViewController: BaseViewController<MapView> {
 
     private func subscribeDelegate() {
         contentView.delegate = self
-    }
-
-    private func checkLocationServices() {
-        if CLLocationManager.locationServicesEnabled() {
-            checkLocationAuthorization()
-        } else {
-            showAlertLocation()
-        }
-    }
-
-    private func checkLocationAuthorization() {
-        switch locationManager.authorizationStatus {
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            break
-        case .denied:
-            showAlertLocation()
-            break
-        case .authorizedWhenInUse:
-            contentView.showUserLocation()
-            // start update location
-            break
-        default:
-            break
-        }
     }
 
     private func showAlertLocation() {
@@ -99,21 +69,24 @@ final class MapViewController: BaseViewController<MapView> {
     }
 }
 
-extension MapViewController: CLLocationManagerDelegate {
-
-    // MARK: - CLLocationManagerDelegate methods
-
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorization()
-    }
-}
-
 extension MapViewController: MapViewInput {
 
     // MARK: - MapViewInput methods
 
-    func updateUI(model: [SaloonMapModel]) {
+    func updateScale(isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
+        contentView.configure(isZoomed: isZoomed, userCoordinates: userCoordinates)
+    }
+
+    func addPinsOnMap(from model: [SaloonMapModel]) {
         contentView.addPinsOnMap(model: model)
+    }
+
+    func updateUserLocation(isCanUpdate: Bool) {
+        if isCanUpdate {
+            contentView.showUserLocation()
+        } else {
+            showAlertLocation()
+        }
     }
 }
 
@@ -122,20 +95,27 @@ extension MapViewController: MapDelegate {
     // MARK: - MapDelegate methods
 
     func showSearch() {
-        if let model = presenter?.getModel() as? [Saloon] {
-            AppRouter.shared.presentSearch(type: .search(model)) { [weak self] model in
-                self?.contentView.showSinglePin(
-                    coordinate_lat: model.coordinate_lat,
-                    coordinate_lon: model.coordinate_lon
-                )
-            }
+        guard let isZoomed = presenter?.isZoomed,
+              let distances = isZoomed ? presenter?.distances : [] else { return }
+
+        AppRouter.shared.presentSearch(
+            type: .search(presenter?.sortedSalons ?? [], distances)
+        ) { [weak self] model in
+            self?.contentView.showSinglePin(
+                coordinate_lat: model.coordinate_lat,
+                coordinate_lon: model.coordinate_lon
+            )
         }
     }
 
     func showDetail(by id: Int) {
-        if let model = presenter?.getModel(by: id) as? Saloon {
+        if let model = presenter?.getSaloonModel(by: id) as? Saloon {
             AppRouter.shared.push(.saloonDetail(.api(model)))
         }
+    }
+
+    func changeScale() {
+        presenter?.isZoomed?.toggle()
     }
 }
 

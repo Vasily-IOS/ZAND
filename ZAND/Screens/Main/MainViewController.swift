@@ -223,7 +223,7 @@ extension MainViewController: MainViewDelegate {
     func showSearch() {
         guard let model = presenter?.sortedSaloons else { return }
 
-        AppRouter.shared.presentSearch(type: .search(model)) { [weak self] singleModel in
+        AppRouter.shared.presentSearch(type: .search(model, [])) { [weak self] singleModel in
             guard let self else { return }
 
             if let index = model.firstIndex(where: { $0.id == singleModel.id} ) {

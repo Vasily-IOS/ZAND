@@ -18,6 +18,7 @@ final class ReuseHeaderView: UICollectionReusableView {
         case data
         case pushes
         case time
+        case filters
         
         var description: String {
             switch self {
@@ -31,6 +32,8 @@ final class ReuseHeaderView: UICollectionReusableView {
                 return AssetString.pushSms
             case .time:
                 return AssetString.time
+            case .filters:
+                return AssetString.filter
             }
         }
     }

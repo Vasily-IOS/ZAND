@@ -5,7 +5,7 @@
 //  Created by Василий on 18.04.2023.
 //
 
-import Foundation
+import CoreLocation
 
 enum SaloonDetailType {
     case api(Saloon)
@@ -13,7 +13,7 @@ enum SaloonDetailType {
 
 enum VCType {
     case tabBar
-    case search(_ model: [Saloon])
+    case search(_ model: [Saloon], _ distance: [DistanceModel])
     case main
     case map
     case saloonDetail(_ type: SaloonDetailType)

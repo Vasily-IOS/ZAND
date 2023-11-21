@@ -27,26 +27,12 @@ struct Saloon: Codable {
     let description: String
     let photos: [String]
     let company_photos: [String]
-    let bookforms: [BookForm]
     let default_bookform_url: String
     let business_type_id: Int
-}
-
-struct BookForm: Codable {
-    let id: Int
-    let title: String
-    let is_default: Int
-    let url: String
 }
 
 extension Saloon: SaloonMapModel, CommonFilterProtocol, Hashable {
     static func == (lhs: Saloon, rhs: Saloon) -> Bool {
         lhs.id == rhs.id
-    }
-}
-
-extension BookForm: Hashable {
-    static func == (lhs: BookForm, rhs: BookForm) -> Bool {
-        return lhs.id == rhs.id
     }
 }
