@@ -26,8 +26,6 @@ final class SearchPresenter: SearchPresenterOutput {
 
     var currentModel: [Saloon] = []
 
-    var currentDistances: [DistanceModel] = []
-
     private let immutableSalons: [Saloon]
 
     private let immutableDistances: [DistanceModel]
@@ -38,8 +36,6 @@ final class SearchPresenter: SearchPresenterOutput {
         self.view = view
         self.immutableSalons = model
         self.immutableDistances = locations
-
-        print("Количество салонов \(model.count), кол-во локаций \(locations.count)")
     }
 }
 
@@ -55,7 +51,7 @@ extension SearchPresenter {
     func search(text: String) {
         if text.isEmpty {
             view?.updateUI(with: immutableSalons, and: immutableDistances)
-//            currentModel = immutableSalons
+            currentModel = immutableSalons
         } else {
             let group = DispatchGroup()
             var filteredDistances: [DistanceModel] = []
@@ -76,6 +72,7 @@ extension SearchPresenter {
 
             group.notify(queue: .main) {
                 self.view?.updateUI(with: filtedModel, and: filteredDistances)
+                self.currentModel = filtedModel
             }
         }
     }

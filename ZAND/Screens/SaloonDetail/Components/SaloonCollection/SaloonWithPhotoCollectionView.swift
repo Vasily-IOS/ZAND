@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-final class SaloonPhotoCollection: BaseUIView {
+final class SaloonWithPhotoCollectionView: BaseUIView {
 
     // MARK: - Closure
 
@@ -85,6 +85,8 @@ final class SaloonPhotoCollection: BaseUIView {
 
     private let heartButton = UIButton()
 
+    private let distanceLabel = UILabel(.systemFont(ofSize: 14), .textGray)
+
     private let bottomButton = BottomButton(buttonText: .book)
 
     // MARK: - Instance methods
@@ -97,7 +99,7 @@ final class SaloonPhotoCollection: BaseUIView {
         addTarget()
     }
 
-    func configure(type: SaloonDetailType) {
+    func configure(type: SaloonDetailType, distance: String) {
         switch type {
         case .api(let model):
             if model.company_photos.count == 1 {
@@ -109,6 +111,9 @@ final class SaloonPhotoCollection: BaseUIView {
             nameLabel.text = model.title
             categoryLabel.text = model.short_descr
             id = model.id
+
+            let text = distance.isEmpty ? "" : "до цели " + distance + " " + "км"
+            distanceLabel.text = text
         }
     }
     
@@ -125,7 +130,7 @@ final class SaloonPhotoCollection: BaseUIView {
     }
 }
 
-extension SaloonPhotoCollection {
+extension SaloonWithPhotoCollectionView {
     
     // MARK: - Instance methods
     
@@ -133,7 +138,7 @@ extension SaloonPhotoCollection {
         backgroundColor = .mainGray
 
         addSubviews([collectionView, pageControl, nameLabel, categoryLabel, ratingLabel,
-                    gradeLabel, gradeCountLabel, heartButton, bottomButton])
+                    gradeLabel, gradeCountLabel, heartButton, bottomButton, distanceLabel])
         
         collectionView.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
@@ -168,7 +173,7 @@ extension SaloonPhotoCollection {
         }
         
         bottomButton.snp.makeConstraints { make in
-            make.top.equalTo(ratingLabel.snp.bottom).offset(27)
+            make.top.equalTo(distanceLabel.snp.bottom).offset(27)
             make.width.equalTo(280)
             make.height.equalTo(44)
             make.centerX.equalTo(self)
@@ -180,6 +185,11 @@ extension SaloonPhotoCollection {
         animationView.snp.makeConstraints { make in
             make.bottom.equalTo(heartButton)
             make.centerX.equalTo(heartButton)
+        }
+
+        distanceLabel.snp.makeConstraints { make in
+            make.right.equalTo(heartButton.snp.right)
+            make.top.equalTo(categoryLabel.snp.bottom).offset(10)
         }
     }
     
@@ -194,7 +204,7 @@ extension SaloonPhotoCollection {
     }
 }
 
-extension SaloonPhotoCollection: UICollectionViewDataSource {
+extension SaloonWithPhotoCollectionView: UICollectionViewDataSource {
     
     // MARK: - UICollectionViewDataSource methods
     
@@ -216,7 +226,7 @@ extension SaloonPhotoCollection: UICollectionViewDataSource {
     }
 }
 
-extension SaloonPhotoCollection: UICollectionViewDelegateFlowLayout {
+extension SaloonWithPhotoCollectionView: UICollectionViewDelegateFlowLayout {
     
     // MARK: - UICollectionViewDelegateFlowLayout methods
     
@@ -232,7 +242,7 @@ extension SaloonPhotoCollection: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension SaloonPhotoCollection: UICollectionViewDelegate {
+extension SaloonWithPhotoCollectionView: UICollectionViewDelegate {
     
     // MARK: - UICollectionViewDelegate methods
     

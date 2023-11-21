@@ -37,12 +37,13 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let presenter = MapPresenter(view: vc, provider: provider)
             vc.presenter = presenter
             return vc
-        case .saloonDetail(let type):
+        case .saloonDetail(let type, let distance):
             let view = SaloonDetailView()
             let vc = SaloonDetailViewController(contentView: view)
             let presenter = SaloonDetailPresenter(
                 view: vc,
-                type: type
+                type: type,
+                distance: distance
             )
             vc.presenter = presenter
             return vc

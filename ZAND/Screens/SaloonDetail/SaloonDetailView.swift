@@ -26,7 +26,7 @@ final class SaloonDetailView: BaseUIView {
 
     weak var delegate: SaloonDetailDelegate?
     
-    private lazy var saloonPhotoCollection = SaloonPhotoCollection()
+    private lazy var saloonPhotoCollection = SaloonWithPhotoCollectionView()
     private lazy var addressView = AddressView()
     private lazy var descriptionShowcaseView = DescriptionShowcaseView()
     
@@ -47,8 +47,8 @@ final class SaloonDetailView: BaseUIView {
         viewAction()
     }
 
-    func configure(type: SaloonDetailType) {
-        saloonPhotoCollection.configure(type: type)
+    func configure(type: SaloonDetailType, distance: String) {
+        saloonPhotoCollection.configure(type: type, distance: distance)
         addressView.configure(type: type)
         descriptionShowcaseView.configure(type: type)
     }

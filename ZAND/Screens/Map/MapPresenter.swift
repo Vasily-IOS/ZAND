@@ -15,6 +15,7 @@ protocol MapPresenterOutput: AnyObject {
 
     func fetchCommonModel()
     func getSaloonModel(by id: Int) -> SaloonMapModel?
+    func getDistance(by id: Int) -> String
 }
 
 protocol MapViewInput: AnyObject {
@@ -88,6 +89,10 @@ final class MapPresenter: MapPresenterOutput {
         return model == nil ? nil : model
     }
 
+    func getDistance(by id: Int) -> String {
+        return distances.first(where: { $0.id == id})?.distanceInKilometers ?? ""
+    }
+
     // MARK: - Private
 
     private func calculateClosedSaloons(isClosed: Bool) {
@@ -141,6 +146,11 @@ final class MapPresenter: MapPresenterOutput {
 
                 self.userCoordinates = userCoordinates
                 self.view?.updateUserLocation(isCanUpdate: true)
+
+                if userCoordinates.latitude != self.userCoordinates?.latitude {
+                    self.calculateClosedSaloons(isClosed: isZoomed ?? false)
+                    self.view?.updateScale(isZoomed: isZoomed ?? false, userCoordinates: userCoordinates)
+                }
             }.store(in: &cancellables)
 
         locationManager.deniedLocationAccess

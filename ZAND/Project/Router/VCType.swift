@@ -16,7 +16,7 @@ enum VCType {
     case search(_ model: [Saloon], _ distance: [DistanceModel])
     case main
     case map
-    case saloonDetail(_ type: SaloonDetailType)
+    case saloonDetail(_ type: SaloonDetailType, _ distance: String)
     case filter(_ dict: [IndexPath: Bool])
     case profile
     case appointments

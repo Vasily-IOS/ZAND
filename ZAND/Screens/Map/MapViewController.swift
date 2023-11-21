@@ -21,12 +21,16 @@ final class MapViewController: BaseViewController<MapRectView> {
 
     // MARK: - Lifecycle
 
+    override func loadView() {
+        super.loadView()
+
+        presenter?.isZoomed = true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         subscribeDelegate()
-
-        presenter?.isZoomed = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -110,7 +114,7 @@ extension MapViewController: MapDelegate {
 
     func showDetail(by id: Int) {
         if let model = presenter?.getSaloonModel(by: id) as? Saloon {
-            AppRouter.shared.push(.saloonDetail(.api(model)))
+            AppRouter.shared.push(.saloonDetail(.api(model), presenter?.getDistance(by: id) ?? ""))
         }
     }
 

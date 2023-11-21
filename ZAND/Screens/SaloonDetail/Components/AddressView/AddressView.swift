@@ -30,23 +30,27 @@ final class AddressView: BaseUIView {
 
     private let minPriceLabel = UILabel(.systemFont(ofSize: 12))
     
-    private lazy var weekDaysStackView = UIStackView(alignment: .trailing,
-                                                     arrangedSubviews: [
-                                                        weedDaysLabel,
-                                                        weekDaysDescriptionLabel
-                                                     ],
-                                                     axis: .vertical,
-                                                     distribution: .equalSpacing,
-                                                     spacing: 2)
+    private lazy var weekDaysStackView = UIStackView(
+        alignment: .trailing,
+        arrangedSubviews: [
+            weedDaysLabel,
+            weekDaysDescriptionLabel
+        ],
+        axis: .vertical,
+        distribution: .equalSpacing,
+        spacing: 2
+    )
 
-    private lazy var weekendDaysStackView = UIStackView(alignment: .trailing,
-                                                     arrangedSubviews: [
-                                                        weekendDaysLabel,
-                                                        weekendDaysDescriptionLabel
-                                                     ],
-                                                        axis: .vertical,
-                                                        distribution: .equalSpacing,
-                                                     spacing: 2)
+    private lazy var weekendDaysStackView = UIStackView(
+        alignment: .trailing,
+        arrangedSubviews: [
+            weekendDaysLabel,
+            weekendDaysDescriptionLabel
+        ],
+        axis: .vertical,
+        distribution: .equalSpacing,
+        spacing: 2
+    )
     
     private let addressDescriptionLabel: UILabel = {
         let addressDescriptionLabel = UILabel()

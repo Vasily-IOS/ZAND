@@ -154,7 +154,7 @@
 		FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */; };
 		FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */; };
 		FFF16A812A6B2FA300D83E5B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF16A802A6B2FA300D83E5B /* UserModel.swift */; };
-		FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */; };
+		FFF5574529F2FA9C00758A31 /* SaloonWithPhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574429F2FA9C00758A31 /* SaloonWithPhotoCollectionView.swift */; };
 		FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */; };
 		FFF600282A6FD312009813E6 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF600272A6FD312009813E6 /* AlertType.swift */; };
 		FFF6002B2A6FD60B009813E6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */; };
@@ -330,7 +330,7 @@
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
 		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
 		FFF16A802A6B2FA300D83E5B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCollection.swift; sourceTree = "<group>"; };
+		FFF5574429F2FA9C00758A31 /* SaloonWithPhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonWithPhotoCollectionView.swift; sourceTree = "<group>"; };
 		FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonPhotoCell.swift; sourceTree = "<group>"; };
 		FFF600272A6FD312009813E6 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		FFF6002A2A6FD60B009813E6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -1039,7 +1039,7 @@
 		FFF5574629F2FB8600758A31 /* SaloonCollection */ = {
 			isa = PBXGroup;
 			children = (
-				FFF5574429F2FA9C00758A31 /* SaloonPhotoCollection.swift */,
+				FFF5574429F2FA9C00758A31 /* SaloonWithPhotoCollectionView.swift */,
 				FFF5574729F2FBA400758A31 /* SaloonPhotoCell.swift */,
 			);
 			path = SaloonCollection;
@@ -1271,7 +1271,7 @@
 				FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */,
 				FFF600282A6FD312009813E6 /* AlertType.swift in Sources */,
 				FFFE2ACC2AC2FD14000A940A /* TimeCell.swift in Sources */,
-				FFF5574529F2FA9C00758A31 /* SaloonPhotoCollection.swift in Sources */,
+				FFF5574529F2FA9C00758A31 /* SaloonWithPhotoCollectionView.swift in Sources */,
 				FF2DB9732A9DE2110036356B /* SignInViewController.swift in Sources */,
 				FF27B0B52AB8DF6900611F47 /* ServicesViewController.swift in Sources */,
 				FF3B866C2B01703400EFE3CC /* UserAnnotation.swift in Sources */,

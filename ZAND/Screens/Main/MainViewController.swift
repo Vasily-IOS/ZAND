@@ -209,7 +209,7 @@ extension MainViewController: UICollectionViewDelegate {
                 }
             }
         case .beautySaloon:
-            AppRouter.shared.push(.saloonDetail(.api((presenter?.sortedSaloons ?? [])[indexPath.item])))
+            AppRouter.shared.push(.saloonDetail(.api((presenter?.sortedSaloons ?? [])[indexPath.item]), ""))
         default:
             break
         }

@@ -131,7 +131,6 @@ extension SearchViewController: UITableViewDelegate {
         if let model = presenter?.currentModel {
             dismiss(value: model[indexPath.row])
         }
-        contentView.endEditing(true)
     }
 }
 

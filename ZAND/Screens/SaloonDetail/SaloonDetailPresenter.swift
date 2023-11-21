@@ -15,11 +15,10 @@ protocol SaloonPresenterOutput: AnyObject {
     func getModel() -> Saloon?
     func isInFavourite()
     func applyDB(completion: () -> ())
-
 }
 
 protocol SaloonViewInput: AnyObject {
-    func updateUI(type: SaloonDetailType)
+    func updateUI(type: SaloonDetailType, distance: String)
     func isInFavourite(result: Bool)
 }
 
@@ -35,11 +34,11 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
 
     var saloonAddress: String?
 
-    private var apiModel: Saloon?
+    private let apiModel: Saloon?
 
     // MARK: - Initializers
 
-    init(view: SaloonViewInput, type: SaloonDetailType) {
+    init(view: SaloonViewInput, type: SaloonDetailType, distance: String) {
         self.view = view
 
         switch type {
@@ -50,7 +49,7 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
             self.saloonAddress = apiModel.address
         }
 
-        view.updateUI(type: type)
+        view.updateUI(type: type, distance: distance)
     }
 
     // MARK: - Instance methods
