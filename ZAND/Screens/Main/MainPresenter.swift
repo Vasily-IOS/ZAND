@@ -17,9 +17,8 @@ protocol MainPresenterOutput: AnyObject {
     var sortedSaloons: [Saloon] { get set }
     var optionsModel: [OptionsModel] { get }
 
-    var selectedDays: [IndexPath: Bool] { get set }
-    func getModel(by type: MainType) -> [CommonFilterProtocol]
-    func getModel(by id: Int) -> SaloonMapModel?
+    var selectedFilters: [IndexPath: Bool] { get set }
+    func getModel(by id: Int) -> Saloon?
     func applyDB(by id: Int, completion: @escaping () -> ())
     func contains(by id: Int) -> Bool
     func fetchData()
@@ -42,7 +41,11 @@ final class MainPresenter: MainPresenterOutput {
 
     weak var view: MainViewInput?
 
-    var selectedDays: [IndexPath: Bool] = [:]
+    var selectedFilters: [IndexPath: Bool] = [:] {
+        didSet {
+            print(selectedFilters)
+        }
+    }
 
     var sortedSaloons: [Saloon] = [] { // дата сорс коллекции
         didSet {
@@ -54,13 +57,13 @@ final class MainPresenter: MainPresenterOutput {
 
     var optionsModel = OptionsModel.options
 
-    private let network: APIManager
-    
+    private let provider: SaloonProvider
+
     // MARK: - Initializer
     
-    init(view: MainViewInput, network: APIManager) {
+    init(view: MainViewInput, provider: SaloonProvider) {
         self.view = view
-        self.network = network
+        self.provider = provider
 
         self.subscribeNotifications()
     }
@@ -96,31 +99,19 @@ extension MainPresenter {
     }
 
     func sortModel(filterID: Int) {
-        sortedSaloons = saloons.filter({ $0.business_type_id == filterID })
+        sortedSaloons = saloons.filter({ $0.saloonCodable.business_type_id == filterID })
     }
 
     func fetchData() {
-        network.performRequest(type: .salons, expectation: Saloons.self
-        ) { [weak self] saloonsData in
-            guard let self else { return }
-
-            self.sortedSaloons = saloonsData.data
-            self.saloons = saloonsData.data
-            self.view?.reloadData()
+        provider.fetchData { [weak self] saloons in
+            self?.sortedSaloons = saloons
+            self?.saloons = saloons
+            self?.view?.reloadData()
         }
     }
 
-    func getModel(by type: MainType) -> [CommonFilterProtocol] {
-        switch type {
-        case .options:
-            return optionsModel
-        case .saloons:
-            return sortedSaloons
-        }
-    }
-
-    func getModel(by id: Int) -> SaloonMapModel? {
-        return sortedSaloons.first(where: { $0.id == id })
+    func getModel(by id: Int) -> Saloon? {
+        return sortedSaloons.first(where: { $0.saloonCodable.id == id })
     }
 
     func applyDB(by id: Int, completion: @escaping () -> ()) {
@@ -142,7 +133,7 @@ extension MainPresenter {
     // MARK: - Private
 
     private func getSearchIndex(id: Int) -> IndexPath? {
-        if let index = sortedSaloons.firstIndex(where: { $0.id == id }) {
+        if let index = sortedSaloons.firstIndex(where: { $0.saloonCodable.id == id }) {
             return [1, index]
         }
         return nil

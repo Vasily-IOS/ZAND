@@ -37,7 +37,7 @@ final class SaloonPhotoCell: BaseCollectionCell {
     }
 
     func configureEmpty() {
-        saloonImage.image = AssetImage.noFoto_icon
+        saloonImage.image = AssetImage.noFoto_icon.image
     }
 }
 

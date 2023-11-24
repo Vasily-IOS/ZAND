@@ -23,27 +23,27 @@ enum AlertType {
     var textValue: String {
         switch self {
         case .enterYourName:
-            return AssetString.enterYourName
+            return AssetString.enterYourName.rawValue
         case .phoneNumberLessThanEleven:
-            return AssetString.phoneNumberLessThanEleven
+            return AssetString.phoneNumberLessThanEleven.rawValue
         case .codeIsInvalid:
-            return AssetString.codeIsInvalid
+            return AssetString.codeIsInvalid.rawValue
         case .enterYourCode:
-            return AssetString.enterYourCode
+            return AssetString.enterYourCode.rawValue
         case .phoneInputError:
-            return AssetString.phoneInputError
+            return AssetString.phoneInputError.rawValue
         case .gotError:
-            return AssetString.gotError
+            return AssetString.gotError.rawValue
         case .enterPhone:
-            return AssetString.enterPhone
+            return AssetString.enterPhone.rawValue
         case .fillAllFields:
-            return AssetString.fillAllFields
+            return AssetString.fillAllFields.rawValue
         case .invalidEmailInput:
-            return AssetString.invalidEmailInput
+            return AssetString.invalidEmailInput.rawValue
         case .shouldAcceptPolicy:
-            return AssetString.shouldAcceptPolicy
+            return AssetString.shouldAcceptPolicy.rawValue
         case .invalidPhoneInput:
-            return AssetString.phoneInput
+            return AssetString.phoneInput.rawValue
         }
     }
 }

@@ -10,18 +10,19 @@ import Combine
 
 protocol MapPresenterOutput: AnyObject {
     var sortedSalons: [Saloon] { get set }
+    var immutableSalons: [Saloon] { get }
     var isZoomed: Bool? { get set }
-    var distances: [DistanceModel] { get }
 
     func fetchCommonModel()
-    func getSaloonModel(by id: Int) -> SaloonMapModel?
-    func getDistance(by id: Int) -> String
+    func getSaloonModel(by id: Int) -> Saloon?
+    func showUser()
 }
 
 protocol MapViewInput: AnyObject {
     func updateScale(isZoomed: Bool, userCoordinates: CLLocationCoordinate2D)
-    func addPinsOnMap(from model: [SaloonMapModel])
+    func addPinsOnMap(from model: [Saloon])
     func updateUserLocation(isCanUpdate: Bool)
+    func showUser(coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool)
 }
 
 final class MapPresenter: MapPresenterOutput {
@@ -32,21 +33,24 @@ final class MapPresenter: MapPresenterOutput {
 
     var sortedSalons: [Saloon] = []
 
-    var distances: [DistanceModel] = []
-
-    private var immutableSalons: [Saloon] = []
+    var immutableSalons: [Saloon] = []
 
     var isZoomed: Bool? {
         didSet {
             guard let isZoomed,
                   let userCoordinates = userCoordinates else { return }
 
-            calculateClosedSaloons(isClosed: isZoomed)
             view?.updateScale(isZoomed: isZoomed, userCoordinates: userCoordinates)
         }
     }
 
-    private var userCoordinates: CLLocationCoordinate2D?
+    private var isShowUserPoint: Bool = false
+
+    private var userCoordinates: CLLocationCoordinate2D? {
+        didSet {
+            calculateNearestSalons()
+        }
+    }
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -62,7 +66,7 @@ final class MapPresenter: MapPresenterOutput {
 
         subscribeNotifications()
         locationManager.requestLocationUpdates()
-        bindUI()
+        bind()
     }
 
     // MARK: - Instance methods
@@ -78,54 +82,51 @@ final class MapPresenter: MapPresenterOutput {
 
     func fetchCommonModel() {
         provider.fetchData { [weak self] saloons in
-            self?.sortedSalons = saloons
-            self?.immutableSalons = saloons
-            self?.view?.addPinsOnMap(from: saloons)
+            guard let self else { return }
+
+            self.immutableSalons = saloons
+            self.view?.addPinsOnMap(from: saloons)
         }
     }
 
-    func getSaloonModel(by id: Int) -> SaloonMapModel? {
-        let model = sortedSalons.first(where: { $0.id == id })
+    func getSaloonModel(by id: Int) -> Saloon? {
+        let salons = (isZoomed ?? true) ? sortedSalons : immutableSalons
+        let model = salons.first(where: { $0.saloonCodable.id == id })
         return model == nil ? nil : model
     }
 
-    func getDistance(by id: Int) -> String {
-        return distances.first(where: { $0.id == id})?.distanceInKilometers ?? ""
+    func showUser() {
+        if let userCoordinates = userCoordinates {
+            view?.showUser(coordinate: userCoordinates, willZoomToRegion: isShowUserPoint)
+        }
+        isShowUserPoint = true
     }
 
     // MARK: - Private
 
-    private func calculateClosedSaloons(isClosed: Bool) {
-        if isClosed {
-            sortedSalons = sortedSalonsByUserLocation()
-        } else {
-            sortedSalons = immutableSalons
-        }
+    private func calculateNearestSalons() {
+        sortedSalons = sortedSalonsByUserLocation()
     }
 
     private func sortedSalonsByUserLocation() -> [Saloon] {
         guard let userCoordinates = userCoordinates else { return [] }
 
-        let userLocation = CLLocation(latitude: userCoordinates.latitude, longitude: userCoordinates.longitude)
-        var sortedSalons: [Saloon] = []
+        let currentUserLocation = CLLocation(
+            latitude: userCoordinates.latitude,
+            longitude: userCoordinates.longitude
+        )
 
-        for saloon in immutableSalons {
-            let saloonLocation = CLLocation(
-                latitude: saloon.coordinate_lat,
-                longitude: saloon.coordinate_lon
+        sortedSalons = immutableSalons.map { saloon in
+            let saloonDistance = CLLocation(
+                latitude: saloon.saloonCodable.coordinate_lat,
+                longitude: saloon.saloonCodable.coordinate_lon
             )
 
-            let distanceToSaloon = userLocation.distance(from: saloonLocation)
-
-            if distanceToSaloon <= 12000 {
-                sortedSalons.append(saloon)
-
-                let locationModel = DistanceModel(id: saloon.id, title: saloon.title, distance: distanceToSaloon)
-                if !distances.contains(where: { $0.id == saloon.id}) {
-                    distances.append(locationModel)
-                }
-            }
-        }
+            return SaloonModel(
+                saloonCodable: saloon.saloonCodable,
+                distance: currentUserLocation.distance(from: saloonDistance)
+            )
+        }.filter { ($0.distance ?? 0.0) <= 12000 }
 
         return sortedSalons
     }
@@ -138,7 +139,7 @@ final class MapPresenter: MapPresenterOutput {
         )
     }
 
-    private func bindUI() {
+    private func bind() {
         locationManager.currentLocation
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in }) { [weak self] userCoordinates in
@@ -146,11 +147,6 @@ final class MapPresenter: MapPresenterOutput {
 
                 self.userCoordinates = userCoordinates
                 self.view?.updateUserLocation(isCanUpdate: true)
-
-                if userCoordinates.latitude != self.userCoordinates?.latitude {
-                    self.calculateClosedSaloons(isClosed: isZoomed ?? false)
-                    self.view?.updateScale(isZoomed: isZoomed ?? false, userCoordinates: userCoordinates)
-                }
             }.store(in: &cancellables)
 
         locationManager.deniedLocationAccess

@@ -62,7 +62,7 @@ final class FilterPresenter: FilterPresenterOutput {
     private func configureModel(selectDict: [IndexPath: Bool]) {
         var newIndexes: [IndexPath: Bool] = [:]
         for (index, value) in selectDict {
-            let newIndex: IndexPath = [0, index.item - 1]
+            let newIndex: IndexPath = [1, index.item - 1]
             newIndexes[newIndex] = value
         }
         self.selectFilters = newIndexes

@@ -16,20 +16,22 @@ final class SearchViewController: BaseViewController<SearchView> {
         case single
     }
 
-    typealias DataSource = UITableViewDiffableDataSource<Section, Saloon>
+    typealias DataSource = UITableViewDiffableDataSource<Section, SaloonModel>
 
     // MARK: - Properties
 
     var dataSource: DataSource?
+
+    var completionWithState: ((Bool) -> ())?
     
-    var completionHandler: ((Saloon) -> ())?
+    var completionWithModel: ((SaloonModel) -> ())?
     
     var presenter: SearchPresenter?
     
     var navController: UINavigationController? {
         return self.navigationController ?? UINavigationController()
     }
-    
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -37,7 +39,6 @@ final class SearchViewController: BaseViewController<SearchView> {
 
         subscribeDelegate()
         subscribeNotifications()
-        presenter?.updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +48,7 @@ final class SearchViewController: BaseViewController<SearchView> {
     }
     
     deinit {
+        completionWithState?(presenter?.isNear ?? true)
         print("SearchViewController died")
     }
     
@@ -82,29 +84,24 @@ final class SearchViewController: BaseViewController<SearchView> {
         contentView.searchBar.delegate = self
     }
 
-    private func setupDataSource(model: [Saloon], distance: [DistanceModel]) {
+    private func setupDataSource(model: [SaloonModel]) {
         dataSource = DataSource(tableView: contentView.tableView) {
             tableView, indexPath, item in
             let cell = tableView.dequeueCell(withType: SearchCell.self, for: indexPath)
             cell.configure(model: item)
-
-            if !distance.isEmpty {
-                cell.configure(distance: distance[indexPath.item].distanceInKilometers)
-            }
-
             return cell
         }
     }
 
-    private func applySnapShot(model: [Saloon], distance: [DistanceModel]) {
-        var snapShot = NSDiffableDataSourceSnapshot<Section, Saloon>()
+    private func applySnapShot(model: [SaloonModel]) {
+        var snapShot = NSDiffableDataSourceSnapshot<Section, SaloonModel>()
         snapShot.appendSections([.single])
         snapShot.appendItems(model)
         dataSource?.apply(snapShot, animatingDifferences: false)
     }
 
-    private func dismiss(value: Saloon) {
-        completionHandler?(value)
+    private func dismiss(value: SaloonModel) {
+        completionWithModel?(value)
         AppRouter.shared.dismiss()
     }
 
@@ -128,9 +125,7 @@ extension SearchViewController: UITableViewDelegate {
     // MARK: - UITableViewDelegate methods
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let model = presenter?.currentModel {
-            dismiss(value: model[indexPath.row])
-        }
+        dismiss(value: (presenter?.modelUI ?? [])[indexPath.item] as! SaloonModel)
     }
 }
 
@@ -143,7 +138,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        if searchBar.text == AssetString.where_wanna_go {
+        if searchBar.text == AssetString.where_wanna_go.rawValue {
             contentView.searchBar.text = nil
         }
         contentView.searchBar.searchTextField.textColor = .black
@@ -154,15 +149,26 @@ extension SearchViewController: SearchViewInput {
     
     // MARK: - SearchViewProtocol methods
     
-    func updateUI(with model: [Saloon], and distances: [DistanceModel]) {
-        setupDataSource(model: model, distance: distances)
-        applySnapShot(model: model, distance: distances)
+    func updateUI(with model: [Saloon]) {
+        guard let model = model as? [SaloonModel] else { return }
+
+        setupDataSource(model: model)
+        applySnapShot(model: model)
+        contentView.updateEmptyLabel(isShow: !model.isEmpty)
+    }
+
+    func updateSegment(index: Int) {
+        contentView.updateSegment(index: index)
     }
 }
 
 extension SearchViewController: SearchViewDelegate {
 
     // MARK: - SearchViewDelegate methods
+
+    func changeSegmentIndex() {
+        presenter?.isNear.toggle()
+    }
 
     func dismiss() {
         AppRouter.shared.dismiss()

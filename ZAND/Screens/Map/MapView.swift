@@ -13,6 +13,7 @@ protocol MapDelegate: AnyObject {
     func showSearch()
     func showDetail(by id: Int)
     func changeScale()
+    func showUser()
 }
 
 final class MapRectView: BaseUIView {
@@ -24,16 +25,32 @@ final class MapRectView: BaseUIView {
         case user = "user"
     }
 
+    enum Radius: Double {
+        case closed = 15000.0
+        case user = 6000.0
+    }
+
     // MARK: - Properties
 
     weak var delegate: MapDelegate?
 
     private var currentId: Int?
 
+    private var isShowSingle: Bool = false
+
+    private var userCoordinate: CLLocationCoordinate2D?
+
+    private var isCurrentLocationSelected: Bool = true {
+        didSet {
+            locationButton.backgroundColor = isCurrentLocationSelected ? .superLightGreen : .white
+            locationButton.isUserInteractionEnabled = !isCurrentLocationSelected
+        }
+    }
+
     private lazy var onMapButton: UIButton = {
         let button = UIButton(configuration: .borderless())
         button.backgroundColor = .white
-        button.setTitle("Ближайшие", for: .normal)
+        button.setTitle(AssetString.near.rawValue, for: .normal)
         button.setTitleColor(.mainGreen, for: .normal)
         button.layer.cornerRadius = 15.0
         button.layer.borderColor = UIColor.mainGreen.cgColor
@@ -42,16 +59,17 @@ final class MapRectView: BaseUIView {
         return button
     }()
 
-    private var defaultOverlay: MKPolygon {
-        return MKPolygon(
-            coordinates: BaseMapRectModel.coordinates,
-            count: BaseMapRectModel.coordinates.count
-        )
-    }
-
     private let mapView = MKMapView()
 
     private let searchButton = SearchButton()
+
+    private let locationButton: UIButton = {
+        let button = UIButton()
+        button.setImage(AssetImage.location_icon.image, for: .normal)
+        button.backgroundColor = .superLightGreen
+        button.layer.cornerRadius = 25
+        return button
+    }()
 
     // MARK: - Instance methods
     
@@ -60,7 +78,7 @@ final class MapRectView: BaseUIView {
 
         setViews()
         subscribeDelegate()
-        searchAction()
+        setupActions()
     }
     
     // MARK: - Public
@@ -68,32 +86,23 @@ final class MapRectView: BaseUIView {
     func configure(isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
         onMapButton.backgroundColor = isZoomed ? .superLightGreen : .white
         onMapButton.setTitleColor(isZoomed ? .mainGreen : .black, for: .normal)
+        userCoordinate = userCoordinates
 
         if isZoomed {
             mapView.setRegion(
                 MKCoordinateRegion(
                     center: userCoordinates,
-                    latitudinalMeters: 15000,
-                    longitudinalMeters: 15000
+                    latitudinalMeters: Radius.closed.rawValue,
+                    longitudinalMeters: Radius.closed.rawValue
                 ),
                 animated: true
             )
-
         } else {
-            mapView.setRegion(
-                MKCoordinateRegion(defaultOverlay.boundingMapRect), animated: true
-            )
-        }
-    }
-
-    func addPinsOnMap(model: [SaloonMapModel]) {
-        model.forEach {
-            let coordinates = CLLocationCoordinate2D(
-                latitude: $0.coordinate_lat,
-                longitude: $0.coordinate_lon
-            )
-            mapView.addAnnotation(
-                SaloonAnnotation(coordinate: coordinates, model: $0))
+            let moscowCenter = CLLocationCoordinate2D(latitude: 55.7524903, longitude: 37.6232096)
+            let span = MKCoordinateSpan(latitudeDelta: 0.8, longitudeDelta: 0.8)
+            let region = MKCoordinateRegion(center: moscowCenter , span: span)
+            mapView.setRegion(region, animated: true)
+            isCurrentLocationSelected = true
         }
     }
 
@@ -117,20 +126,40 @@ final class MapRectView: BaseUIView {
         mapView.setRegion(region, animated: true)
     }
 
-    func showUserLocation() {
+    func addPinsOnMap(model: [Saloon]) {
+        model.forEach {
+            let coordinates = CLLocationCoordinate2D(
+                latitude: $0.saloonCodable.coordinate_lat,
+                longitude: $0.saloonCodable.coordinate_lon
+            )
+            mapView.addAnnotation(
+                SaloonAnnotation(coordinate: coordinates, model: $0))
+        }
+    }
+
+    func confirmShowUserLocation() {
         mapView.showsUserLocation = true
+    }
+
+    func showUserLocation(_ coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool) {
+        isCurrentLocationSelected = true
+        userCoordinate = coordinate
+
+        if willZoomToRegion {
+            self.mapView.setRegion(
+                MKCoordinateRegion(
+                    center: coordinate,
+                    latitudinalMeters: Radius.user.rawValue,
+                    longitudinalMeters: Radius.user.rawValue),
+                animated: true
+            )
+        }
     }
 
     // MARK: - Private methods
 
     private func subscribeDelegate() {
         mapView.delegate = self
-    }
-
-    private func searchAction() {
-        searchButton.tapHandler = { [weak self] in
-            self?.delegate?.showSearch()
-        }
     }
     
     @objc
@@ -144,6 +173,11 @@ final class MapRectView: BaseUIView {
     private func dropScale() {
         delegate?.changeScale()
     }
+
+    @objc
+    private func showUserOnMap() {
+        delegate?.showUser()
+    }
 }
 
 extension MapRectView {
@@ -154,7 +188,7 @@ extension MapRectView {
         backgroundColor = .mainGray
 
         addSubviews([searchButton, mapView])
-        mapView.addSubview(onMapButton)
+        mapView.addSubviews([onMapButton, locationButton])
 
         searchButton.snp.makeConstraints { make in
             make.top.equalTo(self).offset(50)
@@ -172,6 +206,24 @@ extension MapRectView {
             make.top.equalToSuperview().offset(16)
             make.height.equalTo(48)
         }
+
+        locationButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(16)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(24)
+            make.width.height.equalTo(50)
+        }
+    }
+
+    private func setupActions() {
+        searchButton.tapHandler = { [weak self] in
+            self?.delegate?.showSearch()
+        }
+
+        locationButton.addTarget(
+            self,
+            action: #selector(showUserOnMap),
+            for: .touchUpInside
+        )
     }
 }
 
@@ -202,9 +254,9 @@ extension MapRectView: MKMapViewDelegate {
                 } else {
                     annotationView?.annotation = annotation
                 }
-                annotationView?.image = AssetImage.pin_icon
+                annotationView?.image = AssetImage.pin_icon.image
                 let button = UIButton(type: .custom)
-                button.setTitle(annotation.model.title, for: .normal)
+                button.setTitle(annotation.model.saloonCodable.title, for: .normal)
                 button.setTitleColor(.black, for: .normal)
                 button.addTarget(self, action: #selector(navigateToSaloonDetail), for: .touchUpInside)
                 annotationView?.detailCalloutAccessoryView = button
@@ -216,7 +268,22 @@ extension MapRectView: MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let customAnnotation = view.annotation as? SaloonAnnotation {
-            self.currentId = customAnnotation.model.id
+            self.currentId = customAnnotation.model.saloonCodable.id
         }
+    }
+
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        guard let userCoordinate else { return }
+
+        let userLocation = CLLocation(
+            latitude: userCoordinate.latitude,
+            longitude: userCoordinate.longitude
+        )
+        let newLocation = CLLocation(
+            latitude: mapView.region.center.latitude,
+            longitude: mapView.region.center.longitude
+        )
+
+        isCurrentLocationSelected = userLocation.distance(from: newLocation) > 5 ? false : true
     }
 }

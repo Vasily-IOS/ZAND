@@ -7,11 +7,6 @@
 
 import Foundation
 
-enum AttendanceID: Int {
-    case waiting = 0 // ожидание пользователя
-    case userConfirmed = 2 // пользователь подтвердил запись
-}
-
 struct GetRecordModel: Codable {
     let success: Bool
     let data: GetRecord

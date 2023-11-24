@@ -16,15 +16,15 @@ final class AddressView: BaseUIView {
 
     // MARK: - Properties
 
-    private let addressLabel = UILabel(.systemFont(ofSize: 16), .black, AssetString.address)
+    private let addressLabel = UILabel(.systemFont(ofSize: 16), .black, AssetString.address.rawValue)
 
     private let viewOnMapButton = TransparentButton(state: .viewOnMap)
 
-    private let weedDaysLabel = UILabel(.systemFont(ofSize: 12), .black, AssetString.weekDays)
+    private let weedDaysLabel = UILabel(.systemFont(ofSize: 12), .black, AssetString.weekDays.rawValue)
 
     private let weekDaysDescriptionLabel = UILabel(.systemFont(ofSize: 12))
 
-    private let weekendDaysLabel = UILabel(.systemFont(ofSize: 12), .black, AssetString.weekendDays)
+    private let weekendDaysLabel = UILabel(.systemFont(ofSize: 12), .black, AssetString.weekendDays.rawValue)
 
     private let weekendDaysDescriptionLabel = UILabel(.systemFont(ofSize: 12))
 
@@ -67,13 +67,10 @@ final class AddressView: BaseUIView {
         addTarget()
     }
 
-    func configure(type: SaloonDetailType) {
-        switch type {
-        case .api(let model):
-            addressDescriptionLabel.text = model.address
-            weekDaysDescriptionLabel.text = model.schedule
-            weekendDaysDescriptionLabel.text = model.schedule
-        }
+    func configure(model: Saloon) {
+        addressDescriptionLabel.text = model.saloonCodable.address
+        weekDaysDescriptionLabel.text = model.saloonCodable.schedule
+        weekendDaysDescriptionLabel.text = model.saloonCodable.schedule
     }
     
     // MARK: - Action

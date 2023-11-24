@@ -44,12 +44,12 @@ final class FilterView: BaseUIView {
         spacing: 16
     )
     
-    private let lineImage = UIImageView(image: AssetImage.line_icon)
+    private let lineImage = UIImageView(image: AssetImage.line_icon.image)
 
     private let viewFirstLabel = UILabel(
         .systemFont(ofSize: 20, weight: .bold),
         .black,
-        AssetString.showFirst
+        AssetString.showFirst.rawValue
     )
     
     private let applyButton = BottomButton(buttonText: .apply)
@@ -61,7 +61,7 @@ final class FilterView: BaseUIView {
         cancelButton.layer.borderColor = UIColor.lightGreen.cgColor
         cancelButton.layer.borderWidth = 1
         cancelButton.backgroundColor = .mainGray
-        cancelButton.setTitle(AssetString.reset, for: .normal)
+        cancelButton.setTitle(AssetString.reset.rawValue, for: .normal)
         cancelButton.setTitleColor(.mainGreen, for: .normal)
         cancelButton.layer.cornerRadius = 15
         cancelButton.isHidden = true

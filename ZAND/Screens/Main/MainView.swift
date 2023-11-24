@@ -40,11 +40,11 @@ final class MainView: BaseUIView {
         return lostConnectionAnimation
     }()
 
-    private let lostConnectionImage = UIImageView(image: AssetImage.lostConnection_icon)
+    private let lostConnectionImage = UIImageView(image: AssetImage.lostConnection_icon.image)
 
     private let emptyLabel: UILabel = {
         let emptyLabel = UILabel()
-        emptyLabel.text = AssetString.noSalons
+        emptyLabel.text = AssetString.noSalons.rawValue
         emptyLabel.font = .systemFont(ofSize: 24, weight: .regular)
         emptyLabel.textColor = .textGray
         emptyLabel.textAlignment = .center

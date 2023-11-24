@@ -18,8 +18,6 @@ final class DeviceLocationService: NSObject, CLLocationManagerDelegate {
 
     var deniedLocationAccess = PassthroughSubject<Void, Never>()
 
-    var isAppActive: Bool = true
-
     private override init() {
         super.init()
     }
@@ -45,10 +43,7 @@ final class DeviceLocationService: NSObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-
-        if isAppActive {
-            currentLocation.send(location.coordinate)
-        }
+        currentLocation.send(location.coordinate)
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

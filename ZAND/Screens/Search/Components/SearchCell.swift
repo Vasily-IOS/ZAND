@@ -53,12 +53,9 @@ final class SearchCell: BaseTableCell {
     // MARK: - Configure
 
     func configure(model: Saloon) {
-        saloonNameLabel.text = model.title
-        saloonClassLabel.text = String(model.short_descr)
-    }
-
-    func configure(distance: String = "") {
-        distanceLabel.text = distance + " " + "км"
+        saloonNameLabel.text = model.saloonCodable.title
+        saloonClassLabel.text = String(model.saloonCodable.short_descr)
+        distanceLabel.text = model.distance == nil ? "" : model.distanceString ?? ""
     }
 }
 

@@ -17,7 +17,7 @@ final class FavouritesCell: BaseCollectionCell {
         let saloonImage = UIImageView()
         saloonImage.contentMode = .scaleAspectFill
         saloonImage.clipsToBounds = true
-        saloonImage.image = AssetImage.noFoto_icon
+        saloonImage.image = AssetImage.noFoto_icon.image
         return saloonImage
     }()
 
@@ -38,8 +38,8 @@ final class FavouritesCell: BaseCollectionCell {
     }
 
     func configure(model: Saloon) {
-        saloonNameLabel.text = model.title
-        saloonImage.kf.setImage(with: URL(string: model.company_photos.first ?? ""))
+        saloonNameLabel.text = model.saloonCodable.title
+        saloonImage.kf.setImage(with: URL(string: model.saloonCodable.company_photos.first ?? ""))
     }
 }
 

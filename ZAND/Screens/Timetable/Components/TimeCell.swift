@@ -25,7 +25,7 @@ final class TimeCell: BaseCollectionCell {
 
     // MARK: - Instance methods
 
-    func configure(model: BookTime) {
+    func configure(model: BookTimeModel) {
         timeLabel.text = model.time
     }
 

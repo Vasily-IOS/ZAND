@@ -8,7 +8,7 @@
 import Foundation
 import AuthenticationServices
 
-struct User {
+struct UserModel {
 
     // MARK: - Nested types
 

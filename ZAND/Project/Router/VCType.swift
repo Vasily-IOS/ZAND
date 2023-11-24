@@ -7,23 +7,19 @@
 
 import CoreLocation
 
-enum SaloonDetailType {
-    case api(Saloon)
-}
-
 enum VCType {
     case tabBar
-    case search(_ model: [Saloon], _ distance: [DistanceModel])
+    case search(_ sortedModel: [Saloon], allModel: [Saloon], isNear: Bool?=nil)
     case main
     case map
-    case saloonDetail(_ type: SaloonDetailType, _ distance: String)
+    case saloonDetail(_ model: Saloon)
     case filter(_ dict: [IndexPath: Bool])
     case profile
     case appointments
     case privacyPolicy(_ urlString: String)
-    case selectableMap(_ model: SaloonMapModel)
+    case selectableMap(_ model: Saloon)
     case appleSignIn
-    case register(_ user: User)
+    case register(_ user: UserModel)
     case startBooking(Int, String, String)
     case services(
         booking_type: BookingType?=nil,

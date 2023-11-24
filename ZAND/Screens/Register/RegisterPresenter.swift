@@ -9,12 +9,12 @@ import Foundation
 
 protocol RegisterPresenterOutput: AnyObject {
     var keyboardAlreadyHidined: Bool { get set }
-    var user: User { get set }
+    var user: UserModel { get set }
     func save()
 }
 
 protocol RegisterViewInput: AnyObject {
-    func configure(model: User)
+    func configure(model: UserModel)
 }
 
 final class RegisterPresenter: RegisterPresenterOutput {
@@ -23,13 +23,13 @@ final class RegisterPresenter: RegisterPresenterOutput {
 
     weak var view: RegisterViewInput?
 
-    var user: User
+    var user: UserModel
 
     var keyboardAlreadyHidined: Bool = false
 
     // MARK: - Initializers
 
-    init(view: RegisterViewInput, user: User) {
+    init(view: RegisterViewInput, user: UserModel) {
         self.view = view
         self.user = user
 

@@ -9,13 +9,18 @@ import UIKit
 import CoreLocation
 
 protocol SearchViewInput: AnyObject {
-    func updateUI(with model: [Saloon], and distances: [DistanceModel])
+    func updateUI(with model: [Saloon])
+    func updateSegment(index: Int)
 }
 
 protocol SearchPresenterOutput: AnyObject {
-    func updateUI()
-    func getModel() -> [Saloon]
+    var isNear: Bool { get set }
+    var modelUI: [Saloon] { get set }
+
+    func updateUI(isNear: Bool)
+    func getModel(id: Int) -> Saloon?
     func search(text: String)
+    func updateSegment()
 }
 
 final class SearchPresenter: SearchPresenterOutput {
@@ -24,60 +29,79 @@ final class SearchPresenter: SearchPresenterOutput {
     
     weak var view: SearchViewInput?
 
-    var currentModel: [Saloon] = []
+    var isNear: Bool {
+        didSet {
+            updateUI(isNear: isNear)
+        }
+    }
 
-    private let immutableSalons: [Saloon]
+    var modelUI: [Saloon] = [] // салоны, которые идут в коллекцию
 
-    private let immutableDistances: [DistanceModel]
+    private let nearModel: [Saloon] // салоны, которые рядом
+
+    private let originalModel: [Saloon] // все салоны
 
     // MARK: - Initializers
     
-    init(view: SearchViewInput, model: [Saloon], locations: [DistanceModel]) {
+    init(
+        view: SearchViewInput,
+        sortedModel: [Saloon],
+        allModel: [Saloon],
+        isNear: Bool
+    ) {
         self.view = view
-        self.immutableSalons = model
-        self.immutableDistances = locations
+        self.nearModel = sortedModel
+        self.originalModel = allModel
+        self.isNear = isNear
+
+        print(nearModel.count)
+
+        updateUI(isNear: isNear)
+        updateSegment()
     }
 }
 
 extension SearchPresenter {
     
     // MARK: - SearchPresenter methods
-    
-    func updateUI() {
-        view?.updateUI(with: immutableSalons, and: immutableDistances)
-        currentModel = immutableSalons
+
+    func updateUI(isNear: Bool) {
+        if isNear {
+            modelUI = nearModel
+        } else {
+            modelUI = originalModel
+        }
+
+        view?.updateUI(with: modelUI)
     }
 
     func search(text: String) {
         if text.isEmpty {
-            view?.updateUI(with: immutableSalons, and: immutableDistances)
-            currentModel = immutableSalons
+            updateUI(isNear: isNear)
         } else {
-            let group = DispatchGroup()
-            var filteredDistances: [DistanceModel] = []
-
-            group.enter()
-            let filtedModel = immutableSalons.filter({ model in
-                return model.title.uppercased().contains(text.uppercased())
+            let filtedModel = getActualModel().filter({ model in
+                return model.saloonCodable.title.uppercased().contains(text.uppercased())
             })
-            group.leave()
-
-            group.enter()
-            filtedModel.forEach { model in
-                if let model = immutableDistances.first(where: { $0.id == model.id }) {
-                    filteredDistances.append(model)
-                }
-            }
-            group.leave()
-
-            group.notify(queue: .main) {
-                self.view?.updateUI(with: filtedModel, and: filteredDistances)
-                self.currentModel = filtedModel
-            }
+            self.view?.updateUI(with: filtedModel)
+            modelUI = filtedModel
         }
     }
 
-    func getModel() -> [Saloon] {
-        return immutableSalons
+    func getModel(id: Int) -> Saloon? {
+        if let model = originalModel.first(where: { $0.saloonCodable.id == id }) {
+            return model
+        } else {
+            return nil
+        }
+     }
+
+    func updateSegment() {
+        view?.updateSegment(index: isNear ? 0 : 1)
+    }
+
+    // MARK: - Private methods
+
+    private func getActualModel() -> [Saloon] {
+        return isNear ? nearModel : originalModel
     }
 }

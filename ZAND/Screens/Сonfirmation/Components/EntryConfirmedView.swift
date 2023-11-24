@@ -46,10 +46,10 @@ final class EntryConfirmedView: BaseUIView {
 
     func configure(isSuccess: Bool) {
         if isSuccess {
-            finalLabel.text = AssetString.finalText
+            finalLabel.text = AssetString.finalText.rawValue
             setupSuccessSubviews()
         } else {
-            finalLabel.text = AssetString.errorText
+            finalLabel.text = AssetString.errorText.rawValue
             setupFailureSubviews()
         }
         VibrationManager.shared.vibrate(for: .success)

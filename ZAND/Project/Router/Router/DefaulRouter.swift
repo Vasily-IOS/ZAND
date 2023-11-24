@@ -20,7 +20,7 @@ protocol DefaultRouter: AnyObject {
     func showAlert(type: AlertType, message: String?)
     func presentCompletion(type: VCType, completion: @escaping ([IndexPath: Bool]) -> Void)
     func presentRecordNavigation(type: VCType)
-    func presentSearch(type: VCType, completion: ((Saloon) -> ())?)
+    func presentSearch(type: VCType, modelHandler: ((Saloon) -> ())?, segmentHandler: ((Bool) -> ())?)
     func switchRoot(type: ReplacedControllerType)
 
     func checkAuth()

@@ -17,7 +17,7 @@ final class StaffComponentView: BaseUIView {
         let avatarImage = UIImageView()
         avatarImage.layer.cornerRadius = 44.0
         avatarImage.clipsToBounds = true
-        avatarImage.image = AssetImage.profile_icon
+        avatarImage.image = AssetImage.profile_icon.image
         return avatarImage
     }()
 

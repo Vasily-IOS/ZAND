@@ -80,8 +80,8 @@ extension SaloonDetailViewController: SaloonViewInput {
 
     // MARK: - SaloonViewInput methods
 
-    func updateUI(type: SaloonDetailType, distance: String) {
-        contentView.configure(type: type, distance: distance)
+    func updateUI(model: Saloon) {
+        contentView.configure(model: model)
     }
 
     func isInFavourite(result: Bool) {

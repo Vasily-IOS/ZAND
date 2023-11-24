@@ -11,6 +11,6 @@ struct FilterModel: CommonFilterProtocol {
     let title: String
 
     static let model: [Self] = [
-        .init(title: AssetString.near)
+        .init(title: AssetString.near.rawValue)
     ]
 }

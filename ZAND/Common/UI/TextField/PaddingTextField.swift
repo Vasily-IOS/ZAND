@@ -26,23 +26,23 @@ final class PaddingTextField: UITextField {
         var placeholder_text: String {
             switch self {
             case .email:
-                return AssetString.email
+                return AssetString.email.rawValue
             case .smsCode:
-                return AssetString.smsCode
+                return AssetString.smsCode.rawValue
             case .name:
-                return AssetString.name
+                return AssetString.name.rawValue
             case .surname:
-                return AssetString.surname
+                return AssetString.surname.rawValue
             case .age:
-                return AssetString.age
+                return AssetString.age.rawValue
             case .usename:
-                return AssetString.userName
+                return AssetString.userName.rawValue
             case .confirmPassword:
-                return AssetString.confirmPassword
+                return AssetString.confirmPassword.rawValue
             case .confirmation_code:
-                return AssetString.confirmationCode
+                return AssetString.confirmationCode.rawValue
             case .phone:
-                return AssetString.phoneNumber
+                return AssetString.phoneNumber.rawValue
             }
         }
     }

@@ -8,8 +8,8 @@
 import UIKit
 
 protocol TimetablePresenterOutput: AnyObject {
-    var workingRangeModel: [WorkingRangeItem] { get set }
-    var bookTimeModel: [BookTime] { get set }
+    var workingRangeModel: [WorkingRangeItemModel] { get set }
+    var bookTimeModel: [BookTimeModel] { get set }
     var viewModel: ConfirmationViewModel { get set }
     func fetchBookTimes(date: String)
     func updateDateLabel(date: Date)
@@ -28,9 +28,9 @@ final class TimetablePresenter: TimetablePresenterOutput {
 
     weak var view: TimetableInput?
 
-    var workingRangeModel: [WorkingRangeItem] = []
+    var workingRangeModel: [WorkingRangeItemModel] = []
 
-    var bookTimeModel: [BookTime] = []
+    var bookTimeModel: [BookTimeModel] = []
 
     var viewModel: ConfirmationViewModel
 
@@ -80,7 +80,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
                 staff_id: viewModel.staffID,
                 date: date,
                 service_id: viewModel.bookService?.id ?? 0),
-            expectation: BookTimes.self)
+            expectation: BookTimesModel.self)
         { [weak self] bookTimes in
 
             self?.bookTimeModel = bookTimes.data
@@ -100,7 +100,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
         let currentDay = formatter.string(from: Date())
 
         view?.showIndicator(true)
-        let model = FetchBookDate(
+        let model = FetchBookDateModel(
             company_id: company_id,
             service_ids: service_ids,
             staff_id: staff_id,
@@ -108,7 +108,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
             date_from: currentDay,
             date_to: date_to
         )
-        network.performRequest(type: .bookDates(model), expectation: BookDates.self)
+        network.performRequest(type: .bookDates(model), expectation: BookDatesModel.self)
         { bookDates in
             completion(bookDates.data.booking_dates)
         }
@@ -127,7 +127,7 @@ final class TimetablePresenter: TimetablePresenterOutput {
             dayStringFormatter.locale = Locale(identifier: "ru_RU")
             dayStringFormatter.dateFormat = "E"
 
-            let item = WorkingRangeItem(
+            let item = WorkingRangeItemModel(
                 dateString: dateFormatter.string(from: date),
                 dayNumeric: dayNumericFormatter.string(from: date),
                 dayString: dayStringFormatter.string(from: date)

@@ -13,7 +13,7 @@ enum RequestType {
     case categories(Int) // получить все категории услуг
     case bookServices(company_id: Int, staff_id: Int = 0) // Получить список услуг, доступных для бронирования
     case bookStaff(company_id: Int, service_id: [Int]) // Получить список сотрудников доступных для бронирования
-    case bookDates(_ model: FetchBookDate) // Получить список дат, доступных для бронирования
+    case bookDates(_ model: FetchBookDateModel) // Получить список дат, доступных для бронирования
     case bookTimes(company_id: Int, staff_id: Int, date: String, service_id: Int) // Получить список сеансов, доступных для бронирования
     case createRecord(company_id: Int, model: ConfirmationModel) // Создать запись на сеанс
     case getRecord(company_id: Int, record_id: Int) // Получить запись
@@ -36,7 +36,7 @@ enum RequestType {
 extension RequestType: TargetType {
 
     var baseURL: URL {
-        return URL(string: AssetURL.baseURL)!
+        return URL(string: AssetURL.baseURL.rawValue)!
     }
 
     var path: String {

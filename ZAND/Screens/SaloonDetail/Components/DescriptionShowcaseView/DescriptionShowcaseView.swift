@@ -12,13 +12,17 @@ final class DescriptionShowcaseView: BaseUIView {
 
     // MARK: - Properties
     
-    private let topDescriptionLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
-                                              .black,
-                                              AssetString.description)
+    private let topDescriptionLabel = UILabel(
+        .systemFont(ofSize: 20, weight: .bold),
+        .black,
+        AssetString.description.rawValue
+    )
 
-    private let showCaseLabel = UILabel(.systemFont(ofSize: 20, weight: .bold),
-                                        .black,
-                                        AssetString.showCase)
+    private let showCaseLabel = UILabel(
+        .systemFont(ofSize: 20, weight: .bold),
+        .black,
+        AssetString.showCase.rawValue
+    )
     
     private let descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
@@ -48,11 +52,8 @@ final class DescriptionShowcaseView: BaseUIView {
         subscribeDelegate()
     }
 
-    func configure(type: SaloonDetailType) {
-        switch type {
-        case .api(let model):
-            descriptionLabel.text = model.description.html2String
-        }
+    func configure(model: Saloon) {
+        descriptionLabel.text = model.saloonCodable.description.html2String
     }
 }
 

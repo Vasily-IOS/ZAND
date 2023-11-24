@@ -47,10 +47,10 @@ final class SaloonDetailView: BaseUIView {
         viewAction()
     }
 
-    func configure(type: SaloonDetailType, distance: String) {
-        saloonPhotoCollection.configure(type: type, distance: distance)
-        addressView.configure(type: type)
-        descriptionShowcaseView.configure(type: type)
+    func configure(model: Saloon) {
+        saloonPhotoCollection.configure(model: model)
+        addressView.configure(model: model)
+        descriptionShowcaseView.configure(model: model)
     }
 
     // MARK: - Action
@@ -77,8 +77,9 @@ extension SaloonDetailView {
     private func setViews() {
         addSubview(scrollView)
 
-        scrollView.addSubviews([saloonPhotoCollection,
-                                addressView, descriptionShowcaseView])
+        scrollView.addSubviews(
+            [saloonPhotoCollection, addressView, descriptionShowcaseView]
+        )
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(self)

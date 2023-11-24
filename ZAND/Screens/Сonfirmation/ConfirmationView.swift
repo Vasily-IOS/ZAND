@@ -89,11 +89,11 @@ final class ConfirmationView: BaseUIView {
     func configure(viewModel: ConfirmationViewModel) {
         staffComponentView.configure(model: viewModel.employeeCommon)
         nameComponentView.configure(
-            topText: "Имя",
+            topText: AssetString.name.rawValue,
             bottomText: viewModel.fullName
         )
         phoneComponentView.configure(
-            topText: "Телефон",
+            topText: AssetString.phone.rawValue,
             bottomText: viewModel.phone
         )
         serviceComponentView.configure(

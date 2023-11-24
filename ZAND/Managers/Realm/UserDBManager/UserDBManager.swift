@@ -21,7 +21,7 @@ final class UserDBManager {
 
     // MARK: - Instance methods
 
-    func save(user: User) {
+    func save(user: UserModel) {
         let userDB = UserDataBaseModel()
         userDB.id = user.id
         userDB.givenName = user.name ?? ""

@@ -63,9 +63,11 @@ final class ProfilePresenter: ProfilePresenterOutput {
 
         for (index, value) in saloonsID.enumerated() {
             group.enter()
-            network.performRequest(type: .salons, expectation: Saloons.self) { saloonData in
+            network.performRequest(type: .salons, expectation: SalonsCodableModel.self) { saloonData in
                 let saloon = saloonData.data.first(where: { $0.id == value })
-                savedSaloons[index] = saloon
+                if let saloon {
+                    savedSaloons[index] = SaloonModel(saloonCodable: saloon)
+                }
                 group.leave()
             }
         }

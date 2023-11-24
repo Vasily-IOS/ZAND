@@ -22,13 +22,13 @@ final class SignInView: BaseUIView {
     private let topLabel = UILabel(
         .systemFont(ofSize: 24, weight: .bold),
         .black,
-        AssetString.youIsNotRegister
+        AssetString.youIsNotRegister.rawValue
     )
 
     private let mediumLabel = UILabel(
         .systemFont(ofSize: 16, weight: .regular),
         .black,
-        AssetString.pleaseRegister)
+        AssetString.pleaseRegister.rawValue)
 
     private let appleButton = ASAuthorizationAppleIDButton()
 

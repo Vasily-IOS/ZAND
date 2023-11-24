@@ -49,8 +49,8 @@ extension AppRouter {
         else { return }
 
         let tabBarItem = UITabBarItem(
-            title: AssetString.profile,
-            image: AssetImage.profile_icon,
+            title: AssetString.profile.rawValue,
+            image: AssetImage.profile_icon.image,
             selectedImage: nil
         )
 
@@ -154,9 +154,16 @@ extension AppRouter: DefaultRouter {
         navigationController.present(createRecordNavigationController!, animated: true)
     }
     
-    func presentSearch(type: VCType, completion: ((Saloon) -> ())?) {
+    func presentSearch(type: VCType, modelHandler: ((Saloon) -> ())?) {
         let vc = vcFactory.getViewController(for: type) as! SearchViewController
-        vc.completionHandler = completion
+        vc.completionWithModel = modelHandler
+        navigationController.present(vc, animated: true)
+    }
+
+    func presentSearch(type: VCType, modelHandler: ((Saloon) -> ())?, segmentHandler: ((Bool) -> ())?) {
+        let vc = vcFactory.getViewController(for: type) as! SearchViewController
+        vc.completionWithModel = modelHandler
+        vc.completionWithState = segmentHandler
         navigationController.present(vc, animated: true)
     }
 
@@ -168,7 +175,7 @@ extension AppRouter: DefaultRouter {
 
     func showAlert(type: AlertType, message: String? = nil) {
         let alertController = UIAlertController(title: type.textValue, message: message, preferredStyle: .alert)
-        let understandAction = UIAlertAction(title: AssetString.ok, style: .cancel)
+        let understandAction = UIAlertAction(title: AssetString.ok.rawValue, style: .cancel)
         alertController.addAction(understandAction)
         navigationController.present(alertController, animated: true)
     }

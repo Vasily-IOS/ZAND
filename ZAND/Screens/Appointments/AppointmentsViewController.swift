@@ -58,15 +58,15 @@ final class AppointmentsViewController: BaseViewController<AppointemtsView> {
 
     private func showCancelAppointmentAlertController(appointmentID: Int) {
         let alertController = UIAlertController(
-            title: AssetString.areUsureCancelAppointpent,
+            title: AssetString.areUsureCancelAppointment.rawValue,
             message: nil,
             preferredStyle: .alert
         )
-        let approveCancelAction = UIAlertAction(title: AssetString.yes, style: .destructive
+        let approveCancelAction = UIAlertAction(title: AssetString.yes.rawValue, style: .destructive
         ) { [weak self] _ in
             self?.presenter?.deleteAppointment(appointmentID: appointmentID)
         }
-        let cancelAction = UIAlertAction(title: AssetString.no, style: .cancel)
+        let cancelAction = UIAlertAction(title: AssetString.no.rawValue, style: .cancel)
         alertController.addAction(approveCancelAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)

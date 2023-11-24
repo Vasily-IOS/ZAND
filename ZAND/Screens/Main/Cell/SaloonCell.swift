@@ -26,7 +26,7 @@ final class SaloonCell: BaseCollectionCell {
     
     var isInFavourite: Bool = false {
         didSet {
-            let image = isInFavourite ? AssetImage.fillHeart_icon : AssetImage.heart
+            let image = isInFavourite ? AssetImage.fillHeart_icon.image : AssetImage.heart_icon.image
             favouritesButton.setImage(image, for: .normal)
 
             if isInFavourite {
@@ -104,16 +104,16 @@ final class SaloonCell: BaseCollectionCell {
     // MARK: - Configuration
 
     func configure(model: Saloon, indexPath: IndexPath) {
-        self.saloonDescriptionLabel.text = model.title
-        self.categoryLabel.text = model.short_descr
-        self.adressLabel.text = model.address
-        self.id = model.id
+        self.saloonDescriptionLabel.text = model.saloonCodable.title
+        self.categoryLabel.text = model.saloonCodable.short_descr
+        self.adressLabel.text = model.saloonCodable.address
+        self.id = model.saloonCodable.id
         self.indexPath = indexPath
 
-        if model.photos.isEmpty && model.company_photos.isEmpty {
-            saloonImage.image = AssetImage.noFoto_icon
+        if model.saloonCodable.photos.isEmpty && model.saloonCodable.company_photos.isEmpty {
+            saloonImage.image = AssetImage.noFoto_icon.image
         } else {
-            if let url = URL(string: model.company_photos.first ?? "") {
+            if let url = URL(string: model.saloonCodable.company_photos.first ?? "") {
                 saloonImage.kf.setImage(with: url)
             }
         }

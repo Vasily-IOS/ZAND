@@ -9,17 +9,21 @@ import Foundation
 
 struct UIAppointmentModel: Hashable {
 
+    // MARK: - Nested types
+
     enum ButtonState {
         case none
         case cancelAppointment // отменить запись
         case appointmentCanceled // запись отменена
     }
+
+    // MARK: - Properties
     
     let id: Int // id записи
     let company_name: String
     let company_address: String
     let company_id: Int // id компании
-    let services: UIAppointmentRecord // записи
+    let services: UIAppointmentRecordModel // записи
     let date: String // дата сеанса
     let datetime:  String // дата сеанса в ISO
     let visit_attendance: Int // cтатус визита
@@ -37,12 +41,14 @@ struct UIAppointmentModel: Hashable {
         return makeStartSeanceTime(seance_lenght_int, datetime)
     }
 
+    // MARK: - Initializers
+
     init(networkModel: GetRecord, dataBaseModel: RecordDataBaseModel) {
         id = networkModel.id
         company_name = dataBaseModel.company_name
         company_address = dataBaseModel.company_address
         company_id = Int(dataBaseModel.company_id) ?? 0
-        services = UIAppointmentRecord(model: networkModel.services.first!)
+        services = UIAppointmentRecordModel(model: networkModel.services.first!)
         date = networkModel.date
         datetime = networkModel.datetime
         visit_attendance = networkModel.visit_attendance
@@ -59,6 +65,8 @@ struct UIAppointmentModel: Hashable {
             buttonState = .none
         }
     }
+
+    // MARK: - Instance methods
 
     private func makeStartSeanceDate(_ date: String) -> String {
         let date = try? Date(date, strategy: .iso8601)
@@ -98,7 +106,7 @@ struct UIAppointmentModel: Hashable {
     }
 }
 
-struct UIAppointmentRecord: Hashable {
+struct UIAppointmentRecordModel: Hashable {
     var title: String
     var cost: Int
 

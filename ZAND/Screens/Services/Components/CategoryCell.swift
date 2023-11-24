@@ -20,14 +20,14 @@ final class CategoryCell: BaseTableCell {
     }()
 
     private let arrowImage: UIImageView = {
-        let arrowImage = UIImageView(image: AssetImage.arrow_icon)
+        let arrowImage = UIImageView(image: AssetImage.arrow_icon.image)
         arrowImage.isUserInteractionEnabled = false
         return arrowImage
     }()
 
     // MARK: - Instance methods
 
-    func configure(model: Categories) {
+    func configure(model: CategoriesModel) {
         categoryLabel.text = model.category.title
     }
 

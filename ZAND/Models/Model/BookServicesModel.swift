@@ -8,14 +8,14 @@
 import Foundation
 
 struct BookServicesModel: Codable {
-    let data: DataServices
+    let data: DataServicesModel
 }
 
-struct DataServices: Codable {
-    let services: [BookService]
+struct DataServicesModel: Codable {
+    let services: [BookServiceModel]
 }
 
-struct BookService: Codable {
+struct BookServiceModel: Codable {
     let id: Int
     let title: String
     let category_id: Int

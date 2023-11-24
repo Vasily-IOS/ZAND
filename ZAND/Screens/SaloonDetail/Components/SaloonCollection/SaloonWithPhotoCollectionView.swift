@@ -13,6 +13,7 @@ final class SaloonWithPhotoCollectionView: BaseUIView {
     // MARK: - Closure
 
     var openBookingHandler: (() -> Void)?
+    
     var favouriteHandler:((Int) -> Void)?
     
     // MARK: - Properties
@@ -20,7 +21,7 @@ final class SaloonWithPhotoCollectionView: BaseUIView {
     var inFavourite: Bool = false {
         didSet {
             heartButton.setImage(
-                inFavourite ? AssetImage.fillHeart_icon : AssetImage.heart, for: .normal
+                inFavourite ? AssetImage.fillHeart_icon.image : AssetImage.heart_icon.image, for: .normal
             )
 
             if inFavourite {
@@ -79,7 +80,7 @@ final class SaloonWithPhotoCollectionView: BaseUIView {
 
     private let ratingLabel = UILabel(.systemFont(ofSize: 12))
 
-    private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, AssetString.grades)
+    private let gradeLabel = UILabel(.systemFont(ofSize: 12), nil, AssetString.grades.rawValue)
 
     private let gradeCountLabel = UILabel(.systemFont(ofSize: 12))
 
@@ -99,21 +100,19 @@ final class SaloonWithPhotoCollectionView: BaseUIView {
         addTarget()
     }
 
-    func configure(type: SaloonDetailType, distance: String) {
-        switch type {
-        case .api(let model):
-            if model.company_photos.count == 1 {
-                pageControl.isHidden = true
-            } else {
-                pageControl.numberOfPages = model.photos.count
-            }
-            photos = model.company_photos
-            nameLabel.text = model.title
-            categoryLabel.text = model.short_descr
-            id = model.id
+    func configure(model: Saloon) {
+        if model.saloonCodable.company_photos.count == 1 {
+            pageControl.isHidden = true
+        } else {
+            pageControl.numberOfPages = model.saloonCodable.photos.count
+        }
+        photos = model.saloonCodable.company_photos
+        nameLabel.text = model.saloonCodable.title
+        categoryLabel.text = model.saloonCodable.short_descr
+        id = model.saloonCodable.id
 
-            let text = distance.isEmpty ? "" : "до цели " + distance + " " + "км"
-            distanceLabel.text = text
+        if model.distance != nil {
+            distanceLabel.text = "до цели" + " " + (model.distanceString ?? "")
         }
     }
     

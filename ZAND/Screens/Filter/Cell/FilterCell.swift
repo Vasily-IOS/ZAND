@@ -23,7 +23,7 @@ final class FilterCell: BaseCollectionCell {
 
     private let filterDescription = UILabel(.systemFont(ofSize: 16))
 
-    private let circleImage = UIImageView(image: AssetImage.emptyCircle_icon)
+    private let circleImage = UIImageView(image: AssetImage.emptyCircle_icon.image)
     
     private let fillCircleImage: CheckMarkImageView = {
         let fillCircleImage = CheckMarkImageView(frame: .zero)

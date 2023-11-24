@@ -77,33 +77,34 @@ final class MainViewController: BaseViewController<MainView> {
 
         if cell.isTapped == false {
             cell.isTapped = true
-            presenter?.selectedDays[indexPath] = true
-            let unnecessaryIndexes = presenter?.selectedDays.filter({ $0.key != indexPath}) ?? [:]
+            presenter?.selectedFilters[indexPath] = true
+            let unnecessaryIndexes = presenter?.selectedFilters.filter({ $0.key != indexPath}) ?? [:]
             for (index, _) in unnecessaryIndexes {
-                presenter?.selectedDays[index] = false
+                presenter?.selectedFilters[index] = false
                 if let cell = collectionView.cellForItem(at: index) as? OptionCell {
                     cell.isTapped = false
                 }
             }
         } else {
             cell.isTapped = false
-            presenter?.selectedDays[indexPath] = false
+            presenter?.selectedFilters[indexPath] = false
         }
     }
 
     private func showFilterVC() {
+        
         AppRouter.shared.presentCompletion(
-            type: .filter((presenter?.selectedDays ?? [:]).filter({ $0.value == true }))
+            type: .filter((presenter?.selectedFilters ?? [:]).filter({ $0.value == true }))
         ) { [weak self] indexDict in
             guard let self else { return }
 
             if indexDict.isEmpty {
-                self.presenter?.selectedDays.removeAll()
+                self.presenter?.selectedFilters.removeAll()
                 self.presenter?.backToInitialState()
                 self.reloadDataAnimation()
             } else {
                 let filterID = self.presenter?.optionsModel[indexDict.keys.first?.item ?? 0].id ?? 0
-                self.presenter?.selectedDays = indexDict
+                self.presenter?.selectedFilters = indexDict
 
                 self.presenter?.sortModel(filterID: filterID)
                 self.reloadData()
@@ -157,7 +158,7 @@ extension MainViewController: UICollectionViewDataSource {
             let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
             optionCell.configure(model: (presenter?.optionsModel[indexPath.item])!, state: .onMain)
 
-            let isCh = presenter?.selectedDays[indexPath] ?? false
+            let isCh = presenter?.selectedFilters[indexPath] ?? false
             isCh ? (optionCell.isTapped = true) : (optionCell.isTapped = false)
 
             return optionCell
@@ -167,10 +168,11 @@ extension MainViewController: UICollectionViewDataSource {
             saloonCell.mapHandler = mapHandler
             saloonCell.favouritesHandler = favouritesHandler
 
-            if let isInFavourite = presenter?.contains(by: (presenter?.sortedSaloons ?? [])[indexPath.item].id) {
+            if let saloons = presenter?.sortedSaloons as? [SaloonModel],
+               let isInFavourite = presenter?.contains(by: saloons[indexPath.item].saloonCodable.id) {
                 saloonCell.isInFavourite = !isInFavourite
             }
-            
+
             return saloonCell
         default:
             return UICollectionViewCell()
@@ -195,7 +197,7 @@ extension MainViewController: UICollectionViewDelegate {
                 let cell = collectionView.cellForItem(at: indexPath)
                 selectCellHelper(cell: cell, indexPath: indexPath, collectionView: collectionView)
 
-                let isSelectedFiltersEmpty = (presenter?.selectedDays ?? [:]).filter{ $0.value == true }.isEmpty
+                let isSelectedFiltersEmpty = (presenter?.selectedFilters ?? [:]).filter{ $0.value == true }.isEmpty
                 if isSelectedFiltersEmpty {
                     presenter?.backToInitialState()
                     collectionView.reloadSections(IndexSet(integer: 1))
@@ -209,7 +211,7 @@ extension MainViewController: UICollectionViewDelegate {
                 }
             }
         case .beautySaloon:
-            AppRouter.shared.push(.saloonDetail(.api((presenter?.sortedSaloons ?? [])[indexPath.item]), ""))
+            AppRouter.shared.push(.saloonDetail((presenter?.sortedSaloons ?? [])[indexPath.item]))
         default:
             break
         }
@@ -223,12 +225,14 @@ extension MainViewController: MainViewDelegate {
     func showSearch() {
         guard let model = presenter?.sortedSaloons else { return }
 
-        AppRouter.shared.presentSearch(type: .search(model, [])) { [weak self] singleModel in
+        AppRouter.shared.presentSearch(type: .search([], allModel: model)) { [weak self] singleModel in
             guard let self else { return }
 
-            if let index = model.firstIndex(where: { $0.id == singleModel.id} ) {
+            if let index = model.firstIndex(where: { $0.saloonCodable.id == singleModel.saloonCodable.id }) {
                 self.contentView.scrollToItem(at: [1, index])
             }
+        } segmentHandler: { [weak self] isNear in
+            print(isNear)
         }
     }
 }

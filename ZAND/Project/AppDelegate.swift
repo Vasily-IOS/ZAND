@@ -23,13 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        DeviceLocationService.shared.isAppActive = false
-    }
-
     func applicationDidBecomeActive(_ application: UIApplication) {
         AppRouter.shared.checkAuth()
-        DeviceLocationService.shared.isAppActive = true
     }
 }
 
