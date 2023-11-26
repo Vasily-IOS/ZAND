@@ -16,8 +16,9 @@ enum MainType {
 protocol MainPresenterOutput: AnyObject {
     var sortedSaloons: [Saloon] { get set }
     var optionsModel: [OptionsModel] { get }
-
     var selectedFilters: [IndexPath: Bool] { get set }
+    var isFirstLaunch: Bool { get set }
+
     func getModel(by id: Int) -> Saloon?
     func applyDB(by id: Int, completion: @escaping () -> ())
     func contains(by id: Int) -> Bool
@@ -56,6 +57,8 @@ final class MainPresenter: MainPresenterOutput {
     var saloons: [Saloon] = []  // оставляем всегда нетронутым
 
     var optionsModel = OptionsModel.options
+
+    var isFirstLaunch = true
 
     private let provider: SaloonProvider
 

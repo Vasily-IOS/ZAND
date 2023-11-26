@@ -136,6 +136,7 @@
 		FFC01B5B2A03DD37005CE41B /* MyDetailsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5A2A03DD37005CE41B /* MyDetailsLayout.swift */; };
 		FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */; };
 		FFC01B602A03F147005CE41B /* BaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */; };
+		FFCC65832B13B3E100750B6B /* BadInternetConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCC65822B13B3E100750B6B /* BadInternetConnectionView.swift */; };
 		FFD0DA082A4C907D006752B7 /* DefautMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */; };
 		FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */; };
 		FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */; };
@@ -310,6 +311,7 @@
 		FFC01B5A2A03DD37005CE41B /* MyDetailsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailsLayout.swift; sourceTree = "<group>"; };
 		FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsCell.swift; sourceTree = "<group>"; };
 		FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCell.swift; sourceTree = "<group>"; };
+		FFCC65822B13B3E100750B6B /* BadInternetConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadInternetConnectionView.swift; sourceTree = "<group>"; };
 		FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefautMainLayout.swift; sourceTree = "<group>"; };
 		FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
 		FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
@@ -726,7 +728,7 @@
 				FF8AAF5529EE967D007D6A60 /* MainViewController.swift */,
 				FF8AAF6929EEA389007D6A60 /* MainView.swift */,
 				FFB985642A308E1F00ABEFBB /* MainPresenter.swift */,
-				FF8E7BDF29EF25D500644208 /* Cell */,
+				FFCC657E2B13B3A500750B6B /* Components */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -974,6 +976,23 @@
 				FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		FFCC657E2B13B3A500750B6B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FFCC65812B13B3C000750B6B /* View */,
+				FF8E7BDF29EF25D500644208 /* Cell */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FFCC65812B13B3C000750B6B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FFCC65822B13B3E100750B6B /* BadInternetConnectionView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		FFD3E1D52A054E6400680ED5 /* PrivacyPolicy */ = {
@@ -1320,6 +1339,7 @@
 				FFB9857A2A30E87B00ABEFBB /* RealmManagerImpl.swift in Sources */,
 				FF6DB3D12B0FADCF003648A8 /* SaloonModel.swift in Sources */,
 				FFC01B592A03DCA5005CE41B /* DefaultMyDetailsLayout.swift in Sources */,
+				FFCC65832B13B3E100750B6B /* BadInternetConnectionView.swift in Sources */,
 				FFF16A812A6B2FA300D83E5B /* UserModel.swift in Sources */,
 				FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */,
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,

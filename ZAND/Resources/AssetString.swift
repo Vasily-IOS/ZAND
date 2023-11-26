@@ -95,7 +95,9 @@ enum AssetString: String {
     case geoIsOff = "Геопозиция отключена"
     case willOn = "Включить?"
     case all = "Все"
-    
+    case badConnection1 = "⚠️ Не забудьте выключить VPN, он тормозит работу приложения!"
+    case badConnection2 = "При плохом интернет-соединении информация может обновляться дольше ℹ️"
+
     // MARK: - Bottom button values
     case apply = "Применить"
     case enter = "Войти"

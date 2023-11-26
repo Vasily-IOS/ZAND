@@ -54,6 +54,7 @@ final class MainViewController: BaseViewController<MainView> {
         super.viewWillAppear(animated)
 
         hideNavigationBar()
+        showBadConnectionView()
     }
 
     deinit {
@@ -123,6 +124,13 @@ final class MainViewController: BaseViewController<MainView> {
 
         self.contentView.collectionView.performBatchUpdates {
             self.contentView.collectionView.reloadSections(indexSet)
+        }
+    }
+
+    private func showBadConnectionView() {
+        if presenter?.isFirstLaunch == true {
+            contentView.showBadConnectionView()
+            presenter?.isFirstLaunch = false
         }
     }
 }
