@@ -38,6 +38,7 @@ extension ConfirmationViewController: ConfirmationViewDelegate {
 
     func confirm() {
         presenter?.createRecord()
+        contentView.turnOffConfirmationButton()
     }
 }
 

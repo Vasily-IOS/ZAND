@@ -17,6 +17,7 @@ final class BadInternetConnectionView: BaseUIView {
         label.numberOfLines = 0
         label.textColor = .white
         label.text = AssetString.badConnection1.rawValue
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
 
@@ -25,6 +26,7 @@ final class BadInternetConnectionView: BaseUIView {
         label.numberOfLines = 0
         label.textColor = .white
         label.text = AssetString.badConnection2.rawValue
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
 
@@ -56,6 +58,5 @@ final class BadInternetConnectionView: BaseUIView {
             make.right.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(10)
         }
-
     }
 }

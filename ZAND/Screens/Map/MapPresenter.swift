@@ -16,6 +16,7 @@ protocol MapPresenterOutput: AnyObject {
     func fetchCommonModel()
     func getSaloonModel(by id: Int) -> Saloon?
     func showUser()
+    func sortedSalonsByUserLocation() -> [Saloon]
 }
 
 protocol MapViewInput: AnyObject {
@@ -90,9 +91,10 @@ final class MapPresenter: MapPresenterOutput {
     }
 
     func getSaloonModel(by id: Int) -> Saloon? {
-        let salons = (isZoomed ?? true) ? sortedSalons : immutableSalons
-        let model = salons.first(where: { $0.saloonCodable.id == id })
-        return model == nil ? nil : model
+        let isSortedSaloonContains = sortedSalons.contains(where: { $0.saloonCodable.id == id })
+
+        return isSortedSaloonContains ? sortedSalons.first(where: { $0.saloonCodable.id == id }) :
+        immutableSalons.first(where: { $0.saloonCodable.id == id })
     }
 
     func showUser() {
@@ -102,13 +104,11 @@ final class MapPresenter: MapPresenterOutput {
         isShowUserPoint = true
     }
 
-    // MARK: - Private
-
-    private func calculateNearestSalons() {
+    func calculateNearestSalons() {
         sortedSalons = sortedSalonsByUserLocation()
     }
 
-    private func sortedSalonsByUserLocation() -> [Saloon] {
+    func sortedSalonsByUserLocation() -> [Saloon] {
         guard let userCoordinates = userCoordinates else { return [] }
 
         let currentUserLocation = CLLocation(
@@ -130,6 +130,8 @@ final class MapPresenter: MapPresenterOutput {
 
         return sortedSalons
     }
+
+    // MARK: - Private
 
     private func subscribeNotifications() {
         NotificationCenter.default.addObserver(

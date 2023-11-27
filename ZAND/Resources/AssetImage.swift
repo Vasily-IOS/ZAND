@@ -33,7 +33,6 @@ enum AssetImage {
     case lostConnection_icon
     case deleteProfile_icon
     case location_icon
-    case exlamation_icon
 
     var image: UIImage {
         switch self {
@@ -87,8 +86,6 @@ enum AssetImage {
             return UIImage(named: "deleteProfile_icon")!
         case .location_icon:
             return UIImage(named: "location_icon")!
-        case .exlamation_icon:
-            return UIImage(named: "exclamation_icon")!
         }
     }
 }

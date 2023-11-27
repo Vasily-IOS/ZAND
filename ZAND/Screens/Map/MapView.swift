@@ -106,6 +106,21 @@ final class MapRectView: BaseUIView {
         }
     }
 
+    func showUserLocation(_ coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool) {
+        isCurrentLocationSelected = true
+        userCoordinate = coordinate
+
+        if willZoomToRegion {
+            self.mapView.setRegion(
+                MKCoordinateRegion(
+                    center: coordinate,
+                    latitudinalMeters: Radius.user.rawValue,
+                    longitudinalMeters: Radius.user.rawValue),
+                animated: true
+            )
+        }
+    }
+
     func showSinglePin(coordinate_lat: Double, coordinate_lon: Double) {
         let coordinates = CLLocationCoordinate2D(
             latitude: coordinate_lat,
@@ -139,21 +154,6 @@ final class MapRectView: BaseUIView {
 
     func confirmShowUserLocation() {
         mapView.showsUserLocation = true
-    }
-
-    func showUserLocation(_ coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool) {
-        isCurrentLocationSelected = true
-        userCoordinate = coordinate
-
-        if willZoomToRegion {
-            self.mapView.setRegion(
-                MKCoordinateRegion(
-                    center: coordinate,
-                    latitudinalMeters: Radius.user.rawValue,
-                    longitudinalMeters: Radius.user.rawValue),
-                animated: true
-            )
-        }
     }
 
     // MARK: - Private methods

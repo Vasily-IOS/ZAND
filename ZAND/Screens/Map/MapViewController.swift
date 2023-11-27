@@ -102,7 +102,7 @@ extension MapViewController: MapDelegate {
     func showSearch() {
         AppRouter.shared.presentSearch(
             type: .search(
-                presenter?.sortedSalons ?? [],
+                presenter?.sortedSalonsByUserLocation() ?? [],
                 allModel: presenter?.immutableSalons ?? [],
                 isNear: presenter?.isZoomed
             )

@@ -34,7 +34,7 @@ final class ConfirmationView: BaseUIView {
         return entryConfirmedView
     }()
 
-    private let bottomButton = BottomButton(buttonText: .approve)
+    private let confirmationButton = BottomButton(buttonText: .approve)
 
     private lazy var topStackView = UIStackView(
         alignment: .fill,
@@ -86,6 +86,10 @@ final class ConfirmationView: BaseUIView {
         setTargets()
     }
 
+    func turnOffConfirmationButton() {
+        confirmationButton.isUserInteractionEnabled = false
+    }
+
     func configure(viewModel: ConfirmationViewModel) {
         staffComponentView.configure(model: viewModel.employeeCommon)
         nameComponentView.configure(
@@ -108,10 +112,10 @@ final class ConfirmationView: BaseUIView {
     }
 
     private func setupSubviews() {
-        addSubviews([scrollView, bottomButton])
+        addSubviews([scrollView, confirmationButton])
         scrollView.addSubviews([topStackView, bottomStackView])
 
-        bottomButton.snp.makeConstraints { make in
+        confirmationButton.snp.makeConstraints { make in
             make.height.equalTo(44)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().inset(16)
@@ -121,7 +125,7 @@ final class ConfirmationView: BaseUIView {
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(bottomButton.snp.top).inset(-10)
+            make.bottom.equalTo(confirmationButton.snp.top).inset(-10)
         }
 
         topStackView.snp.makeConstraints { make in
@@ -139,7 +143,7 @@ final class ConfirmationView: BaseUIView {
     }
 
     private func setTargets() {
-        bottomButton.addTarget(
+        confirmationButton.addTarget(
             self,
             action: #selector(confirmAction),
             for: .touchUpInside
