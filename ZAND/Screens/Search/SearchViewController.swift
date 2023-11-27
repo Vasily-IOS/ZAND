@@ -77,7 +77,7 @@ final class SearchViewController: BaseViewController<SearchView> {
             notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-        contentView.tableView.contentSize.height += keyboardSize.height
+        contentView.tableView.contentInset.bottom = keyboardSize.height
     }
 
     @objc
@@ -86,7 +86,7 @@ final class SearchViewController: BaseViewController<SearchView> {
             notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-        contentView.tableView.contentSize.height -= (keyboardSize.height)
+        contentView.tableView.contentInset.bottom = 0
     }
     
     private func subscribeDelegate() {
