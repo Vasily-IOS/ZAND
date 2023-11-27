@@ -34,7 +34,9 @@ final class FavouritesSalonsManager {
     }
 
     func add(modelID: Int) {
-        contains(modelID: modelID) ? print("Contains") : storageID.append(modelID)
+        if !contains(modelID: modelID) {
+            storageID.append(modelID)
+        }
         createNotification()
     }
 

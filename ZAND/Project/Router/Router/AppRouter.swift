@@ -160,7 +160,7 @@ extension AppRouter: DefaultRouter {
         navigationController.present(vc, animated: true)
     }
 
-    func presentSearch(type: VCType, modelHandler: ((Saloon) -> ())?, segmentHandler: ((Bool) -> ())?) {
+    func presentSearch(type: VCType, modelHandler: ((Saloon) -> ())?, segmentHandler: ((MapState) -> ())?) {
         let vc = vcFactory.getViewController(for: type) as! SearchViewController
         vc.completionWithModel = modelHandler
         vc.completionWithState = segmentHandler

@@ -9,7 +9,7 @@ import CoreLocation
 
 enum VCType {
     case tabBar
-    case search(_ sortedModel: [Saloon], allModel: [Saloon], isNear: Bool?=nil)
+    case search(_ sortedModel: [Saloon], allModel: [Saloon], state: MapState?=nil)
     case main
     case map
     case saloonDetail(_ model: Saloon)

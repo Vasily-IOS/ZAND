@@ -22,7 +22,9 @@ final class SearchViewController: BaseViewController<SearchView> {
 
     var dataSource: DataSource?
 
-    var completionWithState: ((Bool) -> ())?
+    var indexArray: [IndexPath] = []
+
+    var completionWithState: ((MapState) -> ())?
     
     var completionWithModel: ((SaloonModel) -> ())?
     
@@ -46,9 +48,18 @@ final class SearchViewController: BaseViewController<SearchView> {
         
         hideNavigationBar()
     }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        if indexArray.isEmpty {
+            completionWithState?(presenter?.mapState ?? .none)
+        } else {
+            print("Array is not empty^ call back from cell delegate!")
+        }
+    }
     
     deinit {
-        completionWithState?(presenter?.isNear ?? true)
         print("SearchViewController died")
     }
     
@@ -125,7 +136,9 @@ extension SearchViewController: UITableViewDelegate {
     // MARK: - UITableViewDelegate methods
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexArray.append(indexPath)
         dismiss(value: (presenter?.modelUI ?? [])[indexPath.item] as! SaloonModel)
+        completionWithState?(.saloonZoom)
     }
 }
 
@@ -167,7 +180,11 @@ extension SearchViewController: SearchViewDelegate {
     // MARK: - SearchViewDelegate methods
 
     func changeSegmentIndex() {
-        presenter?.isNear.toggle()
+        if presenter?.mapState == .noZoomed {
+            presenter?.mapState = .zoomed
+        } else {
+            presenter?.mapState = .noZoomed
+        }
     }
 
     func dismiss() {

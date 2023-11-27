@@ -12,14 +12,14 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
         switch type {
         case .tabBar:
             return TabBarController()
-        case .search(let sortedModel, let allModel, let isNear):
+        case .search(let sortedModel, let allModel, let mapState):
             let view = SearchView()
             let vc = SearchViewController(contentView: view)
             let presenter = SearchPresenter(
                 view: vc,
                 sortedModel: sortedModel,
                 allModel: allModel,
-                isNear: isNear ?? false
+                state: mapState ?? .none
             )
             vc.presenter = presenter
             return vc

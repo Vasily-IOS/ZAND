@@ -14,10 +14,10 @@ protocol SearchViewInput: AnyObject {
 }
 
 protocol SearchPresenterOutput: AnyObject {
-    var isNear: Bool { get set }
+    var mapState: MapState { get set }
     var modelUI: [Saloon] { get set }
 
-    func updateUI(isNear: Bool)
+    func updateUI(state: MapState)
     func getModel(id: Int) -> Saloon?
     func search(text: String)
     func updateSegment()
@@ -29,9 +29,9 @@ final class SearchPresenter: SearchPresenterOutput {
     
     weak var view: SearchViewInput?
 
-    var isNear: Bool {
+    var mapState: MapState {
         didSet {
-            updateUI(isNear: isNear)
+            updateUI(state: mapState)
         }
     }
 
@@ -47,16 +47,14 @@ final class SearchPresenter: SearchPresenterOutput {
         view: SearchViewInput,
         sortedModel: [Saloon],
         allModel: [Saloon],
-        isNear: Bool
+        state: MapState
     ) {
         self.view = view
         self.nearModel = sortedModel
         self.originalModel = allModel
-        self.isNear = isNear
+        self.mapState = state
 
-        print(nearModel.count)
-
-        updateUI(isNear: isNear)
+        updateUI(state: state)
         updateSegment()
     }
 }
@@ -65,11 +63,14 @@ extension SearchPresenter {
     
     // MARK: - SearchPresenter methods
 
-    func updateUI(isNear: Bool) {
-        if isNear {
+    func updateUI(state: MapState) {
+        switch state {
+        case .zoomed:
             modelUI = nearModel
-        } else {
+        case .noZoomed:
             modelUI = originalModel
+        default:
+            break
         }
 
         view?.updateUI(with: modelUI)
@@ -77,7 +78,7 @@ extension SearchPresenter {
 
     func search(text: String) {
         if text.isEmpty {
-            updateUI(isNear: isNear)
+            updateUI(state: .noZoomed)
         } else {
             let filtedModel = getActualModel().filter({ model in
                 return model.saloonCodable.title.uppercased().contains(text.uppercased())
@@ -93,15 +94,29 @@ extension SearchPresenter {
         } else {
             return nil
         }
-     }
+    }
 
     func updateSegment() {
-        view?.updateSegment(index: isNear ? 0 : 1)
+        switch mapState {
+        case .noZoomed:
+            view?.updateSegment(index: 1)
+        case .zoomed:
+            view?.updateSegment(index: 0)
+        default:
+            break
+        }
     }
 
     // MARK: - Private methods
 
     private func getActualModel() -> [Saloon] {
-        return isNear ? nearModel : originalModel
+        switch mapState {
+        case .zoomed:
+            return nearModel
+        case .noZoomed:
+            return originalModel
+        default:
+            return []
+        }
     }
 }

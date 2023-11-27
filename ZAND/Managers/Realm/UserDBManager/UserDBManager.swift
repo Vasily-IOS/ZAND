@@ -24,10 +24,10 @@ final class UserDBManager {
     func save(user: UserModel) {
         let userDB = UserDataBaseModel()
         userDB.id = user.id
-        userDB.givenName = user.name ?? ""
-        userDB.familyName = user.surname ?? ""
-        userDB.email = user.email ?? ""
-        userDB.phone = user.phone ?? ""
+        userDB.givenName = user.name
+        userDB.familyName = user.surname
+        userDB.email = user.email
+        userDB.phone = user.phone
 
         realmManager.save(object: userDB)
     }

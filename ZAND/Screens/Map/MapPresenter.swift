@@ -11,7 +11,7 @@ import Combine
 protocol MapPresenterOutput: AnyObject {
     var sortedSalons: [Saloon] { get set }
     var immutableSalons: [Saloon] { get }
-    var isZoomed: Bool? { get set }
+    var mapState: MapState? { get set }
 
     func fetchCommonModel()
     func getSaloonModel(by id: Int) -> Saloon?
@@ -20,10 +20,17 @@ protocol MapPresenterOutput: AnyObject {
 }
 
 protocol MapViewInput: AnyObject {
-    func updateScale(isZoomed: Bool, userCoordinates: CLLocationCoordinate2D)
+    func updateScale(state: MapState, isZoomed: Bool, userCoordinates: CLLocationCoordinate2D)
     func addPinsOnMap(from model: [Saloon])
     func updateUserLocation(isCanUpdate: Bool)
     func showUser(coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool)
+}
+
+enum MapState {
+    case zoomed
+    case noZoomed
+    case saloonZoom
+    case none
 }
 
 final class MapPresenter: MapPresenterOutput {
@@ -36,15 +43,25 @@ final class MapPresenter: MapPresenterOutput {
 
     var immutableSalons: [Saloon] = []
 
-    var isZoomed: Bool? {
+    var mapState: MapState? {
         didSet {
-            guard let isZoomed,
+            guard let mapState,
                   let userCoordinates = userCoordinates else { return }
 
-            view?.updateScale(isZoomed: isZoomed, userCoordinates: userCoordinates)
+            switch mapState {
+//            case .saloonZoom:
+//                view?.updateScale(state: mapState, isZoomed: true, userCoordinates: userCoordinates)
+            case .zoomed:
+                view?.updateScale(state: mapState, isZoomed: true, userCoordinates: userCoordinates)
+            case .noZoomed:
+                view?.updateScale(state: mapState, isZoomed: false, userCoordinates: userCoordinates)
+            default:
+                break
+            }
         }
     }
 
+    // данная переменная служит индикатором показа точки юзера при первом входе
     private var isShowUserPoint: Bool = false
 
     private var userCoordinates: CLLocationCoordinate2D? {

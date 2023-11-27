@@ -16,6 +16,11 @@ protocol MapDelegate: AnyObject {
     func showUser()
 }
 
+enum MapViewState {
+    case performZoom(Bool, CLLocationCoordinate2D)
+    case showSingle(CLLocationCoordinate2D)
+}
+
 final class MapRectView: BaseUIView {
 
     // MARK: - Nested types
@@ -83,33 +88,53 @@ final class MapRectView: BaseUIView {
     
     // MARK: - Public
 
-    func configure(isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
-        onMapButton.backgroundColor = isZoomed ? .superLightGreen : .white
-        onMapButton.setTitleColor(isZoomed ? .mainGreen : .black, for: .normal)
-        userCoordinate = userCoordinates
+    func configure(state: MapViewState) {
+        switch state {
+        case .performZoom(let isZoomed, let coordinates):
+            onMapButton.backgroundColor = isZoomed ? .superLightGreen : .white
+            onMapButton.setTitleColor(isZoomed ? .mainGreen : .black, for: .normal)
+            userCoordinate = coordinates
 
-        if isZoomed {
-            mapView.setRegion(
-                MKCoordinateRegion(
-                    center: userCoordinates,
-                    latitudinalMeters: Radius.closed.rawValue,
-                    longitudinalMeters: Radius.closed.rawValue
-                ),
-                animated: true
+            if isZoomed {
+                mapView.setRegion(
+                    MKCoordinateRegion(
+                        center: coordinates,
+                        latitudinalMeters: Radius.closed.rawValue,
+                        longitudinalMeters: Radius.closed.rawValue
+                    ),
+                    animated: true
+                )
+            } else {
+                let moscowCenter = CLLocationCoordinate2D(latitude: 55.7524903, longitude: 37.6232096)
+                let span = MKCoordinateSpan(latitudeDelta: 0.8, longitudeDelta: 0.8)
+                let region = MKCoordinateRegion(center: moscowCenter , span: span)
+                isCurrentLocationSelected = true
+                mapView.setRegion(region, animated: true)
+            }
+            break
+        case .showSingle(let coordinates):
+            let region = MKCoordinateRegion(
+                center: coordinates,
+                span: MKCoordinateSpan(
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01
+                )
             )
-        } else {
-            let moscowCenter = CLLocationCoordinate2D(latitude: 55.7524903, longitude: 37.6232096)
-            let span = MKCoordinateSpan(latitudeDelta: 0.8, longitudeDelta: 0.8)
-            let region = MKCoordinateRegion(center: moscowCenter , span: span)
+            if let myAnnotation = mapView.annotations.first(
+                where: { $0.coordinate.latitude == coordinates.latitude }
+            ) {
+                mapView.selectAnnotation(myAnnotation, animated: true)
+            }
             mapView.setRegion(region, animated: true)
-            isCurrentLocationSelected = true
         }
     }
 
+    // показывает локацию юзера
     func showUserLocation(_ coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool) {
         isCurrentLocationSelected = true
         userCoordinate = coordinate
 
+        // данная переменная служит индикатором показа точки юзера при первом входе
         if willZoomToRegion {
             self.mapView.setRegion(
                 MKCoordinateRegion(
@@ -121,26 +146,7 @@ final class MapRectView: BaseUIView {
         }
     }
 
-    func showSinglePin(coordinate_lat: Double, coordinate_lon: Double) {
-        let coordinates = CLLocationCoordinate2D(
-            latitude: coordinate_lat,
-            longitude: coordinate_lon
-        )
-        let region = MKCoordinateRegion(
-            center: coordinates,
-            span: MKCoordinateSpan(
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01
-            )
-        )
-        if let myAnnotation = mapView.annotations.first(
-            where: { $0.coordinate.latitude == coordinates.latitude }
-        ) {
-            mapView.selectAnnotation(myAnnotation, animated: true)
-        }
-        mapView.setRegion(region, animated: true)
-    }
-
+    // добавляет точки на карту
     func addPinsOnMap(model: [Saloon]) {
         model.forEach {
             let coordinates = CLLocationCoordinate2D(
@@ -152,6 +158,7 @@ final class MapRectView: BaseUIView {
         }
     }
 
+    // дает доступ на показ локации юзера
     func confirmShowUserLocation() {
         mapView.showsUserLocation = true
     }

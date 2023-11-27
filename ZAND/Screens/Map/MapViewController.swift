@@ -24,7 +24,7 @@ final class MapViewController: BaseViewController<MapRectView> {
     override func loadView() {
         super.loadView()
 
-        presenter?.isZoomed = true
+        presenter?.mapState = .zoomed
         presenter?.showUser()
     }
 
@@ -62,7 +62,10 @@ final class MapViewController: BaseViewController<MapRectView> {
             message: AssetString.willOn.rawValue,
             preferredStyle: .alert
         )
-        let settingsAction = UIAlertAction(title: AssetString.yes.rawValue, style: .default) { alert in
+        let settingsAction = UIAlertAction(
+            title: AssetString.yes.rawValue,
+            style: .default
+        ) { alert in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url)
             }
@@ -78,18 +81,30 @@ extension MapViewController: MapViewInput {
 
     // MARK: - MapViewInput methods
 
-    func updateScale(isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
-        contentView.configure(isZoomed: isZoomed, userCoordinates: userCoordinates)
+    func updateScale(state: MapState, isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
+        switch state {
+        case .zoomed:
+            contentView.configure(state: .performZoom(true, userCoordinates))
+        case .noZoomed:
+            contentView.configure(state: .performZoom(false, userCoordinates))
+//        case .saloonZoom:
+//            contentView.configure(state: .showSingle(userCoordinates))
+        default:
+            break
+        }
     }
 
+    // мимо
     func addPinsOnMap(from model: [Saloon]) {
         contentView.addPinsOnMap(model: model)
     }
 
+    // мимо
     func updateUserLocation(isCanUpdate: Bool) {
         isCanUpdate ? contentView.confirmShowUserLocation() : showAlertLocation()
     }
 
+    // мимо
     func showUser(coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool) {
         contentView.showUserLocation(coordinate, willZoomToRegion: willZoomToRegion)
     }
@@ -104,17 +119,20 @@ extension MapViewController: MapDelegate {
             type: .search(
                 presenter?.sortedSalonsByUserLocation() ?? [],
                 allModel: presenter?.immutableSalons ?? [],
-                isNear: presenter?.isZoomed
+                state: presenter?.mapState
             )
         ) { [weak self] model in
             guard let self else { return }
 
-            self.contentView.showSinglePin(
-                coordinate_lat: model.saloonCodable.coordinate_lat,
-                coordinate_lon: model.saloonCodable.coordinate_lon
+            contentView.configure(state: .showSingle(
+                CLLocationCoordinate2D(
+                    latitude: model.saloonCodable.coordinate_lat,
+                    longitude: model.saloonCodable.coordinate_lon))
             )
-        } segmentHandler: { [weak self] isNear in
-            self?.presenter?.isZoomed = isNear
+        } segmentHandler: { [weak self] state in
+            if state != .saloonZoom {
+                self?.presenter?.mapState = state
+            }
         }
     }
 
@@ -125,7 +143,11 @@ extension MapViewController: MapDelegate {
     }
 
     func changeScale() {
-        presenter?.isZoomed?.toggle()
+        if presenter?.mapState == .zoomed {
+            presenter?.mapState = .noZoomed
+        } else {
+            presenter?.mapState = .zoomed
+        }
     }
 
     func showUser() {
