@@ -49,8 +49,6 @@ final class MapPresenter: MapPresenterOutput {
                   let userCoordinates = userCoordinates else { return }
 
             switch mapState {
-//            case .saloonZoom:
-//                view?.updateScale(state: mapState, isZoomed: true, userCoordinates: userCoordinates)
             case .zoomed:
                 view?.updateScale(state: mapState, isZoomed: true, userCoordinates: userCoordinates)
             case .noZoomed:

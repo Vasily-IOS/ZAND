@@ -55,7 +55,7 @@ final class SearchViewController: BaseViewController<SearchView> {
         if indexArray.isEmpty {
             completionWithState?(presenter?.mapState ?? .none)
         } else {
-            print("Array is not empty^ call back from cell delegate!")
+            print("Array is not empty call back from cell delegate!")
         }
     }
     
@@ -82,10 +82,6 @@ final class SearchViewController: BaseViewController<SearchView> {
 
     @objc
     private func keyboardWillHide(notification: NSNotification) {
-        guard let keyboardSize = (
-            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
         contentView.tableView.contentInset.bottom = 0
     }
     
@@ -149,13 +145,6 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter?.search(text: searchText)
     }
-
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        if searchBar.text == AssetString.where_wanna_go.rawValue {
-            contentView.searchBar.text = nil
-        }
-        contentView.searchBar.searchTextField.textColor = .black
-    }
 }
 
 extension SearchViewController: SearchViewInput {
@@ -180,11 +169,8 @@ extension SearchViewController: SearchViewDelegate {
     // MARK: - SearchViewDelegate methods
 
     func changeSegmentIndex() {
-        if presenter?.mapState == .noZoomed {
-            presenter?.mapState = .zoomed
-        } else {
-            presenter?.mapState = .noZoomed
-        }
+        presenter?.mapState = presenter?.mapState == .noZoomed ? .zoomed : .noZoomed
+        contentView.searchBar.text = nil
     }
 
     func dismiss() {
