@@ -24,7 +24,7 @@ final class SearchViewController: BaseViewController<SearchView> {
 
     var indexArray: [IndexPath] = []
 
-    var completionWithState: ((MapState) -> ())?
+    var completionWithState: ((SearchState) -> ())?
     
     var completionWithModel: ((SaloonModel) -> ())?
     
@@ -53,7 +53,7 @@ final class SearchViewController: BaseViewController<SearchView> {
         super.viewDidDisappear(animated)
 
         if indexArray.isEmpty {
-            completionWithState?(presenter?.mapState ?? .none)
+            completionWithState?(presenter?.searchState ?? .none)
         } else {
             print("Array is not empty call back from cell delegate!")
         }
@@ -169,7 +169,7 @@ extension SearchViewController: SearchViewDelegate {
     // MARK: - SearchViewDelegate methods
 
     func changeSegmentIndex() {
-        presenter?.mapState = presenter?.mapState == .noZoomed ? .zoomed : .noZoomed
+        presenter?.searchState = presenter?.searchState == .all ? .near : .all
         contentView.searchBar.text = nil
     }
 

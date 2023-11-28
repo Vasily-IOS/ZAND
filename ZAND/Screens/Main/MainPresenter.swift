@@ -5,8 +5,8 @@
 //  Created by Василий on 07.06.2023.
 //
 
-import UIKit
-import RealmSwift
+import Combine
+import CoreLocation
 
 enum MainType {
     case options
@@ -15,9 +15,11 @@ enum MainType {
 
 protocol MainPresenterOutput: AnyObject {
     var sortedSaloons: [Saloon] { get set }
-    var optionsModel: [OptionsModel] { get }
+    var immutableSalons: [Saloon] { get }
     var selectedFilters: [IndexPath: Bool] { get set }
     var isFirstLaunch: Bool { get set }
+    var nearSalons: [Saloon] { get set }
+    var state: SearchState { get set }
 
     func getModel(by id: Int) -> Saloon?
     func applyDB(by id: Int, completion: @escaping () -> ())
@@ -25,6 +27,7 @@ protocol MainPresenterOutput: AnyObject {
     func fetchData()
     func backToInitialState()
     func sortModel(filterID: Int)
+    func updateDict() -> [IndexPath: Bool]
 }
 
 protocol MainViewInput: AnyObject {
@@ -51,16 +54,27 @@ final class MainPresenter: MainPresenterOutput {
     var sortedSaloons: [Saloon] = [] { // дата сорс коллекции
         didSet {
             view?.showEmptyLabel(isShow: sortedSaloons.isEmpty)
+            view?.reloadData()
         }
     }
 
-    var saloons: [Saloon] = []  // оставляем всегда нетронутым
+    var immutableSalons: [Saloon] = []  // оставляем всегда нетронутым
 
-    var optionsModel = OptionsModel.options
+    var nearSalons: [Saloon] = []
 
     var isFirstLaunch = true
 
+    var state: SearchState = .all {
+        didSet {
+            sortedSaloons = state == .near ? nearSalons : immutableSalons
+        }
+    }
+
+    private var cancellables = Set<AnyCancellable>()
+
     private let provider: SaloonProvider
+
+    private let locationManager = DeviceLocationService.shared
 
     // MARK: - Initializer
     
@@ -68,13 +82,15 @@ final class MainPresenter: MainPresenterOutput {
         self.view = view
         self.provider = provider
 
+        self.locationManager.requestLocationUpdates()
+        self.bind()
         self.subscribeNotifications()
     }
 
-    // MARK: - Action
+    // MARK: - Instance methods
 
     @objc
-    private func hideTabBarNotificationAction(_ notification: Notification) {
+    private func hideTabBarNotificationAction() {
         view?.hideTabBar()
     }
 
@@ -91,6 +107,17 @@ final class MainPresenter: MainPresenterOutput {
             self.view?.updateUIConection(isConnected: isConnected)
         }
     }
+
+    func updateDict() -> [IndexPath: Bool] {
+        var resultDict: [IndexPath: Bool] = [:]
+        for (index, value) in selectedFilters {
+            let newIndex = IndexPath(item: index.item - 1, section: index.section + 1)
+            resultDict[newIndex] = value
+        }
+        resultDict[IndexPath(item: 0, section: 0)] = state == .all ? false : true
+
+        return resultDict
+    }
 }
 
 extension MainPresenter {
@@ -98,17 +125,17 @@ extension MainPresenter {
     // MARK: - Instance methods
 
     func backToInitialState() {
-        sortedSaloons = saloons
+        sortedSaloons = immutableSalons
     }
 
     func sortModel(filterID: Int) {
-        sortedSaloons = saloons.filter({ $0.saloonCodable.business_type_id == filterID })
+        sortedSaloons = immutableSalons.filter({ $0.saloonCodable.business_type_id == filterID })
     }
 
     func fetchData() {
         provider.fetchData { [weak self] saloons in
             self?.sortedSaloons = saloons
-            self?.saloons = saloons
+            self?.immutableSalons = saloons
             self?.view?.reloadData()
         }
     }
@@ -150,7 +177,7 @@ extension MainPresenter {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(hideTabBarNotificationAction(_:)),
+            selector: #selector(hideTabBarNotificationAction),
             name: .showTabBar,
             object: nil
         )
@@ -159,5 +186,34 @@ extension MainPresenter {
             selector: #selector(connectivityStatus(_:)),
             name: .connecivityChanged, object: nil
         )
+    }
+
+    func calculateNearSaloons(coordinates: CLLocationCoordinate2D) {
+        let currentUserLocation = CLLocation(
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude
+        )
+
+        let nearSalons = immutableSalons.map { saloon in
+            let saloonDistance = CLLocation(
+                latitude: saloon.saloonCodable.coordinate_lat,
+                longitude: saloon.saloonCodable.coordinate_lon
+            )
+
+            return SaloonModel(
+                saloonCodable: saloon.saloonCodable,
+                distance: currentUserLocation.distance(from: saloonDistance)
+            )
+        }.filter { ($0.distance ?? 0.0) <= 12000 }
+
+        self.nearSalons = nearSalons
+    }
+
+    private func bind() {
+        locationManager.currentLocation.sink(receiveCompletion: { _ in
+            debugPrint("Failure to update user location")
+        }) { [weak self] userCoordinates in
+            self?.calculateNearSaloons(coordinates: userCoordinates)
+        }.store(in: &cancellables)
     }
 }

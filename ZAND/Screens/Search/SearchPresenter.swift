@@ -14,10 +14,10 @@ protocol SearchViewInput: AnyObject {
 }
 
 protocol SearchPresenterOutput: AnyObject {
-    var mapState: MapState { get set }
+    var searchState: SearchState { get set }
     var modelUI: [Saloon] { get set }
 
-    func updateUI(state: MapState)
+    func updateUI(state: SearchState)
     func getModel(id: Int) -> Saloon?
     func search(text: String)
     func updateSegment()
@@ -29,9 +29,9 @@ final class SearchPresenter: SearchPresenterOutput {
     
     weak var view: SearchViewInput?
 
-    var mapState: MapState {
+    var searchState: SearchState {
         didSet {
-            updateUI(state: mapState)
+            updateUI(state: searchState)
         }
     }
 
@@ -47,13 +47,13 @@ final class SearchPresenter: SearchPresenterOutput {
         view: SearchViewInput,
         sortedModel: [Saloon],
         allModel: [Saloon],
-        state: MapState
+        state: SearchState
     ) {
         self.view = view
         self.nearModel = sortedModel
         self.originalModel = allModel
-        self.mapState = state
-
+        self.searchState = state
+        
         updateUI(state: state)
         updateSegment()
     }
@@ -63,11 +63,11 @@ extension SearchPresenter {
     
     // MARK: - SearchPresenter methods
 
-    func updateUI(state: MapState) {
+    func updateUI(state: SearchState) {
         switch state {
-        case .zoomed:
+        case .near:
             modelUI = nearModel
-        case .noZoomed:
+        case .all:
             modelUI = originalModel
         default:
             break
@@ -78,7 +78,7 @@ extension SearchPresenter {
 
     func search(text: String) {
         if text.isEmpty {
-            updateUI(state: .noZoomed)
+            updateUI(state: .all)
         } else {
             let filtedModel = getActualModel().filter({ model in
                 return model.saloonCodable.title.uppercased().contains(text.uppercased())
@@ -97,10 +97,10 @@ extension SearchPresenter {
     }
 
     func updateSegment() {
-        switch mapState {
-        case .noZoomed:
+        switch searchState {
+        case .all:
             view?.updateSegment(index: 1)
-        case .zoomed:
+        case .near:
             view?.updateSegment(index: 0)
         default:
             break
@@ -110,10 +110,10 @@ extension SearchPresenter {
     // MARK: - Private methods
 
     private func getActualModel() -> [Saloon] {
-        switch mapState {
-        case .zoomed:
+        switch searchState {
+        case .near:
             return nearModel
-        case .noZoomed:
+        case .all:
             return originalModel
         default:
             return []

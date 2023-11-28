@@ -24,7 +24,7 @@ final class MapViewController: BaseViewController<MapRectView> {
     override func loadView() {
         super.loadView()
 
-        presenter?.mapState = .zoomed
+        presenter?.mapState = .near
         presenter?.showUser()
     }
 
@@ -81,11 +81,11 @@ extension MapViewController: MapViewInput {
 
     // MARK: - MapViewInput methods
 
-    func updateScale(state: MapState, isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
+    func updateScale(state: SearchState, isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
         switch state {
-        case .zoomed:
+        case .near:
             contentView.configure(state: .performZoom(true, userCoordinates))
-        case .noZoomed:
+        case .all:
             contentView.configure(state: .performZoom(false, userCoordinates))
 //        case .saloonZoom:
 //            contentView.configure(state: .showSingle(userCoordinates))
@@ -143,11 +143,7 @@ extension MapViewController: MapDelegate {
     }
 
     func changeScale() {
-        if presenter?.mapState == .zoomed {
-            presenter?.mapState = .noZoomed
-        } else {
-            presenter?.mapState = .zoomed
-        }
+        presenter?.mapState = presenter?.mapState == .near ? .all : .near
     }
 
     func showUser() {

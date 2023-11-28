@@ -132,8 +132,6 @@ extension FilterView {
     // MARK: - Instance methods
     
     private func setViews() {
-        backgroundColor = .white
-        
         addSubviews([lineImage, collectionView, buttonStackView])
         
         lineImage.snp.makeConstraints { make in

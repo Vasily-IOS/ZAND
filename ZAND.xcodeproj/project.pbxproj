@@ -616,6 +616,7 @@
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
 				FF8AAF5429EE9645007D6A60 /* Main */,
+				FF25634129F682B500091374 /* Filter */,
 				FF8AAF5729EE96BA007D6A60 /* Map */,
 				FF8AAF5A29EE96E9007D6A60 /* Profile */,
 				FF2DB9782A9DFADE0036356B /* Register */,
@@ -630,7 +631,6 @@
 				FFDCE4B32A1B8E6F00CEA0E1 /* SelectableMap */,
 				FFD3E1D52A054E6400680ED5 /* PrivacyPolicy */,
 				FFC01B452A03C7D8005CE41B /* Appointments */,
-				FF25634129F682B500091374 /* Filter */,
 			);
 			path = Screens;
 			sourceTree = "<group>";

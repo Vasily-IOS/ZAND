@@ -91,15 +91,18 @@ extension FilterViewController: UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         switch FilterSection.init(rawValue: indexPath.section) {
         case .filterOption:
-            let optionCell = collectionView.dequeueReusableCell(
+            let filterCell = collectionView.dequeueReusableCell(
                 for: indexPath,
                 cellType: FilterCell.self
             )
 
+            let isCh = presenter?.selectFilters[indexPath] ?? false
+            isCh ? (filterCell.isTapped = true) : (filterCell.isTapped = false)
+
             if let model = presenter?.getModel(by: .filter) {
-                optionCell.configure(model: model[indexPath.item], indexPath: indexPath)
+                filterCell.configure(model: model[indexPath.item], indexPath: indexPath)
             }
-            return optionCell
+            return filterCell
         case .services:
             let optionCell = collectionView.dequeueReusableCell(
                 for: indexPath,

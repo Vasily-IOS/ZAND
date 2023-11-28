@@ -11,7 +11,7 @@ import Combine
 protocol MapPresenterOutput: AnyObject {
     var sortedSalons: [Saloon] { get set }
     var immutableSalons: [Saloon] { get }
-    var mapState: MapState? { get set }
+    var mapState: SearchState? { get set }
 
     func fetchCommonModel()
     func getSaloonModel(by id: Int) -> Saloon?
@@ -20,15 +20,15 @@ protocol MapPresenterOutput: AnyObject {
 }
 
 protocol MapViewInput: AnyObject {
-    func updateScale(state: MapState, isZoomed: Bool, userCoordinates: CLLocationCoordinate2D)
+    func updateScale(state: SearchState, isZoomed: Bool, userCoordinates: CLLocationCoordinate2D)
     func addPinsOnMap(from model: [Saloon])
     func updateUserLocation(isCanUpdate: Bool)
     func showUser(coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool)
 }
 
-enum MapState {
-    case zoomed
-    case noZoomed
+enum SearchState {
+    case near
+    case all
     case saloonZoom
     case none
 }
@@ -43,15 +43,15 @@ final class MapPresenter: MapPresenterOutput {
 
     var immutableSalons: [Saloon] = []
 
-    var mapState: MapState? {
+    var mapState: SearchState? {
         didSet {
             guard let mapState,
                   let userCoordinates = userCoordinates else { return }
 
             switch mapState {
-            case .zoomed:
+            case .near:
                 view?.updateScale(state: mapState, isZoomed: true, userCoordinates: userCoordinates)
-            case .noZoomed:
+            case .all:
                 view?.updateScale(state: mapState, isZoomed: false, userCoordinates: userCoordinates)
             default:
                 break
@@ -80,9 +80,9 @@ final class MapPresenter: MapPresenterOutput {
         self.view = view
         self.provider = provider
 
-        subscribeNotifications()
-        locationManager.requestLocationUpdates()
-        bind()
+        self.subscribeNotifications()
+        self.locationManager.requestLocationUpdates()
+        self.bind()
     }
 
     // MARK: - Instance methods

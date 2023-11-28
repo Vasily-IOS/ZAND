@@ -93,18 +93,15 @@ final class MainViewController: BaseViewController<MainView> {
     }
 
     private func showFilterVC() {
-        
         AppRouter.shared.presentCompletion(
-            type: .filter((presenter?.selectedFilters ?? [:]).filter({ $0.value == true }))
+            type: .filter((presenter?.updateDict() ?? [:]).filter({ $0.value == true }))
         ) { [weak self] indexDict in
             guard let self else { return }
 
             if indexDict.isEmpty {
-                self.presenter?.selectedFilters.removeAll()
-                self.presenter?.backToInitialState()
-                self.reloadDataAnimation()
+                setupDefaultState()
             } else {
-                let filterID = self.presenter?.optionsModel[indexDict.keys.first?.item ?? 0].id ?? 0
+                let filterID = OptionsModel.options[indexDict.keys.first?.item ?? 0].id ?? 0
                 self.presenter?.selectedFilters = indexDict
 
                 self.presenter?.sortModel(filterID: filterID)
@@ -133,6 +130,12 @@ final class MainViewController: BaseViewController<MainView> {
             presenter?.isFirstLaunch = false
         }
     }
+
+    private func setupDefaultState() {
+        self.presenter?.selectedFilters.removeAll()
+        self.presenter?.backToInitialState()
+        self.reloadDataAnimation()
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -149,7 +152,7 @@ extension MainViewController: UICollectionViewDataSource {
     ) -> Int {
         switch MainSection.init(rawValue: section) {
         case .option:
-            return presenter?.optionsModel.count ?? 0
+            return OptionsModel.options.count
         case .beautySaloon:
             return presenter?.sortedSaloons.count ?? 0
         default:
@@ -164,7 +167,7 @@ extension MainViewController: UICollectionViewDataSource {
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
             let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
-            optionCell.configure(model: (presenter?.optionsModel[indexPath.item])!, state: .onMain)
+            optionCell.configure(model: OptionsModel.options[indexPath.item], state: .onMain)
 
             let isCh = presenter?.selectedFilters[indexPath] ?? false
             isCh ? (optionCell.isTapped = true) : (optionCell.isTapped = false)
@@ -211,10 +214,12 @@ extension MainViewController: UICollectionViewDelegate {
                     collectionView.reloadSections(IndexSet(integer: 1))
                     collectionView.scrollToItem(at: [0,0], at: .left, animated: true)
                 } else {
-                    self.presenter?.sortModel(filterID: presenter?.optionsModel[indexPath.item].id ?? 0)
+                    self.presenter?.sortModel(filterID: OptionsModel.options[indexPath.item].id ?? 0)
                     self.reloadData()
                     self.contentView.collectionView.scrollToItem(
-                        at: indexPath, at: .centeredHorizontally, animated: true
+                        at: indexPath,
+                        at: .centeredHorizontally,
+                        animated: true
                     )
                 }
             }
@@ -231,17 +236,30 @@ extension MainViewController: MainViewDelegate {
     // MARK: - MainViewDelegate methods
     
     func showSearch() {
-        guard let model = presenter?.sortedSaloons else { return }
+        guard let immutableSalons = presenter?.immutableSalons else { return }
 
-        AppRouter.shared.presentSearch(type: .search([], allModel: model)) { [weak self] singleModel in
-            guard let self else { return }
+        AppRouter.shared.presentSearch(
+            type: .search(
+                presenter?.nearSalons ?? [],
+                allModel: immutableSalons,
+                state: presenter?.state
+            )) { [weak self] singleModel in
+                guard let self else { return }
 
-            if let index = model.firstIndex(where: { $0.saloonCodable.id == singleModel.saloonCodable.id }) {
-                self.contentView.scrollToItem(at: [1, index])
+                if let index = immutableSalons.firstIndex(
+                    where: { $0.saloonCodable.id == singleModel.saloonCodable.id }
+                ) {
+                    self.contentView.scrollToItem(at: [1, index])
+                }
+            } segmentHandler: { [weak self] state in
+                if state != .saloonZoom && self?.presenter?.state != state {
+                    //                    if self?.presenter?.state != state {
+                    self?.presenter?.state = state
+                    self?.setupDefaultState()
+                    print("Setup default state")
+                    //                    }
+                }
             }
-        } segmentHandler: { [weak self] isNear in
-            print(isNear)
-        }
     }
 }
 

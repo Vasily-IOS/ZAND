@@ -45,6 +45,8 @@ final class FilterPresenter: FilterPresenterOutput {
     init(view: FilterViewInput, selectFilters: [IndexPath: Bool]) {
         self.view = view
 
+        print(selectFilters)
+
         configureModel(selectDict: selectFilters)
     }
 
@@ -60,13 +62,8 @@ final class FilterPresenter: FilterPresenterOutput {
     }
 
     private func configureModel(selectDict: [IndexPath: Bool]) {
-        var newIndexes: [IndexPath: Bool] = [:]
-        for (index, value) in selectDict {
-            let newIndex: IndexPath = [1, index.item - 1]
-            newIndexes[newIndex] = value
-        }
-        self.selectFilters = newIndexes
-        view?.filterAlreadyContains(contains: newIndexes.isEmpty)
+        selectFilters = selectDict
+        view?.filterAlreadyContains(contains: selectDict.isEmpty)
     }
 
     private func configureModelToTransfer(selectDict: [IndexPath: Bool]) {

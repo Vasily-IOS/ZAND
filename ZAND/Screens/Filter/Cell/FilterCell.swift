@@ -12,10 +12,10 @@ final class FilterCell: BaseCollectionCell {
     
     // MARK: - Properties
 
-    var isChoosen: Bool = false {
+    var isTapped: Bool = false {
         didSet {
-            fillCircleImage.isHidden = !isChoosen
-            backgroundColor = isChoosen ? .superLightGreen : .white
+            fillCircleImage.isHidden = !isTapped
+            backgroundColor = isTapped ? .superLightGreen : .white
         }
     }
     
@@ -43,7 +43,7 @@ final class FilterCell: BaseCollectionCell {
     // MARK: - Configure
 
     func toggle() {
-        isChoosen = !isChoosen
+        isTapped = !isTapped
     }
     
     func configure(model: CommonFilterProtocol, indexPath: IndexPath) {
