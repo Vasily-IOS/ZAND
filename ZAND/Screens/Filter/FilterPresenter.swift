@@ -45,9 +45,7 @@ final class FilterPresenter: FilterPresenterOutput {
     init(view: FilterViewInput, selectFilters: [IndexPath: Bool]) {
         self.view = view
 
-        print(selectFilters)
-
-        configureModel(selectDict: selectFilters)
+        self.configureModel(selectDict: selectFilters)
     }
 
     // MARK: - Instance methods

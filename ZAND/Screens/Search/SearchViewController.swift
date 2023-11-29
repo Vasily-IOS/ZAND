@@ -60,7 +60,7 @@ final class SearchViewController: BaseViewController<SearchView> {
     }
     
     deinit {
-        print("SearchViewController died")
+//        print("SearchViewController died")
     }
     
     // MARK: - Instance methods

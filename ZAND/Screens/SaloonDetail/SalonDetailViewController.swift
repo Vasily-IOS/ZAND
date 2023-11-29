@@ -34,7 +34,7 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
     }
 
     deinit {
-        print("SaloonDetailViewController died")
+//        print("SaloonDetailViewController died")
     }
     
     // MARK: - Action

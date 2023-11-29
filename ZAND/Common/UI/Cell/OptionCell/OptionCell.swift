@@ -8,7 +8,11 @@
 import UIKit
 import SnapKit
 
-final class OptionCell: BaseCollectionCell {
+protocol CellTappedIndicator: AnyObject {
+    var isTapped: Bool { get set }
+}
+
+final class OptionCell: BaseCollectionCell, CellTappedIndicator {
     
     // MARK: - Nested types
     

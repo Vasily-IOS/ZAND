@@ -58,7 +58,7 @@ final class MainViewController: BaseViewController<MainView> {
     }
 
     deinit {
-        print("MainViewController died")
+//        print("MainViewController died")
     }
     
     // MARK: - Instance methods
@@ -236,28 +236,28 @@ extension MainViewController: MainViewDelegate {
     // MARK: - MainViewDelegate methods
     
     func showSearch() {
-        guard let immutableSalons = presenter?.immutableSalons else { return }
+        guard let allSalons = presenter?.allSalons else { return }
 
         AppRouter.shared.presentSearch(
             type: .search(
                 presenter?.nearSalons ?? [],
-                allModel: immutableSalons,
+                allModel: allSalons,
                 state: presenter?.state
             )) { [weak self] singleModel in
                 guard let self else { return }
 
-                if let index = immutableSalons.firstIndex(
+                if let index = allSalons.firstIndex(
                     where: { $0.saloonCodable.id == singleModel.saloonCodable.id }
                 ) {
                     self.contentView.scrollToItem(at: [1, index])
                 }
             } segmentHandler: { [weak self] state in
-                if state != .saloonZoom && self?.presenter?.state != state {
-                    //                    if self?.presenter?.state != state {
-                    self?.presenter?.state = state
-                    self?.setupDefaultState()
-                    print("Setup default state")
-                    //                    }
+                guard let self else { return }
+
+                if state != .saloonZoom && self.presenter?.state != state {
+                    self.presenter?.state = state
+                    self.presenter?.selectedFilters.removeAll()
+                    self.contentView.collectionView.scrollToItem(at: [0,0], at: .left, animated: true)
                 }
             }
     }

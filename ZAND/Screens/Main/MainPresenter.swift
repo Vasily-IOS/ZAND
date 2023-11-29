@@ -15,10 +15,11 @@ enum MainType {
 
 protocol MainPresenterOutput: AnyObject {
     var sortedSaloons: [Saloon] { get set }
-    var immutableSalons: [Saloon] { get }
+    var allSalons: [Saloon] { get }
+    var nearSalons: [Saloon] { get set }
+
     var selectedFilters: [IndexPath: Bool] { get set }
     var isFirstLaunch: Bool { get set }
-    var nearSalons: [Saloon] { get set }
     var state: SearchState { get set }
 
     func getModel(by id: Int) -> Saloon?
@@ -45,12 +46,8 @@ final class MainPresenter: MainPresenterOutput {
 
     weak var view: MainViewInput?
 
-    var selectedFilters: [IndexPath: Bool] = [:] {
-        didSet {
-            print(selectedFilters)
-        }
-    }
-
+    var selectedFilters: [IndexPath: Bool] = [:]
+    
     var sortedSaloons: [Saloon] = [] { // дата сорс коллекции
         didSet {
             view?.showEmptyLabel(isShow: sortedSaloons.isEmpty)
@@ -58,7 +55,7 @@ final class MainPresenter: MainPresenterOutput {
         }
     }
 
-    var immutableSalons: [Saloon] = []  // оставляем всегда нетронутым
+    var allSalons: [Saloon] = []  // оставляем всегда нетронутым
 
     var nearSalons: [Saloon] = []
 
@@ -66,7 +63,7 @@ final class MainPresenter: MainPresenterOutput {
 
     var state: SearchState = .all {
         didSet {
-            sortedSaloons = state == .near ? nearSalons : immutableSalons
+            sortedSaloons = state == .near ? nearSalons : allSalons
         }
     }
 
@@ -125,17 +122,17 @@ extension MainPresenter {
     // MARK: - Instance methods
 
     func backToInitialState() {
-        sortedSaloons = immutableSalons
+        sortedSaloons = allSalons
     }
 
     func sortModel(filterID: Int) {
-        sortedSaloons = immutableSalons.filter({ $0.saloonCodable.business_type_id == filterID })
+        sortedSaloons = allSalons.filter({ $0.saloonCodable.business_type_id == filterID })
     }
 
     func fetchData() {
         provider.fetchData { [weak self] saloons in
             self?.sortedSaloons = saloons
-            self?.immutableSalons = saloons
+            self?.allSalons = saloons
             self?.view?.reloadData()
         }
     }
@@ -194,7 +191,7 @@ extension MainPresenter {
             longitude: coordinates.longitude
         )
 
-        let nearSalons = immutableSalons.map { saloon in
+        let nearSalons = allSalons.map { saloon in
             let saloonDistance = CLLocation(
                 latitude: saloon.saloonCodable.coordinate_lat,
                 longitude: saloon.saloonCodable.coordinate_lon

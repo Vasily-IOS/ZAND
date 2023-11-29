@@ -10,7 +10,7 @@ import Combine
 
 protocol MapPresenterOutput: AnyObject {
     var sortedSalons: [Saloon] { get set }
-    var immutableSalons: [Saloon] { get }
+    var allSalons: [Saloon] { get }
     var mapState: SearchState? { get set }
 
     func fetchCommonModel()
@@ -41,7 +41,7 @@ final class MapPresenter: MapPresenterOutput {
 
     var sortedSalons: [Saloon] = []
 
-    var immutableSalons: [Saloon] = []
+    var allSalons: [Saloon] = []
 
     var mapState: SearchState? {
         didSet {
@@ -100,7 +100,7 @@ final class MapPresenter: MapPresenterOutput {
         provider.fetchData { [weak self] saloons in
             guard let self else { return }
 
-            self.immutableSalons = saloons
+            self.allSalons = saloons
             self.view?.addPinsOnMap(from: saloons)
         }
     }
@@ -109,7 +109,7 @@ final class MapPresenter: MapPresenterOutput {
         let isSortedSaloonContains = sortedSalons.contains(where: { $0.saloonCodable.id == id })
 
         return isSortedSaloonContains ? sortedSalons.first(where: { $0.saloonCodable.id == id }) :
-        immutableSalons.first(where: { $0.saloonCodable.id == id })
+        allSalons.first(where: { $0.saloonCodable.id == id })
     }
 
     func showUser() {
@@ -131,7 +131,7 @@ final class MapPresenter: MapPresenterOutput {
             longitude: userCoordinates.longitude
         )
 
-        sortedSalons = immutableSalons.map { saloon in
+        sortedSalons = allSalons.map { saloon in
             let saloonDistance = CLLocation(
                 latitude: saloon.saloonCodable.coordinate_lat,
                 longitude: saloon.saloonCodable.coordinate_lon

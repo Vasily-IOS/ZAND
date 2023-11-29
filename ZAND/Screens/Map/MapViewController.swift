@@ -118,7 +118,7 @@ extension MapViewController: MapDelegate {
         AppRouter.shared.presentSearch(
             type: .search(
                 presenter?.sortedSalonsByUserLocation() ?? [],
-                allModel: presenter?.immutableSalons ?? [],
+                allModel: presenter?.allSalons ?? [],
                 state: presenter?.mapState
             )
         ) { [weak self] model in

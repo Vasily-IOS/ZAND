@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class FilterCell: BaseCollectionCell {
+final class FilterCell: BaseCollectionCell, CellTappedIndicator {
     
     // MARK: - Properties
 

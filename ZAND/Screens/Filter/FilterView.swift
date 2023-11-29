@@ -121,7 +121,7 @@ final class FilterView: BaseUIView {
 
     func deselectRows(indexPath: [IndexPath]) {
         for path in indexPath {
-            let cell = collectionView.cellForItem(at: path) as! OptionCell
+            let cell = collectionView.cellForItem(at: path) as! CellTappedIndicator
             cell.isTapped = false
         }
     }
