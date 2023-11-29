@@ -46,7 +46,7 @@ final class MainViewController: BaseViewController<MainView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         subscribeDelegate()
     }
 
@@ -55,10 +55,6 @@ final class MainViewController: BaseViewController<MainView> {
 
         hideNavigationBar()
         showBadConnectionView()
-    }
-
-    deinit {
-//        print("MainViewController died")
     }
     
     // MARK: - Instance methods

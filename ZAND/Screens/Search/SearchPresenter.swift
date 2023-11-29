@@ -89,7 +89,8 @@ extension SearchPresenter {
     }
 
     func getModel(id: Int) -> Saloon? {
-        if let model = originalModel.first(where: { $0.saloonCodable.id == id }) {
+        let model = searchState == .near ? nearModel : originalModel
+        if let model = model.first(where: { $0.saloonCodable.id == id }) {
             return model
         } else {
             return nil

@@ -58,11 +58,7 @@ final class SearchViewController: BaseViewController<SearchView> {
             print("Array is not empty call back from cell delegate!")
         }
     }
-    
-    deinit {
-//        print("SearchViewController died")
-    }
-    
+
     // MARK: - Instance methods
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

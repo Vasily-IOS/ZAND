@@ -54,7 +54,13 @@ final class MainPresenter: MainPresenterOutput {
         }
     }
 
-    var allSalons: [Saloon] = []  // оставляем всегда нетронутым
+    var allSalons: [Saloon] = [] { // оставляем всегда нетронутым
+        didSet {
+            if sortedSaloons.isEmpty {
+                sortedSaloons = allSalons
+            }
+        }
+    }
 
     var nearSalons: [Saloon] = []
 
@@ -78,6 +84,7 @@ final class MainPresenter: MainPresenterOutput {
         self.view = view
         self.provider = provider
 
+        self.fetchData()
         self.locationManager.requestLocationUpdates()
         self.bind()
         self.subscribeNotifications()
@@ -126,13 +133,12 @@ extension MainPresenter {
 
     func fetchData() {
         provider.fetchData { [weak self] saloons in
-            self?.sortedSaloons = saloons
             self?.allSalons = saloons
         }
     }
 
     func getModel(by id: Int) -> Saloon? {
-        return sortedSaloons.first(where: { $0.saloonCodable.id == id })
+        return allSalons.first(where: { $0.saloonCodable.id == id })
     }
 
     func applyDB(by id: Int, completion: @escaping () -> ()) {
