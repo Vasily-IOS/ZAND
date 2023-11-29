@@ -105,22 +105,12 @@ final class MainViewController: BaseViewController<MainView> {
                 self.presenter?.selectedFilters = indexDict
 
                 self.presenter?.sortModel(filterID: filterID)
-                self.reloadData()
                 self.contentView.collectionView.scrollToItem(
                     at: indexDict.keys.first!,
                     at: .centeredHorizontally,
                     animated: true
                 )
             }
-        }
-    }
-
-    private func reloadDataAnimation() {
-        let range = Range(uncheckedBounds: (0, 2))
-        let indexSet = IndexSet(integersIn: range)
-
-        self.contentView.collectionView.performBatchUpdates {
-            self.contentView.collectionView.reloadSections(indexSet)
         }
     }
 
@@ -133,8 +123,7 @@ final class MainViewController: BaseViewController<MainView> {
 
     private func setupDefaultState() {
         self.presenter?.selectedFilters.removeAll()
-        self.presenter?.backToInitialState()
-        self.reloadDataAnimation()
+        self.presenter?.state = .all
     }
 }
 
@@ -210,12 +199,10 @@ extension MainViewController: UICollectionViewDelegate {
 
                 let isSelectedFiltersEmpty = (presenter?.selectedFilters ?? [:]).filter{ $0.value == true }.isEmpty
                 if isSelectedFiltersEmpty {
-                    presenter?.backToInitialState()
-                    collectionView.reloadSections(IndexSet(integer: 1))
+                    presenter?.state = .all
                     collectionView.scrollToItem(at: [0,0], at: .left, animated: true)
                 } else {
                     self.presenter?.sortModel(filterID: OptionsModel.options[indexPath.item].id ?? 0)
-                    self.reloadData()
                     self.contentView.collectionView.scrollToItem(
                         at: indexPath,
                         at: .centeredHorizontally,

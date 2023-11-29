@@ -26,7 +26,6 @@ protocol MainPresenterOutput: AnyObject {
     func applyDB(by id: Int, completion: @escaping () -> ())
     func contains(by id: Int) -> Bool
     func fetchData()
-    func backToInitialState()
     func sortModel(filterID: Int)
     func updateDict() -> [IndexPath: Bool]
 }
@@ -121,10 +120,6 @@ extension MainPresenter {
     
     // MARK: - Instance methods
 
-    func backToInitialState() {
-        sortedSaloons = allSalons
-    }
-
     func sortModel(filterID: Int) {
         sortedSaloons = allSalons.filter({ $0.saloonCodable.business_type_id == filterID })
     }
@@ -133,7 +128,6 @@ extension MainPresenter {
         provider.fetchData { [weak self] saloons in
             self?.sortedSaloons = saloons
             self?.allSalons = saloons
-            self?.view?.reloadData()
         }
     }
 
