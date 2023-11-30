@@ -100,7 +100,6 @@ struct UIAppointmentModel: Hashable {
         if let visitDate = dateFormatter.date(from: visit_time) {
             return currentDate > visitDate
         } else {
-            print("Не удалось преобразовать строку в дату")
             return nil
         }
     }

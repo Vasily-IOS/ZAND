@@ -240,7 +240,7 @@ extension MainViewController: MainViewDelegate {
                 if state != .saloonZoom && self.presenter?.state != state {
                     self.presenter?.state = state
                     self.presenter?.selectedFilters.removeAll()
-                    self.contentView.collectionView.scrollToItem(at: [0,0], at: .left, animated: true)
+                    self.contentView.collectionView.scrollToItem(at: [0,0], at: .top, animated: true)
                 }
             }
     }

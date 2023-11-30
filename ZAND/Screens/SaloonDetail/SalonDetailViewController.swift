@@ -32,10 +32,6 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
         setupBackButtonItem()
         presenter?.isInFavourite()
     }
-
-    deinit {
-//        print("SaloonDetailViewController died")
-    }
     
     // MARK: - Action
     
