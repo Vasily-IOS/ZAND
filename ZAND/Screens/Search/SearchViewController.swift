@@ -129,7 +129,9 @@ extension SearchViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         indexArray.append(indexPath)
-        dismiss(value: (presenter?.modelUI ?? [])[indexPath.item] as! SaloonModel)
+        if let model = (presenter?.modelUI ?? [])[indexPath.item] as? SaloonModel {
+            dismiss(value: model)
+        }
     }
 }
 
