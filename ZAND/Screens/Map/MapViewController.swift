@@ -83,10 +83,8 @@ extension MapViewController: MapViewInput {
 
     func updateScale(state: SearchState, isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
         switch state {
-        case .near:
-            contentView.configure(state: .performZoom(true, userCoordinates))
-        case .all:
-            contentView.configure(state: .performZoom(false, userCoordinates))
+        case .near, .all:
+            contentView.configure(state: .performZoom(isZoomed, userCoordinates))
 //        case .saloonZoom:
 //            contentView.configure(state: .showSingle(userCoordinates))
         default:
