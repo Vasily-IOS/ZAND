@@ -27,7 +27,7 @@ final class SearchPresenter: SearchPresenterOutput {
 
     // MARK: - Properties
     
-    weak var view: SearchViewInput?
+    unowned let view: SearchViewInput
 
     var searchState: SearchState {
         didSet {
@@ -53,9 +53,9 @@ final class SearchPresenter: SearchPresenterOutput {
         self.nearModel = sortedModel
         self.originalModel = allModel
         self.searchState = state
-        
-        updateUI(state: state)
-        updateSegment()
+
+        self.updateUI(state: state)
+        self.updateSegment()
     }
 }
 
@@ -64,16 +64,8 @@ extension SearchPresenter {
     // MARK: - SearchPresenter methods
 
     func updateUI(state: SearchState) {
-        switch state {
-        case .near:
-            modelUI = nearModel
-        case .all:
-            modelUI = originalModel
-        default:
-            break
-        }
-
-        view?.updateUI(with: modelUI)
+        modelUI = state == .near ? nearModel : originalModel
+        view.updateUI(with: modelUI)
     }
 
     func search(text: String) {
@@ -83,41 +75,27 @@ extension SearchPresenter {
             let filtedModel = getActualModel().filter({ model in
                 return model.saloonCodable.title.uppercased().contains(text.uppercased())
             })
-            self.view?.updateUI(with: filtedModel)
+            self.view.updateUI(with: filtedModel)
             modelUI = filtedModel
         }
     }
 
     func getModel(id: Int) -> Saloon? {
         let model = searchState == .near ? nearModel : originalModel
-        if let model = model.first(where: { $0.saloonCodable.id == id }) {
-            return model
+        if let saloonModel = model.first(where: { $0.saloonCodable.id == id }) {
+            return saloonModel
         } else {
             return nil
         }
     }
 
     func updateSegment() {
-        switch searchState {
-        case .all:
-            view?.updateSegment(index: 1)
-        case .near:
-            view?.updateSegment(index: 0)
-        default:
-            break
-        }
+        view.updateSegment(index: searchState == .near ? 0 : 1)
     }
 
     // MARK: - Private methods
 
     private func getActualModel() -> [Saloon] {
-        switch searchState {
-        case .near:
-            return nearModel
-        case .all:
-            return originalModel
-        default:
-            return []
-        }
+        return searchState == .near ? nearModel : originalModel
     }
 }

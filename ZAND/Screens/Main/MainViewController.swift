@@ -226,21 +226,32 @@ extension MainViewController: MainViewDelegate {
                 presenter?.nearSalons ?? [],
                 allModel: allSalons,
                 state: presenter?.state
-            )) { [weak self] singleModel in
+            )) { [weak self] state, model in
                 guard let self else { return }
 
-                if let index = allSalons.firstIndex(
-                    where: { $0.saloonCodable.id == singleModel.saloonCodable.id }
-                ) {
-                    self.contentView.scrollToItem(at: [1, index])
-                }
-            } segmentHandler: { [weak self] state in
-                guard let self else { return }
+                switch state {
+                case .saloonZoom(let stateIndex):
+                    self.presenter?.state = stateIndex == 0 ? .near : .all
 
-                if state != .saloonZoom && self.presenter?.state != state {
-                    self.presenter?.state = state
-                    self.presenter?.selectedFilters.removeAll()
-                    self.contentView.collectionView.scrollToItem(at: [0,0], at: .top, animated: true)
+                    if let index = presenter?.sortedSaloons.firstIndex(
+                        where: { $0.saloonCodable.id == model?.saloonCodable.id }
+                    ) {
+                        self.contentView.scrollToItem(at: [1, index])
+                    }
+                case .near:
+                    if self.presenter?.state != .near {
+                        self.presenter?.state = state
+                        self.presenter?.selectedFilters.removeAll()
+                        self.contentView.collectionView.scrollToItem(at: [0,0], at: .top, animated: true)
+                    }
+                case .all:
+                    if self.presenter?.state != .all {
+                        self.presenter?.state = state
+                        self.presenter?.selectedFilters.removeAll()
+                        self.contentView.collectionView.scrollToItem(at: [0,0], at: .top, animated: true)
+                    }
+                default:
+                    break
                 }
             }
     }

@@ -121,17 +121,17 @@ extension MapViewController: MapDelegate {
                 allModel: presenter?.allSalons ?? [],
                 state: presenter?.mapState
             )
-        ) { [weak self] model in
+        ) { [weak self] state, model in
             guard let self else { return }
 
-            contentView.configure(state: .showSingle(
-                CLLocationCoordinate2D(
-                    latitude: model.saloonCodable.coordinate_lat,
-                    longitude: model.saloonCodable.coordinate_lon))
-            )
-        } segmentHandler: { [weak self] state in
-            if state != .saloonZoom {
-                self?.presenter?.mapState = state
+            if let model = model {
+                contentView.configure(state: .showSingle(
+                    CLLocationCoordinate2D(
+                        latitude: model.saloonCodable.coordinate_lat,
+                        longitude: model.saloonCodable.coordinate_lon))
+                )
+            } else {
+                self.presenter?.mapState = state
             }
         }
     }

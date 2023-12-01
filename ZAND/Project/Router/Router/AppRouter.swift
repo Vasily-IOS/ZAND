@@ -154,16 +154,9 @@ extension AppRouter: DefaultRouter {
         navigationController.present(createRecordNavigationController!, animated: true)
     }
     
-    func presentSearch(type: VCType, modelHandler: ((Saloon) -> ())?) {
+    func presentSearch(type: VCType, completionHandler: ((SearchState, SaloonModel?) -> ())?) {
         let vc = vcFactory.getViewController(for: type) as! SearchViewController
-        vc.completionWithModel = modelHandler
-        navigationController.present(vc, animated: true)
-    }
-
-    func presentSearch(type: VCType, modelHandler: ((Saloon) -> ())?, segmentHandler: ((SearchState) -> ())?) {
-        let vc = vcFactory.getViewController(for: type) as! SearchViewController
-        vc.completionWithModel = modelHandler
-        vc.completionWithState = segmentHandler
+        vc.completionHandler = completionHandler
         navigationController.present(vc, animated: true)
     }
 

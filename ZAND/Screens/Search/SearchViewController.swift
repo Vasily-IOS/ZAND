@@ -24,9 +24,7 @@ final class SearchViewController: BaseViewController<SearchView> {
 
     var indexArray: [IndexPath] = []
 
-    var completionWithState: ((SearchState) -> ())?
-    
-    var completionWithModel: ((SaloonModel) -> ())?
+    var completionHandler: ((SearchState, SaloonModel?) -> ())?
     
     var presenter: SearchPresenter?
     
@@ -53,9 +51,7 @@ final class SearchViewController: BaseViewController<SearchView> {
         super.viewDidDisappear(animated)
 
         if indexArray.isEmpty {
-            completionWithState?(presenter?.searchState ?? .none)
-        } else {
-            print("Array is not empty call back from cell delegate!")
+            completionHandler?(presenter?.searchState ?? .none, nil)
         }
     }
 
@@ -104,8 +100,8 @@ final class SearchViewController: BaseViewController<SearchView> {
     }
 
     private func dismiss(value: SaloonModel) {
-        completionWithModel?(value)
-        AppRouter.shared.dismiss()
+        completionHandler?(.saloonZoom(presenter?.searchState == .near ? 0 : 1), value)
+        dismiss()
     }
 
     private func subscribeNotifications() {
@@ -130,7 +126,6 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         indexArray.append(indexPath)
         dismiss(value: (presenter?.modelUI ?? [])[indexPath.item] as! SaloonModel)
-        completionWithState?(.saloonZoom)
     }
 }
 

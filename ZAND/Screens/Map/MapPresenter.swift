@@ -26,10 +26,10 @@ protocol MapViewInput: AnyObject {
     func showUser(coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool)
 }
 
-enum SearchState {
+enum SearchState: Equatable {
     case near
     case all
-    case saloonZoom
+    case saloonZoom(Int?=0)
     case none
 }
 
@@ -48,14 +48,11 @@ final class MapPresenter: MapPresenterOutput {
             guard let mapState,
                   let userCoordinates = userCoordinates else { return }
 
-            switch mapState {
-            case .near:
-                view?.updateScale(state: mapState, isZoomed: true, userCoordinates: userCoordinates)
-            case .all:
-                view?.updateScale(state: mapState, isZoomed: false, userCoordinates: userCoordinates)
-            default:
-                break
-            }
+            view?.updateScale(
+                state: mapState,
+                isZoomed: mapState == .near ? true : false,
+                userCoordinates: userCoordinates
+            )
         }
     }
 
