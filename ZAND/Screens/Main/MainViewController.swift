@@ -230,7 +230,7 @@ extension MainViewController: MainViewDelegate {
                 guard let self else { return }
 
                 switch state {
-                case .saloonZoom(let stateIndex):
+                case let .saloonZoom(stateIndex, _, _):
                     self.presenter?.state = stateIndex == 0 ? .near : .all
 
                     if let index = presenter?.sortedSaloons.firstIndex(

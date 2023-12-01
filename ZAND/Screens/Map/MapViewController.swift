@@ -81,28 +81,30 @@ extension MapViewController: MapViewInput {
 
     // MARK: - MapViewInput methods
 
-    func updateScale(state: SearchState, isZoomed: Bool, userCoordinates: CLLocationCoordinate2D) {
+    func updateScale(state: SearchState, isShouldZoom: Bool?, coordinates: CLLocationCoordinate2D?) {
         switch state {
         case .near, .all:
-            contentView.configure(state: .performZoom(isZoomed, userCoordinates))
-//        case .saloonZoom:
-//            contentView.configure(state: .showSingle(userCoordinates))
+            guard let isShouldZoom, let coordinates else { return }
+
+            contentView.configure(state: .performZoom(coordinates), isShouldZoom: isShouldZoom)
+        case let .saloonZoom(index, latitude, longtitude):
+            let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
+            let isShouldSelectNear: Bool = index == 0 ? true : false
+
+            contentView.configure(state: .showSingle(coordinates), isShouldZoom: isShouldSelectNear)
         default:
             break
         }
     }
 
-    // мимо
     func addPinsOnMap(from model: [Saloon]) {
         contentView.addPinsOnMap(model: model)
     }
 
-    // мимо
     func updateUserLocation(isCanUpdate: Bool) {
         isCanUpdate ? contentView.confirmShowUserLocation() : showAlertLocation()
     }
 
-    // мимо
     func showUser(coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool) {
         contentView.showUserLocation(coordinate, willZoomToRegion: willZoomToRegion)
     }
@@ -118,20 +120,9 @@ extension MapViewController: MapDelegate {
                 presenter?.sortedSalonsByUserLocation() ?? [],
                 allModel: presenter?.allSalons ?? [],
                 state: presenter?.mapState
-            )
-        ) { [weak self] state, model in
-            guard let self else { return }
-
-            if let model = model {
-                contentView.configure(state: .showSingle(
-                    CLLocationCoordinate2D(
-                        latitude: model.saloonCodable.coordinate_lat,
-                        longitude: model.saloonCodable.coordinate_lon))
-                )
-            } else {
-                self.presenter?.mapState = state
+            )) { [weak self] state, _ in
+                self?.presenter?.mapState = state
             }
-        }
     }
 
     func showDetail(by id: Int) {

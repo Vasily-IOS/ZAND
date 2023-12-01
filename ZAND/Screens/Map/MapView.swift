@@ -17,7 +17,7 @@ protocol MapDelegate: AnyObject {
 }
 
 enum MapViewState {
-    case performZoom(Bool, CLLocationCoordinate2D)
+    case performZoom(CLLocationCoordinate2D)
     case showSingle(CLLocationCoordinate2D)
 }
 
@@ -88,14 +88,16 @@ final class MapRectView: BaseUIView {
     
     // MARK: - Public
 
-    func configure(state: MapViewState) {
+    func configure(state: MapViewState, isShouldZoom: Bool?) {
         switch state {
-        case .performZoom(let isZoomed, let coordinates):
-            onMapButton.backgroundColor = isZoomed ? .superLightGreen : .white
-            onMapButton.setTitleColor(isZoomed ? .mainGreen : .black, for: .normal)
+        case .performZoom(let coordinates):
+            guard let isShouldZoom else { return }
+            
+            onMapButton.backgroundColor = isShouldZoom ? .superLightGreen : .white
+            onMapButton.setTitleColor(isShouldZoom ? .mainGreen : .black, for: .normal)
             userCoordinate = coordinates
 
-            if isZoomed {
+            if isShouldZoom {
                 mapView.setRegion(
                     MKCoordinateRegion(
                         center: coordinates,
@@ -113,6 +115,11 @@ final class MapRectView: BaseUIView {
             }
             break
         case .showSingle(let coordinates):
+            guard let isShouldZoom else { return }
+            
+            onMapButton.backgroundColor = isShouldZoom ? .superLightGreen : .white
+            onMapButton.setTitleColor(isShouldZoom ? .mainGreen : .black, for: .normal)
+
             let region = MKCoordinateRegion(
                 center: coordinates,
                 span: MKCoordinateSpan(

@@ -20,7 +20,7 @@ protocol MapPresenterOutput: AnyObject {
 }
 
 protocol MapViewInput: AnyObject {
-    func updateScale(state: SearchState, isZoomed: Bool, userCoordinates: CLLocationCoordinate2D)
+    func updateScale(state: SearchState, isShouldZoom: Bool?, coordinates: CLLocationCoordinate2D?)
     func addPinsOnMap(from model: [Saloon])
     func updateUserLocation(isCanUpdate: Bool)
     func showUser(coordinate: CLLocationCoordinate2D, willZoomToRegion: Bool)
@@ -29,7 +29,7 @@ protocol MapViewInput: AnyObject {
 enum SearchState: Equatable {
     case near
     case all
-    case saloonZoom(Int?=0)
+    case saloonZoom(Int?=0, latitude: Double, longtitude: Double)
     case none
 }
 
@@ -48,11 +48,26 @@ final class MapPresenter: MapPresenterOutput {
             guard let mapState,
                   let userCoordinates = userCoordinates else { return }
 
-            view?.updateScale(
-                state: mapState,
-                isZoomed: mapState == .near ? true : false,
-                userCoordinates: userCoordinates
-            )
+            switch mapState {
+            case let .saloonZoom(stateIndex, _, _):
+                self.mapState = stateIndex == 0 ? .near : .all
+
+                view?.updateScale(
+                    state: mapState,
+                    isShouldZoom: nil,
+                    coordinates: nil
+                )
+            case .near, .all:
+                self.mapState = mapState
+
+                view?.updateScale(
+                    state: mapState,
+                    isShouldZoom: mapState == .near ? true : false,
+                    coordinates: userCoordinates
+                )
+            default:
+                break
+            }
         }
     }
 

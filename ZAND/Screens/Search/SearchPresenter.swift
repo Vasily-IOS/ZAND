@@ -29,7 +29,7 @@ final class SearchPresenter: SearchPresenterOutput {
     
     unowned let view: SearchViewInput
 
-    var searchState: SearchState {
+    var searchState: SearchState = .none {
         didSet {
             updateUI(state: searchState)
         }
