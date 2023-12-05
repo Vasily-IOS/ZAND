@@ -233,11 +233,7 @@ extension MainViewController: MainViewDelegate {
                 case let .saloonZoom(stateIndex, _, _):
                     self.presenter?.state = stateIndex == 0 ? .near : .all
 
-//                    let index = self.presenter?.sortedSaloons.firstIndex(where: { $0.saloonCodable.id == model?.saloonCodable.id } )
-
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                        print("Количество элементов коллекции - \(self.contentView.collectionView.numberOfItems(inSection: 1)), state \(self.presenter?.state), индекс выбранного салона \(index ?? 0)")
-
                         if let index = self.presenter?.sortedSaloons.firstIndex(
                             where: { $0.saloonCodable.id == model?.saloonCodable.id }
                         ) {

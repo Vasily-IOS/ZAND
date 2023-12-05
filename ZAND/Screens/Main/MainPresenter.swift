@@ -128,7 +128,11 @@ extension MainPresenter {
     // MARK: - Instance methods
 
     func sortModel(filterID: Int) {
-        sortedSaloons = allSalons.filter({ $0.saloonCodable.business_type_id == filterID })
+        if state == .all {
+            sortedSaloons = allSalons.filter({ $0.saloonCodable.business_type_id == filterID })
+        } else {
+            sortedSaloons = sortedSalonsByUserLocation().filter({ $0.saloonCodable.business_type_id == filterID })
+        }
     }
 
     func fetchData() {
