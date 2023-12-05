@@ -21,10 +21,8 @@ final class SearchView: BaseUIView {
 
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(
-            string: AssetString.where_wanna_go.rawValue,
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        )
+        searchBar.text = AssetString.where_wanna_go.rawValue
+        searchBar.searchTextField.textColor = .textGray
         UISearchBar.appearance().setImage(
             AssetImage.search_icon.image,
             for: .search,
@@ -33,7 +31,6 @@ final class SearchView: BaseUIView {
         searchBar.backgroundColor = .white
         searchBar.searchTextField.backgroundColor = .white
         searchBar.searchBarStyle = .prominent
-        searchBar.searchTextField.textColor = .black
         searchBar.backgroundImage = UIImage()
         return searchBar
     }()

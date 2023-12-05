@@ -142,6 +142,13 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter?.search(text: searchText)
     }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if searchBar.text == AssetString.where_wanna_go.rawValue {
+            contentView.searchBar.text = nil
+        }
+        contentView.searchBar.searchTextField.textColor = .black
+    }
 }
 
 extension SearchViewController: SearchViewInput {
@@ -167,7 +174,9 @@ extension SearchViewController: SearchViewDelegate {
 
     func changeSegmentIndex() {
         presenter?.searchState = presenter?.searchState == .all ? .near : .all
-        contentView.searchBar.text = nil
+        contentView.searchBar.searchTextField.text = AssetString.where_wanna_go.rawValue
+        contentView.searchBar.searchTextField.textColor = .textGray
+        contentView.searchBar.resignFirstResponder()
     }
 
     func dismiss() {
