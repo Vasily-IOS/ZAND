@@ -223,7 +223,7 @@ extension MainViewController: MainViewDelegate {
 
         AppRouter.shared.presentSearch(
             type: .search(
-                presenter?.nearSalons ?? [],
+                presenter?.sortedSalonsByUserLocation() ?? [],
                 allModel: allSalons,
                 state: presenter?.state
             )) { [weak self] state, model in

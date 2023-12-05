@@ -16,7 +16,6 @@ enum MainType {
 protocol MainPresenterOutput: AnyObject {
     var sortedSaloons: [Saloon] { get set }
     var allSalons: [Saloon] { get }
-    var nearSalons: [Saloon] { get set }
 
     var selectedFilters: [IndexPath: Bool] { get set }
     var isFirstLaunch: Bool { get set }
@@ -28,6 +27,7 @@ protocol MainPresenterOutput: AnyObject {
     func fetchData()
     func sortModel(filterID: Int)
     func updateDict() -> [IndexPath: Bool]
+    func sortedSalonsByUserLocation() -> [Saloon]
 }
 
 protocol MainViewInput: AnyObject {
@@ -62,17 +62,17 @@ final class MainPresenter: MainPresenterOutput {
         }
     }
 
-    var nearSalons: [Saloon] = []
-
     var isFirstLaunch = true
 
     var state: SearchState = .all {
         didSet {
-            sortedSaloons = state == .near ? nearSalons : allSalons
+            sortedSaloons = state == .near ? sortedSalonsByUserLocation() : allSalons
         }
     }
 
     private var cancellables = Set<AnyCancellable>()
+
+    private var userCoordinates: CLLocationCoordinate2D?
 
     private let provider: SaloonProvider
 
@@ -85,9 +85,9 @@ final class MainPresenter: MainPresenterOutput {
         self.provider = provider
 
         self.fetchData()
+        self.subscribeNotifications()
         self.locationManager.requestLocationUpdates()
         self.bind()
-        self.subscribeNotifications()
     }
 
     // MARK: - Instance methods
@@ -185,10 +185,12 @@ extension MainPresenter {
         )
     }
 
-    func calculateNearSaloons(coordinates: CLLocationCoordinate2D) {
+    func sortedSalonsByUserLocation() -> [Saloon] {
+        guard let userCoordinates else { return [] }
+
         let currentUserLocation = CLLocation(
-            latitude: coordinates.latitude,
-            longitude: coordinates.longitude
+            latitude: userCoordinates.latitude,
+            longitude: userCoordinates.longitude
         )
 
         let nearSalons = allSalons.map { saloon in
@@ -203,14 +205,21 @@ extension MainPresenter {
             )
         }.filter { ($0.distance ?? 0.0) <= 12000 }
 
-        self.nearSalons = nearSalons
+        return nearSalons
     }
 
     private func bind() {
-        locationManager.currentLocation.sink(receiveCompletion: { _ in
+        locationManager.currentLocation
+            .sink(receiveCompletion: { _ in
             debugPrint("Failure to update user location")
         }) { [weak self] userCoordinates in
-            self?.calculateNearSaloons(coordinates: userCoordinates)
+            self?.userCoordinates = userCoordinates
         }.store(in: &cancellables)
+
+        locationManager.deniedLocationAccess
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                debugPrint("Denied location updates by user")
+            }.store(in: &cancellables)
     }
 }

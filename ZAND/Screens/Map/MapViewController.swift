@@ -23,7 +23,7 @@ final class MapViewController: BaseViewController<MapRectView> {
 
     override func loadView() {
         super.loadView()
-
+        
         presenter?.mapState = .near
         presenter?.showUser()
     }
