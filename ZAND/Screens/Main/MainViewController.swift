@@ -56,7 +56,7 @@ final class MainViewController: BaseViewController<MainView> {
         hideNavigationBar()
         showBadConnectionView()
     }
-    
+
     // MARK: - Instance methods
     
     private func subscribeDelegate() {
@@ -233,11 +233,18 @@ extension MainViewController: MainViewDelegate {
                 case let .saloonZoom(stateIndex, _, _):
                     self.presenter?.state = stateIndex == 0 ? .near : .all
 
-                    if let index = presenter?.sortedSaloons.firstIndex(
-                        where: { $0.saloonCodable.id == model?.saloonCodable.id }
-                    ) {
-                        self.contentView.scrollToItem(at: [1, index])
+//                    let index = self.presenter?.sortedSaloons.firstIndex(where: { $0.saloonCodable.id == model?.saloonCodable.id } )
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                        print("Количество элементов коллекции - \(self.contentView.collectionView.numberOfItems(inSection: 1)), state \(self.presenter?.state), индекс выбранного салона \(index ?? 0)")
+
+                        if let index = self.presenter?.sortedSaloons.firstIndex(
+                            where: { $0.saloonCodable.id == model?.saloonCodable.id }
+                        ) {
+                            self.contentView.scrollToItem(at: [1, index])
+                        }
                     }
+
                 case .near:
                     if self.presenter?.state != .near {
                         self.presenter?.state = state

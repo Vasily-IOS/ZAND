@@ -99,7 +99,7 @@ final class MainView: BaseUIView {
         DispatchQueue.main.async {
             UIView.transition(
                 with: self.collectionView,
-                duration: 0.1,
+                duration: 0,
                 options: .transitionCrossDissolve,
                 animations: { self.collectionView.reloadData() }
             )
