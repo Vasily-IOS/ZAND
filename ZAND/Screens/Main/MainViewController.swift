@@ -195,7 +195,7 @@ extension MainViewController: UICollectionViewDelegate {
 
                 let isSelectedFiltersEmpty = (presenter?.selectedFilters ?? [:]).filter{ $0.value == true }.isEmpty
                 if isSelectedFiltersEmpty {
-                    presenter?.state = .all
+                    presenter?.state = presenter?.state == .all ? .all : .near
                     collectionView.scrollToItem(at: [0,0], at: .left, animated: true)
                 } else {
                     self.presenter?.sortModel(filterID: OptionsModel.options[indexPath.item].id ?? 0)
