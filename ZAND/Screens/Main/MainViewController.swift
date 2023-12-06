@@ -232,6 +232,7 @@ extension MainViewController: MainViewDelegate {
                 switch state {
                 case let .saloonZoom(stateIndex, _, _):
                     self.presenter?.state = stateIndex == 0 ? .near : .all
+                    self.presenter?.selectedFilters.removeAll()
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         if let index = self.presenter?.sortedSaloons.firstIndex(
