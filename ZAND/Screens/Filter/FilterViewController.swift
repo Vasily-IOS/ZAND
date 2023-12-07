@@ -196,6 +196,8 @@ extension FilterViewController: FilerViewDelegate {
         )
         presenter?.selectFilters.removeAll()
         presenter?.isNearestActive = false
+        let cell = contentView.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? FilterCell
+        cell?.isTapped = false
     }
 
     func applyButtonTap() {
