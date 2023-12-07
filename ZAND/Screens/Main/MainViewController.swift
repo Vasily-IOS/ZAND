@@ -98,16 +98,13 @@ final class MainViewController: BaseViewController<MainView> {
 
             self.presenter?.state = nearestIsActive ? .near : .all
 
-            if indexDict.isEmpty {
+            if indexDict.isEmpty && nearestIsActive == false {
+                self.setupDefaultState()
+            } else if indexDict.isEmpty {
                 self.presenter?.selectedFilters.removeAll()
             } else {
-
-//                print("Near is active - \(self.presenter?.state ?? .none)")
-//                print("Index to scroll \(indexDict.first(where: { $0.value == true })?.key)")
-
                 let filterID = OptionsModel.options[indexDict.keys.first?.item ?? 0].id ?? 0
                 self.presenter?.selectedFilters = indexDict
-
                 self.presenter?.sortModel(filterID: filterID)
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

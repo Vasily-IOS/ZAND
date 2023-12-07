@@ -15,9 +15,10 @@ enum FilterType {
 protocol FilterPresenterOutput: AnyObject {
     var selectFilters: [IndexPath: Bool] { get set }
     var isNearestActive: Bool { get set }
-    
     var selectFiltersToTransfer: [IndexPath: Bool] { get }
+
     func getModel(by type: FilterType) -> [CommonFilterProtocol]
+    func isFiltersEmpty() -> Bool
 }
 
 protocol FilterViewInput: AnyObject {
@@ -42,6 +43,7 @@ final class FilterPresenter: FilterPresenterOutput {
             configureModelToTransfer(selectDict: selectFilters)
 
             view.updateButton(by: !isNearestActive && selectFilters.filter({ $0.value == true }).isEmpty)
+            
         }
     }
 
@@ -72,6 +74,10 @@ final class FilterPresenter: FilterPresenterOutput {
         case .options:
             return OptionsModel.optionsWithoutFilter()
         }
+    }
+
+    func isFiltersEmpty() -> Bool {
+        return isNearestActive == false && (selectFilters.isEmpty || selectFilters.values.filter({ $0 == true }).isEmpty)
     }
 
     private func configureModel(selectDict: [IndexPath: Bool]) {

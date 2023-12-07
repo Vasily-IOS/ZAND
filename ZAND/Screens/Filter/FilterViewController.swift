@@ -23,6 +23,12 @@ final class FilterViewController: BaseViewController<FilterView> {
         subscribeDelegate()
     }
 
+    deinit {
+        if presenter?.isFiltersEmpty() == true {
+            completionHandler?([:], false)
+        }
+    }
+
     // MARK: - Instance methods
 
     private func subscribeDelegate() {
@@ -193,8 +199,6 @@ extension FilterViewController: FilerViewDelegate {
     }
 
     func applyButtonTap() {
-        print(presenter?.selectFiltersToTransfer)
-
         completionHandler?(presenter?.selectFiltersToTransfer ?? [:], presenter?.isNearestActive ?? false)
         AppRouter.shared.dismiss()
     }
