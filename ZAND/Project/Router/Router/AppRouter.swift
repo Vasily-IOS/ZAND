@@ -160,7 +160,7 @@ extension AppRouter: DefaultRouter {
         navigationController.present(vc, animated: true)
     }
 
-    func presentCompletion(type: VCType, completion: @escaping ([IndexPath : Bool]) -> Void) {
+    func presentFilterVC(type: VCType, completion: @escaping ([IndexPath : Bool], Bool) -> Void) {
         let vc = vcFactory.getViewController(for: type) as! FilterViewController
         vc.completionHandler = completion
         navigationController.present(vc, animated: true)

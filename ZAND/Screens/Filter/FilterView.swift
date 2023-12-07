@@ -125,6 +125,10 @@ final class FilterView: BaseUIView {
             cell.isTapped = false
         }
     }
+
+    func updateButtons(isUpdate: Bool) {
+        buttonStackView.subviews[0].isHidden = isUpdate
+    }
 }
 
 extension FilterView {

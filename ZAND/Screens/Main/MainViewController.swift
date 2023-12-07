@@ -89,23 +89,34 @@ final class MainViewController: BaseViewController<MainView> {
     }
 
     private func showFilterVC() {
-        AppRouter.shared.presentCompletion(
-            type: .filter((presenter?.updateDict() ?? [:]).filter({ $0.value == true }))
-        ) { [weak self] indexDict in
+        AppRouter.shared.presentFilterVC(
+            type: .filter(
+                (presenter?.updateDict() ?? [:]).filter({ $0.value == true }),
+                nearestIsActive: presenter?.state == .all ? false : true)
+        ) { [weak self] indexDict, nearestIsActive in
             guard let self else { return }
 
+            self.presenter?.state = nearestIsActive ? .near : .all
+
             if indexDict.isEmpty {
-                setupDefaultState()
+                self.presenter?.selectedFilters.removeAll()
             } else {
+
+//                print("Near is active - \(self.presenter?.state ?? .none)")
+//                print("Index to scroll \(indexDict.first(where: { $0.value == true })?.key)")
+
                 let filterID = OptionsModel.options[indexDict.keys.first?.item ?? 0].id ?? 0
                 self.presenter?.selectedFilters = indexDict
 
                 self.presenter?.sortModel(filterID: filterID)
-                self.contentView.collectionView.scrollToItem(
-                    at: indexDict.keys.first!,
-                    at: .centeredHorizontally,
-                    animated: true
-                )
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.contentView.collectionView.scrollToItem(
+                        at: indexDict.keys.first!,
+                        at: .centeredHorizontally,
+                        animated: true
+                    )
+                }
             }
         }
     }

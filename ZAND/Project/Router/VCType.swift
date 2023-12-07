@@ -5,7 +5,7 @@
 //  Created by Василий on 18.04.2023.
 //
 
-import CoreLocation
+import Foundation
 
 enum VCType {
     case tabBar
@@ -13,7 +13,7 @@ enum VCType {
     case main
     case map
     case saloonDetail(_ model: Saloon)
-    case filter(_ dict: [IndexPath: Bool])
+    case filter(_ dict: [IndexPath: Bool], nearestIsActive: Bool)
     case profile
     case appointments
     case privacyPolicy(_ urlString: String)

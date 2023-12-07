@@ -18,7 +18,7 @@ protocol DefaultRouter: AnyObject {
 
     func pushCreateRecord(_ type: VCType)
     func showAlert(type: AlertType, message: String?)
-    func presentCompletion(type: VCType, completion: @escaping ([IndexPath: Bool]) -> Void)
+    func presentFilterVC(type: VCType, completion: @escaping ([IndexPath: Bool], Bool) -> Void)
     func presentRecordNavigation(type: VCType)
     func presentSearch(type: VCType, completionHandler: ((SearchState, SaloonModel?) -> ())?)
     func switchRoot(type: ReplacedControllerType)

@@ -50,11 +50,14 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             )
             vc.presenter = presenter
             return vc
-        case .filter(let selectFilters):
+        case let .filter(selectFilters, isNearestActive):
             let layoutBuilder: DefaultFilterLayout = FilterLayout()
             let view = FilterView(layout: layoutBuilder)
             let vc = FilterViewController(contentView: view)
-            let presenter = FilterPresenter(view: vc, selectFilters: selectFilters)
+            let presenter = FilterPresenter(
+                view: vc, selectFilters: selectFilters,
+                isNearestActive: isNearestActive
+            )
             vc.presenter = presenter
             return vc
         case .profile:

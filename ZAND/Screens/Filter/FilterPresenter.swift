@@ -14,38 +14,53 @@ enum FilterType {
 
 protocol FilterPresenterOutput: AnyObject {
     var selectFilters: [IndexPath: Bool] { get set }
+    var isNearestActive: Bool { get set }
+    
     var selectFiltersToTransfer: [IndexPath: Bool] { get }
     func getModel(by type: FilterType) -> [CommonFilterProtocol]
 }
 
 protocol FilterViewInput: AnyObject {
-    func filterAlreadyContains(contains: Bool)
+    func setSelectedFilters(contains: Bool)
+    func updateButton(by emptyPoint: Bool)
 }
 
 final class FilterPresenter: FilterPresenterOutput {
 
     // MARK: - Properties
 
-    weak var view: FilterViewInput?
+    unowned let view: FilterViewInput
+
+    var isNearestActive: Bool {
+        didSet {
+            view.updateButton(by: !isNearestActive && selectFilters.filter({ $0.value == true }).isEmpty)
+        }
+    }
 
     var selectFilters: [IndexPath: Bool] = [:] {
         didSet {
             configureModelToTransfer(selectDict: selectFilters)
+
+            view.updateButton(by: !isNearestActive && selectFilters.filter({ $0.value == true }).isEmpty)
         }
     }
 
     var selectFiltersToTransfer: [IndexPath: Bool] = [:] {
         didSet {
-            view?.filterAlreadyContains(contains: selectFiltersToTransfer.isEmpty)
+            view.setSelectedFilters(contains: selectFiltersToTransfer.isEmpty)
         }
     }
 
     // MARK: -  Initializers
 
-    init(view: FilterViewInput, selectFilters: [IndexPath: Bool]) {
+    init(view: FilterViewInput,
+         selectFilters: [IndexPath: Bool],
+         isNearestActive: Bool
+    ) {
         self.view = view
-
+        self.isNearestActive = isNearestActive
         self.configureModel(selectDict: selectFilters)
+
     }
 
     // MARK: - Instance methods
@@ -61,7 +76,7 @@ final class FilterPresenter: FilterPresenterOutput {
 
     private func configureModel(selectDict: [IndexPath: Bool]) {
         selectFilters = selectDict
-        view?.filterAlreadyContains(contains: selectDict.isEmpty)
+        view.setSelectedFilters(contains: selectDict.isEmpty)
     }
 
     private func configureModelToTransfer(selectDict: [IndexPath: Bool]) {
