@@ -38,10 +38,10 @@ final class TimetableViewController: BaseViewController<TimetableView> {
 
     private func showAlert() {
         let alertController = UIAlertController(
-            title: AssetString.chooseTime,
+            title: AssetString.chooseTime.rawValue,
             message: nil,
             preferredStyle: .alert)
-        let understandAction = UIAlertAction(title: AssetString.ok, style: .cancel)
+        let understandAction = UIAlertAction(title: AssetString.ok.rawValue, style: .cancel)
         alertController.addAction(understandAction)
         present(alertController, animated: true)
     }

@@ -11,46 +11,53 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
     func getViewController(for type: VCType) -> UIViewController {
         switch type {
         case .tabBar:
-            let vc = TabBarController()
-            return vc
-        case .search(let model):
+            return TabBarController()
+        case .search(let sortedModel, let allModel, let mapState):
             let view = SearchView()
             let vc = SearchViewController(contentView: view)
-            let presenter = SearchPresenter(view: vc, model: model)
+            let presenter = SearchPresenter(
+                view: vc,
+                sortedModel: sortedModel,
+                allModel: allModel,
+                state: mapState ?? .none
+            )
             vc.presenter = presenter
             return vc
         case .main:
             let layotBuilder: DefaultMainLayout = MainLayout()
-            let network: APIManager = APIManagerImpl()
+            let provider: SaloonProvider = SaloonProviderImpl()
             let view = MainView(layoutBuilder: layotBuilder)
             let vc = MainViewController(contentView: view)
             let presenter = MainPresenter(
                 view: vc,
-                network: network
+                provider: provider
             )
             vc.presenter = presenter
             return vc
         case .map:
-            let view = MapView()
+            let view = MapRectView()
             let vc = MapViewController(contentView: view)
             let provider: SaloonProvider = SaloonProviderImpl()
             let presenter = MapPresenter(view: vc, provider: provider)
             vc.presenter = presenter
             return vc
-        case .saloonDetail(let type):
+        case .saloonDetail(let model):
             let view = SaloonDetailView()
             let vc = SaloonDetailViewController(contentView: view)
             let presenter = SaloonDetailPresenter(
                 view: vc,
-                type: type
+                model: model
             )
             vc.presenter = presenter
             return vc
-        case .filter(let selectFilters):
+        case let .filter(selectFilters, isNearestActive):
             let layoutBuilder: DefaultFilterLayout = FilterLayout()
             let view = FilterView(layout: layoutBuilder)
             let vc = FilterViewController(contentView: view)
-            let presenter = FilterPresenter(view: vc, selectFilters: selectFilters)
+            let presenter = FilterPresenter(
+                view: vc, selectFilters: selectFilters,
+                isNearestActive: isNearestActive
+            )
             vc.presenter = presenter
             return vc
         case .profile:
@@ -68,7 +75,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let vc = AppointmentsViewController(contentView: view)
             let presenter = AppointmentsPresenterImpl(view: vc, network: network, realm: realmManager)
             vc.presenter = presenter
-            vc.title = AssetString.books
+            vc.title = AssetString.books.rawValue
             return vc
         case .privacyPolicy(let url):
             return PrivacyPolicyViewController(url: url)
@@ -93,7 +100,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
         case .startBooking(let company_id, let companyName, let companyAddress):
             let view = StartBookingView()
             let vc = StartBookingViewController(contentView: view)
-            vc.title = AssetString.howStart
+            vc.title = AssetString.howStart.rawValue
             let presenter = StartBookingPresenter(
                 view: vc,
                 company_id: company_id,
@@ -129,7 +136,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
 
             vc.presenter = presenter
 
-            vc.title = AssetString.service
+            vc.title = AssetString.service.rawValue
             return vc
 
         case .staff(let booking_type, let company_id, let company_name, let company_address, let viewModel):
@@ -157,7 +164,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
                 network: network,
                 viewModel: currentViewModel)
             vc.presenter = presenter
-            vc.title = AssetString.staff
+            vc.title = AssetString.staff.rawValue
             return vc
         case .timeTable(let viewModel):
             let layout: DefaultTimetableLayout = TimetableLayout()
@@ -169,7 +176,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
                 network: network,
                 viewModel:  viewModel)
             vс.presenter = presenter
-            vс.title = AssetString.selectDateAndTime
+            vс.title = AssetString.selectDateAndTime.rawValue
             return vс
         case .confirmation(let viewModel):
             let realm: RealmManager = RealmManagerImpl()
@@ -183,7 +190,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
                 realm: realm
             )
             vc.presenter = presenter
-            vc.title = AssetString.checkAppointment
+            vc.title = AssetString.checkAppointment.rawValue
             return vc
         }
     }

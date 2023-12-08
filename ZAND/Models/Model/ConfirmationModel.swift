@@ -13,7 +13,7 @@ struct ConfirmationModel: Codable {
     let phone: String // required
     let fullname: String // required
     let email: String
-    var comment: String = "Тестовая запись ZAND"
+    var comment: String = "Я записался через ZAND"
     var notify_by_sms: Int = 2 // За сколько часов до визита следует выслать смс напоминание клиенту (0 - если не нужно)
     var notify_by_email: Int = 0 //За сколько часов до визита следует выслать email напоминание клиенту (0 - если не нужно)
     let api_id: Int //ID записи из внешней системы

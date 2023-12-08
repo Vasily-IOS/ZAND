@@ -23,7 +23,7 @@ final class FilterView: BaseUIView {
         let collectionView = UICollectionView(
             frame: .zero, collectionViewLayout: createLayout()
         )
-        collectionView.register(cellType: FilterOptionCell.self)
+        collectionView.register(cellType: FilterCell.self)
         collectionView.register(cellType: OptionCell.self)
         collectionView.register(view: ReuseHeaderView.self)
 
@@ -44,12 +44,12 @@ final class FilterView: BaseUIView {
         spacing: 16
     )
     
-    private let lineImage = UIImageView(image: AssetImage.line_icon)
+    private let lineImage = UIImageView(image: AssetImage.line_icon.image)
 
     private let viewFirstLabel = UILabel(
         .systemFont(ofSize: 20, weight: .bold),
         .black,
-        AssetString.showFirst
+        AssetString.showFirst.rawValue
     )
     
     private let applyButton = BottomButton(buttonText: .apply)
@@ -61,7 +61,7 @@ final class FilterView: BaseUIView {
         cancelButton.layer.borderColor = UIColor.lightGreen.cgColor
         cancelButton.layer.borderWidth = 1
         cancelButton.backgroundColor = .mainGray
-        cancelButton.setTitle(AssetString.reset, for: .normal)
+        cancelButton.setTitle(AssetString.reset.rawValue, for: .normal)
         cancelButton.setTitleColor(.mainGreen, for: .normal)
         cancelButton.layer.cornerRadius = 15
         cancelButton.isHidden = true
@@ -94,6 +94,8 @@ final class FilterView: BaseUIView {
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] section, _ in
             switch FilterSection.init(rawValue: section) {
+            case .filterOption:
+                return self?.layoutBulder.createSection(type: .filterOption)
             case .services:
                 return self?.layoutBulder.createSection(type: .services)
             default:
@@ -119,9 +121,13 @@ final class FilterView: BaseUIView {
 
     func deselectRows(indexPath: [IndexPath]) {
         for path in indexPath {
-            let cell = collectionView.cellForItem(at: path) as! OptionCell
+            let cell = collectionView.cellForItem(at: path) as! CellTappedIndicator
             cell.isTapped = false
         }
+    }
+
+    func updateButtons(isUpdate: Bool) {
+        buttonStackView.subviews[0].isHidden = isUpdate
     }
 }
 
@@ -130,8 +136,6 @@ extension FilterView {
     // MARK: - Instance methods
     
     private func setViews() {
-        backgroundColor = .white
-        
         addSubviews([lineImage, collectionView, buttonStackView])
         
         lineImage.snp.makeConstraints { make in

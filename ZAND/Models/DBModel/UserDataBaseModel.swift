@@ -1,5 +1,5 @@
 //
-//  UserModelDB.swift
+//  UserDataBaseModel.swift
 //  ZAND
 //
 //  Created by Василий on 29.08.2023.

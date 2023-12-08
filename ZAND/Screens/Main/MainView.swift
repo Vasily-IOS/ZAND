@@ -40,11 +40,11 @@ final class MainView: BaseUIView {
         return lostConnectionAnimation
     }()
 
-    private let lostConnectionImage = UIImageView(image: AssetImage.lostConnection_icon)
+    private let lostConnectionImage = UIImageView(image: AssetImage.lostConnection_icon.image)
 
     private let emptyLabel: UILabel = {
         let emptyLabel = UILabel()
-        emptyLabel.text = AssetString.noSalons
+        emptyLabel.text = AssetString.noSalons.rawValue
         emptyLabel.font = .systemFont(ofSize: 24, weight: .regular)
         emptyLabel.textColor = .textGray
         emptyLabel.textAlignment = .center
@@ -52,7 +52,9 @@ final class MainView: BaseUIView {
         emptyLabel.isHidden = true
         return emptyLabel
     }()
-    
+
+    private let badConnectionView = BadInternetConnectionView()
+
     // MARK: - Initializers
     
     init(layoutBuilder: DefaultMainLayout) {
@@ -97,7 +99,7 @@ final class MainView: BaseUIView {
         DispatchQueue.main.async {
             UIView.transition(
                 with: self.collectionView,
-                duration: 0.1,
+                duration: 0,
                 options: .transitionCrossDissolve,
                 animations: { self.collectionView.reloadData() }
             )
@@ -106,6 +108,22 @@ final class MainView: BaseUIView {
 
     func isLabelShows(_ isShow: Bool) {
         emptyLabel.isHidden = !isShow
+    }
+
+    func showBadConnectionView() {
+        addSubview(badConnectionView)
+
+        badConnectionView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().inset(16)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).inset(32)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
+            UIView.animate(withDuration: 0.5, animations: {
+                self?.badConnectionView.alpha = 0.0
+            }) { _ in self?.badConnectionView.removeFromSuperview() }
+        }
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ServicesPresenterOutput: AnyObject {
-    var model: [Categories] { get set }
+    var model: [CategoriesModel] { get set }
     var viewModel: ConfirmationViewModel { get set }
     func search(text: String)
 }
@@ -24,9 +24,9 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     weak var view: ServicesViewInput?
 
-    var model: [Categories] = []
+    var model: [CategoriesModel] = []
 
-    var adittionalModel: [Categories] = []
+    var adittionalModel: [CategoriesModel] = []
 
     var viewModel: ConfirmationViewModel
 
@@ -68,7 +68,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     private func fetchData(staff_id: Int = 0) {
         let group = DispatchGroup()
-        var result: [Categories] = []
+        var result: [CategoriesModel] = []
 
         view?.showIndicator(true)
         group.enter()
@@ -90,10 +90,10 @@ final class ServicesPresenter: ServicesPresenterOutput {
         }
     }
 
-    private func fetchCategories(completion: @escaping (([CategoryJSON]) -> Void)) {
+    private func fetchCategories(completion: @escaping (([CategoryJSONModel]) -> Void)) {
         network.performRequest(
             type: .categories(viewModel.company_id),
-            expectation: CategoriesJSON.self)
+            expectation: CategoriesJSONModel.self)
         { categories in
             completion(categories.data)
         }
@@ -101,7 +101,7 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     private func fetchBookServices(
         staff_id: Int,
-        completion: @escaping (([BookService]) -> Void)
+        completion: @escaping (([BookServiceModel]) -> Void)
     ) {
         network.performRequest(
             type: .bookServices(company_id: viewModel.company_id, staff_id: staff_id),
@@ -112,10 +112,10 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     private func fetchCategoriesAndServices(
         staff_id: Int = 0,
-        completion: @escaping ([CategoryJSON], [BookService]) -> Void) {
+        completion: @escaping ([CategoryJSONModel], [BookServiceModel]) -> Void) {
             let group = DispatchGroup()
-            var categoriesToFetch: [CategoryJSON] = []
-            var servicesToFetch: [BookService] = []
+            var categoriesToFetch: [CategoryJSONModel] = []
+            var servicesToFetch: [BookServiceModel] = []
 
             group.enter()
             fetchCategories { categoriesJSON in
@@ -135,15 +135,15 @@ final class ServicesPresenter: ServicesPresenterOutput {
         }
 
     private func createResultModel(
-        categories: [CategoryJSON],
-        services: [BookService],
-        completion: @escaping (([Categories]) -> Void)) {
+        categories: [CategoryJSONModel],
+        services: [BookServiceModel],
+        completion: @escaping (([CategoriesModel]) -> Void)) {
             let group = DispatchGroup()
-            var result: [Categories] = []
+            var result: [CategoriesModel] = []
 
             group.enter()
             categories.forEach { category in
-                let category = Categories(
+                let category = CategoriesModel(
                     category: category,
                     services: services.filter(
                         { $0.category_id == category.id && $0.active == 1 })

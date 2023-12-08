@@ -21,7 +21,7 @@ final class StartBookingView: BaseUIView {
 
     private let titleLabel = UILabel(
         .systemFont(ofSize: 20, weight: .bold),
-        .black, AssetString.howStart
+        .black, AssetString.howStart.rawValue
     )
 
     private let serviceButtonView = StartBookingButtonView(state: .service)

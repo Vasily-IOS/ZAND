@@ -6,58 +6,96 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol SearchViewInput: AnyObject {
     func updateUI(with model: [Saloon])
+    func updateSegment(index: Int)
 }
 
 protocol SearchPresenterOutput: AnyObject {
-    func updateUI()
-    func getModel() -> [Saloon]
+    var searchState: SearchState { get set }
+    var modelUI: [Saloon] { get set }
+
+    func updateUI(state: SearchState)
+    func getModel(id: Int) -> Saloon?
     func search(text: String)
+    func updateSegment()
 }
 
 final class SearchPresenter: SearchPresenterOutput {
 
     // MARK: - Properties
     
-    weak var view: SearchViewInput?
+    unowned let view: SearchViewInput
 
-    var currentModel: [Saloon] = []
+    var searchState: SearchState = .none {
+        didSet {
+            updateUI(state: searchState)
+        }
+    }
 
-    private let model: [Saloon]
+    var modelUI: [Saloon] = [] // салоны, которые идут в коллекцию
+
+    private let nearModel: [Saloon] // салоны, которые рядом
+
+    private let originalModel: [Saloon] // все салоны
 
     // MARK: - Initializers
     
-    init(view: SearchViewInput, model: [Saloon]) {
+    init(
+        view: SearchViewInput,
+        sortedModel: [Saloon],
+        allModel: [Saloon],
+        state: SearchState
+    ) {
         self.view = view
-        self.model = model
+        self.nearModel = sortedModel
+        self.originalModel = allModel
+        self.searchState = state
+
+        self.updateUI(state: state)
+        self.updateSegment()
     }
 }
 
 extension SearchPresenter {
     
     // MARK: - SearchPresenter methods
-    
-    func updateUI() {
-        view?.updateUI(with: model)
-        currentModel = model
+
+    func updateUI(state: SearchState) {
+        modelUI = state == .near ? nearModel : originalModel
+        view.updateUI(with: modelUI)
     }
 
     func search(text: String) {
         if text.isEmpty {
-            view?.updateUI(with: model)
-            currentModel = model
+            updateUI(state: .all)
         } else {
-            let filtedModel = model.filter({ model in
-                model.title.uppercased().contains(text.uppercased())})
-
-            view?.updateUI(with: filtedModel)
-            currentModel = filtedModel
+            let filtedModel = getActualModel().filter({ model in
+                return model.saloonCodable.title.uppercased().contains(text.uppercased())
+            })
+            self.view.updateUI(with: filtedModel)
+            modelUI = filtedModel
         }
     }
 
-    func getModel() -> [Saloon] {
-        return model
+    func getModel(id: Int) -> Saloon? {
+        let model = searchState == .near ? nearModel : originalModel
+        if let saloonModel = model.first(where: { $0.saloonCodable.id == id }) {
+            return saloonModel
+        } else {
+            return nil
+        }
+    }
+
+    func updateSegment() {
+        view.updateSegment(index: searchState == .near ? 0 : 1)
+    }
+
+    // MARK: - Private methods
+
+    private func getActualModel() -> [Saloon] {
+        return searchState == .near ? nearModel : originalModel
     }
 }

@@ -40,7 +40,7 @@ final class DayCell: BaseCollectionCell {
 
     // MARK: - Instance methods
 
-    func configure(model: WorkingRangeItem) {
+    func configure(model: WorkingRangeItemModel) {
         dayNumericLabel.text = model.dayNumeric
         daySringLabel.text = model.dayString
     }

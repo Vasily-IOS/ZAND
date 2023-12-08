@@ -36,7 +36,7 @@ final class ProfileView: BaseUIView {
         var emptyLabel = UILabel()
         emptyLabel.font = .systemFont(ofSize: 24, weight: .regular)
         emptyLabel.textColor = .textGray
-        emptyLabel.text = AssetString.empty
+        emptyLabel.text = AssetString.empty.rawValue
         return emptyLabel
     }()
 

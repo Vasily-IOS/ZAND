@@ -29,13 +29,13 @@ class TransparentButton: UIButton {
         var text: String {
             switch self {
             case .viewOnMap:
-                return AssetString.viewOnMap
+                return AssetString.viewOnMap.rawValue
             case .register:
-                return AssetString.register
+                return AssetString.register.rawValue
             case .forgotPassword:
-                return AssetString.forgotPassword
+                return AssetString.forgotPassword.rawValue
             case .accountExist:
-                return AssetString.accountExist
+                return AssetString.accountExist.rawValue
             }
         }
         

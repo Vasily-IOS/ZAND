@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum AssetURL {
-    static let baseURL = "https://api.yclients.com"
-    static let telegram_bot = "https://t.me/zandcenter_bot"
-    static let privacy_policy = "https://zandbeauty.ru/information"
+enum AssetURL: String {
+    case baseURL = "https://api.yclients.com"
+    case telegram_bot = "https://t.me/zandcenter_bot"
+    case privacy_policy = "https://zandbeauty.ru/information"
 }

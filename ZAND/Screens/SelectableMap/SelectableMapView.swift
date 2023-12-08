@@ -24,13 +24,13 @@ final class SelectableMapView: BaseUIView {
         subscribeDelegate()
     }
 
-    func addPinOnMap(model: SaloonMapModel) {
+    func addPinOnMap(model: Saloon) {
         let coordinates = CLLocationCoordinate2D(
-            latitude: model.coordinate_lat,
-            longitude: model.coordinate_lon
+            latitude: model.saloonCodable.coordinate_lat,
+            longitude: model.saloonCodable.coordinate_lon
         )
         let annotation = SaloonAnnotation(coordinate: coordinates, model: model)
-        annotation.title = model.title
+        annotation.title = model.saloonCodable.title
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
         mapView.showAnnotations(self.mapView.annotations, animated: true)
@@ -70,7 +70,7 @@ extension SelectableMapView: MKMapViewDelegate {
             } else {
                 annotationView?.annotation = annotation
             }
-            annotationView?.image = AssetImage.pin_icon
+            annotationView?.image = AssetImage.pin_icon.image
             annotationView?.canShowCallout = true
             return annotationView
         }

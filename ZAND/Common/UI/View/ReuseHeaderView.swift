@@ -18,19 +18,22 @@ final class ReuseHeaderView: UICollectionReusableView {
         case data
         case pushes
         case time
+        case filters
         
         var description: String {
             switch self {
             case .services:
-                return AssetString.services
+                return AssetString.service.rawValue
             case .favourites:
-                return AssetString.favourites
+                return AssetString.favourites.rawValue
             case .data:
-                return AssetString.myData
+                return AssetString.details.rawValue
             case .pushes:
-                return AssetString.pushSms
+                return AssetString.pushSms.rawValue
             case .time:
-                return AssetString.time
+                return AssetString.time.rawValue
+            case .filters:
+                return AssetString.filter.rawValue
             }
         }
     }

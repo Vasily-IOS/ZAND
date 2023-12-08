@@ -153,7 +153,7 @@ extension ServicesViewController: UISearchBarDelegate {
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        if searchBar.text == AssetString.findInServices {
+        if searchBar.text == AssetString.findInServices.rawValue {
             contentView.searchBar.text = nil
         }
         contentView.searchBar.searchTextField.textColor = .black

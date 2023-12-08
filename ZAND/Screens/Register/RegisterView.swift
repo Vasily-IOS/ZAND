@@ -70,7 +70,7 @@ final class RegisterView: BaseUIView {
     private let entranceLabel = UILabel(
         .systemFont(ofSize: 24, weight: .bold),
         .black,
-        AssetString.entrance
+        AssetString.entrance.rawValue
     )
 
     private lazy var policyButtonsStackView = UIStackView(
@@ -135,7 +135,7 @@ final class RegisterView: BaseUIView {
         phoneTextField.layer.borderWidth = 0.0
     }
 
-    func configure(model: User) {
+    func configure(model: UserModel) {
         nameTextField.configure(textInput: model.name)
         surnameTextField.configure(textInput: model.surname)
         emailTextField.configure(textInput: model.email)

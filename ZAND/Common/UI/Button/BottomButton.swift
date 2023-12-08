@@ -22,25 +22,25 @@ enum ButtonText {
     var text: String {
         switch self {
         case .apply:
-            return AssetString.apply
+            return AssetString.apply.rawValue
         case .enter:
-            return AssetString.enter
+            return AssetString.enter.rawValue
         case .register:
-            return AssetString.register
+            return AssetString.register.rawValue
         case .book:
-            return AssetString.book
+            return AssetString.book.rawValue
         case .contin:
-            return AssetString.contin
+            return AssetString.contin.rawValue
         case .callUs:
-            return AssetString.callUs
+            return AssetString.callUs.rawValue
         case .sendCode:
-            return AssetString.sendCode
+            return AssetString.sendCode.rawValue
         case .getCode:
-            return AssetString.getCode
+            return AssetString.getCode.rawValue
         case .approve:
-            return AssetString.approveAppointment
+            return AssetString.approveAppointment.rawValue
         case .save:
-            return AssetString.save
+            return AssetString.save.rawValue
         }
     }
 }

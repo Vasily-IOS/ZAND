@@ -2,51 +2,21 @@
 //  SaloonModel.swift
 //  ZAND
 //
-//  Created by Василий on 05.09.2023.
+//  Created by Василий on 23.11.2023.
 //
 
-import Foundation
+import CoreLocation
 
-struct Saloons: Codable {
-    let data: [Saloon]
+protocol Saloon {
+    var saloonCodable: SaloonCodableModel { get }
+    var distance: CLLocationDistance? { get set }
+    var distanceString: String? { get }
 }
 
-struct Saloon: Codable {
-    let id: Int
-    let title: String
-    let public_title: String
-    let short_descr: String
-    let logo: String
-    let city_id: Int
-    let city: String
-    let active: Int
-    let schedule: String
-    let address: String
-    let coordinate_lat: Double
-    let coordinate_lon: Double
-    let description: String
-    let photos: [String]
-    let company_photos: [String]
-    let bookforms: [BookForm]
-    let default_bookform_url: String
-    let business_type_id: Int
-}
-
-struct BookForm: Codable {
-    let id: Int
-    let title: String
-    let is_default: Int
-    let url: String
-}
-
-extension Saloon: SaloonMapModel, CommonFilterProtocol, Hashable {
-    static func == (lhs: Saloon, rhs: Saloon) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
-extension BookForm: Hashable {
-    static func == (lhs: BookForm, rhs: BookForm) -> Bool {
-        return lhs.id == rhs.id
+struct SaloonModel: Saloon, Hashable {
+    var saloonCodable: SaloonCodableModel
+    var distance: CLLocationDistance?
+    var distanceString: String? {
+        return String(format: "%.3f", (Double(distance ?? 0.0 / 1000)) / 1000) + " " + "км"
     }
 }

@@ -67,11 +67,14 @@ extension ProfileViewController {
     
     private func showLogOutAlert() {
         let alertController = UIAlertController(
-            title: AssetString.exitMessage,
+            title: AssetString.exitMessage.rawValue,
             message: nil,
             preferredStyle: .alert)
-        let noAction = UIAlertAction(title: AssetString.no, style: .cancel)
-        let yesAction = UIAlertAction(title: AssetString.yes, style: .default) { [weak self] _ in
+        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .cancel)
+        let yesAction = UIAlertAction(
+            title: AssetString.yes.rawValue,
+            style: .default
+        ) { [weak self] _ in
             self?.presenter?.signOut()
         }
         alertController.addAction(noAction)
@@ -81,19 +84,19 @@ extension ProfileViewController {
 
     private func showDeleteProfileAlert() {
         let alertController = UIAlertController(
-            title: AssetString.areYouSure,
+            title: AssetString.areYouSure.rawValue,
             message: nil,
             preferredStyle: .alert)
-        let noAction = UIAlertAction(title: AssetString.no, style: .cancel)
+        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .cancel)
         let yesAction = UIAlertAction(
-            title: AssetString.yes,
+            title: AssetString.yes.rawValue,
             style: .default) { [weak self] _ in
             let alertConrol = UIAlertController(
-                title: AssetString.managerWillPhone,
+                title: AssetString.managerWillPhone.rawValue,
                 message: nil,
                 preferredStyle: .alert)
             let action = UIAlertAction(
-                title: AssetString.ok, style: .cancel)
+                title: AssetString.ok.rawValue, style: .cancel)
             alertConrol.addAction(action)
             self?.present(alertConrol, animated: true)
         }
@@ -119,7 +122,7 @@ extension ProfileViewController: ProfileViewDelegate {
     // MARK: - ProfileViewDelegate methods
 
     func showTelegramBot() {
-        guard let botURL = URL.init(string: AssetURL.telegram_bot) else {
+        guard let botURL = URL.init(string: AssetURL.telegram_bot.rawValue) else {
             return
         }
 
@@ -195,7 +198,7 @@ extension ProfileViewController: UICollectionViewDelegate {
                 break
             }
         case .favourites:
-            AppRouter.shared.push(.saloonDetail(.api(saloonModel[indexPath.row])))
+            AppRouter.shared.push(.saloonDetail(saloonModel[indexPath.row]))
         default:
             break
         }

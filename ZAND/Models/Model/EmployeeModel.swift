@@ -1,5 +1,5 @@
 //
-//  StaffModel.swift
+//  EmployeeModel.swift
 //  ZAND
 //
 //  Created by Василий on 19.09.2023.

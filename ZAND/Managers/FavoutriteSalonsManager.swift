@@ -17,7 +17,6 @@ final class FavouritesSalonsManager {
 
     var storageID: [Int] = [] {
         didSet {
-            print(storageID.count)
             save(model: storageID, key: saloonStorageKey)
         }
     }
@@ -35,7 +34,9 @@ final class FavouritesSalonsManager {
     }
 
     func add(modelID: Int) {
-        contains(modelID: modelID) ? print("Contains") : storageID.append(modelID)
+        if !contains(modelID: modelID) {
+            storageID.append(modelID)
+        }
         createNotification()
     }
 
@@ -55,6 +56,6 @@ final class FavouritesSalonsManager {
     }
 
     private func createNotification() {
-        NotificationCenter.default.post(name: .storageIDisChanged, object: nil)
+        NotificationCenter.default.post(name: .storageIDidChanged, object: nil)
     }
 }

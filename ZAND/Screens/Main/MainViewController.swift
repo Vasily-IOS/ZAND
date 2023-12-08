@@ -46,7 +46,7 @@ final class MainViewController: BaseViewController<MainView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         subscribeDelegate()
     }
 
@@ -54,12 +54,9 @@ final class MainViewController: BaseViewController<MainView> {
         super.viewWillAppear(animated)
 
         hideNavigationBar()
+        showBadConnectionView()
     }
 
-    deinit {
-        print("MainViewController died")
-    }
-    
     // MARK: - Instance methods
     
     private func subscribeDelegate() {
@@ -77,53 +74,60 @@ final class MainViewController: BaseViewController<MainView> {
 
         if cell.isTapped == false {
             cell.isTapped = true
-            presenter?.selectedDays[indexPath] = true
-            let unnecessaryIndexes = presenter?.selectedDays.filter({ $0.key != indexPath}) ?? [:]
+            presenter?.selectedFilters[indexPath] = true
+            let unnecessaryIndexes = presenter?.selectedFilters.filter({ $0.key != indexPath}) ?? [:]
             for (index, _) in unnecessaryIndexes {
-                presenter?.selectedDays[index] = false
+                presenter?.selectedFilters[index] = false
                 if let cell = collectionView.cellForItem(at: index) as? OptionCell {
                     cell.isTapped = false
                 }
             }
         } else {
             cell.isTapped = false
-            presenter?.selectedDays[indexPath] = false
+            presenter?.selectedFilters[indexPath] = false
         }
     }
 
-    // лагов нет
     private func showFilterVC() {
-        AppRouter.shared.presentCompletion(
-            type: .filter((presenter?.selectedDays ?? [:]).filter({ $0.value == true }))
-        ) { [weak self] indexDict in
+        AppRouter.shared.presentFilterVC(
+            type: .filter(
+                (presenter?.updateDict() ?? [:]).filter({ $0.value == true }),
+                nearestIsActive: presenter?.state == .all ? false : true)
+        ) { [weak self] indexDict, nearestIsActive in
             guard let self else { return }
 
-            if indexDict.isEmpty {
-                self.presenter?.selectedDays.removeAll()
-                self.presenter?.backToInitialState()
-                self.reloadDataAnimation()
-            } else {
-                let filterID = self.presenter?.optionsModel[indexDict.keys.first?.item ?? 0].id ?? 0
-                self.presenter?.selectedDays = indexDict
+            self.presenter?.state = nearestIsActive ? .near : .all
 
+            if indexDict.isEmpty && nearestIsActive == false {
+                self.setupDefaultState()
+            } else if indexDict.isEmpty {
+                self.presenter?.selectedFilters.removeAll()
+            } else {
+                let filterID = OptionsModel.options[indexDict.keys.first?.item ?? 0].id ?? 0
+                self.presenter?.selectedFilters = indexDict
                 self.presenter?.sortModel(filterID: filterID)
-                self.reloadData()
-                self.contentView.collectionView.scrollToItem(
-                    at: indexDict.keys.first!,
-                    at: .centeredHorizontally,
-                    animated: true
-                )
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.contentView.collectionView.scrollToItem(
+                        at: indexDict.keys.first!,
+                        at: .centeredHorizontally,
+                        animated: true
+                    )
+                }
             }
         }
     }
 
-    private func reloadDataAnimation() {
-        let range = Range(uncheckedBounds: (0, 2))
-        let indexSet = IndexSet(integersIn: range)
-
-        self.contentView.collectionView.performBatchUpdates {
-            self.contentView.collectionView.reloadSections(indexSet)
+    private func showBadConnectionView() {
+        if presenter?.isFirstLaunch == true {
+            contentView.showBadConnectionView()
+            presenter?.isFirstLaunch = false
         }
+    }
+
+    private func setupDefaultState() {
+        self.presenter?.selectedFilters.removeAll()
+        self.presenter?.state = .all
     }
 }
 
@@ -141,7 +145,7 @@ extension MainViewController: UICollectionViewDataSource {
     ) -> Int {
         switch MainSection.init(rawValue: section) {
         case .option:
-            return presenter?.optionsModel.count ?? 0
+            return OptionsModel.options.count
         case .beautySaloon:
             return presenter?.sortedSaloons.count ?? 0
         default:
@@ -156,9 +160,9 @@ extension MainViewController: UICollectionViewDataSource {
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
             let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
-            optionCell.configure(model: (presenter?.optionsModel[indexPath.item])!, state: .onMain)
+            optionCell.configure(model: OptionsModel.options[indexPath.item], state: .onMain)
 
-            let isCh = presenter?.selectedDays[indexPath] ?? false
+            let isCh = presenter?.selectedFilters[indexPath] ?? false
             isCh ? (optionCell.isTapped = true) : (optionCell.isTapped = false)
 
             return optionCell
@@ -168,10 +172,11 @@ extension MainViewController: UICollectionViewDataSource {
             saloonCell.mapHandler = mapHandler
             saloonCell.favouritesHandler = favouritesHandler
 
-            if let isInFavourite = presenter?.contains(by: (presenter?.sortedSaloons ?? [])[indexPath.item].id) {
+            if let saloons = presenter?.sortedSaloons as? [SaloonModel],
+               let isInFavourite = presenter?.contains(by: saloons[indexPath.item].saloonCodable.id) {
                 saloonCell.isInFavourite = !isInFavourite
             }
-            
+
             return saloonCell
         default:
             return UICollectionViewCell()
@@ -196,21 +201,21 @@ extension MainViewController: UICollectionViewDelegate {
                 let cell = collectionView.cellForItem(at: indexPath)
                 selectCellHelper(cell: cell, indexPath: indexPath, collectionView: collectionView)
 
-                let isSelectedFiltersEmpty = (presenter?.selectedDays ?? [:]).filter{ $0.value == true }.isEmpty
+                let isSelectedFiltersEmpty = (presenter?.selectedFilters ?? [:]).filter{ $0.value == true }.isEmpty
                 if isSelectedFiltersEmpty {
-                    presenter?.backToInitialState()
-                    collectionView.reloadSections(IndexSet(integer: 1))
+                    presenter?.state = presenter?.state == .all ? .all : .near
                     collectionView.scrollToItem(at: [0,0], at: .left, animated: true)
                 } else {
-                    self.presenter?.sortModel(filterID: presenter?.optionsModel[indexPath.item].id ?? 0)
-                    self.reloadData()
+                    self.presenter?.sortModel(filterID: OptionsModel.options[indexPath.item].id ?? 0)
                     self.contentView.collectionView.scrollToItem(
-                        at: indexPath, at: .centeredHorizontally, animated: true
+                        at: indexPath,
+                        at: .centeredHorizontally,
+                        animated: true
                     )
                 }
             }
         case .beautySaloon:
-            AppRouter.shared.push(.saloonDetail(.api((presenter?.sortedSaloons ?? [])[indexPath.item])))
+            AppRouter.shared.push(.saloonDetail((presenter?.sortedSaloons ?? [])[indexPath.item]))
         default:
             break
         }
@@ -222,15 +227,45 @@ extension MainViewController: MainViewDelegate {
     // MARK: - MainViewDelegate methods
     
     func showSearch() {
-        guard let model = presenter?.sortedSaloons else { return }
+        guard let allSalons = presenter?.allSalons else { return }
 
-        AppRouter.shared.presentSearch(type: .search(model)) { [weak self] singleModel in
-            guard let self else { return }
+        AppRouter.shared.presentSearch(
+            type: .search(
+                presenter?.sortedSalonsByUserLocation() ?? [],
+                allModel: allSalons,
+                state: presenter?.state
+            )) { [weak self] state, model in
+                guard let self else { return }
 
-            if let index = model.firstIndex(where: { $0.id == singleModel.id} ) {
-                self.contentView.scrollToItem(at: [1, index])
+                switch state {
+                case let .saloonZoom(stateIndex, _, _):
+                    self.presenter?.state = stateIndex == 0 ? .near : .all
+                    self.presenter?.selectedFilters.removeAll()
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if let index = self.presenter?.sortedSaloons.firstIndex(
+                            where: { $0.saloonCodable.id == model?.saloonCodable.id }
+                        ) {
+                            self.contentView.scrollToItem(at: [1, index])
+                        }
+                    }
+
+                case .near:
+                    if self.presenter?.state != .near {
+                        self.presenter?.state = state
+                        self.presenter?.selectedFilters.removeAll()
+                        self.contentView.collectionView.scrollToItem(at: [0,0], at: .top, animated: true)
+                    }
+                case .all:
+                    if self.presenter?.state != .all {
+                        self.presenter?.state = state
+                        self.presenter?.selectedFilters.removeAll()
+                        self.contentView.collectionView.scrollToItem(at: [0,0], at: .top, animated: true)
+                    }
+                default:
+                    break
+                }
             }
-        }
     }
 }
 

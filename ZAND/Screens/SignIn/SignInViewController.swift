@@ -59,7 +59,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
                                  didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let credential as ASAuthorizationAppleIDCredential:
-            let user = User(credential: credential)
+            let user = UserModel(credential: credential)
 
             AppRouter.shared.push(.register(user))
         default:

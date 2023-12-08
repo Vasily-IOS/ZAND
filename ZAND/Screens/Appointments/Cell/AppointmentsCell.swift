@@ -19,9 +19,9 @@ final class AppoitmentsCell: BaseTableCell {
         var title: String {
             switch self {
             case .cancelAppointment:
-                return AssetString.cancelAppointment
+                return AssetString.cancelAppointment.rawValue
             case .appointmentCanceled:
-                return AssetString.appointmentDeleted
+                return AssetString.appointmentDeleted.rawValue
             }
         }
 

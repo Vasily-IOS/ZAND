@@ -23,10 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        NotificationCenter.default.post(name: .updateData, object: nil)
-    }
-
     func applicationDidBecomeActive(_ application: UIApplication) {
         AppRouter.shared.checkAuth()
     }

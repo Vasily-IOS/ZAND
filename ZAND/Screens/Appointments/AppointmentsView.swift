@@ -30,15 +30,16 @@ final class AppointemtsView: BaseUIView {
     }()
 
     private lazy var segmentControl: UISegmentedControl = {
-        let items = [AssetString.feature, AssetString.was]
+        let items = [AssetString.feature.rawValue, AssetString.was.rawValue]
         let segmentControl = UISegmentedControl(items: items)
         segmentControl.selectedSegmentIndex = 0
         segmentControl.selectedSegmentTintColor = .mainGreen
-        segmentControl.layer.borderWidth = 2
-        segmentControl.layer.borderColor = UIColor.mainGreen.cgColor
         segmentControl.tintColor = .mainGray
 
-        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)
+        ]
         let unSelected = [NSAttributedString.Key.foregroundColor: UIColor.mainGreen]
         segmentControl.setTitleTextAttributes(titleTextAttributes, for: .selected)
         segmentControl.setTitleTextAttributes(unSelected, for: .normal)
@@ -47,7 +48,7 @@ final class AppointemtsView: BaseUIView {
 
     private let emptyLabel: UILabel = {
         let emptyLabel = UILabel()
-        emptyLabel.text = AssetString.noAppointments
+        emptyLabel.text = AssetString.noAppointments.rawValue
         emptyLabel.font = .systemFont(ofSize: 24, weight: .regular)
         emptyLabel.textColor = .textGray
         return emptyLabel
@@ -66,14 +67,7 @@ final class AppointemtsView: BaseUIView {
 
     @objc
     private func changeModel(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            delegate?.changeModel(by: .waitingServices)
-        case 1:
-            delegate?.changeModel(by: .servicesProvided)
-        default:
-            break
-        }
+        delegate?.changeModel(by: sender.selectedSegmentIndex == 0 ? .waitingServices : .servicesProvided)
     }
 
     func showActivity(_ isShow: Bool) {
@@ -109,7 +103,7 @@ extension AppointemtsView {
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(30)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
-            make.height.equalTo(30)
+            make.height.equalTo(44)
         }
         
         tableView.snp.makeConstraints { make in

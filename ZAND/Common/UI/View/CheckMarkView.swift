@@ -12,7 +12,7 @@ final class CheckMarkImageView: UIImageView {
     
     // MARK: - Properties
     
-    private let checkMarkImage = UIImageView(image: AssetImage.checkMark_icon)
+    private let checkMarkImage = UIImageView(image: AssetImage.checkMark_icon.image)
 
     // MARK: - Initializers
  
@@ -32,7 +32,7 @@ extension CheckMarkImageView {
     // MARK: - Instance methods
     
     private func setup() {
-        image = AssetImage.fillCircle_icon
+        image = AssetImage.fillCircle_icon.image
         addSubview(checkMarkImage)
         
         checkMarkImage.snp.makeConstraints { make in

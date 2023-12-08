@@ -26,7 +26,7 @@ final class SaloonCell: BaseCollectionCell {
     
     var isInFavourite: Bool = false {
         didSet {
-            let image = isInFavourite ? AssetImage.fillHeart_icon : AssetImage.heart
+            let image = isInFavourite ? AssetImage.fillHeart_icon.image : AssetImage.heart_icon.image
             favouritesButton.setImage(image, for: .normal)
 
             if isInFavourite {
@@ -85,11 +85,28 @@ final class SaloonCell: BaseCollectionCell {
     
     private let viewOnMapButton = TransparentButton(state: .viewOnMap)
 
+    private let distanceLabel: UILabel = {
+        let distanceLabel = UILabel()
+        distanceLabel.textColor = .textGray
+        distanceLabel.font = .systemFont(ofSize: 12.0)
+        return distanceLabel
+    }()
+
     private lazy var animationView: LottieAnimationView = {
         var animationView = LottieAnimationView(name: Config.animation_fav)
         animationView.isHidden = true
         return animationView
     }()
+
+    private lazy var bottomStackView = UIStackView(
+        alignment: .trailing,
+        arrangedSubviews: [
+            distanceLabel,
+            viewOnMapButton
+        ],
+        axis: .horizontal,
+        spacing: 10
+    )
 
     // MARK: - Instance methods
     
@@ -104,19 +121,22 @@ final class SaloonCell: BaseCollectionCell {
     // MARK: - Configuration
 
     func configure(model: Saloon, indexPath: IndexPath) {
-        self.saloonDescriptionLabel.text = model.title
-        self.categoryLabel.text = model.short_descr
-        self.adressLabel.text = model.address
-        self.id = model.id
+        self.saloonDescriptionLabel.text = model.saloonCodable.title
+        self.categoryLabel.text = model.saloonCodable.short_descr
+        self.adressLabel.text = model.saloonCodable.address
+        self.id = model.saloonCodable.id
         self.indexPath = indexPath
 
-        if model.photos.isEmpty && model.company_photos.isEmpty {
-            saloonImage.image = AssetImage.noFoto_icon
+        if model.saloonCodable.photos.isEmpty && model.saloonCodable.company_photos.isEmpty {
+            saloonImage.image = AssetImage.noFoto_icon.image
         } else {
-            if let url = URL(string: model.company_photos.first ?? "") {
+            if let url = URL(string: model.saloonCodable.company_photos.first ?? "") {
                 saloonImage.kf.setImage(with: url)
             }
         }
+
+        distanceLabel.text = model.distance == nil ? nil :
+        "до цели" + " " + (model.distanceString ?? "")
     }
     
     // MARK: - Action
@@ -142,7 +162,7 @@ extension SaloonCell {
     
     private func setViews() {
         addSubviews([saloonImage, leftStackView, favouritesButton,
-                     viewOnMapButton, animationView])
+                     bottomStackView, animationView])
         
         saloonImage.snp.makeConstraints { make in
             make.left.top.right.equalTo(self)
@@ -159,11 +179,14 @@ extension SaloonCell {
             make.top.equalTo(self).offset(24)
             make.right.equalTo(self).inset(16)
         }
-        
-        viewOnMapButton.snp.makeConstraints { make in
+
+        bottomStackView.snp.makeConstraints { make in
             make.top.equalTo(leftStackView.snp.bottom).offset(13)
             make.right.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(10)
+        }
+        
+        viewOnMapButton.snp.makeConstraints { make in
             make.height.equalTo(15)
             make.width.equalTo(125)
         }
