@@ -36,29 +36,6 @@ final class FilterViewController: BaseViewController<FilterView> {
         contentView.collectionView.dataSource = self
         contentView.delegate = self
     }
-
-    private func selectCellHelper(
-        cell: UICollectionViewCell?,
-        indexPath: IndexPath,
-        collectionView: UICollectionView
-    ) {
-//        let cell = collectionView.cellForItem(at: indexPath) as! OptionCell
-//
-//        if cell.isTapped == false {
-//            cell.isTapped = true
-//            presenter?.selectFilters[indexPath] = true
-//            let unnecessaryIndexes = presenter?.selectFilters.filter({ $0.key != indexPath})
-//            for (index, _) in unnecessaryIndexes! {
-//                presenter?.selectFilters[index] = false
-//                if let cell = collectionView.cellForItem(at: index) as? OptionCell {
-//                    cell.isTapped = false
-//                }
-//            }
-//        } else {
-//            cell.isTapped = false
-//            presenter?.selectFilters[indexPath] = false
-//        }
-    }
 }
 
 extension FilterViewController: UICollectionViewDataSource {
@@ -157,15 +134,7 @@ extension FilterViewController: UICollectionViewDelegate {
                         cell.isTapped = false
                     }
                 }
-            } else {
-                cell.isTapped = false
-                presenter?.selectFilters[indexPath] = false
             }
-//            selectCellHelper(
-//                cell: collectionView.cellForItem(at: indexPath),
-//                indexPath: indexPath,
-//                collectionView: collectionView
-//            )
         default:
             break
         }
