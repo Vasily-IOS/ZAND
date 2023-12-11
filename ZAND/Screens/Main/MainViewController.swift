@@ -57,6 +57,14 @@ final class MainViewController: BaseViewController<MainView> {
         showBadConnectionView()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if presenter?.isShowAttention == true {
+            showAlertLocation()
+        }
+    }
+
     // MARK: - Instance methods
     
     private func subscribeDelegate() {
@@ -128,6 +136,27 @@ final class MainViewController: BaseViewController<MainView> {
     private func setupDefaultState() {
         self.presenter?.selectedFilters.removeAll()
         self.presenter?.state = .all
+    }
+
+    private func showAlertLocation() {
+        let alertController = UIAlertController(
+            title: AssetString.geoIsOff.rawValue,
+            message: nil,
+            preferredStyle: .alert
+        )
+        let settingsAction = UIAlertAction(
+            title: AssetString.yes.rawValue,
+            style: .default
+        ) { alert in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        }
+        let cancelAction = UIAlertAction(title: AssetString.no.rawValue, style: .cancel)
+        alertController.addAction(settingsAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+        presenter?.isShowAttention = false
     }
 }
 

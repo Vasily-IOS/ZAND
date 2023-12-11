@@ -37,7 +37,7 @@ final class DeviceLocationService: NSObject, CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         default:
             locationManager.stopUpdatingLocation()
-            deniedLocationAccess.send()
+//            deniedLocationAccess.send()
         }
     }
 

@@ -19,6 +19,7 @@ protocol MainPresenterOutput: AnyObject {
 
     var selectedFilters: [IndexPath: Bool] { get set }
     var isFirstLaunch: Bool { get set }
+    var isShowAttention: Bool { get set }
     var state: SearchState { get set }
 
     func getModel(by id: Int) -> Saloon?
@@ -63,6 +64,8 @@ final class MainPresenter: MainPresenterOutput {
     }
 
     var isFirstLaunch = true
+
+    var isShowAttention = false
 
     var state: SearchState = .all {
         didSet {
@@ -222,8 +225,9 @@ extension MainPresenter {
 
         locationManager.deniedLocationAccess
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                debugPrint("Denied location updates by user")
+            .sink { [weak self] _ in
+                self?.isShowAttention = true
+                print("Denied access")
             }.store(in: &cancellables)
     }
 }

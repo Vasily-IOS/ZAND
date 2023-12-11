@@ -40,12 +40,6 @@ final class MapViewController: BaseViewController<MapRectView> {
         hideNavigationBar()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        DeviceLocationService.shared.requestLocationUpdates()
-    }
-    
     deinit {
         print("MapViewController died")
     }
