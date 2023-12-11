@@ -19,18 +19,18 @@ final class StartBookingButtonView: BaseUIView {
         var text: String {
             switch self {
             case .service:
-                return AssetString.selectService
+                return AssetString.selectService.rawValue
             case .sprecialist:
-                return AssetString.selectStaff
+                return AssetString.selectStaff.rawValue
             }
         }
 
         var image: UIImage {
             switch self {
             case .service:
-                return AssetImage.start_booking_service_icon ?? UIImage()
+                return AssetImage.start_booking_service_icon.image
             case .sprecialist:
-                return AssetImage.start_booking_specialist_icon ?? UIImage()
+                return AssetImage.start_booking_specialist_icon.image
             }
         }
     }

@@ -14,8 +14,8 @@ final class TabBarController: UITabBarController {
     var switchedViewController: UIViewController {
         var vc = UIViewController()
         let tabBarItem = UITabBarItem(
-            title: AssetString.profile,
-            image: AssetImage.profile_icon,
+            title: AssetString.profile.rawValue,
+            image: AssetImage.profile_icon.image,
             selectedImage: nil
         )
 
@@ -49,14 +49,18 @@ extension TabBarController {
     private func setViews() {
         let vcFactory: ViewControllerFactory = ViewControllerFactoryImpl()
         let mainVC = vcFactory.getViewController(for: .main)
-        mainVC.tabBarItem = UITabBarItem(title: AssetString.main,
-                                         image: AssetImage.main_icon,
-                                         selectedImage: nil)
+        mainVC.tabBarItem = UITabBarItem(
+            title: AssetString.main.rawValue,
+            image: AssetImage.main_icon.image,
+            selectedImage: nil
+        )
 
         let mapVC = vcFactory.getViewController(for: .map)
-        mapVC.tabBarItem = UITabBarItem(title: AssetString.map,
-                                        image:  AssetImage.map_icon,
-                                        selectedImage: nil)
+        mapVC.tabBarItem = UITabBarItem(
+            title: AssetString.map.rawValue,
+            image:  AssetImage.map_icon.image,
+            selectedImage: nil
+        )
 
         UITabBar.appearance().tintColor = .mainGreen
         UITabBar.appearance().backgroundColor = .white

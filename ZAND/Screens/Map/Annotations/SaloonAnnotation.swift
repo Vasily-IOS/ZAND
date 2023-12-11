@@ -13,12 +13,12 @@ final class SaloonAnnotation: NSObject, MKAnnotation {
     // MARK: - Public properties
 
     var coordinate: CLLocationCoordinate2D
-    var model: SaloonMapModel
+    var model: Saloon
     var title: String?
 
     // MARK: - Initializers
 
-    init(coordinate: CLLocationCoordinate2D, model: SaloonMapModel) {
+    init(coordinate: CLLocationCoordinate2D, model: Saloon) {
         self.coordinate = coordinate
         self.model = model
     }

@@ -26,7 +26,7 @@ final class SaloonDetailView: BaseUIView {
 
     weak var delegate: SaloonDetailDelegate?
     
-    private lazy var saloonPhotoCollection = SaloonPhotoCollection()
+    private lazy var saloonPhotoCollection = SaloonWithPhotoCollectionView()
     private lazy var addressView = AddressView()
     private lazy var descriptionShowcaseView = DescriptionShowcaseView()
     
@@ -47,10 +47,10 @@ final class SaloonDetailView: BaseUIView {
         viewAction()
     }
 
-    func configure(type: SaloonDetailType) {
-        saloonPhotoCollection.configure(type: type)
-        addressView.configure(type: type)
-        descriptionShowcaseView.configure(type: type)
+    func configure(model: Saloon) {
+        saloonPhotoCollection.configure(model: model)
+        addressView.configure(model: model)
+        descriptionShowcaseView.configure(model: model)
     }
 
     // MARK: - Action
@@ -77,8 +77,9 @@ extension SaloonDetailView {
     private func setViews() {
         addSubview(scrollView)
 
-        scrollView.addSubviews([saloonPhotoCollection,
-                                addressView, descriptionShowcaseView])
+        scrollView.addSubviews(
+            [saloonPhotoCollection, addressView, descriptionShowcaseView]
+        )
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(self)

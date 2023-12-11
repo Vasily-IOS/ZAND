@@ -5,8 +5,8 @@
 //  Created by Василий on 07.06.2023.
 //
 
-import UIKit
-import RealmSwift
+import Combine
+import CoreLocation
 
 enum MainType {
     case options
@@ -15,16 +15,20 @@ enum MainType {
 
 protocol MainPresenterOutput: AnyObject {
     var sortedSaloons: [Saloon] { get set }
-    var optionsModel: [OptionsModel] { get }
+    var allSalons: [Saloon] { get }
 
-    var selectedDays: [IndexPath: Bool] { get set }
-    func getModel(by type: MainType) -> [CommonFilterProtocol]
-    func getModel(by id: Int) -> SaloonMapModel?
+    var selectedFilters: [IndexPath: Bool] { get set }
+    var isFirstLaunch: Bool { get set }
+    var isShowAttention: Bool { get set }
+    var state: SearchState { get set }
+
+    func getModel(by id: Int) -> Saloon?
     func applyDB(by id: Int, completion: @escaping () -> ())
     func contains(by id: Int) -> Bool
     func fetchData()
-    func backToInitialState()
     func sortModel(filterID: Int)
+    func updateDict() -> [IndexPath: Bool]
+    func sortedSalonsByUserLocation() -> [Saloon]
 }
 
 protocol MainViewInput: AnyObject {
@@ -42,33 +46,57 @@ final class MainPresenter: MainPresenterOutput {
 
     weak var view: MainViewInput?
 
-    var selectedDays: [IndexPath: Bool] = [:]
-
+    var selectedFilters: [IndexPath: Bool] = [:]
+    
     var sortedSaloons: [Saloon] = [] { // дата сорс коллекции
         didSet {
             view?.showEmptyLabel(isShow: sortedSaloons.isEmpty)
+            view?.reloadData()
         }
     }
 
-    var saloons: [Saloon] = []  // оставляем всегда нетронутым
-
-    var optionsModel = OptionsModel.options
-
-    private let network: APIManager
-    
-    // MARK: - Initializer
-    
-    init(view: MainViewInput, network: APIManager) {
-        self.view = view
-        self.network = network
-
-        self.subscribeNotifications()
+    var allSalons: [Saloon] = [] { // оставляем всегда нетронутым
+        didSet {
+            if sortedSaloons.isEmpty {
+                sortedSaloons = allSalons
+            }
+        }
     }
 
-    // MARK: - Action
+    var isFirstLaunch = true
+
+    var isShowAttention = false
+
+    var state: SearchState = .all {
+        didSet {
+            sortedSaloons = state == .near ? sortedSalonsByUserLocation() : allSalons
+        }
+    }
+
+    private var cancellables = Set<AnyCancellable>()
+
+    private var userCoordinates: CLLocationCoordinate2D?
+
+    private let provider: SaloonProvider
+
+    private let locationManager = DeviceLocationService.shared
+
+    // MARK: - Initializer
+    
+    init(view: MainViewInput, provider: SaloonProvider) {
+        self.view = view
+        self.provider = provider
+
+        self.fetchData()
+        self.subscribeNotifications()
+        self.locationManager.requestLocationUpdates()
+        self.bind()
+    }
+
+    // MARK: - Instance methods
 
     @objc
-    private func hideTabBarNotificationAction(_ notification: Notification) {
+    private func hideTabBarNotificationAction() {
         view?.hideTabBar()
     }
 
@@ -79,20 +107,22 @@ final class MainPresenter: MainPresenterOutput {
         view?.changeFavouritesAppearence(indexPath: (getSearchIndex(id: userId) ?? [0, 0]))
     }
 
-    // срабатывает когда пользователь заходит в приложение и обновляет коллекцию только
-    // тогда, когда фильтры пусты
-    @objc
-    private func updateDataSource() {
-        if selectedDays.isEmpty {
-            fetchData()
-        }
-    }
-
     @objc
     private func connectivityStatus(_ notification: Notification) {
         if let isConnected = notification.userInfo?[Config.connectivityStatus] as? Bool {
             self.view?.updateUIConection(isConnected: isConnected)
         }
+    }
+
+    func updateDict() -> [IndexPath: Bool] {
+        var resultDict: [IndexPath: Bool] = [:]
+        for (index, value) in selectedFilters {
+            let newIndex = IndexPath(item: index.item - 1, section: index.section + 1)
+            resultDict[newIndex] = value
+        }
+        resultDict[IndexPath(item: 0, section: 0)] = state == .all ? false : true
+
+        return resultDict
     }
 }
 
@@ -100,38 +130,22 @@ extension MainPresenter {
     
     // MARK: - Instance methods
 
-    // либо это!!!!
-    func backToInitialState() {
-        sortedSaloons = saloons
-    }
-
     func sortModel(filterID: Int) {
-        sortedSaloons = saloons.filter({ $0.business_type_id == filterID })
+        if state == .all {
+            sortedSaloons = allSalons.filter({ $0.saloonCodable.business_type_id == filterID })
+        } else {
+            sortedSaloons = sortedSalonsByUserLocation().filter({ $0.saloonCodable.business_type_id == filterID })
+        }
     }
 
-    // либо это!!!!
     func fetchData() {
-        network.performRequest(type: .salons, expectation: Saloons.self
-        ) { [weak self] saloonsData in
-            guard let self else { return }
-
-            self.sortedSaloons = saloonsData.data
-            self.saloons = saloonsData.data
-            self.view?.reloadData()
+        provider.fetchData { [weak self] saloons in
+            self?.allSalons = saloons
         }
     }
 
-    func getModel(by type: MainType) -> [CommonFilterProtocol] {
-        switch type {
-        case .options:
-            return optionsModel
-        case .saloons:
-            return sortedSaloons
-        }
-    }
-
-    func getModel(by id: Int) -> SaloonMapModel? {
-        return sortedSaloons.first(where: { $0.id == id })
+    func getModel(by id: Int) -> Saloon? {
+        return allSalons.first(where: { $0.saloonCodable.id == id })
     }
 
     func applyDB(by id: Int, completion: @escaping () -> ()) {
@@ -153,7 +167,7 @@ extension MainPresenter {
     // MARK: - Private
 
     private func getSearchIndex(id: Int) -> IndexPath? {
-        if let index = sortedSaloons.firstIndex(where: { $0.id == id }) {
+        if let index = sortedSaloons.firstIndex(where: { $0.saloonCodable.id == id }) {
             return [1, index]
         }
         return nil
@@ -167,14 +181,8 @@ extension MainPresenter {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(hideTabBarNotificationAction(_:)),
+            selector: #selector(hideTabBarNotificationAction),
             name: .showTabBar,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateDataSource),
-            name: .updateData,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -182,5 +190,44 @@ extension MainPresenter {
             selector: #selector(connectivityStatus(_:)),
             name: .connecivityChanged, object: nil
         )
+    }
+
+    func sortedSalonsByUserLocation() -> [Saloon] {
+        guard let userCoordinates else { return [] }
+
+        let currentUserLocation = CLLocation(
+            latitude: userCoordinates.latitude,
+            longitude: userCoordinates.longitude
+        )
+
+        let nearSalons = allSalons.map { saloon in
+            let saloonDistance = CLLocation(
+                latitude: saloon.saloonCodable.coordinate_lat,
+                longitude: saloon.saloonCodable.coordinate_lon
+            )
+
+            return SaloonModel(
+                saloonCodable: saloon.saloonCodable,
+                distance: currentUserLocation.distance(from: saloonDistance)
+            )
+        }.filter { ($0.distance ?? 0.0) <= 12000 }
+
+        return nearSalons
+    }
+
+    private func bind() {
+        locationManager.currentLocation
+            .sink(receiveCompletion: { _ in
+            debugPrint("Failure to update user location")
+        }) { [weak self] userCoordinates in
+            self?.userCoordinates = userCoordinates
+        }.store(in: &cancellables)
+
+        locationManager.deniedLocationAccess
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.isShowAttention = true
+                print("Denied access")
+            }.store(in: &cancellables)
     }
 }

@@ -32,10 +32,6 @@ final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
         setupBackButtonItem()
         presenter?.isInFavourite()
     }
-
-    deinit {
-        print("SaloonDetailViewController died")
-    }
     
     // MARK: - Action
     
@@ -80,8 +76,8 @@ extension SaloonDetailViewController: SaloonViewInput {
 
     // MARK: - SaloonViewInput methods
 
-    func updateUI(type: SaloonDetailType) {
-        contentView.configure(type: type)
+    func updateUI(model: Saloon) {
+        contentView.configure(model: model)
     }
 
     func isInFavourite(result: Bool) {

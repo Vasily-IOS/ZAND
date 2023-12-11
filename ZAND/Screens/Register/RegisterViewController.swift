@@ -55,12 +55,20 @@ final class RegisterViewController: BaseViewController<RegisterView> {
     private func showFinalAlertController() {
         let finalText = "\n\(AssetString.name): \(presenter?.user.fullName ?? "")\n\(AssetString.email): \(presenter?.user.email ?? "")\n\(AssetString.phone): \(presenter?.user.phone ?? "")"
         let alertController = UIAlertController(
-            title: AssetString.checkYourData, message: finalText, preferredStyle: .alert
+            title: AssetString.checkYourData.rawValue,
+            message: finalText,
+            preferredStyle: .alert
         )
 
-        let cancelAction = UIAlertAction(title: AssetString.fix, style: .destructive)
+        let cancelAction = UIAlertAction(
+            title: AssetString.fix.rawValue,
+            style: .destructive
+        )
         
-        let confirmAction = UIAlertAction(title: AssetString.good, style: .cancel) { [weak self]_ in
+        let confirmAction = UIAlertAction(
+            title: AssetString.good.rawValue,
+            style: .cancel
+        ) { [weak self]_ in
             self?.presenter?.save()
             AppRouter.shared.popViewController()
             AppRouter.shared.switchRoot(type: .profile)
@@ -115,7 +123,7 @@ extension RegisterViewController: RegisterDelegate {
     }
 
     func showPolicy() {
-        AppRouter.shared.presentRecordNavigation(type: .privacyPolicy(AssetURL.privacy_policy))
+        AppRouter.shared.presentRecordNavigation(type: .privacyPolicy(AssetURL.privacy_policy.rawValue))
     }
 
     func changePolicy(isConfirmed: Bool) {
@@ -171,7 +179,7 @@ extension RegisterViewController: RegisterViewInput {
 
     // MARK: - RegisterViewInput methods
 
-    func configure(model: User) {
+    func configure(model: UserModel) {
         contentView.configure(model: model)
     }
 }

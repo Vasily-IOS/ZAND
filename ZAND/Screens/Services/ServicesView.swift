@@ -14,9 +14,9 @@ final class ServicesView: BaseUIView {
 
     let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.text = AssetString.findInServices
+        searchBar.text = AssetString.findInServices.rawValue
         UISearchBar.appearance().setImage(
-            AssetImage.search_icon,
+            AssetImage.search_icon.image,
             for: .search,
             state: .normal)
         searchBar.layer.cornerRadius = 15
@@ -54,7 +54,7 @@ final class ServicesView: BaseUIView {
     @objc
     private func cancelEditingAction() {
         endEditing(true)
-        searchBar.text = AssetString.findInServices
+        searchBar.text = AssetString.findInServices.rawValue
         searchBar.searchTextField.textColor = .lightGray
     }
 
@@ -82,7 +82,7 @@ final class ServicesView: BaseUIView {
     }
 
     func endEditing() {
-        searchBar.text = AssetString.findInServices
+        searchBar.text = AssetString.findInServices.rawValue
         searchBar.searchTextField.textColor = .lightGray
         endEditing(true)
     }

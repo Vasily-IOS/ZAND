@@ -1,5 +1,5 @@
 //
-//  WorkingRangeItem.swift
+//  WorkingRangeItemModel.swift
 //  ZAND
 //
 //  Created by Василий on 26.09.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WorkingRangeItem {
+struct WorkingRangeItemModel {
     let dateString: String
     let dayNumeric: String
     let dayString: String

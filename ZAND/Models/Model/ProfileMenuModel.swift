@@ -1,5 +1,5 @@
 //
-//  ProfileMenu.swift
+//  ProfileMenuModel.swift
 //  ZAND
 //
 //  Created by Василий on 28.06.2023.
@@ -12,8 +12,8 @@ struct ProfileMenuModel {
     let description: String
 
     static let model: [Self] = [
-        .init(image: AssetImage.books_icon!, description: AssetString.books),
-        .init(image: AssetImage.logout_icon!, description: AssetString.logOut),
-        .init(image: AssetImage.deleteProfile_icon, description: AssetString.deleteProfile)
+        .init(image: AssetImage.books_icon.image, description: AssetString.books.rawValue),
+        .init(image: AssetImage.logout_icon.image, description: AssetString.logOut.rawValue),
+        .init(image: AssetImage.deleteProfile_icon.image, description: AssetString.deleteProfile.rawValue)
     ]
 }

@@ -35,7 +35,7 @@ final class ServiceCell: BaseTableCell {
 
     // MARK: - Instance methods
 
-    func configure(model: BookService?) {
+    func configure(model: BookServiceModel?) {
         guard let model = model else { return }
 
         titleLabel.text = model.title.html2String

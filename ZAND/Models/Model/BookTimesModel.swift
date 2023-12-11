@@ -1,5 +1,5 @@
 //
-//  BookTimes.swift
+//  BookTimesModel.swift
 //  ZAND
 //
 //  Created by Василий on 26.09.2023.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct BookTimes: Codable {
-    let data: [BookTime]
+struct BookTimesModel: Codable {
+    let data: [BookTimeModel]
 }
 
-struct BookTime: Codable {
+struct BookTimeModel: Codable {
     let time: String
     let seance_length: Int
     let datetime: String

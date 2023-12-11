@@ -1,5 +1,5 @@
 //
-//  FetchBookDate.swift
+//  FetchBookDateModel.swift
 //  ZAND
 //
 //  Created by Василий on 15.10.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FetchBookDate {
+struct FetchBookDateModel {
     let company_id: Int
     let service_ids: [String]
     let staff_id: Int

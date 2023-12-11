@@ -12,14 +12,13 @@ protocol SaloonPresenterOutput: AnyObject {
     var salonID: Int? { get }
     var saloonName: String? { get }
     var saloonAddress: String? { get }
-    func getModel() -> Saloon?
+    func getModel() -> Saloon
     func isInFavourite()
     func applyDB(completion: () -> ())
-
 }
 
 protocol SaloonViewInput: AnyObject {
-    func updateUI(type: SaloonDetailType)
+    func updateUI(model: Saloon)
     func isInFavourite(result: Bool)
 }
 
@@ -35,42 +34,35 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
 
     var saloonAddress: String?
 
-    private var apiModel: Saloon?
+    private let model: Saloon
 
     // MARK: - Initializers
 
-    init(view: SaloonViewInput, type: SaloonDetailType) {
+    init(view: SaloonViewInput, model: Saloon) {
         self.view = view
 
-        switch type {
-        case .api(let apiModel):
-            self.apiModel = apiModel
-            self.salonID = apiModel.id
-            self.saloonName = apiModel.title
-            self.saloonAddress = apiModel.address
-        }
+        self.model = model
+        self.salonID = model.saloonCodable.id
+        self.saloonName = model.saloonCodable.title
+        self.saloonAddress = model.saloonCodable.address
 
-        view.updateUI(type: type)
+        view.updateUI(model: model)
     }
 
     // MARK: - Instance methods
 
-    func getModel() -> Saloon? {
-        guard let apiModel else { return nil }
-
-        return apiModel
+    func getModel() -> Saloon {
+        return model
     }
 
     func isInFavourite() {
-        guard let apiModel else { return }
-
-        view?.isInFavourite(result: !FavouritesSalonsManager.shared.contains(modelID: apiModel.id))
+        view?.isInFavourite(
+            result: !FavouritesSalonsManager.shared.contains(modelID: model.saloonCodable.id)
+        )
     }
 
     func applyDB(completion: () -> ()) {
-        guard let modelForSave = apiModel else { return }
-
-        let id = modelForSave.id
+        let id = model.saloonCodable.id
         let storageManager = FavouritesSalonsManager.shared
 
         if storageManager.contains(modelID: id) {

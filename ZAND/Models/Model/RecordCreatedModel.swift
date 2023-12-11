@@ -1,5 +1,5 @@
 //
-//  RecordCreated.swift
+//  RecordCreatedModel.swift
 //  ZAND
 //
 //  Created by Василий on 28.09.2023.

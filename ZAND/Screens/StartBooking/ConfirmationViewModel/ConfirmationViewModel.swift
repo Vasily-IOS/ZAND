@@ -27,9 +27,9 @@ final class ConfirmationViewModel {
     var startSeanceDate: String?
     var startSeanceTime: String?
     var employeeCommon: EmployeeCommon?
-    var bookService: BookService?
+    var bookService: BookServiceModel?
     var scheduleTill = String()
-    var bookTime: BookTime? = nil {
+    var bookTime: BookTimeModel? = nil {
         didSet {
             configureSeanceDate(model: bookTime)
         }
@@ -79,7 +79,7 @@ final class ConfirmationViewModel {
         resultModel = confirmationModel
     }
 
-    private func configureSeanceDate(model: BookTime?) {
+    private func configureSeanceDate(model: BookTimeModel?) {
         let date = try? Date(bookTime?.datetime ?? "", strategy: .iso8601)
         let formatter = DateFormatter()
         formatter.dateStyle = .long

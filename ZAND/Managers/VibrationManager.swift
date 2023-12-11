@@ -19,14 +19,6 @@ final class VibrationManager {
 
     // MARK: - Instance methods
     
-    func selectionVibrate() {
-        DispatchQueue.main.async {
-            let selectionFeedBackGenerator = UISelectionFeedbackGenerator()
-            selectionFeedBackGenerator.prepare()
-            selectionFeedBackGenerator.selectionChanged()
-        }
-    }
-    
     func vibrate(for type: UINotificationFeedbackGenerator.FeedbackType) {
         DispatchQueue.main.async {
             let notificationGenerator = UINotificationFeedbackGenerator()

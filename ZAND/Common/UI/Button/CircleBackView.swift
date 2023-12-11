@@ -13,7 +13,7 @@ final class CircleBackView: UIView {
     // MARK: - Properties
     
     private let backImage: UIImageView = {
-        let backImage = UIImageView(image: AssetImage.back_icon)
+        let backImage = UIImageView(image: AssetImage.back_icon.image)
         backImage.contentMode = .scaleAspectFit
         backImage.clipsToBounds = true
         return backImage

@@ -8,28 +8,84 @@
 import UIKit
 
 enum AssetImage {
-    static let main_icon = UIImage(named: "main_icon")
-    static let map_icon = UIImage(named: "map_icon")
-    static let profile_icon = UIImage(named: "profile_icon")
-    static let pin_icon = UIImage(named: "pin_icon")
-    static let line_icon = UIImage(named: "line_icon")
-    static let emptyCircle_icon = UIImage(named: "emptyCircle_icon")
-    static let like_icon = UIImage(named: "like_icon")
-    static let star_icon = UIImage(named: "star_icon")
-    static let fav_icon = UIImage(named: "fav_icon")
-    static let fillCircle_icon = UIImage(named: "fillCircle_icon")
-    static let checkMark_icon = UIImage(named: "checkMark_icon")
-    static let back_icon = UIImage(named: "back_icon")
-    static let books_icon = UIImage(named: "books_icon")
-    static let settings_icon = UIImage(named: "settings_icon")
-    static let logout_icon = UIImage(named: "logout_icon")
-    static let heart = UIImage(named: "heart_icon")
-    static let fillHeart_icon = UIImage(named: "fill_heart_icon")
-    static let search_icon = UIImage(named: "search_icon")
-    static let noFoto_icon = UIImage(named: "noFoto_icon")
-    static let start_booking_service_icon = UIImage(named: "start_booking_service_icon")
-    static let start_booking_specialist_icon = UIImage(named: "start_booking_specialist_icon")
-    static let arrow_icon = UIImage(named: "arrow_icon")
-    static let lostConnection_icon = UIImage(named: "lost_connection_icon")
-    static let deleteProfile_icon = UIImage(named: "deleteProfile_icon")
+    case main_icon
+    case map_icon
+    case profile_icon
+    case pin_icon
+    case line_icon
+    case emptyCircle_icon
+    case like_icon
+    case star_icon
+    case fav_icon
+    case fillCircle_icon
+    case checkMark_icon
+    case back_icon
+    case books_icon
+    case settings_icon
+    case logout_icon
+    case heart_icon
+    case fillHeart_icon
+    case search_icon
+    case noFoto_icon
+    case start_booking_service_icon
+    case start_booking_specialist_icon
+    case arrow_icon
+    case lostConnection_icon
+    case deleteProfile_icon
+    case location_icon
+
+    var image: UIImage {
+        switch self {
+        case .main_icon:
+            return UIImage(named: "main_icon")!
+        case .map_icon:
+            return UIImage(named: "map_icon")!
+        case .profile_icon:
+            return UIImage(named: "profile_icon")!
+        case .pin_icon:
+            return UIImage(named: "pin_icon")!
+        case .line_icon:
+            return UIImage(named: "line_icon")!
+        case .emptyCircle_icon:
+            return UIImage(named: "emptyCircle_icon")!
+        case .like_icon:
+            return UIImage(named: "like_icon")!
+        case .star_icon:
+            return UIImage(named: "star_icon")!
+        case .fav_icon:
+            return UIImage(named: "fav_icon")!
+        case .fillCircle_icon:
+            return UIImage(named: "fillCircle_icon")!
+        case .checkMark_icon:
+            return UIImage(named: "checkMark_icon")!
+        case .back_icon:
+            return UIImage(named: "back_icon")!
+        case .books_icon:
+            return UIImage(named: "books_icon")!
+        case .settings_icon:
+            return UIImage(named: "settings_icon")!
+        case .logout_icon:
+            return UIImage(named: "logout_icon")!
+        case .heart_icon:
+            return UIImage(named: "heart_icon")!
+        case .fillHeart_icon:
+            return UIImage(named: "fill_heart_icon")!
+        case .search_icon:
+            return UIImage(named: "search_icon")!
+        case .noFoto_icon:
+            return UIImage(named: "noFoto_icon")!
+        case .start_booking_service_icon:
+            return UIImage(named: "start_booking_service_icon")!
+        case .start_booking_specialist_icon:
+            return UIImage(named: "start_booking_specialist_icon")!
+        case .arrow_icon:
+            return UIImage(named: "arrow_icon")!
+        case .lostConnection_icon:
+            return UIImage(named: "lost_connection_icon")!
+        case .deleteProfile_icon:
+            return UIImage(named: "deleteProfile_icon")!
+        case .location_icon:
+            return UIImage(named: "location_icon")!
+        }
+    }
 }
