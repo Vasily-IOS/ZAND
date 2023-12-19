@@ -27,7 +27,9 @@ final class SaloonDetailView: BaseUIView {
     weak var delegate: SaloonDetailDelegate?
     
     private lazy var saloonPhotoCollection = SaloonWithPhotoCollectionView()
+
     private lazy var addressView = AddressView()
+
     private lazy var descriptionShowcaseView = DescriptionShowcaseView()
     
     private lazy var scrollView: UIScrollView = {
