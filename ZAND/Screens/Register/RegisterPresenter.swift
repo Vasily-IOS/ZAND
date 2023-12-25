@@ -9,7 +9,7 @@ import Foundation
 
 protocol RegisterPresenterOutput: AnyObject {
     var keyboardAlreadyHidined: Bool { get set }
-    var user: UserModel { get set }
+//    var user: UserModel { get set }
     func save()
 }
 
@@ -23,22 +23,22 @@ final class RegisterPresenter: RegisterPresenterOutput {
 
     weak var view: RegisterViewInput?
 
-    var user: UserModel
+//    var user: UserModel
 
     var keyboardAlreadyHidined: Bool = false
 
     // MARK: - Initializers
 
-    init(view: RegisterViewInput, user: UserModel) {
+    init(view: RegisterViewInput) {
         self.view = view
-        self.user = user
+//        self.user = user
 
-        view.configure(model: user)
+//        view.configure(model: user)
     }
 
     // MARK: - Instance methods
 
     func save() {
-        UserDBManager.shared.save(user: user)
+//        UserDBManager.shared.save(user: user)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 
-enum RequestType {
+enum CommonRequestType {
     case salons // Данные о салонах, подключивших приложение
     case categories(Int) // получить все категории услуг
     case bookServices(company_id: Int, staff_id: Int = 0) // Получить список услуг, доступных для бронирования
@@ -33,7 +33,7 @@ enum RequestType {
     }
 }
 
-extension RequestType: TargetType {
+extension CommonRequestType: TargetType {
 
     var baseURL: URL {
         return URL(string: AssetURL.baseURL.rawValue)!

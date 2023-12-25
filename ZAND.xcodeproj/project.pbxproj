@@ -54,9 +54,21 @@
 		FF3B866C2B01703400EFE3CC /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B866B2B01703400EFE3CC /* UserAnnotation.swift */; };
 		FF3C62C42ABA123100032803 /* StaffCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3C62C32ABA123100032803 /* StaffCell.swift */; };
 		FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */; };
-		FF3E65D92A55C1F6007EC56D /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D82A55C1F6007EC56D /* RequestType.swift */; };
+		FF3E65D92A55C1F6007EC56D /* CommonRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D82A55C1F6007EC56D /* CommonRequestType.swift */; };
 		FF427DDA2A128645007DF80A /* LaunchVideoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */; };
 		FF4401322AA7B09F00318A76 /* SalonsCodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4401312AA7B09F00318A76 /* SalonsCodableModel.swift */; };
+		FF44EA5A2B39A0FC00989A0B /* APIManagerAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA592B39A0FC00989A0B /* APIManagerAuth.swift */; };
+		FF44EA5C2B39A13800989A0B /* AuthRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA5B2B39A13800989A0B /* AuthRequestType.swift */; };
+		FF44EA5E2B39A59F00989A0B /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA5D2B39A59F00989A0B /* RegisterModel.swift */; };
+		FF44EA602B39A86900989A0B /* VerifyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA5F2B39A86900989A0B /* VerifyModel.swift */; };
+		FF44EA622B39AC6E00989A0B /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA612B39AC6E00989A0B /* LoginModel.swift */; };
+		FF44EA642B39B01000989A0B /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA632B39B01000989A0B /* TokenModel.swift */; };
+		FF44EA662B39B19900989A0B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA652B39B19900989A0B /* User.swift */; };
+		FF44EA682B39B31900989A0B /* EmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA672B39B31900989A0B /* EmailModel.swift */; };
+		FF44EA6A2B39B53900989A0B /* NewPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA692B39B53900989A0B /* NewPassword.swift */; };
+		FF44EA6C2B39B79800989A0B /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA6B2B39B79800989A0B /* TokenManager.swift */; };
+		FF44EA6F2B39B8F700989A0B /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF44EA6E2B39B8F700989A0B /* KeychainSwift */; };
+		FF44EA712B39C15500989A0B /* UpdatedTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA702B39C15500989A0B /* UpdatedTokenModel.swift */; };
 		FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45A12C29E7EC1200587DAF /* AppDelegate.swift */; };
 		FF45A13629E7EC1300587DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13529E7EC1300587DAF /* Assets.xcassets */; };
 		FF45A13929E7EC1300587DAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF45A13729E7EC1300587DAF /* LaunchScreen.storyboard */; };
@@ -82,7 +94,7 @@
 		FF63B97F2AC35EF000DFD932 /* BookTimesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63B97E2AC35EF000DFD932 /* BookTimesModel.swift */; };
 		FF69DADD2A545F5700481CF1 /* Extension + StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */; };
 		FF6DB3D12B0FADCF003648A8 /* SaloonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6DB3D02B0FADCF003648A8 /* SaloonModel.swift */; };
-		FF6E41322B0A7332002D85AD /* DeviceLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E41312B0A7332002D85AD /* DeviceLocationService.swift */; };
+		FF6E41322B0A7332002D85AD /* DeviceLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */; };
 		FF862A4D2AA88B660083DEB7 /* SaloonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF862A4C2AA88B660083DEB7 /* SaloonProvider.swift */; };
 		FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5529EE967D007D6A60 /* MainViewController.swift */; };
 		FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */; };
@@ -140,6 +152,12 @@
 		FFD0DA082A4C907D006752B7 /* DefautMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */; };
 		FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */; };
 		FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */; };
+		FFD0F7552B39F4D1001EDAAA /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0F7542B39F4D1001EDAAA /* ResetPasswordViewController.swift */; };
+		FFD0F7572B39F4E8001EDAAA /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0F7562B39F4E8001EDAAA /* ResetPasswordView.swift */; };
+		FFD0F7592B39F4F2001EDAAA /* ResetPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0F7582B39F4F2001EDAAA /* ResetPasswordPresenter.swift */; };
+		FFD0F75C2B39FD19001EDAAA /* RefreshPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0F75B2B39FD19001EDAAA /* RefreshPasswordViewController.swift */; };
+		FFD0F75E2B39FD22001EDAAA /* RefreshPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0F75D2B39FD22001EDAAA /* RefreshPasswordView.swift */; };
+		FFD0F7602B39FD2A001EDAAA /* RefreshPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0F75F2B39FD2A001EDAAA /* RefreshPasswordPresenter.swift */; };
 		FFD3E1D72A054E7C00680ED5 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3E1D62A054E7C00680ED5 /* PrivacyPolicyViewController.swift */; };
 		FFD429102AC4C3030069E681 /* NetworkMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD4290F2AC4C3030069E681 /* NetworkMonitorManager.swift */; };
 		FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */; };
@@ -148,7 +166,7 @@
 		FFDCE4B92A1B8EA500CEA0E1 /* SelectableMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */; };
 		FFDCE4BB2A1BB47000CEA0E1 /* AssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4BA2A1BB47000CEA0E1 /* AssetImage.swift */; };
 		FFDCE4BD2A1BB7E300CEA0E1 /* AssetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCE4BC2A1BB7E300CEA0E1 /* AssetURL.swift */; };
-		FFDE118F2A5C436C00CEF390 /* APIManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE118E2A5C436C00CEF390 /* APIManagerImpl.swift */; };
+		FFDE118F2A5C436C00CEF390 /* APIManagerCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE118E2A5C436C00CEF390 /* APIManagerCommon.swift */; };
 		FFE6F49429FACE9700FDB519 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49329FACE9700FDB519 /* UserNameView.swift */; };
 		FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */; };
 		FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */; };
@@ -226,9 +244,20 @@
 		FF3B866B2B01703400EFE3CC /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		FF3C62C32ABA123100032803 /* StaffCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCell.swift; sourceTree = "<group>"; };
 		FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Notification.Name.swift"; sourceTree = "<group>"; };
-		FF3E65D82A55C1F6007EC56D /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
+		FF3E65D82A55C1F6007EC56D /* CommonRequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRequestType.swift; sourceTree = "<group>"; };
 		FF427DD92A128645007DF80A /* LaunchVideoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVideoScreenViewController.swift; sourceTree = "<group>"; };
 		FF4401312AA7B09F00318A76 /* SalonsCodableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonsCodableModel.swift; sourceTree = "<group>"; };
+		FF44EA592B39A0FC00989A0B /* APIManagerAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManagerAuth.swift; sourceTree = "<group>"; };
+		FF44EA5B2B39A13800989A0B /* AuthRequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestType.swift; sourceTree = "<group>"; };
+		FF44EA5D2B39A59F00989A0B /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
+		FF44EA5F2B39A86900989A0B /* VerifyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyModel.swift; sourceTree = "<group>"; };
+		FF44EA612B39AC6E00989A0B /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		FF44EA632B39B01000989A0B /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
+		FF44EA652B39B19900989A0B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FF44EA672B39B31900989A0B /* EmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModel.swift; sourceTree = "<group>"; };
+		FF44EA692B39B53900989A0B /* NewPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPassword.swift; sourceTree = "<group>"; };
+		FF44EA6B2B39B79800989A0B /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		FF44EA702B39C15500989A0B /* UpdatedTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedTokenModel.swift; sourceTree = "<group>"; };
 		FF45A12929E7EC1200587DAF /* ZAND.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZAND.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF45A12C29E7EC1200587DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF45A13529E7EC1300587DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -256,7 +285,7 @@
 		FF63B97E2AC35EF000DFD932 /* BookTimesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTimesModel.swift; sourceTree = "<group>"; };
 		FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + StringProtocol.swift"; sourceTree = "<group>"; };
 		FF6DB3D02B0FADCF003648A8 /* SaloonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonModel.swift; sourceTree = "<group>"; };
-		FF6E41312B0A7332002D85AD /* DeviceLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationService.swift; sourceTree = "<group>"; };
+		FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationManager.swift; sourceTree = "<group>"; };
 		FF862A4C2AA88B660083DEB7 /* SaloonProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonProvider.swift; sourceTree = "<group>"; };
 		FF8AAF5529EE967D007D6A60 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -315,6 +344,12 @@
 		FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefautMainLayout.swift; sourceTree = "<group>"; };
 		FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
 		FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		FFD0F7542B39F4D1001EDAAA /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		FFD0F7562B39F4E8001EDAAA /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		FFD0F7582B39F4F2001EDAAA /* ResetPasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPresenter.swift; sourceTree = "<group>"; };
+		FFD0F75B2B39FD19001EDAAA /* RefreshPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshPasswordViewController.swift; sourceTree = "<group>"; };
+		FFD0F75D2B39FD22001EDAAA /* RefreshPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshPasswordView.swift; sourceTree = "<group>"; };
+		FFD0F75F2B39FD2A001EDAAA /* RefreshPasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshPasswordPresenter.swift; sourceTree = "<group>"; };
 		FFD3E1D62A054E7C00680ED5 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		FFD4290F2AC4C3030069E681 /* NetworkMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitorManager.swift; sourceTree = "<group>"; };
 		FFDCE4B12A1B680A00CEA0E1 /* CheckMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkView.swift; sourceTree = "<group>"; };
@@ -323,7 +358,7 @@
 		FFDCE4B82A1B8EA500CEA0E1 /* SelectableMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMapPresenter.swift; sourceTree = "<group>"; };
 		FFDCE4BA2A1BB47000CEA0E1 /* AssetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImage.swift; sourceTree = "<group>"; };
 		FFDCE4BC2A1BB7E300CEA0E1 /* AssetURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetURL.swift; sourceTree = "<group>"; };
-		FFDE118E2A5C436C00CEF390 /* APIManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManagerImpl.swift; sourceTree = "<group>"; };
+		FFDE118E2A5C436C00CEF390 /* APIManagerCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManagerCommon.swift; sourceTree = "<group>"; };
 		FFE6F49329FACE9700FDB519 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		FFE6F49A29FAD74000FDB519 /* ProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLayout.swift; sourceTree = "<group>"; };
 		FFE6F49C29FAD7C100FDB519 /* DefaultProfileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileLayout.swift; sourceTree = "<group>"; };
@@ -355,6 +390,7 @@
 				FFF8962C2ACA3FCB008E97D7 /* RealmSwift in Frameworks */,
 				FFF896272ACA3FA5008E97D7 /* Kingfisher in Frameworks */,
 				FFF8961E2ACA3F60008E97D7 /* SnapKit in Frameworks */,
+				FF44EA6F2B39B8F700989A0B /* KeychainSwift in Frameworks */,
 				FFF896212ACA3F73008E97D7 /* Lottie in Frameworks */,
 				FFF896242ACA3F8E008E97D7 /* Moya in Frameworks */,
 				FFF8962A2ACA3FCB008E97D7 /* Realm in Frameworks */,
@@ -475,6 +511,14 @@
 				FF4D4BB52AD88E7C005DA53C /* GetRecordModel.swift */,
 				FF4D4BB92AD8ACA7005DA53C /* UIAppointmentModel.swift */,
 				FF1F3DB72ADC341B0023407C /* FetchBookDateModel.swift */,
+				FF44EA5D2B39A59F00989A0B /* RegisterModel.swift */,
+				FF44EA5F2B39A86900989A0B /* VerifyModel.swift */,
+				FF44EA612B39AC6E00989A0B /* LoginModel.swift */,
+				FF44EA632B39B01000989A0B /* TokenModel.swift */,
+				FF44EA652B39B19900989A0B /* User.swift */,
+				FF44EA672B39B31900989A0B /* EmailModel.swift */,
+				FF44EA692B39B53900989A0B /* NewPassword.swift */,
+				FF44EA702B39C15500989A0B /* UpdatedTokenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -563,8 +607,8 @@
 		FF3E65DA2A55C202007EC56D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				FF3E65D82A55C1F6007EC56D /* RequestType.swift */,
-				FFDE118E2A5C436C00CEF390 /* APIManagerImpl.swift */,
+				FF44EA582B399E8300989A0B /* Common */,
+				FF44EA572B399DE300989A0B /* Auth */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -576,6 +620,24 @@
 				FFB6579C2A6AC5B700451D65 /* splash_video.mp4 */,
 			);
 			path = LaunchVideoScreen;
+			sourceTree = "<group>";
+		};
+		FF44EA572B399DE300989A0B /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FF44EA5B2B39A13800989A0B /* AuthRequestType.swift */,
+				FF44EA592B39A0FC00989A0B /* APIManagerAuth.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		FF44EA582B399E8300989A0B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FF3E65D82A55C1F6007EC56D /* CommonRequestType.swift */,
+				FFDE118E2A5C436C00CEF390 /* APIManagerCommon.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		FF45A12029E7EC1200587DAF = {
@@ -615,18 +677,20 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FFD0F75A2B39FBFA001EDAAA /* RefreshPassword */,
+				FFD0F7532B39F4B7001EDAAA /* ResetPassword */,
+				FF2DB9712A9DE1F40036356B /* SignIn */,
+				FF2DB9782A9DFADE0036356B /* Register */,
 				FF8AAF5429EE9645007D6A60 /* Main */,
 				FF25634129F682B500091374 /* Filter */,
 				FF8AAF5729EE96BA007D6A60 /* Map */,
 				FF8AAF5A29EE96E9007D6A60 /* Profile */,
-				FF2DB9782A9DFADE0036356B /* Register */,
 				FFA3D45229F2CABE0067CC6F /* SaloonDetail */,
 				FF95F8902AC58A71005DA310 /* Сonfirmation */,
 				FFFFDD3D2ABF771800FA5B92 /* Timetable */,
 				FF27B0BA2AB8F05000611F47 /* Staff */,
 				FF27B0B32AB8DF5300611F47 /* Services */,
 				FF27B0AA2AB8D07A00611F47 /* StartBooking */,
-				FF2DB9712A9DE1F40036356B /* SignIn */,
 				FF99B90429EEBA5A00F4E4C3 /* Search */,
 				FFDCE4B32A1B8E6F00CEA0E1 /* SelectableMap */,
 				FFD3E1D52A054E6400680ED5 /* PrivacyPolicy */,
@@ -940,9 +1004,10 @@
 		FFB985662A30AF7A00ABEFBB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				FF6E41312B0A7332002D85AD /* DeviceLocationService.swift */,
+				FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */,
 				FFD4290F2AC4C3030069E681 /* NetworkMonitorManager.swift */,
 				FFB985672A30AFD100ABEFBB /* VibrationManager.swift */,
+				FF44EA6B2B39B79800989A0B /* TokenManager.swift */,
 				FF5FDCF02AEA9D710063400E /* FavoutriteSalonsManager.swift */,
 				FF3E65DA2A55C202007EC56D /* API */,
 				FF4F757A2A9E3889001E8731 /* Realm */,
@@ -993,6 +1058,26 @@
 				FFCC65822B13B3E100750B6B /* BadInternetConnectionView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FFD0F7532B39F4B7001EDAAA /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				FFD0F7542B39F4D1001EDAAA /* ResetPasswordViewController.swift */,
+				FFD0F7562B39F4E8001EDAAA /* ResetPasswordView.swift */,
+				FFD0F7582B39F4F2001EDAAA /* ResetPasswordPresenter.swift */,
+			);
+			path = ResetPassword;
+			sourceTree = "<group>";
+		};
+		FFD0F75A2B39FBFA001EDAAA /* RefreshPassword */ = {
+			isa = PBXGroup;
+			children = (
+				FFD0F75B2B39FD19001EDAAA /* RefreshPasswordViewController.swift */,
+				FFD0F75D2B39FD22001EDAAA /* RefreshPasswordView.swift */,
+				FFD0F75F2B39FD2A001EDAAA /* RefreshPasswordPresenter.swift */,
+			);
+			path = RefreshPassword;
 			sourceTree = "<group>";
 		};
 		FFD3E1D52A054E6400680ED5 /* PrivacyPolicy */ = {
@@ -1127,6 +1212,7 @@
 				FFF896262ACA3FA5008E97D7 /* Kingfisher */,
 				FFF896292ACA3FCB008E97D7 /* Realm */,
 				FFF8962B2ACA3FCB008E97D7 /* RealmSwift */,
+				FF44EA6E2B39B8F700989A0B /* KeychainSwift */,
 			);
 			productName = ZAND;
 			productReference = FF45A12929E7EC1200587DAF /* ZAND.app */;
@@ -1162,6 +1248,7 @@
 				FFF896222ACA3F8E008E97D7 /* XCRemoteSwiftPackageReference "Moya" */,
 				FFF896252ACA3FA5008E97D7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				FFF896282ACA3FCB008E97D7 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				FF44EA6D2B39B8F700989A0B /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = FF45A12A29E7EC1200587DAF /* Products */;
 			projectDirPath = "";
@@ -1191,6 +1278,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF30A1C12A4A156D00DD6E29 /* Reusable.swift in Sources */,
+				FFD0F75E2B39FD22001EDAAA /* RefreshPasswordView.swift in Sources */,
+				FF44EA5A2B39A0FC00989A0B /* APIManagerAuth.swift in Sources */,
+				FF44EA5E2B39A59F00989A0B /* RegisterModel.swift in Sources */,
 				FF1961C02A4C7A7900434AC7 /* ProfileMenuModel.swift in Sources */,
 				FF99B90129EEB90100F4E4C3 /* ViewControllerFactory.swift in Sources */,
 				FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */,
@@ -1205,14 +1295,17 @@
 				FF1961B22A4C5FE300434AC7 /* MapPresenter.swift in Sources */,
 				FFC01B602A03F147005CE41B /* BaseTableCell.swift in Sources */,
 				FFFE2ACA2AC2DD9F000A940A /* WorkingRangeItemModel.swift in Sources */,
+				FF44EA6C2B39B79800989A0B /* TokenManager.swift in Sources */,
 				FFB657A12A6B1A3F00451D65 /* Extension + String.swift in Sources */,
 				FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */,
 				FF45A16429E7F5C100587DAF /* Extension + UILabel.swift in Sources */,
 				FF27B0BC2AB8F07600611F47 /* StaffViewController.swift in Sources */,
 				FF4F757D2A9E38DD001E8731 /* UserDBManager.swift in Sources */,
+				FFD0F7592B39F4F2001EDAAA /* ResetPasswordPresenter.swift in Sources */,
 				FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */,
 				FF45A16829E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift in Sources */,
 				FFFE2AC32AC2D5E4000A940A /* DefaultTimetableLayout .swift in Sources */,
+				FF44EA622B39AC6E00989A0B /* LoginModel.swift in Sources */,
 				FF63B97F2AC35EF000DFD932 /* BookTimesModel.swift in Sources */,
 				FF1961B62A4C740700434AC7 /* SaloonDetailPresenter.swift in Sources */,
 				FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */,
@@ -1222,19 +1315,23 @@
 				FF27B0AE2AB8D0A100611F47 /* StartBookingView.swift in Sources */,
 				FF2DB9752A9DE2250036356B /* SignInPresenter.swift in Sources */,
 				FFD3E1D72A054E7C00680ED5 /* PrivacyPolicyViewController.swift in Sources */,
+				FF44EA6A2B39B53900989A0B /* NewPassword.swift in Sources */,
 				FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */,
 				FF4D4BB82AD89058005DA53C /* RecordDataBaseModel.swift in Sources */,
+				FF44EA662B39B19900989A0B /* User.swift in Sources */,
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */,
+				FF44EA602B39A86900989A0B /* VerifyModel.swift in Sources */,
 				FFDCE4B52A1B8E9000CEA0E1 /* SelectableMapViewController.swift in Sources */,
 				FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */,
-				FF3E65D92A55C1F6007EC56D /* RequestType.swift in Sources */,
+				FF3E65D92A55C1F6007EC56D /* CommonRequestType.swift in Sources */,
 				FF95F8A82AC5AC5B005DA310 /* ConfirmationViewModel.swift in Sources */,
 				FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */,
 				FF862A4D2AA88B660083DEB7 /* SaloonProvider.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */,
 				FF4D4BB62AD88E7C005DA53C /* GetRecordModel.swift in Sources */,
 				FF519A852AC6F39100D490A4 /* EntryConfirmedView.swift in Sources */,
+				FF44EA642B39B01000989A0B /* TokenModel.swift in Sources */,
 				FF3C62C42ABA123100032803 /* StaffCell.swift in Sources */,
 				FFE6F49D29FAD7C100FDB519 /* DefaultProfileLayout.swift in Sources */,
 				FFDCE4BD2A1BB7E300CEA0E1 /* AssetURL.swift in Sources */,
@@ -1261,6 +1358,7 @@
 				FF2DB97C2A9DFAFD0036356B /* RegisterView.swift in Sources */,
 				FF8AAF6A29EEA389007D6A60 /* MainView.swift in Sources */,
 				FF27B0B72AB8DF7100611F47 /* ServicesView.swift in Sources */,
+				FFD0F7602B39FD2A001EDAAA /* RefreshPasswordPresenter.swift in Sources */,
 				FF27FC262A2E079F006DE1B9 /* HideNavigationBar.swift in Sources */,
 				FFDCE4BB2A1BB47000CEA0E1 /* AssetImage.swift in Sources */,
 				FF63B97D2AC3469C00DFD932 /* BookServicesModel.swift in Sources */,
@@ -1288,7 +1386,7 @@
 				FF3B866C2B01703400EFE3CC /* UserAnnotation.swift in Sources */,
 				FF27FC242A2E0494006DE1B9 /* HideBackButtonTitle.swift in Sources */,
 				FF27FC212A2DE4C3006DE1B9 /* BackView.swift in Sources */,
-				FFDE118F2A5C436C00CEF390 /* APIManagerImpl.swift in Sources */,
+				FFDE118F2A5C436C00CEF390 /* APIManagerCommon.swift in Sources */,
 				FF27B0B02AB8D0B000611F47 /* StartBookingPresenter.swift in Sources */,
 				FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */,
 				FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */,
@@ -1300,6 +1398,7 @@
 				FF25632D29F5718C00091374 /* DescriptionShowcaseView.swift in Sources */,
 				FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */,
 				FF4D4BBA2AD8ACA7005DA53C /* UIAppointmentModel.swift in Sources */,
+				FF44EA682B39B31900989A0B /* EmailModel.swift in Sources */,
 				FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */,
 				FF27FC282A2E07A9006DE1B9 /* ShowNavigationBar.swift in Sources */,
 				FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */,
@@ -1317,10 +1416,13 @@
 				FFA3D44E29F2A21D0067CC6F /* MainLayout.swift in Sources */,
 				FFDCE4B22A1B680A00CEA0E1 /* CheckMarkView.swift in Sources */,
 				FF4401322AA7B09F00318A76 /* SalonsCodableModel.swift in Sources */,
+				FFD0F7552B39F4D1001EDAAA /* ResetPasswordViewController.swift in Sources */,
 				FFF5574829F2FBA400758A31 /* SaloonPhotoCell.swift in Sources */,
+				FFD0F75C2B39FD19001EDAAA /* RefreshPasswordViewController.swift in Sources */,
 				FFF6002B2A6FD60B009813E6 /* ActivityIndicator.swift in Sources */,
 				FFB985682A30AFD100ABEFBB /* VibrationManager.swift in Sources */,
-				FF6E41322B0A7332002D85AD /* DeviceLocationService.swift in Sources */,
+				FF6E41322B0A7332002D85AD /* DeviceLocationManager.swift in Sources */,
+				FF44EA712B39C15500989A0B /* UpdatedTokenModel.swift in Sources */,
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,
 				FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */,
 				FFD0DA082A4C907D006752B7 /* DefautMainLayout.swift in Sources */,
@@ -1343,11 +1445,13 @@
 				FFF16A812A6B2FA300D83E5B /* UserModel.swift in Sources */,
 				FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */,
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,
+				FFD0F7572B39F4E8001EDAAA /* ResetPasswordView.swift in Sources */,
 				FF45A12D29E7EC1200587DAF /* AppDelegate.swift in Sources */,
 				FF99B90329EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift in Sources */,
 				FFFFDD3C2ABF564A00FA5B92 /* ServiceCell.swift in Sources */,
 				FF1F3DB82ADC341B0023407C /* FetchBookDateModel.swift in Sources */,
 				FF27B0C02AB8F08500611F47 /* StaffPresenter.swift in Sources */,
+				FF44EA5C2B39A13800989A0B /* AuthRequestType.swift in Sources */,
 				FF25633A29F591F600091374 /* PaddingTextField.swift in Sources */,
 				FFD429102AC4C3030069E681 /* NetworkMonitorManager.swift in Sources */,
 			);
@@ -1581,6 +1685,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FF44EA6D2B39B8F700989A0B /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
 		FFF8961C2ACA3F60008E97D7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1624,6 +1736,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FF44EA6E2B39B8F700989A0B /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF44EA6D2B39B8F700989A0B /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
 		FFF8961D2ACA3F60008E97D7 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FFF8961C2ACA3F60008E97D7 /* XCRemoteSwiftPackageReference "SnapKit" */;

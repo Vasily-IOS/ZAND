@@ -62,7 +62,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             return vc
         case .profile:
             let layout: DefaultProfileLayout = ProfileLayoutBuilder()
-            let network: APIManager = APIManagerImpl()
+            let network: APIManagerCommonP = APIManagerCommon()
             let view = ProfileView(layout: layout)
             let vc = ProfileViewController(contentView: view)
             let presenter = ProfilePresenter(view: vc, network: network)
@@ -70,7 +70,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             return vc
         case .appointments:
             let realmManager: RealmManager = RealmManagerImpl()
-            let network: APIManager = APIManagerImpl()
+            let network: APIManagerCommonP = APIManagerCommon()
             let view = AppointemtsView()
             let vc = AppointmentsViewController(contentView: view)
             let presenter = AppointmentsPresenterImpl(view: vc, network: network, realm: realmManager)
@@ -85,16 +85,16 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let presenter = SelectableMapPresenter(view: vc, model: model)
             vc.presenter = presenter
             return vc
-        case .appleSignIn:
+        case .signIn:
             let view = SignInView()
             let vc = SignInViewController(contentView: view)
             let presenter = SignInPresenter(view: vc)
             vc.presenter = presenter
             return vc
-        case .register(let user):
+        case .register:
             let view = RegisterView()
             let vc = RegisterViewController(contentView: view)
-            let presenter = RegisterPresenter(view: vc, user: user)
+            let presenter = RegisterPresenter(view: vc)
             vc.presenter = presenter
             return vc
         case .startBooking(let company_id, let companyName, let companyAddress):
@@ -112,7 +112,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
         case .services(let booking_type, let company_id, let company_name, let company_address, let viewModel):
             let view = ServicesView()
             let vc = ServicesViewController(contentView: view)
-            let network: APIManager = APIManagerImpl()
+            let network: APIManagerCommonP = APIManagerCommon()
 
             var currentViewModel: ConfirmationViewModel?
 
@@ -142,7 +142,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
         case .staff(let booking_type, let company_id, let company_name, let company_address, let viewModel):
             let view = StaffView()
             let vc = StaffViewController(contentView: view)
-            let network: APIManager = APIManagerImpl()
+            let network: APIManagerCommonP = APIManagerCommon()
 
             var currentViewModel: ConfirmationViewModel?
 
@@ -170,7 +170,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let layout: DefaultTimetableLayout = TimetableLayout()
             let contentView = TimetableView(layout: layout)
             let vс = TimetableViewController(contentView: contentView)
-            let network: APIManager = APIManagerImpl()
+            let network: APIManagerCommonP = APIManagerCommon()
             let presenter = TimetablePresenter(
                 view: vс,
                 network: network,
@@ -180,7 +180,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             return vс
         case .confirmation(let viewModel):
             let realm: RealmManager = RealmManagerImpl()
-            let network: APIManager = APIManagerImpl()
+            let network: APIManagerCommonP = APIManagerCommon()
             let view = ConfirmationView()
             let vc = ConfirmationViewController(contentView: view)
             let presenter = ConfirmationPresenter(
@@ -191,6 +191,18 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             )
             vc.presenter = presenter
             vc.title = AssetString.checkAppointment.rawValue
+            return vc
+        case .resetPassword:
+            let view = ResetPasswordView()
+            let vc = ResetPasswordViewController(contentView: view)
+            let presenter = ResetPasswordPresenter(view: vc)
+            vc.presenter = presenter
+            return vc
+        case .refreshPassword:
+            let view = RefreshPasswordView()
+            let vc = RefreshPasswordViewController(contentView: view)
+            let presenter = RefreshPasswordPresenter(view: vc)
+            vc.presenter = presenter
             return vc
         }
     }

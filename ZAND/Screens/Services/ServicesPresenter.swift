@@ -30,12 +30,12 @@ final class ServicesPresenter: ServicesPresenterOutput {
 
     var viewModel: ConfirmationViewModel
 
-    private let network: APIManager
+    private let network: APIManagerCommonP
 
     // MARK: - Initializers
 
     init(view: ServicesViewInput,
-         network: APIManager,
+         network: APIManagerCommonP,
          viewModel: ConfirmationViewModel
     ) {
         self.view = view

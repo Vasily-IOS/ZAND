@@ -35,11 +35,11 @@ final class ProfilePresenter: ProfilePresenterOutput {
 
     private var uiModelCount: Int = 0
 
-    private let network: APIManager
+    private let network: APIManagerCommonP
 
     // MARK: - Initializers
 
-    init(view: ProfileViewInput, network: APIManager) {
+    init(view: ProfileViewInput, network: APIManagerCommonP) {
         self.view = view
         self.network = network
 

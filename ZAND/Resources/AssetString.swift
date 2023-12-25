@@ -97,6 +97,7 @@ enum AssetString: String {
     case all = "Все"
     case badConnection1 = "⚠️ Не забудьте выключить VPN, он тормозит работу приложения!"
     case badConnection2 = "ℹ️ При плохом интернет-соединении информация может обновляться дольше"
+    case resetPassword = "Восстановление пароля"
 
     // MARK: - Bottom button values
     case apply = "Применить"

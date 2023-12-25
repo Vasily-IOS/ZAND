@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransparentButton: UIButton {
+final class TransparentButton: UIButton {
     
     // MARK: - Nested types
     

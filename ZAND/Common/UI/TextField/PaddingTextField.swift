@@ -14,6 +14,7 @@ final class PaddingTextField: UITextField {
     
     enum State {
         case email
+        case password
         case smsCode
         case name
         case surname
@@ -27,6 +28,8 @@ final class PaddingTextField: UITextField {
             switch self {
             case .email:
                 return AssetString.email.rawValue
+            case .password:
+                return AssetString.password.rawValue
             case .smsCode:
                 return AssetString.smsCode.rawValue
             case .name:

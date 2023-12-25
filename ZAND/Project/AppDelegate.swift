@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        AppRouter.shared.checkAuth()
+        TokenManager.shared.appDelegate = self
     }
 }
 

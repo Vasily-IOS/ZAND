@@ -15,6 +15,8 @@ enum ReplacedControllerType {
 }
 
 final class AppRouter {
+
+    // MARK: - Properties
     
     static let shared: DefaultRouter = AppRouter()
 
@@ -54,7 +56,7 @@ extension AppRouter {
             selectedImage: nil
         )
 
-        let signInViewController = vcFactory.getViewController(for: .appleSignIn)
+        let signInViewController = vcFactory.getViewController(for: .signIn)
         let profileViewController = vcFactory.getViewController(for: .profile)
 
         [signInViewController, profileViewController].forEach {
@@ -66,18 +68,6 @@ extension AppRouter {
             tabBarController.viewControllers?[2] = profileViewController
         case .signIn:
             tabBarController.viewControllers?[2] = signInViewController
-        }
-    }
-
-    func checkAuth() {
-        if UserDBManager.shared.isUserContains() {
-            DispatchQueue.main.async {
-                self.switchRoot(type: .profile)
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.switchRoot(type: .signIn)
-            }
         }
     }
 

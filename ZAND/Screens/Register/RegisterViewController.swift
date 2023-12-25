@@ -22,6 +22,12 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         subscribeNotifications()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
     // MARK: - Instance methods
 
     @objc
@@ -53,10 +59,10 @@ final class RegisterViewController: BaseViewController<RegisterView> {
     }
 
     private func showFinalAlertController() {
-        let finalText = "\n\(AssetString.name): \(presenter?.user.fullName ?? "")\n\(AssetString.email): \(presenter?.user.email ?? "")\n\(AssetString.phone): \(presenter?.user.phone ?? "")"
+//        let finalText = "\n\(AssetString.name): \(presenter?.user.fullName ?? "")\n\(AssetString.email): \(presenter?.user.email ?? "")\n\(AssetString.phone): \(presenter?.user.phone ?? "")"
         let alertController = UIAlertController(
             title: AssetString.checkYourData.rawValue,
-            message: finalText,
+            message: "finalText",
             preferredStyle: .alert
         )
 
@@ -104,22 +110,22 @@ extension RegisterViewController: RegisterDelegate {
     }
 
     func register() {
-        guard let step = presenter?.user.isCanRegister() else { return }
-
-        switch step {
-        case .notAllFieldsAreFilledIn:
-            AppRouter.shared.showAlert(type: .fillAllFields, message: nil)
-        case .emailIsNotCorrect:
-            AppRouter.shared.showAlert(type: .invalidEmailInput, message: nil)
-        case .phoneIsNotCorrect:
-            AppRouter.shared.showAlert(type: .invalidPhoneInput, message: nil)
-        case .policyIsNotConfirmed:
-            AppRouter.shared.showAlert(type: .shouldAcceptPolicy, message: nil)
-        case .phoneNumberCountIsSmall:
-            AppRouter.shared.showAlert(type: .phoneNumberLessThanEleven, message: nil)
-        case .register:
-            showFinalAlertController()
-        }
+//        guard let step = presenter?.user.isCanRegister() else { return }
+//
+//        switch step {
+//        case .notAllFieldsAreFilledIn:
+//            AppRouter.shared.showAlert(type: .fillAllFields, message: nil)
+//        case .emailIsNotCorrect:
+//            AppRouter.shared.showAlert(type: .invalidEmailInput, message: nil)
+//        case .phoneIsNotCorrect:
+//            AppRouter.shared.showAlert(type: .invalidPhoneInput, message: nil)
+//        case .policyIsNotConfirmed:
+//            AppRouter.shared.showAlert(type: .shouldAcceptPolicy, message: nil)
+//        case .phoneNumberCountIsSmall:
+//            AppRouter.shared.showAlert(type: .phoneNumberLessThanEleven, message: nil)
+//        case .register:
+//            showFinalAlertController()
+//        }
     }
 
     func showPolicy() {
@@ -127,7 +133,7 @@ extension RegisterViewController: RegisterDelegate {
     }
 
     func changePolicy(isConfirmed: Bool) {
-        presenter?.user.isPolicyConfirmed = isConfirmed
+//        presenter?.user.isPolicyConfirmed = isConfirmed
     }
 }
 
@@ -160,18 +166,18 @@ extension RegisterViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let text = textField.text ?? ""
 
-        switch textField {
-        case contentView.nameTextField:
-            presenter?.user.name = text
-        case contentView.surnameTextField:
-            presenter?.user.surname = text
-        case contentView.emailTextField:
-            presenter?.user.email = text
-        case contentView.phoneTextField:
-            presenter?.user.phone = text
-        default:
-            break
-        }
+//        switch textField {
+//        case contentView.nameTextField:
+//            presenter?.user.name = text
+//        case contentView.surnameTextField:
+//            presenter?.user.surname = text
+//        case contentView.emailTextField:
+//            presenter?.user.email = text
+//        case contentView.phoneTextField:
+//            presenter?.user.phone = text
+//        default:
+//            break
+//        }
     }
 }
 

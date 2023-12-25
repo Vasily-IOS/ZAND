@@ -70,7 +70,7 @@ final class RegisterView: BaseUIView {
     private let entranceLabel = UILabel(
         .systemFont(ofSize: 24, weight: .bold),
         .black,
-        AssetString.entrance.rawValue
+        AssetString.registation.rawValue
     )
 
     private lazy var policyButtonsStackView = UIStackView(

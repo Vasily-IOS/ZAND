@@ -22,6 +22,4 @@ protocol DefaultRouter: AnyObject {
     func presentRecordNavigation(type: VCType)
     func presentSearch(type: VCType, completionHandler: ((SearchState, SaloonModel?) -> ())?)
     func switchRoot(type: ReplacedControllerType)
-
-    func checkAuth()
 }

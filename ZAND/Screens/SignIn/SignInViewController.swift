@@ -34,50 +34,20 @@ extension SignInViewController: SignInDelegate {
     // MARK: - AppleSignInDelegate methods
 
     func signInButtonTap() {
-        presenter?.createAuthRequest()
+        print("Enter")
+    }
+
+    func forgotButtonDidTap() {
+        AppRouter.shared.push(.resetPassword)
+    }
+
+    func registerButtonDidTap() {
+        AppRouter.shared.push(.register)
     }
 }
 
 extension SignInViewController: SignInViewInput {
 
-    // MARK: - AppleSignInViewInput methods
-    
-    func showASAuthController(request: ASAuthorizationOpenIDRequest) {
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
+    // MARK: - SignInViewInput methods
 
-        controller.performRequests()
-    }
-}
-
-extension SignInViewController: ASAuthorizationControllerDelegate {
-
-    // MARK: - ASAuthorizationControllerDelegate methods
-
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        case let credential as ASAuthorizationAppleIDCredential:
-            let user = UserModel(credential: credential)
-
-            AppRouter.shared.push(.register(user))
-        default:
-            break
-        }
-    }
-
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithError error: Error) {
-        debugPrint(error)
-    }
-}
-
-extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
-
-    // MARK: - ASAuthorizationControllerPresentationContextProviding methods
-
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return view.window!
-    }
 }

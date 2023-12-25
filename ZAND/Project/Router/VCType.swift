@@ -18,8 +18,11 @@ enum VCType {
     case appointments
     case privacyPolicy(_ urlString: String)
     case selectableMap(_ model: Saloon)
-    case appleSignIn
-    case register(_ user: UserModel)
+    case signIn
+    case register
+    case resetPassword
+    case refreshPassword
+
     case startBooking(Int, String, String)
     case services(
         booking_type: BookingType?=nil,
