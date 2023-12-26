@@ -20,6 +20,7 @@ final class RegisterViewController: BaseViewController<RegisterView> {
 
         subscribeDelegates()
         subscribeNotifications()
+        hideBackButtonTitle()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,25 +38,25 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         }
 
         let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        contentView.scrollView.contentInset = contentInset
+//        contentView.scrollView.contentInset = contentInset
     }
 
     @objc
     private func keyboardWillHide(notification: NSNotification) {
-        contentView.scrollView.contentInset = .zero
+//        contentView.scrollView.contentInset = .zero
     }
 
     private func subscribeDelegates() {
         contentView.delegate = self
 
-        contentView.delegate = self
-        [contentView.nameTextField,
-         contentView.surnameTextField,
-         contentView.emailTextField,
-         contentView.phoneTextField
-        ].forEach {
-            $0.delegate = self
-        }
+//        contentView.delegate = self
+//        [contentView.nameTextField,
+//         contentView.surnameTextField,
+//         contentView.emailTextField,
+//         contentView.phoneTextField
+//        ].forEach {
+//            $0.delegate = self
+//        }
     }
 
     private func showFinalAlertController() {
@@ -110,6 +111,7 @@ extension RegisterViewController: RegisterDelegate {
     }
 
     func register() {
+        AppRouter.shared.push(.verify)
 //        guard let step = presenter?.user.isCanRegister() else { return }
 //
 //        switch step {
@@ -185,7 +187,6 @@ extension RegisterViewController: RegisterViewInput {
 
     // MARK: - RegisterViewInput methods
 
-    func configure(model: UserModel) {
-        contentView.configure(model: model)
-    }
 }
+
+extension RegisterViewController: HideBackButtonTitle {}

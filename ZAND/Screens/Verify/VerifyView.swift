@@ -1,50 +1,34 @@
 //
-//  RefreshPasswordView.swift
+//  VerifyView.swift
 //  ZAND
 //
-//  Created by Василий on 25.12.2023.
+//  Created by Василий on 26.12.2023.
 //
 
 import UIKit
 import SnapKit
 
-protocol RefreshPasswordDelegate: AnyObject {
-    func refreshButtonDidTap()
+protocol VerifyViewDelegate: AnyObject {
+    func sendButtonDidTap()
 }
 
-final class RefreshPasswordView: BaseUIView {
+final class VerifyView: BaseUIView {
 
     // MARK: - Properties
 
-    weak var delegate: RefreshPasswordDelegate?
+    weak var delegate: VerifyViewDelegate?
 
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.text = AssetString.resetPassword.rawValue
+        label.text = AssetString.confirmationCode.rawValue
         label.numberOfLines = 2
         return label
     }()
 
-    private (set) var passwordTextField = PaddingTextField(state: .password)
-
-    private (set) var confirmPasswordTextField = PaddingTextField(state: .confirmPassword)
-
     private (set) var confirmationCodeTextField = PaddingTextField(state: .confirmation_code)
 
-    private lazy var mainStackView = UIStackView(
-        alignment: .fill,
-        arrangedSubviews: [
-            passwordTextField,
-            confirmPasswordTextField,
-            confirmationCodeTextField
-        ],
-        axis: .vertical,
-        distribution: .equalSpacing,
-        spacing: 30
-    )
-
-    private let refreshPasswordButton = BottomButton(buttonText: .refreshPass)
+    private let sendButton = BottomButton(buttonText: .sendCode)
 
     // MARK: - Instance methods
 
@@ -58,32 +42,32 @@ final class RefreshPasswordView: BaseUIView {
     // MARK: - Action
 
     @objc
-    private func refreshButtonAction() {
-        delegate?.refreshButtonDidTap()
+    private func sendButtonAction() {
+        delegate?.sendButtonDidTap()
     }
 }
 
-extension RefreshPasswordView {
+extension VerifyView {
 
     // MARK: - Instance methods
 
     private func setupSubviews() {
         backgroundColor = .mainGray
 
-        addSubviews([descriptionLabel, mainStackView, refreshPasswordButton])
+        addSubviews([descriptionLabel, confirmationCodeTextField, sendButton])
 
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(200)
             make.centerX.equalToSuperview()
         }
 
-        mainStackView.snp.makeConstraints { make in
+        confirmationCodeTextField.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().inset(20)
         }
 
-        refreshPasswordButton.snp.makeConstraints { make in
+        sendButton.snp.makeConstraints { make in
             make.height.equalTo(44)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().inset(20)
@@ -92,6 +76,6 @@ extension RefreshPasswordView {
     }
 
     private func setupTargets() {
-        refreshPasswordButton.addTarget(self, action: #selector(refreshButtonAction), for: .touchUpInside)
+        sendButton.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)
     }
 }

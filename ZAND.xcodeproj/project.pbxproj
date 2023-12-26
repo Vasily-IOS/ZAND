@@ -51,6 +51,9 @@
 		FF30A1BD2A4A138800DD6E29 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BC2A4A138800DD6E29 /* Config.swift */; };
 		FF30A1BF2A4A151400DD6E29 /* Extension + UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */; };
 		FF30A1C12A4A156D00DD6E29 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30A1C02A4A156D00DD6E29 /* Reusable.swift */; };
+		FF377F262B3B035800574426 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF377F252B3B035800574426 /* VerifyViewController.swift */; };
+		FF377F282B3B036100574426 /* VerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF377F272B3B036100574426 /* VerifyView.swift */; };
+		FF377F2A2B3B036B00574426 /* VerifyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF377F292B3B036B00574426 /* VerifyPresenter.swift */; };
 		FF3B866C2B01703400EFE3CC /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B866B2B01703400EFE3CC /* UserAnnotation.swift */; };
 		FF3C62C42ABA123100032803 /* StaffCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3C62C32ABA123100032803 /* StaffCell.swift */; };
 		FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */; };
@@ -241,6 +244,9 @@
 		FF30A1BC2A4A138800DD6E29 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FF30A1BE2A4A151400DD6E29 /* Extension + UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UICollectionView.swift"; sourceTree = "<group>"; };
 		FF30A1C02A4A156D00DD6E29 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		FF377F252B3B035800574426 /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
+		FF377F272B3B036100574426 /* VerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyView.swift; sourceTree = "<group>"; };
+		FF377F292B3B036B00574426 /* VerifyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPresenter.swift; sourceTree = "<group>"; };
 		FF3B866B2B01703400EFE3CC /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		FF3C62C32ABA123100032803 /* StaffCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffCell.swift; sourceTree = "<group>"; };
 		FF3E65D32A55A51D007EC56D /* Extension + Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Notification.Name.swift"; sourceTree = "<group>"; };
@@ -596,6 +602,16 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		FF377F242B3B034700574426 /* Verify */ = {
+			isa = PBXGroup;
+			children = (
+				FF377F252B3B035800574426 /* VerifyViewController.swift */,
+				FF377F272B3B036100574426 /* VerifyView.swift */,
+				FF377F292B3B036B00574426 /* VerifyPresenter.swift */,
+			);
+			path = Verify;
+			sourceTree = "<group>";
+		};
 		FF3C62C22ABA122200032803 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,6 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FF377F242B3B034700574426 /* Verify */,
 				FFD0F75A2B39FBFA001EDAAA /* RefreshPassword */,
 				FFD0F7532B39F4B7001EDAAA /* ResetPassword */,
 				FF2DB9712A9DE1F40036356B /* SignIn */,
@@ -1282,6 +1299,7 @@
 				FF44EA5A2B39A0FC00989A0B /* APIManagerAuth.swift in Sources */,
 				FF44EA5E2B39A59F00989A0B /* RegisterModel.swift in Sources */,
 				FF1961C02A4C7A7900434AC7 /* ProfileMenuModel.swift in Sources */,
+				FF377F2A2B3B036B00574426 /* VerifyPresenter.swift in Sources */,
 				FF99B90129EEB90100F4E4C3 /* ViewControllerFactory.swift in Sources */,
 				FFB985612A2F551600ABEFBB /* SearchPresenter.swift in Sources */,
 				FF8AAF6229EEA222007D6A60 /* BaseViewController.swift in Sources */,
@@ -1316,6 +1334,7 @@
 				FF2DB9752A9DE2250036356B /* SignInPresenter.swift in Sources */,
 				FFD3E1D72A054E7C00680ED5 /* PrivacyPolicyViewController.swift in Sources */,
 				FF44EA6A2B39B53900989A0B /* NewPassword.swift in Sources */,
+				FF377F262B3B035800574426 /* VerifyViewController.swift in Sources */,
 				FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */,
 				FF4D4BB82AD89058005DA53C /* RecordDataBaseModel.swift in Sources */,
 				FF44EA662B39B19900989A0B /* User.swift in Sources */,
@@ -1438,6 +1457,7 @@
 				FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */,
 				FF25634329F682C800091374 /* FilterViewController.swift in Sources */,
 				FFC01B492A03C80A005CE41B /* AppointmentsView.swift in Sources */,
+				FF377F282B3B036100574426 /* VerifyView.swift in Sources */,
 				FFB9857A2A30E87B00ABEFBB /* RealmManagerImpl.swift in Sources */,
 				FF6DB3D12B0FADCF003648A8 /* SaloonModel.swift in Sources */,
 				FFC01B592A03DCA5005CE41B /* DefaultMyDetailsLayout.swift in Sources */,

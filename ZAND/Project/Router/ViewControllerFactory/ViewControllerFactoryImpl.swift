@@ -204,6 +204,12 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let presenter = RefreshPasswordPresenter(view: vc)
             vc.presenter = presenter
             return vc
+        case .verify:
+            let view = VerifyView()
+            let vc = VerifyViewController(contentView: view)
+            let presenter = VerifyPresenter(view: vc)
+            vc.presenter = presenter
+            return vc
         }
     }
 }

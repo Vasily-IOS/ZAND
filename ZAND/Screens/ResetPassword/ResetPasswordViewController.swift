@@ -20,6 +20,7 @@ final class ResetPasswordViewController: BaseViewController<ResetPasswordView> {
 
         subscribeDelegates()
         navigationController?.setNavigationBarHidden(false, animated: true)
+        hideBackButtonTitle()
     }
 
     // MARK: - Instance methods
@@ -42,3 +43,5 @@ extension ResetPasswordViewController: ResetPasswordDelegate {
 extension ResetPasswordViewController: ResetPasswordViewInput {
     
 }
+
+extension ResetPasswordViewController: HideBackButtonTitle {}

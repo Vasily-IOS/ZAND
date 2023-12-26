@@ -167,4 +167,8 @@ extension AppRouter: DefaultRouter {
         let viewController = vcFactory.getViewController(for: type)
         createRecordNavigationController?.pushViewController(viewController, animated: true)
     }
+
+    func popToRoot() {
+        navigationController.popToRootViewController(animated: true)
+    }
 }

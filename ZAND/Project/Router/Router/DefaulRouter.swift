@@ -15,6 +15,7 @@ protocol DefaultRouter: AnyObject {
     func changeTabBarVC(to index: Int)
     func popViewController()
     func dismiss()
+    func popToRoot()
 
     func pushCreateRecord(_ type: VCType)
     func showAlert(type: AlertType, message: String?)

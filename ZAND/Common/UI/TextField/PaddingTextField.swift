@@ -16,13 +16,17 @@ final class PaddingTextField: UITextField {
         case email
         case password
         case smsCode
-        case name
-        case surname
+        case name // имя
+        case surname // фамилия
+        case fathersName // отчество
         case age
         case usename
+        case createPassword
         case confirmPassword
         case confirmation_code
         case phone
+        case birthday
+        case repeatPassword
         
         var placeholder_text: String {
             switch self {
@@ -36,16 +40,24 @@ final class PaddingTextField: UITextField {
                 return AssetString.name.rawValue
             case .surname:
                 return AssetString.surname.rawValue
+            case .fathersName:
+                return AssetString.fathersName.rawValue
             case .age:
                 return AssetString.age.rawValue
             case .usename:
                 return AssetString.userName.rawValue
+            case .createPassword:
+                return AssetString.createPassword.rawValue
             case .confirmPassword:
                 return AssetString.confirmPassword.rawValue
             case .confirmation_code:
                 return AssetString.confirmationCode.rawValue
             case .phone:
                 return AssetString.phoneNumber.rawValue
+            case .birthday:
+                return AssetString.birthday.rawValue
+            case .repeatPassword:
+                return AssetString.repeatPassword.rawValue
             }
         }
     }

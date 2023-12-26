@@ -6,8 +6,6 @@
 //
 
 import UIKit
-
-import UIKit
 import SnapKit
 
 protocol ResetPasswordDelegate: AnyObject {
@@ -36,7 +34,6 @@ final class ResetPasswordView: BaseUIView {
         alignment: .fill,
         arrangedSubviews: [
             emailTextField
-//            loginTextField
         ],
         axis: .vertical,
         distribution: .equalSpacing,

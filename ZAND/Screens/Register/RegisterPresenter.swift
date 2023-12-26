@@ -14,7 +14,7 @@ protocol RegisterPresenterOutput: AnyObject {
 }
 
 protocol RegisterViewInput: AnyObject {
-    func configure(model: UserModel)
+    
 }
 
 final class RegisterPresenter: RegisterPresenterOutput {

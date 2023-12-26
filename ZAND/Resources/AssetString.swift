@@ -98,6 +98,8 @@ enum AssetString: String {
     case badConnection1 = "⚠️ Не забудьте выключить VPN, он тормозит работу приложения!"
     case badConnection2 = "ℹ️ При плохом интернет-соединении информация может обновляться дольше"
     case resetPassword = "Восстановление пароля"
+    case refreshPassword = "Обновить пароль"
+    case birthday = "Дата рождения"
 
     // MARK: - Bottom button values
     case apply = "Применить"
@@ -116,9 +118,12 @@ enum AssetString: String {
     case password = "Пароль"
     case name = "Имя"
     case surname = "Фамилия"
+    case fathersName = "Отчество"
     case age = "Возраст"
     case user_name = "@username"
+    case createPassword = "Придумайте пароль"
     case confirmPassword = "Подтвердите пароль"
+    case repeatPassword = "Повторите пароль"
     case confirmationCode = "Код подтверждения"
     case near = "Ближайшие"
     
