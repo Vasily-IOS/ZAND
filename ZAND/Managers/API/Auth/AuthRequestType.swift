@@ -12,12 +12,12 @@ import Foundation
 import Moya
 
 enum AuthRequestType {
-    case register(RegisterModel)
+    case register(CreateUserModel)
     case verify(VerifyModel) // код живет 10 минут
     case login(LoginModel)
     case getUser
     case refreshToken(String)
-    case refreshUser(User)
+    case refreshUser(RefreshUser)
     case refreshEmail(EmailModel)
     case resetPassword(EmailModel)
     case refreshPassword(NewPassword)
@@ -70,6 +70,16 @@ extension AuthRequestType: TargetType {
     var task: Moya.Task {
         switch self {
         case .register(let model):
+//            let parameters: [String: Any] = [
+//                "firstName": model.firstName,
+//                "middleName": model.middleName,
+//                "lastName": model.lastName,
+//                "email": model.email,
+//                "phone": model.phone,
+//                "birthday": model.birthday,
+//                "password": model.password
+//            ]
+//            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
             return .requestJSONEncodable(model)
         case .verify(let model):
             return .requestJSONEncodable(model)

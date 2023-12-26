@@ -72,7 +72,7 @@ final class PaddingTextField: UITextField {
         bottom: 0,
         right: 10
     )
-    
+
     // MARK: - Initializers
 
     init(state: State) {
@@ -88,21 +88,10 @@ final class PaddingTextField: UITextField {
     
     // MARK: -
 
-    func configure(textInput: String) {
-        if textInput.isEmpty {
-            layer.borderWidth = 0.5
-            layer.borderColor = UIColor.red.cgColor
-        } else {
-            text = textInput
-            layer.borderWidth = 0.0
-        }
-    }
-
     private func setup(state: State) {
         layer.cornerRadius = 15.0
         backgroundColor = .white
         addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
-
         placeholder = state.placeholder_text
 
         if state == .phone || state == .smsCode {
@@ -116,12 +105,13 @@ final class PaddingTextField: UITextField {
 
     @objc
     private func textDidChange(_ sender: UITextField) {
-        if sender.text == "" {
-            layer.borderWidth = 0.5
-            layer.borderColor = UIColor.red.cgColor
-        } else {
-            layer.borderWidth = 0
-        }
+//        if sender.text == "" {
+//            layer.borderWidth = 0.5
+//            layer.borderColor = UIColor.red.cgColor
+//        } else {
+//            layer.borderWidth = 0
+//        }
+
         textDidChange?(sender.text ?? "")
     }
     

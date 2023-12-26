@@ -9,13 +9,21 @@ import Foundation
 
 protocol RegisterPresenterOutput: AnyObject {
     var keyboardAlreadyHidined: Bool { get set }
-//    var user: UserModel { get set }
-    func save()
+    var user: UserRegisterModel { get set }
+
+    func setName(name: String)
+    func setSurname(surname: String)
+    func setFatherName(fatheName: String)
+    func setEmail(email: String)
+    func setPhone(phone: String)
+    func setBirthday(birthday: Date)
+    func setPassword(password: String)
+    func setRepeatPassword(password: String)
+
+    func register(completion: @escaping (Bool) -> ())
 }
 
-protocol RegisterViewInput: AnyObject {
-    
-}
+protocol RegisterViewInput: AnyObject {}
 
 final class RegisterPresenter: RegisterPresenterOutput {
 
@@ -23,22 +31,77 @@ final class RegisterPresenter: RegisterPresenterOutput {
 
     weak var view: RegisterViewInput?
 
-//    var user: UserModel
-
     var keyboardAlreadyHidined: Bool = false
+
+    var user = UserRegisterModel()
+
+    private let network: APIManagerAuthP
 
     // MARK: - Initializers
 
-    init(view: RegisterViewInput) {
+    init(view: RegisterViewInput, network: APIManagerAuthP) {
         self.view = view
-//        self.user = user
-
-//        view.configure(model: user)
+        self.network = network
     }
 
     // MARK: - Instance methods
 
-    func save() {
-//        UserDBManager.shared.save(user: user)
+    func setName(name: String) {
+        user.name = name
+    }
+
+    func setSurname(surname: String) {
+        user.surname = surname
+    }
+
+    func setFatherName(fatheName: String) {
+        user.fathersName = fatheName
+    }
+
+    func setEmail(email: String) {
+        user.email = email
+    }
+
+    func setPhone(phone: String) {
+        user.phone = phone
+    }
+
+    func setBirthday(birthday: Date) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        user.birthday = dateFormatter.string(from: birthday)
+    }
+
+    func setPassword(password: String) {
+        user.password = password
+    }
+
+    func setRepeatPassword(password: String) {
+        user.repeatPassword = password
+    }
+
+    func register(completion: @escaping (Bool) -> ()) {
+        let createUserModel = CreateUserModel(
+            firstName: user.name.trimmingCharacters(in: .whitespaces),
+            middleName: user.fathersName.trimmingCharacters(in: .whitespaces),
+            lastName: user.surname.trimmingCharacters(in: .whitespaces),
+            email: user.email.trimmingCharacters(in: .whitespaces),
+//            phone: user.phone.numbers,
+            phone: user.phone,
+            birthday: user.birthday,
+            password: user.password.trimmingCharacters(in: .whitespaces)
+        )
+
+        network.performRequest(
+            type: .register(createUserModel), expectation: ServerResponse.self
+        ) { response in
+            completion(true)
+        }
+    }
+}
+
+extension String {
+    var numbers: String {
+        return filter { "0"..."9" ~= $0 }
     }
 }

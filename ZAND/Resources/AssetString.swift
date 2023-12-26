@@ -99,7 +99,10 @@ enum AssetString: String {
     case badConnection2 = "ℹ️ При плохом интернет-соединении информация может обновляться дольше"
     case resetPassword = "Восстановление пароля"
     case refreshPassword = "Обновить пароль"
-    case birthday = "Дата рождения"
+    case birthday = "Дата рождения (необязательно)"
+    case done = "Готово"
+    case passwIsNotEqual = "Пароли не совпадают"
+    case passwordCountIsSmall = "Пароль должен содержать минимум 8 символов"
 
     // MARK: - Bottom button values
     case apply = "Применить"
@@ -111,14 +114,14 @@ enum AssetString: String {
     case pushSms = "Уведомления и смс"
     case phoneInputError = "Ошибка ввода номера телефона"
     case tryAgain = "Попробуйте еще раз"
-    case fillAllFields = "Заполните все поля"
+    case fillAllRequiredFields = "Заполните все обязательные поля"
 
     // MARK: - Padding textfield
     case email = "Email"
     case password = "Пароль"
     case name = "Имя"
     case surname = "Фамилия"
-    case fathersName = "Отчество"
+    case fathersName = "Отчество (необязательно)"
     case age = "Возраст"
     case user_name = "@username"
     case createPassword = "Придумайте пароль"

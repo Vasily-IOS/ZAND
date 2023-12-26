@@ -13,6 +13,7 @@ protocol RegisterDelegate: AnyObject {
     func register()
     func showPolicy()
     func changePolicy(isConfirmed: Bool)
+    func setBirthday(birthday: Date)
 }
 
 final class RegisterView: BaseUIView {
@@ -21,29 +22,28 @@ final class RegisterView: BaseUIView {
 
     weak var delegate: RegisterDelegate?
 
-    let phoneTextField: PaddingTextField = {
+    private let scrollView = UIScrollView()
+
+    private (set) var nameTextField = PaddingTextField(state: .name)
+
+    private (set) var surnameTextField = PaddingTextField(state: .surname)
+
+    private (set) var fathersNameTextField = PaddingTextField(state: .fathersName) // отчество не обязательно
+
+    private (set) var birthdayTextField = PaddingTextField(state: .birthday) // birthday не обязательно
+
+    private (set) var emailTextField = PaddingTextField(state: .email)
+
+    private (set) var phoneTextField: PaddingTextField = {
         let phoneTextField = PaddingTextField(state: .phone)
-        phoneTextField.text = "+7"
         phoneTextField.layer.borderColor = UIColor.red.cgColor
         phoneTextField.layer.borderWidth = 0.0
         return phoneTextField
     }()
 
-    private let scrollView = UIScrollView()
+    private (set) var createPasswordTextField = PaddingTextField(state: .createPassword)
 
-    private let nameTextField = PaddingTextField(state: .name)
-
-    private let surnameTextField = PaddingTextField(state: .surname)
-
-    private let fathersNameTextField = PaddingTextField(state: .fathersName)
-
-    private let birthdayTextField = PaddingTextField(state: .birthday)
-
-    private let emailTextField = PaddingTextField(state: .email)
-
-    private let createPasswordTextField = PaddingTextField(state: .createPassword)
-
-    private let repeatPasswordTextField = PaddingTextField(state: .repeatPassword)
+    private (set) var repeatPasswordTextField = PaddingTextField(state: .repeatPassword)
 
     private let policySwitchControl = UISwitch()
 
@@ -117,14 +117,15 @@ final class RegisterView: BaseUIView {
 
     private let contentView = UIView()
 
+    private let datePicker = UIDatePicker()
+
     // MARK: - Instance methods
 
     override func setup() {
-        super.setup()
-
         setupSubviews()
         setupRecognizer()
         setupTargets()
+        createDatePicker()
     }
 
     func hidePhoneKeyboard() {
@@ -139,8 +140,24 @@ final class RegisterView: BaseUIView {
     func removeBorder() {
         phoneTextField.layer.borderWidth = 0.0
     }
+
+    func setNewScrollInset(inset: UIEdgeInsets) {
+        scrollView.contentInset = inset
+    }
+
+    func getAllTextFileds() -> [UITextField] {
+        [nameTextField,
+         surnameTextField,
+         fathersNameTextField,
+         birthdayTextField,
+         emailTextField,
+         phoneTextField,
+         createPasswordTextField,
+         repeatPasswordTextField
+        ]
+    }
     
-    // MARK: - Action
+    // MARK: - Private methods
 
     @objc
     private func cancelEditingAction() {
@@ -160,6 +177,46 @@ final class RegisterView: BaseUIView {
     @objc
     private func switchAction(_ sender: UISwitch) {
         delegate?.changePolicy(isConfirmed: sender.isOn)
+    }
+
+    @objc
+    private func pickerDoneAction() {
+        setDate()
+    }
+
+    private func createToolBar() -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+
+        let spaceButton = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        let doneButton = UIBarButtonItem(
+            title: AssetString.done.rawValue,
+            style: .plain,
+            target: self,
+            action: #selector(pickerDoneAction)
+        )
+        toolBar.setItems([spaceButton, doneButton], animated: true)
+
+        return toolBar
+    }
+
+    private func createDatePicker() {
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date()
+        birthdayTextField.inputView = datePicker
+        birthdayTextField.inputAccessoryView = createToolBar()
+    }
+
+    private func setDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        birthdayTextField.text = dateFormatter.string(from: datePicker.date)
+        delegate?.setBirthday(birthday: datePicker.date)
     }
 }
 
@@ -189,7 +246,6 @@ extension RegisterView {
             make.top.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
-
         }
 
         entranceLabel.snp.makeConstraints { make in

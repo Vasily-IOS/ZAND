@@ -92,9 +92,10 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             vc.presenter = presenter
             return vc
         case .register:
+            let network: APIManagerAuthP = APIManagerAuth()
             let view = RegisterView()
             let vc = RegisterViewController(contentView: view)
-            let presenter = RegisterPresenter(view: vc)
+            let presenter = RegisterPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
         case .startBooking(let company_id, let companyName, let companyAddress):
@@ -205,9 +206,10 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             vc.presenter = presenter
             return vc
         case .verify:
+            let network: APIManagerAuthP = APIManagerAuth()
             let view = VerifyView()
             let vc = VerifyViewController(contentView: view)
-            let presenter = VerifyPresenter(view: vc)
+            let presenter = VerifyPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
         }

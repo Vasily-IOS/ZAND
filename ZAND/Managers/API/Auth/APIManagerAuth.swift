@@ -35,7 +35,10 @@ final class APIManagerAuth: APIManagerAuthP {
 
             switch result {
             case .success(let response):
-                if let _ = response.response?.statusCode {
+
+
+                if let code = response.response?.statusCode {
+                    print("Code \(code) and type \(type)")
 //                    let successRange = (200...299)
                     if let model = self.decoder(
                         data: response.data, expected: expectation
