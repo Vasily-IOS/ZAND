@@ -54,7 +54,23 @@ final class SignInPresenter: SignInPresenterOutput {
                 savedDate: Date()
             )
             TokenManager.shared.save(tokenModel)
+            self?.fetchAndSaveUser()
             self?.view.switchScreen()
+        }
+    }
+
+    func fetchAndSaveUser() {
+        network.performRequest(type: .getUser, expectation: UserModel.self) { user in
+            UserDBManager.shared.save(
+                user: UserModel(data: User(
+                    lastName: user.data.lastName,
+                    middleName: user.data.middleName,
+                    firstName: user.data.firstName,
+                    email: user.data.email,
+                    phone: user.data.phone,
+                    birthday: user.data.birthday)
+                )
+            )
         }
     }
 }

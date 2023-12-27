@@ -9,10 +9,10 @@ import Foundation
 
 struct CreateUserModel: Codable {
     let firstName: String // required // имя
-    var middleName: String // отчество
+    var middleName: String? // отчество
     let lastName: String // required // фамилия
     let email: String // required
     let phone: String // required
-    var birthday: String
+    var birthday: String?
     let password: String // required
 }

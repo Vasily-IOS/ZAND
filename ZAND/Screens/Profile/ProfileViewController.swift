@@ -45,9 +45,9 @@ final class ProfileViewController: BaseViewController<ProfileView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        presenter?.checkLogIn()
+        presenter?.updateProfile()
     }
- 
+
     deinit {
         print("ProfileViewController died")
     }
@@ -91,15 +91,8 @@ extension ProfileViewController {
         let yesAction = UIAlertAction(
             title: AssetString.yes.rawValue,
             style: .default) { [weak self] _ in
-            let alertConrol = UIAlertController(
-                title: AssetString.managerWillPhone.rawValue,
-                message: nil,
-                preferredStyle: .alert)
-            let action = UIAlertAction(
-                title: AssetString.ok.rawValue, style: .cancel)
-            alertConrol.addAction(action)
-            self?.present(alertConrol, animated: true)
-        }
+                self?.presenter?.deleteProfile()
+            }
         alertController.addAction(noAction)
         alertController.addAction(yesAction)
         present(alertController, animated: true)
@@ -222,7 +215,7 @@ extension ProfileViewController: ProfileViewInput {
 
     // MARK: - ProfileViewInput methods
 
-    func updateWithLoggedData(model: UserDataBaseModel) {
+    func updateProfile(model: UserDataBaseModel) {
         contentView.userNameView.configure(model: model)
     }
 

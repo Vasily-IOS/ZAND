@@ -16,12 +16,13 @@ enum ProfileType {
 protocol ProfilePresenterOutput: AnyObject {
     func getMenuModel() -> [ProfileMenuModel]
     func updateSavedSaloons()
-    func checkLogIn()
+    func updateProfile()
     func signOut()
+    func deleteProfile()
 }
 
 protocol ProfileViewInput: AnyObject {
-    func updateWithLoggedData(model: UserDataBaseModel)
+    func updateProfile(model: UserDataBaseModel)
     func updateWithSaloons(model: [Saloon])
 }
 
@@ -37,11 +38,14 @@ final class ProfilePresenter: ProfilePresenterOutput {
 
     private let network: APIManagerCommonP
 
+    private let authNetwork: APIManagerAuthP
+
     // MARK: - Initializers
 
-    init(view: ProfileViewInput, network: APIManagerCommonP) {
+    init(view: ProfileViewInput, network: APIManagerCommonP, authNetwork: APIManagerAuthP) {
         self.view = view
         self.network = network
+        self.authNetwork = authNetwork
 
         subscribeNotification()
 
@@ -77,16 +81,26 @@ final class ProfilePresenter: ProfilePresenterOutput {
         }
     }
 
-    func checkLogIn() {
+    func updateProfile() {
         if let user = UserDBManager.shared.get() {
-            view?.updateWithLoggedData(model: user)
+            view?.updateProfile(model: user)
         }
     }
 
     func signOut() {
         UserDBManager.shared.delete()
-        TokenManager.shared.delete()
+        TokenManager.shared.deleteToken()
         AppRouter.shared.switchRoot(type: .signIn)
+    }
+
+    func deleteProfile() {
+        authNetwork.performRequest(type: .deleteUser) { [weak self] isSuccess in
+            if isSuccess == true {
+                self?.signOut()
+            } else {
+                print("Юзер не был удален")
+            }
+        }
     }
 
     @objc

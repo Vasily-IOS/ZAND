@@ -22,7 +22,7 @@ final class TokenManager {
     static let shared = TokenManager()
 
     var bearerToken: String? {
-        return keyChain.get(Config.token)
+        return getSavedTokenModel()?.accessToken
     }
 
     var appDelegate: AppDelegate? {
@@ -46,7 +46,7 @@ final class TokenManager {
             let data = try JSONEncoder().encode(token)
             keyChain.set(data, forKey: Config.token)
         } catch let error {
-            print(error.localizedDescription)
+            debugPrint(error)
         }
     }
 
@@ -54,7 +54,6 @@ final class TokenManager {
         do {
             let data = keyChain.getData(Config.token)
             let model = try JSONDecoder().decode(TokenModel.self, from: data ?? Data())
-
             return model
         } catch {
             return nil
@@ -64,17 +63,17 @@ final class TokenManager {
     func checkAuthorization() {
         guard let tokenModel = getSavedTokenModel() else { return }
 
-        let accessLifeTime = 250 // 5 минут (Время жизни access - 5 min)
-        if accessIsValid(date: tokenModel.savedDate, expiriesIn: accessLifeTime) {
+        let accessLifeTime = 250
+        if refreshExpiried(date: tokenModel.savedDate) {
+            deleteToken()
+            print("Refresh invalid. Delete and log out")
+        } else if accessIsValid(date: tokenModel.savedDate, expiriesIn: accessLifeTime) {
             updateToken()
             print("Update token")
-        } else if refreshIsValid(date: tokenModel.savedDate) {
-            delete()
-            print("Refresh invalid. Delete ang log out")
         }
     }
 
-    func delete() {
+    func deleteToken() {
         keyChain.delete(Config.token)
     }
 
@@ -86,7 +85,7 @@ final class TokenManager {
         return now.timeIntervalSince(date) > seconds
     }
 
-    private func refreshIsValid(date: Date) -> Bool {
+    private func refreshExpiried(date: Date) -> Bool {
         let now = Date()
         let seconds = TimeInterval(550)
         return now.timeIntervalSince(date) > seconds

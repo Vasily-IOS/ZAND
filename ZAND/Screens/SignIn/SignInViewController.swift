@@ -72,6 +72,8 @@ extension SignInViewController: SignInViewInput {
     // MARK: - SignInViewInput methods
 
     func switchScreen() {
-        AppRouter.shared.switchRoot(type: .profile)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            AppRouter.shared.switchRoot(type: .profile)
+        }
     }
 }

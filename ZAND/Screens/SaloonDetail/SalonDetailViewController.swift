@@ -96,7 +96,7 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
     }
 
     func openBooking() {
-        if !UserDBManager.shared.isUserContains() {
+        if TokenManager.shared.bearerToken == nil {
             AppRouter.shared.popViewController()
             AppRouter.shared.changeTabBarVC(to: 2)
         } else {
@@ -111,7 +111,7 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
     }
 
     func applyDB() {
-        if !UserDBManager.shared.isUserContains() {
+        if TokenManager.shared.bearerToken == nil {
             AppRouter.shared.popViewController()
             AppRouter.shared.changeTabBarVC(to: 2)
         } else {

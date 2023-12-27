@@ -38,6 +38,7 @@ struct UserRegisterModel: Codable {
         return !name.isEmpty && !surname.isEmpty &&
         !email.isEmpty && !phone.isEmpty &&
         (!password.isEmpty && !repeatPassword.isEmpty)
+        && !fathersName.isEmpty && !birthday.isEmpty
     }
 
     private var isEmailCanValidate: Bool {

@@ -63,9 +63,10 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
         case .profile:
             let layout: DefaultProfileLayout = ProfileLayoutBuilder()
             let network: APIManagerCommonP = APIManagerCommon()
+            let authNetwork: APIManagerAuthP = APIManagerAuth()
             let view = ProfileView(layout: layout)
             let vc = ProfileViewController(contentView: view)
-            let presenter = ProfilePresenter(view: vc, network: network)
+            let presenter = ProfilePresenter(view: vc, network: network, authNetwork: authNetwork)
             vc.presenter = presenter
             return vc
         case .appointments:

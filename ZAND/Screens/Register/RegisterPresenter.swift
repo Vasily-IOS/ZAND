@@ -94,8 +94,9 @@ final class RegisterPresenter: RegisterPresenterOutput {
         network.performRequest(
             type: .register(createUserModel), expectation: ServerResponse.self
         ) { response in
-            print(response)
-            completion(true)
+            if !response.data.isEmpty {
+                completion(true)
+            }
         }
     }
 }
