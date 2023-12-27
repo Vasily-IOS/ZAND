@@ -1,5 +1,5 @@
 //
-//  RegisterNPresenter.swift
+//  RegisterPresenter.swift
 //  ZAND
 //
 //  Created by Василий on 29.08.2023.
@@ -86,7 +86,6 @@ final class RegisterPresenter: RegisterPresenterOutput {
             middleName: user.fathersName.trimmingCharacters(in: .whitespaces),
             lastName: user.surname.trimmingCharacters(in: .whitespaces),
             email: user.email.trimmingCharacters(in: .whitespaces),
-//            phone: user.phone.numbers,
             phone: user.phone,
             birthday: user.birthday,
             password: user.password.trimmingCharacters(in: .whitespaces)
@@ -95,13 +94,8 @@ final class RegisterPresenter: RegisterPresenterOutput {
         network.performRequest(
             type: .register(createUserModel), expectation: ServerResponse.self
         ) { response in
+            print(response)
             completion(true)
         }
-    }
-}
-
-extension String {
-    var numbers: String {
-        return filter { "0"..."9" ~= $0 }
     }
 }

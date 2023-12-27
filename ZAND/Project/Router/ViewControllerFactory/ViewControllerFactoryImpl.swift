@@ -86,9 +86,10 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             vc.presenter = presenter
             return vc
         case .signIn:
+            let network: APIManagerAuthP = APIManagerAuth()
             let view = SignInView()
             let vc = SignInViewController(contentView: view)
-            let presenter = SignInPresenter(view: vc)
+            let presenter = SignInPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
         case .register:

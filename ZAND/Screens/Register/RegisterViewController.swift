@@ -1,5 +1,5 @@
 //
-//  RegisterNViewController.swift
+//  RegisterViewController.swift
 //  ZAND
 //
 //  Created by Василий on 29.08.2023.
@@ -72,29 +72,29 @@ extension RegisterViewController: RegisterDelegate {
     }
 
     func register() {
-        guard let step = presenter?.user.isCanRegister() else { return }
-
-        switch step {
-        case .notAllRequiredFieldsAreFilled:
-            AppRouter.shared.showAlert(type: .fillAllRequiredFields, message: nil)
-        case .emailIsNotCorrect:
-            AppRouter.shared.showAlert(type: .invalidEmailInput, message: nil)
-        case .phoneIsNotCorrect:
-            AppRouter.shared.showAlert(type: .invalidPhoneInput, message: nil)
-        case .policyIsNotConfirmed:
-            AppRouter.shared.showAlert(type: .shouldAcceptPolicy, message: nil)
-        case .phoneNumberCountIsSmall:
-            AppRouter.shared.showAlert(type: .phoneNumberLessThanEleven, message: nil)
-        case .passwordAreNotEqual:
-            AppRouter.shared.showAlert(type: .passwwordsIsNotEqual, message: nil)
-        case .passwordCountIsSmall:
-            AppRouter.shared.showAlert(type: .passwordCountIsSmall, message: nil)
-        case .register:
-            presenter?.register { response in
+//        guard let step = presenter?.user.isCanRegister() else { return }
+//
+//        switch step {
+//        case .notAllRequiredFieldsAreFilled:
+//            AppRouter.shared.showAlert(type: .fillAllRequiredFields, message: nil)
+//        case .emailIsNotCorrect:
+//            AppRouter.shared.showAlert(type: .invalidEmailInput, message: nil)
+//        case .phoneIsNotCorrect:
+//            AppRouter.shared.showAlert(type: .invalidPhoneInput, message: nil)
+//        case .policyIsNotConfirmed:
+//            AppRouter.shared.showAlert(type: .shouldAcceptPolicy, message: nil)
+//        case .phoneNumberCountIsSmall:
+//            AppRouter.shared.showAlert(type: .phoneNumberLessThanEleven, message: nil)
+//        case .passwordAreNotEqual:
+//            AppRouter.shared.showAlert(type: .passwwordsIsNotEqual, message: nil)
+//        case .passwordCountIsSmall:
+//            AppRouter.shared.showAlert(type: .passwordCountIsSmall, message: nil)
+//        case .register:
+//            presenter?.register { response in
                 AppRouter.shared.push(.verify)
             }
-        }
-    }
+//        }
+//    }
 
     func showPolicy() {
         AppRouter.shared.presentRecordNavigation(
@@ -159,6 +159,4 @@ extension RegisterViewController: UITextFieldDelegate {
     }
 }
 
-extension RegisterViewController: RegisterViewInput {}
-
-extension RegisterViewController: HideBackButtonTitle {}
+extension RegisterViewController: RegisterViewInput, HideBackButtonTitle {}

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AuthenticationServices
 
 final class SignInViewController: BaseViewController<SignInView> {
 
@@ -22,6 +21,12 @@ final class SignInViewController: BaseViewController<SignInView> {
         subscribeDelegates()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
     // MARK: - Instance methods
 
     private func subscribeDelegates() {
@@ -34,7 +39,7 @@ extension SignInViewController: SignInDelegate {
     // MARK: - AppleSignInDelegate methods
 
     func signInButtonTap() {
-        print("Enter")
+        presenter?.login()
     }
 
     func forgotButtonDidTap() {
@@ -44,10 +49,29 @@ extension SignInViewController: SignInDelegate {
     func registerButtonDidTap() {
         AppRouter.shared.push(.register)
     }
+
+    func cancelEditing() {
+        contentView.endEditing(true)
+    }
+
+    func setEmail(text: String) {
+        presenter?.email = text
+    }
+
+    func setLogin(text: String) {
+        presenter?.password = text
+    }
+
+    func showAlert() {
+        AppRouter.shared.showAlert(type: .fillAllRequiredFields, message: nil)
+    }
 }
 
 extension SignInViewController: SignInViewInput {
 
     // MARK: - SignInViewInput methods
 
+    func switchScreen() {
+        AppRouter.shared.switchRoot(type: .profile)
+    }
 }

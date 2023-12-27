@@ -33,10 +33,27 @@ extension VerifyViewController: VerifyViewDelegate {
     // MARK: - VerifyViewDelegate methods
 
     func sendButtonDidTap() {
-        guard let code = contentView.confirmationCodeTextField.text?.trimmingCharacters(in: .whitespaces) else { return }
+        if let code = contentView.confirmationCodeTextField.text?.trimmingCharacters(in: .whitespaces) {
+            presenter?.verify(code: code)
+        }
+    }
 
-        presenter?.verify(code: code)
+    func cancelEditing() {
+        contentView.endEditing(true)
     }
 }
 
-extension VerifyViewController: VerifyInput {}
+extension VerifyViewController: VerifyInput {
+
+    // MARK: - VerifyInput methods
+
+    func popToRoot() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            AppRouter.shared.popToRoot()
+        }
+    }
+
+    func showAlert() {
+        AppRouter.shared.showAlert(type: .codeIsInvalid, message: nil)
+    }
+}

@@ -21,8 +21,8 @@ final class TokenManager {
 
     static let shared = TokenManager()
 
-    var bearerToken: String {
-        return keyChain.get(Config.token) ?? ""
+    var bearerToken: String? {
+        return keyChain.get(Config.token)
     }
 
     var appDelegate: AppDelegate? {
@@ -41,7 +41,7 @@ final class TokenManager {
 
     // MARK: - Public methods
 
-    func save(token: TokenModel) {
+    func save(_ token: TokenModel) {
         do {
             let data = try JSONEncoder().encode(token)
             keyChain.set(data, forKey: Config.token)
@@ -64,7 +64,7 @@ final class TokenManager {
     func checkAuthorization() {
         guard let tokenModel = getSavedTokenModel() else { return }
 
-        let accessLifeTime = 300 // 5 минут
+        let accessLifeTime = 250 // 5 минут (Время жизни access - 5 min)
         if accessIsValid(date: tokenModel.savedDate, expiriesIn: accessLifeTime) {
             updateToken()
             print("Update token")
@@ -78,7 +78,6 @@ final class TokenManager {
         keyChain.delete(Config.token)
     }
 
-
     // MARK: - Private methods
 
     private func accessIsValid(date: Date, expiriesIn: Int) -> Bool {
@@ -89,7 +88,7 @@ final class TokenManager {
 
     private func refreshIsValid(date: Date) -> Bool {
         let now = Date()
-        let seconds = TimeInterval(10000)
+        let seconds = TimeInterval(550)
         return now.timeIntervalSince(date) > seconds
     }
 
@@ -97,7 +96,7 @@ final class TokenManager {
         guard let tokenModel = getSavedTokenModel() else { return }
 
         apiManager.performRequest(
-            type: .refreshToken(tokenModel.refreshToken),
+            type: .refreshToken(RefreshTokenModel(refreshToken: tokenModel.refreshToken)),
             expectation: UpdatedTokenModel.self
         ) { [weak self] updatedModel in
 
@@ -106,7 +105,7 @@ final class TokenManager {
                 refreshToken: updatedModel.data.refreshToken,
                 savedDate: Date()
             )
-            self?.save(token: model)
+            self?.save(model)
         }
     }
 }

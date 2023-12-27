@@ -36,7 +36,7 @@ enum CommonRequestType {
 extension CommonRequestType: TargetType {
 
     var baseURL: URL {
-        return URL(string: AssetURL.baseURL.rawValue)!
+        return URL(string: AssetURL.yclientsURL.rawValue)!
     }
 
     var path: String {

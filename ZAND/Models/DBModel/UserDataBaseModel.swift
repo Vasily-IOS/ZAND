@@ -9,9 +9,9 @@ import Foundation
 import RealmSwift
 
 class UserDataBaseModel: Object {
-    @Persisted var id: String = ""
-    @Persisted var givenName: String = ""
-    @Persisted var familyName: String = ""
+    @Persisted var name: String = ""
+    @Persisted var surname: String = ""
+    @Persisted var fathersName: String = ""
     @Persisted var email: String = ""
     @Persisted var phone: String = ""
 }

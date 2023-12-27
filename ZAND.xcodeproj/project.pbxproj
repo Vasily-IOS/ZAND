@@ -101,6 +101,8 @@
 		FF6DB3D12B0FADCF003648A8 /* SaloonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6DB3D02B0FADCF003648A8 /* SaloonModel.swift */; };
 		FF6E41322B0A7332002D85AD /* DeviceLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */; };
 		FF862A4D2AA88B660083DEB7 /* SaloonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF862A4C2AA88B660083DEB7 /* SaloonProvider.swift */; };
+		FF8904F82B3C54B40037652A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8904F72B3C54B40037652A /* UserModel.swift */; };
+		FF8904FA2B3C5B830037652A /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8904F92B3C5B830037652A /* RefreshTokenModel.swift */; };
 		FF8AAF5629EE967D007D6A60 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5529EE967D007D6A60 /* MainViewController.swift */; };
 		FF8AAF5929EE96CE007D6A60 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */; };
 		FF8AAF5C29EE96FE007D6A60 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */; };
@@ -296,6 +298,8 @@
 		FF6DB3D02B0FADCF003648A8 /* SaloonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonModel.swift; sourceTree = "<group>"; };
 		FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationManager.swift; sourceTree = "<group>"; };
 		FF862A4C2AA88B660083DEB7 /* SaloonProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonProvider.swift; sourceTree = "<group>"; };
+		FF8904F72B3C54B40037652A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		FF8904F92B3C5B830037652A /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
 		FF8AAF5529EE967D007D6A60 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5829EE96CE007D6A60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FF8AAF5B29EE96FE007D6A60 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -528,6 +532,8 @@
 				FF44EA652B39B19900989A0B /* RefreshUser.swift */,
 				FF506B922B3B42F60050A474 /* CreateUserModel.swift */,
 				FF506B942B3B449A0050A474 /* ServerResponse.swift */,
+				FF8904F72B3C54B40037652A /* UserModel.swift */,
+				FF8904F92B3C5B830037652A /* RefreshTokenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -756,17 +762,8 @@
 			children = (
 				FFB985712A30E6E700ABEFBB /* RealmManager.swift */,
 				FFB985792A30E87B00ABEFBB /* RealmManagerImpl.swift */,
-				FF4F757B2A9E38C8001E8731 /* UserDBManager */,
 			);
 			path = Realm;
-			sourceTree = "<group>";
-		};
-		FF4F757B2A9E38C8001E8731 /* UserDBManager */ = {
-			isa = PBXGroup;
-			children = (
-				FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */,
-			);
-			path = UserDBManager;
 			sourceTree = "<group>";
 		};
 		FF4F757E2A9E4126001E8731 /* DBModel */ = {
@@ -1028,6 +1025,7 @@
 				FFD4290F2AC4C3030069E681 /* NetworkMonitorManager.swift */,
 				FFB985672A30AFD100ABEFBB /* VibrationManager.swift */,
 				FF44EA6B2B39B79800989A0B /* TokenManager.swift */,
+				FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */,
 				FF5FDCF02AEA9D710063400E /* FavoutriteSalonsManager.swift */,
 				FF3E65DA2A55C202007EC56D /* API */,
 				FF4F757A2A9E3889001E8731 /* Realm */,
@@ -1388,6 +1386,7 @@
 				FF95F8AF2AC5E1D9005DA310 /* RecordCreatedModel.swift in Sources */,
 				FF25634D29F68CE800091374 /* FilterCell.swift in Sources */,
 				FF3E65D42A55A51D007EC56D /* Extension + Notification.Name.swift in Sources */,
+				FF8904FA2B3C5B830037652A /* RefreshTokenModel.swift in Sources */,
 				FF49C9CC2AB067620086847C /* Extension + Data.swift in Sources */,
 				FF8E7BE529EF293100644208 /* OptionView.swift in Sources */,
 				FF2DB97A2A9DFAF40036356B /* RegisterViewController.swift in Sources */,
@@ -1445,6 +1444,7 @@
 				FFD0F75C2B39FD19001EDAAA /* RefreshPasswordViewController.swift in Sources */,
 				FFF6002B2A6FD60B009813E6 /* ActivityIndicator.swift in Sources */,
 				FFB985682A30AFD100ABEFBB /* VibrationManager.swift in Sources */,
+				FF8904F82B3C54B40037652A /* UserModel.swift in Sources */,
 				FF6E41322B0A7332002D85AD /* DeviceLocationManager.swift in Sources */,
 				FF44EA712B39C15500989A0B /* UpdatedTokenModel.swift in Sources */,
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,

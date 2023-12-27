@@ -14,7 +14,8 @@ protocol VerifyOutput: AnyObject {
 }
 
 protocol VerifyInput: AnyObject {
-
+    func popToRoot()
+    func showAlert()
 }
 
 final class VerifyPresenter: VerifyOutput {
@@ -35,10 +36,12 @@ final class VerifyPresenter: VerifyOutput {
     // MARK: - Instance methods
 
     func verify(code: String) {
-        network.performRequest(
-            type: .verify(VerifyModel(verifyCode: code)), expectation: ServerResponse.self
-        ) { response in
-            print(response)
+        network.performRequest(type: .verify(VerifyModel(verifyCode: code))
+        ) { [weak self] isSuccess in
+            guard let self,
+                  let isSuccess else { return }
+
+            isSuccess ? view.popToRoot() : view.showAlert()
         }
     }
 }

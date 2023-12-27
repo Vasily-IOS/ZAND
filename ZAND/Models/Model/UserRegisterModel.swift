@@ -35,7 +35,9 @@ struct UserRegisterModel: Codable {
     var isPolicyConfirmed: Bool = false
 
     private var isAllFieldsFilled: Bool {
-        return !name.isEmpty && !surname.isEmpty && !email.isEmpty && !phone.isEmpty && (!password.isEmpty && !repeatPassword.isEmpty)
+        return !name.isEmpty && !surname.isEmpty &&
+        !email.isEmpty && !phone.isEmpty &&
+        (!password.isEmpty && !repeatPassword.isEmpty)
     }
 
     private var isEmailCanValidate: Bool {
@@ -62,7 +64,7 @@ struct UserRegisterModel: Codable {
         return password == repeatPassword
     }
 
-    // MARK: - Instance methods
+    // MARK: - Public methods
 
     func isCanRegister() -> UserState {
         if !isAllFieldsFilled {
@@ -83,6 +85,8 @@ struct UserRegisterModel: Codable {
             return .register
         }
     }
+
+    // MARK: - Private methods
 
     private func isEmailCorrect(email: String) -> Bool {
         let emailPattern = Regex.email

@@ -12,6 +12,9 @@ protocol SignInDelegate: AnyObject {
     func signInButtonTap()
     func forgotButtonDidTap()
     func registerButtonDidTap()
+    func cancelEditing()
+    func setEmail(text: String)
+    func setLogin(text: String)
 }
 
 final class SignInView: BaseUIView {
@@ -29,13 +32,17 @@ final class SignInView: BaseUIView {
 
     private (set) var emailTextField = PaddingTextField(state: .email)
 
-    private (set) var loginTextField = PaddingTextField(state: .password)
+    private (set) var passwordTextField: PaddingTextField = {
+        let textField = PaddingTextField(state: .password)
+        textField.isSecureTextEntry = true
+        return textField
+    }()
 
     private lazy var mainStackView = UIStackView(
         alignment: .fill,
         arrangedSubviews: [
             emailTextField,
-            loginTextField
+            passwordTextField
         ],
         axis: .vertical,
         distribution: .equalSpacing,
@@ -62,10 +69,10 @@ final class SignInView: BaseUIView {
     // MARK: - Instance methods
 
     override func setup() {
-        super.setup()
-
         setupSubviews()
-        addTargets()
+        setupRecognizer()
+        setupTargets()
+        setupTextFieldHandlers()
     }
 
     // MARK: - Action
@@ -84,11 +91,26 @@ final class SignInView: BaseUIView {
     private func registerAction() {
         delegate?.registerButtonDidTap()
     }
+
+    @objc
+    private func cancelEditingAction() {
+        delegate?.cancelEditing()
+    }
 }
 
 extension SignInView {
 
     // MARK: - Instance methods
+
+    private func setupTextFieldHandlers() {
+        emailTextField.textDidChange = { [weak self] email in
+            self?.delegate?.setEmail(text: email)
+        }
+
+        passwordTextField.textDidChange = { [weak self] login in
+            self?.delegate?.setLogin(text: login)
+        }
+    }
 
     private func setupSubviews() {
         backgroundColor = .mainGray
@@ -122,9 +144,18 @@ extension SignInView {
         }
     }
 
-    private func addTargets() {
+    private func setupTargets() {
         forgotPassButton.addTarget(self, action: #selector(forgotPassAction), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
         signInButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
+    }
+
+    private func setupRecognizer() {
+        addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(cancelEditingAction)
+            )
+        )
     }
 }

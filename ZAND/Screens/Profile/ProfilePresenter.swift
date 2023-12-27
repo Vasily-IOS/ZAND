@@ -84,7 +84,8 @@ final class ProfilePresenter: ProfilePresenterOutput {
     }
 
     func signOut() {
-        UserDBManager.shared.exit()
+        UserDBManager.shared.delete()
+        TokenManager.shared.delete()
         AppRouter.shared.switchRoot(type: .signIn)
     }
 

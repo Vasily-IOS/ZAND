@@ -10,6 +10,7 @@ import SnapKit
 
 protocol RefreshPasswordDelegate: AnyObject {
     func refreshButtonDidTap()
+    func cancelEditing()
 }
 
 final class RefreshPasswordView: BaseUIView {
@@ -44,15 +45,14 @@ final class RefreshPasswordView: BaseUIView {
         spacing: 30
     )
 
-    private let refreshPasswordButton = BottomButton(buttonText: .refreshPass)
+    private let refreshPasswordButton = BottomButton(buttonText: .refreshPassword)
 
     // MARK: - Instance methods
 
     override func setup() {
-        super.setup()
-
         setupSubviews()
         setupTargets()
+        setupRecognizer()
     }
 
     // MARK: - Action
@@ -60,6 +60,11 @@ final class RefreshPasswordView: BaseUIView {
     @objc
     private func refreshButtonAction() {
         delegate?.refreshButtonDidTap()
+    }
+
+    @objc
+    private func cancelEditingAction() {
+        delegate?.cancelEditing()
     }
 }
 
@@ -93,5 +98,14 @@ extension RefreshPasswordView {
 
     private func setupTargets() {
         refreshPasswordButton.addTarget(self, action: #selector(refreshButtonAction), for: .touchUpInside)
+    }
+
+    private func setupRecognizer() {
+        addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(cancelEditingAction)
+            )
+        )
     }
 }

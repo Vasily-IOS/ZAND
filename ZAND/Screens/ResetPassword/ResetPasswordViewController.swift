@@ -38,6 +38,10 @@ extension ResetPasswordViewController: ResetPasswordDelegate {
     func sendButtonDidTap() {
         AppRouter.shared.push(.refreshPassword)
     }
+
+    func cancelEditing() {
+        contentView.endEditing(true)
+    }
 }
 
 extension ResetPasswordViewController: ResetPasswordViewInput {

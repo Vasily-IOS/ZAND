@@ -38,6 +38,10 @@ extension RefreshPasswordViewController: RefreshPasswordDelegate {
             AppRouter.shared.popToRoot()
         }
     }
+
+    func cancelEditing() {
+        contentView.endEditing(true)
+    }
 }
 
 extension RefreshPasswordViewController: RefreshPasswordInput {

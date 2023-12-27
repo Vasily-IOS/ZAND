@@ -21,16 +21,16 @@ final class UserDBManager {
 
     // MARK: - Instance methods
 
-//    func save(user: UserModel) {
-//        let userDB = UserDataBaseModel()
-//        userDB.id = user.id
-//        userDB.givenName = user.name
-//        userDB.familyName = user.surname
-//        userDB.email = user.email
-//        userDB.phone = user.phone
-//
-//        realmManager.save(object: userDB)
-//    }
+    func save(user: UserModel) {
+        let userDB = UserDataBaseModel()
+        userDB.name = user.data.firstName
+        userDB.surname = user.data.lastName
+        userDB.fathersName = user.data.middleName
+        userDB.email = user.data.email
+        userDB.phone = user.data.phone
+
+        realmManager.save(object: userDB)
+    }
 
     func get() -> UserDataBaseModel? {
         return realmManager.get(UserDataBaseModel.self).first
@@ -40,11 +40,9 @@ final class UserDBManager {
         return !realmManager.get(UserDataBaseModel.self).isEmpty
     }
 
-    func exit() {
+    func delete() {
         if let object = realmManager.get(UserDataBaseModel.self).first {
             realmManager.removeObject(object: object)
-        } else {
-            print("Have no objects of this type")
         }
     }
 }

@@ -16,7 +16,7 @@ enum AuthRequestType {
     case verify(VerifyModel) // код живет 10 минут
     case login(LoginModel)
     case getUser
-    case refreshToken(String)
+    case refreshToken(RefreshTokenModel)
     case refreshUser(RefreshUser)
     case refreshEmail(EmailModel)
     case resetPassword(EmailModel)
@@ -24,7 +24,7 @@ enum AuthRequestType {
     case deleteUser
 
     private var bearerToken: String {
-        return TokenManager.shared.bearerToken
+        return TokenManager.shared.bearerToken ?? ""
     }
 }
 
@@ -70,16 +70,6 @@ extension AuthRequestType: TargetType {
     var task: Moya.Task {
         switch self {
         case .register(let model):
-//            let parameters: [String: Any] = [
-//                "firstName": model.firstName,
-//                "middleName": model.middleName,
-//                "lastName": model.lastName,
-//                "email": model.email,
-//                "phone": model.phone,
-//                "birthday": model.birthday,
-//                "password": model.password
-//            ]
-//            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
             return .requestJSONEncodable(model)
         case .verify(let model):
             return .requestJSONEncodable(model)
@@ -87,9 +77,8 @@ extension AuthRequestType: TargetType {
             return .requestJSONEncodable(model)
         case .getUser:
             return .requestPlain
-        case .refreshToken(let token):
-            let parameters: [String: Any] = ["refreshToken": "\(token)"]
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.httpBody)
+        case .refreshToken(let model):
+            return .requestJSONEncodable(model)
         case .refreshUser(let model):
             return .requestJSONEncodable(model)
         case .refreshEmail(let model), .resetPassword(let model):

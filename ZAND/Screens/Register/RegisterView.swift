@@ -1,5 +1,5 @@
 //
-//  RegisterNView.swift
+//  RegisterView.swift
 //  ZAND
 //
 //  Created by Василий on 29.08.2023.
@@ -41,9 +41,17 @@ final class RegisterView: BaseUIView {
         return phoneTextField
     }()
 
-    private (set) var createPasswordTextField = PaddingTextField(state: .createPassword)
+    private (set) var createPasswordTextField: PaddingTextField = {
+        let textField = PaddingTextField(state: .createPassword)
+        textField.isSecureTextEntry = true
+        return textField
+    }()
 
-    private (set) var repeatPasswordTextField = PaddingTextField(state: .repeatPassword)
+    private (set) var repeatPasswordTextField: PaddingTextField = {
+        let textField = PaddingTextField(state: .repeatPassword)
+        textField.isSecureTextEntry = true
+        return textField
+    }()
 
     private let policySwitchControl = UISwitch()
 
@@ -208,6 +216,7 @@ final class RegisterView: BaseUIView {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Date()
+        datePicker.locale = Locale(identifier: "ru_RU")
         birthdayTextField.inputView = datePicker
         birthdayTextField.inputAccessoryView = createToolBar()
     }
@@ -215,8 +224,10 @@ final class RegisterView: BaseUIView {
     private func setDate() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMMM yyyy"
+        dateFormatter.locale = Locale(identifier: "ru_RU")
         birthdayTextField.text = dateFormatter.string(from: datePicker.date)
         delegate?.setBirthday(birthday: datePicker.date)
+        birthdayTextField.resignFirstResponder()
     }
 }
 

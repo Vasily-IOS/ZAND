@@ -10,6 +10,7 @@ import SnapKit
 
 protocol VerifyViewDelegate: AnyObject {
     func sendButtonDidTap()
+    func cancelEditing()
 }
 
 final class VerifyView: BaseUIView {
@@ -33,10 +34,9 @@ final class VerifyView: BaseUIView {
     // MARK: - Instance methods
 
     override func setup() {
-        super.setup()
-
         setupSubviews()
         setupTargets()
+        setupRecognizer()
     }
 
     // MARK: - Action
@@ -44,6 +44,11 @@ final class VerifyView: BaseUIView {
     @objc
     private func sendButtonAction() {
         delegate?.sendButtonDidTap()
+    }
+
+    @objc
+    private func cancelEditingAction() {
+        delegate?.cancelEditing()
     }
 }
 
@@ -77,5 +82,14 @@ extension VerifyView {
 
     private func setupTargets() {
         sendButton.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)
+    }
+
+    private func setupRecognizer() {
+        addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(cancelEditingAction)
+            )
+        )
     }
 }

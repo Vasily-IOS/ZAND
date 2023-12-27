@@ -14,6 +14,7 @@ protocol APIManagerAuthP: AnyObject {
         expectation: T.Type,
         completion: @escaping (T) -> Void
     )
+    func performRequest(type: AuthRequestType, completion: @escaping (Bool?) -> Void)
 }
 
 final class APIManagerAuth: APIManagerAuthP {
@@ -30,24 +31,44 @@ final class APIManagerAuth: APIManagerAuthP {
         expectation: T.Type,
         completion: @escaping (T) -> Void
     ) where T : Decodable, T : Encodable {
-        provider.request(type) { [weak self] result in
-            guard let self else { return }
-
+        provider.request(type) { result in
             switch result {
             case .success(let response):
-
-
+                let successfulRange = (200...299)
                 if let code = response.response?.statusCode {
                     print("Code \(code) and type \(type)")
-//                    let successRange = (200...299)
-                    if let model = self.decoder(
-                        data: response.data, expected: expectation
-                    ) {
-                        completion(model)
+
+                    if successfulRange.contains(code) {
+                        if let model = self.decoder(
+                            data: response.data, expected: expectation
+                        ) {
+                            completion(model)
+                        }
+                    } else {
+                        print("Error number \(code). Something went wrong")
                     }
                 }
             case .failure(let error):
                 debugPrint(error)
+            }
+        }
+    }
+
+    func performRequest(type: AuthRequestType, completion: @escaping (Bool?) -> Void) {
+        provider.request(type) { response in
+            switch response {
+            case .success(let success):
+                let successfulRange = (200...299)
+                if let responseCode = success.response?.statusCode {
+                    if successfulRange.contains(responseCode) {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                }
+            case .failure(let error):
+                debugPrint(error)
+                completion(nil)
             }
         }
     }
