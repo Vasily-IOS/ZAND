@@ -24,13 +24,15 @@ protocol ProfilePresenterOutput: AnyObject {
 protocol ProfileViewInput: AnyObject {
     func updateProfile(model: UserDataBaseModel)
     func updateWithSaloons(model: [Saloon])
+    func showSuccessAlert()
+    func showFailureAlert()
 }
 
 final class ProfilePresenter: ProfilePresenterOutput {
 
     // MARK: - Properties
 
-    weak var view: ProfileViewInput?
+    unowned let view: ProfileViewInput
 
     private let profileMenuModel = ProfileMenuModel.model
 
@@ -77,13 +79,13 @@ final class ProfilePresenter: ProfilePresenterOutput {
         }
 
         group.notify(queue: .main) {
-            self.view?.updateWithSaloons(model: savedSaloons.compactMap({ $0 }))
+            self.view.updateWithSaloons(model: savedSaloons.compactMap({ $0 }))
         }
     }
 
     func updateProfile() {
         if let user = UserDBManager.shared.get() {
-            view?.updateProfile(model: user)
+            view.updateProfile(model: user)
         }
     }
 
@@ -96,11 +98,15 @@ final class ProfilePresenter: ProfilePresenterOutput {
     func deleteProfile() {
         authNetwork.performRequest(type: .deleteUser, expectation: DefaultType.self
         ) { [weak self] _, isSuccess in
+            guard let self else { return }
+
             if isSuccess {
-                self?.signOut()
-                print("Юзер удален")
+                self.view.showSuccessAlert()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.signOut()
+                }
             } else {
-                print("Юзер не удален")
+                self.view.showFailureAlert()
             }
         }
     }

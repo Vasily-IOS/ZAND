@@ -223,6 +223,14 @@ extension ProfileViewController: ProfileViewInput {
         saloonModel = model
         reloadData()
     }
+
+    func showSuccessAlert() {
+        AppRouter.shared.showAlert(type: .profileDeleted, message: nil)
+    }
+
+    func showFailureAlert() {
+        AppRouter.shared.showAlert(type: .smthWentWrong, message: nil)
+    }
 }
 
 extension ProfileViewController: HideBackButtonTitle, ShowNavigationBar {}

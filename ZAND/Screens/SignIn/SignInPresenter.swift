@@ -74,6 +74,8 @@ final class SignInPresenter: SignInPresenterOutput {
 
             guard let user = user, isSuccess else { return }
 
+            print(user.data)
+
             UserDBManager.shared.save(
                 user: UserModel(data: User(
                     lastName: user.data.lastName,

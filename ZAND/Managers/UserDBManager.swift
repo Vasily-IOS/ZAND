@@ -41,8 +41,6 @@ final class UserDBManager {
     }
 
     func delete() {
-        if let object = realmManager.get(UserDataBaseModel.self).first {
-            realmManager.removeObject(object: object)
-        }
+        realmManager.removeAll()
     }
 }

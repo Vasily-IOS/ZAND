@@ -196,15 +196,17 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             vc.title = AssetString.checkAppointment.rawValue
             return vc
         case .resetPassword:
+            let network: APIManagerAuthP = APIManagerAuth()
             let view = ResetPasswordView()
             let vc = ResetPasswordViewController(contentView: view)
-            let presenter = ResetPasswordPresenter(view: vc)
+            let presenter = ResetPasswordPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
         case .refreshPassword:
+            let network: APIManagerAuthP = APIManagerAuth()
             let view = RefreshPasswordView()
             let vc = RefreshPasswordViewController(contentView: view)
-            let presenter = RefreshPasswordPresenter(view: vc)
+            let presenter = RefreshPasswordPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
         case .verify:

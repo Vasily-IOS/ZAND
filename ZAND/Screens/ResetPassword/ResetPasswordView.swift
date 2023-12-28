@@ -9,8 +9,9 @@ import UIKit
 import SnapKit
 
 protocol ResetPasswordDelegate: AnyObject {
-    func sendButtonDidTap()
+    func resetPasswordButtonDidTap()
     func cancelEditing()
+    func setEmail(text: String)
 }
 
 final class ResetPasswordView: BaseUIView {
@@ -28,8 +29,6 @@ final class ResetPasswordView: BaseUIView {
     }()
 
     private (set) var emailTextField = PaddingTextField(state: .email)
-
-    private (set) var loginTextField = PaddingTextField(state: .password)
 
     private lazy var mainStackView = UIStackView(
         alignment: .fill,
@@ -49,13 +48,14 @@ final class ResetPasswordView: BaseUIView {
         setupSubviews()
         setupTargets()
         setupRecognizer()
+        setupTextFieldHandlers()
     }
 
     // MARK: - Action
 
     @objc
     private func sendButtonAction() {
-        delegate?.sendButtonDidTap()
+        delegate?.resetPasswordButtonDidTap()
     }
 
     @objc
@@ -67,6 +67,12 @@ final class ResetPasswordView: BaseUIView {
 extension ResetPasswordView {
 
     // MARK: - Instance methods
+
+    private func setupTextFieldHandlers() {
+        emailTextField.textDidChange = { [weak self] text in
+            self?.delegate?.setEmail(text: text)
+        }
+    }
 
     private func setupSubviews() {
         backgroundColor = .mainGray

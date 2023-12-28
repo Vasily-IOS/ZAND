@@ -19,8 +19,8 @@ final class ResetPasswordViewController: BaseViewController<ResetPasswordView> {
         super.viewDidLoad()
 
         subscribeDelegates()
-        navigationController?.setNavigationBarHidden(false, animated: true)
         hideBackButtonTitle()
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     // MARK: - Instance methods
@@ -28,24 +28,36 @@ final class ResetPasswordViewController: BaseViewController<ResetPasswordView> {
     private func subscribeDelegates() {
         contentView.delegate = self
     }
-
 }
 
 extension ResetPasswordViewController: ResetPasswordDelegate {
 
     // MARK: - ResetPasswordDelegate methods
 
-    func sendButtonDidTap() {
-        AppRouter.shared.push(.refreshPassword)
+    func resetPasswordButtonDidTap() {
+        presenter?.resetPassword()
     }
 
     func cancelEditing() {
         contentView.endEditing(true)
     }
+
+    func setEmail(text: String) {
+        presenter?.email = text
+    }
 }
 
 extension ResetPasswordViewController: ResetPasswordViewInput {
-    
+
+    // MARK: - ResetPasswordViewInput methods
+
+    func showRefreshPasswordScreen() {
+        AppRouter.shared.push(.refreshPassword)
+    }
+
+    func showAlert() {
+        AppRouter.shared.showAlert(type: .smthWentWrong, message: nil)
+    }
 }
 
 extension ResetPasswordViewController: HideBackButtonTitle {}

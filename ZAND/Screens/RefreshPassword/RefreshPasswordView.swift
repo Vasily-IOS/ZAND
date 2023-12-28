@@ -11,6 +11,9 @@ import SnapKit
 protocol RefreshPasswordDelegate: AnyObject {
     func refreshButtonDidTap()
     func cancelEditing()
+    func setPassword(text: String)
+    func setRepeatPassword(text: String)
+    func setVerifyCode(text: String)
 }
 
 final class RefreshPasswordView: BaseUIView {
@@ -27,18 +30,26 @@ final class RefreshPasswordView: BaseUIView {
         return label
     }()
 
-    private (set) var passwordTextField = PaddingTextField(state: .password)
+    private (set) var passwordTextField: PaddingTextField = {
+        let textField = PaddingTextField(state: .password)
+        textField.isSecureTextEntry = true
+        return textField
+    }()
 
-    private (set) var confirmPasswordTextField = PaddingTextField(state: .confirmPassword)
+    private (set) var repeatPasswordTextField: PaddingTextField = {
+        let textField = PaddingTextField(state: .confirmPassword)
+        textField.isSecureTextEntry = true
+        return textField
+    }()
 
-    private (set) var confirmationCodeTextField = PaddingTextField(state: .confirmation_code)
+    private (set) var verifyCodeTextField = PaddingTextField(state: .confirmation_code)
 
     private lazy var mainStackView = UIStackView(
         alignment: .fill,
         arrangedSubviews: [
             passwordTextField,
-            confirmPasswordTextField,
-            confirmationCodeTextField
+            repeatPasswordTextField,
+            verifyCodeTextField
         ],
         axis: .vertical,
         distribution: .equalSpacing,
@@ -53,6 +64,7 @@ final class RefreshPasswordView: BaseUIView {
         setupSubviews()
         setupTargets()
         setupRecognizer()
+        setupTextFieldHandlers()
     }
 
     // MARK: - Action
@@ -71,6 +83,20 @@ final class RefreshPasswordView: BaseUIView {
 extension RefreshPasswordView {
 
     // MARK: - Instance methods
+
+    private func setupTextFieldHandlers() {
+        passwordTextField.textDidChange = { [weak self] text in
+            self?.delegate?.setPassword(text: text)
+        }
+
+        repeatPasswordTextField.textDidChange = { [weak self] text in
+            self?.delegate?.setRepeatPassword(text: text)
+        }
+
+        verifyCodeTextField.textDidChange = { [weak self] text in
+            self?.delegate?.setVerifyCode(text: text)
+        }
+    }
 
     private func setupSubviews() {
         backgroundColor = .mainGray

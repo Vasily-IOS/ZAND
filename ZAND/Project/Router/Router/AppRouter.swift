@@ -156,7 +156,7 @@ extension AppRouter: DefaultRouter {
         navigationController.present(vc, animated: true)
     }
 
-    func showAlert(type: AlertType, message: String? = nil) {
+    func showAlert(type: AlertType, message: String?) {
         let alertController = UIAlertController(title: type.textValue, message: message, preferredStyle: .alert)
         let understandAction = UIAlertAction(title: AssetString.ok.rawValue, style: .cancel)
         alertController.addAction(understandAction)

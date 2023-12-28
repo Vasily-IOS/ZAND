@@ -22,6 +22,8 @@ enum AlertType {
     case passwwordsIsNotEqual
     case passwordCountIsSmall
     case invalidEmailOrPassword
+    case profileDeleted
+    case smthWentWrong
 
     var textValue: String {
         switch self {
@@ -53,6 +55,10 @@ enum AlertType {
             return AssetString.passwordCountIsSmall.rawValue
         case .invalidEmailOrPassword:
             return AssetString.invalidEmailOrPassword.rawValue
+        case .profileDeleted:
+            return AssetString.profileDeleted.rawValue
+        case .smthWentWrong:
+            return AssetString.smthWentWrong.rawValue
         }
     }
 }
