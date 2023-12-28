@@ -94,11 +94,13 @@ final class ProfilePresenter: ProfilePresenterOutput {
     }
 
     func deleteProfile() {
-        authNetwork.performRequest(type: .deleteUser) { [weak self] isSuccess in
-            if isSuccess == true {
+        authNetwork.performRequest(type: .deleteUser, expectation: DefaultType.self
+        ) { [weak self] _, isSuccess in
+            if isSuccess {
                 self?.signOut()
+                print("Юзер удален")
             } else {
-                print("Юзер не был удален")
+                print("Юзер не удален")
             }
         }
     }

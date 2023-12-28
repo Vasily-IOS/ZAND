@@ -12,9 +12,8 @@ protocol APIManagerAuthP: AnyObject {
     func performRequest<T: Codable>(
         type: AuthRequestType,
         expectation: T.Type,
-        completion: @escaping (T) -> Void
+        completion: @escaping (T?, Bool) -> Void
     )
-    func performRequest(type: AuthRequestType, completion: @escaping (Bool?) -> Void)
 }
 
 final class APIManagerAuth: APIManagerAuthP {
@@ -29,57 +28,41 @@ final class APIManagerAuth: APIManagerAuthP {
     func performRequest<T>(
         type: AuthRequestType,
         expectation: T.Type,
-        completion: @escaping (T) -> Void
+        completion: @escaping (T?, Bool) -> Void
     ) where T : Decodable, T : Encodable {
         provider.request(type) { result in
             switch result {
             case .success(let response):
                 let successfulRange = (200...299)
-                if let code = response.response?.statusCode {
-                    print("Code \(code) and type \(type)")
+                let responseCode = response.response?.statusCode ?? 0
 
-                    if successfulRange.contains(code) {
+                if successfulRange.contains(responseCode) {
+                    if expectation == DefaultType.self {
+                        completion(nil, true)
+                    } else {
                         if let model = self.decoder(
                             data: response.data, expected: expectation
                         ) {
-                            completion(model)
+                            completion(model, true)
                         }
-                    } else {
-                        print("Error number \(code). Something went wrong")
                     }
+                } else {
+                    completion(nil, false)
                 }
             case .failure(let error):
                 debugPrint(error)
+                completion(nil, false)
             }
         }
     }
 
-    func performRequest(type: AuthRequestType, completion: @escaping (Bool?) -> Void) {
-        provider.request(type) { response in
-            switch response {
-            case .success(let success):
-                let successfulRange = (200...299)
-                if let responseCode = success.response?.statusCode {
-                    if successfulRange.contains(responseCode) {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                }
-            case .failure(let error):
-                debugPrint(error)
-                completion(nil)
-            }
-        }
-    }
-
-    private func decoder<T: Codable>(data: Data, expected: T.Type) -> T? {
+    private func decoder<T: Codable>(data: Data, expected: T.Type?) -> T? {
         do {
-            let json = try self.decoder.decode(
-                expected,
-                from: data
-            )
-            return json
+            if let expected = expected {
+                return try self.decoder.decode(expected, from: data)
+            } else {
+                return nil
+            }
         } catch(let error) {
             debugPrint(error)
             return nil

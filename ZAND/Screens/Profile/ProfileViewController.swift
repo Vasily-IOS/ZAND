@@ -98,7 +98,7 @@ extension ProfileViewController {
         present(alertController, animated: true)
     }
 
-    func reloadData() {
+    private func reloadData() {
         DispatchQueue.main.async {
             UIView.transition(
                 with: self.contentView.collectionView,

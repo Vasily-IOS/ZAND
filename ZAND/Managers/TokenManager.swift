@@ -97,7 +97,9 @@ final class TokenManager {
         apiManager.performRequest(
             type: .refreshToken(RefreshTokenModel(refreshToken: tokenModel.refreshToken)),
             expectation: UpdatedTokenModel.self
-        ) { [weak self] updatedModel in
+        ) { [weak self] updatedModel, isSuccess in
+
+            guard let updatedModel = updatedModel, isSuccess else { return }
 
             let model = TokenModel(
                 accessToken: updatedModel.data.token,

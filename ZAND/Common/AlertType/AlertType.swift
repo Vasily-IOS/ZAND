@@ -21,6 +21,7 @@ enum AlertType {
     case invalidPhoneInput
     case passwwordsIsNotEqual
     case passwordCountIsSmall
+    case invalidEmailOrPassword
 
     var textValue: String {
         switch self {
@@ -50,6 +51,8 @@ enum AlertType {
             return AssetString.passwIsNotEqual.rawValue
         case .passwordCountIsSmall:
             return AssetString.passwordCountIsSmall.rawValue
+        case .invalidEmailOrPassword:
+            return AssetString.invalidEmailOrPassword.rawValue
         }
     }
 }

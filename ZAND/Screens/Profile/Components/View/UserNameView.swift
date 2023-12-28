@@ -14,7 +14,7 @@ final class UserNameView: BaseUIView {
 
     private let nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        nameLabel.font = .systemFont(ofSize: 28, weight: .bold)
         nameLabel.numberOfLines = 0
         return nameLabel
     }()
@@ -22,12 +22,14 @@ final class UserNameView: BaseUIView {
     private let phoneLabel = UILabel(.systemFont(ofSize: 16), .black)
 
     private let emailLabel = UILabel(.systemFont(ofSize: 16), .black)
-    
+
     private lazy var userNameStackView = UIStackView(
         arrangedSubviews:
-            [phoneLabel,
-             nameLabel,
-             emailLabel],
+            [
+//                phoneLabel,
+                nameLabel
+//                emailLabel
+            ],
         axis: .vertical,
         spacing: 10
     )
@@ -35,9 +37,7 @@ final class UserNameView: BaseUIView {
     // MARK: - Instance methods
     
     override func setup() {
-        super.setup()
-
-        setViews()
+        setupViews()
     }
 
     func configure(model: UserDataBaseModel) {
@@ -51,14 +51,14 @@ extension UserNameView {
     
     // MARK: - Instance methods
     
-    private func setViews() {
+    private func setupViews() {
         backgroundColor = .mainGray
 
         addSubview(userNameStackView)
         userNameStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview()
         }
     }
 }

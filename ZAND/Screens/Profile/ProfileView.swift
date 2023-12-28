@@ -99,7 +99,7 @@ extension ProfileView {
         }
 
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(userNameView.snp.bottom).offset(50)
+            make.top.equalTo(userNameView.snp.bottom).offset(40)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
             make.height.equalTo(400)

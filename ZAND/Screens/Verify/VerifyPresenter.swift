@@ -36,12 +36,11 @@ final class VerifyPresenter: VerifyOutput {
     // MARK: - Instance methods
 
     func verify(code: String) {
-        network.performRequest(type: .verify(VerifyModel(verifyCode: code))
-        ) { [weak self] isSuccess in
-            guard let self,
-                  let isSuccess else { return }
-
-            isSuccess ? view.popToRoot() : view.showAlert()
+        network.performRequest(
+            type: .verify(VerifyModel(verifyCode: code)),
+            expectation: DefaultType.self
+        ) { [weak self] _, isSuccess in
+            isSuccess ? self?.view.popToRoot() : self?.view.showAlert()
         }
     }
 }

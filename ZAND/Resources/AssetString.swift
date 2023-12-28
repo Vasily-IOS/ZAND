@@ -103,6 +103,7 @@ enum AssetString: String {
     case done = "Готово"
     case passwIsNotEqual = "Пароли не совпадают"
     case passwordCountIsSmall = "Пароль должен содержать минимум 8 символов"
+    case invalidEmailOrPassword = "Почта или пароль не верны"
 
     // MARK: - Bottom button values
     case apply = "Применить"

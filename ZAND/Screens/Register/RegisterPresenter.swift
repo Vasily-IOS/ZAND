@@ -93,9 +93,15 @@ final class RegisterPresenter: RegisterPresenterOutput {
 
         network.performRequest(
             type: .register(createUserModel), expectation: ServerResponse.self
-        ) { response in
-            if !response.data.isEmpty {
-                completion(true)
+        ) { response, isSuccess in
+            if isSuccess {
+                if let response = response {
+                    completion(true)
+                    print("Register invalid")
+                }
+            } else {
+                completion(false)
+                print("Register is invalid")
             }
         }
     }

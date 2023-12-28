@@ -13,7 +13,7 @@ import Moya
 
 enum AuthRequestType {
     case register(CreateUserModel)
-    case verify(VerifyModel) // код живет 10 минут
+    case verify(VerifyModel)
     case login(LoginModel)
     case getUser
     case refreshToken(RefreshTokenModel)

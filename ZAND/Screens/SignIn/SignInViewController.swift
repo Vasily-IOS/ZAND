@@ -39,7 +39,7 @@ extension SignInViewController: SignInDelegate {
     // MARK: - AppleSignInDelegate methods
 
     func signInButtonTap() {
-        presenter?.login()
+        presenter?.signIn()
     }
 
     func forgotButtonDidTap() {
@@ -62,8 +62,12 @@ extension SignInViewController: SignInDelegate {
         presenter?.password = text
     }
 
-    func showAlert() {
+    func showEmptyFieldsAlert() {
         AppRouter.shared.showAlert(type: .fillAllRequiredFields, message: nil)
+    }
+
+    func showBadInputAlert() {
+        AppRouter.shared.showAlert(type: .invalidEmailOrPassword, message: nil)
     }
 }
 
