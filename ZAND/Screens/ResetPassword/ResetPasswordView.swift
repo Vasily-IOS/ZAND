@@ -91,10 +91,10 @@ extension ResetPasswordView {
         }
 
         sendButton.snp.makeConstraints { make in
+            make.top.equalTo(mainStackView.snp.bottom).offset(40)
             make.height.equalTo(44)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().inset(20)
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(30)
+            make.width.equalTo(mainStackView)
+            make.centerX.equalTo(mainStackView)
         }
     }
 

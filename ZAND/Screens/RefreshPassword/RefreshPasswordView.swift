@@ -58,6 +58,10 @@ final class RefreshPasswordView: BaseUIView {
 
     private let refreshPasswordButton = BottomButton(buttonText: .refreshPassword)
 
+    private let scrollView = UIScrollView()
+
+    private let contentView = UIView()
+
     // MARK: - Instance methods
 
     override func setup() {
@@ -67,7 +71,11 @@ final class RefreshPasswordView: BaseUIView {
         setupTextFieldHandlers()
     }
 
-    // MARK: - Action
+    // MARK: - Instance methods
+
+    func setNewScrollInset(inset: UIEdgeInsets) {
+        scrollView.contentInset = inset
+    }
 
     @objc
     private func refreshButtonAction() {
@@ -101,29 +109,50 @@ extension RefreshPasswordView {
     private func setupSubviews() {
         backgroundColor = .mainGray
 
-        addSubviews([descriptionLabel, mainStackView, refreshPasswordButton])
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+
+        contentView.addSubviews([
+            descriptionLabel, mainStackView, refreshPasswordButton
+        ])
+
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.left.bottom.right.equalToSuperview()
+        }
+
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(scrollView)
+            make.centerX.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+        }
 
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(200)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(contentView.snp.top).offset(200)
+            make.centerX.equalTo(contentView)
         }
 
         mainStackView.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().inset(20)
+            make.left.equalTo(contentView).offset(20)
+            make.right.equalTo(contentView).inset(20)
         }
 
         refreshPasswordButton.snp.makeConstraints { make in
+            make.top.equalTo(mainStackView.snp.bottom).offset(40)
+            make.width.equalTo(mainStackView)
+            make.centerX.equalTo(mainStackView)
             make.height.equalTo(44)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().inset(20)
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(30)
+            make.bottom.equalTo(contentView).priority(999)
         }
     }
 
     private func setupTargets() {
-        refreshPasswordButton.addTarget(self, action: #selector(refreshButtonAction), for: .touchUpInside)
+        refreshPasswordButton.addTarget(
+            self,
+            action: #selector(refreshButtonAction),
+            for: .touchUpInside
+        )
     }
 
     private func setupRecognizer() {

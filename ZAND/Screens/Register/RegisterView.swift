@@ -22,8 +22,6 @@ final class RegisterView: BaseUIView {
 
     weak var delegate: RegisterDelegate?
 
-    private let scrollView = UIScrollView()
-
     private (set) var nameTextField = PaddingTextField(state: .name)
 
     private (set) var surnameTextField = PaddingTextField(state: .surname)
@@ -122,6 +120,8 @@ final class RegisterView: BaseUIView {
         axis: .horizontal,
         spacing: 5
     )
+
+    private let scrollView = UIScrollView()
 
     private let contentView = UIView()
 
