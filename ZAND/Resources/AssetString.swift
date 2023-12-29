@@ -106,6 +106,7 @@ enum AssetString: String {
     case invalidEmailOrPassword = "Почта или пароль не верны, либо Вы еще не зарегистрированы"
     case profileDeleted = "Профиль успешно удален"
     case smthWentWrong = "Что-то пошло не так :("
+    case settings = "Настройки"
 
     // MARK: - Bottom button values
     case apply = "Применить"
