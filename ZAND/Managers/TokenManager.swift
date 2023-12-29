@@ -63,13 +63,13 @@ final class TokenManager {
     func checkAuthorization() {
         guard let tokenModel = getSavedTokenModel() else { return }
 
-        let accessLifeTime = 250
-        if refreshExpiried(date: tokenModel.savedDate) {
+        if refreshExpiried(savedDate: tokenModel.savedDate) {
             deleteToken()
-            print("Refresh invalid. Delete and log out")
-        } else if accessIsValid(date: tokenModel.savedDate, expiriesIn: accessLifeTime) {
+            sendNotification()
+            print("Refresh expiried. Log out.")
+        } else if accessExpiried(savedDate: tokenModel.savedDate) {
             updateToken()
-            print("Update token")
+            print("Access expiried. Refresh.")
         }
     }
 
@@ -79,16 +79,16 @@ final class TokenManager {
 
     // MARK: - Private methods
 
-    private func accessIsValid(date: Date, expiriesIn: Int) -> Bool {
-        let now = Date()
-        let seconds = TimeInterval(expiriesIn)
-        return now.timeIntervalSince(date) > seconds
+    private func accessExpiried(savedDate: Date) -> Bool {
+        let accessLifeTime = TimeInterval(900)
+
+        return Date().timeIntervalSince(savedDate) > (accessLifeTime - 10)
     }
 
-    private func refreshExpiried(date: Date) -> Bool {
-        let now = Date()
-        let seconds = TimeInterval(550)
-        return now.timeIntervalSince(date) > seconds
+    private func refreshExpiried(savedDate: Date) -> Bool {
+        let refreshLifeTime = TimeInterval(1440)
+
+        return Date().timeIntervalSince(savedDate) > (refreshLifeTime - 10)
     }
 
     private func updateToken() {
@@ -108,5 +108,14 @@ final class TokenManager {
             )
             self?.save(model)
         }
+    }
+
+    private func sendNotification() {
+        let userInfo = ["isAuthorized": false]
+        NotificationCenter.default.post(
+            name: .authorizationStatusHasChanged,
+            object: nil,
+            userInfo: userInfo
+        )
     }
 }

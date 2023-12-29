@@ -42,12 +42,6 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         subscribeDelegate()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        presenter?.updateProfile()
-    }
-
     deinit {
         print("ProfileViewController died")
     }
@@ -82,7 +76,7 @@ extension ProfileViewController {
         present(alertController, animated: true)
     }
 
-    private func showDeleteProfileAlert() {
+    private func showDeleteUserAlert() {
         let alertController = UIAlertController(
             title: AssetString.areYouSure.rawValue,
             message: nil,
@@ -91,7 +85,7 @@ extension ProfileViewController {
         let yesAction = UIAlertAction(
             title: AssetString.yes.rawValue,
             style: .default) { [weak self] _ in
-                self?.presenter?.deleteProfile()
+                self?.presenter?.deleteUser()
             }
         alertController.addAction(noAction)
         alertController.addAction(yesAction)
@@ -186,7 +180,7 @@ extension ProfileViewController: UICollectionViewDelegate {
             case 1:
                 showLogOutAlert()
             case 2:
-                showDeleteProfileAlert()
+                showDeleteUserAlert()
             default:
                 break
             }

@@ -18,7 +18,7 @@ protocol ProfilePresenterOutput: AnyObject {
     func updateSavedSaloons()
     func updateProfile()
     func signOut()
-    func deleteProfile()
+    func deleteUser()
 }
 
 protocol ProfileViewInput: AnyObject {
@@ -50,6 +50,8 @@ final class ProfilePresenter: ProfilePresenterOutput {
         self.authNetwork = authNetwork
 
         subscribeNotification()
+
+        updateProfile()
 
         if !FavouritesSalonsManager.shared.storageID.isEmpty {
             updateSavedSaloons()
@@ -89,13 +91,26 @@ final class ProfilePresenter: ProfilePresenterOutput {
         }
     }
 
+    // sign out явный из профиля
     func signOut() {
         UserDBManager.shared.delete()
         TokenManager.shared.deleteToken()
-        AppRouter.shared.switchRoot(type: .signIn)
+
+        DispatchQueue.main.async {
+            AppRouter.shared.switchRoot(type: .signIn)
+        }
     }
 
-    func deleteProfile() {
+    // sign out по причине истекшего времени жизни рефреша
+    func signOutRefreshExpiried() {
+        UserDBManager.shared.delete()
+
+        DispatchQueue.main.async {
+            AppRouter.shared.switchRoot(type: .signIn)
+        }
+    }
+
+    func deleteUser() {
         authNetwork.performRequest(type: .deleteUser, expectation: DefaultType.self
         ) { [weak self] _, isSuccess in
             guard let self else { return }
@@ -112,15 +127,42 @@ final class ProfilePresenter: ProfilePresenterOutput {
     }
 
     @objc
-    private func notificationRecieved() {
+    private func updateSalonStorageAction() {
         updateSavedSaloons()
+    }
+
+    @objc
+    private func authorizationStatusHasChangedAction(_ notification: NSNotification) {
+        if let isAuthorized = notification.userInfo?["isAuthorized"] as? Bool {
+
+            if !isAuthorized {
+                signOutRefreshExpiried()
+            }
+        }
+    }
+
+    @objc
+    private func updateProfileAction() {
+        updateProfile()
     }
 
     private func subscribeNotification() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(notificationRecieved),
+            selector: #selector(updateSalonStorageAction),
             name: .storageIDidChanged,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(authorizationStatusHasChangedAction(_ :)),
+            name: .authorizationStatusHasChanged,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateProfileAction),
+            name: .canUpdateProfile,
             object: nil
         )
     }

@@ -35,8 +35,7 @@ extension ResetPasswordViewController: ResetPasswordDelegate {
     // MARK: - ResetPasswordDelegate methods
 
     func resetPasswordButtonDidTap() {
-//        presenter?.resetPassword()
-        AppRouter.shared.push(.refreshPassword)
+        presenter?.resetPassword()
     }
 
     func cancelEditing() {
@@ -56,8 +55,12 @@ extension ResetPasswordViewController: ResetPasswordViewInput {
         AppRouter.shared.push(.refreshPassword)
     }
 
-    func showAlert() {
+    func showSmthWentWrongAlert() {
         AppRouter.shared.showAlert(type: .smthWentWrong, message: nil)
+    }
+
+    func showFillEmailAlert() {
+        AppRouter.shared.showAlert(type: .fillAllRequiredFields, message: nil)
     }
 }
 

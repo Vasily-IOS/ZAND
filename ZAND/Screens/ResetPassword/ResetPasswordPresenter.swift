@@ -9,7 +9,8 @@ import Foundation
 
 protocol ResetPasswordViewInput: AnyObject {
     func showRefreshPasswordScreen()
-    func showAlert()
+    func showSmthWentWrongAlert()
+    func showFillEmailAlert()
 }
 
 protocol ResetPasswordOutput: AnyObject {
@@ -40,7 +41,10 @@ final class ResetPasswordPresenter: ResetPasswordOutput {
     // MARK: - Instance methods
 
     func resetPassword() {
-        guard !email.isEmpty else { return }
+        guard !email.isEmpty else {
+            view.showFillEmailAlert()
+            return
+        }
 
         network.performRequest(
             type: .resetPassword(EmailModel(email: email)),
@@ -48,7 +52,7 @@ final class ResetPasswordPresenter: ResetPasswordOutput {
         ) { [weak self] _, isSuccess in
             guard let self else { return }
 
-            isSuccess ? self.view.showRefreshPasswordScreen() : self.view.showAlert()
+            isSuccess ? self.view.showRefreshPasswordScreen() : self.view.showSmthWentWrongAlert()
         }
     }
 }

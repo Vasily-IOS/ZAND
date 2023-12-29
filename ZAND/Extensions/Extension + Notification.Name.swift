@@ -13,4 +13,6 @@ extension Notification.Name {
     static let connecivityChanged = Notification.Name(rawValue: "connecivityChanged")
     static let showBadRequestScreen = Notification.Name(rawValue: "showBadRequestScreen")
     static let storageIDidChanged = Notification.Name(rawValue: "storageIDidChanged")
+    static let authorizationStatusHasChanged = Notification.Name(rawValue: "authorizationStatusHasChanged")
+    static let canUpdateProfile = Notification.Name(rawValue: "canUpdateProfile")
 }

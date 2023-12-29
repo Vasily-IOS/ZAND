@@ -70,11 +70,11 @@ final class SignInPresenter: SignInPresenterOutput {
     }
 
     func fetchAndSaveUser() {
-        network.performRequest(type: .getUser, expectation: UserModel.self) { user, isSuccess in
-
+        network.performRequest(
+            type: .getUser,
+            expectation: UserModel.self
+        ) { user, isSuccess in
             guard let user = user, isSuccess else { return }
-
-            print(user.data)
 
             UserDBManager.shared.save(
                 user: UserModel(data: User(
@@ -87,5 +87,11 @@ final class SignInPresenter: SignInPresenterOutput {
                 )
             )
         }
+    }
+
+    // MARK: - Private methods
+
+    private func sendNotification() {
+        NotificationCenter.default.post(name: .canUpdateProfile, object: nil)
     }
 }
