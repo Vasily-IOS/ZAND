@@ -16,10 +16,12 @@ final class TransparentButton: UIButton {
         case register
         case forgotPassword
         case accountExist
+        case changeUserData
+        case changeUserEmail
         
         var fontSize: CGFloat {
             switch self {
-            case .viewOnMap, .forgotPassword, .accountExist:
+            case .viewOnMap, .forgotPassword, .accountExist, .changeUserData, .changeUserEmail:
                 return 12.0
             case .register:
                 return 16.0
@@ -36,12 +38,16 @@ final class TransparentButton: UIButton {
                 return AssetString.forgotPassword.rawValue
             case .accountExist:
                 return AssetString.accountExist.rawValue
+            case .changeUserData:
+                return AssetString.changeUserData.rawValue
+            case .changeUserEmail:
+                return AssetString.changeUserEmail.rawValue
             }
         }
         
         var textColor: UIColor {
             switch self {
-            case .viewOnMap, .forgotPassword:
+            case .viewOnMap, .forgotPassword, .changeUserData, .changeUserEmail:
                 return .lightGreen
             case .register:
                 return .mainGreen

@@ -216,6 +216,14 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let presenter = VerifyPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
+        case .settings:
+            let network: APIManagerAuthP = APIManagerAuth()
+            let view = SettingsView()
+            let vc = SettingsViewController(contentView: view)
+            let presenter = SettingsPresenter(view: vc, network: network)
+            vc.presenter = presenter
+            vc.title = AssetString.settings.rawValue
+            return vc
         }
     }
 }

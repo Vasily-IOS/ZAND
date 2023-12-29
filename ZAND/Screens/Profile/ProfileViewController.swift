@@ -178,7 +178,7 @@ extension ProfileViewController: UICollectionViewDelegate {
             case 0:
                 AppRouter.shared.presentRecordNavigation(type: .appointments)
             case 1:
-                print("Navigate to settings")
+                AppRouter.shared.presentRecordNavigation(type: .settings)
             case 2:
                 showLogOutAlert()
             case 3:

@@ -12,6 +12,7 @@ class UserDataBaseModel: Object {
     @Persisted var name: String = ""
     @Persisted var surname: String = ""
     @Persisted var fathersName: String = ""
-    @Persisted var email: String = ""
+    @Persisted var birthday: String = ""
     @Persisted var phone: String = ""
+    @Persisted var email: String = ""
 }

@@ -107,6 +107,8 @@ enum AssetString: String {
     case profileDeleted = "Профиль успешно удален"
     case smthWentWrong = "Что-то пошло не так :("
     case settings = "Настройки"
+    case changeUserData = "Изменить общие данные"
+    case changeUserEmail = "Изменить email"
 
     // MARK: - Bottom button values
     case apply = "Применить"

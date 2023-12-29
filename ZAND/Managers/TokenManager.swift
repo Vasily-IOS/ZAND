@@ -80,15 +80,15 @@ final class TokenManager {
     // MARK: - Private methods
 
     private func accessExpiried(savedDate: Date) -> Bool {
-        let accessLifeTime = TimeInterval(900)
+        let accessLifeTime = TimeInterval(1800) // 30 min
 
-        return Date().timeIntervalSince(savedDate) > (accessLifeTime - 10)
+        return Date().timeIntervalSince(savedDate) >= (accessLifeTime - 10)
     }
 
     private func refreshExpiried(savedDate: Date) -> Bool {
-        let refreshLifeTime = TimeInterval(1440)
+        let refreshLifeTime = TimeInterval(86400) // 24 hours
 
-        return Date().timeIntervalSince(savedDate) > (refreshLifeTime - 10)
+        return Date().timeIntervalSince(savedDate) >= (refreshLifeTime - 10)
     }
 
     private func updateToken() {

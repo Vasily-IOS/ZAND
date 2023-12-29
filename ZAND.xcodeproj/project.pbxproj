@@ -97,6 +97,10 @@
 		FF5FF23E2A4D9E6900CFAB82 /* CommonFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */; };
 		FF63B97D2AC3469C00DFD932 /* BookServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63B97C2AC3469C00DFD932 /* BookServicesModel.swift */; };
 		FF63B97F2AC35EF000DFD932 /* BookTimesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63B97E2AC35EF000DFD932 /* BookTimesModel.swift */; };
+		FF66E5CC2B3EF8C40055A03B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E5CB2B3EF8C40055A03B /* SettingsViewController.swift */; };
+		FF66E5CE2B3EF8CE0055A03B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E5CD2B3EF8CE0055A03B /* SettingsView.swift */; };
+		FF66E5D02B3EF9450055A03B /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E5CF2B3EF9450055A03B /* SettingsPresenter.swift */; };
+		FF66E5D32B3F01390055A03B /* SettingsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E5D22B3F01390055A03B /* SettingsInputView.swift */; };
 		FF69DADD2A545F5700481CF1 /* Extension + StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */; };
 		FF6DB3D12B0FADCF003648A8 /* SaloonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6DB3D02B0FADCF003648A8 /* SaloonModel.swift */; };
 		FF6E41322B0A7332002D85AD /* DeviceLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */; };
@@ -295,6 +299,10 @@
 		FF5FF23D2A4D9E6900CFAB82 /* CommonFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterProtocol.swift; sourceTree = "<group>"; };
 		FF63B97C2AC3469C00DFD932 /* BookServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookServicesModel.swift; sourceTree = "<group>"; };
 		FF63B97E2AC35EF000DFD932 /* BookTimesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTimesModel.swift; sourceTree = "<group>"; };
+		FF66E5CB2B3EF8C40055A03B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FF66E5CD2B3EF8CE0055A03B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		FF66E5CF2B3EF9450055A03B /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		FF66E5D22B3F01390055A03B /* SettingsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInputView.swift; sourceTree = "<group>"; };
 		FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + StringProtocol.swift"; sourceTree = "<group>"; };
 		FF6DB3D02B0FADCF003648A8 /* SaloonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonModel.swift; sourceTree = "<group>"; };
 		FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationManager.swift; sourceTree = "<group>"; };
@@ -705,6 +713,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FF66E5CA2B3EF8B90055A03B /* Settings */,
 				FF377F242B3B034700574426 /* Verify */,
 				FFD0F75A2B39FBFA001EDAAA /* RefreshPassword */,
 				FFD0F7532B39F4B7001EDAAA /* ResetPassword */,
@@ -796,6 +805,25 @@
 				FFA3D45329F2CC320067CC6F /* BottomButton.swift */,
 			);
 			path = Button;
+			sourceTree = "<group>";
+		};
+		FF66E5CA2B3EF8B90055A03B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FF66E5CB2B3EF8C40055A03B /* SettingsViewController.swift */,
+				FF66E5CD2B3EF8CE0055A03B /* SettingsView.swift */,
+				FF66E5CF2B3EF9450055A03B /* SettingsPresenter.swift */,
+				FF66E5D12B3F00F80055A03B /* Components */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		FF66E5D12B3F00F80055A03B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FF66E5D22B3F01390055A03B /* SettingsInputView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		FF862A4B2AA88B560083DEB7 /* Providers */ = {
@@ -1436,7 +1464,9 @@
 				FF8AAF5E29EE9724007D6A60 /* TabBarController.swift in Sources */,
 				FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */,
 				FFA3D45829F2D0A60067CC6F /* SaloonDetailView.swift in Sources */,
+				FF66E5D32B3F01390055A03B /* SettingsInputView.swift in Sources */,
 				FF95F8A12AC5A7DC005DA310 /* ConfirmationComponentView.swift in Sources */,
+				FF66E5D02B3EF9450055A03B /* SettingsPresenter.swift in Sources */,
 				FFFFDD3A2ABF2B7A00FA5B92 /* CategoryCell.swift in Sources */,
 				FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */,
 				FF25632829F561FD00091374 /* AddressView.swift in Sources */,
@@ -1451,6 +1481,7 @@
 				FF8904F82B3C54B40037652A /* UserModel.swift in Sources */,
 				FF6E41322B0A7332002D85AD /* DeviceLocationManager.swift in Sources */,
 				FF44EA712B39C15500989A0B /* UpdatedTokenModel.swift in Sources */,
+				FF66E5CE2B3EF8CE0055A03B /* SettingsView.swift in Sources */,
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,
 				FF99B8FE29EEB6AD00F4E4C3 /* AppRouter.swift in Sources */,
 				FFD0DA082A4C907D006752B7 /* DefautMainLayout.swift in Sources */,
@@ -1471,6 +1502,7 @@
 				FF6DB3D12B0FADCF003648A8 /* SaloonModel.swift in Sources */,
 				FFC01B592A03DCA5005CE41B /* DefaultMyDetailsLayout.swift in Sources */,
 				FFCC65832B13B3E100750B6B /* BadInternetConnectionView.swift in Sources */,
+				FF66E5CC2B3EF8C40055A03B /* SettingsViewController.swift in Sources */,
 				FFB985652A308E1F00ABEFBB /* MainPresenter.swift in Sources */,
 				FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */,
 				FFD0F7572B39F4E8001EDAAA /* ResetPasswordView.swift in Sources */,

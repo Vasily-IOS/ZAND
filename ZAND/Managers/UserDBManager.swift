@@ -28,6 +28,7 @@ final class UserDBManager {
         userDB.fathersName = user.data.middleName
         userDB.email = user.data.email
         userDB.phone = user.data.phone
+        userDB.birthday = user.data.birthday
 
         realmManager.save(object: userDB)
     }
