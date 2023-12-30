@@ -8,9 +8,9 @@
 import Foundation
 
 enum SaveType {
-    case `default`
     case all
     case email
+    case `default`
 }
 
 
@@ -23,13 +23,18 @@ protocol SettingsOutput: AnyObject {
 
 protocol SettingsInput: AnyObject {
     func configure(model: UserDataBaseModel)
+    func changeUIAppearing(type: SaveType)
 }
 
 final class SettingsPresenter: SettingsOutput {
 
     // MARK: - Properties
 
-    var saveType: SaveType = .default
+    var saveType: SaveType = .default {
+        didSet {
+            view.changeUIAppearing(type: saveType)
+        }
+    }
 
     unowned var view: SettingsInput
 
@@ -60,10 +65,10 @@ final class SettingsPresenter: SettingsOutput {
     }
 
     private func changeUserData() {
-        print("Change user data")
+//        print("Change user data")
     }
 
     private func changeUserEmail() {
-        print("Change user email")
+//        print("Change user email")
     }
 }

@@ -71,6 +71,7 @@ extension SettingsViewController: SettingsViewDelegate {
 
     func save() {
         presenter?.save()
+        presenter?.saveType = .default
     }
 
     func changeAll() {
@@ -80,6 +81,10 @@ extension SettingsViewController: SettingsViewDelegate {
     func changeEmail() {
         presenter?.saveType = .email
     }
+
+    func cancelChanges() {
+        presenter?.saveType = .default
+    }
 }
 
 extension SettingsViewController: SettingsInput {
@@ -88,5 +93,9 @@ extension SettingsViewController: SettingsInput {
 
     func configure(model: UserDataBaseModel) {
         contentView.configure(model: model)
+    }
+
+    func changeUIAppearing(type: SaveType) {
+        contentView.changeUIAppearing(type: type)
     }
 }

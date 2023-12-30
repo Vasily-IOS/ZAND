@@ -19,6 +19,7 @@ protocol SettingsViewDelegate: AnyObject {
     func cancelEditing()
     func changeAll()
     func changeEmail()
+    func cancelChanges()
 }
 
 final class SettingsView: BaseUIView {
@@ -26,12 +27,6 @@ final class SettingsView: BaseUIView {
     // MARK: - Properties
 
     weak var delegate: SettingsViewDelegate?
-
-    var whichTypeIsChanges: SaveType = .default {
-        didSet {
-
-        }
-    }
 
     private (set) var nameView = SettingsInputView(state: .name)
 
@@ -54,6 +49,12 @@ final class SettingsView: BaseUIView {
     private let changeUserEmailButton = TransparentButton(state: .changeUserEmail)
 
     private let saveButton = BottomButton(buttonText: .save)
+
+    private let cancelChangesButton: TransparentButton = {
+        let button = TransparentButton(state: .cancelChanges)
+        button.isHidden = true
+        return button
+    }()
 
     private lazy var stackView = UIStackView(
         alignment: .fill,
@@ -90,6 +91,32 @@ final class SettingsView: BaseUIView {
         scrollView.contentInset = inset
     }
 
+    func changeUIAppearing(type: SaveType) {
+        switch type {
+        case .all:
+            emailView.changeBackground(color: .mainGray)
+            [nameView, surnameView,
+             fatherNameView, birthdayView,
+             phoneView].forEach {
+                $0.changeBackground(color: .white)
+            }
+            cancelChangesButton.isHidden = false
+        case .email:
+            [nameView, surnameView,
+             fatherNameView, birthdayView,
+             phoneView].forEach {
+                $0.changeBackground(color: .mainGray)
+            }
+            emailView.changeBackground(color: .white)
+            cancelChangesButton.isHidden = false
+        case .default:
+            [nameView, surnameView,
+             fatherNameView, birthdayView,
+             phoneView, emailView].forEach { $0.changeBackground(color: .white) }
+            cancelChangesButton.isHidden = true
+        }
+    }
+
     // MARK: - Private methods
 
     @objc
@@ -112,14 +139,9 @@ final class SettingsView: BaseUIView {
         delegate?.changeEmail()
     }
 
-    private func changeUIWhenAllDataChanging(color: UIColor) {
-        emailView.changeBackground(color: color)
-    }
-
-    private func changeUIWhenEmailChanging(color: UIColor) {
-        [nameView, surnameView, fatherNameView, birthdayView, phoneView].forEach {
-            $0.changeBackground(color: color)
-        }
+    @objc
+    private func cancelChangesAction() {
+        delegate?.cancelChanges()
     }
 }
 
@@ -133,7 +155,8 @@ extension SettingsView {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(
-            [stackView, changeUserDataButton, emailView, changeUserEmailButton, saveButton]
+            [stackView, changeUserDataButton, emailView,
+             changeUserEmailButton, saveButton, cancelChangesButton]
         )
 
         scrollView.snp.makeConstraints { make in
@@ -154,7 +177,7 @@ extension SettingsView {
         }
 
         changeUserDataButton.snp.makeConstraints { make in
-            make.top.equalTo(stackView.snp.bottom).offset(20)
+            make.top.equalTo(stackView.snp.bottom).offset(10)
             make.right.equalTo(stackView)
         }
 
@@ -166,7 +189,7 @@ extension SettingsView {
         }
 
         changeUserEmailButton.snp.makeConstraints { make in
-            make.top.equalTo(emailView.snp.bottom).offset(20)
+            make.top.equalTo(emailView.snp.bottom).offset(10)
             make.right.equalTo(stackView)
         }
 
@@ -175,6 +198,11 @@ extension SettingsView {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().inset(20)
             make.height.equalTo(44)
+        }
+
+        cancelChangesButton.snp.makeConstraints { make in
+            make.top.equalTo(saveButton.snp.bottom).offset(20)
+            make.centerX.equalTo(saveButton)
             make.bottom.equalTo(contentView)
         }
     }
@@ -194,5 +222,6 @@ extension SettingsView {
         changeUserDataButton.addTarget(self, action: #selector(changeAllDataAction), for: .touchUpInside)
         changeUserEmailButton.addTarget(self, action: #selector(changeEmailAction), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
+        cancelChangesButton.addTarget(self, action: #selector(cancelChangesAction), for: .touchUpInside)
     }
 }
