@@ -110,6 +110,7 @@ enum AssetString: String {
     case changeUserData = "Изменить общие данные"
     case changeUserEmail = "Изменить email"
     case cancelChanges = "Отменить редактирование"
+    case emailsEqual = "Адрес электронной почты не был изменен"
 
     // MARK: - Bottom button values
     case apply = "Применить"

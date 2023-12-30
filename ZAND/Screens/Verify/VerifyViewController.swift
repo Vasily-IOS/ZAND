@@ -48,8 +48,8 @@ extension VerifyViewController: VerifyInput {
     // MARK: - VerifyInput methods
 
     func popToRoot() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            AppRouter.shared.popToRoot()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.navigationController?.popToRootViewController(animated: true)
         }
     }
 

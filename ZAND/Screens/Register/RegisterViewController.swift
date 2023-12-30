@@ -91,7 +91,7 @@ extension RegisterViewController: RegisterDelegate {
             AppRouter.shared.showAlert(type: .passwordCountIsSmall, message: nil)
         case .register:
             presenter?.register { response in
-                AppRouter.shared.push(.verify)
+                AppRouter.shared.push(.verify(nil))
             }
         }
     }

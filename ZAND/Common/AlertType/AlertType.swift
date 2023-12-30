@@ -24,6 +24,7 @@ enum AlertType {
     case invalidEmailOrPassword
     case profileDeleted
     case smthWentWrong
+    case emailsEqual
 
     var textValue: String {
         switch self {
@@ -59,6 +60,8 @@ enum AlertType {
             return AssetString.profileDeleted.rawValue
         case .smthWentWrong:
             return AssetString.smthWentWrong.rawValue
+        case .emailsEqual:
+            return AssetString.emailsEqual.rawValue
         }
     }
 }

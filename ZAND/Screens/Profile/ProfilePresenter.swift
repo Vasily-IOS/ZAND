@@ -22,7 +22,7 @@ protocol ProfilePresenterOutput: AnyObject {
 }
 
 protocol ProfileViewInput: AnyObject {
-    func updateProfile(model: UserDataBaseModel)
+    func updateProfile(model: UserDBModel)
     func updateWithSaloons(model: [Saloon])
     func showSuccessAlert()
     func showFailureAlert()
@@ -85,14 +85,14 @@ final class ProfilePresenter: ProfilePresenterOutput {
     }
 
     func updateProfile() {
-        if let user = UserDBManager.shared.get() {
+        if let user = UserManager.shared.get() {
             view.updateProfile(model: user)
         }
     }
 
     // sign out явный из профиля
     func signOut() {
-        UserDBManager.shared.delete()
+        UserManager.shared.delete()
         TokenManager.shared.deleteToken()
 
         DispatchQueue.main.async {
@@ -102,7 +102,7 @@ final class ProfilePresenter: ProfilePresenterOutput {
 
     // sign out по причине истекшего времени жизни рефреша
     func signOutRefreshExpiried() {
-        UserDBManager.shared.delete()
+        UserManager.shared.delete()
 
         DispatchQueue.main.async {
             AppRouter.shared.switchRoot(type: .signIn)
@@ -145,6 +145,11 @@ final class ProfilePresenter: ProfilePresenterOutput {
         updateProfile()
     }
 
+    @objc
+    private func signOutAction() {
+        signOut()
+    }
+
     private func subscribeNotification() {
         NotificationCenter.default.addObserver(
             self,
@@ -162,6 +167,12 @@ final class ProfilePresenter: ProfilePresenterOutput {
             self,
             selector: #selector(updateProfileAction),
             name: .canUpdateProfile,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(signOutAction),
+            name: .signOut,
             object: nil
         )
     }

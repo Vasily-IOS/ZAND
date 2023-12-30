@@ -13,7 +13,6 @@ enum SaveType {
     case `default`
 }
 
-
 protocol SettingsOutput: AnyObject {
     var view: SettingsInput { get set }
     var saveType: SaveType { get set }
@@ -28,9 +27,12 @@ protocol SettingsOutput: AnyObject {
 }
 
 protocol SettingsInput: AnyObject {
-    func configure(model: UserDataBaseModel)
+    func configure(model: UserDBModel)
     func changeUIAppearing(type: SaveType)
     func showSmthWentWrongAlert()
+    func showEqualEmailAlert()
+    func navigateToVerify()
+    func dismiss()
 }
 
 final class SettingsPresenter: SettingsOutput {
@@ -65,9 +67,11 @@ final class SettingsPresenter: SettingsOutput {
         self.view = view
         self.network = network
 
-        if let userModel = UserDBManager.shared.get() {
+        if let userModel = UserManager.shared.get() {
             view.configure(model: userModel)
         }
+
+        subscribeNotification()
     }
 
     // MARK: - Instance methods
@@ -83,8 +87,15 @@ final class SettingsPresenter: SettingsOutput {
         }
     }
 
+    // MARK: - Private methods
+
+    @objc
+    private func signOutAction() {
+        view.dismiss()
+    }
+
     private func changeUserData() {
-        guard let savedUser = UserDBManager.shared.get() else { return }
+        guard let savedUser = UserManager.shared.get() else { return }
 
         let refreshModel = RefreshUserModel(
             lastName: surname ?? savedUser.surname,
@@ -102,7 +113,7 @@ final class SettingsPresenter: SettingsOutput {
 
             if isSuccess {
                 if let user = user {
-                    UserDBManager.shared.save(user: user)
+                    UserManager.shared.save(user: user)
                 }
                 NotificationCenter.default.post(name: .canUpdateProfile, object: nil)
             } else {
@@ -112,6 +123,33 @@ final class SettingsPresenter: SettingsOutput {
     }
 
     private func changeUserEmail() {
-//        print("Change user email")
+        guard let savedUser = UserManager.shared.get() else { return }
+
+        if email?.trimmingCharacters(in: .whitespaces) ?? savedUser.email == savedUser.email {
+            view.showEqualEmailAlert()
+        } else {
+            let emailModel = EmailModel(email: email ?? savedUser.email)
+
+            network.performRequest(
+                type: .refreshEmail(emailModel),
+                expectation: ServerResponse.self) { [weak self] _, isSuccess in
+                    guard let self else { return }
+
+                    if isSuccess {
+                        self.view.navigateToVerify()
+                    } else {
+                        self.view.showSmthWentWrongAlert()
+                    }
+                }
+        }
+    }
+
+    private func subscribeNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(signOutAction),
+            name: .signOut,
+            object: nil
+        )
     }
 }

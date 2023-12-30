@@ -86,7 +86,6 @@
 		FF4D4BB62AD88E7C005DA53C /* GetRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D4BB52AD88E7C005DA53C /* GetRecordModel.swift */; };
 		FF4D4BB82AD89058005DA53C /* RecordDataBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D4BB72AD89058005DA53C /* RecordDataBaseModel.swift */; };
 		FF4D4BBA2AD8ACA7005DA53C /* UIAppointmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D4BB92AD8ACA7005DA53C /* UIAppointmentModel.swift */; };
-		FF4F757D2A9E38DD001E8731 /* UserDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */; };
 		FF4F75802A9E41A9001E8731 /* UserDataBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */; };
 		FF506B932B3B42F60050A474 /* CreateUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF506B922B3B42F60050A474 /* CreateUserModel.swift */; };
 		FF506B952B3B449A0050A474 /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF506B942B3B449A0050A474 /* ServerResponse.swift */; };
@@ -140,6 +139,7 @@
 		FF99B90329EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90229EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift */; };
 		FF99B90629EEBA7800F4E4C3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90529EEBA7800F4E4C3 /* SearchViewController.swift */; };
 		FF99B90829EEBA7F00F4E4C3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B90729EEBA7F00F4E4C3 /* SearchView.swift */; };
+		FF9EEE5C2B4088D50093D5DD /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9EEE5B2B4088D50093D5DD /* UserManager.swift */; };
 		FFA3D44E29F2A21D0067CC6F /* MainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D44D29F2A21D0067CC6F /* MainLayout.swift */; };
 		FFA3D45129F2A6800067CC6F /* SaloonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45029F2A6800067CC6F /* SaloonCell.swift */; };
 		FFA3D45429F2CC320067CC6F /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3D45329F2CC320067CC6F /* BottomButton.swift */; };
@@ -288,7 +288,6 @@
 		FF4D4BB52AD88E7C005DA53C /* GetRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRecordModel.swift; sourceTree = "<group>"; };
 		FF4D4BB72AD89058005DA53C /* RecordDataBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDataBaseModel.swift; sourceTree = "<group>"; };
 		FF4D4BB92AD8ACA7005DA53C /* UIAppointmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAppointmentModel.swift; sourceTree = "<group>"; };
-		FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBManager.swift; sourceTree = "<group>"; };
 		FF4F757F2A9E41A9001E8731 /* UserDataBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataBaseModel.swift; sourceTree = "<group>"; };
 		FF506B922B3B42F60050A474 /* CreateUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserModel.swift; sourceTree = "<group>"; };
 		FF506B942B3B449A0050A474 /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
@@ -343,6 +342,7 @@
 		FF99B90229EEB95400F4E4C3 /* ViewControllerFactoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactoryImpl.swift; sourceTree = "<group>"; };
 		FF99B90529EEBA7800F4E4C3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FF99B90729EEBA7F00F4E4C3 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		FF9EEE5B2B4088D50093D5DD /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		FFA3D44D29F2A21D0067CC6F /* MainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLayout.swift; sourceTree = "<group>"; };
 		FFA3D45029F2A6800067CC6F /* SaloonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonCell.swift; sourceTree = "<group>"; };
 		FFA3D45329F2CC320067CC6F /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
@@ -1056,7 +1056,7 @@
 				FFD4290F2AC4C3030069E681 /* NetworkMonitorManager.swift */,
 				FFB985672A30AFD100ABEFBB /* VibrationManager.swift */,
 				FF44EA6B2B39B79800989A0B /* TokenManager.swift */,
-				FF4F757C2A9E38DD001E8731 /* UserDBManager.swift */,
+				FF9EEE5B2B4088D50093D5DD /* UserManager.swift */,
 				FF5FDCF02AEA9D710063400E /* FavoutriteSalonsManager.swift */,
 				FF3E65DA2A55C202007EC56D /* API */,
 				FF4F757A2A9E3889001E8731 /* Realm */,
@@ -1350,7 +1350,6 @@
 				FF01E3392A02C3C4006476F0 /* ProfileCell.swift in Sources */,
 				FF45A16429E7F5C100587DAF /* Extension + UILabel.swift in Sources */,
 				FF27B0BC2AB8F07600611F47 /* StaffViewController.swift in Sources */,
-				FF4F757D2A9E38DD001E8731 /* UserDBManager.swift in Sources */,
 				FFD0F7592B39F4F2001EDAAA /* ResetPasswordPresenter.swift in Sources */,
 				FF99B8F729EEB1A100F4E4C3 /* Extension + UIColor.swift in Sources */,
 				FF45A16829E7F5FC00587DAF /* Extension + UITableViewHeaderFooterView.swift in Sources */,
@@ -1398,6 +1397,7 @@
 				FF2DB9772A9DE2360036356B /* SignInView.swift in Sources */,
 				FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */,
 				FF45A16C29E7F70D00587DAF /* Extension + UserDefaults.swift in Sources */,
+				FF9EEE5C2B4088D50093D5DD /* UserManager.swift in Sources */,
 				FF4F75802A9E41A9001E8731 /* UserDataBaseModel.swift in Sources */,
 				FF8AAF6829EEA37F007D6A60 /* MapView.swift in Sources */,
 				FFFFDD372ABE66AE00FA5B92 /* CategoriesModel.swift in Sources */,

@@ -22,7 +22,7 @@ enum VCType {
     case register
     case resetPassword
     case refreshPassword
-    case verify
+    case verify(VerifyType?=nil)
     case settings
 
     case startBooking(Int, String, String)

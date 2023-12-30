@@ -76,7 +76,7 @@ final class SignInPresenter: SignInPresenterOutput {
         ) { user, isSuccess in
             guard let user = user, isSuccess else { return }
 
-            UserDBManager.shared.save(
+            UserManager.shared.save(
                 user: UserModel(data: User(
                     lastName: user.data.lastName,
                     middleName: user.data.middleName,
@@ -87,11 +87,5 @@ final class SignInPresenter: SignInPresenterOutput {
                 )
             )
         }
-    }
-
-    // MARK: - Private methods
-
-    private func sendNotification() {
-        NotificationCenter.default.post(name: .canUpdateProfile, object: nil)
     }
 }

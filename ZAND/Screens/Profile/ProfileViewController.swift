@@ -211,7 +211,7 @@ extension ProfileViewController: ProfileViewInput {
 
     // MARK: - ProfileViewInput methods
 
-    func updateProfile(model: UserDataBaseModel) {
+    func updateProfile(model: UserDBModel) {
         contentView.userNameView.configure(model: model)
     }
 

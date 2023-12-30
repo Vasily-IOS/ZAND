@@ -209,11 +209,11 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let presenter = RefreshPasswordPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
-        case .verify:
+        case .verify(let type):
             let network: APIManagerAuthP = APIManagerAuth()
             let view = VerifyView()
             let vc = VerifyViewController(contentView: view)
-            let presenter = VerifyPresenter(view: vc, network: network)
+            let presenter = VerifyPresenter(view: vc, network: network, verifyType: type)
             vc.presenter = presenter
             return vc
         case .settings:

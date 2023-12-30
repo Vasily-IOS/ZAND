@@ -7,13 +7,6 @@
 
 import UIKit
 
-// Имя
-// Фамилия
-// Отчество
-// Дата pождения
-// Номер телефона
-// Email -> меняется отдельно от всего
-
 protocol SettingsViewDelegate: AnyObject {
     func save()
     func cancelEditing()
@@ -84,7 +77,7 @@ final class SettingsView: BaseUIView {
         getAllTextFields().forEach { $0.isUserInteractionEnabled = false }
     }
 
-    func configure(model: UserDataBaseModel) {
+    func configure(model: UserDBModel) {
         nameView.setText(text: model.name)
         surnameView.setText(text: model.surname)
         fatherNameView.setText(text: model.fathersName)
@@ -116,6 +109,7 @@ final class SettingsView: BaseUIView {
                 $0.textField.isUserInteractionEnabled = true
             }
             cancelChangesButton.isHidden = false
+            saveButton.stateText = .save
         case .email:
             [nameView, surnameView,
              fatherNameView, birthdayView,
@@ -126,12 +120,14 @@ final class SettingsView: BaseUIView {
             emailView.changeBackground(color: .white)
             emailView.textField.isUserInteractionEnabled = true
             cancelChangesButton.isHidden = false
+            saveButton.stateText = .contin
         case .default:
             [nameView, surnameView,
              fatherNameView, birthdayView,
              phoneView, emailView].forEach { $0.changeBackground(color: .white) }
             cancelChangesButton.isHidden = true
             getAllTextFields().forEach { $0.isUserInteractionEnabled = false }
+            saveButton.stateText = .save
         }
     }
 

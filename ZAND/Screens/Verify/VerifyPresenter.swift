@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum VerifyType {
+    case changeEmail
+    case none
+}
+
 protocol VerifyOutput: AnyObject {
     var view: VerifyInput { get }
 
@@ -22,15 +27,18 @@ final class VerifyPresenter: VerifyOutput {
 
     // MARK: - Properties
 
+    var verifyType: VerifyType?
+
     unowned let view: VerifyInput
 
     private let network: APIManagerAuthP
 
     // MARK: - Initializers
 
-    init(view: VerifyInput, network: APIManagerAuthP) {
+    init(view: VerifyInput, network: APIManagerAuthP, verifyType: VerifyType?=nil) {
         self.view = view
         self.network = network
+        self.verifyType = verifyType
     }
 
     // MARK: - Instance methods
@@ -40,7 +48,18 @@ final class VerifyPresenter: VerifyOutput {
             type: .verify(VerifyModel(verifyCode: code)),
             expectation: DefaultType.self
         ) { [weak self] _, isSuccess in
-            isSuccess ? self?.view.popToRoot() : self?.view.showAlert()
+            guard let self else { return }
+
+            if isSuccess {
+                if (self.verifyType ?? .none) == .changeEmail {
+                    self.view.popToRoot()
+                    NotificationCenter.default.post(name: .signOut, object: nil)
+                } else {
+                    self.view.popToRoot()
+                }
+            } else {
+                self.view.showAlert()
+            }
         }
     }
 }

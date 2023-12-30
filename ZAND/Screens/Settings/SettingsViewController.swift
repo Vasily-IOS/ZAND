@@ -20,6 +20,7 @@ final class SettingsViewController: BaseViewController<SettingsView> {
 
         subscribeDelegates()
         subscribeNotifications()
+        hideBackButtonTitle()
 
         navigationController?.navigationBar.isUserInteractionEnabled = false
     }
@@ -59,6 +60,13 @@ final class SettingsViewController: BaseViewController<SettingsView> {
             selector: #selector(keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification, object: nil
         )
+    }
+
+    private func showAlert(text: String) {
+        let alertController = UIAlertController(title: text, message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: AssetString.ok.rawValue, style: .cancel)
+        alertController.addAction(action)
+        navigationController?.present(alertController, animated: true)
     }
 }
 
@@ -138,7 +146,7 @@ extension SettingsViewController: SettingsInput {
 
     // MARK: - SettingsInput methods
 
-    func configure(model: UserDataBaseModel) {
+    func configure(model: UserDBModel) {
         contentView.configure(model: model)
     }
 
@@ -147,6 +155,24 @@ extension SettingsViewController: SettingsInput {
     }
 
     func showSmthWentWrongAlert() {
-        AppRouter.shared.showAlert(type: .smthWentWrong, message: nil)
+        showAlert(text: AssetString.smthWentWrong.rawValue)
+    }
+
+    func showEqualEmailAlert() {
+        showAlert(text: AssetString.emailsEqual.rawValue)
+    }
+
+    func navigateToVerify() {
+        let factory: ViewControllerFactory = ViewControllerFactoryImpl()
+        let vc = factory.getViewController(for: .verify(.changeEmail))
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func dismiss() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+            self?.navigationController?.dismiss(animated: true)
+        }
     }
 }
+
+extension SettingsViewController: HideBackButtonTitle {}

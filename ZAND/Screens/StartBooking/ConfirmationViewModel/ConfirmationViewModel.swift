@@ -92,7 +92,7 @@ final class ConfirmationViewModel {
     }
 
     private func fetchUserData() {
-        let user = UserDBManager.shared.get()
+        let user = UserManager.shared.get()
         phone = "\(user?.phone ?? "")"
         fullName = "\(user?.name ?? "")" + " " + "\(user?.surname ?? "")"
         email = "\(user?.email ?? "")"
