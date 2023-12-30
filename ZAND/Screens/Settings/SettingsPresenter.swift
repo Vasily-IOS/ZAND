@@ -17,6 +17,12 @@ enum SaveType {
 protocol SettingsOutput: AnyObject {
     var view: SettingsInput { get set }
     var saveType: SaveType { get set }
+    var name: String? { get set }
+    var surname: String? { get set }
+    var fathersName: String? { get set }
+    var birthday: String? { get set }
+    var phone: String? { get set }
+    var email: String? { get set }
 
     func save()
 }
@@ -24,6 +30,7 @@ protocol SettingsOutput: AnyObject {
 protocol SettingsInput: AnyObject {
     func configure(model: UserDataBaseModel)
     func changeUIAppearing(type: SaveType)
+    func showSmthWentWrongAlert()
 }
 
 final class SettingsPresenter: SettingsOutput {
@@ -35,6 +42,18 @@ final class SettingsPresenter: SettingsOutput {
             view.changeUIAppearing(type: saveType)
         }
     }
+
+    var name: String?
+
+    var surname: String?
+
+    var fathersName: String?
+
+    var birthday: String?
+
+    var phone: String?
+
+    var email: String?
 
     unowned var view: SettingsInput
 
@@ -65,7 +84,31 @@ final class SettingsPresenter: SettingsOutput {
     }
 
     private func changeUserData() {
-//        print("Change user data")
+        guard let savedUser = UserDBManager.shared.get() else { return }
+
+        let refreshModel = RefreshUserModel(
+            lastName: surname ?? savedUser.surname,
+            middleName: fathersName ?? savedUser.fathersName,
+            firstName: name ?? savedUser.name ,
+            phone: phone ?? savedUser.phone,
+            birthday: birthday ?? savedUser.birthday
+        )
+
+        network.performRequest(
+            type: .refreshUser(refreshModel),
+            expectation: UserModel.self
+        ) { [weak self] user, isSuccess in
+            guard let self else { return }
+
+            if isSuccess {
+                if let user = user {
+                    UserDBManager.shared.save(user: user)
+                }
+                NotificationCenter.default.post(name: .canUpdateProfile, object: nil)
+            } else {
+                view.showSmthWentWrongAlert()
+            }
+        }
     }
 
     private func changeUserEmail() {

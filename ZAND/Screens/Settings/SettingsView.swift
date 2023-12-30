@@ -20,6 +20,7 @@ protocol SettingsViewDelegate: AnyObject {
     func changeAll()
     func changeEmail()
     func cancelChanges()
+    func setBirthday(date: Date)
 }
 
 final class SettingsView: BaseUIView {
@@ -70,21 +71,33 @@ final class SettingsView: BaseUIView {
         spacing: 30
     )
 
+    private let datePicker = UIDatePicker()
+
     // MARK: - Instance methods
 
     override func setup() {
         setupSubviews()
         setupRecognizer()
         setupTargets()
+        createDatePicker()
+
+        getAllTextFields().forEach { $0.isUserInteractionEnabled = false }
     }
 
     func configure(model: UserDataBaseModel) {
         nameView.setText(text: model.name)
         surnameView.setText(text: model.surname)
         fatherNameView.setText(text: model.fathersName)
-        birthdayView.setText(text: model.birthday)
         phoneView.setText(text: model.phone)
         emailView.setText(text: model.email)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateFromString = dateFormatter.date(from: model.birthday)
+        let newFormatter = DateFormatter()
+        newFormatter.dateFormat = "dd MMMM yyyy"
+        newFormatter.locale = Locale(identifier: "ru_RU")
+        birthdayView.textField.text = newFormatter.string(from: dateFromString ?? Date())
     }
 
     func setNewScrollInset(inset: UIEdgeInsets) {
@@ -95,10 +108,12 @@ final class SettingsView: BaseUIView {
         switch type {
         case .all:
             emailView.changeBackground(color: .mainGray)
+            emailView.textField.isUserInteractionEnabled = false
             [nameView, surnameView,
              fatherNameView, birthdayView,
              phoneView].forEach {
                 $0.changeBackground(color: .white)
+                $0.textField.isUserInteractionEnabled = true
             }
             cancelChangesButton.isHidden = false
         case .email:
@@ -106,15 +121,27 @@ final class SettingsView: BaseUIView {
              fatherNameView, birthdayView,
              phoneView].forEach {
                 $0.changeBackground(color: .mainGray)
+                $0.textField.isUserInteractionEnabled = false
             }
             emailView.changeBackground(color: .white)
+            emailView.textField.isUserInteractionEnabled = true
             cancelChangesButton.isHidden = false
         case .default:
             [nameView, surnameView,
              fatherNameView, birthdayView,
              phoneView, emailView].forEach { $0.changeBackground(color: .white) }
             cancelChangesButton.isHidden = true
+            getAllTextFields().forEach { $0.isUserInteractionEnabled = false }
         }
+    }
+
+    func getAllTextFields() -> [UITextField] {
+        [nameView.textField,
+         surnameView.textField,
+         fatherNameView.textField,
+         birthdayView.textField,
+         phoneView.textField,
+         emailView.textField]
     }
 
     // MARK: - Private methods
@@ -142,6 +169,49 @@ final class SettingsView: BaseUIView {
     @objc
     private func cancelChangesAction() {
         delegate?.cancelChanges()
+    }
+
+    @objc
+    private func pickerDoneAction() {
+        setDate()
+    }
+
+    private func createToolBar() -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+
+        let spaceButton = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        let doneButton = UIBarButtonItem(
+            title: AssetString.done.rawValue,
+            style: .plain,
+            target: self,
+            action: #selector(pickerDoneAction)
+        )
+        toolBar.setItems([spaceButton, doneButton], animated: true)
+
+        return toolBar
+    }
+
+    private func createDatePicker() {
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date()
+        datePicker.locale = Locale(identifier: "ru_RU")
+        birthdayView.textField.inputView = datePicker
+        birthdayView.textField.inputAccessoryView = createToolBar()
+    }
+
+    private func setDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        birthdayView.textField.text = dateFormatter.string(from: datePicker.date)
+        delegate?.setBirthday(date: datePicker.date)
+        birthdayView.textField.resignFirstResponder()
     }
 }
 

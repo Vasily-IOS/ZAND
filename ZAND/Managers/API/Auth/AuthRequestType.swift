@@ -17,7 +17,7 @@ enum AuthRequestType {
     case login(LoginModel)
     case getUser
     case refreshToken(RefreshTokenModel)
-    case refreshUser(RefreshUser)
+    case refreshUser(RefreshUserModel)
     case refreshEmail(EmailModel)
     case resetPassword(EmailModel)
     case refreshPassword(NewPassword)

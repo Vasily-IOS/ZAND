@@ -50,7 +50,6 @@ final class ProfilePresenter: ProfilePresenterOutput {
         self.authNetwork = authNetwork
 
         subscribeNotification()
-
         updateProfile()
 
         if !FavouritesSalonsManager.shared.storageID.isEmpty {

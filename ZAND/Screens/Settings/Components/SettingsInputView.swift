@@ -42,7 +42,7 @@ final class SettingsInputView: UIView {
 
     private let descriptionLabel = UILabel(.systemFont(ofSize: 12.0), .textGray)
 
-    private let textField: UITextField = {
+    private (set) var textField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Пока нет данных"
         textField.backgroundColor = .white
@@ -57,9 +57,8 @@ final class SettingsInputView: UIView {
         setup(state: state)
     }
 
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
 
     // MARK: - Instance methods

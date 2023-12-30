@@ -44,6 +44,7 @@ final class SettingsViewController: BaseViewController<SettingsView> {
 
     private func subscribeDelegates() {
         contentView.delegate = self
+        contentView.getAllTextFields().forEach { $0.delegate = self }
     }
 
     private func subscribeNotifications() {
@@ -58,6 +59,46 @@ final class SettingsViewController: BaseViewController<SettingsView> {
             selector: #selector(keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification, object: nil
         )
+    }
+}
+
+extension SettingsViewController: UITextFieldDelegate {
+
+    // MARK: - UITextFieldDelegate methods
+
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        if textField == contentView.phoneView.textField {
+            guard let text = textField.text else { return false }
+
+            let phoneString = (text as NSString).replacingCharacters(in: range, with: string)
+            textField.text = text.format(with: "+X (XXX) XXX-XX-XX", phone: phoneString)
+
+            return false
+        }
+        return true
+    }
+
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+
+        switch textField {
+        case contentView.nameView.textField:
+            presenter?.name = text
+        case contentView.surnameView.textField:
+            presenter?.surname = text
+        case contentView.fatherNameView.textField:
+            presenter?.fathersName = text
+        case contentView.phoneView.textField:
+            presenter?.phone = text
+        case contentView.emailView.textField:
+            presenter?.email = text
+        default:
+            break
+        }
     }
 }
 
@@ -85,6 +126,12 @@ extension SettingsViewController: SettingsViewDelegate {
     func cancelChanges() {
         presenter?.saveType = .default
     }
+
+    func setBirthday(date: Date) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        presenter?.birthday = dateFormatter.string(from: date)
+    }
 }
 
 extension SettingsViewController: SettingsInput {
@@ -97,5 +144,9 @@ extension SettingsViewController: SettingsInput {
 
     func changeUIAppearing(type: SaveType) {
         contentView.changeUIAppearing(type: type)
+    }
+
+    func showSmthWentWrongAlert() {
+        AppRouter.shared.showAlert(type: .smthWentWrong, message: nil)
     }
 }

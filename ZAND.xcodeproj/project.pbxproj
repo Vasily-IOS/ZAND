@@ -66,7 +66,7 @@
 		FF44EA602B39A86900989A0B /* VerifyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA5F2B39A86900989A0B /* VerifyModel.swift */; };
 		FF44EA622B39AC6E00989A0B /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA612B39AC6E00989A0B /* LoginModel.swift */; };
 		FF44EA642B39B01000989A0B /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA632B39B01000989A0B /* TokenModel.swift */; };
-		FF44EA662B39B19900989A0B /* RefreshUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA652B39B19900989A0B /* RefreshUser.swift */; };
+		FF44EA662B39B19900989A0B /* RefreshUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA652B39B19900989A0B /* RefreshUserModel.swift */; };
 		FF44EA682B39B31900989A0B /* EmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA672B39B31900989A0B /* EmailModel.swift */; };
 		FF44EA6A2B39B53900989A0B /* NewPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA692B39B53900989A0B /* NewPassword.swift */; };
 		FF44EA6C2B39B79800989A0B /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44EA6B2B39B79800989A0B /* TokenManager.swift */; };
@@ -267,7 +267,7 @@
 		FF44EA5F2B39A86900989A0B /* VerifyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyModel.swift; sourceTree = "<group>"; };
 		FF44EA612B39AC6E00989A0B /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		FF44EA632B39B01000989A0B /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
-		FF44EA652B39B19900989A0B /* RefreshUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshUser.swift; sourceTree = "<group>"; };
+		FF44EA652B39B19900989A0B /* RefreshUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshUserModel.swift; sourceTree = "<group>"; };
 		FF44EA672B39B31900989A0B /* EmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModel.swift; sourceTree = "<group>"; };
 		FF44EA692B39B53900989A0B /* NewPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPassword.swift; sourceTree = "<group>"; };
 		FF44EA6B2B39B79800989A0B /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
@@ -539,7 +539,7 @@
 				FF44EA692B39B53900989A0B /* NewPassword.swift */,
 				FF44EA702B39C15500989A0B /* UpdatedTokenModel.swift */,
 				FF44EA5D2B39A59F00989A0B /* UserRegisterModel.swift */,
-				FF44EA652B39B19900989A0B /* RefreshUser.swift */,
+				FF44EA652B39B19900989A0B /* RefreshUserModel.swift */,
 				FF506B922B3B42F60050A474 /* CreateUserModel.swift */,
 				FF506B942B3B449A0050A474 /* ServerResponse.swift */,
 				FF8904F72B3C54B40037652A /* UserModel.swift */,
@@ -1369,7 +1369,7 @@
 				FF377F262B3B035800574426 /* VerifyViewController.swift in Sources */,
 				FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */,
 				FF4D4BB82AD89058005DA53C /* RecordDataBaseModel.swift in Sources */,
-				FF44EA662B39B19900989A0B /* RefreshUser.swift in Sources */,
+				FF44EA662B39B19900989A0B /* RefreshUserModel.swift in Sources */,
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
 				FF45A16229E7F52900587DAF /* Extension + UITableView.swift in Sources */,
 				FF44EA602B39A86900989A0B /* VerifyModel.swift in Sources */,
