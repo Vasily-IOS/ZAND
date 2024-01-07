@@ -42,7 +42,11 @@ final class SettingsView: BaseUIView {
 
     private let changeUserEmailButton = TransparentButton(state: .changeUserEmail)
 
-    private let saveButton = BottomButton(buttonText: .save)
+    private let saveButton: BottomButton = {
+        let button = BottomButton(buttonText: .save)
+        button.isHidden = true
+        return button
+    }()
 
     private let cancelChangesButton: TransparentButton = {
         let button = TransparentButton(state: .cancelChanges)
@@ -74,7 +78,7 @@ final class SettingsView: BaseUIView {
         setupTargets()
         createDatePicker()
 
-        getAllTextFields().forEach { $0.isUserInteractionEnabled = false }
+        getTextFields().forEach { $0.isUserInteractionEnabled = false }
     }
 
     func configure(model: UserDBModel) {
@@ -109,7 +113,12 @@ final class SettingsView: BaseUIView {
                 $0.textField.isUserInteractionEnabled = true
             }
             cancelChangesButton.isHidden = false
+            saveButton.isHidden = false
             saveButton.stateText = .save
+            getInputViews().dropLast().forEach {
+                $0.layer.borderWidth = 1.0
+                $0.layer.borderColor = UIColor.mainGreen.cgColor
+            }
         case .email:
             [nameView, surnameView,
              fatherNameView, birthdayView,
@@ -120,24 +129,40 @@ final class SettingsView: BaseUIView {
             emailView.changeBackground(color: .white)
             emailView.textField.isUserInteractionEnabled = true
             cancelChangesButton.isHidden = false
+            saveButton.isHidden = false
             saveButton.stateText = .contin
+            getInputViews().dropFirst(5).forEach {
+                $0.layer.borderWidth = 1.0
+                $0.layer.borderColor = UIColor.mainGreen.cgColor
+            }
         case .default:
             [nameView, surnameView,
              fatherNameView, birthdayView,
              phoneView, emailView].forEach { $0.changeBackground(color: .white) }
             cancelChangesButton.isHidden = true
-            getAllTextFields().forEach { $0.isUserInteractionEnabled = false }
+            saveButton.isHidden = true
+            getTextFields().forEach { $0.isUserInteractionEnabled = false }
             saveButton.stateText = .save
+            getInputViews().forEach { $0.layer.borderWidth = 0.0 }
         }
     }
 
-    func getAllTextFields() -> [UITextField] {
+    func getTextFields() -> [UITextField] {
         [nameView.textField,
          surnameView.textField,
          fatherNameView.textField,
          birthdayView.textField,
          phoneView.textField,
          emailView.textField]
+    }
+
+    func getInputViews() -> [UIView] {
+        [nameView,
+         surnameView,
+         fatherNameView,
+         birthdayView,
+         phoneView,
+         emailView]
     }
 
     // MARK: - Private methods

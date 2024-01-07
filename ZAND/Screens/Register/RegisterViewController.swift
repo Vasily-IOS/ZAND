@@ -61,6 +61,35 @@ final class RegisterViewController: BaseViewController<RegisterView> {
             name: UIResponder.keyboardWillHideNotification, object: nil
         )
     }
+
+    private func showFinalAlertController() {
+        let finalText = "\n\(AssetString.name.rawValue): \(presenter?.user.fullName ?? "")\n\(AssetString.email.rawValue): \(presenter?.user.email ?? "")\n\(AssetString.phone.rawValue): \(presenter?.user.phone ?? "")"
+
+        let alertController = UIAlertController(
+            title: AssetString.checkYourData.rawValue,
+            message: finalText,
+            preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(
+            title: AssetString.fix.rawValue,
+            style: .destructive
+        )
+
+        let confirmAction = UIAlertAction(
+            title: AssetString.continue.rawValue,
+            style: .cancel
+        ) { [weak self] _ in
+            self?.presenter?.register { response in
+                AppRouter.shared.push(.verify(nil))
+            }
+        }
+
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true)
+    }
 }
 
 extension RegisterViewController: RegisterDelegate {
@@ -90,9 +119,7 @@ extension RegisterViewController: RegisterDelegate {
         case .passwordCountIsSmall:
             AppRouter.shared.showAlert(type: .passwordCountIsSmall, message: nil)
         case .register:
-            presenter?.register { response in
-                AppRouter.shared.push(.verify(nil))
-            }
+            showFinalAlertController()
         }
     }
 

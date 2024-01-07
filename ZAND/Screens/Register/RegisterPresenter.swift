@@ -47,19 +47,19 @@ final class RegisterPresenter: RegisterPresenterOutput {
     // MARK: - Instance methods
 
     func setName(name: String) {
-        user.name = name
+        user.name = name.trimmingCharacters(in: .whitespaces)
     }
 
     func setSurname(surname: String) {
-        user.surname = surname
+        user.surname = surname.trimmingCharacters(in: .whitespaces)
     }
 
     func setFatherName(fatheName: String) {
-        user.fathersName = fatheName
+        user.fathersName = fatheName.trimmingCharacters(in: .whitespaces)
     }
 
     func setEmail(email: String) {
-        user.email = email
+        user.email = email.trimmingCharacters(in: .whitespaces)
     }
 
     func setPhone(phone: String) {
@@ -73,22 +73,22 @@ final class RegisterPresenter: RegisterPresenterOutput {
     }
 
     func setPassword(password: String) {
-        user.password = password
+        user.password = password.trimmingCharacters(in: .whitespaces)
     }
 
     func setRepeatPassword(password: String) {
-        user.repeatPassword = password
+        user.repeatPassword = password.trimmingCharacters(in: .whitespaces)
     }
 
     func register(completion: @escaping (Bool) -> ()) {
         let createUserModel = CreateUserModel(
-            firstName: user.name.trimmingCharacters(in: .whitespaces),
-            middleName: user.fathersName.trimmingCharacters(in: .whitespaces),
-            lastName: user.surname.trimmingCharacters(in: .whitespaces),
-            email: user.email.trimmingCharacters(in: .whitespaces),
+            firstName: user.name,
+            middleName: user.fathersName,
+            lastName: user.surname,
+            email: user.email,
             phone: user.phone,
             birthday: user.birthday,
-            password: user.password.trimmingCharacters(in: .whitespaces)
+            password: user.password
         )
 
         network.performRequest(
@@ -97,7 +97,7 @@ final class RegisterPresenter: RegisterPresenterOutput {
             if isSuccess {
                 if let response = response {
                     completion(true)
-                    print("Register invalid")
+                    print("Register is valid")
                 }
             } else {
                 completion(false)

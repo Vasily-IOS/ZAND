@@ -50,10 +50,11 @@ extension ProfileCell {
         profileOptionImage.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(12)
             make.centerY.equalToSuperview()
+            make.width.height.equalTo(24)
         }
         
         profileOptionLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(42)
+            make.left.equalToSuperview().offset(48)
             make.centerY.equalToSuperview()
         }
     }

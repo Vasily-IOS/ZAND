@@ -34,6 +34,10 @@ struct UserRegisterModel: Codable {
     var repeatPassword: String = ""
     var isPolicyConfirmed: Bool = false
 
+    var fullName: String {
+        return "\(surname) \(name) \(fathersName)"
+    }
+
     private var isAllFieldsFilled: Bool {
         return !name.isEmpty && !surname.isEmpty &&
         !email.isEmpty && !phone.isEmpty &&

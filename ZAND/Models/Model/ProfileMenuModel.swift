@@ -16,6 +16,6 @@ struct ProfileMenuModel {
         .init(image: AssetImage.books_icon.image, description: AssetString.books.rawValue, color: nil),
         .init(image: AssetImage.settings_icon.image, description: AssetString.settings.rawValue, color: nil),
         .init(image: AssetImage.logout_icon.image, description: AssetString.logOut.rawValue, color: nil),
-        .init(image: nil, description: AssetString.deleteProfile.rawValue, color: .red)
+        .init(image: AssetImage.delete_icon.image, description: AssetString.deleteProfile.rawValue, color: .red)
     ]
 }

@@ -45,7 +45,7 @@ final class SettingsViewController: BaseViewController<SettingsView> {
 
     private func subscribeDelegates() {
         contentView.delegate = self
-        contentView.getAllTextFields().forEach { $0.delegate = self }
+        contentView.getTextFields().forEach { $0.delegate = self }
     }
 
     private func subscribeNotifications() {

@@ -22,8 +22,10 @@ final class TransparentButton: UIButton {
         
         var fontSize: CGFloat {
             switch self {
-            case .viewOnMap, .forgotPassword, .accountExist, .changeUserData, .changeUserEmail:
+            case .viewOnMap, .forgotPassword, .accountExist:
                 return 12.0
+            case .changeUserData, .changeUserEmail:
+                return 14.0
             case .register, .cancelChanges:
                 return 16.0
             }

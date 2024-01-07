@@ -52,7 +52,7 @@ enum AssetString: String {
     case smsCode = "Код из смс"
     case enterYourName = "Вы не написали своё имя :)"
     case phoneNumberLessThanEleven = "Общее количество символов телефона должно быть 11"
-    case codeIsInvalid = "Код не верен"
+    case codeIsInvalid = "Неверный код"
     case sendCode = "Отправить код"
     case enterYourCode = "Введите код"
     case gotError = "Произошла ошибка"
@@ -103,7 +103,7 @@ enum AssetString: String {
     case done = "Готово"
     case passwIsNotEqual = "Пароли не совпадают"
     case passwordCountIsSmall = "Пароль должен содержать минимум 8 символов"
-    case invalidEmailOrPassword = "Почта или пароль не верны, либо Вы еще не зарегистрированы"
+    case invalidEmailOrPassword = "Неверный почта или пароль, либо аккаунт ещё не зарегистрирован"
     case profileDeleted = "Профиль успешно удален"
     case smthWentWrong = "Что-то пошло не так :("
     case settings = "Настройки"
@@ -111,6 +111,7 @@ enum AssetString: String {
     case changeUserEmail = "Изменить email"
     case cancelChanges = "Отменить редактирование"
     case emailsEqual = "Адрес электронной почты не был изменен"
+    case `continue` = "Продолжить"
 
     // MARK: - Bottom button values
     case apply = "Применить"
