@@ -33,6 +33,7 @@ final class APIManagerAuth: APIManagerAuthP {
         provider.request(type) { result in
             switch result {
             case .success(let response):
+
                 let successfulRange = (200...299)
                 let responseCode = response.response?.statusCode ?? 0
 
