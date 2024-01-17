@@ -97,7 +97,7 @@ final class RegisterPresenter: RegisterPresenterOutput {
             if isSuccess {
                 if let response = response {
                     completion(true)
-                    print("Register is valid")
+                    print("Register is valid. Response is \(response.data)")
                 }
             } else {
                 completion(false)

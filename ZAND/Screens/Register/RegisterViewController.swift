@@ -80,8 +80,15 @@ final class RegisterViewController: BaseViewController<RegisterView> {
             title: AssetString.continue.rawValue,
             style: .cancel
         ) { [weak self] _ in
-            self?.presenter?.register { response in
-                AppRouter.shared.push(.verify(nil))
+            self?.presenter?.register { isSuccess in
+                if isSuccess {
+                    AppRouter.shared.push(.verify(nil))
+                } else {
+                    AppRouter.shared.showAlert(
+                        type: .profileAlreadyExist,
+                        message: AssetString.ifYouDontRememberPass.rawValue
+                    )
+                }
             }
         }
 

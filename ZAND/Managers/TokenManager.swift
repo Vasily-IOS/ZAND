@@ -64,7 +64,7 @@ final class TokenManager {
         guard let tokenModel = getSavedTokenModel() else { return }
 
         if refreshExpiried(savedDate: tokenModel.savedDate) {
-            deleteToken()
+            delete()
             sendNotification()
             print("Refresh expiried. Log out.")
         } else if accessExpiried(savedDate: tokenModel.savedDate) {
@@ -73,7 +73,7 @@ final class TokenManager {
         }
     }
 
-    func deleteToken() {
+    func delete() {
         keyChain.delete(Config.token)
     }
 

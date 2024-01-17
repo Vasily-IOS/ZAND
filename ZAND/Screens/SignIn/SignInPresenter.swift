@@ -11,6 +11,7 @@ protocol SignInPresenterOutput: AnyObject {
     var email: String { get set }
     var password: String { get set }
 
+    func checkUndeletableInfo()
     func signIn()
 }
 
@@ -18,6 +19,7 @@ protocol SignInViewInput: AnyObject {
     func showEmptyFieldsAlert()
     func showBadInputAlert()
     func switchScreen()
+    func setupUndeletableUser(user: UndeletableUserModel)
 }
 
 final class SignInPresenter: SignInPresenterOutput {
@@ -41,6 +43,15 @@ final class SignInPresenter: SignInPresenterOutput {
 
     // MARK: - Instance methods
 
+    func checkUndeletableInfo() {
+        guard let user = fetchUndeletableUser() else { return }
+
+        email = user.email
+        password = user.password
+
+        view.setupUndeletableUser(user: user)
+    }
+
     func signIn() {
         guard !email.isEmpty && !password.isEmpty else {
             view.showEmptyFieldsAlert()
@@ -61,6 +72,7 @@ final class SignInPresenter: SignInPresenterOutput {
                     )
                     TokenManager.shared.save(tokenModel)
                     self.fetchAndSaveUser()
+                    self.saveUndeletableUserData()
                     self.view.switchScreen()
                 }
             } else {
@@ -86,6 +98,22 @@ final class SignInPresenter: SignInPresenterOutput {
                     birthday: user.data.birthday)
                 )
             )
+        }
+    }
+
+    private func saveUndeletableUserData() {
+        let undeletableUserModel = UndeletableUserModel(email: email, password: password)
+        let data = try! JSONEncoder().encode(undeletableUserModel)
+        UserDefaults.standard.set(data, forKey: Config.undeletableUserKey)
+    }
+
+    private func fetchUndeletableUser() -> UndeletableUserModel? {
+        let data = UserDefaults.standard.data(forKey: Config.undeletableUserKey)
+        do {
+           return try JSONDecoder().decode(UndeletableUserModel.self, from: data ?? Data())
+        } catch let error {
+            debugPrint(error)
+            return nil
         }
     }
 }

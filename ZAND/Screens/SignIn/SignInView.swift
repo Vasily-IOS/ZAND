@@ -66,6 +66,10 @@ final class SignInView: BaseUIView {
         spacing: 20
     )
 
+    private let scrollView = UIScrollView()
+
+    private let contentView = UIView()
+
     // MARK: - Instance methods
 
     override func setup() {
@@ -75,7 +79,16 @@ final class SignInView: BaseUIView {
         setupTextFieldHandlers()
     }
 
-    // MARK: - Action
+    func setNewScrollInset(inset: UIEdgeInsets) {
+        scrollView.contentInset = inset
+    }
+
+    func setupUserInfo(model: UndeletableUserModel) {
+        emailTextField.text = model.email
+        passwordTextField.text = model.password
+    }
+
+    // MARK: - Private methods
 
     @objc
     private func signInAction() {
@@ -115,10 +128,30 @@ extension SignInView {
     private func setupSubviews() {
         backgroundColor = .mainGray
 
-        addSubviews([descriptionLabel, mainStackView, forgotPassButton, bottomStackView])
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+
+        contentView.addSubviews([
+            descriptionLabel,
+            mainStackView,
+            forgotPassButton,
+            bottomStackView
+        ])
+
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+        }
+
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+        }
 
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(200)
+            make.top.equalTo(contentView.snp.top).offset(200)
             make.centerX.equalToSuperview()
         }
 
@@ -134,9 +167,10 @@ extension SignInView {
         }
 
         bottomStackView.snp.makeConstraints { make in
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(30)
+            make.top.equalTo(forgotPassButton.snp.bottom).offset(100)
             make.left.equalToSuperview().offset(40)
             make.right.equalToSuperview().inset(40)
+            make.bottom.equalToSuperview().inset(30)
         }
 
         signInButton.snp.makeConstraints { make in

@@ -92,10 +92,9 @@ final class ProfilePresenter: ProfilePresenterOutput {
 
     // sign out явный из профиля
     func signOut() {
-        UserManager.shared.delete()
-        TokenManager.shared.deleteToken()
-
         DispatchQueue.main.async {
+            UserManager.shared.delete()
+            TokenManager.shared.delete()
             AppRouter.shared.switchRoot(type: .signIn)
         }
     }
@@ -111,11 +110,12 @@ final class ProfilePresenter: ProfilePresenterOutput {
 
     func deleteUser() {
         authNetwork.performRequest(type: .deleteUser, expectation: DefaultType.self
-        ) { [weak self] _, isSuccess in
+        ) { [weak self] _ , isSuccess in
             guard let self else { return }
 
             if isSuccess {
                 self.view.showSuccessAlert()
+                self.deleteUndeletableUserData()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.signOut()
                 }
@@ -175,5 +175,9 @@ final class ProfilePresenter: ProfilePresenterOutput {
             name: .signOut,
             object: nil
         )
+    }
+
+    private func deleteUndeletableUserData() {
+        UserDefaults.standard.removeObject(forKey: Config.undeletableUserKey)
     }
 }

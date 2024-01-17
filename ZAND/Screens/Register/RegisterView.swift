@@ -237,7 +237,6 @@ extension RegisterView {
 
     private func setupSubviews() {
         backgroundColor = .mainGray
-//        policyButtonsStackView.sizeToFit() // это че за хуйня!
 
         addSubview(scrollView)
         scrollView.addSubview(contentView)

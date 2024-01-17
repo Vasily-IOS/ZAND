@@ -56,17 +56,14 @@ extension AppRouter {
             selectedImage: nil
         )
 
-        let signInViewController = vcFactory.getViewController(for: .signIn)
-        let profileViewController = vcFactory.getViewController(for: .profile)
-
-        [signInViewController, profileViewController].forEach {
-            $0.tabBarItem = tabBarItem
-        }
-
         switch type {
         case .profile:
+            let profileViewController = vcFactory.getViewController(for: .profile)
+            profileViewController.tabBarItem = tabBarItem
             tabBarController.viewControllers?[2] = profileViewController
         case .signIn:
+            let signInViewController = vcFactory.getViewController(for: .signIn)
+            signInViewController.tabBarItem = tabBarItem
             tabBarController.viewControllers?[2] = signInViewController
         }
     }

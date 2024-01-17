@@ -28,6 +28,7 @@
 		FF25634D29F68CE800091374 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25634C29F68CE800091374 /* FilterCell.swift */; };
 		FF25635229F69BE100091374 /* OptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635129F69BE100091374 /* OptionModel.swift */; };
 		FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF25635329F6B46800091374 /* ReuseHeaderView.swift */; };
+		FF2713402B581BD000DF65DD /* UndeletableUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27133F2B581BD000DF65DD /* UndeletableUserModel.swift */; };
 		FF27B0AC2AB8D09700611F47 /* StartBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0AB2AB8D09700611F47 /* StartBookingViewController.swift */; };
 		FF27B0AE2AB8D0A100611F47 /* StartBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0AD2AB8D0A100611F47 /* StartBookingView.swift */; };
 		FF27B0B02AB8D0B000611F47 /* StartBookingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF27B0AF2AB8D0B000611F47 /* StartBookingPresenter.swift */; };
@@ -229,6 +230,7 @@
 		FF25634C29F68CE800091374 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		FF25635129F69BE100091374 /* OptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionModel.swift; sourceTree = "<group>"; };
 		FF25635329F6B46800091374 /* ReuseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseHeaderView.swift; sourceTree = "<group>"; };
+		FF27133F2B581BD000DF65DD /* UndeletableUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndeletableUserModel.swift; sourceTree = "<group>"; };
 		FF27B0AB2AB8D09700611F47 /* StartBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingViewController.swift; sourceTree = "<group>"; };
 		FF27B0AD2AB8D0A100611F47 /* StartBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingView.swift; sourceTree = "<group>"; };
 		FF27B0AF2AB8D0B000611F47 /* StartBookingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBookingPresenter.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				FF8904F72B3C54B40037652A /* UserModel.swift */,
 				FF8904F92B3C5B830037652A /* RefreshTokenModel.swift */,
 				FFD1C91A2B3DB732003EA240 /* DefaultType.swift */,
+				FF27133F2B581BD000DF65DD /* UndeletableUserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -717,8 +720,8 @@
 				FF377F242B3B034700574426 /* Verify */,
 				FFD0F75A2B39FBFA001EDAAA /* RefreshPassword */,
 				FFD0F7532B39F4B7001EDAAA /* ResetPassword */,
-				FF2DB9712A9DE1F40036356B /* SignIn */,
 				FF2DB9782A9DFADE0036356B /* Register */,
+				FF2DB9712A9DE1F40036356B /* SignIn */,
 				FF8AAF5429EE9645007D6A60 /* Main */,
 				FF25634129F682B500091374 /* Filter */,
 				FF8AAF5729EE96BA007D6A60 /* Map */,
@@ -1395,6 +1398,7 @@
 				FF95F8AB2AC5AD8F005DA310 /* ConfirmationModel.swift in Sources */,
 				FF27B0AC2AB8D09700611F47 /* StartBookingViewController.swift in Sources */,
 				FF2DB9772A9DE2360036356B /* SignInView.swift in Sources */,
+				FF2713402B581BD000DF65DD /* UndeletableUserModel.swift in Sources */,
 				FF01E33B2A02CAD3006476F0 /* FavouritesCell.swift in Sources */,
 				FF45A16C29E7F70D00587DAF /* Extension + UserDefaults.swift in Sources */,
 				FF9EEE5C2B4088D50093D5DD /* UserManager.swift in Sources */,
@@ -1670,7 +1674,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.32;
+				MARKETING_VERSION = 1.9.33;
 				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1708,7 +1712,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.32;
+				MARKETING_VERSION = 1.9.33;
 				PRODUCT_BUNDLE_IDENTIFIER = com.io.zand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

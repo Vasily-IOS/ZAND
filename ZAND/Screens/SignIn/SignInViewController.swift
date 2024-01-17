@@ -18,7 +18,9 @@ final class SignInViewController: BaseViewController<SignInView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        presenter?.checkUndeletableInfo()
         subscribeDelegates()
+        subscribeNotifications()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,8 +31,38 @@ final class SignInViewController: BaseViewController<SignInView> {
 
     // MARK: - Instance methods
 
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+
+        contentView.setNewScrollInset(
+            inset: UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        )
+    }
+
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        contentView.setNewScrollInset(inset: .zero)
+    }
+
     private func subscribeDelegates() {
         contentView.delegate = self
+    }
+
+    private func subscribeNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil
+        )
     }
 }
 
@@ -79,5 +111,9 @@ extension SignInViewController: SignInViewInput {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             AppRouter.shared.switchRoot(type: .profile)
         }
+    }
+
+    func setupUndeletableUser(user: UndeletableUserModel) {
+        contentView.setupUserInfo(model: user)
     }
 }

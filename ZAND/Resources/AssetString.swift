@@ -103,7 +103,7 @@ enum AssetString: String {
     case done = "Готово"
     case passwIsNotEqual = "Пароли не совпадают"
     case passwordCountIsSmall = "Пароль должен содержать минимум 8 символов"
-    case invalidEmailOrPassword = "Неверный почта или пароль, либо аккаунт ещё не зарегистрирован"
+    case invalidEmailOrPassword = "Неверный email или пароль, либо аккаунт ещё не зарегистрирован"
     case profileDeleted = "Профиль успешно удален"
     case smthWentWrong = "Что-то пошло не так :("
     case settings = "Настройки"
@@ -112,6 +112,11 @@ enum AssetString: String {
     case cancelChanges = "Отменить редактирование"
     case emailsEqual = "Адрес электронной почты не был изменен"
     case `continue` = "Продолжить"
+    case profileAlreadyExist = """
+    Профиль на этот email уже зарегистрирован
+    
+    """
+    case ifYouDontRememberPass = "Если не помните пароль, воспользуйтесь функцией «Восстановление пароля»"
 
     // MARK: - Bottom button values
     case apply = "Применить"
