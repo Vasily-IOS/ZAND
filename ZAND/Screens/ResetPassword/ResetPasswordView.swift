@@ -51,6 +51,10 @@ final class ResetPasswordView: BaseUIView {
         setupTextFieldHandlers()
     }
 
+    func disableButtonСlicking() {
+        sendButton.isUserInteractionEnabled = false
+    }
+
     // MARK: - Action
 
     @objc

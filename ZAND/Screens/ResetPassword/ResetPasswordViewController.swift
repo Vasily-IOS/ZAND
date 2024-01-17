@@ -36,6 +36,7 @@ extension ResetPasswordViewController: ResetPasswordDelegate {
 
     func resetPasswordButtonDidTap() {
         presenter?.resetPassword()
+        contentView.disableButtonСlicking()
     }
 
     func cancelEditing() {

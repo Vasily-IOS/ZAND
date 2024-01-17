@@ -27,6 +27,7 @@ final class PaddingTextField: UITextField {
         case phone
         case birthday
         case repeatPassword
+        case phoneEnter
         
         var placeholder_text: String {
             switch self {
@@ -58,6 +59,8 @@ final class PaddingTextField: UITextField {
                 return AssetString.birthday.rawValue
             case .repeatPassword:
                 return AssetString.repeatPassword.rawValue
+            case .phoneEnter:
+                return AssetString.phoneEnter.rawValue
             }
         }
     }

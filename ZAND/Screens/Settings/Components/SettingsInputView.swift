@@ -44,7 +44,7 @@ final class SettingsInputView: UIView {
 
     private (set) var textField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Пока нет данных"
+        textField.placeholder = AssetString.enterPhone.rawValue
         textField.backgroundColor = .white
         return textField
     }()

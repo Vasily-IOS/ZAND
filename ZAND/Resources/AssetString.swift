@@ -117,7 +117,8 @@ enum AssetString: String {
     
     """
     case ifYouDontRememberPass = "Если не помните пароль, воспользуйтесь функцией «Восстановление пароля»"
-
+    case phoneEnter = "+7 (9"
+    
     // MARK: - Bottom button values
     case apply = "Применить"
     case enter = "Войти"

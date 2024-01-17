@@ -36,6 +36,7 @@ final class RegisterView: BaseUIView {
         let phoneTextField = PaddingTextField(state: .phone)
         phoneTextField.layer.borderColor = UIColor.red.cgColor
         phoneTextField.layer.borderWidth = 0.0
+        phoneTextField.text = AssetString.phoneEnter.rawValue
         return phoneTextField
     }()
 
