@@ -56,9 +56,11 @@ final class MainView: BaseUIView {
     private let badConnectionView = BadInternetConnectionView()
 
     private let scrollToTopButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(configuration: .borderedTinted())
         button.isHidden = false
-        button.setImage(UIImage(named: "1159520"), for: .normal)
+        button.tintColor = .lightGreen
+        button.setImage(AssetImage.scrollToTop.image, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
 
@@ -178,6 +180,7 @@ extension MainView {
         scrollToTopButton.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(16)
+            make.width.height.equalTo(55)
         }
     }
     

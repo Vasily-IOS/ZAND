@@ -104,6 +104,8 @@ final class RegisterPresenter: RegisterPresenterOutput {
             if isSuccess {
                 self?.view?.registerStepAction(state: .success)
                 print("Register is valid. Response is \(response?.data)")
+            } else {
+                print(response?.data)
             }
         } error: { [weak self] error in
             print("Register is NOT valid.")
