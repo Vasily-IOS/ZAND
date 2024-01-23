@@ -21,7 +21,7 @@ enum CommonRequestType {
     // MARK: -
 
     var applicationID: Int {
-        return AppID.id
+        return ID.yclientsID
     }
 
     var bearerToken: String {

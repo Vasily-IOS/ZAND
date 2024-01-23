@@ -129,7 +129,7 @@
 		FF95F8A32AC5AA59005DA310 /* StaffComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A22AC5AA59005DA310 /* StaffComponentView.swift */; };
 		FF95F8A82AC5AC5B005DA310 /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8A72AC5AC5B005DA310 /* ConfirmationViewModel.swift */; };
 		FF95F8AB2AC5AD8F005DA310 /* ConfirmationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */; };
-		FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AC2AC5BCD6005DA310 /* AppID.swift */; };
+		FF95F8AD2AC5BCD6005DA310 /* ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AC2AC5BCD6005DA310 /* ID.swift */; };
 		FF95F8AF2AC5E1D9005DA310 /* RecordCreatedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95F8AE2AC5E1D9005DA310 /* RecordCreatedModel.swift */; };
 		FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F229EEAB1500F4E4C3 /* AssetString.swift */; };
 		FF99B8F529EEAC7B00F4E4C3 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */; };
@@ -162,6 +162,8 @@
 		FFC01B5E2A03F0FB005CE41B /* AppointmentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5D2A03F0FB005CE41B /* AppointmentsCell.swift */; };
 		FFC01B602A03F147005CE41B /* BaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC01B5F2A03F147005CE41B /* BaseTableCell.swift */; };
 		FFCC65832B13B3E100750B6B /* BadInternetConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCC65822B13B3E100750B6B /* BadInternetConnectionView.swift */; };
+		FFD046C82B5FDA2D002AE02F /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = FFD046C72B5FDA2D002AE02F /* YandexMobileMetrica */; };
+		FFD046CA2B5FDA2D002AE02F /* YandexMobileMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = FFD046C92B5FDA2D002AE02F /* YandexMobileMetricaCrashes */; };
 		FFD0DA082A4C907D006752B7 /* DefautMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA072A4C907D006752B7 /* DefautMainLayout.swift */; };
 		FFD0DA0A2A4CC551006752B7 /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA092A4CC551006752B7 /* FilterPresenter.swift */; };
 		FFD0DA0C2A4CC574006752B7 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0DA0B2A4CC574006752B7 /* ProfilePresenter.swift */; };
@@ -334,7 +336,7 @@
 		FF95F8A22AC5AA59005DA310 /* StaffComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffComponentView.swift; sourceTree = "<group>"; };
 		FF95F8A72AC5AC5B005DA310 /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
 		FF95F8AA2AC5AD8F005DA310 /* ConfirmationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationModel.swift; sourceTree = "<group>"; };
-		FF95F8AC2AC5BCD6005DA310 /* AppID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppID.swift; sourceTree = "<group>"; };
+		FF95F8AC2AC5BCD6005DA310 /* ID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ID.swift; sourceTree = "<group>"; };
 		FF95F8AE2AC5E1D9005DA310 /* RecordCreatedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreatedModel.swift; sourceTree = "<group>"; };
 		FF99B8F229EEAB1500F4E4C3 /* AssetString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetString.swift; sourceTree = "<group>"; };
 		FF99B8F429EEAC7B00F4E4C3 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
@@ -414,7 +416,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFF8962C2ACA3FCB008E97D7 /* RealmSwift in Frameworks */,
+				FFD046C82B5FDA2D002AE02F /* YandexMobileMetrica in Frameworks */,
 				FFF896272ACA3FA5008E97D7 /* Kingfisher in Frameworks */,
+				FFD046CA2B5FDA2D002AE02F /* YandexMobileMetricaCrashes in Frameworks */,
 				FFF8961E2ACA3F60008E97D7 /* SnapKit in Frameworks */,
 				FF44EA6F2B39B8F700989A0B /* KeychainSwift in Frameworks */,
 				FFF896212ACA3F73008E97D7 /* Lottie in Frameworks */,
@@ -878,7 +882,7 @@
 			children = (
 				FF45A12C29E7EC1200587DAF /* AppDelegate.swift */,
 				FF30A1BC2A4A138800DD6E29 /* Config.swift */,
-				FF95F8AC2AC5BCD6005DA310 /* AppID.swift */,
+				FF95F8AC2AC5BCD6005DA310 /* ID.swift */,
 				FF45A13A29E7EC1300587DAF /* Info.plist */,
 				FF99B8F829EEB4D600F4E4C3 /* Router */,
 			);
@@ -1268,6 +1272,8 @@
 				FFF896292ACA3FCB008E97D7 /* Realm */,
 				FFF8962B2ACA3FCB008E97D7 /* RealmSwift */,
 				FF44EA6E2B39B8F700989A0B /* KeychainSwift */,
+				FFD046C72B5FDA2D002AE02F /* YandexMobileMetrica */,
+				FFD046C92B5FDA2D002AE02F /* YandexMobileMetricaCrashes */,
 			);
 			productName = ZAND;
 			productReference = FF45A12929E7EC1200587DAF /* ZAND.app */;
@@ -1304,6 +1310,7 @@
 				FFF896252ACA3FA5008E97D7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				FFF896282ACA3FCB008E97D7 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				FF44EA6D2B39B8F700989A0B /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				FFD046C62B5FDA2D002AE02F /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
 			);
 			productRefGroup = FF45A12A29E7EC1200587DAF /* Products */;
 			projectDirPath = "";
@@ -1372,7 +1379,7 @@
 				FFD3E1D72A054E7C00680ED5 /* PrivacyPolicyViewController.swift in Sources */,
 				FF44EA6A2B39B53900989A0B /* NewPassword.swift in Sources */,
 				FF377F262B3B035800574426 /* VerifyViewController.swift in Sources */,
-				FF95F8AD2AC5BCD6005DA310 /* AppID.swift in Sources */,
+				FF95F8AD2AC5BCD6005DA310 /* ID.swift in Sources */,
 				FF4D4BB82AD89058005DA53C /* RecordDataBaseModel.swift in Sources */,
 				FF44EA662B39B19900989A0B /* RefreshUserModel.swift in Sources */,
 				FF25634529F682CF00091374 /* FilterView.swift in Sources */,
@@ -1761,6 +1768,14 @@
 				minimumVersion = 20.0.0;
 			};
 		};
+		FFD046C62B5FDA2D002AE02F /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/metrica-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
 		FFF8961C2ACA3F60008E97D7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1808,6 +1823,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF44EA6D2B39B8F700989A0B /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		FFD046C72B5FDA2D002AE02F /* YandexMobileMetrica */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFD046C62B5FDA2D002AE02F /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetrica;
+		};
+		FFD046C92B5FDA2D002AE02F /* YandexMobileMetricaCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFD046C62B5FDA2D002AE02F /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetricaCrashes;
 		};
 		FFF8961D2ACA3F60008E97D7 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

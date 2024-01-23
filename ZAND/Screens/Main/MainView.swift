@@ -57,7 +57,7 @@ final class MainView: BaseUIView {
 
     private let scrollToTopButton: UIButton = {
         let button = UIButton(configuration: .borderedTinted())
-        button.isHidden = false
+        button.isHidden = true
         button.tintColor = .lightGreen
         button.setImage(AssetImage.scrollToTop.image, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
@@ -100,7 +100,7 @@ final class MainView: BaseUIView {
     }
 
     func isScrollToTopButtonShows(isShow: Bool) {
-        scrollToTopButton.isHidden = isShow
+        scrollToTopButton.isHidden = !isShow
     }
 
     func setLostConnectionAimation(isConnected: Bool) {

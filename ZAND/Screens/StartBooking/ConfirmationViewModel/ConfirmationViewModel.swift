@@ -73,7 +73,7 @@ final class ConfirmationViewModel {
             phone: phone.filter("0123456789".contains),
             fullname: fullName,
             email: email,
-            api_id: AppID.id,
+            api_id: ID.yclientsID,
             appointments: [appointmet])
 
         resultModel = confirmationModel

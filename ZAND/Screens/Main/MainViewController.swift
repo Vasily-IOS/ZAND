@@ -186,11 +186,6 @@ extension MainViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let isTopCellisVisible = collectionView.visibleCurrentCellIndexPath == [0, 1] ||
-        collectionView.visibleCurrentCellIndexPath == [0, 0]
-
-        contentView.isScrollToTopButtonShows(isShow: isTopCellisVisible)
-
         switch MainSection.init(rawValue: indexPath.section) {
         case .option:
             let optionCell = collectionView.dequeueReusableCell(for: indexPath, cellType: OptionCell.self)
@@ -215,6 +210,10 @@ extension MainViewController: UICollectionViewDataSource {
         default:
             return UICollectionViewCell()
         }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        contentView.isScrollToTopButtonShows(isShow: scrollView.contentOffset.y >= 500.0)
     }
 }
 
@@ -344,14 +343,3 @@ extension MainViewController: MainViewInput {
 }
 
 extension MainViewController: HideNavigationBar, ActivityIndicator {}
-
-extension UICollectionView {
-  var visibleCurrentCellIndexPath: IndexPath? {
-    for cell in self.visibleCells {
-      let indexPath = self.indexPath(for: cell)
-      return indexPath
-    }
-
-    return nil
-  }
-}

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import YandexMobileMetrica
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setupRouter()
         NetworkMonitor.shared.startMonitoring()
+
+        let configuration = YMMYandexMetricaConfiguration.init(apiKey: ID.yandexID)
+        YMMYandexMetrica.activate(with: configuration!)
 
         return true
     }
