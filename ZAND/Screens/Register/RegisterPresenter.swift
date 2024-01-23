@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum RegisterState {
+    case success
+    case failure(Int)
+}
+
 protocol RegisterPresenterOutput: AnyObject {
     var keyboardAlreadyHidined: Bool { get set }
     var user: UserRegisterModel { get set }
@@ -20,10 +25,12 @@ protocol RegisterPresenterOutput: AnyObject {
     func setPassword(password: String)
     func setRepeatPassword(password: String)
 
-    func register(completion: @escaping (Bool) -> ())
+    func register()
 }
 
-protocol RegisterViewInput: AnyObject {}
+protocol RegisterViewInput: AnyObject {
+    func registerStepAction(state: RegisterState)
+}
 
 final class RegisterPresenter: RegisterPresenterOutput {
 
@@ -80,7 +87,7 @@ final class RegisterPresenter: RegisterPresenterOutput {
         user.repeatPassword = password.trimmingCharacters(in: .whitespaces)
     }
 
-    func register(completion: @escaping (Bool) -> ()) {
+    func register() {
         let createUserModel = CreateUserModel(
             firstName: user.name,
             middleName: user.fathersName,
@@ -93,15 +100,24 @@ final class RegisterPresenter: RegisterPresenterOutput {
 
         network.performRequest(
             type: .register(createUserModel), expectation: ServerResponse.self
-        ) { response, isSuccess in
+        ) { [weak self] response, isSuccess in
             if isSuccess {
-                if let response = response {
-                    completion(true)
-                    print("Register is valid. Response is \(response.data)")
+                self?.view?.registerStepAction(state: .success)
+                print("Register is valid. Response is \(response?.data)")
+            }
+        } error: { [weak self] error in
+            print("Register is NOT valid.")
+            if let errorModel = try? JSONDecoder().decode(ResponseError.self, from: error) {
+                switch errorModel.code {
+                case 0:
+                    self?.view?.registerStepAction(state: .failure(0))
+                    print("Пользователь с почтой уже зарегистрирован.")
+                case 1:
+                    self?.view?.registerStepAction(state: .failure(1))
+                    print("Пользователь с телефоном уже зарегистрирован.")
+                default:
+                    break
                 }
-            } else {
-                completion(false)
-                print("Register is invalid")
             }
         }
     }

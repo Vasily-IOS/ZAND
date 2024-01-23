@@ -12,7 +12,8 @@ protocol APIManagerAuthP: AnyObject {
     func performRequest<T: Codable>(
         type: AuthRequestType,
         expectation: T.Type,
-        completion: @escaping (T?, Bool) -> Void
+        completion: @escaping (T?, Bool) -> Void,
+        error: @escaping ((Data) -> Void)
     )
 }
 
@@ -28,9 +29,12 @@ final class APIManagerAuth: APIManagerAuthP {
     func performRequest<T>(
         type: AuthRequestType,
         expectation: T.Type,
-        completion: @escaping (T?, Bool) -> Void
+        completion: @escaping (T?, Bool) -> Void,
+        error: @escaping ((Data) -> Void)
     ) where T : Decodable, T : Encodable {
-        provider.request(type) { result in
+        provider.request(type) { [weak self] result in
+            guard let self else { return }
+
             switch result {
             case .success(let response):
 
@@ -49,7 +53,10 @@ final class APIManagerAuth: APIManagerAuthP {
                     }
                 } else {
                     completion(nil, false)
+                    error(response.data)
                 }
+
+                print(String(data: response.data, encoding: .utf8))
             case .failure(let error):
                 debugPrint(error)
                 completion(nil, false)

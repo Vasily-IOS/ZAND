@@ -75,7 +75,7 @@ final class RefreshPasswordPresenter: RefreshPasswordOutput {
                 guard let self else { return }
 
                 isSucceess ? view.popToRoot() : view.showSmthWentWrongAlert()
-            }
+            } error: { _ in }
         }
     }
 }

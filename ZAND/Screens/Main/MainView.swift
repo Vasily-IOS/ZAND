@@ -55,6 +55,13 @@ final class MainView: BaseUIView {
 
     private let badConnectionView = BadInternetConnectionView()
 
+    private let scrollToTopButton: UIButton = {
+        let button = UIButton()
+        button.isHidden = false
+        button.setImage(UIImage(named: "1159520"), for: .normal)
+        return button
+    }()
+
     // MARK: - Initializers
     
     init(layoutBuilder: DefaultMainLayout) {
@@ -73,6 +80,7 @@ final class MainView: BaseUIView {
         super.setup()
 
         setViews()
+        setupTargets()
     }
 
     func changeHeartAppearance(by indexPath: IndexPath) {
@@ -83,6 +91,14 @@ final class MainView: BaseUIView {
 
     func scrollToItem(at indexPath: IndexPath) {
         collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+    }
+
+    func scrollToFirstItem() {
+        collectionView.scrollToItem(at: [0, 0], at: .top, animated: true)
+    }
+
+    func isScrollToTopButtonShows(isShow: Bool) {
+        scrollToTopButton.isHidden = isShow
     }
 
     func setLostConnectionAimation(isConnected: Bool) {
@@ -125,6 +141,11 @@ final class MainView: BaseUIView {
             }) { _ in self?.badConnectionView.removeFromSuperview() }
         }
     }
+
+    @objc
+    private func scrollToTopAction() {
+        scrollToFirstItem()
+    }
 }
 
 extension MainView {
@@ -134,7 +155,7 @@ extension MainView {
     private func setViews() {
         backgroundColor = .mainGray
 
-        addSubviews([searchButton, collectionView, emptyLabel])
+        addSubviews([searchButton, collectionView, emptyLabel, scrollToTopButton])
         searchButton.snp.makeConstraints { make in
             make.top.equalTo(self).offset(50)
             make.left.equalTo(self).offset(16)
@@ -153,6 +174,11 @@ extension MainView {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().inset(20)
         }
+
+        scrollToTopButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(16)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(16)
+        }
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
@@ -168,5 +194,9 @@ extension MainView {
             }
         }
         return layout
+    }
+
+    private func setupTargets() {
+        scrollToTopButton.addTarget(self, action: #selector(scrollToTopAction), for: .touchUpInside)
     }
 }

@@ -116,6 +116,7 @@
 		FF8AAF6829EEA37F007D6A60 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF6729EEA37F007D6A60 /* MapView.swift */; };
 		FF8AAF6A29EEA389007D6A60 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF6929EEA389007D6A60 /* MainView.swift */; };
 		FF8AAF6C29EEA392007D6A60 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8AAF6B29EEA392007D6A60 /* ProfileView.swift */; };
+		FF8D63E82B5F1ECE00EAF88B /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8D63E72B5F1ECE00EAF88B /* ResponseError.swift */; };
 		FF8E7BE129EF25F300644208 /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE029EF25F300644208 /* OptionCell.swift */; };
 		FF8E7BE329EF260500644208 /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE229EF260500644208 /* BaseCollectionCell.swift */; };
 		FF8E7BE529EF293100644208 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8E7BE429EF293100644208 /* OptionView.swift */; };
@@ -320,6 +321,7 @@
 		FF8AAF6929EEA389007D6A60 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		FF8AAF6B29EEA392007D6A60 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FF8B12292A8BD45200837E29 /* ZAND..entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZAND..entitlements; sourceTree = "<group>"; };
+		FF8D63E72B5F1ECE00EAF88B /* ResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseError.swift; sourceTree = "<group>"; };
 		FF8E7BE029EF25F300644208 /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		FF8E7BE229EF260500644208 /* BaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
 		FF8E7BE429EF293100644208 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 				FF8904F92B3C5B830037652A /* RefreshTokenModel.swift */,
 				FFD1C91A2B3DB732003EA240 /* DefaultType.swift */,
 				FF27133F2B581BD000DF65DD /* UndeletableUserModel.swift */,
+				FF8D63E72B5F1ECE00EAF88B /* ResponseError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -716,13 +719,13 @@
 			isa = PBXGroup;
 			children = (
 				FF8AAF5D29EE9724007D6A60 /* TabBarController.swift */,
+				FF8AAF5429EE9645007D6A60 /* Main */,
 				FF66E5CA2B3EF8B90055A03B /* Settings */,
 				FF377F242B3B034700574426 /* Verify */,
 				FFD0F75A2B39FBFA001EDAAA /* RefreshPassword */,
 				FFD0F7532B39F4B7001EDAAA /* ResetPassword */,
 				FF2DB9782A9DFADE0036356B /* Register */,
 				FF2DB9712A9DE1F40036356B /* SignIn */,
-				FF8AAF5429EE9645007D6A60 /* Main */,
 				FF25634129F682B500091374 /* Filter */,
 				FF8AAF5729EE96BA007D6A60 /* Map */,
 				FF8AAF5A29EE96E9007D6A60 /* Profile */,
@@ -1496,6 +1499,7 @@
 				FFDCE4B92A1B8EA500CEA0E1 /* SelectableMapPresenter.swift in Sources */,
 				FFFFDD412ABF786700FA5B92 /* TimetableView.swift in Sources */,
 				FF95F8962AC58AD0005DA310 /* ConfirmationPresenter.swift in Sources */,
+				FF8D63E82B5F1ECE00EAF88B /* ResponseError.swift in Sources */,
 				FF99B90829EEBA7F00F4E4C3 /* SearchView.swift in Sources */,
 				FFC01B472A03C801005CE41B /* AppointmentsViewController.swift in Sources */,
 				FFE6F49B29FAD74000FDB519 /* ProfileLayout.swift in Sources */,

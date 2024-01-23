@@ -42,12 +42,7 @@ final class SettingsInputView: UIView {
 
     private let descriptionLabel = UILabel(.systemFont(ofSize: 12.0), .textGray)
 
-    private (set) var textField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = AssetString.enterPhone.rawValue
-        textField.backgroundColor = .white
-        return textField
-    }()
+    private (set) var textField = UITextField()
 
     // MARK: - Initializers
 
@@ -76,6 +71,12 @@ final class SettingsInputView: UIView {
         backgroundColor = .white
         layer.cornerRadius = 15.0
         descriptionLabel.text = state.textValue
+        textField.placeholder = state.textValue
+
+        if state == .phone {
+            textField.text = AssetString.phoneInput.rawValue
+            textField.keyboardType = .numberPad
+        }
 
         addSubviews([descriptionLabel, textField])
 

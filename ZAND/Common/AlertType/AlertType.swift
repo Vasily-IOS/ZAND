@@ -25,7 +25,8 @@ enum AlertType {
     case profileDeleted
     case smthWentWrong
     case emailsEqual
-    case profileAlreadyExist
+    case emailAlreadyExist
+    case phoneAlreadyExist
 
     var textValue: String {
         switch self {
@@ -63,8 +64,10 @@ enum AlertType {
             return AssetString.smthWentWrong.rawValue
         case .emailsEqual:
             return AssetString.emailsEqual.rawValue
-        case .profileAlreadyExist:
-            return AssetString.profileAlreadyExist.rawValue
+        case .emailAlreadyExist:
+            return AssetString.emailAlreadyExist.rawValue
+        case .phoneAlreadyExist:
+            return AssetString.phoneAlreadyExist.rawValue
         }
     }
 }

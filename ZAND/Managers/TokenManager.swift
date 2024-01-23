@@ -80,15 +80,15 @@ final class TokenManager {
     // MARK: - Private methods
 
     private func accessExpiried(savedDate: Date) -> Bool {
-        let accessLifeTime = TimeInterval(1800) // 30 min
+        let accessLifeTime = TimeInterval(5184000) // 60 days
 
-        return Date().timeIntervalSince(savedDate) >= (accessLifeTime - 10)
+        return Date().timeIntervalSince(savedDate) >= (accessLifeTime - 100)
     }
 
     private func refreshExpiried(savedDate: Date) -> Bool {
-        let refreshLifeTime = TimeInterval(86400) // 24 hours
+        let refreshLifeTime = TimeInterval(5270400) // 61 days
 
-        return Date().timeIntervalSince(savedDate) >= (refreshLifeTime - 10)
+        return Date().timeIntervalSince(savedDate) >= (refreshLifeTime - 100)
     }
 
     private func updateToken() {
@@ -107,7 +107,7 @@ final class TokenManager {
                 savedDate: Date()
             )
             self?.save(model)
-        }
+        } error: { _ in }
     }
 
     private func sendNotification() {

@@ -60,6 +60,6 @@ final class VerifyPresenter: VerifyOutput {
             } else {
                 self.view.showAlert()
             }
-        }
+        } error: { _ in }
     }
 }

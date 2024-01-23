@@ -64,10 +64,10 @@ extension ProfileViewController {
             title: AssetString.exitMessage.rawValue,
             message: nil,
             preferredStyle: .alert)
-        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .destructive)
+        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .default)
         let yesAction = UIAlertAction(
             title: AssetString.yes.rawValue,
-            style: .default
+            style: .destructive
         ) { [weak self] _ in
             self?.presenter?.signOut()
         }
@@ -81,10 +81,10 @@ extension ProfileViewController {
             title: AssetString.areYouSure.rawValue,
             message: nil,
             preferredStyle: .alert)
-        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .destructive)
+        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .default)
         let yesAction = UIAlertAction(
             title: AssetString.yes.rawValue,
-            style: .default) { [weak self] _ in
+            style: .destructive) { [weak self] _ in
                 self?.presenter?.deleteUser()
             }
         alertController.addAction(noAction)

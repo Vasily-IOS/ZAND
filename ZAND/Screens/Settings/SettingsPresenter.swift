@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum ChangeUserDataState {
+    case success
+    case failure(Int)
+}
+
+
 enum SaveType {
     case all
     case email
@@ -29,8 +35,12 @@ protocol SettingsOutput: AnyObject {
 protocol SettingsInput: AnyObject {
     func configure(model: UserDBModel)
     func changeUIAppearing(type: SaveType)
-    func showSmthWentWrongAlert()
+    func showIncorrectEmailAlert() // знаю знаю
     func showEqualEmailAlert()
+    func showLessMinCountNimberAlert()
+    func badInputNumberAlert()
+    func showSmthWentWrongAlert()
+    func changeDataAction(state: ChangeUserDataState)
     func navigateToVerify()
     func dismiss()
 }
@@ -44,7 +54,7 @@ final class SettingsPresenter: SettingsOutput {
             view.changeUIAppearing(type: saveType)
         }
     }
-
+    
     var name: String?
 
     var surname: String?
@@ -87,6 +97,22 @@ final class SettingsPresenter: SettingsOutput {
         }
     }
 
+    private func isPhoneCorrect() -> Bool {
+        guard let savedUser = UserManager.shared.get() else { return false }
+
+        return ((phone ?? savedUser.phone).prefix(5) == "+7 (9")
+    }
+
+    private func isValidPhoneNumberCount() -> Bool {
+        return (phone?.isEmpty ?? false) || phone?.count != 18
+    }
+
+    private func isEmailCorrect(email: String) -> Bool {
+        let emailPattern = Regex.email
+        let isEmailCorrect = email.range(of: emailPattern, options: .regularExpression)
+        return (isEmailCorrect != nil)
+    }
+
     // MARK: - Private methods
 
     @objc
@@ -97,27 +123,41 @@ final class SettingsPresenter: SettingsOutput {
     private func changeUserData() {
         guard let savedUser = UserManager.shared.get() else { return }
 
-        let refreshModel = RefreshUserModel(
-            lastName: surname ?? savedUser.surname,
-            middleName: fathersName ?? savedUser.fathersName,
-            firstName: name ?? savedUser.name ,
-            phone: phone ?? savedUser.phone,
-            birthday: birthday ?? savedUser.birthday
-        )
+        if isPhoneCorrect() == false || (phone ?? savedUser.phone).count != 18 {
+            view.badInputNumberAlert()
+        } else {
+            let refreshModel = RefreshUserModel(
+                lastName: surname ?? savedUser.surname,
+                middleName: fathersName ?? savedUser.fathersName,
+                firstName: name ?? savedUser.name ,
+                phone: phone ?? savedUser.phone,
+                birthday: birthday ?? savedUser.birthday
+            )
 
-        network.performRequest(
-            type: .refreshUser(refreshModel),
-            expectation: UserModel.self
-        ) { [weak self] user, isSuccess in
-            guard let self else { return }
+            network.performRequest(
+                type: .refreshUser(refreshModel),
+                expectation: UserModel.self
+            ) { [weak self] user, isSuccess in
+                guard let self else { return }
 
-            if isSuccess {
-                if let user = user {
-                    UserManager.shared.save(user: user)
+                if isSuccess {
+                    if let user = user {
+                        UserManager.shared.save(user: user)
+                    }
+                    NotificationCenter.default.post(name: .canUpdateProfile, object: nil)
+                    self.view.changeDataAction(state: .success)
+                } 
+//                else {
+//                    view.showSmthWentWrongAlert()
+//                }
+            } error: { error in
+                if let model = try? JSONDecoder().decode(ResponseError.self, from: error) {
+                    if model.code == 1 {
+                        self.view.changeDataAction(state: .failure(1))
+                    }
+                } else {
+                    self.view.showSmthWentWrongAlert()
                 }
-                NotificationCenter.default.post(name: .canUpdateProfile, object: nil)
-            } else {
-                view.showSmthWentWrongAlert()
             }
         }
     }
@@ -125,8 +165,10 @@ final class SettingsPresenter: SettingsOutput {
     private func changeUserEmail() {
         guard let savedUser = UserManager.shared.get() else { return }
 
-        if email?.trimmingCharacters(in: .whitespaces) ?? savedUser.email == savedUser.email {
+        if email?.trimmingCharacters(in: .whitespaces) ?? savedUser.email == savedUser.email  {
             view.showEqualEmailAlert()
+        } else if email?.isEmpty == true || (email?.count ?? 0) <= 10 {
+            view.showIncorrectEmailAlert()
         } else {
             let emailModel = EmailModel(email: email ?? savedUser.email)
 
@@ -138,9 +180,9 @@ final class SettingsPresenter: SettingsOutput {
                     if isSuccess {
                         self.view.navigateToVerify()
                     } else {
-                        self.view.showSmthWentWrongAlert()
+                        self.view.changeDataAction(state: .failure(0))
                     }
-                }
+                } error: { _ in }
         }
     }
 

@@ -75,6 +75,7 @@ enum AssetString: String {
     case finalText = "Поздравляем! Запись оформлена!"
     case errorText = "Произошла ошибка :("
     case phoneInput = "Номер телефона должен начинаться с +7 (9..."
+    case phoneInputEleven = "Номер телефона должен начинаться с +7 (9... и иметь 11 символов"
     case deleteProfile = "Удалить профиль"
     case areYouSure = "Вы уверены?"
     case managerWillPhone = "Для удаления профиля наш менеджер свяжется в Вами"
@@ -112,13 +113,11 @@ enum AssetString: String {
     case cancelChanges = "Отменить редактирование"
     case emailsEqual = "Адрес электронной почты не был изменен"
     case `continue` = "Продолжить"
-    case profileAlreadyExist = """
-    Профиль на этот email уже зарегистрирован
-    
-    """
+    case emailAlreadyExist = "Профиль на этот email уже зарегистрирован"
+    case phoneAlreadyExist = "Профиль на этот номер телефона уже зарегистрирован"
     case ifYouDontRememberPass = "Если не помните пароль, воспользуйтесь функцией «Восстановление пароля»"
     case phoneEnter = "+7 (9"
-    
+
     // MARK: - Bottom button values
     case apply = "Применить"
     case enter = "Войти"

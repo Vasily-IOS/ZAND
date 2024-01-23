@@ -126,7 +126,6 @@ extension SettingsViewController: SettingsViewDelegate {
 
     func save() {
         presenter?.save()
-        presenter?.saveType = .default
     }
 
     func changeAll() {
@@ -164,8 +163,36 @@ extension SettingsViewController: SettingsInput {
         showAlert(text: AssetString.smthWentWrong.rawValue)
     }
 
+    func changeDataAction(state: ChangeUserDataState) {
+        switch state {
+        case .success:
+            presenter?.saveType = .default
+        case .failure(let index):
+            switch index {
+            case 0:
+                self.showAlert(text: AssetString.emailAlreadyExist.rawValue)
+            case 1:
+                self.showAlert(text: AssetString.phoneAlreadyExist.rawValue)
+            default:
+                break
+            }
+        }
+    }
+
     func showEqualEmailAlert() {
         showAlert(text: AssetString.emailsEqual.rawValue)
+    }
+
+    func showIncorrectEmailAlert() {
+        showAlert(text: AssetString.invalidEmailInput.rawValue)
+    }
+
+    func showLessMinCountNimberAlert() {
+        showAlert(text: AssetString.phoneNumberLessThanEleven.rawValue)
+    }
+
+    func badInputNumberAlert() {
+        showAlert(text: AssetString.phoneInputEleven.rawValue)
     }
 
     func navigateToVerify() {

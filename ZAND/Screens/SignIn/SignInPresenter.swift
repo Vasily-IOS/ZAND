@@ -78,7 +78,7 @@ final class SignInPresenter: SignInPresenterOutput {
             } else {
                 self.view.showBadInputAlert()
             }
-        }
+        } error: { _ in }
     }
 
     func fetchAndSaveUser() {
@@ -98,7 +98,7 @@ final class SignInPresenter: SignInPresenterOutput {
                     birthday: user.data.birthday)
                 )
             )
-        }
+        } error: { _ in }
     }
 
     private func saveUndeletableUserData() {

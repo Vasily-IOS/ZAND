@@ -53,6 +53,6 @@ final class ResetPasswordPresenter: ResetPasswordOutput {
             guard let self else { return }
 
             isSuccess ? self.view.showRefreshPasswordScreen() : self.view.showSmthWentWrongAlert()
-        }
+        } error: { _ in }
     }
 }

@@ -122,7 +122,7 @@ final class ProfilePresenter: ProfilePresenterOutput {
             } else {
                 self.view.showFailureAlert()
             }
-        }
+        } error: { _ in }
     }
 
     @objc

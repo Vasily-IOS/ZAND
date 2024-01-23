@@ -80,16 +80,7 @@ final class RegisterViewController: BaseViewController<RegisterView> {
             title: AssetString.continue.rawValue,
             style: .cancel
         ) { [weak self] _ in
-            self?.presenter?.register { isSuccess in
-                if isSuccess {
-                    AppRouter.shared.push(.verify(nil))
-                } else {
-                    AppRouter.shared.showAlert(
-                        type: .profileAlreadyExist,
-                        message: AssetString.ifYouDontRememberPass.rawValue
-                    )
-                }
-            }
+            self?.presenter?.register()
         }
 
         alertController.addAction(confirmAction)
@@ -199,4 +190,23 @@ extension RegisterViewController: UITextFieldDelegate {
     }
 }
 
-extension RegisterViewController: RegisterViewInput, HideBackButtonTitle {}
+extension RegisterViewController: RegisterViewInput, HideBackButtonTitle {
+
+    // MARK: - RegisterViewInput methods
+
+    func registerStepAction(state: RegisterState) {
+        switch state {
+        case .success:
+            AppRouter.shared.push(.verify(nil))
+        case .failure(let index):
+            switch index {
+            case 0:
+                AppRouter.shared.showAlert(type: .emailAlreadyExist, message: nil)
+            case 1:
+                AppRouter.shared.showAlert(type: .phoneAlreadyExist, message: nil)
+            default:
+                break
+            }
+        }
+    }
+}
