@@ -8,11 +8,11 @@
 import Combine
 import CoreLocation
 
-final class DeviceLocationService: NSObject, CLLocationManagerDelegate {
+final class DeviceLocationManager: NSObject, CLLocationManagerDelegate {
 
     // MARK: - Properties
 
-    static let shared = DeviceLocationService()
+    static let shared = DeviceLocationManager()
 
     var currentLocation = PassthroughSubject<CLLocationCoordinate2D, Error>()
 

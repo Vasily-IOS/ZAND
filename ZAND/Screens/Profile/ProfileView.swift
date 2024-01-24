@@ -99,23 +99,23 @@ extension ProfileView {
         }
 
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(userNameView.snp.bottom).offset(50)
+            make.top.equalTo(userNameView.snp.bottom).offset(40)
             make.left.equalTo(self).offset(16)
             make.right.equalTo(self).inset(16)
-            make.height.equalTo(400)
+            make.height.equalTo(460)
         }
 
         callUsButton.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(45)
             make.width.equalTo(280)
             make.height.equalTo(44)
-            make.centerX.equalTo(self)
-            make.bottom.equalTo(scrollView.snp.bottom).inset(40)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(scrollView.snp.bottom).inset(40).priority(999)
         }
 
         emptyLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(collectionView.snp.top).offset(270)
+            make.top.equalTo(collectionView.snp.bottom).inset(50)
         }
     }
     

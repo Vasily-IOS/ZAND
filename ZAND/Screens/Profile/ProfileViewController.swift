@@ -42,12 +42,6 @@ final class ProfileViewController: BaseViewController<ProfileView> {
         subscribeDelegate()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        presenter?.checkLogIn()
-    }
- 
     deinit {
         print("ProfileViewController died")
     }
@@ -70,10 +64,10 @@ extension ProfileViewController {
             title: AssetString.exitMessage.rawValue,
             message: nil,
             preferredStyle: .alert)
-        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .cancel)
+        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .default)
         let yesAction = UIAlertAction(
             title: AssetString.yes.rawValue,
-            style: .default
+            style: .destructive
         ) { [weak self] _ in
             self?.presenter?.signOut()
         }
@@ -82,30 +76,23 @@ extension ProfileViewController {
         present(alertController, animated: true)
     }
 
-    private func showDeleteProfileAlert() {
+    private func showDeleteUserAlert() {
         let alertController = UIAlertController(
             title: AssetString.areYouSure.rawValue,
             message: nil,
             preferredStyle: .alert)
-        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .cancel)
+        let noAction = UIAlertAction(title: AssetString.no.rawValue, style: .default)
         let yesAction = UIAlertAction(
             title: AssetString.yes.rawValue,
-            style: .default) { [weak self] _ in
-            let alertConrol = UIAlertController(
-                title: AssetString.managerWillPhone.rawValue,
-                message: nil,
-                preferredStyle: .alert)
-            let action = UIAlertAction(
-                title: AssetString.ok.rawValue, style: .cancel)
-            alertConrol.addAction(action)
-            self?.present(alertConrol, animated: true)
-        }
+            style: .destructive) { [weak self] _ in
+                self?.presenter?.deleteUser()
+            }
         alertController.addAction(noAction)
         alertController.addAction(yesAction)
         present(alertController, animated: true)
     }
 
-    func reloadData() {
+    private func reloadData() {
         DispatchQueue.main.async {
             UIView.transition(
                 with: self.contentView.collectionView,
@@ -191,9 +178,11 @@ extension ProfileViewController: UICollectionViewDelegate {
             case 0:
                 AppRouter.shared.presentRecordNavigation(type: .appointments)
             case 1:
-                showLogOutAlert()
+                AppRouter.shared.presentRecordNavigation(type: .settings)
             case 2:
-                showDeleteProfileAlert()
+                showLogOutAlert()
+            case 3:
+                showDeleteUserAlert()
             default:
                 break
             }
@@ -222,13 +211,21 @@ extension ProfileViewController: ProfileViewInput {
 
     // MARK: - ProfileViewInput methods
 
-    func updateWithLoggedData(model: UserDataBaseModel) {
+    func updateProfile(model: UserDBModel) {
         contentView.userNameView.configure(model: model)
     }
 
     func updateWithSaloons(model: [Saloon]) {
         saloonModel = model
         reloadData()
+    }
+
+    func showSuccessAlert() {
+        AppRouter.shared.showAlert(type: .profileDeleted, message: nil)
+    }
+
+    func showFailureAlert() {
+        AppRouter.shared.showAlert(type: .smthWentWrong, message: nil)
     }
 }
 

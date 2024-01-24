@@ -73,7 +73,7 @@ final class ConfirmationViewModel {
             phone: phone.filter("0123456789".contains),
             fullname: fullName,
             email: email,
-            api_id: AppID.id,
+            api_id: ID.yclientsID,
             appointments: [appointmet])
 
         resultModel = confirmationModel
@@ -92,9 +92,9 @@ final class ConfirmationViewModel {
     }
 
     private func fetchUserData() {
-        let user = UserDBManager.shared.get()
+        let user = UserManager.shared.get()
         phone = "\(user?.phone ?? "")"
-        fullName = "\(user?.familyName ?? "")" + " " + "\(user?.givenName ?? "")"
+        fullName = "\(user?.name ?? "")" + " " + "\(user?.surname ?? "")"
         email = "\(user?.email ?? "")"
     }
 }

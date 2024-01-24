@@ -1,5 +1,5 @@
 //
-//  RegisterNViewController.swift
+//  RegisterViewController.swift
 //  ZAND
 //
 //  Created by Василий on 29.08.2023.
@@ -20,6 +20,9 @@ final class RegisterViewController: BaseViewController<RegisterView> {
 
         subscribeDelegates()
         subscribeNotifications()
+        hideBackButtonTitle()
+
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     // MARK: - Instance methods
@@ -30,54 +33,19 @@ final class RegisterViewController: BaseViewController<RegisterView> {
             return
         }
 
-        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        contentView.scrollView.contentInset = contentInset
+        contentView.setNewScrollInset(
+            inset: UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        )
     }
 
     @objc
     private func keyboardWillHide(notification: NSNotification) {
-        contentView.scrollView.contentInset = .zero
+        contentView.setNewScrollInset(inset: .zero)
     }
 
     private func subscribeDelegates() {
         contentView.delegate = self
-
-        contentView.delegate = self
-        [contentView.nameTextField,
-         contentView.surnameTextField,
-         contentView.emailTextField,
-         contentView.phoneTextField
-        ].forEach {
-            $0.delegate = self
-        }
-    }
-
-    private func showFinalAlertController() {
-        let finalText = "\n\(AssetString.name): \(presenter?.user.fullName ?? "")\n\(AssetString.email): \(presenter?.user.email ?? "")\n\(AssetString.phone): \(presenter?.user.phone ?? "")"
-        let alertController = UIAlertController(
-            title: AssetString.checkYourData.rawValue,
-            message: finalText,
-            preferredStyle: .alert
-        )
-
-        let cancelAction = UIAlertAction(
-            title: AssetString.fix.rawValue,
-            style: .destructive
-        )
-        
-        let confirmAction = UIAlertAction(
-            title: AssetString.good.rawValue,
-            style: .cancel
-        ) { [weak self]_ in
-            self?.presenter?.save()
-            AppRouter.shared.popViewController()
-            AppRouter.shared.switchRoot(type: .profile)
-        }
-
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-
-        present(alertController, animated: true)
+        contentView.getAllTextFileds().forEach { $0.delegate = self }
     }
 
     private func subscribeNotifications() {
@@ -93,6 +61,33 @@ final class RegisterViewController: BaseViewController<RegisterView> {
             name: UIResponder.keyboardWillHideNotification, object: nil
         )
     }
+
+    private func showFinalAlertController() {
+        let finalText = "\n\(AssetString.name.rawValue): \(presenter?.user.fullName ?? "")\n\(AssetString.email.rawValue): \(presenter?.user.email ?? "")\n\(AssetString.phone.rawValue): \(presenter?.user.phone ?? "")"
+
+        let alertController = UIAlertController(
+            title: AssetString.checkYourData.rawValue,
+            message: finalText,
+            preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(
+            title: AssetString.fix.rawValue,
+            style: .destructive
+        )
+
+        let confirmAction = UIAlertAction(
+            title: AssetString.continue.rawValue,
+            style: .cancel
+        ) { [weak self] _ in
+            self?.presenter?.register()
+        }
+
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true)
+    }
 }
 
 extension RegisterViewController: RegisterDelegate {
@@ -107,8 +102,8 @@ extension RegisterViewController: RegisterDelegate {
         guard let step = presenter?.user.isCanRegister() else { return }
 
         switch step {
-        case .notAllFieldsAreFilledIn:
-            AppRouter.shared.showAlert(type: .fillAllFields, message: nil)
+        case .notAllRequiredFieldsAreFilled:
+            AppRouter.shared.showAlert(type: .fillAllRequiredFields, message: nil)
         case .emailIsNotCorrect:
             AppRouter.shared.showAlert(type: .invalidEmailInput, message: nil)
         case .phoneIsNotCorrect:
@@ -117,17 +112,27 @@ extension RegisterViewController: RegisterDelegate {
             AppRouter.shared.showAlert(type: .shouldAcceptPolicy, message: nil)
         case .phoneNumberCountIsSmall:
             AppRouter.shared.showAlert(type: .phoneNumberLessThanEleven, message: nil)
+        case .passwordAreNotEqual:
+            AppRouter.shared.showAlert(type: .passwwordsIsNotEqual, message: nil)
+        case .passwordCountIsSmall:
+            AppRouter.shared.showAlert(type: .passwordCountIsSmall, message: nil)
         case .register:
             showFinalAlertController()
         }
     }
 
     func showPolicy() {
-        AppRouter.shared.presentRecordNavigation(type: .privacyPolicy(AssetURL.privacy_policy.rawValue))
+        AppRouter.shared.presentRecordNavigation(
+            type: .privacyPolicy(AssetURL.privacy_policy.rawValue)
+        )
     }
 
     func changePolicy(isConfirmed: Bool) {
         presenter?.user.isPolicyConfirmed = isConfirmed
+    }
+
+    func setBirthday(birthday: Date) {
+        presenter?.setBirthday(birthday: birthday)
     }
 }
 
@@ -135,51 +140,73 @@ extension RegisterViewController: UITextFieldDelegate {
 
     // MARK: - UITextViewDelegate methods
 
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
         if textField == contentView.phoneTextField {
             guard let text = textField.text else { return false }
 
-            let phoneString = (text as NSString).replacingCharacters(in: range, with: string)
-            textField.text = text.format(with: "+X (XXX) XXX-XX-XX", phone: phoneString)
+            if range.length == 1 {
+                if text != AssetString.phoneEnter.rawValue {
+                    textField.text = String(text.dropLast())
+                }
+            } else {
+                let phoneString = (text as NSString).replacingCharacters(in: range, with: string)
+                textField.text = text.format(with: "+X (XXX) XXX-XX-XX", phone: phoneString)
+            }
 
             if (textField.text?.count ?? 0) == 18 && (presenter?.keyboardAlreadyHidined ?? false) == false {
                 presenter?.keyboardAlreadyHidined = true
                 contentView.hidePhoneKeyboard()
             }
-
-            textField.text == "" || textField.text?.count != 18 || textField.text == "+7" ?
-            contentView.makeRedBorder() : contentView.removeBorder()
-
             return false
         }
         return true
     }
 
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        let text = textField.text ?? ""
+        guard let text = textField.text else { return }
 
         switch textField {
         case contentView.nameTextField:
-            presenter?.user.name = text
+            presenter?.setName(name: text)
         case contentView.surnameTextField:
-            presenter?.user.surname = text
+            presenter?.setSurname(surname: text)
+        case contentView.fathersNameTextField:
+            presenter?.setFatherName(fatheName: text)
         case contentView.emailTextField:
-            presenter?.user.email = text
+            presenter?.setEmail(email: text)
         case contentView.phoneTextField:
-            presenter?.user.phone = text
+            presenter?.setPhone(phone: text)
+        case contentView.createPasswordTextField:
+            presenter?.setPassword(password: text)
+        case contentView.repeatPasswordTextField:
+            presenter?.setRepeatPassword(password: text)
         default:
             break
         }
     }
 }
 
-extension RegisterViewController: RegisterViewInput {
+extension RegisterViewController: RegisterViewInput, HideBackButtonTitle {
 
     // MARK: - RegisterViewInput methods
 
-    func configure(model: UserModel) {
-        contentView.configure(model: model)
+    func registerStepAction(state: RegisterState) {
+        switch state {
+        case .success:
+            AppRouter.shared.push(.verify(nil))
+        case .failure(let index):
+            switch index {
+            case 0:
+                AppRouter.shared.showAlert(type: .emailAlreadyExist, message: nil)
+            case 1:
+                AppRouter.shared.showAlert(type: .phoneAlreadyExist, message: nil)
+            default:
+                break
+            }
+        }
     }
 }

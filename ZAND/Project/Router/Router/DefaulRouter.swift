@@ -15,6 +15,7 @@ protocol DefaultRouter: AnyObject {
     func changeTabBarVC(to index: Int)
     func popViewController()
     func dismiss()
+    func popToRoot()
 
     func pushCreateRecord(_ type: VCType)
     func showAlert(type: AlertType, message: String?)
@@ -22,6 +23,4 @@ protocol DefaultRouter: AnyObject {
     func presentRecordNavigation(type: VCType)
     func presentSearch(type: VCType, completionHandler: ((SearchState, SaloonModel?) -> ())?)
     func switchRoot(type: ReplacedControllerType)
-
-    func checkAuth()
 }

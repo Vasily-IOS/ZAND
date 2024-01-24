@@ -31,6 +31,7 @@ final class ProfileCell: BaseCollectionCell {
     func configure(model: ProfileMenuModel) {
         profileOptionImage.image = model.image
         profileOptionLabel.text = model.description
+        profileOptionLabel.textColor = model.color
     }
 }
 
@@ -47,14 +48,13 @@ extension ProfileCell {
         }
         
         profileOptionImage.snp.makeConstraints { make in
-            make.left.equalTo(self).offset(12)
-            make.width.height.equalTo(18)
-            make.centerY.equalTo(self)
+            make.left.equalToSuperview().offset(12)
+            make.centerY.equalToSuperview()
         }
         
         profileOptionLabel.snp.makeConstraints { make in
-            make.left.equalTo(profileOptionImage.snp.right).offset(12)
-            make.centerY.equalTo(self)
+            make.left.equalToSuperview().offset(48)
+            make.centerY.equalToSuperview()
         }
     }
 }

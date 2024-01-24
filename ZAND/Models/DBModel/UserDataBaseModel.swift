@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import RealmSwift
 
-class UserDataBaseModel: Object {
-    @Persisted var id: String = ""
-    @Persisted var givenName: String = ""
-    @Persisted var familyName: String = ""
-    @Persisted var email: String = ""
-    @Persisted var phone: String = ""
+struct UserDBModel: Codable {
+    let name: String
+    let surname: String
+    let fathersName: String
+    let birthday: String
+    let phone: String
+    var email: String
 }

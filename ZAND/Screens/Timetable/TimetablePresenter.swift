@@ -34,12 +34,12 @@ final class TimetablePresenter: TimetablePresenterOutput {
 
     var viewModel: ConfirmationViewModel
 
-    private let network: APIManager
+    private let network: APIManagerCommonP
 
     // MARK: - Initializers
 
     init(view: TimetableInput,
-         network: APIManager,
+         network: APIManagerCommonP,
          viewModel: ConfirmationViewModel
     ) {
 

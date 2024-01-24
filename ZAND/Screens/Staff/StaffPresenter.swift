@@ -29,13 +29,13 @@ final class StaffPresenter: StaffPresenterOutput {
 
     var viewModel: ConfirmationViewModel
 
-    private let network: APIManager
+    private let network: APIManagerCommonP
 
     // MARK: - Initializers
 
     init(
         view: StaffViewInput,
-        network: APIManager,
+        network: APIManagerCommonP,
         serviceToProvideID: Int=0,
         viewModel: ConfirmationViewModel
     ) {

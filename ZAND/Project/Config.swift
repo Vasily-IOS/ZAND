@@ -22,4 +22,7 @@ enum Config {
     static let connectivityStatus = "connectivityStatus"
     static let splash_video = "splash_video"
     static let splash_video_type = "mp4"
+    // other
+    static let token = "currentBearerToken"
+    static let undeletableUserKey = "undeletableUserKey"
 }
