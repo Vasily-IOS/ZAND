@@ -122,15 +122,15 @@ final class SaloonCell: BaseCollectionCell {
 
     func configure(model: Saloon, indexPath: IndexPath) {
         self.saloonDescriptionLabel.text = model.saloonCodable.title
-        self.categoryLabel.text = model.saloonCodable.short_descr
+        self.categoryLabel.text = model.saloonCodable.shortDescription
         self.adressLabel.text = model.saloonCodable.address
         self.id = model.saloonCodable.id
         self.indexPath = indexPath
 
-        if model.saloonCodable.photos.isEmpty && model.saloonCodable.company_photos.isEmpty {
+        if model.saloonCodable.photos.isEmpty && model.saloonCodable.companyPhotos.isEmpty {
             saloonImage.image = AssetImage.noFoto_icon.image
         } else {
-            if let url = URL(string: model.saloonCodable.company_photos.first ?? "") {
+            if let url = URL(string: model.saloonCodable.companyPhotos.first ?? "") {
                 saloonImage.kf.setImage(with: url)
             }
         }

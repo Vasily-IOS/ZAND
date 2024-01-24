@@ -5,6 +5,8 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleIdentifier</key>
+			<string></string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
@@ -12,6 +14,7 @@
 				<string>com.googleusercontent.apps.102387260014-laonrhjt9738su6750gtme9h6317fetg</string>
 			</array>
 		</dict>
+		<dict/>
 	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array>

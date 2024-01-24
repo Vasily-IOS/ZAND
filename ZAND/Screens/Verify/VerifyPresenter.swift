@@ -31,11 +31,11 @@ final class VerifyPresenter: VerifyOutput {
 
     unowned let view: VerifyInput
 
-    private let network: APIManagerAuthP
+    private let network: ZandAppAPI
 
     // MARK: - Initializers
 
-    init(view: VerifyInput, network: APIManagerAuthP, verifyType: VerifyType?=nil) {
+    init(view: VerifyInput, network: ZandAppAPI, verifyType: VerifyType?=nil) {
         self.view = view
         self.network = network
         self.verifyType = verifyType

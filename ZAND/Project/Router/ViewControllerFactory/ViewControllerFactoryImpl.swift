@@ -62,8 +62,8 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             return vc
         case .profile:
             let layout: DefaultProfileLayout = ProfileLayoutBuilder()
-            let network: APIManagerCommonP = APIManagerCommon()
-            let authNetwork: APIManagerAuthP = APIManagerAuth()
+            let network: YclientsAPI = YclientsAPIManager()
+            let authNetwork: ZandAppAPI = ZandAppAPIManager()
             let view = ProfileView(layout: layout)
             let vc = ProfileViewController(contentView: view)
             let presenter = ProfilePresenter(view: vc, network: network, authNetwork: authNetwork)
@@ -71,7 +71,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             return vc
         case .appointments:
             let realmManager: RealmManager = RealmManagerImpl()
-            let network: APIManagerCommonP = APIManagerCommon()
+            let network: YclientsAPI = YclientsAPIManager()
             let view = AppointemtsView()
             let vc = AppointmentsViewController(contentView: view)
             let presenter = AppointmentsPresenterImpl(view: vc, network: network, realm: realmManager)
@@ -87,14 +87,14 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             vc.presenter = presenter
             return vc
         case .signIn:
-            let network: APIManagerAuthP = APIManagerAuth()
+            let network: ZandAppAPI = ZandAppAPIManager()
             let view = SignInView()
             let vc = SignInViewController(contentView: view)
             let presenter = SignInPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
         case .register:
-            let network: APIManagerAuthP = APIManagerAuth()
+            let network: ZandAppAPI = ZandAppAPIManager()
             let view = RegisterView()
             let vc = RegisterViewController(contentView: view)
             let presenter = RegisterPresenter(view: vc, network: network)
@@ -115,7 +115,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
         case .services(let booking_type, let company_id, let company_name, let company_address, let viewModel):
             let view = ServicesView()
             let vc = ServicesViewController(contentView: view)
-            let network: APIManagerCommonP = APIManagerCommon()
+            let network: YclientsAPI = YclientsAPIManager()
 
             var currentViewModel: ConfirmationViewModel?
 
@@ -145,7 +145,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
         case .staff(let booking_type, let company_id, let company_name, let company_address, let viewModel):
             let view = StaffView()
             let vc = StaffViewController(contentView: view)
-            let network: APIManagerCommonP = APIManagerCommon()
+            let network: YclientsAPI = YclientsAPIManager()
 
             var currentViewModel: ConfirmationViewModel?
 
@@ -173,7 +173,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let layout: DefaultTimetableLayout = TimetableLayout()
             let contentView = TimetableView(layout: layout)
             let vс = TimetableViewController(contentView: contentView)
-            let network: APIManagerCommonP = APIManagerCommon()
+            let network: YclientsAPI = YclientsAPIManager()
             let presenter = TimetablePresenter(
                 view: vс,
                 network: network,
@@ -183,7 +183,7 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             return vс
         case .confirmation(let viewModel):
             let realm: RealmManager = RealmManagerImpl()
-            let network: APIManagerCommonP = APIManagerCommon()
+            let network: YclientsAPI = YclientsAPIManager()
             let view = ConfirmationView()
             let vc = ConfirmationViewController(contentView: view)
             let presenter = ConfirmationPresenter(
@@ -196,28 +196,28 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             vc.title = AssetString.checkAppointment.rawValue
             return vc
         case .resetPassword:
-            let network: APIManagerAuthP = APIManagerAuth()
+            let network: ZandAppAPI = ZandAppAPIManager()
             let view = ResetPasswordView()
             let vc = ResetPasswordViewController(contentView: view)
             let presenter = ResetPasswordPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
         case .refreshPassword:
-            let network: APIManagerAuthP = APIManagerAuth()
+            let network: ZandAppAPI = ZandAppAPIManager()
             let view = RefreshPasswordView()
             let vc = RefreshPasswordViewController(contentView: view)
             let presenter = RefreshPasswordPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
         case .verify(let type):
-            let network: APIManagerAuthP = APIManagerAuth()
+            let network: ZandAppAPI = ZandAppAPIManager()
             let view = VerifyView()
             let vc = VerifyViewController(contentView: view)
             let presenter = VerifyPresenter(view: vc, network: network, verifyType: type)
             vc.presenter = presenter
             return vc
         case .settings:
-            let network: APIManagerAuthP = APIManagerAuth()
+            let network: ZandAppAPI = ZandAppAPIManager()
             let view = SettingsView()
             let vc = SettingsViewController(contentView: view)
             let presenter = SettingsPresenter(view: vc, network: network)

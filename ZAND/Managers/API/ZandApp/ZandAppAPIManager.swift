@@ -1,5 +1,5 @@
 //
-//  APIManagerAuth.swift
+//  ZandAppAPIManager.swift
 //  ZAND
 //
 //  Created by Василий on 25.12.2023.
@@ -8,26 +8,27 @@
 import Foundation
 import Moya
 
-protocol APIManagerAuthP: AnyObject {
+protocol ZandAppAPI: AnyObject {
     func performRequest<T: Codable>(
-        type: AuthRequestType,
+        type: ZandAppRequestType,
         expectation: T.Type,
         completion: @escaping (T?, Bool) -> Void,
         error: @escaping ((Data) -> Void)
     )
 }
 
-final class APIManagerAuth: APIManagerAuthP {
+final class ZandAppAPIManager: ZandAppAPI {
 
     // MARK: - Properties
 
     private let decoder = JSONDecoder()
-    private let provider = MoyaProvider<AuthRequestType>()
+    
+    private let provider = MoyaProvider<ZandAppRequestType>()
 
     // MARK: - Instance methods
 
     func performRequest<T>(
-        type: AuthRequestType,
+        type: ZandAppRequestType,
         expectation: T.Type,
         completion: @escaping (T?, Bool) -> Void,
         error: @escaping ((Data) -> Void)
@@ -37,7 +38,6 @@ final class APIManagerAuth: APIManagerAuthP {
 
             switch result {
             case .success(let response):
-
                 let successfulRange = (200...299)
                 let responseCode = response.response?.statusCode ?? 0
 
@@ -55,8 +55,6 @@ final class APIManagerAuth: APIManagerAuthP {
                     completion(nil, false)
                     error(response.data)
                 }
-
-                print(String(data: response.data, encoding: .utf8))
             case .failure(let error):
                 debugPrint(error)
                 completion(nil, false)

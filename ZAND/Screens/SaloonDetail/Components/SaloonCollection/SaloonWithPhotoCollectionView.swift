@@ -101,14 +101,14 @@ final class SaloonWithPhotoCollectionView: BaseUIView {
     }
 
     func configure(model: Saloon) {
-        if model.saloonCodable.company_photos.count == 1 {
+        if model.saloonCodable.companyPhotos.count == 1 {
             pageControl.isHidden = true
         } else {
             pageControl.numberOfPages = model.saloonCodable.photos.count
         }
-        photos = model.saloonCodable.company_photos
+        photos = model.saloonCodable.companyPhotos
         nameLabel.text = model.saloonCodable.title
-        categoryLabel.text = model.saloonCodable.short_descr
+        categoryLabel.text = model.saloonCodable.shortDescription
         id = model.saloonCodable.id
 
         if model.distance != nil {

@@ -5,11 +5,11 @@
 //  Created by Василий on 07.06.2023.
 //
 
-import UIKit
+import Foundation
 import RealmSwift
 
 final class RealmManagerImpl: RealmManager {
-    
+
     private let defaultRealm: Realm
 
     var isInWriteTransaction: Bool {
@@ -26,7 +26,7 @@ final class RealmManagerImpl: RealmManager {
             fatalError()
         }
     }
-    
+
     func save<Element: Object>(object: Element) {
         do {
             try defaultRealm.write {
@@ -36,7 +36,7 @@ final class RealmManagerImpl: RealmManager {
             print(error.localizedDescription)
         }
     }
-    
+
     func get<Element>(_ type: Element.Type) -> Results<Element> where Element : RealmFetchable {
         return defaultRealm.objects(type)
     }
@@ -44,7 +44,7 @@ final class RealmManagerImpl: RealmManager {
     func getID<Element>(type: Element.Type, predicate: NSPredicate) -> Element? where Element : RealmFetchable {
         return defaultRealm.objects(type).filter(predicate).first
     }
-    
+
     func removeObject<Element: Object>(object: Element) {
         do {
             try defaultRealm.write({
@@ -54,7 +54,7 @@ final class RealmManagerImpl: RealmManager {
             print(error.localizedDescription)
         }
     }
-    
+
     func removeObjectByPredicate<Element: Object>(object: Element.Type, predicate: NSPredicate) {
         do {
             try defaultRealm.write({
@@ -66,7 +66,7 @@ final class RealmManagerImpl: RealmManager {
             print(error.localizedDescription)
         }
     }
-    
+
     func contains<Element: Object>(predicate: NSPredicate, _ type: Element.Type) -> Bool {
         let existingObject = defaultRealm.objects(Element.self).filter(predicate).first
         return existingObject == nil

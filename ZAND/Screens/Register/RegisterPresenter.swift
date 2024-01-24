@@ -42,11 +42,11 @@ final class RegisterPresenter: RegisterPresenterOutput {
 
     var user = UserRegisterModel()
 
-    private let network: APIManagerAuthP
+    private let network: ZandAppAPI
 
     // MARK: - Initializers
 
-    init(view: RegisterViewInput, network: APIManagerAuthP) {
+    init(view: RegisterViewInput, network: ZandAppAPI) {
         self.view = view
         self.network = network
     }
