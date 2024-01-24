@@ -92,7 +92,8 @@ extension ZandAppRequestType: TargetType {
             return .requestPlain
         case .salons(let size):
             return .requestParameters(
-                parameters: ["size": "\(size)"], 
+                parameters: ["size": "\(size)",
+                             "sort": "remoteId"],
                 encoding: URLEncoding.queryString
             )
         }
