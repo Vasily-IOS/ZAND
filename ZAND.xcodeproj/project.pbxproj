@@ -103,7 +103,7 @@
 		FF66E5D32B3F01390055A03B /* SettingsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E5D22B3F01390055A03B /* SettingsInputView.swift */; };
 		FF69DADD2A545F5700481CF1 /* Extension + StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */; };
 		FF6DB3D12B0FADCF003648A8 /* SaloonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6DB3D02B0FADCF003648A8 /* SaloonModel.swift */; };
-		FF6E41322B0A7332002D85AD /* DeviceLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */; };
+		FF6E41322B0A7332002D85AD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E41312B0A7332002D85AD /* LocationManager.swift */; };
 		FF862A4D2AA88B660083DEB7 /* SaloonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF862A4C2AA88B660083DEB7 /* SaloonProvider.swift */; };
 		FF8904F82B3C54B40037652A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8904F72B3C54B40037652A /* UserModel.swift */; };
 		FF8904FA2B3C5B830037652A /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8904F92B3C5B830037652A /* RefreshTokenModel.swift */; };
@@ -309,7 +309,7 @@
 		FF66E5D22B3F01390055A03B /* SettingsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInputView.swift; sourceTree = "<group>"; };
 		FF69DADC2A545F5700481CF1 /* Extension + StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + StringProtocol.swift"; sourceTree = "<group>"; };
 		FF6DB3D02B0FADCF003648A8 /* SaloonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonModel.swift; sourceTree = "<group>"; };
-		FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationManager.swift; sourceTree = "<group>"; };
+		FF6E41312B0A7332002D85AD /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FF7D50712B609E0C00E241B6 /* ZAND..entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZAND..entitlements; sourceTree = "<group>"; };
 		FF862A4C2AA88B660083DEB7 /* SaloonProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonProvider.swift; sourceTree = "<group>"; };
 		FF8904F72B3C54B40037652A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -1062,7 +1062,7 @@
 		FFB985662A30AF7A00ABEFBB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				FF6E41312B0A7332002D85AD /* DeviceLocationManager.swift */,
+				FF6E41312B0A7332002D85AD /* LocationManager.swift */,
 				FFD4290F2AC4C3030069E681 /* NetworkMonitorManager.swift */,
 				FFB985672A30AFD100ABEFBB /* VibrationManager.swift */,
 				FF44EA6B2B39B79800989A0B /* TokenManager.swift */,
@@ -1493,7 +1493,7 @@
 				FFF6002B2A6FD60B009813E6 /* ActivityIndicator.swift in Sources */,
 				FFB985682A30AFD100ABEFBB /* VibrationManager.swift in Sources */,
 				FF8904F82B3C54B40037652A /* UserModel.swift in Sources */,
-				FF6E41322B0A7332002D85AD /* DeviceLocationManager.swift in Sources */,
+				FF6E41322B0A7332002D85AD /* LocationManager.swift in Sources */,
 				FF44EA712B39C15500989A0B /* UpdatedTokenModel.swift in Sources */,
 				FF66E5CE2B3EF8CE0055A03B /* SettingsView.swift in Sources */,
 				FF25632A29F5675900091374 /* TransparentButton.swift in Sources */,

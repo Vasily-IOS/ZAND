@@ -84,7 +84,7 @@ final class MapPresenter: MapPresenterOutput {
 
     private let provider: SaloonProvider
 
-    private let locationManager = DeviceLocationManager.shared
+    private let locationManager = LocationManager.shared
 
     // MARK: - Initializers
 

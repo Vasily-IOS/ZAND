@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import YandexMobileMetrica
 
 enum VerifyType {
     case changeEmail
@@ -31,12 +32,15 @@ final class VerifyPresenter: VerifyOutput {
 
     unowned let view: VerifyInput
 
+    private let dateOfBirth: Date
+
     private let network: ZandAppAPI
 
     // MARK: - Initializers
 
-    init(view: VerifyInput, network: ZandAppAPI, verifyType: VerifyType?=nil) {
+    init(view: VerifyInput, network: ZandAppAPI, verifyType: VerifyType?=nil, dateOfBirth: Date = Date()) {
         self.view = view
+        self.dateOfBirth = dateOfBirth
         self.network = network
         self.verifyType = verifyType
     }
@@ -51,6 +55,11 @@ final class VerifyPresenter: VerifyOutput {
             guard let self else { return }
 
             if isSuccess {
+                // евент об успешной регистрации
+                YMMYandexMetrica.reportEvent("registration_completed", parameters: nil, onFailure: nil)
+                // отправка юзера с его возрастом
+                sendUserDataToYandexMetrica()
+
                 if (self.verifyType ?? .none) == .changeEmail {
                     self.view.popToRoot()
                     NotificationCenter.default.post(name: .signOut, object: nil)
@@ -61,5 +70,19 @@ final class VerifyPresenter: VerifyOutput {
                 self.view.showAlert()
             }
         } error: { _ in }
+    }
+
+    private func sendUserDataToYandexMetrica() {
+        YMMYandexMetrica.setUserProfileID("user_id")
+        let userProfile = YMMMutableUserProfile()
+        let ageAttribute = YMMProfileAttribute.customNumber("age").withValue(yearsBetweenDates() ?? 0)
+        userProfile.apply(ageAttribute)
+        YMMYandexMetrica.report(userProfile, onFailure: nil)
+    }
+
+    func yearsBetweenDates() -> Double? {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year], from: dateOfBirth, to: Date())
+        return Double(components.year ?? 0)
     }
 }

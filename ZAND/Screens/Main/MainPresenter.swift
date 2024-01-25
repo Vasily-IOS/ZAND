@@ -79,7 +79,7 @@ final class MainPresenter: MainPresenterOutput {
 
     private let provider: SaloonProvider
 
-    private let locationManager = DeviceLocationManager.shared
+    private let locationManager = LocationManager.shared
 
     // MARK: - Initializer
     

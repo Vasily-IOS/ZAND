@@ -209,11 +209,11 @@ final class ViewControllerFactoryImpl: ViewControllerFactory {
             let presenter = RefreshPasswordPresenter(view: vc, network: network)
             vc.presenter = presenter
             return vc
-        case .verify(let type):
+        case let .verify(type, birthday):
             let network: ZandAppAPI = ZandAppAPIManager()
             let view = VerifyView()
             let vc = VerifyViewController(contentView: view)
-            let presenter = VerifyPresenter(view: vc, network: network, verifyType: type)
+            let presenter = VerifyPresenter(view: vc, network: network, verifyType: type, dateOfBirth: birthday ?? Date())
             vc.presenter = presenter
             return vc
         case .settings:

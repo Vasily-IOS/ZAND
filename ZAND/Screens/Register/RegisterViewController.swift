@@ -197,7 +197,7 @@ extension RegisterViewController: RegisterViewInput, HideBackButtonTitle {
     func registerStepAction(state: RegisterState) {
         switch state {
         case .success:
-            AppRouter.shared.push(.verify(nil))
+            AppRouter.shared.push(.verify(nil, birthday: presenter?.birthday ?? Date()))
         case .failure(let index):
             switch index {
             case 0:
