@@ -69,11 +69,11 @@ final class SettingsPresenter: SettingsOutput {
 
     unowned var view: SettingsInput
 
-    private let network: APIManagerAuthP
+    private let network: ZandAppAPI
 
     // MARK: - Initializers
 
-    init(view: SettingsInput, network: APIManagerAuthP) {
+    init(view: SettingsInput, network: ZandAppAPI) {
         self.view = view
         self.network = network
 

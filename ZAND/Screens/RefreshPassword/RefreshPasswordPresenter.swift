@@ -49,11 +49,11 @@ final class RefreshPasswordPresenter: RefreshPasswordOutput {
 
     unowned let view: RefreshPasswordInput
 
-    private let network: APIManagerAuthP
+    private let network: ZandAppAPI
 
     // MARK: - Initializers
 
-    init(view: RefreshPasswordInput, network: APIManagerAuthP) {
+    init(view: RefreshPasswordInput, network: ZandAppAPI) {
         self.view = view
         self.network = network
     }

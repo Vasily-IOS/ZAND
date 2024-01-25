@@ -32,11 +32,11 @@ final class SignInPresenter: SignInPresenterOutput {
 
     unowned let view: SignInViewInput
 
-    private let network: APIManagerAuthP
+    private let network: ZandAppAPI
 
     // MARK: - Initializers
 
-    init(view: SignInViewInput, network: APIManagerAuthP) {
+    init(view: SignInViewInput, network: ZandAppAPI) {
         self.view = view
         self.network = network
     }

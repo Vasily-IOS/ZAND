@@ -1,5 +1,5 @@
 //
-//  APIManagerCommon.swift
+//  YclientsAPIManager.swift
 //  ZAND
 //
 //  Created by Василий on 10.07.2023.
@@ -8,25 +8,26 @@
 import Foundation
 import Moya
 
-protocol APIManagerCommonP: AnyObject {
+protocol YclientsAPI: AnyObject {
     func performRequest<T: Codable>(
-        type: CommonRequestType,
+        type: YclientsRequestType,
         expectation: T.Type,
         completion: @escaping (T) -> Void
     )
 }
 
-final class APIManagerCommon: APIManagerCommonP {
+final class YclientsAPIManager: YclientsAPI {
 
     // MARK: - Properties
 
     private let decoder = JSONDecoder()
-    private let provider = MoyaProvider<CommonRequestType>()
+
+    private let provider = MoyaProvider<YclientsRequestType>()
 
     // MARK: - Instance methods
 
     func performRequest<T>(
-        type: CommonRequestType,
+        type: YclientsRequestType,
         expectation: T.Type,
         completion: @escaping (T) -> Void
     ) where T : Decodable, T : Encodable {

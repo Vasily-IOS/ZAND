@@ -29,11 +29,11 @@ final class ResetPasswordPresenter: ResetPasswordOutput {
 
     unowned let view: ResetPasswordViewInput
 
-    private let network: APIManagerAuthP
+    private let network: ZandAppAPI
 
     // MARK: - Initializers
 
-    init(view: ResetPasswordViewInput, network: APIManagerAuthP) {
+    init(view: ResetPasswordViewInput, network: ZandAppAPI) {
         self.view = view
         self.network = network
     }

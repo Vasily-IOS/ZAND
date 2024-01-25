@@ -102,8 +102,8 @@ final class SearchViewController: BaseViewController<SearchView> {
     private func dismiss(value: SaloonModel) {
         completionHandler?(.saloonZoom(
             presenter?.searchState == .near ? 0 : 1,
-            latitude: value.saloonCodable.coordinate_lat,
-            longtitude: value.saloonCodable.coordinate_lon), value
+            latitude: value.saloonCodable.latitude,
+            longtitude: value.saloonCodable.longitude), value
         )
         dismiss()
     }

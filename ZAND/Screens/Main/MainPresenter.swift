@@ -79,7 +79,7 @@ final class MainPresenter: MainPresenterOutput {
 
     private let provider: SaloonProvider
 
-    private let locationManager = DeviceLocationManager.shared
+    private let locationManager = LocationManager.shared
 
     // MARK: - Initializer
     
@@ -132,9 +132,13 @@ extension MainPresenter {
 
     func sortModel(filterID: Int) {
         if state == .all {
-            sortedSaloons = allSalons.filter({ $0.saloonCodable.business_type_id == filterID })
+            sortedSaloons = allSalons.filter {
+                $0.saloonCodable.categories.first?.id == filterID
+            }
         } else {
-            sortedSaloons = sortedSalonsByUserLocation().filter({ $0.saloonCodable.business_type_id == filterID })
+            sortedSaloons = sortedSalonsByUserLocation().filter {
+                $0.saloonCodable.categories.first?.id == filterID
+            }
         }
     }
 
@@ -202,8 +206,8 @@ extension MainPresenter {
 
         let nearSalons = allSalons.map { saloon in
             let saloonDistance = CLLocation(
-                latitude: saloon.saloonCodable.coordinate_lat,
-                longitude: saloon.saloonCodable.coordinate_lon
+                latitude: saloon.saloonCodable.latitude,
+                longitude: saloon.saloonCodable.longitude
             )
 
             return SaloonModel(

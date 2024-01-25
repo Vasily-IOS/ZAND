@@ -19,16 +19,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
 
         setupRouter()
-        NetworkMonitor.shared.startMonitoring()
+        setupYandexMetrica()
 
-        let configuration = YMMYandexMetricaConfiguration.init(apiKey: ID.yandexID)
-        YMMYandexMetrica.activate(with: configuration!)
+        NetworkMonitor.shared.startMonitoring()
 
         return true
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         TokenManager.shared.appDelegate = self
+    }
+
+    // MARK: - Instance methods
+
+    private func setupYandexMetrica() {
+        // По умолчанию AppMetrica отслеживает жизненный цикл приложения в автоматическом режиме.
+        // Чтобы изменить длительность таймаута, передайте значение в секундах в свойство sessionTimeout конфигурации YMMYandexMetricaConfiguration.
+        // По умолчанию длительность таймаута сессии равна 10 (у нас 120) секундам. Это минимально допустимое значение свойства sessionTimeout.
+
+        let configuration = YMMYandexMetricaConfiguration.init(apiKey: ID.yandexID)
+        configuration?.sessionTimeout = 120
+        YMMYandexMetrica.activate(with: configuration!)
     }
 }
 

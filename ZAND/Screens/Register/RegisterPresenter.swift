@@ -15,6 +15,7 @@ enum RegisterState {
 protocol RegisterPresenterOutput: AnyObject {
     var keyboardAlreadyHidined: Bool { get set }
     var user: UserRegisterModel { get set }
+    var birthday: Date? { get set }
 
     func setName(name: String)
     func setSurname(surname: String)
@@ -42,11 +43,13 @@ final class RegisterPresenter: RegisterPresenterOutput {
 
     var user = UserRegisterModel()
 
-    private let network: APIManagerAuthP
+    var birthday: Date?
+
+    private let network: ZandAppAPI
 
     // MARK: - Initializers
 
-    init(view: RegisterViewInput, network: APIManagerAuthP) {
+    init(view: RegisterViewInput, network: ZandAppAPI) {
         self.view = view
         self.network = network
     }
@@ -74,6 +77,8 @@ final class RegisterPresenter: RegisterPresenterOutput {
     }
 
     func setBirthday(birthday: Date) {
+        self.birthday = birthday
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         user.birthday = dateFormatter.string(from: birthday)
@@ -103,9 +108,6 @@ final class RegisterPresenter: RegisterPresenterOutput {
         ) { [weak self] response, isSuccess in
             if isSuccess {
                 self?.view?.registerStepAction(state: .success)
-                print("Register is valid. Response is \(response?.data)")
-            } else {
-                print(response?.data)
             }
         } error: { [weak self] error in
             print("Register is NOT valid.")

@@ -38,13 +38,13 @@ final class ProfilePresenter: ProfilePresenterOutput {
 
     private var uiModelCount: Int = 0
 
-    private let network: APIManagerCommonP
+    private let network: YclientsAPI
 
-    private let authNetwork: APIManagerAuthP
+    private let authNetwork: ZandAppAPI
 
     // MARK: - Initializers
 
-    init(view: ProfileViewInput, network: APIManagerCommonP, authNetwork: APIManagerAuthP) {
+    init(view: ProfileViewInput, network: YclientsAPI, authNetwork: ZandAppAPI) {
         self.view = view
         self.network = network
         self.authNetwork = authNetwork
@@ -70,13 +70,14 @@ final class ProfilePresenter: ProfilePresenterOutput {
 
         for (index, value) in saloonsID.enumerated() {
             group.enter()
-            network.performRequest(type: .salons, expectation: SalonsCodableModel.self) { saloonData in
-                let saloon = saloonData.data.first(where: { $0.id == value })
+            authNetwork.performRequest(type: .salons(size: 100), expectation: SalonsCodableModel.self
+            ) { saloonData, _ in
+                let saloon = saloonData?.data.first(where: { $0.id == value })
                 if let saloon {
                     savedSaloons[index] = SaloonModel(saloonCodable: saloon)
                 }
                 group.leave()
-            }
+            } error: { _ in }
         }
 
         group.notify(queue: .main) {

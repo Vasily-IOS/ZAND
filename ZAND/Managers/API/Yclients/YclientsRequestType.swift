@@ -1,5 +1,5 @@
 //
-//  Network.swift
+//  YclientsRequestType.swift
 //  ZAND
 //
 //  Created by Василий on 05.07.2023.
@@ -8,8 +8,7 @@
 import Foundation
 import Moya
 
-enum CommonRequestType {
-    case salons // Данные о салонах, подключивших приложение
+enum YclientsRequestType {
     case categories(Int) // получить все категории услуг
     case bookServices(company_id: Int, staff_id: Int = 0) // Получить список услуг, доступных для бронирования
     case bookStaff(company_id: Int, service_id: [Int]) // Получить список сотрудников доступных для бронирования
@@ -33,7 +32,7 @@ enum CommonRequestType {
     }
 }
 
-extension CommonRequestType: TargetType {
+extension YclientsRequestType: TargetType {
 
     var baseURL: URL {
         return URL(string: AssetURL.yclientsURL.rawValue)!
@@ -41,8 +40,6 @@ extension CommonRequestType: TargetType {
 
     var path: String {
         switch self {
-        case .salons:
-            return "/marketplace/application/\(applicationID)/salons"
         case .categories(let company_id):
             return "/api/v1/company/\(company_id)/service_categories/"
         case .bookServices(let company_id, _):
@@ -62,7 +59,7 @@ extension CommonRequestType: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .salons, .categories, .bookServices, .bookStaff,
+        case .categories, .bookServices, .bookStaff,
              .bookDates, .bookTimes, .getRecord:
             return .get
         case .createRecord:
@@ -72,12 +69,12 @@ extension CommonRequestType: TargetType {
 
     var task: Moya.Task {
         switch self {
-        case .salons:
-            let parameters: [String: Any] = ["count": 1000]
-            return .requestParameters(
-                parameters: parameters,
-                encoding: URLEncoding.queryString
-            )
+//        case .salons:
+//            let parameters: [String: Any] = ["count": 1000]
+//            return .requestParameters(
+//                parameters: parameters,
+//                encoding: URLEncoding.queryString
+//            )
         case .categories, .bookTimes, .getRecord:
             return .requestPlain
         case .bookServices(_ , let staff_id):

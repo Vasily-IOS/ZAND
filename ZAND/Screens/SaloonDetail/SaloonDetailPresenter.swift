@@ -42,7 +42,7 @@ final class SaloonDetailPresenter: SaloonPresenterOutput {
         self.view = view
 
         self.model = model
-        self.salonID = model.saloonCodable.id
+        self.salonID = model.saloonCodable.remoteId
         self.saloonName = model.saloonCodable.title
         self.saloonAddress = model.saloonCodable.address
 

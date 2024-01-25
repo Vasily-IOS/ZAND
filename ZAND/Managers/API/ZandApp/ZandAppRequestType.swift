@@ -1,5 +1,5 @@
 //
-//  AuthRequestType.swift
+//  ZandAppRequestType.swift
 //  ZAND
 //
 //  Created by Василий on 25.12.2023.
@@ -11,7 +11,8 @@
 import Foundation
 import Moya
 
-enum AuthRequestType {
+enum ZandAppRequestType {
+    case salons(size: Int) // салоны красоты
     case register(CreateUserModel)
     case verify(VerifyModel)
     case login(LoginModel)
@@ -28,7 +29,7 @@ enum AuthRequestType {
     }
 }
 
-extension AuthRequestType: TargetType {
+extension ZandAppRequestType: TargetType {
 
     var baseURL: URL {
         return URL(string: AssetURL.authURL.rawValue)!
@@ -36,6 +37,8 @@ extension AuthRequestType: TargetType {
 
     var path: String {
         switch self {
+        case .salons(let size):
+            return "/api/v1/salons/list"
         case .register:
             return "/api/v1/auth/register"
         case .verify:
@@ -60,7 +63,7 @@ extension AuthRequestType: TargetType {
         case .register, .verify, .login, .refreshToken, .refreshUser,
                 .refreshEmail, .resetPassword, .refreshPassword:
             return .post
-        case .getUser:
+        case .salons, .getUser:
             return .get
         case .deleteUser:
             return .delete
@@ -87,12 +90,18 @@ extension AuthRequestType: TargetType {
             return .requestJSONEncodable(model)
         case .deleteUser:
             return .requestPlain
+        case .salons(let size):
+            return .requestParameters(
+                parameters: ["size": "\(size)",
+                             "sort": "remoteId"],
+                encoding: URLEncoding.queryString
+            )
         }
     }
 
     var headers: [String : String]? {
         switch self {
-        case .register, .verify, .login, .refreshToken, .resetPassword, .refreshPassword:
+        case .salons, .register, .verify, .login, .refreshToken, .resetPassword, .refreshPassword:
             return ["Content-Type": "application/json"]
         case .getUser, .deleteUser:
             return ["Authorization" : "Bearer \(bearerToken)"]

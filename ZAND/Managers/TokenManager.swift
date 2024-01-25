@@ -31,7 +31,7 @@ final class TokenManager {
         }
     }
 
-    private let apiManager: APIManagerAuthP = APIManagerAuth()
+    private let apiManager: ZandAppAPI = ZandAppAPIManager()
 
     private let keyChain = KeychainSwift()
 
