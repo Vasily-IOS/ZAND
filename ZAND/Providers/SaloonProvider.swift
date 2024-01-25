@@ -16,19 +16,19 @@ final class SaloonProviderImpl: SaloonProvider {
 
     // MARK: - Properties
 
-    private let apiManager: APIManager = APIManagerImpl()
+    private let network: ZandAppAPI = ZandAppAPIManager()
 
     // MARK: - Instance methods
 
     func fetchData(completion: @escaping ([Saloon]) -> Void) {
-        apiManager.performRequest(type: .salons, expectation: SalonsCodableModel.self
-        ) { result in
-            if !result.data.isEmpty {
-                let result = result.data.map{ SaloonModel(saloonCodable: $0) }
+        network.performRequest(type: .salons(size: 100), expectation: SalonsCodableModel.self
+        ) { result, isSuccess  in
+            guard isSuccess else { return }
+
+            if let model = result?.data {
+                let result = model.map { SaloonModel(saloonCodable: $0) }
                 completion(result)
-            } else {
-                print("We have no salons")
             }
-        }
+        } error: { _ in }
     }
 }

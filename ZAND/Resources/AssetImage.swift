@@ -33,6 +33,9 @@ enum AssetImage {
     case lostConnection_icon
     case deleteProfile_icon
     case location_icon
+    case delete_icon
+    case trash
+    case scrollToTop
 
     var image: UIImage {
         switch self {
@@ -86,6 +89,12 @@ enum AssetImage {
             return UIImage(named: "deleteProfile_icon")!
         case .location_icon:
             return UIImage(named: "location_icon")!
+        case .delete_icon:
+            return UIImage(named: "delete_icon")!
+        case .trash:
+            return UIImage(named: "trash_icon")!
+        case .scrollToTop:
+            return UIImage(named: "scrollToTop_icon")!
         }
     }
 }

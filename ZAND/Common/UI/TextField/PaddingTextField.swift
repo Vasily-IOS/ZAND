@@ -14,35 +14,53 @@ final class PaddingTextField: UITextField {
     
     enum State {
         case email
+        case password
         case smsCode
-        case name
-        case surname
+        case name // имя
+        case surname // фамилия
+        case fathersName // отчество
         case age
         case usename
+        case createPassword
         case confirmPassword
         case confirmation_code
         case phone
+        case birthday
+        case repeatPassword
+        case phoneEnter
         
         var placeholder_text: String {
             switch self {
             case .email:
                 return AssetString.email.rawValue
+            case .password:
+                return AssetString.password.rawValue
             case .smsCode:
                 return AssetString.smsCode.rawValue
             case .name:
                 return AssetString.name.rawValue
             case .surname:
                 return AssetString.surname.rawValue
+            case .fathersName:
+                return AssetString.fathersName.rawValue
             case .age:
                 return AssetString.age.rawValue
             case .usename:
                 return AssetString.userName.rawValue
+            case .createPassword:
+                return AssetString.createPassword.rawValue
             case .confirmPassword:
                 return AssetString.confirmPassword.rawValue
             case .confirmation_code:
                 return AssetString.confirmationCode.rawValue
             case .phone:
                 return AssetString.phoneNumber.rawValue
+            case .birthday:
+                return AssetString.birthday.rawValue
+            case .repeatPassword:
+                return AssetString.repeatPassword.rawValue
+            case .phoneEnter:
+                return AssetString.phoneEnter.rawValue
             }
         }
     }
@@ -57,7 +75,7 @@ final class PaddingTextField: UITextField {
         bottom: 0,
         right: 10
     )
-    
+
     // MARK: - Initializers
 
     init(state: State) {
@@ -73,21 +91,10 @@ final class PaddingTextField: UITextField {
     
     // MARK: -
 
-    func configure(textInput: String) {
-        if textInput.isEmpty {
-            layer.borderWidth = 0.5
-            layer.borderColor = UIColor.red.cgColor
-        } else {
-            text = textInput
-            layer.borderWidth = 0.0
-        }
-    }
-
     private func setup(state: State) {
         layer.cornerRadius = 15.0
         backgroundColor = .white
         addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
-
         placeholder = state.placeholder_text
 
         if state == .phone || state == .smsCode {
@@ -101,12 +108,13 @@ final class PaddingTextField: UITextField {
 
     @objc
     private func textDidChange(_ sender: UITextField) {
-        if sender.text == "" {
-            layer.borderWidth = 0.5
-            layer.borderColor = UIColor.red.cgColor
-        } else {
-            layer.borderWidth = 0
-        }
+//        if sender.text == "" {
+//            layer.borderWidth = 0.5
+//            layer.borderColor = UIColor.red.cgColor
+//        } else {
+//            layer.borderWidth = 0
+//        }
+
         textDidChange?(sender.text ?? "")
     }
     

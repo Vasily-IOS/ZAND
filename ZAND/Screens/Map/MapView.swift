@@ -157,8 +157,8 @@ final class MapRectView: BaseUIView {
     func addPinsOnMap(model: [Saloon]) {
         model.forEach {
             let coordinates = CLLocationCoordinate2D(
-                latitude: $0.saloonCodable.coordinate_lat,
-                longitude: $0.saloonCodable.coordinate_lon
+                latitude: $0.saloonCodable.latitude,
+                longitude: $0.saloonCodable.longitude
             )
             mapView.addAnnotation(
                 SaloonAnnotation(coordinate: coordinates, model: $0))

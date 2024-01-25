@@ -15,10 +15,18 @@ enum AlertType {
     case phoneInputError
     case gotError
     case enterPhone
-    case fillAllFields
+    case fillAllRequiredFields
     case invalidEmailInput
     case shouldAcceptPolicy
     case invalidPhoneInput
+    case passwwordsIsNotEqual
+    case passwordCountIsSmall
+    case invalidEmailOrPassword
+    case profileDeleted
+    case smthWentWrong
+    case emailsEqual
+    case emailAlreadyExist
+    case phoneAlreadyExist
 
     var textValue: String {
         switch self {
@@ -36,14 +44,30 @@ enum AlertType {
             return AssetString.gotError.rawValue
         case .enterPhone:
             return AssetString.enterPhone.rawValue
-        case .fillAllFields:
-            return AssetString.fillAllFields.rawValue
+        case .fillAllRequiredFields:
+            return AssetString.fillAllRequiredFields.rawValue
         case .invalidEmailInput:
             return AssetString.invalidEmailInput.rawValue
         case .shouldAcceptPolicy:
             return AssetString.shouldAcceptPolicy.rawValue
         case .invalidPhoneInput:
             return AssetString.phoneInput.rawValue
+        case .passwwordsIsNotEqual:
+            return AssetString.passwIsNotEqual.rawValue
+        case .passwordCountIsSmall:
+            return AssetString.passwordCountIsSmall.rawValue
+        case .invalidEmailOrPassword:
+            return AssetString.invalidEmailOrPassword.rawValue
+        case .profileDeleted:
+            return AssetString.profileDeleted.rawValue
+        case .smthWentWrong:
+            return AssetString.smthWentWrong.rawValue
+        case .emailsEqual:
+            return AssetString.emailsEqual.rawValue
+        case .emailAlreadyExist:
+            return AssetString.emailAlreadyExist.rawValue
+        case .phoneAlreadyExist:
+            return AssetString.phoneAlreadyExist.rawValue
         }
     }
 }

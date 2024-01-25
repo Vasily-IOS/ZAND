@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AuthenticationServices
 
 final class SignInViewController: BaseViewController<SignInView> {
 
@@ -19,13 +18,51 @@ final class SignInViewController: BaseViewController<SignInView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        presenter?.checkUndeletableInfo()
         subscribeDelegates()
+        subscribeNotifications()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     // MARK: - Instance methods
 
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+
+        contentView.setNewScrollInset(
+            inset: UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        )
+    }
+
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        contentView.setNewScrollInset(inset: .zero)
+    }
+
     private func subscribeDelegates() {
         contentView.delegate = self
+    }
+
+    private func subscribeNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil
+        )
     }
 }
 
@@ -34,50 +71,49 @@ extension SignInViewController: SignInDelegate {
     // MARK: - AppleSignInDelegate methods
 
     func signInButtonTap() {
-        presenter?.createAuthRequest()
+        presenter?.signIn()
+    }
+
+    func forgotButtonDidTap() {
+        AppRouter.shared.push(.resetPassword)
+    }
+
+    func registerButtonDidTap() {
+        AppRouter.shared.push(.register)
+    }
+
+    func cancelEditing() {
+        contentView.endEditing(true)
+    }
+
+    func setEmail(text: String) {
+        presenter?.email = text
+    }
+
+    func setLogin(text: String) {
+        presenter?.password = text
+    }
+
+    func showEmptyFieldsAlert() {
+        AppRouter.shared.showAlert(type: .fillAllRequiredFields, message: nil)
+    }
+
+    func showBadInputAlert() {
+        AppRouter.shared.showAlert(type: .invalidEmailOrPassword, message: nil)
     }
 }
 
 extension SignInViewController: SignInViewInput {
 
-    // MARK: - AppleSignInViewInput methods
-    
-    func showASAuthController(request: ASAuthorizationOpenIDRequest) {
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
+    // MARK: - SignInViewInput methods
 
-        controller.performRequests()
-    }
-}
-
-extension SignInViewController: ASAuthorizationControllerDelegate {
-
-    // MARK: - ASAuthorizationControllerDelegate methods
-
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        case let credential as ASAuthorizationAppleIDCredential:
-            let user = UserModel(credential: credential)
-
-            AppRouter.shared.push(.register(user))
-        default:
-            break
+    func switchScreen() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            AppRouter.shared.switchRoot(type: .profile)
         }
     }
 
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithError error: Error) {
-        debugPrint(error)
-    }
-}
-
-extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
-
-    // MARK: - ASAuthorizationControllerPresentationContextProviding methods
-
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return view.window!
+    func setupUndeletableUser(user: UndeletableUserModel) {
+        contentView.setupUserInfo(model: user)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  RegisterNView.swift
+//  RegisterView.swift
 //  ZAND
 //
 //  Created by Василий on 29.08.2023.
@@ -13,6 +13,7 @@ protocol RegisterDelegate: AnyObject {
     func register()
     func showPolicy()
     func changePolicy(isConfirmed: Bool)
+    func setBirthday(birthday: Date)
 }
 
 final class RegisterView: BaseUIView {
@@ -21,23 +22,37 @@ final class RegisterView: BaseUIView {
 
     weak var delegate: RegisterDelegate?
 
-    let phoneTextField: PaddingTextField = {
+    private (set) var nameTextField = PaddingTextField(state: .name)
+
+    private (set) var surnameTextField = PaddingTextField(state: .surname)
+
+    private (set) var fathersNameTextField = PaddingTextField(state: .fathersName) // отчество не обязательно
+
+    private (set) var birthdayTextField = PaddingTextField(state: .birthday) // birthday не обязательно
+
+    private (set) var emailTextField = PaddingTextField(state: .email)
+
+    private (set) var phoneTextField: PaddingTextField = {
         let phoneTextField = PaddingTextField(state: .phone)
-        phoneTextField.text = "+7"
         phoneTextField.layer.borderColor = UIColor.red.cgColor
-        phoneTextField.layer.borderWidth = 0.5
+        phoneTextField.layer.borderWidth = 0.0
+        phoneTextField.text = AssetString.phoneEnter.rawValue
         return phoneTextField
     }()
 
-    let scrollView = UIScrollView()
+    private (set) var createPasswordTextField: PaddingTextField = {
+        let textField = PaddingTextField(state: .createPassword)
+        textField.isSecureTextEntry = true
+        return textField
+    }()
 
-    let nameTextField = PaddingTextField(state: .name)
+    private (set) var repeatPasswordTextField: PaddingTextField = {
+        let textField = PaddingTextField(state: .repeatPassword)
+        textField.isSecureTextEntry = true
+        return textField
+    }()
 
-    let surnameTextField = PaddingTextField(state: .surname)
-
-    let emailTextField = PaddingTextField(state: .email)
-
-    let policySwitchControl = UISwitch()
+    private let policySwitchControl = UISwitch()
 
     private let agreeButton: UIButton = {
         let policyButton = UIButton()
@@ -50,7 +65,7 @@ final class RegisterView: BaseUIView {
     private let policyButton: UIButton = {
         let policyButton = UIButton()
 
-        let yourAttributes: [NSAttributedString.Key: Any] = [
+        let attributes: [NSAttributedString.Key: Any] = [
               .font: UIFont.systemFont(ofSize: 12),
               .foregroundColor: UIColor.mainGreen,
               .underlineStyle: NSUnderlineStyle.single.rawValue
@@ -58,19 +73,19 @@ final class RegisterView: BaseUIView {
 
         let attributeString = NSMutableAttributedString(
                 string: "политикой конфиденциальности",
-                attributes: yourAttributes
+                attributes: attributes
              )
 
         policyButton.setAttributedTitle(attributeString, for: .normal)
         return policyButton
     }()
 
-    private let saveButton = BottomButton(buttonText: .save)
+    private let continueButton = BottomButton(buttonText: .contin)
 
     private let entranceLabel = UILabel(
         .systemFont(ofSize: 24, weight: .bold),
         .black,
-        AssetString.entrance.rawValue
+        AssetString.registation.rawValue
     )
 
     private lazy var policyButtonsStackView = UIStackView(
@@ -80,24 +95,21 @@ final class RegisterView: BaseUIView {
         distribution: .fillProportionally
     )
 
-    lazy var interiorStackView = UIStackView(
+    private lazy var textFieldsStackView = UIStackView(
         alignment: .fill,
-        arrangedSubviews: [nameTextField,
-                           surnameTextField,
-                           emailTextField,
-                           phoneTextField],
+        arrangedSubviews: [
+            nameTextField,
+            surnameTextField,
+            fathersNameTextField,
+            birthdayTextField,
+            emailTextField,
+            phoneTextField,
+            createPasswordTextField,
+            repeatPasswordTextField
+        ],
         axis: .vertical,
-        distribution: .fillEqually,
+        distribution: .fillProportionally,
         spacing: 16
-    )
-
-    private lazy var baseStackView = UIStackView(
-        alignment: .center,
-        arrangedSubviews: [entranceLabel,
-                           interiorStackView],
-        axis: .vertical,
-        distribution: .fill,
-        spacing: 30
     )
 
     private lazy var policyStackView = UIStackView(
@@ -110,16 +122,19 @@ final class RegisterView: BaseUIView {
         spacing: 5
     )
 
+    private let scrollView = UIScrollView()
+
     private let contentView = UIView()
+
+    private let datePicker = UIDatePicker()
 
     // MARK: - Instance methods
 
     override func setup() {
-        super.setup()
-
-        setViews()
-        setRecognizer()
-        setTargets()
+        setupSubviews()
+        setupRecognizer()
+        setupTargets()
+        createDatePicker()
     }
 
     func hidePhoneKeyboard() {
@@ -135,13 +150,23 @@ final class RegisterView: BaseUIView {
         phoneTextField.layer.borderWidth = 0.0
     }
 
-    func configure(model: UserModel) {
-        nameTextField.configure(textInput: model.name)
-        surnameTextField.configure(textInput: model.surname)
-        emailTextField.configure(textInput: model.email)
+    func setNewScrollInset(inset: UIEdgeInsets) {
+        scrollView.contentInset = inset
     }
 
-    // MARK: - Action
+    func getAllTextFileds() -> [UITextField] {
+        [nameTextField,
+         surnameTextField,
+         fathersNameTextField,
+         birthdayTextField,
+         emailTextField,
+         phoneTextField,
+         createPasswordTextField,
+         repeatPasswordTextField
+        ]
+    }
+    
+    // MARK: - Private methods
 
     @objc
     private func cancelEditingAction() {
@@ -162,68 +187,106 @@ final class RegisterView: BaseUIView {
     private func switchAction(_ sender: UISwitch) {
         delegate?.changePolicy(isConfirmed: sender.isOn)
     }
+
+    @objc
+    private func pickerDoneAction() {
+        setDate()
+    }
+
+    private func createToolBar() -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+
+        let spaceButton = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        let doneButton = UIBarButtonItem(
+            title: AssetString.done.rawValue,
+            style: .plain,
+            target: self,
+            action: #selector(pickerDoneAction)
+        )
+        toolBar.setItems([spaceButton, doneButton], animated: true)
+
+        return toolBar
+    }
+
+    private func createDatePicker() {
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date()
+        datePicker.locale = Locale(identifier: "ru_RU")
+        birthdayTextField.inputView = datePicker
+        birthdayTextField.inputAccessoryView = createToolBar()
+    }
+
+    private func setDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        birthdayTextField.text = dateFormatter.string(from: datePicker.date)
+        delegate?.setBirthday(birthday: datePicker.date)
+        birthdayTextField.resignFirstResponder()
+    }
 }
 
 extension RegisterView {
 
     // MARK: - Instance methods
 
-    private func setViews() {
+    private func setupSubviews() {
         backgroundColor = .mainGray
-        policyButtonsStackView.sizeToFit()
 
         addSubview(scrollView)
         scrollView.addSubview(contentView)
-
-        contentView.addSubviews([baseStackView, policyStackView, saveButton])
+        contentView.addSubviews([
+            entranceLabel,
+            textFieldsStackView,
+            policyStackView,
+            continueButton
+        ])
 
         scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(self)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.left.bottom.right.equalToSuperview()
         }
 
         contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
         }
 
-        [nameTextField, surnameTextField, emailTextField, phoneTextField].forEach {
-            $0.snp.makeConstraints { make in
-                make.left.equalTo(self.snp.left).offset(16)
-                make.right.equalTo(self.snp.right).inset(16)
-            }
+        entranceLabel.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(30)
+            make.centerX.equalToSuperview()
         }
 
-        baseStackView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(170)
-            make.left.equalToSuperview().offset(16)
-            make.right.equalToSuperview().inset(16)
+        textFieldsStackView.snp.makeConstraints { make in
+            make.top.equalTo(entranceLabel.snp.bottom).offset(30)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().inset(20)
         }
 
         policyStackView.snp.makeConstraints { make in
-            make.top.equalTo(baseStackView.snp.bottom).offset(20)
+            make.top.equalTo(textFieldsStackView.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().inset(16)
         }
 
-        saveButton.snp.makeConstraints { make in
-            make.top.equalTo(policyStackView.snp.bottom).offset(60)
-            make.width.equalTo(interiorStackView)
+        continueButton.snp.makeConstraints { make in
+            make.top.equalTo(policyStackView.snp.bottom).offset(30)
+            make.width.equalTo(textFieldsStackView)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(40)
+            make.bottom.equalToSuperview().inset(40).priority(999)
         }
     }
 
-    private func setRecognizer() {
-        addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(cancelEditingAction)
-            )
-        )
-    }
-
-    private func setTargets() {
-        saveButton.addTarget(
+    private func setupTargets() {
+        continueButton.addTarget(
             self,
             action: #selector(registerAction),
             for: .touchUpInside
@@ -239,6 +302,15 @@ extension RegisterView {
             self,
             action: #selector(switchAction),
             for: .valueChanged
+        )
+    }
+
+    private func setupRecognizer() {
+        addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(cancelEditingAction)
+            )
         )
     }
 }

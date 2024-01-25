@@ -84,7 +84,7 @@ final class MapPresenter: MapPresenterOutput {
 
     private let provider: SaloonProvider
 
-    private let locationManager = DeviceLocationService.shared
+    private let locationManager = LocationManager.shared
 
     // MARK: - Initializers
 
@@ -145,8 +145,8 @@ final class MapPresenter: MapPresenterOutput {
 
         sortedSalons = allSalons.map { saloon in
             let saloonDistance = CLLocation(
-                latitude: saloon.saloonCodable.coordinate_lat,
-                longitude: saloon.saloonCodable.coordinate_lon
+                latitude: saloon.saloonCodable.latitude,
+                longitude: saloon.saloonCodable.longitude
             )
 
             return SaloonModel(

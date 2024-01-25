@@ -9,5 +9,4 @@ import Foundation
 
 enum Regex {
     static let email = #"^\S+@\S+\.\S+$"#
-    static let phone = "[\\+\\s-\\(\\)]"
 }

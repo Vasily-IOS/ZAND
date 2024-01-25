@@ -38,13 +38,13 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
 
     var servicesProvidedModel: [UIAppointmentModel] = []
 
-    private let network: APIManager
+    private let network: YclientsAPI
 
     private let realm: RealmManager
 
     // MARK: - Initializers
 
-    init(view: AppointmentsInput, network: APIManager, realm: RealmManager) {
+    init(view: AppointmentsInput, network: YclientsAPI, realm: RealmManager) {
         self.view = view
         self.network = network
         self.realm = realm

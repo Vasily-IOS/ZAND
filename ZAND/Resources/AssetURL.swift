@@ -8,7 +8,8 @@
 import Foundation
 
 enum AssetURL: String {
-    case baseURL = "https://api.yclients.com"
+    case yclientsURL = "https://api.yclients.com"
+    case authURL = "https://zand-app.ru"
     case telegram_bot = "https://t.me/zandcenter_bot"
     case privacy_policy = "https://zandbeauty.ru/information"
 }

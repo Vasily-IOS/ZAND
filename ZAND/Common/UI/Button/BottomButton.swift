@@ -18,6 +18,7 @@ enum ButtonText {
     case getCode // "Получить код"
     case approve // "Подтвердите запись"
     case save // "Cохранить"
+    case refreshPassword // "Обновить пароль"
     
     var text: String {
         switch self {
@@ -41,6 +42,8 @@ enum ButtonText {
             return AssetString.approveAppointment.rawValue
         case .save:
             return AssetString.save.rawValue
+        case .refreshPassword:
+            return AssetString.refreshPassword.rawValue
         }
     }
 }
@@ -52,7 +55,7 @@ final class BottomButton: UIButton {
     var stateText: ButtonText? = nil {
         didSet {
             if let stateText = stateText {
-                setTitleForSelf(text: stateText.text)
+                setTitle(text: stateText.text)
             }
         }
     }
@@ -63,7 +66,7 @@ final class BottomButton: UIButton {
         super.init(frame: .zero)
 
         setup()
-        setTitleForSelf(text: buttonText.text)
+        setTitle(text: buttonText.text)
     }
     
     @available(*, unavailable)
@@ -82,7 +85,7 @@ extension BottomButton {
         setTitleColor(.white, for: .normal)
     }
     
-    private func setTitleForSelf(text: String) {
+    private func setTitle(text: String) {
         setTitle(text, for: .normal)
     }
 }

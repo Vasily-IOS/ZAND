@@ -26,8 +26,8 @@ final class SelectableMapView: BaseUIView {
 
     func addPinOnMap(model: Saloon) {
         let coordinates = CLLocationCoordinate2D(
-            latitude: model.saloonCodable.coordinate_lat,
-            longitude: model.saloonCodable.coordinate_lon
+            latitude: model.saloonCodable.latitude,
+            longitude: model.saloonCodable.longitude
         )
         let annotation = SaloonAnnotation(coordinate: coordinates, model: model)
         annotation.title = model.saloonCodable.title

@@ -7,15 +7,17 @@
 
 import Combine
 import CoreLocation
+import YandexMobileMetrica
 
-final class DeviceLocationService: NSObject, CLLocationManagerDelegate {
+final class LocationManager: NSObject, CLLocationManagerDelegate {
 
     // MARK: - Properties
 
-    static let shared = DeviceLocationService()
+    static let shared = LocationManager()
 
     var currentLocation = PassthroughSubject<CLLocationCoordinate2D, Error>()
 
+    // пока не используется, но я думаю понадобится позже
     var deniedLocationAccess = PassthroughSubject<Void, Never>()
 
     private override init() {
@@ -37,13 +39,15 @@ final class DeviceLocationService: NSObject, CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         default:
             locationManager.stopUpdatingLocation()
-//            deniedLocationAccess.send()
+            deniedLocationAccess.send()
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         currentLocation.send(location.coordinate)
+        // отправляем эвент о локации юзера
+        YMMYandexMetrica.setLocation(location)
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

@@ -19,12 +19,12 @@ final class TabBarController: UITabBarController {
             selectedImage: nil
         )
 
-        if UserDBManager.shared.isUserContains() {
+        if TokenManager.shared.bearerToken != nil {
             vc = vcFactory.getViewController(for: .profile)
             vc.tabBarItem = tabBarItem
             return vc
         } else {
-            vc = vcFactory.getViewController(for: .appleSignIn)
+            vc = vcFactory.getViewController(for: .signIn)
             vc.tabBarItem = tabBarItem
             return vc
         }

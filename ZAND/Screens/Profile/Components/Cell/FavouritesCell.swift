@@ -39,7 +39,7 @@ final class FavouritesCell: BaseCollectionCell {
 
     func configure(model: Saloon) {
         saloonNameLabel.text = model.saloonCodable.title
-        saloonImage.kf.setImage(with: URL(string: model.saloonCodable.company_photos.first ?? ""))
+        saloonImage.kf.setImage(with: URL(string: model.saloonCodable.companyPhotos.first ?? ""))
     }
 }
 

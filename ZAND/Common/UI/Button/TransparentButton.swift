@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransparentButton: UIButton {
+final class TransparentButton: UIButton {
     
     // MARK: - Nested types
     
@@ -16,12 +16,17 @@ class TransparentButton: UIButton {
         case register
         case forgotPassword
         case accountExist
+        case changeUserData
+        case changeUserEmail
+        case cancelChanges
         
         var fontSize: CGFloat {
             switch self {
             case .viewOnMap, .forgotPassword, .accountExist:
                 return 12.0
-            case .register:
+            case .changeUserData, .changeUserEmail:
+                return 14.0
+            case .register, .cancelChanges:
                 return 16.0
             }
         }
@@ -36,14 +41,20 @@ class TransparentButton: UIButton {
                 return AssetString.forgotPassword.rawValue
             case .accountExist:
                 return AssetString.accountExist.rawValue
+            case .changeUserData:
+                return AssetString.changeUserData.rawValue
+            case .changeUserEmail:
+                return AssetString.changeUserEmail.rawValue
+            case .cancelChanges:
+                return AssetString.cancelChanges.rawValue
             }
         }
         
         var textColor: UIColor {
             switch self {
-            case .viewOnMap, .forgotPassword:
+            case .viewOnMap, .forgotPassword, .changeUserData, .changeUserEmail:
                 return .lightGreen
-            case .register:
+            case .register, .cancelChanges:
                 return .mainGreen
             case .accountExist:
                 return .textGray

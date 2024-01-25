@@ -15,6 +15,8 @@ enum ReplacedControllerType {
 }
 
 final class AppRouter {
+
+    // MARK: - Properties
     
     static let shared: DefaultRouter = AppRouter()
 
@@ -54,30 +56,15 @@ extension AppRouter {
             selectedImage: nil
         )
 
-        let signInViewController = vcFactory.getViewController(for: .appleSignIn)
-        let profileViewController = vcFactory.getViewController(for: .profile)
-
-        [signInViewController, profileViewController].forEach {
-            $0.tabBarItem = tabBarItem
-        }
-
         switch type {
         case .profile:
+            let profileViewController = vcFactory.getViewController(for: .profile)
+            profileViewController.tabBarItem = tabBarItem
             tabBarController.viewControllers?[2] = profileViewController
         case .signIn:
+            let signInViewController = vcFactory.getViewController(for: .signIn)
+            signInViewController.tabBarItem = tabBarItem
             tabBarController.viewControllers?[2] = signInViewController
-        }
-    }
-
-    func checkAuth() {
-        if UserDBManager.shared.isUserContains() {
-            DispatchQueue.main.async {
-                self.switchRoot(type: .profile)
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.switchRoot(type: .signIn)
-            }
         }
     }
 
@@ -166,7 +153,7 @@ extension AppRouter: DefaultRouter {
         navigationController.present(vc, animated: true)
     }
 
-    func showAlert(type: AlertType, message: String? = nil) {
+    func showAlert(type: AlertType, message: String?) {
         let alertController = UIAlertController(title: type.textValue, message: message, preferredStyle: .alert)
         let understandAction = UIAlertAction(title: AssetString.ok.rawValue, style: .cancel)
         alertController.addAction(understandAction)
@@ -176,5 +163,9 @@ extension AppRouter: DefaultRouter {
     func pushCreateRecord(_ type: VCType) {
         let viewController = vcFactory.getViewController(for: type)
         createRecordNavigationController?.pushViewController(viewController, animated: true)
+    }
+
+    func popToRoot() {
+        navigationController.popToRootViewController(animated: true)
     }
 }
