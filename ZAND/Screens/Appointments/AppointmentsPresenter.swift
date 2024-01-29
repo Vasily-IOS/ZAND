@@ -116,8 +116,13 @@ final class AppointmentsPresenterImpl: AppointmentsPresenterOutput {
                     record_id: Int(recordModel.record_id) ?? 0), expectation: GetRecordModel.self
             ) { [weak self] result in
                 guard let self else { return }
-                self.makeModel(result) { [weak self] model in
 
+                // отправляем отчет об оплаченных записях
+                if result.data.attendance == 1 || result.data.visit_attendance == 1 {
+                    PaymentReportManager.shared.saveAndSendReport(model: result.data)
+                }
+
+                self.makeModel(result) { [weak self] model in
                     let isVisitValid = self?.isVisitVailed(visit_time: model.date)
                     if model.deleted || isVisitValid == true {
                         servicesProvidedSortedModel.append(model)

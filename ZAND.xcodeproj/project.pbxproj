@@ -91,6 +91,7 @@
 		FF506B932B3B42F60050A474 /* CreateUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF506B922B3B42F60050A474 /* CreateUserModel.swift */; };
 		FF506B952B3B449A0050A474 /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF506B942B3B449A0050A474 /* ServerResponse.swift */; };
 		FF519A852AC6F39100D490A4 /* EntryConfirmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF519A842AC6F39100D490A4 /* EntryConfirmedView.swift */; };
+		FF59F4622B6719AC0004B9BE /* PaymentReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59F4612B6719AC0004B9BE /* PaymentReportManager.swift */; };
 		FF5DFDB12A0CFE4100495E63 /* CircleBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */; };
 		FF5DFDB62A0D4E1200495E63 /* SaloonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */; };
 		FF5FDCF12AEA9D710063400E /* FavoutriteSalonsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5FDCF02AEA9D710063400E /* FavoutriteSalonsManager.swift */; };
@@ -297,6 +298,7 @@
 		FF506B922B3B42F60050A474 /* CreateUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserModel.swift; sourceTree = "<group>"; };
 		FF506B942B3B449A0050A474 /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
 		FF519A842AC6F39100D490A4 /* EntryConfirmedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmedView.swift; sourceTree = "<group>"; };
+		FF59F4612B6719AC0004B9BE /* PaymentReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentReportManager.swift; sourceTree = "<group>"; };
 		FF5DFDB02A0CFE4100495E63 /* CircleBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBackView.swift; sourceTree = "<group>"; };
 		FF5DFDB52A0D4E1200495E63 /* SaloonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonAnnotation.swift; sourceTree = "<group>"; };
 		FF5FDCF02AEA9D710063400E /* FavoutriteSalonsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoutriteSalonsManager.swift; sourceTree = "<group>"; };
@@ -1068,6 +1070,7 @@
 				FF44EA6B2B39B79800989A0B /* TokenManager.swift */,
 				FF9EEE5B2B4088D50093D5DD /* UserManager.swift */,
 				FF5FDCF02AEA9D710063400E /* FavoutriteSalonsManager.swift */,
+				FF59F4612B6719AC0004B9BE /* PaymentReportManager.swift */,
 				FF3E65DA2A55C202007EC56D /* API */,
 				FF4F757A2A9E3889001E8731 /* Realm */,
 			);
@@ -1390,6 +1393,7 @@
 				FF3E65D92A55C1F6007EC56D /* YclientsRequestType.swift in Sources */,
 				FF95F8A82AC5AC5B005DA310 /* ConfirmationViewModel.swift in Sources */,
 				FF25635429F6B46800091374 /* ReuseHeaderView.swift in Sources */,
+				FF59F4622B6719AC0004B9BE /* PaymentReportManager.swift in Sources */,
 				FF862A4D2AA88B660083DEB7 /* SaloonProvider.swift in Sources */,
 				FF99B8F329EEAB1500F4E4C3 /* AssetString.swift in Sources */,
 				FF4D4BB62AD88E7C005DA53C /* GetRecordModel.swift in Sources */,

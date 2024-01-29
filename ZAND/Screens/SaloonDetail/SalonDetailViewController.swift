@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import YandexMobileMetrica
 
 final class SaloonDetailViewController: BaseViewController<SaloonDetailView> {
     
@@ -100,6 +101,9 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
             AppRouter.shared.popViewController()
             AppRouter.shared.changeTabBarVC(to: 2)
         } else {
+            // тест кастомного события прошел успешно
+            YMMYandexMetrica.reportEvent("open_booking", parameters: nil, onFailure: nil)
+
             AppRouter.shared.presentRecordNavigation(
                 type: .startBooking(
                     presenter?.salonID ?? 0,

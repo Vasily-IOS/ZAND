@@ -22,7 +22,7 @@ struct GetRecord: Codable, Hashable {
     let attendance: Int // Статус записи
     let confirmed: Int // Статус подтверждения записи, 0 - не подтверждена, 1 - подтверждена
     let seance_length: Int? // длительность сеанса
-    let length: Int? // длительность сеанса
+    let length: Int?
     let api_id: String // внешний идентификатор записи
     let create_date: String
     let deleted: Bool 
@@ -32,5 +32,6 @@ struct ServiceRecord: Codable, Hashable {
     let id: Int //
     let title: String // название услуги
     let cost: Float // итоговая стоимость услуги
+    let first_cost: Float // начальная стоимость услуги (без учета скидок)
     let cost_per_unit: Float // cтоимость за единицу
 }

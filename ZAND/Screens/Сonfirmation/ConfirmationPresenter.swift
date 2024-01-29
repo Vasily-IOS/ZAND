@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import YandexMobileMetrica
 
 protocol ConfirmationOutput: AnyObject {
     var viewModel: ConfirmationViewModel { get }
@@ -73,6 +74,9 @@ final class ConfirmationPresenter: ConfirmationOutput {
             model: model), expectation: RecordCreatedModel.self)
         { [weak self] result in
             guard let self else { return }
+
+            let parameters: [AnyHashable: Any] = ["record_created":"RecordID \(result.data.first?.record_id ?? 0)"]
+            YMMYandexMetrica.reportEvent("record_created", parameters: parameters, onFailure: nil)
 
             // save record info
             let dataBaseModel = RecordDataBaseModel()

@@ -38,7 +38,12 @@ final class VerifyPresenter: VerifyOutput {
 
     // MARK: - Initializers
 
-    init(view: VerifyInput, network: ZandAppAPI, verifyType: VerifyType?=nil, dateOfBirth: Date = Date()) {
+    init(
+        view: VerifyInput,
+        network: ZandAppAPI,
+        verifyType: VerifyType?=nil,
+        dateOfBirth: Date = Date()
+    ) {
         self.view = view
         self.dateOfBirth = dateOfBirth
         self.network = network
@@ -58,6 +63,7 @@ final class VerifyPresenter: VerifyOutput {
                 // евент об успешной регистрации
                 YMMYandexMetrica.reportEvent("registration_completed", parameters: nil, onFailure: nil)
                 // отправка юзера с его возрастом
+
                 sendUserDataToYandexMetrica()
 
                 if (self.verifyType ?? .none) == .changeEmail {
@@ -73,16 +79,19 @@ final class VerifyPresenter: VerifyOutput {
     }
 
     private func sendUserDataToYandexMetrica() {
-        YMMYandexMetrica.setUserProfileID("user_id")
         let userProfile = YMMMutableUserProfile()
-        let ageAttribute = YMMProfileAttribute.customNumber("age").withValue(yearsBetweenDates() ?? 0)
-        userProfile.apply(ageAttribute)
+
+        userProfile.apply(from: [
+            // Updating predefined attributes.
+            YMMProfileAttribute.birthDate().withAge(userAge())
+        ])
+
         YMMYandexMetrica.report(userProfile, onFailure: nil)
     }
 
-    func yearsBetweenDates() -> Double? {
+    func userAge() -> UInt {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year], from: dateOfBirth, to: Date())
-        return Double(components.year ?? 0)
+        return UInt(Double(components.year ?? 0))
     }
 }
