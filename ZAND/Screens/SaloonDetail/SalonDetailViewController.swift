@@ -103,6 +103,7 @@ extension SaloonDetailViewController: SaloonDetailDelegate {
         } else {
             // тест кастомного события прошел успешно
             YMMYandexMetrica.reportEvent("open_booking", parameters: nil, onFailure: nil)
+            YMMYandexMetrica.sendEventsBuffer()
 
             AppRouter.shared.presentRecordNavigation(
                 type: .startBooking(

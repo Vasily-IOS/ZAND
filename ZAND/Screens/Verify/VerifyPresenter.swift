@@ -63,8 +63,8 @@ final class VerifyPresenter: VerifyOutput {
                 // евент об успешной регистрации
                 YMMYandexMetrica.reportEvent("registration_completed", parameters: nil, onFailure: nil)
                 // отправка юзера с его возрастом
-
                 sendUserDataToYandexMetrica()
+                YMMYandexMetrica.sendEventsBuffer()
 
                 if (self.verifyType ?? .none) == .changeEmail {
                     self.view.popToRoot()

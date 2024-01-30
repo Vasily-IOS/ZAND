@@ -77,6 +77,7 @@ final class ConfirmationPresenter: ConfirmationOutput {
 
             let parameters: [AnyHashable: Any] = ["record_created":"RecordID \(result.data.first?.record_id ?? 0)"]
             YMMYandexMetrica.reportEvent("record_created", parameters: parameters, onFailure: nil)
+            YMMYandexMetrica.sendEventsBuffer()
 
             // save record info
             let dataBaseModel = RecordDataBaseModel()

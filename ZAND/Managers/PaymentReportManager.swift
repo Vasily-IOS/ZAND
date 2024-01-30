@@ -42,6 +42,7 @@ class PaymentReportManager {
             ]
 
             YMMYandexMetrica.reportEvent("service_provided", parameters: parameters, onFailure: nil)
+            YMMYandexMetrica.sendEventsBuffer()
         }
     }
 
