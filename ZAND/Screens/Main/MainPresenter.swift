@@ -132,12 +132,14 @@ extension MainPresenter {
 
     func sortModel(filterID: Int) {
         if state == .all {
-            sortedSaloons = allSalons.filter {
-                $0.saloonCodable.categories.first?.id == filterID
+            sortedSaloons = allSalons.filter { item in
+                let categories = item.saloonCodable.categories.map { $0.id }
+                return categories.contains(filterID)
             }
         } else {
-            sortedSaloons = sortedSalonsByUserLocation().filter {
-                $0.saloonCodable.categories.first?.id == filterID
+            sortedSaloons = sortedSalonsByUserLocation().filter { item in
+                let categories = item.saloonCodable.categories.map { $0.id }
+                return categories.contains(filterID)
             }
         }
     }
